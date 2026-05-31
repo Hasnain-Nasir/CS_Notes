@@ -23,10 +23,7 @@
     const isDark = theme === "dark";
     btn.setAttribute("aria-pressed", isDark ? "true" : "false");
     btn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
-    const label = btn.querySelector(".theme-toggle-label");
-    if (label) {
-      label.textContent = isDark ? "Light mode" : "Dark mode";
-    }
+    btn.classList.toggle("is-dark", isDark);
   }
 
   function toggleTheme() {
@@ -36,7 +33,15 @@
     applyTheme(next);
   }
 
-  applyTheme(getPreferredTheme());
+  function wrapTables() {
+    document.querySelectorAll(".main-content table").forEach(function (table) {
+      if (table.parentElement && table.parentElement.classList.contains("table-wrap")) return;
+      const wrap = document.createElement("div");
+      wrap.className = "table-wrap";
+      table.parentNode.insertBefore(wrap, table);
+      wrap.appendChild(table);
+    });
+  }
 
   function initMobileNav() {
     const wrapper = document.querySelector(".page-wrapper");
@@ -54,17 +59,21 @@
       toggle.className = "nav-toggle";
       toggle.setAttribute("aria-expanded", "false");
       toggle.setAttribute("aria-controls", sidebar.id);
-      toggle.setAttribute("aria-label", "Open page navigation");
+      toggle.setAttribute("aria-label", "Open sections on this page");
       toggle.innerHTML =
         '<span class="nav-toggle-icon" aria-hidden="true">' +
         '<span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>' +
-        '</span><span class="nav-toggle-label">Menu</span>';
+        '</span><span class="nav-toggle-label">Sections</span>';
       const headerActions = document.querySelector(".header-actions");
       if (headerActions) {
         headerActions.insertBefore(toggle, headerActions.firstChild);
       } else {
         document.body.appendChild(toggle);
       }
+    } else {
+      toggle.setAttribute("aria-label", "Open sections on this page");
+      const label = toggle.querySelector(".nav-toggle-label");
+      if (label) label.textContent = "Sections";
     }
 
     let backdrop = document.querySelector(".nav-backdrop");
@@ -72,7 +81,7 @@
       backdrop = document.createElement("button");
       backdrop.type = "button";
       backdrop.className = "nav-backdrop";
-      backdrop.setAttribute("aria-label", "Close navigation");
+      backdrop.setAttribute("aria-label", "Close sections menu");
       backdrop.hidden = true;
       document.body.appendChild(backdrop);
     }
@@ -83,7 +92,7 @@
       backdrop.hidden = !open;
       document.body.classList.toggle("nav-menu-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? "Close page navigation" : "Open page navigation");
+      toggle.setAttribute("aria-label", open ? "Close sections menu" : "Open sections on this page");
     }
 
     function closeNav() {
@@ -109,11 +118,12 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+  function initPageEnhancements() {
     updateToggleLabel(getPreferredTheme());
     const btn = document.querySelector(".global-header .theme-toggle") || document.querySelector(".theme-toggle");
     if (btn) btn.addEventListener("click", toggleTheme);
 
+    wrapTables();
     initMobileNav();
 
     const tocLinks = document.querySelectorAll(".toc nav a[href^='#']");
@@ -146,5 +156,23 @@
         observer.observe(s.el);
       });
     }
-  });
+  }
+
+  applyTheme(getPreferredTheme());
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      if (document.querySelector(".global-header .theme-toggle")) {
+        initPageEnhancements();
+      } else {
+        document.addEventListener("site-nav-ready", initPageEnhancements, { once: true });
+      }
+    });
+  } else {
+    if (document.querySelector(".global-header .theme-toggle")) {
+      initPageEnhancements();
+    } else {
+      document.addEventListener("site-nav-ready", initPageEnhancements, { once: true });
+    }
+  }
 })();

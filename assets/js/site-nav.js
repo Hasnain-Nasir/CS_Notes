@@ -53,14 +53,14 @@
 
     var toggle = document.createElement("button");
     toggle.type = "button";
-    toggle.className = "site-nav-toggle";
+    toggle.className = "site-nav-toggle site-nav-toggle--icon";
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-controls", "global-nav");
     toggle.setAttribute("aria-label", "Open site menu");
     toggle.innerHTML =
       '<span class="nav-toggle-icon" aria-hidden="true">' +
       '<span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>' +
-      '</span><span class="nav-toggle-label">Menu</span>';
+      "</span>";
 
     var nav = document.createElement("nav");
     nav.className = "global-nav";
@@ -80,13 +80,17 @@
 
     var themeBtn = document.createElement("button");
     themeBtn.type = "button";
-    themeBtn.className = "theme-toggle";
+    themeBtn.className = "theme-toggle theme-toggle--icon";
     themeBtn.setAttribute("aria-pressed", "false");
-    themeBtn.innerHTML = '<span class="theme-toggle-label">Dark mode</span>';
+    themeBtn.innerHTML =
+      '<span class="theme-toggle-icon" aria-hidden="true">' +
+      '<svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>' +
+      '<svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>' +
+      "</span>";
 
     actions.appendChild(themeBtn);
+    actions.appendChild(toggle);
     inner.appendChild(brand);
-    inner.appendChild(toggle);
     inner.appendChild(nav);
     inner.appendChild(actions);
     header.appendChild(inner);
@@ -107,88 +111,25 @@
     footer.setAttribute("role", "contentinfo");
 
     var inner = document.createElement("div");
-    inner.className = "global-footer-inner";
-
-    var grid = document.createElement("div");
-    grid.className = "global-footer-grid";
-
-    var colBooks = document.createElement("div");
-    colBooks.className = "global-footer-col";
-    colBooks.innerHTML = "<h3>Books</h3>";
-    var booksList = document.createElement("ul");
-    BOOKS.forEach(function (book) {
-      if (book.id === "home") return;
-      var li = document.createElement("li");
-      var a = document.createElement("a");
-      a.href = prefix + book.path;
-      a.textContent = book.label;
-      li.appendChild(a);
-      booksList.appendChild(li);
-    });
-    colBooks.appendChild(booksList);
-
-    var colInfo = document.createElement("div");
-    colInfo.className = "global-footer-col";
-    colInfo.innerHTML = "<h3>Information Security</h3>";
-    var infoList = document.createElement("ul");
-    var topicBase = prefix + infoSecTopicPrefix(depth);
-    FOOTER_INFOSEC.forEach(function (item) {
-      var li = document.createElement("li");
-      var a = document.createElement("a");
-      a.href = topicBase + item.file;
-      a.textContent = item.label;
-      li.appendChild(a);
-      infoList.appendChild(li);
-    });
-    colInfo.appendChild(infoList);
-
-    var colSe = document.createElement("div");
-    colSe.className = "global-footer-col";
-    colSe.innerHTML = "<h3>Software Engineering</h3>";
-    var seList = document.createElement("ul");
-    FOOTER_SE.forEach(function (item) {
-      var li = document.createElement("li");
-      if (item.bookIndex) {
-        var a = document.createElement("a");
-        a.href = prefix + "software-engineering/index.html";
-        a.textContent = item.label;
-        li.appendChild(a);
-      } else {
-        var span = document.createElement("span");
-        span.className = "footer-soon";
-        span.textContent = item.label;
-        li.appendChild(span);
-      }
-      seList.appendChild(li);
-    });
-    colSe.appendChild(seList);
-
-    grid.appendChild(colBooks);
-    grid.appendChild(colInfo);
-    grid.appendChild(colSe);
+    inner.className = "global-footer-inner global-footer-minimal";
 
     var bottom = document.createElement("div");
     bottom.className = "global-footer-bottom";
     bottom.innerHTML =
       '<p>&copy; ' +
       new Date().getFullYear() +
-      " Hasnain Nasir. All rights reserved.</p>" +
-      '<nav class="global-footer-nav" aria-label="Footer">' +
-      '<a href="' +
-      prefix +
-      'index.html">Home</a>' +
-      '<a href="' +
-      prefix +
-      'info-sec/index.html">Information Security</a>' +
-      '<a href="' +
-      prefix +
-      'software-engineering/index.html">Software Engineering</a>' +
-      "</nav>";
+      " Hasnain Nasir. All rights reserved.</p>";
 
-    inner.appendChild(grid);
     inner.appendChild(bottom);
     footer.appendChild(inner);
     return footer;
+  }
+
+  function syncGlobalHeaderHeight() {
+    var header = document.querySelector(".global-header");
+    if (!header) return;
+    var h = Math.ceil(header.getBoundingClientRect().height);
+    document.documentElement.style.setProperty("--global-header-height", h + "px");
   }
 
   function initSiteNav() {
@@ -250,6 +191,10 @@
       var active = nav.querySelector('a[href="' + bookPath + '"]');
       if (active) active.setAttribute("aria-current", "page");
     }
+
+    syncGlobalHeaderHeight();
+    window.addEventListener("resize", syncGlobalHeaderHeight);
+    document.dispatchEvent(new CustomEvent("site-nav-ready"));
   }
 
   if (document.readyState === "loading") {
