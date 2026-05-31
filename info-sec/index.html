@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Information Security — Course Notes</title>
+  <link rel="stylesheet" href="../assets/css/notes.css">
+  <script src="../assets/js/site-nav.js" defer></script>
+  <script src="../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="1" data-nav-book="info-sec/index.html">
+  <div class="index-hero">
+    <header class="site-header">
+<h1>Information Security</h1>
+      <p class="topic-meta">Undergraduate course notes · Static reference material</p>
+</header>
+
+    <div class="course-info">
+      <dl>
+        <dt>Credit hours</dt>
+        <dd>3 (Lectures: 3 / Labs: 0)</dd>
+        <dt>Prerequisite</dt>
+        <dd>Data Communication and Computer Networks</dd>
+      </dl>
+    </div>
+
+    <h2>Topic Notes</h2>
+    <p>Select a topic below. Each major unit is a separate, detailed HTML document. Additional topics will be added as the course progresses.</p>
+
+    <div class="topic-cards">
+      <a class="topic-card available" href="topics/01-introduction-to-info-sec.html">
+        <span class="badge ready">Available</span>
+        <h3>Topic 1 — Introduction to Information Security</h3>
+        <p>Definitions, why InfoSec matters, CIA goals (then deep dive), principles, domains, ISMS/GDPR, challenges, and history — with recommended reading order.</p>
+      </a>
+      <a class="topic-card available" href="topics/02-authentication-models.html">
+        <span class="badge ready">Available</span>
+        <h3>Topic 2 — Authentication Models</h3>
+        <p>Factors → methods → models → evolution (SFA to continuous) → applications → digital auth catalog, with reading order and diagrams.</p>
+      </a>
+      <a class="topic-card available" href="topics/03-protection-models.html">
+        <span class="badge ready">Available</span>
+        <h3>Topic 3 — Protection Models</h3>
+        <p>Classic models, access control (MAC–ABAC), confidentiality/integrity models, TCB, availability, defense in depth, POLA — numbered 1–9 reading order.</p>
+      </a>
+      <a class="topic-card available" href="topics/04-security-kernel.html">
+        <span class="badge ready">Available</span>
+        <h3>Topic 4 — The Security Kernel Concept</h3>
+        <p>Reference monitor, monolithic vs microkernel (plus hybrid/hypervisor notes), responsibilities, seven characteristics, formal verification.</p>
+      </a>
+      <a class="topic-card available" href="topics/05-advanced-cryptography.html">
+        <div class="topic-card-badges">
+          <span class="badge ready">Available</span>
+          <span class="topic-tag sym">Sym</span>
+          <span class="topic-tag asym">Asym</span>
+        </div>
+        <h3>Topic 5 — Advanced Cryptography</h3>
+        <p>Logical reading order: cryptology → classical ciphers → modern encryption → types → algorithm catalogs → HTTPS/E2EE → applications. Links to Topic 6 for HMAC and signatures.</p>
+      </a>
+      <a class="topic-card available" href="topics/06-hashing-and-digital-signatures.html">
+        <span class="badge ready">Available</span>
+        <h3>Topic 6 — Hashing and Digital Signatures</h3>
+        <p>Hash evolution, HMAC, digital signatures and certificates (CA/X.509), hash vs encryption vs encoding, RSA/DSA/ECDSA, summary matrix, and OpenSSL/CyberChef labs.</p>
+      </a>
+      <a class="topic-card available" href="topics/07-security-auditing.html">
+        <span class="badge ready">Available</span>
+        <h3>Topic 7 — Security Auditing</h3>
+        <p>Audit scope, compliance, risk and controls, vulnerability and IR evaluation, documentation and reporting, GfG audit types, tools, and internal vs external audits.</p>
+      </a>
+      <a class="topic-card available" href="topics/08-intrusion-detection-and-response.html">
+        <span class="badge ready">Available</span>
+        <h3>Topic 8 — Intrusion Detection and Response</h3>
+        <p>IDR governance, six-phase SOC lifecycle, IDS types and detection methods, placement, benefits and limitations, and IDS vs IPS comparison.</p>
+      </a>
+    </div>
+
+    <section class="roadmap">
+      <div class="section-header-row">
+        <h2>Syllabus Roadmap</h2>
+        <a
+          class="btn-download btn-download-sm"
+          href="Information-Security-Handwritten-notes.pdf"
+          download="Information-Security-Handwritten-notes.pdf"
+        >
+          Handwritten notes (PDF)
+        </a>
+      </div>
+      <p class="topic-meta">Full course outline from the official syllabus. Items marked with ✓ have dedicated notes.</p>
+      <ul>
+        <li class="done">Introduction to information security (CIA triad, principles, scope)</li>
+        <li class="done">Authentication models</li>
+        <li class="done">Protection models</li>
+        <li class="done">Security kernels</li>
+        <li class="done">Encryption, hashing, and digital signatures (Topics 5–6)</li>
+        <li class="done">Audit</li>
+        <li class="done">Intrusion detection and response</li>
+        <li class="pending">Database security</li>
+        <li class="pending">Host-based and network-based security issues</li>
+        <li class="pending">Operational security issues</li>
+        <li class="pending">Physical security issues</li>
+        <li class="pending">Personnel security</li>
+        <li class="pending">Policy formation and enforcement</li>
+        <li class="pending">Access controls</li>
+        <li class="pending">Information flow</li>
+        <li class="pending">Legal and social issues</li>
+        <li class="pending">Identification and authentication in local and distributed systems</li>
+        <li class="pending">Classification and trust modeling</li>
+        <li class="pending">Risk assessment</li>
+      </ul>
+    </section>
+
+    <section class="references">
+      <h2>Reference Material</h2>
+      <ul>
+        <li><em>Computer Security: Art and Science</em> — Matthew Bishop</li>
+        <li><em>Cryptography and Network Security</em> (6th ed., 2012) — William Stallings</li>
+        <li><em>Principles of Information Security</em> (3rd ed.) — Michael E. Whitman &amp; Herbert J. Mattord</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

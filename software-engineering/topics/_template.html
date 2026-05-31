@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic Template — Software Engineering</title>
+  <link rel="stylesheet" href="../../assets/css/notes.css">
+  <script src="../../assets/js/site-nav.js" defer></script>
+  <script src="../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="2" data-nav-book="software-engineering/index.html">
+  <!--
+    TOPIC TEMPLATE — copy to topics/XX-slug.html when ready.
+
+    1. Update <title>, <h1>, and outline-coverage list
+    2. Fill sidebar TOC + main sections
+    3. On software-engineering/index.html:
+       - Change card to <a class="topic-card available" href="topics/XX-slug.html">
+       - Mark matching syllabus roadmap items as class="done"
+  -->
+  <div class="page-wrapper has-toc-nav">
+    <aside class="sidebar toc" id="sidebar-nav">
+      <p class="toc-title">On this page</p>
+      <nav aria-label="Table of contents">
+        <ul>
+          <li><a href="#placeholder">Overview</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="site-header">
+        <h1>1. Introduction &amp; Fundamentals</h1>
+        <div class="header-actions">
+          <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="sidebar-nav" aria-label="Open page navigation">
+            <span class="nav-toggle-icon" aria-hidden="true">
+              <span class="nav-toggle-bar"></span>
+              <span class="nav-toggle-bar"></span>
+              <span class="nav-toggle-bar"></span>
+            </span>
+            <span class="nav-toggle-label">Menu</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="outline-coverage" id="outline-coverage">
+        <div class="outline-coverage-title">Syllabus outline covered in this topic</div>
+        <ul>
+          <li>Introduction to Computer-based System Engineering</li>
+        </ul>
+        <p class="topic-meta">Tick matching items on the book index Syllabus Roadmap when this note is published.</p>
+      </div>
+
+      <div class="empty-state" id="placeholder">
+        <span class="empty-state-icon" aria-hidden="true">…</span>
+        <h2>Notes coming soon</h2>
+        <p>Replace this block with lecture notes content.</p>
+      </div>
+
+      <!--
+        <section id="sec-1-1">
+          <h2>1.1 Section title</h2>
+          <p>Content...</p>
+        </section>
+      -->
+    </main>
+  </div>
+</body>
+</html>

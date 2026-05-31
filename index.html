@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Course Notes — All Books</title>
+  <link rel="stylesheet" href="assets/css/notes.css">
+  <script src="assets/js/site-nav.js" defer></script>
+  <script src="assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="0">
+  <div class="index-hero master-index">
+    <header class="site-header">
+      <h1>Notes by Hasnain Nasir</h1>
+      <p class="topic-meta">Select a book to open its topics, syllabus, and detailed lecture notes.</p>
+</header>
+
+    <h2>Available Books</h2>
+    <div class="book-cards">
+      <a class="book-card available" href="info-sec/index.html">
+        <span class="badge ready">Available</span>
+        <h3>Information Security</h3>
+        <p class="book-meta">3 credit hours · Prerequisite: Data Comm &amp; Networks</p>
+        <p class="book-summary">CIA triad, authentication, protection models, cryptography, and full syllabus coverage.</p>
+        <p class="book-stats"><strong>8 topics</strong> published · more coming</p>
+      </a>
+      <a class="book-card available" href="software-engineering/index.html">
+        <span class="badge ready">Available</span>
+        <h3>Software Engineering</h3>
+        <p class="book-meta">3 credit hours · Prerequisite: Object Oriented Programming</p>
+        <p class="book-summary">SDLC models, requirements engineering, design, testing, quality assurance, and configuration management.</p>
+        <p class="book-stats"><strong>1 topic</strong> published · more coming</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

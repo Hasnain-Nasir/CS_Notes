@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" role="img" aria-labelledby="title desc">
+  <title id="title">Hardware bathtub curve vs software failure intensity</title>
+  <desc id="desc">Hardware failure rate follows a bathtub curve; software failure intensity decreases over time after initial defects are fixed.</desc>
+  <rect width="640" height="280" fill="#f8fafc"/>
+  <text x="320" y="24" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Hardware vs Software lifecycle failure behaviour</text>
+  <line x1="60" y1="230" x2="600" y2="230" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="60" y1="50" x2="60" y2="230" stroke="#64748b" stroke-width="1.5"/>
+  <text x="320" y="258" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#475569">Time / age of product</text>
+  <text x="22" y="140" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#475569" transform="rotate(-90 22 140)">Failure rate / intensity</text>
+  <text x="200" y="68" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#0369a1">Hardware (bathtub curve)</text>
+  <path d="M 80 180 C 120 60, 160 60, 200 120 C 280 200, 360 200, 440 120 C 480 80, 520 90, 560 110" fill="none" stroke="#0369a1" stroke-width="2.5"/>
+  <text x="200" y="108" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#0369a1">Infant mortality</text>
+  <text x="360" y="218" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#0369a1">Useful life</text>
+  <text x="520" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#0369a1">Wear-out</text>
+  <text x="200" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#b45309">Software (failure intensity)</text>
+  <path d="M 80 70 C 140 70, 180 120, 240 170 C 320 210, 420 220, 560 225" fill="none" stroke="#b45309" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <text x="480" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#b45309">Decreases as defects are fixed</text>
+</svg>
