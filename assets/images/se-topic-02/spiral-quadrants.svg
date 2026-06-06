@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title desc">
+  <title id="title">Spiral model four quadrants</title>
+  <desc id="desc">Four sectors per spiral cycle: objectives and planning, risk analysis, engineering develop and test, customer evaluation and next iteration planning.</desc>
+  <rect width="400" height="400" fill="#f8fafc"/>
+  <text x="200" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Spiral Model — four sectors per cycle</text>
+  <circle cx="200" cy="210" r="120" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+  <path d="M200 210 L320 210 A120 120 0 0 1 200 90 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="260" y="175" font-size="10" fill="#1e3a8a">1. Objectives</text>
+  <text x="248" y="188" font-size="10" fill="#1e3a8a">and planning</text>
+  <path d="M200 210 L200 90 A120 120 0 0 1 80 210 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="145" y="145" font-size="10" fill="#92400e">2. Risk</text>
+  <text x="138" y="158" font-size="10" fill="#92400e">analysis</text>
+  <path d="M200 210 L80 210 A120 120 0 0 1 200 330 Z" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="118" y="245" font-size="10" fill="#14532d">3. Engineering</text>
+  <text x="125" y="258" font-size="10" fill="#14532d">develop and test</text>
+  <path d="M200 210 L200 330 A120 120 0 0 1 320 210 Z" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <text x="248" y="268" font-size="10" fill="#9d174d">4. Customer</text>
+  <text x="252" y="281" font-size="10" fill="#9d174d">evaluation</text>
+  <text x="200" y="360" text-anchor="middle" font-size="10" fill="#64748b">Each loop = one iteration; cost increases outward (radial dimension)</text>
+</svg>

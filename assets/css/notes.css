@@ -927,8 +927,13 @@ section {
 [data-theme="dark"] .figure-photo img[src*="topic-01"],
 [data-theme="dark"] .figure-photo img[src*="topic-02"],
 [data-theme="dark"] .figure-photo img[src*="topic-03"],
-[data-theme="dark"] .figure-photo img[src*="se-topic-01"] {
+[data-theme="dark"] .figure-photo img[src*="se-topic-01"],
+[data-theme="dark"] .figure-photo img[src*="se-topic-02"] {
   filter: invert(0.92) hue-rotate(180deg);
+}
+
+[data-theme="dark"] .figure-photo img[src$=".svg"] {
+  filter: none;
 }
 
 .figure-photo figcaption {

@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — SDLC &amp; Process Models</title>
+  <link rel="stylesheet" href="../../assets/css/notes.css">
+  <script src="../../assets/js/site-nav.js" defer></script>
+  <script src="../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="2" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper has-toc-nav">
+    <aside class="sidebar toc" id="sidebar-nav">
+      <p class="toc-title">On this page</p>
+      <nav aria-label="Table of contents">
+        <ul>
+          <li><a href="#sec-2-1">2.1 Software Development Life Cycle</a></li>
+          <li><a href="#sec-2-2">2.2 Classical Waterfall Model</a></li>
+          <li><a href="#sec-2-3">2.3 Iterative Waterfall Model</a></li>
+          <li><a href="#sec-2-4">2.4 Prototype Model / Software Prototyping</a></li>
+          <li><a href="#sec-2-5">2.5 Spiral Model</a></li>
+          <li><a href="#sec-2-6">2.6 Evolutionary Development Models</a></li>
+          <li><a href="#sec-2-7">2.7 Iterative Enhancement Models</a></li>
+          <li><a href="#sec-2-8">2.8 Incremental Process Model</a></li>
+          <li><a href="#sec-2-9">2.9 Rapid Application Development (RAD)</a></li>
+          <li><a href="#sec-2-10">2.10 RAD vs Waterfall</a></li>
+          <li><a href="#sec-2-11">2.11 Agile Software Development</a></li>
+          <li><a href="#sec-2-12">2.12 Extreme Programming (XP)</a></li>
+          <li><a href="#sec-2-13">2.13 SDLC V-Model</a></li>
+          <li><a href="#sec-2-14">2.14 Information System Life Cycle</a></li>
+          <li><a href="#sec-2-15">2.15 Database Application System Life Cycle</a></li>
+          <li><a href="#sec-2-16">2.16 Comparison of Life Cycle Models</a></li>
+          <li><a href="#sec-2-17">2.17 Pairwise Model Comparisons</a></li>
+          <li><a href="#sec-2-18">2.18 Risk Management in SDLC</a></li>
+          <li><a href="#key-takeaways">Key takeaways</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="site-header">
+        <h1>2. SDLC &amp; Process Models</h1>
+        <div class="header-actions">
+          <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="sidebar-nav" aria-label="Open page navigation">
+            <span class="nav-toggle-icon" aria-hidden="true">
+              <span class="nav-toggle-bar"></span>
+              <span class="nav-toggle-bar"></span>
+              <span class="nav-toggle-bar"></span>
+            </span>
+            <span class="nav-toggle-label">Sections</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="outline-coverage" id="outline-coverage">
+        <div class="outline-coverage-title">Syllabus outline covered in this topic</div>
+        <ul>
+          <li>Software Prototyping</li>
+          <li>Software Development Life Cycle (SDLC) and process models</li>
+        </ul>
+      </div>
+
+      <section id="sec-2-1">
+        <h2>2.1 Software Development Life Cycle (SDLC)</h2>
+        <p>
+          The <strong>Software Development Life Cycle (SDLC)</strong> is a structured framework that defines the
+          <strong>phases, activities, deliverables, and milestones</strong> through which software is planned, built,
+          tested, deployed, and maintained. An SDLC model is a specific <em>instance</em> of this framework —
+          for example Waterfall, Spiral, or Agile — that prescribes how phases are ordered, overlapped, or repeated.
+        </p>
+        <p>
+          SDLC connects directly to the generic software process activities introduced in
+          <a href="01-introduction-and-fundamentals.html#sec-1-9">Topic 1 §1.9</a>: feasibility, requirements,
+          design, coding, testing, implementation, and maintenance. The difference is that an SDLC <strong>model</strong>
+          decides whether these activities run strictly in sequence, in loops, in parallel, or in increments.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-sdlc-caption">
+          <img src="../../assets/images/se-topic-02/sdlc-full.webp"
+               alt="Software Development Life Cycle — phases from planning through deployment and maintenance"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-sdlc-caption">SDLC — a structured sequence of phases from conception to maintenance (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Standard SDLC phases</h3>
+        <ol>
+          <li><strong>Planning / Feasibility.</strong> The organisation defines project scope, checks technical and economic viability, and allocates resources before committing to full development.</li>
+          <li><strong>Requirements analysis.</strong> Analysts elicit and document what the system must do and produce the Software Requirements Specification (SRS).</li>
+          <li><strong>Design.</strong> Architects create high-level and detailed designs and produce the software design document (SDD) and interface specifications.</li>
+          <li><strong>Implementation (coding).</strong> Developers translate the approved design into source code according to coding standards.</li>
+          <li><strong>Testing.</strong> Testers run unit, integration, system, and acceptance testing to find and report defects.</li>
+          <li><strong>Deployment.</strong> The release is installed, configured, and handed over, and users are trained before the system goes live.</li>
+          <li><strong>Maintenance.</strong> The team performs corrective, adaptive, and perfective changes throughout the operational life of the product.</li>
+        </ol>
+
+        <h3>Entry and exit criteria (exam favourite)</h3>
+        <p>Each phase has <strong>entry criteria</strong> (what must be complete before starting) and
+          <strong>exit criteria</strong> (deliverables that must be approved before moving on):</p>
+        <table>
+          <thead>
+            <tr><th>Phase</th><th>Entry criteria</th><th>Exit criteria (deliverables)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Requirements</td><td>The project charter is approved and the feasibility study has been accepted.</td><td>A reviewed and signed-off Software Requirements Specification (SRS) is available.</td></tr>
+            <tr><td>Design</td><td>The SRS has been approved by stakeholders.</td><td>A reviewed software design document, database schema, and user-interface mock-ups are complete.</td></tr>
+            <tr><td>Coding</td><td>The design document has been approved.</td><td>Source code and unit-test results for all modules are ready.</td></tr>
+            <tr><td>Testing</td><td>A testable build exists and the test plan has been approved.</td><td>The test report, defect log, and customer acceptance sign-off are complete.</td></tr>
+            <tr><td>Deployment</td><td>A tested release candidate is ready for installation.</td><td>The system is installed in the target environment and user training is complete.</td></tr>
+            <tr><td>Maintenance</td><td>The system is running in production.</td><td>Change requests are handled according to the agreed service-level agreement.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Choosing an SDLC model</h3>
+        <p>Model selection depends on project context:</p>
+        <ul>
+          <li><strong>Requirements stability.</strong> When specifications are fixed, Waterfall or the V-Model is often appropriate. When requirements change frequently, Agile or the Prototype model is usually a better fit.</li>
+          <li><strong>Project size and complexity.</strong> Large, safety-critical systems need rigorous models with strong documentation. Smaller applications can often use RAD or Agile successfully.</li>
+          <li><strong>Risk level.</strong> High technical or business risk favours the Spiral model (<a href="#sec-2-5">§2.5</a>) or incremental delivery so that risk is reduced early.</li>
+          <li><strong>Customer involvement.</strong> RAD and Agile require active users throughout the project, whereas Waterfall relies on upfront sign-off of requirements and design.</li>
+          <li><strong>Time-to-market.</strong> Incremental development, RAD, and Agile typically deliver working software to users earlier than a single end-of-project release.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — SDLC definition and phases</div>
+          <p><strong>Q:</strong> Define SDLC. List its phases with entry and exit criteria for any three phases. How does SDLC relate to the software process in Topic 1?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define SDLC as a structured framework of phases from planning through maintenance, and explain that an SDLC model is a specific way of ordering, overlapping, or repeating those phases.</li>
+            <li>List all seven standard phases and give entry and exit criteria for at least requirements, design, and testing using the table above.</li>
+            <li>Link to <a href="01-introduction-and-fundamentals.html#sec-1-9">Topic 1 §1.9</a>: the underlying process activities are the same, but the chosen model defines their sequence, iteration, and overlap.</li>
+            <li>Explain model selection using requirements stability, project size, risk level, customer involvement, and schedule pressure.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-2">
+        <h2>2.2 Classical Waterfall Model</h2>
+        <p>
+          The <strong>Classical Waterfall Model</strong> is the oldest and most widely taught SDLC model. It treats
+          software development as a <strong>strictly sequential</strong> process: each phase must be fully completed,
+          reviewed, and signed off before the next phase begins. There is <strong>no overlap</strong> between phases
+          and <strong>no backward movement</strong> — if a mistake is found later, the model does not formally allow
+          returning to fix it without breaking the prescribed flow.
+        </p>
+        <p>
+          The model is associated with <strong>Winston Royce</strong>, who published a paper in <strong>1970</strong>
+          describing a large-system development approach. A common exam trap: students say Royce “invented” pure
+          Waterfall as the ideal method. In reality, Royce illustrated the sequential diagram mainly to
+          <strong>critique</strong> it — he argued that large projects need iteration, prototyping, and risk
+          handling. The <em>classical</em> form (no feedback) became popular in industry and textbooks anyway because
+          of its simplicity and ease of project planning.
+        </p>
+
+        <h3>Definition and core idea</h3>
+        <p>
+          In the Classical Waterfall Model, development flows in one direction like water falling over steps:
+          from <strong>requirements</strong> down to <strong>maintenance</strong>. The underlying assumption is that
+          every requirement can be captured completely at the start, that design can be frozen before coding, and
+          that testing at the end will expose any remaining defects. This mirrors traditional engineering (e.g., bridge
+          design → construction → inspection) and works only when the problem domain is stable and well understood.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-waterfall-caption">
+          <img src="../../assets/images/se-topic-02/waterfall.webp"
+               alt="Classical Waterfall model — sequential phases from requirements to maintenance"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-waterfall-caption">Classical Waterfall — linear, sequential phases with no feedback loops (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>How to read the Waterfall diagram</h3>
+        <p>
+          The diagram shows boxes or stages arranged vertically or horizontally. Arrows point <strong>downward only</strong>
+          (or left-to-right). Each box represents a phase with defined inputs and outputs. In exams, you should be able
+          to <strong>draw and label</strong> all phases and state that classical Waterfall has <strong>no curved return
+          arrows</strong> — that absence is what distinguishes it from the Iterative Waterfall in §2.3.
+        </p>
+
+        <h3>Phases of the Classical Waterfall Model</h3>
+        <p>
+          Different textbooks list five, six, or seven phases. For exams, use the following six-phase breakdown
+          (aligned with GFG and most university notes). Explain <em>what happens</em> and <em>what is produced</em> in each.
+        </p>
+
+        <h4>Phase 1 — Requirements gathering and analysis</h4>
+        <p>
+          The development team meets customers, users, and stakeholders to collect needs. Analysts study the existing
+          system (if any), identify problems, and document functional and non-functional requirements. Ambiguities must
+          be resolved here because classical Waterfall assumes requirements will not change later.
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> The team conducts interviews and questionnaires, observes users in their environment, runs feasibility studies, and holds requirements workshops.</li>
+          <li><strong>Deliverable.</strong> The main output is the Software Requirements Specification (SRS), which acts as the contract for all later work.</li>
+          <li><strong>Entry criterion.</strong> The project must be approved and scope must be defined at a high level before this phase begins.</li>
+          <li><strong>Exit criterion.</strong> The SRS must be reviewed and signed off by the customer or management.</li>
+        </ul>
+
+        <h4>Phase 2 — System design</h4>
+        <p>
+          Architects and designers transform the SRS into a technical blueprint: module structure, databases, interfaces,
+          algorithms, and hardware/software platform choices. Design is split into <strong>high-level design</strong>
+          (architecture, major components) and <strong>low-level design</strong> (detailed module specs, data structures).
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> Architects perform architectural design, database design, interface design, and security design based on the approved SRS.</li>
+          <li><strong>Deliverable.</strong> The team produces the Design Document Specification (DDS), also called the software design document.</li>
+          <li><strong>Exit criterion.</strong> A formal design review must pass, and no coding should start until the design is frozen.</li>
+        </ul>
+
+        <h4>Phase 3 — Implementation (coding)</h4>
+        <p>
+          Programmers write source code according to the DDS. Unit-level work happens here: choosing languages,
+          following coding standards, version control, and code reviews. In classical Waterfall, integration across
+          modules is minimal until the next phase.
+        </p>
+        <ul>
+          <li><strong>Deliverable.</strong> The phase produces source code, build scripts, and unit-test results for all planned modules.</li>
+          <li><strong>Exit criterion.</strong> All modules must be coded and compiled successfully so that the build is ready for formal testing.</li>
+        </ul>
+
+        <h4>Phase 4 — Testing</h4>
+        <p>
+          Testers verify and validate the product against the SRS. Testing progresses from small to large:
+          <strong>unit testing</strong> → <strong>integration testing</strong> → <strong>system testing</strong> →
+          <strong>acceptance testing</strong> (often with the customer). Defects are logged; in pure classical Waterfall,
+          fixing a requirements-level fault discovered here is extremely costly because the model does not encourage
+          reopening the SRS phase.
+        </p>
+        <ul>
+          <li><strong>Deliverable.</strong> The testing phase produces test plans, test cases, defect reports, and a test summary report.</li>
+          <li><strong>Exit criterion.</strong> Acceptance criteria must be met and all critical defects must be closed or formally waived.</li>
+        </ul>
+
+        <h4>Phase 5 — Deployment (installation / delivery)</h4>
+        <p>
+          The tested product is delivered to the customer environment: installation on servers or client machines,
+          data migration, user training, and cutover from the old system. Release notes and operational manuals are handed over.
+        </p>
+        <ul>
+          <li><strong>Deliverable.</strong> The customer receives the deployed system, release documentation, and training materials.</li>
+          <li><strong>Exit criterion.</strong> The customer signs off on go-live and the warranty or support period begins.</li>
+        </ul>
+
+        <h4>Phase 6 — Maintenance</h4>
+        <p>
+          After delivery, the software enters the longest phase in terms of calendar time. Maintenance includes
+          <strong>corrective</strong> (fix bugs), <strong>adaptive</strong> (adjust to new OS/hardware), and
+          <strong>perfective</strong> (improve performance/features). In strict classical Waterfall, large new features
+          may trigger a new project rather than informal iteration.
+        </p>
+
+        <h3>Assumptions behind the Classical Waterfall</h3>
+        <ul>
+          <li>Requirements are <strong>complete and correct</strong> before design starts.</li>
+          <li>Design is <strong>correct</strong> before coding starts. No prototyping of uncertain areas.</li>
+          <li>Technology and environment will <strong>not change</strong> during the project.</li>
+          <li>Each phase produces a <strong>baseline document</strong> that is not revised.</li>
+          <li>Customer involvement is concentrated at the <strong>start</strong> (requirements) and <strong>end</strong> (acceptance), not throughout.</li>
+        </ul>
+        <p>
+          When any of these assumptions fail — as they do on most commercial software — the classical model becomes
+          risky. That is why later models (Iterative Waterfall, Prototype, Spiral, Agile) were introduced.
+        </p>
+
+        <h3>Advantages of the Classical Waterfall Model</h3>
+        <ul>
+          <li>
+            <strong>Simple and disciplined</strong> — easy to teach, easy for managers to schedule. Each phase has a
+            clear start and end; progress is measured by documents completed, not partial code.
+          </li>
+          <li>
+            <strong>Strong documentation</strong> — SRS, DDS, test plans, and manuals are produced systematically.
+            Useful for audits, government contracts, and long-term maintenance when staff turnover is high.
+          </li>
+          <li>
+            <strong>Milestone-based management</strong> — budgets and timelines map to phases. Stakeholders know when
+            reviews occur and when sign-off is required.
+          </li>
+          <li>
+            <strong>Stable requirements</strong> — if requirements truly will not change (e.g., translating a fixed
+            mathematical specification into code), sequential flow avoids rework and scope creep.
+          </li>
+          <li>
+            <strong>Clear roles</strong> — analysts, designers, programmers, and testers work in separate phases;
+            suitable for large teams with strict separation of duties.
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>Working software appears very late</strong> — customers may wait months or years before seeing
+            anything runnable. Wrong assumptions in requirements are discovered only at acceptance testing.
+          </li>
+          <li>
+            <strong>High cost of late change</strong> — an error in requirements propagates through design and code.
+            Fixing it after testing can mean redoing entire phases; cost grows exponentially with phase distance
+            (the “cost of change” curve is a standard exam point).
+          </li>
+          <li>
+            <strong>No formal feedback</strong> — classical Waterfall does not allow going back; real projects often
+            break the model informally, leading to undocumented rework.
+          </li>
+          <li>
+            <strong>Poor fit for uncertain or evolving requirements</strong> — web apps, startups, and research
+            projects rarely have frozen specs at day one.
+          </li>
+          <li>
+            <strong>Testing is delayed</strong> — quality problems accumulate silently until the testing phase;
+            test-driven or continuous testing is not part of the classical view.
+          </li>
+          <li>
+            <strong>Risk is front-loaded invisibly</strong> — all major risks (wrong product, technology mismatch)
+            materialise near the end, when options to recover are limited.
+          </li>
+        </ul>
+
+        <h3>When to use the Classical Waterfall Model</h3>
+        <ul>
+          <li>Requirements are <strong>fixed, complete, and legally binding</strong> (government, defence, banking regulations).</li>
+          <li>The problem is <strong>well understood</strong> and similar systems have been built before (e.g., porting a known algorithm to a new platform).</li>
+          <li>Project is <strong>small</strong> with few stakeholders and short duration.</li>
+          <li>Technology, standards, and team skills are <strong>stable</strong>.</li>
+          <li>Documentation and traceability matter more than speed (safety-critical or certified systems where process evidence is audited).</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Requirements are unclear, changing, or discovered through use (most modern products).</li>
+          <li>User interface or workflow must be validated early with real users.</li>
+          <li>Project has high technical or business risk that needs early prototyping or spikes.</li>
+          <li>Competitive pressure demands early partial releases (use Incremental, RAD, or Agile instead).</li>
+        </ul>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — Payroll system for a university with fixed government rules:</strong> Salary formulas,
+          tax slabs, and reporting formats are defined by regulation and change only when law changes. The university
+          commissions a vendor to replace an old system. Requirements are written in a tender document; design and
+          testing must prove compliance. Classical Waterfall (or V-Model) fits because scope is stable and documentation
+          for audit is mandatory. Contrast with a student startup building a social app — requirements evolve weekly;
+          Waterfall would fail.
+        </p>
+
+        <h3>Relation to other models</h3>
+        <p>
+          Classical Waterfall is the <strong>baseline</strong> against which other models are compared. The
+          <strong>Iterative Waterfall</strong> (§2.3) adds feedback loops. The <strong>V-Model</strong> (§2.13) keeps
+          sequential ordering but pairs each development phase with a test phase. <strong>Incremental</strong> and
+          <strong>Agile</strong> models deliberately deliver working software early. In exams, always state
+          <em>which variant</em> of Waterfall you mean — classical (no feedback) vs iterative (with feedback).
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Classical Waterfall</div>
+          <p><strong>Q:</strong> Explain the Classical Waterfall model of software development. Describe its phases with deliverables. Discuss the assumptions it makes, its advantages and disadvantages, and give examples of projects where it is appropriate or inappropriate.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define the Classical Waterfall as the oldest SDLC model with strictly sequential phases and no overlap or backward movement.</li>
+            <li>Mention Royce (1970) and note that he warned against using pure sequential flow on large systems.</li>
+            <li>Draw six phases from top to bottom with one-way arrows only.</li>
+            <li>For each phase from requirements through maintenance, state its purpose, main deliverable, and exit criterion.</li>
+            <li>List assumptions such as complete upfront requirements, frozen design, late testing, and limited mid-project customer involvement.</li>
+            <li>Give advantages (simplicity, documentation, milestone control) and disadvantages (late software, costly changes, late risk discovery).</li>
+            <li>Explain when to use the model (stable or regulated projects) and when not to use it (volatile or UI-heavy projects).</li>
+            <li>Support the answer with examples such as a regulated payroll system versus a social-media startup.</li>
+            <li>Contrast with Iterative Waterfall, which adds controlled feedback loops.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-3">
+        <h2>2.3 Iterative Waterfall Model</h2>
+        <p>
+          The <strong>Iterative Waterfall Model</strong> is a practical refinement of the Classical Waterfall. It
+          keeps the same <strong>phase order</strong> and the same emphasis on documentation, but introduces
+          <strong>feedback loops</strong>: when an error or omission is found in a later phase, the team may return
+          to an earlier phase, update the relevant documents, and then repeat the downstream work. This makes the
+          process closer to what <strong>Winston Royce</strong> actually advocated for large systems — sequential
+          structure plus controlled iteration when reality does not match the plan.
+        </p>
+        <p>
+          Iterative Waterfall is <strong>not</strong> the same as Incremental delivery (§2.8) or Agile sprints (§2.11).
+          In Iterative Waterfall you still aim to build <strong>one complete product</strong> through the full phase
+          chain; you only loop back to <em>fix mistakes</em>, not to release version 1, version 2, version 3 to customers.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-iter-waterfall-caption">
+          <img src="../../assets/images/se-topic-02/waterfall.webp"
+               alt="Iterative Waterfall model — sequential phases with feedback loops between stages"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-iter-waterfall-caption">Iterative Waterfall — same phases as classical, with backward arrows when defects or gaps are found (GeeksforGeeks). In exams, sketch return paths from testing and design to earlier phases.</figcaption>
+        </figure>
+
+        <h3>Why the Iterative Waterfall model exists</h3>
+        <p>
+          Pure Classical Waterfall assumes perfection in every phase. In practice, requirements are misunderstood,
+          designs omit edge cases, and code introduces defects. Without a formal way to go back, teams either
+          (a) hide rework and patch code informally, or (b) fail acceptance tests. Iterative Waterfall legitimises
+          <strong>controlled backtracking</strong> while keeping management visibility: each return trip updates baselines
+          (SRS, DDS, test plans) and is recorded in change logs.
+        </p>
+
+        <h3>Classical vs Iterative Waterfall — key differences</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Classical Waterfall</th><th>Iterative Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Direction of flow</td><td>Work moves in one direction only, with no formal return to earlier phases.</td><td>Work still moves mainly forward, but the team may return to an earlier phase when errors are found.</td></tr>
+            <tr><td>Handling errors found in testing</td><td>Going back to fix earlier work is discouraged and treated as outside the model.</td><td>The team returns to design or requirements, updates documents, and then moves forward again.</td></tr>
+            <tr><td>Documentation</td><td>Each phase produces a fixed baseline that is not expected to change.</td><td>Documents are revised when feedback occurs, and version numbers track each update.</td></tr>
+            <tr><td>Customer-visible software</td><td>The customer usually sees working software only at the end of the project.</td><td>The customer still sees the full product late, although requirements may improve through feedback.</td></tr>
+            <tr><td>Realism</td><td>The classical form is idealised and is rarely achievable on real projects without informal rework.</td><td>This form is more realistic and is common in regulated industries and large corporate projects.</td></tr>
+            <tr><td>Relation to Royce (1970)</td><td>It reflects an oversimplified reading of Royce’s paper.</td><td>It is closer to what Royce actually recommended for large systems.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phases (same as Classical Waterfall)</h3>
+        <p>
+          The phase names and deliverables are identical to §2.2: requirements → design → implementation → testing →
+          deployment → maintenance. The difference is <strong>what happens when a phase discovers a problem that
+          belongs to an earlier phase</strong>. Below are the standard feedback paths examiners expect you to describe.
+        </p>
+
+        <h3>Feedback paths and rules</h3>
+        <p>
+          Feedback is triggered by <strong>defects, reviews, or failed tests</strong> — not by casual preference to
+          redesign. Each backward move should follow a change-control process (impact analysis, approval, document update).
+        </p>
+
+        <h4>1. Testing → Implementation (coding)</h4>
+        <p>
+          Most common loop. System or integration testing finds a coding bug or wrong module behaviour. Testers log
+          defects; developers fix code, perform unit regression, and testing resumes. The SRS and design usually stay
+          unchanged. This loop is narrow and cheap.
+        </p>
+
+        <h4>2. Testing → Design</h4>
+        <p>
+          Tests show that the design cannot meet performance, security, or correctness requirements — e.g., database
+          schema causes deadlock under load. The team revisits the DDS, updates architecture or module interfaces,
+          then re-implements affected modules and re-runs integration and system tests. Cost is moderate to high.
+        </p>
+
+        <h4>3. Testing or Design → Requirements</h4>
+        <p>
+          The most expensive loop. Stakeholders realise the SRS was wrong or incomplete: a missing business rule,
+          illegal workflow, or misunderstood regulation. Analysts revise the SRS; design and code for affected parts
+          are redone. Schedule and budget impact is large — this illustrates why requirements engineering is critical.
+        </p>
+
+        <h4>4. Implementation → Design (during coding)</h4>
+        <p>
+          While coding, developers discover the specified algorithm is inefficient or an interface is impractical.
+          They request a design change before continuing. Iterative Waterfall allows returning to design without
+          waiting until formal testing — good teams catch this early in code reviews.
+        </p>
+
+        <h4>5. Design → Requirements</h4>
+        <p>
+          During design reviews, architects find conflicting or ambiguous requirements. The SRS must be clarified
+          before design can be completed. This loop prevents building the wrong structure on top of vague requirements.
+        </p>
+
+        <p>
+          <strong>Important exam point:</strong> feedback is typically <strong>local</strong> — you go back only to
+          the phase where the fault originated, not always to the very first phase. Going from testing directly to
+          requirements happens only for major specification errors.
+        </p>
+
+        <h3>Step-by-step scenario (how a loop works in practice)</h3>
+        <p>
+          <strong>Scenario — Online admission system:</strong>
+        </p>
+        <ol>
+          <li>Requirements and design are signed off. Developers implement modules for application form and fee payment.</li>
+          <li>During <strong>system testing</strong>, testers find that partial payments leave applications in an invalid state. A business rule was missing from the SRS.</li>
+          <li>Project manager authorises feedback to <strong>requirements analysis</strong>. SRS is updated (v1.1) with refund/cancel rules.</li>
+          <li><strong>Design</strong> is updated for the payment module and database transactions.</li>
+          <li>Affected code is rewritten. <strong>regression testing</strong> runs on payment and admission modules.</li>
+          <li>When tests pass, flow continues to deployment. Total project time increases, but the product matches real policy.</li>
+        </ol>
+        <p>
+          Under <em>Classical</em> Waterfall, the same discovery at testing might be treated as “scope creep” or fixed
+          with risky patches. Under <em>Iterative</em> Waterfall, the return path is explicit and documented.
+        </p>
+
+        <h3>Documentation and version control</h3>
+        <p>
+          Every feedback loop must update controlled documents:
+        </p>
+        <ul>
+          <li>SRS versions (v1.0, v1.1, …) with change history.</li>
+          <li>Design document revisions linked to requirement IDs.</li>
+          <li>Traceability matrix: requirement ↔ design ↔ test case ↔ code module.</li>
+          <li>Re-test evidence showing old defects are closed and no new ones introduced (regression).</li>
+        </ul>
+        <p>
+          Without version control, Iterative Waterfall degenerates into chaos — multiple developers working from
+          different editions of the SRS. Configuration management (Topic 13) supports this model directly.
+        </p>
+
+        <h3>Advantages of the Iterative Waterfall Model</h3>
+        <ul>
+          <li>
+            <strong>Error correction is built into the process</strong> — mistakes found in design or testing can be
+            fixed at the source instead of patched silently in code.
+          </li>
+          <li>
+            <strong>More realistic than classical Waterfall</strong> — acknowledges that perfect upfront analysis is rare.
+          </li>
+          <li>
+            <strong>Preserves structure and accountability</strong> — phases, reviews, and sign-offs remain; suitable for
+            organisations that cannot adopt Agile but need some flexibility.
+          </li>
+          <li>
+            <strong>Better quality at acceptance</strong> — major specification gaps can be closed before delivery,
+            reducing catastrophic failure at go-live.
+          </li>
+          <li>
+            <strong>Aligns with Royce’s intent</strong> — iteration for risk reduction without abandoning documentation.
+          </li>
+          <li>
+            <strong>Supports regulated industries</strong> — auditors can see change requests and traceability when loops occur.
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>Feedback is expensive</strong> — each return to requirements or design replays downstream work;
+            frequent loops destroy schedule and budget. Not a licence for changing requirements every week.
+          </li>
+          <li>
+            <strong>Still no early product for the customer</strong> — unlike Incremental or Agile, users do not receive
+            working subsets until the full cycle completes (unless combined with another model).
+          </li>
+          <li>
+            <strong>Document proliferation</strong> — multiple SRS/DDS versions; teams need strict CM discipline.
+          </li>
+          <li>
+            <strong>“Waterfall” stigma</strong> — managers may deny that loops are happening, leading to hidden technical debt.
+          </li>
+          <li>
+            <strong>Not for continuous requirement churn</strong> — if the market changes daily, Agile/Spiral/Prototype fit better.
+          </li>
+          <li>
+            <strong>Testing still relatively late</strong> — compared to V-Model or TDD, test planning is not paired at every micro-step unless the organisation adds extra practices.
+          </li>
+        </ul>
+
+        <h3>When to use the Iterative Waterfall Model</h3>
+        <ul>
+          <li>Large projects with <strong>mostly stable requirements</strong> but some risk of discovery during design/testing.</li>
+          <li>Organisations with <strong>mature process culture</strong>: change control boards, traceability, formal reviews.</li>
+          <li>Contracts that require <strong>Waterfall-style reporting</strong> but allow approved change requests.</li>
+          <li>Systems where failures must be traced to document versions (finance, healthcare, aerospace documentation).</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Requirements evolve continuously (use Agile or evolutionary models).</li>
+          <li>Need frequent releases to market (Incremental, RAD).</li>
+          <li>High UI uncertainty. Users must see prototypes early (Prototype model, §2.4).</li>
+          <li>High technical risk needing risk-driven cycles (Spiral model, §2.5).</li>
+        </ul>
+
+        <h3>Combining with other ideas</h3>
+        <p>
+          Iterative Waterfall is often used <strong>inside</strong> each increment of an Incremental model, or as the
+          internal process of a government phase-gate project. It does not replace risk analysis (Spiral) or early
+          prototypes (Prototype model) — those can be added on top where needed.
+        </p>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — Hospital information system upgrade:</strong> Core workflows (patient registration, billing)
+          are regulated and specified in a national health data standard. The hospital uses Iterative Waterfall: baseline
+          SRS from the ministry, design review with clinicians, then development. During integration testing, clinicians
+          find that emergency admissions bypass normal registration — the SRS lacked an exception flow. The team loops
+          back to requirements, updates design, recodes two modules, and re-tests. The project is late by six weeks but
+          passes accreditation. A classical “no feedback” approach would have shipped unsafe workarounds.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Iterative Waterfall</div>
+          <p><strong>Q:</strong> Explain the Iterative Waterfall model. How does it differ from the Classical Waterfall model? Illustrate with a diagram showing feedback paths. Discuss advantages, disadvantages, and suitable application areas with an example.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define Iterative Waterfall as using the same phases as classical Waterfall but allowing controlled feedback when later phases discover errors in earlier work.</li>
+            <li>Explain that pure Waterfall is unrealistic and that Royce recommended iteration with updated documents.</li>
+            <li>Draw six phases and show backward paths from testing to coding, design, or requirements, and from design to requirements, explaining when each path is used.</li>
+            <li>Compare classical and iterative Waterfall using a table (one-way flow versus feedback, document versions, delivery timing, realism).</li>
+            <li>Clarify that Iterative Waterfall is not the same as Incremental delivery or Agile continuous change.</li>
+            <li>State that feedback is triggered by defects or reviews, follows change control, updates the SRS and DDS, and requires regression testing.</li>
+            <li>Walk through a scenario where testing finds a missing requirement, the SRS is updated, design and code are revised, and testing is repeated.</li>
+            <li>List advantages and disadvantages, suitable contexts (for example a hospital system), and when other models are preferable.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-4">
+        <h2>2.4 Prototype Model / Software Prototyping</h2>
+        <p>
+          The <strong>Prototype Model</strong> is an SDLC approach in which the team builds a
+          <strong>working model (prototype)</strong> of the system — or of critical parts of it — early in the
+          project so that users and developers can <strong>see, use, and critique</strong> realistic behaviour before
+          committing to full-scale design and coding. The prototype may be a screen mock-up with simulated data,
+          a partial implementation of core workflows, or a throwaway script; the essential idea is
+          <strong>learning by doing</strong> rather than relying only on written requirements.
+        </p>
+        <p>
+          <strong>Software Prototyping</strong> appears as a separate item on the course syllabus outline. In exams,
+          treat it as covering both (1) <strong>prototyping as a requirements-engineering technique</strong> used inside
+          other models (e.g., Spiral risk reduction), and (2) <strong>the Prototype Model</strong> as a named SDLC
+          process where prototyping drives the main flow of the project.
+        </p>
+
+        <h3>Why prototyping is needed</h3>
+        <p>
+          Many projects fail because stakeholders and developers interpret the same words differently. Users often
+          cannot articulate needs until they <em>see</em> a system. Written SRS documents are abstract; prototypes make
+          requirements <strong>concrete</strong>. The Prototype Model is therefore chosen when:
+        </p>
+        <ul>
+          <li>Requirements are <strong>incomplete, ambiguous, or conflicting</strong>.</li>
+          <li>The <strong>user interface</strong> or human workflow is central (booking systems, dashboards, mobile apps).</li>
+          <li>The domain is <strong>new</strong> to the development team (first version of a product category).</li>
+          <li>Stakeholders need <strong>early proof</strong> that an idea is feasible before large funding is approved.</li>
+        </ul>
+        <p>
+          Contrast with Classical Waterfall (§2.2), which assumes requirements are complete before design. Prototyping
+          deliberately delays freezing the SRS until experience with a model reduces uncertainty.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-prototype-caption">
+          <img src="../../assets/images/se-topic-02/prototype-flow.svg"
+               alt="Prototype model throwaway cycle — requirements, quick design, build prototype, user evaluation, refine SRS, repeat until satisfied, then final implementation"
+               width="720" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-prototype-caption">Prototype Model (throwaway cycle) — loop until requirements stabilise, then discard prototype and build the final system.</figcaption>
+        </figure>
+
+        <h3>Phases of the Prototype Model (general flow)</h3>
+        <p>
+          Textbooks and GFG describe a repeating cycle followed by a final construction phase. Use these phases in
+          long answers and link them to the diagram above.
+        </p>
+        <ol>
+          <li>
+            <strong>Requirement gathering (initial)</strong> — collect a <em>partial</em> set of known requirements;
+            accept that many details are unknown. Produce a draft SRS or user stories, not a final contract.
+          </li>
+          <li>
+            <strong>Quick / rough design</strong> — focus on screens, workflows, and data visible to users; ignore
+            optimisation, full security hardening, and production scalability for now.
+          </li>
+          <li>
+            <strong>Build prototype</strong> — implement using rapid tools (UI builders, scripting languages, mock APIs).
+            Speed matters more than clean architecture in throwaway mode.
+          </li>
+          <li>
+            <strong>User evaluation</strong> — users perform realistic tasks; analysts record gaps, wrong assumptions,
+            and new requirements. Manage expectations: label it a prototype, not the finished product.
+          </li>
+          <li>
+            <strong>Refine requirements</strong> — update SRS, wireframes, and acceptance criteria. If still unclear,
+            loop back to quick design and another prototype version.
+          </li>
+          <li>
+            <strong>Final implementation</strong> — once stakeholders agree on requirements, build the
+            <strong>production system</strong> with proper architecture, testing, and documentation. In throwaway
+            prototyping, the prototype code is <strong>discarded</strong>; in evolutionary prototyping, the prototype
+            is <strong>extended</strong> (see below).
+          </li>
+        </ol>
+
+        <h3>Types of prototyping</h3>
+        <p>
+          Exams almost always ask you to <strong>compare throwaway and evolutionary</strong> prototyping. Learn the
+          table and be able to give examples of each.
+        </p>
+
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Throwaway (rapid) prototyping</th><th>Evolutionary prototyping</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Purpose</td><td>The prototype is used only to clarify and validate requirements.</td><td>The prototype is used to deliver the product incrementally until it becomes the final system.</td></tr>
+            <tr><td>Fate of prototype code</td><td>The prototype code is discarded after the SRS is stable.</td><td>The prototype code is kept and extended in each iteration.</td></tr>
+            <tr><td>Final system</td><td>The final system is built from scratch using proper engineering practices.</td><td>The final system evolves directly from the prototype codebase.</td></tr>
+            <tr><td>Documentation</td><td>Documentation is light during exploration, and the SRS is updated at the end.</td><td>Documentation must improve over time, or technical debt will accumulate.</td></tr>
+            <tr><td>Risk</td><td>Effort is wasted if lessons from the prototype are not captured in the SRS.</td><td>Technical debt and poor structure arise if the team does not refactor regularly.</td></tr>
+            <tr><td>Best when</td><td>Requirements are very unclear and the user interface must be discovered.</td><td>Requirements evolve, but a usable core of the system can be built early.</td></tr>
+          </tbody>
+        </table>
+
+        <h4>1. Throwaway (rapid) prototyping</h4>
+        <p>
+          The team builds a <strong>quick, disposable prototype</strong> solely to explore the problem space. Tools may
+          include paper sketches, Figma mock-ups, or a “quick and dirty” web demo with fake data. When users and analysts
+          agree on what the system should do, developers <strong>throw away</strong> the prototype and implement the real
+          system with maintainable code, proper database design, and full test coverage.
+        </p>
+        <ul>
+          <li><strong>Focus.</strong> The team concentrates on understanding <em>what</em> the system must do, not on how it will be built in production.</li>
+          <li><strong>Speed.</strong> The team uses rapid tools such as 4GLs, scripting, UI generators, or AI-assisted mock-ups to shorten feedback time.</li>
+          <li><strong>Deliverable of the prototyping phase.</strong> The main output is an improved, detailed SRS, not the prototype program itself.</li>
+          <li><strong>Exam trap.</strong> Throwaway prototyping does not mean “no documentation”; the effort is wasted if user feedback is not written into the SRS.</li>
+        </ul>
+        <p>
+          <strong>Example — University course registration:</strong> Students cannot describe every edge case in interviews.
+          The team builds a clickable prototype in two weeks. Users discover needs for wait-lists, prerequisite checks,
+          and mobile layout. The prototype is discarded; the production system is built in Java with a proper database.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-evolutionary-prototype-caption">
+          <img src="../../assets/images/se-topic-02/prototype-evolutionary.webp"
+               alt="Evolutionary prototyping model — prototype built and refined through iterations until it becomes the final product"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-evolutionary-prototype-caption">Evolutionary prototyping — the prototype is refined over iterations and becomes the final product (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h4>2. Evolutionary prototyping</h4>
+        <p>
+          The first prototype is a <strong>core subset</strong> of the system (e.g., login + one main feature). Users
+          evaluate it; developers <strong>add features and improve quality</strong> in later iterations until the
+          prototype becomes the delivered product. No separate “big bang” rewrite as in throwaway mode.
+        </p>
+        <ul>
+          <li><strong>Advantage:</strong> Working software from early iterations. Users see continuous progress.</li>
+          <li><strong>Risk:</strong> prototype code written for speed may lack modularity. Requires <strong>refactoring</strong> and coding standards in later iterations.</li>
+          <li><strong>Relation to evolutionary development</strong> (§2.6): evolutionary prototyping is one form of building the system through repeated extension.</li>
+        </ul>
+        <p>
+          <strong>Example — Startup mobile app:</strong> Version 0.1 shows profile and feed; version 0.2 adds messaging;
+          each release is the same codebase grown outward. Investors see a live product early.
+        </p>
+
+        <h3>Other prototyping terms (short definitions)</h3>
+        <ul>
+          <li><strong>Horizontal prototype.</strong> This type covers many features at shallow depth, such as many screens with little underlying logic.</li>
+          <li><strong>Vertical prototype.</strong> This type implements one feature fully through all layers (user interface, logic, and database) to prove feasibility.</li>
+          <li><strong>Paper prototype.</strong> These are hand-drawn sketches used in very early workshops; they are the cheapest form of prototyping.</li>
+          <li><strong>Operational prototype.</strong> This type focuses on performance or algorithm behaviour, for example whether search meets the required response time.</li>
+        </ul>
+
+        <h3>Prototype Model vs Waterfall and Iterative Waterfall</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall / Iterative Waterfall</th><th>Prototype Model</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>When requirements are fixed</td><td>Requirements are treated as fixed early, or refined only through formal feedback loops.</td><td>Requirements are frozen only after one or more prototyping cycles.</td></tr>
+            <tr><td>First deliverable to user</td><td>The user first receives documents, and working software appears late.</td><td>The user receives prototype screens or an executable model early in the project.</td></tr>
+            <tr><td>Handling vague UI</td><td>Waterfall is a poor fit when the user interface is unclear.</td><td>The Prototype model is a strong fit when the user interface must be explored.</td></tr>
+            <tr><td>Cost of wrong requirements</td><td>The cost is high if wrong requirements are discovered only during testing.</td><td>The cost is lower because mistakes are often found during prototype evaluation.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Advantages of the Prototype Model</h3>
+        <ul>
+          <li>
+            <strong>Clarifies requirements early</strong> — users react to something tangible; missing rules and conflicting
+            goals surface before large development cost.
+          </li>
+          <li>
+            <strong>Improves communication</strong> — developers, managers, and customers share a common reference (the prototype).
+          </li>
+          <li>
+            <strong>Reduces development risk</strong> — wrong product direction is corrected cheaply compared to rewriting a finished system.
+          </li>
+          <li>
+            <strong>Supports usability evaluation</strong> — navigation, layout, and accessibility can be tested with real users.
+          </li>
+          <li>
+            <strong>Helps estimation</strong> — after a vertical prototype, the team can estimate effort for the full build more accurately.
+          </li>
+          <li>
+            <strong>Stakeholder confidence</strong> — sponsors see progress and are more likely to continue funding (especially evolutionary path).
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>User expectation management</strong> — users may think the rough prototype is nearly finished (“Why does it take six more months?”).
+            Must label versions, use greyscale UI, or disclaim performance.
+          </li>
+          <li>
+            <strong>Scope creep</strong> — each demo invites new features; needs strong product owner and change control.
+          </li>
+          <li>
+            <strong>Throwaway effort wasted</strong> — if the team does not update the SRS, the prototype was pointless.
+          </li>
+          <li>
+            <strong>Evolutionary technical debt</strong> — quick hacks in early iterations may corrupt architecture unless time is budgeted for refactoring.
+          </li>
+          <li>
+            <strong>Non-functional requirements</strong> — security, load, and reliability are hard to judge from a light prototype; separate spikes or benchmarks may be needed.
+          </li>
+          <li>
+            <strong>Not for all domains</strong> — safety-critical firmware or batch-only backends with no UI gain less from UI-centric prototyping.
+          </li>
+          <li>
+            <strong>Documentation neglect</strong> — teams focused on demos may skip traceability; dangerous for regulated systems unless corrected before final build.
+          </li>
+        </ul>
+
+        <h3>When to use the Prototype Model</h3>
+        <ul>
+          <li>Requirements are <strong>unclear or unstable</strong> at project start.</li>
+          <li><strong>Human-computer interaction</strong> is a major success factor.</li>
+          <li>Customer cannot evaluate a paper SRS but <strong>can use a demo</strong>.</li>
+          <li>Project is <strong>medium risk</strong> and needs early validation before Waterfall-style full specification.</li>
+          <li>Combines well with <strong>Spiral model</strong> (§2.5). Prototypes built in the “resolve risks” quadrant.</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Requirements are already complete and legally fixed (strict Waterfall or V-Model may suffice).</li>
+          <li>Primary risks are <strong>algorithmic or performance</strong>. Need vertical/operational prototypes or proofs, not UI mock-ups alone.</li>
+          <li>Organisation lacks discipline to <strong>discard or refactor</strong>. Evolutionary prototypes become unmaintainable legacy code.</li>
+          <li>Tight fixed-price contract with <strong>no allowance</strong> for requirement evolution after demos.</li>
+        </ul>
+
+        <h3>Step-by-step exam scenario (throwaway)</h3>
+        <ol>
+          <li>Bank wants a new loan calculator web app. Business rules are spread across emails and spreadsheets.</li>
+          <li>Analysts run workshops and build a <strong>throwaway</strong> HTML/JS prototype with sample rates.</li>
+          <li>Loan officers test scenarios. Discover missing rules for Islamic finance products and early repayment.</li>
+          <li>SRS v2.0 is written. Prototype is <strong>archived and discarded</strong>.</li>
+          <li>Production system is developed with secure APIs, audit logs, and penetration testing. None of which were in the prototype.</li>
+        </ol>
+
+        <h3>Relation to syllabus and other topics</h3>
+        <ul>
+          <li><strong>Syllabus outline — Software Prototyping:</strong> satisfied by this section (technique + Prototype Model).</li>
+          <li><strong>Spiral model (§2.5):</strong> uses prototypes to reduce specific risks each cycle.</li>
+          <li><strong>RAD (§2.9):</strong> relies on fast prototyping and user workshops. Overlapping ideas, different emphasis (time-boxing).</li>
+          <li><strong>Agile (§2.11):</strong> every sprint delivers incrementally. Similar spirit to evolutionary prototyping.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Prototyping</div>
+          <p><strong>Q:</strong> Explain the Prototype Model of software development. Describe its phases with a diagram. Differentiate between throwaway and evolutionary prototyping with examples. Discuss advantages, disadvantages, and situations where prototyping is appropriate or inappropriate.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define the Prototype model as building an early working model that users evaluate before full development, and note that the syllabus item Software Prototyping covers both the technique and the SDLC model.</li>
+            <li>Explain why prototyping is used when requirements are vague, the user interface is critical, or users cannot express needs from documents alone.</li>
+            <li>Describe the throwaway cycle: requirements, quick design, prototype, user evaluation, refined SRS, repeated loops, then final implementation after discarding the prototype.</li>
+            <li>Describe evolutionary prototyping as repeated refinement of the same codebase until it becomes the delivered product.</li>
+            <li>List the six phases of the prototype model and state the purpose of each in full sentences.</li>
+            <li>Compare throwaway and evolutionary prototyping using purpose, fate of code, documentation, risks, and when to use each.</li>
+            <li>Give examples such as university registration (throwaway) versus a startup app (evolutionary).</li>
+            <li>Mention horizontal, vertical, paper, and operational prototypes if the question asks for types.</li>
+            <li>Discuss advantages, disadvantages, suitable and unsuitable projects, and contrast with Waterfall (late versus early requirements freeze).</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> In throwaway prototyping, the prototype is — <strong>(B) Discarded after requirements are clarified</strong>.</p>
+          <p><strong>MCQ:</strong> In evolutionary prototyping, the final system is — <strong>(C) Developed by extending the prototype over iterations</strong>.</p>
+        </div>
+      </section>
+
+      <section id="sec-2-5">
+        <h2>2.5 Spiral Model</h2>
+        <p>
+          The <strong>Spiral Model</strong> is a risk-driven SDLC model proposed by <strong>Barry Boehm in 1986</strong>.
+          Unlike Classical Waterfall, which assumes risks can be ignored until late testing, the Spiral model makes
+          <strong>risk analysis and risk reduction</strong> the organising principle of the project. Each iteration
+          of the project is represented as one <strong>loop (cycle)</strong> of a spiral that grows outward: the team
+          plans objectives, analyses risks, builds and tests product elements, evaluates with the customer, and then
+          decides whether to proceed to the next, larger cycle.
+        </p>
+        <p>
+          The Spiral model <strong>combines</strong> ideas from other approaches: structured phases like Waterfall,
+          prototypes to resolve uncertainty (as in §2.4), and iterative delivery of increasing completeness. It is
+          widely cited in exams as the model best suited to <strong>large, complex, high-risk</strong> software projects.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-spiral-caption">
+          <img src="../../assets/images/se-topic-02/spiral.webp"
+               alt="Spiral model — iterative cycles expanding outward with four quadrants per loop"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-spiral-caption">Spiral Model — each revolution of the spiral is one iteration; cost and scope grow outward (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-spiral-quadrants-caption">
+          <img src="../../assets/images/se-topic-02/spiral-quadrants.svg"
+               alt="Spiral model four quadrants — objectives and planning, risk analysis, engineering develop and test, customer evaluation"
+               width="400" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-spiral-quadrants-caption">Four quadrants (sectors) of each spiral cycle — memorise order and purpose for diagrams in exams.</figcaption>
+        </figure>
+
+        <h3>Core idea and philosophy</h3>
+        <p>
+          Boehm observed that many failures come from <strong>unresolved risks</strong> — wrong requirements, new
+          technology that does not scale, performance shortfalls, or staff turnover. The Spiral model forces the team
+          to ask at every cycle: <em>What can go wrong? How serious is it? What will we do now to reduce it?</em>
+          Only after risk-handling activities does the team commit to major development cost for that cycle.
+        </p>
+        <ul>
+          <li>Each loop produces a <strong>more complete product</strong> (requirements slice, design, code, or operational release).</li>
+          <li>Early loops may produce only documents and prototypes. Later loops deliver production-quality software.</li>
+          <li>The customer is involved at the <strong>end of every cycle</strong> in evaluation, not only at project start and finish.</li>
+        </ul>
+
+        <h3>Four quadrants of each spiral cycle</h3>
+        <p>
+          Every revolution of the spiral is divided into <strong>four sectors (quadrants)</strong>. In long answers,
+          describe each quadrant with activities and outputs. Order matters for exams.
+        </p>
+
+        <h4>Quadrant 1 — Determine objectives, alternatives, and constraints</h4>
+        <p>
+          <strong>Planning</strong> for the current cycle. The team defines what this iteration must achieve, what
+          resources are available, and what boundaries apply (budget, schedule, standards, technology choices).
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> The team sets iteration goals, compares alternative solutions (for example database A versus B, or in-house hosting versus cloud), and records constraints from stakeholders and regulation.</li>
+          <li><strong>Outputs.</strong> This quadrant produces an iteration plan, an updated project schedule, and a clear definition of success for the current loop.</li>
+          <li><strong>Exam note.</strong> In an exam answer, state that this quadrant answers the question <em>where are we going in this cycle?</em></li>
+        </ul>
+
+        <h4>Quadrant 2 — Identify and resolve risks</h4>
+        <p>
+          The <strong>distinctive</strong> quadrant of the Spiral model. Risks are identified, prioritised, and
+          mitigated <strong>before</strong> heavy engineering. Mitigation often uses <strong>prototypes, simulations,
+          benchmarks, or feasibility studies</strong> — linking directly to Software Prototyping (§2.4).
+        </p>
+        <ul>
+          <li><strong>Types of risk.</strong> The team considers technical risks (such as performance or security), schedule risks (such as dependency delays), cost risks (such as budget overrun), business risks (such as market change), and staffing risks (such as losing a key person).</li>
+          <li><strong>Activities.</strong> The team runs risk workshops, performs probability and impact analysis, builds throwaway prototypes to test the user interface, runs technical spikes to test API throughput, and arranges legal reviews for compliance where needed.</li>
+          <li><strong>Outputs.</strong> Typical outputs include a risk register, a risk mitigation plan, and prototypes or proof-of-concept results that reduce uncertainty.</li>
+          <li><strong>Exam note.</strong> If a risk cannot be reduced to an acceptable level, the project may <strong>stop or pivot</strong> early, which saves cost compared with discovering failure only at the end of a Waterfall project.</li>
+        </ul>
+
+        <h4>Quadrant 3 — Develop and test</h4>
+        <p>
+          <strong>Engineering</strong> work for this cycle: whatever was planned once risks are understood. May include
+          requirements specification for a subsystem, detailed design, coding, integration, and testing.
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> The team produces the deliverables agreed in quadrant 1, carries out unit, integration, and system testing, and holds technical reviews and inspections.</li>
+          <li><strong>Outputs.</strong> Outputs include code, design documents, test reports, and a working increment of the system for this cycle.</li>
+          <li><strong>Exam note.</strong> This quadrant resembles Waterfall phases, but the work is <strong>scoped to one spiral cycle</strong>, not to the entire project at once.</li>
+        </ul>
+
+        <h4>Quadrant 4 — Plan the next iteration</h4>
+        <p>
+          <strong>Customer evaluation</strong> and decision-making. Stakeholders review progress against objectives,
+          approve the current increment, and plan the next loop (or terminate the project).
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> The team demonstrates results to the customer, collects feedback, updates the requirements backlog, and decides the budget and scope for the next spiral.</li>
+          <li><strong>Outputs.</strong> This quadrant produces an evaluation report, approval to continue (or a decision to stop), and a revised plan for the next cycle.</li>
+          <li><strong>Exam note.</strong> This quadrant is also called customer evaluation and should be linked to stakeholder management and acceptance criteria.</li>
+        </ul>
+
+        <h3>Two dimensions of the Spiral model</h3>
+        <p>
+          Boehm describes progress in two dimensions. Draw the spiral and label both in exam diagrams.
+        </p>
+        <ul>
+          <li>
+            <strong>Angular dimension (horizontal rotation)</strong> — represents progress through the
+            <strong>SDLC phases</strong> (requirements, design, implementation, testing) as the project moves around
+            the spiral. Each full loop advances the product through more of the lifecycle. Over many cycles, the
+            project covers the same kinds of work as Waterfall, but in slices.
+          </li>
+          <li>
+            <strong>Radial dimension (outward movement)</strong> — represents <strong>cumulative cost, effort, and
+            scope</strong>. As the spiral grows outward, more money and people are committed; the system becomes
+            larger and more complete. Outer loops are more expensive than inner loops.
+          </li>
+        </ul>
+        <p>
+          <strong>Memory aid:</strong> angular = <em>which phase angle are we at?</em>; radial = <em>how big and costly is the project now?</em>
+        </p>
+
+        <h3>How one full spiral cycle works (exam scenario)</h3>
+        <ol>
+          <li><strong>Cycle goal:</strong> prove that a new payment gateway can handle peak load for an e-commerce platform.</li>
+          <li><strong>Q1 — Objectives:</strong> Define success as 10,000 transactions/minute with 99.9% success rate. Budget two weeks.</li>
+          <li><strong>Q2 — Risks:</strong> Unknown latency from third-party API. Mitigate with load-test prototype and failover design review.</li>
+          <li><strong>Q3 — Develop/test:</strong> Implement integration module and run automated load tests. Fix bottlenecks.</li>
+          <li><strong>Q4 — Evaluation:</strong> Show results to customer. Approve next cycle for full checkout UI integration, or cancel gateway if risks remain too high.</li>
+        </ol>
+
+        <h3>Spiral Model vs other models</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall</th><th>Prototype Model</th><th>Spiral Model</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Main driver</td><td>Waterfall is driven by completing sequential phases in order.</td><td>The Prototype model is driven by user feedback on working prototypes.</td><td>The Spiral model is driven by explicit risk reduction in every cycle.</td></tr>
+            <tr><td>Iteration</td><td>Classical Waterfall has no iteration, or feedback only when errors are found.</td><td>Iteration continues until requirements are clear enough to build the final system.</td><td>The team runs planned cycles until the full product is complete.</td></tr>
+            <tr><td>Prototyping</td><td>Prototyping is optional and not central to Waterfall.</td><td>Prototyping is the central activity of the model.</td><td>Prototypes are used in the risk quadrant whenever uncertainty must be reduced.</td></tr>
+            <tr><td>Project size</td><td>Waterfall suits small or simple projects with stable scope.</td><td>The Prototype model suits projects with unclear requirements.</td><td>The Spiral model suits large, high-risk projects.</td></tr>
+            <tr><td>Cost of failure</td><td>In Waterfall, the cost of failure is often discovered late in the project.</td><td>Prototype models reduce the cost of wrong requirements through early evaluation.</td><td>The Spiral model reduces the cost of major risks by addressing them early in each cycle.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Advantages of the Spiral Model</h3>
+        <ul>
+          <li>
+            <strong>Explicit risk management</strong> — risks are documented and addressed every cycle; suitable for
+            safety-critical, financial, aerospace, and large enterprise systems.
+          </li>
+          <li>
+            <strong>Early elimination of bad options</strong> — prototypes and studies in quadrant 2 prevent building
+            the wrong architecture for years.
+          </li>
+          <li>
+            <strong>Flexible use of prototyping</strong> — only where uncertainty exists; not every project phase needs a prototype.
+          </li>
+          <li>
+            <strong>Stakeholder visibility</strong> — customer evaluation each cycle maintains alignment and funding support.</li>
+          <li>
+            <strong>Supports evolution</strong> — product grows incrementally around the spiral (links to §2.6 evolutionary development).</li>
+          <li>
+            <strong>Can absorb requirement change</strong> — objectives for the next iteration can be revised after evaluation.</li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>High cost and overhead</strong> — risk analysis, reviews, and multiple cycles require experienced staff and time; overkill for small, routine projects.
+          </li>
+          <li>
+            <strong>Depends on risk expertise</strong> — poor risk identification gives false confidence; the model fails if quadrant 2 is done superficially.
+          </li>
+          <li>
+            <strong>Complex to manage</strong> — tracking many cycles, deliverables, and versions needs strong project management and configuration management.</li>
+          <li>
+            <strong>Contract challenges</strong> — fixed-price contracts are harder unless scope per cycle is tightly defined.</li>
+          <li>
+            <strong>Not a substitute for Agile speed</strong> — when the market demands weekly releases, lightweight Agile may outperform a formal Spiral.</li>
+          <li>
+            <strong>Documentation load</strong> — each cycle produces plans, risk logs, and test evidence; can feel heavy for small teams.</li>
+        </ul>
+
+        <h3>When to use the Spiral Model</h3>
+        <ul>
+          <li><strong>Large-scale</strong> projects with long duration and many subsystems.</li>
+          <li><strong>High technical risk.</strong> Examples include new algorithms, hardware integration, or untested third-party services.</li>
+          <li><strong>High business or safety risk.</strong> Failure is unacceptable in domains such as medical devices, air traffic control, or core banking.</li>
+          <li><strong>Requirements partially known.</strong> Requirements may evolve, but each spiral cycle must still be planned and reviewed.</li>
+          <li>Organisation has maturity in <strong>risk management, reviews, and prototyping</strong>.</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Small projects with well-known technology and stable requirements (Waterfall or Agile is simpler).</li>
+          <li>No access to skilled risk analysts or architects. Quadrant 2 will be checkbox exercise only.</li>
+          <li>Need for very fast MVP with minimal process (startup Agile/RAD).</li>
+          <li>Customer unavailable for end-of-cycle evaluation. Quadrant 4 cannot function properly.</li>
+        </ul>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — National tax authority modernisation:</strong> Replace legacy mainframe with a distributed
+          system over five years. Early spirals produce feasibility prototypes for data migration and security; risk
+          analysis identifies legal and fraud risks. Middle spirals deliver pilot regions; outer spirals roll out nationwide.
+          Project stops an approach after a failed prototype rather than after a failed national launch.
+        </p>
+
+        <h3>Link to risk management in SDLC (§2.18)</h3>
+        <p>
+          The Spiral model is the SDLC model most closely aligned with <strong>integrating risk management</strong> into
+          every phase. Topic 2.18 generalises risk identification, mitigation, and monitoring; Spiral embeds them in
+          every cycle’s quadrant 2.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Spiral Model</div>
+          <p><strong>Q:</strong> Explain the Spiral model of software development proposed by Barry Boehm. Describe the four quadrants of each cycle and the angular and radial dimensions. Compare the Spiral model with the Waterfall model. Discuss advantages, disadvantages, and suitable application areas with an example.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define the Spiral model (Boehm, 1986) as a risk-driven approach with iterative cycles on an expanding spiral that combines structured phases, prototyping, and customer evaluation.</li>
+            <li>Draw the spiral with four labelled quadrants per loop and show both angular progression through phases and radial growth in cost and completeness.</li>
+            <li>Explain quadrant 1 (objectives, alternatives, and constraints), quadrant 2 (identify and resolve risks using prototypes or simulations), quadrant 3 (develop and test), and quadrant 4 (customer evaluation and planning the next iteration).</li>
+            <li>Walk through one complete cycle, such as validating a payment gateway under peak load.</li>
+            <li>Contrast with Waterfall by noting explicit risk handling each cycle versus late risk discovery in a single pass.</li>
+            <li>Discuss advantages, disadvantages, suitable projects, and link to integrated risk management in §2.18.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> The Spiral model was proposed by — <strong>(B) Barry Boehm</strong>.</p>
+          <p><strong>MCQ:</strong> Risk analysis in the Spiral model is performed in — <strong>(B) Every cycle (quadrant 2)</strong>.</p>
+        </div>
+      </section>
+
+      <section id="sec-2-6">
+        <h2>2.6 Evolutionary Development Models</h2>
+        <p>
+          <strong>Evolutionary development models</strong> treat software as something that
+          <strong>grows and changes over time</strong> rather than being fully specified and built in a single pass.
+          The system is developed through a sequence of <strong>versions</strong> (increments), where each version
+          refines, extends, or corrects the previous one. Requirements, design, and implementation
+          <strong>co-evolve</strong> as stakeholders learn from each release — in contrast to Waterfall, which tries to
+          freeze requirements before construction.
+        </p>
+        <p>
+          “Evolutionary” is a <strong>family of approaches</strong>, not one diagram with a single name. Several named
+          SDLC models — evolutionary prototyping (§2.4), Spiral (§2.5), Incremental (§2.8), and Agile (§2.11) — are all
+          evolutionary in spirit. Exams often ask for the <strong>general concept</strong> first, then examples.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-evolutionary-caption">
+          <img src="../../assets/images/se-topic-02/evolutionary-sdlc.webp"
+               alt="Evolution of SDLC methodologies — from Waterfall through iterative, evolutionary, and Agile approaches"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-evolutionary-caption">Evolution of SDLC methodologies — evolutionary approaches emphasise successive refinement and adaptation (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Definition and core idea</h3>
+        <p>
+          In evolutionary development, the team delivers an <strong>initial version quickly</strong> with the most
+          important or best-understood functionality. Users and developers learn from that version; the next version
+          adds features, improves quality, or fixes misunderstandings. The final product is reached by
+          <strong>successive refinement</strong>, not by executing one frozen plan from day one.
+        </p>
+        <p>
+          <strong>Key phrase for exams:</strong> “The system evolves from a partial, imperfect first version into a
+          complete product through multiple iterations.”
+        </p>
+
+        <h3>Key characteristics of evolutionary development</h3>
+        <ul>
+          <li>
+            <strong>Partial early delivery</strong> — users receive usable software (or a strong prototype) long before
+            the full feature set exists; feedback drives later versions.
+          </li>
+          <li>
+            <strong>Co-evolving requirements and design</strong> — the SRS is not fixed at the start; it is updated after
+            each release based on experience.
+          </li>
+          <li>
+            <strong>Adaptation over prediction</strong> — the process embraces change in business needs, technology, and
+            understanding rather than treating change as failure of planning.
+          </li>
+          <li>
+            <strong>Successive versions</strong> — version 1.0, 1.1, 2.0, or sprint releases each build on the previous codebase or design.</li>
+          <li>
+            <strong>User-centred learning</strong> — especially when UI or workflow is critical; same motivation as prototyping, but evolutionary models may deliver production code each cycle.</li>
+          <li>
+            <strong>Architecture must be managed</strong> — without refactoring and standards, repeated extension leads to unmaintainable “big ball of mud” systems.</li>
+        </ul>
+
+        <h3>Evolutionary vs other development styles</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall (classical)</th><th>Evolutionary development</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Requirements</td><td>In classical Waterfall, requirements are treated as fixed early in the project.</td><td>In evolutionary development, requirements emerge and change across successive versions.</td></tr>
+            <tr><td>Planning horizon</td><td>Waterfall plans the whole project in detail at the start.</td><td>Evolutionary development plans the next version in detail while keeping only a high-level roadmap for the whole effort.</td></tr>
+            <tr><td>First user-visible result</td><td>Waterfall delivers a user-visible result late in the lifecycle.</td><td>Evolutionary development delivers a core product or release early.</td></tr>
+            <tr><td>Response to change</td><td>Waterfall tends to resist change because changes are costly after sign-off.</td><td>Evolutionary development expects change and plans for it in each new version.</td></tr>
+            <tr><td>Risk of wrong product</td><td>Waterfall carries a high risk of building the wrong product if requirements were wrong from the start.</td><td>Evolutionary development lowers that risk because mistakes can be corrected in later versions.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Major examples of evolutionary models (know each for exams)</h3>
+
+        <h4>1. Evolutionary prototyping (Prototype Model — §2.4)</h4>
+        <p>
+          The <strong>prototype becomes the product</strong>. Version 1 is a minimal prototype; later versions add modules
+          and refactor. Same codebase grows until it is the delivered system. Best when requirements are unclear but
+          something usable must appear quickly.
+        </p>
+        <ul>
+          <li><strong>Strength.</strong> This approach gives fast feedback and shows continuous visible progress to stakeholders.</li>
+          <li><strong>Weakness.</strong> Technical debt can grow quickly if code quality is ignored between versions.</li>
+        </ul>
+
+        <h4>2. Spiral model (§2.5)</h4>
+        <p>
+          Each spiral cycle delivers a <strong>more complete evolutionary increment</strong> while emphasising
+          <strong>risk reduction</strong> before engineering. Evolution happens around the spiral; risk analysis distinguishes
+          Spiral from simple “build version 1, then version 2” without structure.
+        </p>
+
+        <h4>3. Incremental process model (§2.8)</h4>
+        <p>
+          The system is split into <strong>increments</strong> (chunks of functionality). Each increment is often developed
+          like a mini-Waterfall and delivered to the customer. Overall architecture is usually planned early; evolution
+          is in <em>features delivered</em>, not in discovering the whole architecture from scratch.
+        </p>
+        <ul>
+          <li><strong>Contrast.</strong> The Incremental model uses planned partitions of functionality, whereas pure evolutionary prototyping may let architecture emerge over time.</li>
+        </ul>
+
+        <h4>4. Agile software development (§2.11)</h4>
+        <p>
+          Short <strong>sprints</strong> deliver working software every few weeks. Requirements live in a backlog that
+          changes every sprint. Agile is the most widely used evolutionary approach in industry today (Scrum, Kanban, etc.).
+        </p>
+
+        <h3>Evolutionary development vs Iterative Enhancement (§2.7)</h3>
+        <p>
+          Exams often contrast these two — read §2.7 in full, but summarise here:
+        </p>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Evolutionary development</th><th>Iterative Enhancement</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Overall architecture</td><td>In evolutionary development, the architecture may emerge or change during early versions.</td><td>In iterative enhancement, the architecture is usually defined upfront and kept stable.</td></tr>
+            <tr><td>Requirements</td><td>Evolutionary requirements are highly fluid and co-evolve with the product.</td><td>Iterative enhancement keeps requirements more stable while each iteration adds planned modules.</td></tr>
+            <tr><td>Goal of iteration</td><td>Each evolutionary iteration aims to learn from users and adapt the product.</td><td>Each iterative-enhancement iteration aims to implement the next planned part of a known structure.</td></tr>
+            <tr><td>Example metaphor</td><td>Evolutionary development is like growing an organism over time.</td><td>Iterative enhancement is like filling in the rooms of a house that was already designed.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Process view — how an evolutionary project unfolds</h3>
+        <ol>
+          <li><strong>Vision and priorities.</strong> The team defines a thin first release (a minimum viable product) that includes only must-have features.</li>
+          <li><strong>Build version 1.</strong> The team accepts some imperfection but documents known gaps and technical debt items openly.</li>
+          <li><strong>Deploy and gather feedback.</strong> Real users reveal missing business rules, performance problems, and new requirements.</li>
+          <li><strong>Reprioritise backlog.</strong> The product owner chooses the next features and fixes for version 2 based on feedback.</li>
+          <li><strong>Refactor and extend.</strong> The team improves architecture where needed, adds modules, and runs regression tests before the next release.</li>
+          <li><strong>Repeat</strong> the cycle until acceptance criteria for the full product are met or the product is retired.</li>
+        </ol>
+
+        <h3>Advantages of evolutionary development</h3>
+        <ul>
+          <li>
+            <strong>Handles changing requirements</strong> — business, law, and competition change; evolutionary models absorb change without treating it as project failure.
+          </li>
+          <li>
+            <strong>Early business value</strong> — partial system can generate revenue, support pilots, or satisfy regulators incrementally.
+          </li>
+          <li>
+            <strong>Continuous stakeholder engagement</strong> — users stay involved; reduces gap between expectation and delivery.</li>
+          <li>
+            <strong>Lower risk of total wrong product</strong> — mistakes corrected in the next version rather than after a multi-year monolith fails acceptance.</li>
+          <li>
+            <strong>Morale and transparency</strong> — visible progress motivates team and sponsors.</li>
+        </ul>
+
+        <h3>Disadvantages and risks</h3>
+        <ul>
+          <li>
+            <strong>Scope creep</strong> — without disciplined backlog control, “just one more feature” never ends; budgets explode.
+          </li>
+          <li>
+            <strong>Architecture erosion</strong> — quick fixes in version 1 and 2 make version 3 slow and buggy unless refactoring is scheduled.</li>
+          <li>
+            <strong>Hard upfront estimation</strong> — total cost and end date are uncertain; fixed-price contracts are difficult.</li>
+          <li>
+            <strong>Documentation lag</strong> — teams may skip updating specs; maintenance and audit suffer.</li>
+          <li>
+            <strong>Process discipline required</strong> — evolution is not chaos; needs product owner, priorities, and quality gates.</li>
+          <li>
+            <strong>Integration complexity</strong> — each new version must integrate with existing modules and data; regression testing load grows.</li>
+        </ul>
+
+        <h3>When to use evolutionary development</h3>
+        <ul>
+          <li>Requirements are <strong>incomplete, volatile, or market-driven</strong> (e-commerce, social apps, internal tools).</li>
+          <li><strong>Competitive pressure</strong> to ship early and improve often.</li>
+          <li>Stakeholders can participate in regular reviews or sprint demos.</li>
+          <li>Domain allows <strong>incremental rollout</strong> (beta users, pilot departments, feature flags).</li>
+        </ul>
+
+        <h3>When NOT to use (or use with care)</h3>
+        <ul>
+          <li>Requirements are fully fixed by law or contract and will not change (strict Waterfall/V-Model may be simpler to audit).</li>
+          <li>System must be <strong>100% complete and certified</strong> before any deployment (some safety-critical systems use evolution internally but release only after full validation).</li>
+          <li>Team or client cannot commit to ongoing involvement. Evolutionary without feedback becomes uncontrolled hacking.</li>
+        </ul>
+
+        <h3>Real-world examples</h3>
+        <p>
+          <strong>Example 1 — E-commerce website:</strong> Version 1: catalogue and cart. Version 2: payment gateway.
+          Version 3: reviews and recommendations. Requirements evolved after each sales season; Agile sprints are a common implementation.
+        </p>
+        <p>
+          <strong>Example 2 — Evolutionary prototyping:</strong> A GIS mapping tool for a city council starts as a basic map viewer;
+          planners request layer overlays and export; the same codebase grows over two years into the production system.
+        </p>
+        <p>
+          <strong>Example 3 — Spiral + evolution:</strong> A defence contractor delivers increasing capability each spiral cycle while
+          running formal risk analysis — evolution with heavy process.
+        </p>
+
+        <h3>Summary table — evolutionary models at a glance</h3>
+        <table>
+          <thead>
+            <tr><th>Model</th><th>What evolves each iteration?</th><th>Distinctive feature</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Evolutionary prototyping</td><td>Each iteration extends the same prototype codebase.</td><td>Its distinctive feature is that the prototype gradually becomes the final product.</td></tr>
+            <tr><td>Spiral</td><td>Each cycle increases product completeness and process maturity.</td><td>Its distinctive feature is explicit risk analysis in every cycle.</td></tr>
+            <tr><td>Incremental</td><td>Each iteration delivers another chunk of functionality.</td><td>Its distinctive feature is a mini-Waterfall for every increment.</td></tr>
+            <tr><td>Agile</td><td>Each sprint evolves backlog priorities and working software.</td><td>Its distinctive feature is short sprints guided by Agile Manifesto values.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Evolutionary Development Models</div>
+          <p><strong>Q:</strong> What are evolutionary development models in software engineering? Explain their characteristics and how they differ from the Classical Waterfall model. Describe at least three examples of evolutionary models and compare evolutionary development with iterative enhancement. Discuss advantages, disadvantages, and when such models are appropriate.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define evolutionary development as building software through successive versions in which each version refines the last and requirements co-evolve with the product.</li>
+            <li>Compare with Waterfall using a table that contrasts fixed versus emerging requirements, late versus early delivery, and resistance to change versus expected change.</li>
+            <li>Describe key characteristics such as partial early delivery, adaptation, continuous user feedback, and the need for disciplined refactoring.</li>
+            <li>Give at least three examples (evolutionary prototyping, Spiral, Incremental, Agile) and explain what evolves in each.</li>
+            <li>Contrast with Iterative Enhancement, where architecture is planned upfront rather than emerging over time.</li>
+            <li>Outline the process from minimum viable product through feedback, reprioritisation, refactoring, and repeat cycles.</li>
+            <li>Discuss advantages, disadvantages, when to use or avoid the approach, and support with real examples.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> Evolutionary development is most appropriate when — <strong>(C) Requirements are likely to change during the project</strong>.</p>
+          <p><strong>MCQ:</strong> Which is NOT an evolutionary approach? — <strong>(A) Classical Waterfall with no iteration</strong>.</p>
+        </div>
+      </section>
+
+      <section id="sec-2-7">
+        <h2>2.7 Iterative Enhancement Models</h2>
+        <p>
+          <strong>Iterative Enhancement</strong> is an approach to software development in which the system is built
+          through a series of <strong>iterations</strong>, and each iteration <strong>adds new modules or improves
+          existing ones</strong> on top of a <strong>pre-planned overall architecture</strong>. Unlike pure evolutionary
+          models (§2.6), where structure and requirements may co-evolve unpredictably, iterative enhancement assumes
+          that the team can define a <strong>stable architectural skeleton early</strong> and then fill it in over
+          successive cycles — like completing the rooms of a house whose floor plan was already drawn.
+        </p>
+        <p>
+          Iterative Enhancement is a <strong>development philosophy</strong>, not always a single named diagram.
+          The <strong>Incremental Process Model</strong> (§2.8) is the most common exam example of iterative
+          enhancement in practice. Iterative Waterfall (§2.3) can also be used <em>inside</em> each iteration when
+          the team needs controlled feedback within a single increment. The key exam phrase:
+          <strong>“planned architecture + successive module additions.”</strong>
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-iter-enhance-caption">
+          <img src="../../assets/images/se-topic-02/incremental.webp"
+               alt="Iterative enhancement — planned architecture with successive module additions per iteration"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-iter-enhance-caption">Iterative Enhancement — each iteration adds modules to a pre-planned architecture (GeeksforGeeks). In exams, show a fixed core structure with new boxes attached in each cycle.</figcaption>
+        </figure>
+
+        <h3>Why iterative enhancement exists</h3>
+        <p>
+          Classical Waterfall tries to build everything in one pass — risky when the system is large or when stakeholders
+          need early proof that the direction is correct. Pure evolutionary development (Agile, evolutionary prototyping)
+          allows architecture to emerge — powerful for uncertain domains but risky when the system must integrate with
+          legacy databases, comply with standards, or scale to millions of users. Iterative Enhancement sits in the
+          <strong>middle ground</strong>: plan the structure once, then grow the product in controlled steps so that
+          each iteration delivers value without redesigning the foundation every month.
+        </p>
+
+        <h3>Core principles</h3>
+        <ul>
+          <li>
+            <strong>Architecture first.</strong> Before the first iteration, architects define modules, interfaces,
+            data models, and integration points. Later iterations must fit this skeleton unless a formal change
+            request authorises structural revision.
+          </li>
+          <li>
+            <strong>Each iteration extends the same codebase.</strong> New modules plug into existing interfaces;
+            the team does not throw away the previous iteration and start from scratch (contrast throwaway prototyping, §2.4).
+          </li>
+          <li>
+            <strong>Requirements are mostly known but may be refined.</strong> The broad feature set is planned early;
+            details within each module can be clarified during the iteration that implements that module.
+          </li>
+          <li>
+            <strong>Integration and regression testing every cycle.</strong> Because each iteration builds on prior work,
+            the team must verify that new code does not break old modules — configuration management and automated
+            tests are essential.
+          </li>
+          <li>
+            <strong>Partial delivery is possible.</strong> When combined with the Incremental model, users may receive
+            working subsets early; when used internally (e.g., alpha builds), stakeholders still see progress before
+            the full product is finished.
+          </li>
+        </ul>
+
+        <h3>Process — how an iterative enhancement project unfolds</h3>
+        <ol>
+          <li>
+            <strong>Initial planning and architecture.</strong> The team produces a high-level requirements overview,
+            system architecture document, module breakdown, and interface specifications. Risk analysis identifies
+            which modules are critical path or technically risky.
+          </li>
+          <li>
+            <strong>Prioritise modules for iteration 1.</strong> Choose the smallest set that forms a coherent, testable
+            subset — often core data handling, authentication, or the most essential business workflow.
+          </li>
+          <li>
+            <strong>Iteration 1 — develop, integrate, test, deliver.</strong> Run requirements → design → code → test
+            for the chosen modules; integrate with any stubs for future modules; deliver to users or internal testers
+            if the Incremental delivery pattern is used.
+          </li>
+          <li>
+            <strong>Review and refine plan.</strong> Feedback from iteration 1 may adjust <em>details</em> of later
+            modules but should not casually rewrite the whole architecture. Major structural changes go through change control.
+          </li>
+          <li>
+            <strong>Iteration 2, 3, … n.</strong> Add the next planned modules, connect them via defined interfaces,
+            run full regression on all prior modules, and optionally release another increment to customers.
+          </li>
+          <li>
+            <strong>Final integration and acceptance.</strong> When all planned modules exist, perform system-wide
+            testing, performance tuning, documentation, and formal acceptance against the original vision.
+          </li>
+        </ol>
+
+        <h3>What happens inside one iteration</h3>
+        <p>
+          Each iteration is not “random coding” — it typically follows a <strong>mini-lifecycle</strong> (often a
+          mini-Waterfall or Iterative Waterfall). Examiners expect you to name the activities:
+        </p>
+        <ul>
+          <li><strong>Requirements for this iteration</strong> — detailed specs for the modules in scope only.</li>
+          <li><strong>Design</strong> — module-level design that conforms to the global architecture (class diagrams, APIs, database tables).</li>
+          <li><strong>Implementation</strong> — coding with reuse of shared libraries and adherence to interface contracts.</li>
+          <li><strong>Unit and integration testing</strong> — test new modules alone and together with existing ones.</li>
+          <li><strong>Regression testing</strong> — re-run tests for all previously delivered modules to catch breakage.</li>
+          <li><strong>Release or internal demo</strong> — deploy increment or show working build to stakeholders.</li>
+        </ul>
+
+        <h3>Iterative Enhancement vs Evolutionary Development</h3>
+        <p>
+          This is the comparison most often asked in long questions. §2.6 covers evolutionary development in full;
+          the table below is the exam-ready summary:
+        </p>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Iterative Enhancement</th><th>Evolutionary Development</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Architecture</td><td>Planned upfront and kept as a stable skeleton; major changes need formal approval.</td><td>May emerge or change significantly across early versions; refactoring is expected.</td></tr>
+            <tr><td>Requirements</td><td>Mostly known at the start; refined per module during each iteration.</td><td>Often unclear initially; discovered and changed through user experience of each version.</td></tr>
+            <tr><td>Goal of each iteration</td><td>Implement the next planned part of a known structure.</td><td>Learn from users and adapt the product — structure and features may shift.</td></tr>
+            <tr><td>Planning horizon</td><td>Detailed plan for the whole system architecture; detailed requirements per iteration.</td><td>Roadmap is high-level; detailed planning mainly for the next version or sprint.</td></tr>
+            <tr><td>Examples</td><td>Incremental model (§2.8); structured multi-release projects with fixed platforms.</td><td>Evolutionary prototyping (§2.4), Spiral (§2.5), Agile (§2.11).</td></tr>
+            <tr><td>Architecture risk</td><td>Lower — structure is fixed early, so integration paths are clearer.</td><td>Higher — “big ball of mud” if refactoring is neglected between versions.</td></tr>
+            <tr><td>Requirements risk</td><td>Higher if upfront requirements were wrong — harder to pivot than in Agile.</td><td>Lower — change is built into the process from the start.</td></tr>
+            <tr><td>Metaphor</td><td>Filling in rooms of a house already designed on paper.</td><td>Growing an organism that changes shape as it matures.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Iterative Enhancement vs Iterative Waterfall (§2.3)</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Iterative Enhancement</th><th>Iterative Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primary goal</td><td>Build the full system in planned stages, adding modules each iteration.</td><td>Build one complete product through one pass of phases, looping back only to fix errors.</td></tr>
+            <tr><td>Customer delivery</td><td>May deliver partial working software after each iteration (especially with Incremental model).</td><td>Customer usually receives the full product only at the end.</td></tr>
+            <tr><td>Feedback loops</td><td>Forward progress through planned increments; feedback refines future modules.</td><td>Backward loops fix defects in earlier phases of the same release.</td></tr>
+            <tr><td>Architecture</td><td>Explicitly planned for all future iterations from the start.</td><td>Designed once for the whole system; loops do not imply multiple customer releases.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Iterative Enhancement vs Incremental Model (§2.8)</h3>
+        <p>
+          <strong>Important exam distinction:</strong> Iterative Enhancement is the <em>concept</em> (planned architecture,
+          successive module additions). The Incremental Process Model is a <em>specific SDLC model</em> that implements
+          iterative enhancement by delivering each chunk through a mini-Waterfall to the customer. Not every iterative
+          enhancement project must ship to customers every iteration — internal alpha builds still follow the philosophy.
+          Every Incremental model project is iterative enhancement; not every iterative enhancement project uses the
+          full Incremental delivery pattern.
+        </p>
+
+        <h3>Architecture and interface planning (critical success factor)</h3>
+        <p>
+          Because later iterations depend on decisions made early, the team must invest in:
+        </p>
+        <ul>
+          <li><strong>Modular decomposition</strong> — clear boundaries so iteration 3 does not require rewriting iteration 1.</li>
+          <li><strong>Stable APIs and data schemas</strong> — version interfaces if change is unavoidable; avoid breaking existing modules.</li>
+          <li><strong>Extension points</strong> — hooks for features planned in later iterations (plugin slots, configurable workflows).</li>
+          <li><strong>Shared infrastructure early</strong> — authentication, logging, error handling, and database access layers in iteration 1.</li>
+          <li><strong>Traceability</strong> — map each module to requirements and test cases so regression is manageable.</li>
+        </ul>
+        <p>
+          Failure to plan interfaces is the main reason iterative enhancement projects collapse into expensive rework —
+          effectively becoming evolutionary development with architectural chaos.
+        </p>
+
+        <h3>Step-by-step scenario</h3>
+        <p><strong>Scenario — University learning management system (LMS):</strong></p>
+        <ol>
+          <li>Architects define modules: user accounts, course catalog, assignments, grading, notifications, analytics. Database schema and REST API conventions are fixed in month 1.</li>
+          <li><strong>Iteration 1:</strong> Login, roles (student/teacher/admin), course enrollment. Delivered to one pilot department.</li>
+          <li><strong>Iteration 2:</strong> Assignment upload and deadline tracking. Integrates with existing user and course modules; regression tests cover iteration 1.</li>
+          <li><strong>Iteration 3:</strong> Online quizzes and auto-grading. Uses same user and course APIs; no change to core schema except one new table planned in the original design.</li>
+          <li><strong>Iteration 4:</strong> Email/SMS notifications and grade export. Pilot feedback adjusts notification templates but not the overall architecture.</li>
+          <li>Full university rollout after acceptance testing across all modules.</li>
+        </ol>
+        <p>
+          If the team had skipped upfront API design, iteration 3 might have forced a rewrite of the course module —
+          the hallmark of failed iterative enhancement.
+        </p>
+
+        <h3>Advantages of Iterative Enhancement</h3>
+        <ul>
+          <li>
+            <strong>Controlled growth on a stable base</strong> — avoids both Waterfall’s big-bang risk and evolutionary
+            models’ architectural drift when discipline is applied.
+          </li>
+          <li>
+            <strong>Early partial functionality</strong> — when paired with Incremental delivery, users gain value before
+            the full system exists.
+          </li>
+          <li>
+            <strong>Easier integration than ad-hoc evolution</strong> — interfaces defined upfront reduce surprises when modules meet.
+          </li>
+          <li>
+            <strong>Manageable team focus</strong> — each iteration has a clear scope (specific modules), improving estimates and morale.
+          </li>
+          <li>
+            <strong>Progress visibility</strong> — sponsors see working software grow iteration by iteration instead of waiting years.
+          </li>
+          <li>
+            <strong>Supports parallel work</strong> — independent modules in different iterations can sometimes be built by separate teams once interfaces are frozen.
+          </li>
+          <li>
+            <strong>Regression catches defects early</strong> — testing after every iteration prevents a pile-up of integration bugs at the end.
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>Upfront architecture must be good</strong> — wrong early decisions propagate through every iteration;
+            fixing them later is expensive (contrast Agile, where refactoring is routine).
+          </li>
+          <li>
+            <strong>Not ideal for highly uncertain requirements</strong> — if the team cannot predict major features,
+            evolutionary or prototype approaches fit better.
+          </li>
+          <li>
+            <strong>Integration overhead</strong> — each iteration must merge with all prior modules; without automation, cost grows.
+          </li>
+          <li>
+            <strong>Total cost may exceed single-pass Waterfall</strong> — repeated testing, documentation per iteration,
+            and release activities add expense.
+          </li>
+          <li>
+            <strong>“Iteration” can be confused with “fix bugs”</strong> — exam answers must clarify that iterations add
+            planned capability, unlike Iterative Waterfall loops that mainly correct earlier-phase errors.
+          </li>
+          <li>
+            <strong>Customer expectations</strong> — early increments may look “unfinished”; stakeholders must understand the roadmap.
+          </li>
+        </ul>
+
+        <h3>When to use Iterative Enhancement</h3>
+        <ul>
+          <li>Large systems where the <strong>overall structure is understandable</strong> early but full implementation takes too long for one pass.</li>
+          <li>Projects needing <strong>early partial delivery</strong> without abandoning architectural discipline (Incremental model).</li>
+          <li>Products that must integrate with <strong>fixed external systems</strong> (legacy ERP, payment gateways, government APIs).</li>
+          <li>Organisations that want <strong>more flexibility than Waterfall</strong> but more structure than pure Agile.</li>
+          <li>Multi-team development where <strong>interface contracts</strong> allow parallel module construction.</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Requirements are unknown or volatile — use evolutionary prototyping, Spiral, or Agile (§2.4, §2.5, §2.11).</li>
+          <li>Small projects completable in one short cycle — overhead of multiple iterations is unnecessary.</li>
+          <li>No skill to design scalable architecture upfront — the model will fail without a solid skeleton.</li>
+          <li>Regulatory need for single documented baseline with no partial releases — classical or V-Model Waterfall may be required.</li>
+        </ul>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — E-commerce platform rebuild:</strong> A retailer replaces a monolithic PHP shop with a
+          microservices architecture. Architects define services for catalog, cart, checkout, inventory, and shipping
+          in quarter 1. Iteration 1 launches catalog browsing and search (read-only, no checkout). Iteration 2 adds
+          cart and guest checkout. Iteration 3 integrates payment and inventory reservation. Iteration 4 adds loyalty
+          points and recommendations. Each release is production-quality on the same platform; the service boundaries
+          chosen in quarter 1 never change. This is iterative enhancement implemented through an Incremental delivery plan.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Iterative Enhancement</div>
+          <p><strong>Q:</strong> Explain the Iterative Enhancement approach to software development. How does it differ from Evolutionary Development models and from the Iterative Waterfall model? Describe the typical process, advantages, disadvantages, and suitable application areas. Illustrate with an example.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define Iterative Enhancement as building software in iterations on a pre-planned architecture, where each cycle adds or improves modules while preserving the structural design.</li>
+            <li>State that it is a philosophy exemplified by the Incremental model (§2.8), distinct from evolutionary approaches where architecture and requirements co-evolve.</li>
+            <li>Explain core principles: architecture first, extend same codebase, mostly known requirements, integration and regression each iteration.</li>
+            <li>Describe the process: plan architecture → prioritise modules → develop/test/deliver iteration 1 → repeat until complete → final acceptance.</li>
+            <li>Contrast with Evolutionary Development using a table (architecture, requirements, goal of iteration, examples, risk).</li>
+            <li>Contrast with Iterative Waterfall: enhancement adds planned modules across releases; Iterative Waterfall loops back to fix errors within one product cycle.</li>
+            <li>Clarify relationship to Incremental model: Incremental is a specific delivery pattern that implements iterative enhancement.</li>
+            <li>Discuss architecture planning (modules, APIs, extension points) as critical success factor.</li>
+            <li>Walk through an example (e.g., LMS or e-commerce) showing iterations adding modules on a fixed skeleton.</li>
+            <li>List advantages (controlled growth, early value, integration clarity) and disadvantages (bad upfront architecture, integration cost, not for volatile requirements).</li>
+            <li>State when to use and when to prefer other models.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> Iterative Enhancement differs from Evolutionary Development mainly because — <strong>(B) Architecture is planned upfront and kept stable</strong>.</p>
+          <p><strong>MCQ:</strong> Which model best exemplifies Iterative Enhancement in exams? — <strong>(C) Incremental Process Model</strong>.</p>
+          <p><strong>MCQ:</strong> In Iterative Enhancement, each iteration primarily — <strong>(A) Adds planned modules to an existing structure</strong>.</p>
+        </div>
+      </section>
+
+      <section id="sec-2-8">
+        <h2>2.8 Incremental Process Model</h2>
+        <p>
+          The <strong>Incremental Process Model</strong> (also called the <strong>Incremental Model</strong>) divides
+          the system into <strong>multiple increments</strong> — self-contained chunks of functionality — and develops
+          each increment through a <strong>mini-Waterfall</strong> (requirements → design → implementation → testing)
+          before <strong>delivering it to the customer</strong>. The first increment provides core, usable capability;
+          later increments add features until the full system is complete. Unlike Classical Waterfall, users do not wait
+          until the end of the project to see working software.
+        </p>
+        <p>
+          The Incremental model is the most common <strong>named SDLC model</strong> that implements
+          <strong>Iterative Enhancement</strong> (§2.7): architecture is planned upfront, and each cycle adds modules
+          on that stable base. It is also classified as an <strong>evolutionary</strong> approach (§2.6) because the
+          product grows over time — but evolution here is in <em>delivered features</em>, not in discovering the whole
+          architecture from scratch. The key exam phrase: <strong>“multiple mini-Waterfalls, each delivering a usable increment.”</strong>
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-incremental-caption">
+          <img src="../../assets/images/se-topic-02/incremental.webp"
+               alt="Incremental model — multiple mini-waterfall cycles delivering successive product increments"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-incremental-caption">Incremental Model — each increment is a complete mini-cycle delivering usable functionality (GeeksforGeeks). In exams, draw stacked or side-by-side mini-Waterfalls labelled Increment 1, 2, 3…</figcaption>
+        </figure>
+
+        <h3>Why the Incremental model exists</h3>
+        <p>
+          Large systems take months or years to build. Classical Waterfall keeps customers waiting until a single
+          “big-bang” release — if requirements were misunderstood, the project fails late and expensively. Pure Agile
+          suits many products but not every organisation (heavy regulation, fixed-price contracts, legacy integration).
+          The Incremental model offers a <strong>structured middle path</strong>: plan the whole architecture once,
+          ship working subsets on a schedule, gather feedback, and adjust later increments — without abandoning
+          documentation or phase discipline entirely.
+        </p>
+
+        <h3>Core characteristics</h3>
+        <ul>
+          <li>
+            <strong>Partitioned requirements.</strong> The full SRS is split into increment-sized pieces, usually
+            ordered by business priority (must-have first, nice-to-have later).
+          </li>
+          <li>
+            <strong>Mini-Waterfall per increment.</strong> Each chunk runs its own requirements refinement, design,
+            coding, and testing before release — not a single monolithic pass through all phases for the whole system.
+          </li>
+          <li>
+            <strong>Customer-visible delivery every increment.</strong> Each release is production-quality (or pilot-quality)
+            software the user can operate, not merely an internal prototype.
+          </li>
+          <li>
+            <strong>Shared architecture from day one.</strong> Database schema, module interfaces, and integration
+            strategy must accommodate all planned increments — see §2.7 on architecture planning.
+          </li>
+          <li>
+            <strong>Cumulative product.</strong> Increment 2 builds on increment 1’s codebase; increment 3 includes
+            everything from 1 and 2 plus new features — the system <em>grows</em>, it is not replaced each time.
+          </li>
+          <li>
+            <strong>Regression testing across increments.</strong> Every new increment must be tested together with all
+            prior increments to ensure nothing breaks.
+          </li>
+        </ul>
+
+        <h3>Process — how an incremental project unfolds</h3>
+        <ol>
+          <li>
+            <strong>Overall requirements and architecture.</strong> Define the full vision, module breakdown, interfaces,
+            and data model. Identify which features belong to which increment (release plan).
+          </li>
+          <li>
+            <strong>Prioritise increments.</strong> Rank by business value, dependency order, and risk — core workflows
+            and shared infrastructure typically go in increment 1.
+          </li>
+          <li>
+            <strong>Increment 1 — mini-Waterfall.</strong> Detailed requirements for increment 1 only → design →
+            implement → test → deploy to users. Document known stubs or placeholders for future increments if needed.
+          </li>
+          <li>
+            <strong>Customer feedback and plan adjustment.</strong> Users report gaps, usability issues, or new priorities.
+            Adjust scope of increment 2 within the fixed architecture; major structural changes need change control.
+          </li>
+          <li>
+            <strong>Increment 2, 3, … n.</strong> Repeat mini-Waterfall for each chunk; integrate with all prior code;
+            run full regression; release to customers.
+          </li>
+          <li>
+            <strong>Final system acceptance.</strong> When all increments are delivered, perform end-to-end system test,
+            performance validation, training, and formal sign-off on the complete product.
+          </li>
+        </ol>
+
+        <h3>Phases inside one increment (mini-Waterfall)</h3>
+        <p>
+          Examiners often ask you to list what happens <em>within</em> a single increment. Typical phases:
+        </p>
+        <ul>
+          <li><strong>Requirements analysis (for this increment)</strong> — refine specs for features in scope; update traceability matrix.</li>
+          <li><strong>Design</strong> — module and interface design consistent with the global architecture; update DDS for new parts only.</li>
+          <li><strong>Implementation</strong> — code new features; reuse shared libraries from earlier increments.</li>
+          <li><strong>Testing</strong> — unit tests for new code; integration tests with prior increments; regression suite for the whole product so far.</li>
+          <li><strong>Delivery / deployment</strong> — release to production or pilot environment; user training for new features; release notes.</li>
+        </ul>
+        <p>
+          If defects found during testing belong to <em>earlier</em> increments, the team may apply
+          <strong>Iterative Waterfall</strong> (§2.3) feedback within that increment — fix design or code and re-test
+          before shipping.
+        </p>
+
+        <h3>Planning increments — horizontal vs vertical slicing</h3>
+        <p>
+          How you split the system affects success. Two common strategies (know both for exams):
+        </p>
+        <table>
+          <thead>
+            <tr><th>Strategy</th><th>Meaning</th><th>Example</th><th>Trade-off</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Horizontal (layer) slicing</strong></td><td>Each increment completes one architectural layer for part of the system.</td><td>Increment 1: database schema for all modules; increment 2: all UI shells; increment 3: all business logic.</td><td>Early increments may not be usable by end users — less common for customer delivery.</td></tr>
+            <tr><td><strong>Vertical (feature) slicing</strong></td><td>Each increment delivers an end-to-end slice of functionality through all layers.</td><td>Increment 1: login and user profile; increment 2: order placement; increment 3: payment and invoicing.</td><td>Preferred for incremental delivery — each release is usable and demo-able.</td></tr>
+          </tbody>
+        </table>
+        <p>
+          <strong>Exam tip:</strong> When asked for an example increment plan, use <strong>vertical slices</strong> —
+          examiners expect customer-visible functionality in every increment.
+        </p>
+
+        <h3>Classical Waterfall vs Incremental Model</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Classical Waterfall</th><th>Incremental Model</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Delivery pattern</td><td>Single release at the end of the project after all phases complete once.</td><td>Multiple partial releases; each increment is delivered when its mini-Waterfall finishes.</td></tr>
+            <tr><td>Requirements</td><td>Complete SRS frozen before design begins.</td><td>High-level SRS for whole system; detailed specs per increment just before that increment starts.</td></tr>
+            <tr><td>Customer involvement</td><td>Mainly at start (requirements) and end (acceptance).</td><td>Continuous — users operate each increment and feedback shapes later ones.</td></tr>
+            <tr><td>Risk of wrong product</td><td>High — mistakes discovered only at final acceptance.</td><td>Lower — early increments validate direction before full investment.</td></tr>
+            <tr><td>Architecture</td><td>Designed once for the entire system before coding.</td><td>Designed once upfront to support all increments; must allow safe extension.</td></tr>
+            <tr><td>Testing</td><td>System testing mainly at the end.</td><td>Testing after every increment plus cumulative regression.</td></tr>
+            <tr><td>Schedule visibility</td><td>Working software invisible until late in the project.</td><td>Visible progress after each increment — good for sponsors and morale.</td></tr>
+            <tr><td>Cost profile</td><td>Lower process overhead if one pass succeeds.</td><td>Higher overhead (repeated releases, regression) but less catastrophic failure risk.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Incremental Model vs Iterative Waterfall (§2.3)</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Incremental Model</th><th>Iterative Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Number of customer releases</td><td>Multiple — one per increment.</td><td>Usually one final product; loops fix errors within the same release.</td></tr>
+            <tr><td>Direction of work</td><td>Forward through planned increments, each adding features.</td><td>Mainly forward through phases, with backward loops to correct earlier-phase mistakes.</td></tr>
+            <tr><td>Scope of each cycle</td><td>A subset of total functionality delivered as working software.</td><td>The full product scope, revisiting phases only when defects demand it.</td></tr>
+            <tr><td>Relationship</td><td>Iterative Waterfall can run <em>inside</em> each increment’s mini-Waterfall.</td><td>Does not by itself deliver partial products to customers.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Incremental Model vs Iterative Enhancement (§2.7)</h3>
+        <p>
+          <strong>Iterative Enhancement</strong> is the broader philosophy (planned architecture + successive module additions).
+          The <strong>Incremental Process Model</strong> is a specific way to implement it with formal mini-Waterfalls and
+          customer delivery each cycle. In exam answers: Incremental ⊂ Iterative Enhancement in practice; every Incremental
+          project is iterative enhancement, but you could do iterative enhancement with internal alpha builds only and no
+          customer release until the end.
+        </p>
+
+        <h3>Incremental Model vs Agile (§2.11)</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Incremental Model</th><th>Agile (e.g., Scrum)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Increment planning</td><td>Increments usually planned upfront in a release roadmap.</td><td>Sprints are short; backlog is reprioritised every sprint.</td></tr>
+            <tr><td>Requirements change</td><td>Allowed within limits; major change may require re-planning increments.</td><td>Change is welcomed even late in development (Agile Manifesto).</td></tr>
+            <tr><td>Process formality</td><td>Closer to Waterfall inside each increment — phases and documents.</td><td>Lightweight — working software over comprehensive documentation.</td></tr>
+            <tr><td>Increment size</td><td>Often weeks to months per increment.</td><td>Sprints typically 1–4 weeks.</td></tr>
+            <tr><td>Architecture</td><td>Strong emphasis on upfront architectural plan.</td><td>Architecture emerges; refactor continuously.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Architecture requirements (make or break)</h3>
+        <p>
+          Incremental delivery fails without upfront design for extensibility. Critical decisions include:
+        </p>
+        <ul>
+          <li><strong>Module boundaries</strong> — each increment should touch well-defined components, not scatter changes everywhere.</li>
+          <li><strong>Database evolution</strong> — new tables/columns in later increments should be anticipated; use migration scripts.</li>
+          <li><strong>API versioning</strong> — public interfaces used by increment 1 must remain stable when increment 3 adds consumers.</li>
+          <li><strong>Stub and scaffold strategy</strong> — increment 1 may ship with placeholder menus for features arriving in increment 2, but core integration paths must be real.</li>
+          <li><strong>Configuration management</strong> — one codebase, tagged releases per increment (v1.0, v1.1, v2.0).</li>
+        </ul>
+
+        <h3>Step-by-step scenario</h3>
+        <p><strong>Scenario — Bank mobile banking app:</strong></p>
+        <ol>
+          <li><strong>Architecture (month 1):</strong> API gateway, auth service, accounts module, transfers module, bill-pay module. Security and audit logging built into shared layer.</li>
+          <li><strong>Increment 1 (months 2–4):</strong> Mini-Waterfall for login, balance inquiry, mini-statement. Released to 5% of customers (pilot). Regression: N/A (first release).</li>
+          <li><strong>Feedback:</strong> Users want fingerprint login — added to increment 2 scope; architecture unchanged.</li>
+          <li><strong>Increment 2 (months 5–7):</strong> Fund transfers between own accounts + biometric login. Integrates with increment 1 auth and accounts modules. Full regression on increment 1 features.</li>
+          <li><strong>Increment 3 (months 8–10):</strong> Bill payment and payee management. Uses same API gateway and audit trail. Regression covers increments 1 and 2.</li>
+          <li><strong>Final acceptance:</strong> Penetration test, load test, regulatory sign-off on complete app.</li>
+        </ol>
+
+        <h3>Advantages of the Incremental Model</h3>
+        <ul>
+          <li>
+            <strong>Early working software for the customer</strong> — business value and user feedback begin after
+            increment 1, not after the entire project.
+          </li>
+          <li>
+            <strong>Lower delivery risk</strong> — if increment 1 fails acceptance, the team corrects course before
+            building increments 2 and 3.
+          </li>
+          <li>
+            <strong>Feedback guides later increments</strong> — real usage reveals missing rules, usability problems,
+            and reprioritisation opportunities.
+          </li>
+          <li>
+            <strong>Parallel development possible</strong> — independent increments (e.g., reporting vs payments) can
+            be built by separate teams once interfaces are frozen.
+          </li>
+          <li>
+            <strong>Incremental revenue or compliance</strong> — partial system may satisfy regulators or generate income
+            while development continues.
+          </li>
+          <li>
+            <strong>More realistic for large systems</strong> — avoids single multi-year release that nobody can test until the end.
+          </li>
+          <li>
+            <strong>Structured yet flexible</strong> — more disciplined than ad-hoc coding; more adaptive than pure Waterfall.
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>Requires strong upfront architecture</strong> — poor early design forces expensive rework across
+            multiple increments.
+          </li>
+          <li>
+            <strong>Integration complexity</strong> — each increment must merge cleanly; interface mistakes compound over time.
+          </li>
+          <li>
+            <strong>Higher total cost than ideal Waterfall</strong> — repeated testing, deployment, training, and
+            documentation per increment add overhead.
+          </li>
+          <li>
+            <strong>Incomplete product perception</strong> — users may complain that “the system is half-finished” until
+            all increments ship; manage expectations with a public roadmap.
+          </li>
+          <li>
+            <strong>Regression effort grows</strong> — increment 5 must retest everything from increments 1–4 unless
+            automation exists.
+          </li>
+          <li>
+            <strong>Contract and pricing complexity</strong> — fixed-price contracts must define what each increment
+            contains and when payment milestones occur.
+          </li>
+          <li>
+            <strong>Not for volatile greenfield exploration</strong> — if requirements are completely unknown, Prototype
+            or Agile may fit better than a fixed increment plan.
+          </li>
+        </ul>
+
+        <h3>When to use the Incremental Model</h3>
+        <ul>
+          <li>Large systems where <strong>features can be prioritised</strong> and delivered in useful subsets.</li>
+          <li>Stakeholders need <strong>early partial product</strong> for operations, pilots, or competitive pressure.</li>
+          <li>Requirements are <strong>mostly stable</strong> at the macro level but details can be refined per increment.</li>
+          <li>Organisation wants <strong>Waterfall-like discipline</strong> with better time-to-market than single release.</li>
+          <li>Integration with <strong>legacy systems</strong> where architecture must be fixed early.</li>
+          <li>Multi-team projects with <strong>clear module boundaries</strong> and interface contracts.</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Small projects deliverable in one short cycle — increment overhead is wasteful.</li>
+          <li>Requirements completely unknown — use Prototype (§2.4) or Agile (§2.11) first.</li>
+          <li>Cannot define extensible architecture upfront — increments will collide.</li>
+          <li>Regulation mandates single atomic go-live with no partial deployment.</li>
+          <li>Need continuous daily requirement churn — Agile sprints fit better than multi-month increments.</li>
+        </ul>
+
+        <h3>Combining with other models</h3>
+        <ul>
+          <li><strong>Iterative Waterfall inside each increment</strong> — when testing finds design errors during increment 2, loop back within that mini-Waterfall.</li>
+          <li><strong>Prototype for risky increment</strong> — spike unknown UI in increment 3 using throwaway prototype before committing.</li>
+          <li><strong>Spiral for high-risk increments</strong> — run risk analysis before building a critical payment increment.</li>
+          <li><strong>V-Model testing</strong> — pair each increment’s design with test plans for stronger verification.</li>
+        </ul>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — Government tax e-filing portal:</strong> The authority launches increment 1 with income
+          declaration for salaried individuals only. Increment 2 adds business filers. Increment 3 adds refund tracking
+          and SMS alerts. Increment 4 integrates with national identity verification. Each increment is a production
+          release used by real taxpayers; architecture (single citizen account, audit log, document store) was defined
+          in the feasibility study. Early increments reduced fraud-support calls by validating workflows before adding
+          complex business rules in later releases.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Incremental Model</div>
+          <p><strong>Q:</strong> Describe the Incremental Process Model. Explain how each increment is developed. How does it differ from the Classical Waterfall model, the Iterative Waterfall model, and the Iterative Enhancement approach? Discuss horizontal vs vertical slicing, advantages, disadvantages, and suitable application areas. Illustrate with an example.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define the Incremental model as splitting the system into priority-ordered chunks, each developed through a mini-Waterfall and delivered to the customer as working software.</li>
+            <li>State its relationship to Iterative Enhancement (§2.7) and evolutionary development (§2.6) — planned architecture, growing product through releases.</li>
+            <li>Describe the overall process: architecture and release plan → increment 1 mini-Waterfall → feedback → increment 2… → final acceptance.</li>
+            <li>List phases inside one increment: requirements, design, implementation, testing, delivery; mention Iterative Waterfall loops within an increment if defects are found.</li>
+            <li>Explain vertical (feature) vs horizontal (layer) slicing; prefer vertical for customer-visible increments.</li>
+            <li>Contrast with Classical Waterfall (single release, late feedback, higher delivery risk).</li>
+            <li>Contrast with Iterative Waterfall (multiple customer releases vs one product with error-correction loops).</li>
+            <li>Contrast with Iterative Enhancement (Incremental is a specific delivery pattern implementing the enhancement philosophy).</li>
+            <li>Discuss architecture requirements: modules, APIs, database evolution, regression testing.</li>
+            <li>Walk through an example (e.g., mobile banking or e-filing portal) with named increments.</li>
+            <li>List advantages (early software, lower risk, feedback, parallel work) and disadvantages (architecture dependency, integration cost, regression growth).</li>
+            <li>State when to use and when to prefer Prototype, Agile, or pure Waterfall.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> In the Incremental model, each increment is developed using — <strong>(B) A mini-Waterfall cycle</strong>.</p>
+          <p><strong>MCQ:</strong> The main advantage of the Incremental model over Classical Waterfall is — <strong>(C) Early delivery of partial working software to the customer</strong>.</p>
+          <p><strong>MCQ:</strong> Vertical slicing in the Incremental model means — <strong>(A) Each increment delivers end-to-end functionality through all layers</strong>.</p>
+          <p><strong>MCQ:</strong> The Incremental model requires — <strong>(D) Upfront architectural planning to accommodate future increments</strong>.</p>
+        </div>
+      </section>
+
+      <section id="sec-2-9">
+        <h2>2.9 Rapid Application Development (RAD)</h2>
+        <p>
+          <strong>Rapid Application Development (RAD)</strong> emphasises <strong>speed</strong> through
+          time-boxed delivery, heavy <strong>user involvement</strong>, and extensive use of
+          <strong>CASE tools</strong> (Computer-Aided Software Engineering) for code generation, prototyping,
+          and automated testing. RAD is not a single model but a philosophy that can use incremental or prototype approaches.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-rad-caption">
+          <img src="../../assets/images/se-topic-02/rad.jpg"
+               alt="RAD phases — requirements planning, user design, construction, cutover with time-boxed iterations"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-rad-caption">RAD model — time-boxed phases with active user participation and CASE tool support (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Key features</h3>
+        <ul>
+          <li><strong>Time-boxing.</strong> Each iteration has a fixed duration, and the team adjusts scope to fit the time-box rather than extending the deadline indefinitely.</li>
+          <li><strong>User involvement.</strong> Users take part in workshops (such as Joint Application Design sessions) throughout development, not only at the start and end.</li>
+          <li><strong>Prototyping.</strong> The team builds rapid user-interface and workflow prototypes so that requirements can be confirmed with real feedback.</li>
+          <li><strong>CASE tools.</strong> Computer-Aided Software Engineering tools support automated code generation from models, reusable components, and fourth-generation database environments.</li>
+          <li><strong>Small teams.</strong> RAD works best when skilled developers work in small groups that stay close to users and decision-makers.</li>
+        </ul>
+
+        <h3>Phases (typical RAD lifecycle)</h3>
+        <ol>
+          <li><strong>Requirements planning.</strong> The team runs a workshop to agree goals, scope, and constraints for the application.</li>
+          <li><strong>User design.</strong> Users and developers create prototypes together to validate screens and workflows.</li>
+          <li><strong>Construction.</strong> Developers implement the system quickly, often using CASE tools and generated code.</li>
+          <li><strong>Cutover.</strong> The team completes testing, data conversion, and go-live activities to put the system into production.</li>
+        </ol>
+
+        <h3>Advantages and disadvantages</h3>
+        <ul>
+          <li><strong>Advantages.</strong> RAD can achieve very fast delivery, high user satisfaction, and fewer misunderstandings because users stay involved throughout.</li>
+          <li><strong>Disadvantages.</strong> RAD needs committed users, skilled staff, and strong CASE support. It is not ideal for very large teams, and scalability or performance can suffer if the architecture is rushed.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — RAD</div>
+          <p><strong>Q:</strong> Explain Rapid Application Development. What are its key features, and what are its limitations?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define RAD as a fast development approach that combines time-boxing, continuous user involvement, prototyping, and CASE tools.</li>
+            <li>Describe the four phases in order: requirements planning, user design, construction, and cutover.</li>
+            <li>State advantages such as speed, user satisfaction, and fewer requirement errors.</li>
+            <li>State limitations such as the need for active users, small skilled teams, limited suitability for very large systems, and dependence on tools.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-10">
+        <h2>2.10 RAD vs Waterfall</h2>
+        <p>
+          RAD and the Classical Waterfall represent opposite ends of the SDLC spectrum: Waterfall prioritises
+          <strong>planning and documentation</strong>; RAD prioritises <strong>speed and user feedback</strong>.
+        </p>
+
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>RAD</th><th>Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Speed</td><td>RAD is very fast because work is organised in time-boxed iterations with rapid delivery.</td><td>Waterfall is slow because the customer receives the product only after the full cycle completes.</td></tr>
+            <tr><td>User involvement</td><td>Users are involved continuously through workshops and prototyping sessions.</td><td>Users are involved mainly during requirements definition and final acceptance.</td></tr>
+            <tr><td>Requirements</td><td>Requirements are allowed to evolve during development as users learn more.</td><td>Requirements are fixed upfront in the SRS before construction begins.</td></tr>
+            <tr><td>Documentation</td><td>RAD keeps documentation minimal and prefers working software as the main deliverable.</td><td>Waterfall produces extensive documentation at each phase.</td></tr>
+            <tr><td>Tools</td><td>RAD relies heavily on CASE tools and code generation.</td><td>Waterfall typically uses standard development tools.</td></tr>
+            <tr><td>Team size</td><td>RAD works best with small, skilled teams working closely with users.</td><td>Waterfall can support teams of any size, including very large teams.</td></tr>
+            <tr><td>Flexibility</td><td>RAD is highly flexible because scope is adjusted to fit each time-box.</td><td>Waterfall has low flexibility because changes become costly after sign-off.</td></tr>
+            <tr><td>Best for</td><td>RAD is best for small or medium applications, tight deadlines, and highly engaged users.</td><td>Waterfall is best for fixed requirements, regulatory environments, and large documented projects.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — RAD vs Waterfall</div>
+          <p><strong>Q:</strong> Compare RAD with the Traditional Waterfall SDLC. When would you choose each?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Present a comparison using criteria such as speed, user involvement, requirements handling, documentation, tools, team size, and flexibility.</li>
+            <li>Explain when RAD is appropriate, for example when the schedule is tight, users are available, scope is moderate, and CASE tools exist.</li>
+            <li>Explain when Waterfall is appropriate, for example when requirements are stable, an audit trail is required, or the project is large and regulated.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-11">
+        <h2>2.11 Agile Software Development</h2>
+        <p>
+          <strong>Agile</strong> is a family of lightweight, iterative SDLC approaches defined by the
+          <strong>Agile Manifesto (2001)</strong>. Agile values <strong>individuals and interactions, working
+          software, customer collaboration, and responding to change</strong> over processes, documentation,
+          contracts, and rigid plans.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-agile-caption">
+          <img src="../../assets/images/se-topic-02/agile.png"
+               alt="Agile software development — iterative sprints delivering working increments with customer collaboration"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-agile-caption">Agile — iterative sprints with continuous customer feedback (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Agile Manifesto values</h3>
+        <ul>
+          <li>Individuals and interactions <strong>over</strong> processes and tools.</li>
+          <li>Working software <strong>over</strong> comprehensive documentation.</li>
+          <li>Customer collaboration <strong>over</strong> contract negotiation.</li>
+          <li>Responding to change <strong>over</strong> following a plan.</li>
+        </ul>
+
+        <h3>Agile principles (selected for exams)</h3>
+        <ul>
+          <li>Deliver working software frequently (weeks, not months).</li>
+          <li>Welcome changing requirements, even late in development.</li>
+          <li>Business people and developers cooperate daily.</li>
+          <li>Teams should be self-organising and should reflect regularly so they can improve their process.</li>
+        </ul>
+
+        <h3>Scrum sprints (common Agile framework)</h3>
+        <ul>
+          <li><strong>Sprint.</strong> A sprint is a fixed time-box (usually one to four weeks) in which the team delivers a potentially shippable product increment.</li>
+          <li><strong>Sprint planning.</strong> At the start of the sprint, the team selects which backlog items it will complete.</li>
+          <li><strong>Daily stand-up.</strong> Each day the team holds a short meeting to share progress and surface blockers.</li>
+          <li><strong>Sprint review.</strong> At the end of the sprint, the team demonstrates work to stakeholders and collects feedback.</li>
+          <li><strong>Retrospective.</strong> The team reviews what went well and what to improve before the next sprint begins.</li>
+        </ul>
+
+        <h3>Advantages and disadvantages</h3>
+        <ul>
+          <li><strong>Advantages.</strong> Agile provides fast feedback, adapts well to change, keeps customers involved, and delivers business value early.</li>
+          <li><strong>Disadvantages.</strong> Schedule and cost are harder to predict, the customer must stay engaged, documentation may be lighter, and very large distributed teams need strong discipline to succeed.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Agile</div>
+          <p><strong>Q:</strong> Explain Agile software development. State the four values of the Agile Manifesto and describe how sprints work in Scrum.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define Agile as iterative, incremental, customer-collaborative development based on the Agile Manifesto (2001).</li>
+            <li>State the four values: individuals and interactions, working software, customer collaboration, and responding to change are preferred over rigid process, heavy documentation, contracts, and fixed plans.</li>
+            <li>Explain a Scrum sprint as a time-boxed iteration that includes planning, daily stand-ups, a review demo, and a retrospective.</li>
+            <li>Mention advantages (flexibility and early delivery) and disadvantages (estimation difficulty and need for committed stakeholders).</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-12">
+        <h2>2.12 Extreme Programming (XP)</h2>
+        <p>
+          <strong>Extreme Programming (XP)</strong>, introduced by Kent Beck, is an Agile methodology that takes
+          proven practices to <strong>extreme levels</strong>. XP focuses on <strong>technical excellence</strong>,
+          frequent releases, and close customer pairing with developers.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-xp-caption">
+          <img src="../../assets/images/se-topic-02/agile.png"
+               alt="Extreme Programming — pair programming, test-driven development, continuous integration practices"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-xp-caption">XP — engineering practices taken to the extreme within Agile (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Core XP practices</h3>
+        <ul>
+          <li><strong>Pair programming.</strong> Two developers share one workstation: the driver writes code while the navigator reviews and thinks ahead, and they swap roles frequently.</li>
+          <li><strong>Test-Driven Development (TDD).</strong> The developer writes a failing test first, writes the minimal code to pass it, and then refactors (the Red, Green, Refactor cycle).</li>
+          <li><strong>Continuous Integration (CI).</strong> The team merges code into a shared repository several times a day and runs automated build and test on each merge.</li>
+          <li><strong>Collective code ownership.</strong> Any member of the team may improve any part of the codebase.</li>
+          <li><strong>Simple design.</strong> The team builds only what is needed now, following the “You Aren’t Gonna Need It” (YAGNI) principle.</li>
+          <li><strong>Refactoring.</strong> The team continuously improves code structure without changing external behaviour.</li>
+          <li><strong>On-site customer.</strong> A user representative is available full-time to answer questions and clarify requirements.</li>
+          <li><strong>Small releases.</strong> The team delivers small, deployable increments frequently rather than waiting for one large release.</li>
+        </ul>
+
+        <h3>Advantages and disadvantages</h3>
+        <ul>
+          <li><strong>Advantages.</strong> XP tends to produce high code quality, fewer defects through TDD and pair review, rapid feedback, and strong communication within the team.</li>
+          <li><strong>Disadvantages.</strong> Pair programming increases staffing cost on coding tasks, the approach needs highly skilled developers, an on-site customer is often impractical, and XP is less suited to very large teams or fixed-price contracts.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Extreme Programming</div>
+          <p><strong>Q:</strong> Describe Extreme Programming. Explain pair programming, TDD, and Continuous Integration with advantages and disadvantages.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define XP as an Agile method introduced by Kent Beck that takes good practices to an extreme level for quality and speed.</li>
+            <li>Explain pair programming as two developers sharing one keyboard for real-time review and knowledge sharing.</li>
+            <li>Explain TDD as writing a test first, then code, then refactoring, which improves coverage and keeps design simple.</li>
+            <li>Explain continuous integration as frequent merges with automated tests that catch defects early.</li>
+            <li>State advantages (quality and fewer defects) and disadvantages (cost of pairing, need for skilled staff and an available customer).</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> In TDD, the first step is — <strong>(A) Write a failing test</strong>.</p>
+        </div>
+      </section>
+
+      <section id="sec-2-13">
+        <h2>2.13 SDLC V-Model</h2>
+        <p>
+          The <strong>V-Model</strong> (Verification and Validation model) extends Waterfall by mapping each
+          development phase to a corresponding <strong>testing phase</strong>. The left side of the "V" represents
+          development activities; the right side represents testing activities that verify those development stages.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-vmodel-caption">
+          <img src="../../assets/images/se-topic-02/vmodel.webp"
+               alt="V-Model — development phases on left, corresponding test phases on right forming a V shape"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-vmodel-caption">V-Model — each development phase has a matching test phase (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Verification vs Validation</h3>
+        <ul>
+          <li><strong>Verification</strong> asks whether we are building the product <em>right</em>. It checks conformance to specifications through reviews, inspections, and unit or integration testing.</li>
+          <li><strong>Validation</strong> asks whether we are building the <em>right</em> product. It checks that user needs are met through acceptance testing and user acceptance testing (UAT).</li>
+        </ul>
+
+        <h3>Phase pairs (left → right)</h3>
+        <table>
+          <thead>
+            <tr><th>Development (verification)</th><th>Testing (validation of that stage)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Requirements analysis</td><td>Requirements analysis on the left side of the V is verified by acceptance testing on the right.</td></tr>
+            <tr><td>System design</td><td>System design is paired with system testing to confirm that the overall system meets its specification.</td></tr>
+            <tr><td>Architecture / high-level design</td><td>Architecture or high-level design is paired with integration testing to verify that subsystems work together.</td></tr>
+            <tr><td>Module design</td><td>Detailed module design is paired with unit testing to verify each component in isolation.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Advantages and disadvantages</h3>
+        <ul>
+          <li><strong>Advantages.</strong> Testing is planned from the start, traceability links each requirement to tests, and the model suits safety-critical and regulated systems.</li>
+          <li><strong>Disadvantages.</strong> The V-Model shares Waterfall’s rigidity, provides no early working software, makes late requirement changes expensive, and requires maintaining testing documents alongside design documents.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — V-Model</div>
+          <p><strong>Q:</strong> Explain the V-Model. Differentiate verification and validation. Map development phases to test phases.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Describe the V-Model as Waterfall with a parallel testing arm: the left side is development and the right side is testing.</li>
+            <li>Define verification as building the product correctly against specifications, and validation as building the product the user actually needs.</li>
+            <li>Map phase pairs: requirements with acceptance testing, system design with system testing, high-level design with integration testing, and module design with unit testing.</li>
+            <li>State advantages (early test planning and traceability) and disadvantages (inflexibility, late delivery, and costly changes).</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-14">
+        <h2>2.14 Information System Life Cycle</h2>
+        <p>
+          The <strong>Information System (IS) Life Cycle</strong> describes phases specific to developing
+          <strong>information systems</strong> that collect, process, store, and distribute information for
+          organisational decision-making. It extends generic SDLC with IS-specific concerns such as data migration,
+          user training, and organisational change management.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-is-lifecycle-caption">
+          <img src="../../assets/images/se-topic-02/sdlc-stages.webp"
+               alt="Information System life cycle — feasibility through implementation, operation, and maintenance"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-is-lifecycle-caption">Information System Life Cycle — phases from initiation to retirement (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>IS-specific phases</h3>
+        <ol>
+          <li><strong>Initiation / feasibility.</strong> The organisation identifies the business need, defines scope, performs cost–benefit analysis, and obtains stakeholder approval.</li>
+          <li><strong>Requirements determination.</strong> Analysts study the information needs of users and departments that the system will support.</li>
+          <li><strong>Analysis.</strong> The team models current and proposed processes using tools such as data-flow and entity–relationship diagrams and performs gap analysis.</li>
+          <li><strong>Design.</strong> Architects define system architecture, database design, user interface, security, and integration interfaces.</li>
+          <li><strong>Implementation.</strong> Developers code the system, convert data, test the solution, and train users.</li>
+          <li><strong>Operation and maintenance.</strong> The organisation monitors performance, handles change requests, and maintains backups while the system is live.</li>
+          <li><strong>Retirement / disposal.</strong> When the system is replaced, data is migrated and the legacy system is decommissioned safely.</li>
+        </ol>
+
+        <h3>IS-specific concerns</h3>
+        <ul>
+          <li><strong>Organisational impact.</strong> A new information system changes workflows, so change management and communication are critical.</li>
+          <li><strong>Data quality.</strong> Poor source data leads to poor decisions, so data cleansing during migration is essential.</li>
+          <li><strong>Security and compliance.</strong> The system must provide access control, audit trails, and compliance with relevant regulations.</li>
+          <li><strong>User adoption.</strong> Non-technical staff need training, help-desk support, and clear documentation to use the system effectively.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — IS Life Cycle</div>
+          <p><strong>Q:</strong> Describe the Information System Life Cycle. How does it differ from generic SDLC?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define the Information System Life Cycle as the set of phases used to build systems that manage organisational information and support decisions.</li>
+            <li>List the phases in order from initiation through requirements, analysis, design, implementation, operation, and retirement.</li>
+            <li>Explain IS-specific concerns such as organisational change, data migration, user training, compliance, and data quality.</li>
+            <li>Contrast with generic SDLC by noting that IS life cycles explicitly include business processes and people, not only software construction.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-15">
+        <h2>2.15 Database Application System Life Cycle</h2>
+        <p>
+          The <strong>Database Application System Life Cycle</strong> focuses on systems where a
+          <strong>database is the central component</strong>. Phases emphasise data modelling, schema design,
+          normalisation, query optimisation, and data integrity alongside application logic.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-db-lifecycle-caption">
+          <img src="../../assets/images/se-topic-02/sdlc-stages.webp"
+               alt="Database application life cycle — data modelling, schema design, implementation, and maintenance phases"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-db-lifecycle-caption">Database Application Life Cycle — data-centred phases within SDLC (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>DB application phases</h3>
+        <ol>
+          <li><strong>Planning.</strong> The team defines scope, identifies data sources and users, and confirms feasibility.</li>
+          <li><strong>Requirements collection and analysis.</strong> Analysts document data needs, transactions, reports, and constraints.</li>
+          <li><strong>Conceptual data modelling.</strong> A high-level entity–relationship diagram defines entities, relationships, and attributes.</li>
+          <li><strong>Logical database design.</strong> The schema is normalised (for example to third normal form), and integrity rules are defined.</li>
+          <li><strong>Physical database design.</strong> The team chooses storage structures, indexes, partitioning, and performance tuning options.</li>
+          <li><strong>Application development.</strong> Developers implement SQL, stored procedures, the application layer, and APIs.</li>
+          <li><strong>Testing.</strong> Testers verify data integrity, run load tests, and confirm backup and recovery procedures.</li>
+          <li><strong>Deployment and migration.</strong> Legacy data is loaded, the system is cut over, and parallel running may be used to reduce risk.</li>
+          <li><strong>Maintenance.</strong> The team manages schema evolution, performance monitoring, and security patches over the life of the database.</li>
+        </ol>
+
+        <h3>DB-specific concerns</h3>
+        <ul>
+          <li><strong>Data integrity.</strong> Primary keys, foreign keys, constraints, and triggers keep data consistent and valid.</li>
+          <li><strong>Concurrency.</strong> Locking and transaction isolation allow many users to access the database safely at the same time.</li>
+          <li><strong>Backup and recovery.</strong> Disaster recovery plans and replication protect against data loss.</li>
+          <li><strong>Scalability.</strong> Indexing strategies and sharding help the database grow as data volume increases.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — DB Application Life Cycle</div>
+          <p><strong>Q:</strong> Explain the Database Application System Life Cycle. What phases are specific to database development?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define the Database Application System Life Cycle as an SDLC variant in which the database is the central architectural component.</li>
+            <li>Highlight database-specific phases: conceptual modelling with an ERD, logical design with normalisation, and physical design with indexes and storage tuning.</li>
+            <li>Also mention data migration, integrity testing, backup and recovery, and concurrency control.</li>
+            <li>Explain how this differs from generic SDLC through deeper data modelling and long-term schema maintenance.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-16">
+        <h2>2.16 Comparison of Different Life Cycle Models</h2>
+        <p>
+          No single SDLC model fits all projects. Examiners often ask for a <strong>master comparison</strong>
+          and <strong>selection criteria</strong>. Use the table below as a revision anchor.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-comparison-caption">
+          <img src="../../assets/images/se-topic-02/sdlc-models-comparison.webp"
+               alt="Overview of SDLC models — Waterfall, Iterative, V-Model, Spiral, Incremental, RAD, Agile, and related approaches"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-comparison-caption">SDLC models overview — from sequential (Waterfall) to highly iterative (Agile) (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Master comparison table</h3>
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Nature</th><th>Requirements</th><th>Risk handling</th><th>Delivery</th><th>Best suited for</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Waterfall</td><td>It follows a strictly sequential process.</td><td>Requirements are fixed upfront.</td><td>Risks are often discovered late.</td><td>The customer receives the product at the end of the project.</td><td>It suits stable specifications and small or simple projects.</td></tr>
+            <tr><td>Iterative Waterfall</td><td>It is sequential but allows controlled feedback between phases.</td><td>Requirements are mostly fixed, with limited revision.</td><td>Some risk is reduced through backtracking when errors are found.</td><td>Delivery still occurs mainly at the end of the project.</td><td>It suits projects with moderate requirement stability.</td></tr>
+            <tr><td>Prototype</td><td>It is iterative and centred on building prototypes.</td><td>Requirements are unclear at first and are clarified through prototyping.</td><td>Early user feedback reduces requirements risk.</td><td>A prototype is delivered first, then the final product.</td><td>It suits novel user interfaces and vague initial requirements.</td></tr>
+            <tr><td>Spiral</td><td>It is iterative and explicitly risk-driven.</td><td>Requirements evolve across cycles.</td><td>Risks are analysed and addressed in every cycle.</td><td>Deliverables are produced at the end of each spiral cycle.</td><td>It suits large, complex, high-risk projects.</td></tr>
+            <tr><td>Incremental</td><td>It uses multiple mini-Waterfall cycles.</td><td>Requirements are partitioned into increments.</td><td>Partial early delivery reduces overall delivery risk.</td><td>Each increment is delivered separately to the customer.</td><td>It suits projects with prioritised features that can be released in parts.</td></tr>
+            <tr><td>RAD</td><td>It is time-boxed and tool-driven.</td><td>Requirements evolve during rapid development.</td><td>User workshops help surface risks early.</td><td>Working software is delivered in fast iterations.</td><td>It suits small or medium projects with tight schedules.</td></tr>
+            <tr><td>Agile/XP</td><td>It uses short iterative sprints.</td><td>Requirements are highly changeable.</td><td>Continuous customer feedback manages risk.</td><td>Working software is delivered every sprint.</td><td>It suits dynamic requirements and fast-changing markets.</td></tr>
+            <tr><td>V-Model</td><td>It is sequential with paired test phases.</td><td>Requirements are fixed upfront.</td><td>Test planning begins early, which improves risk control.</td><td>Delivery occurs at the end of the project.</td><td>It suits safety-critical and regulated systems.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Selection criteria (exam checklist)</h3>
+        <ul>
+          <li><strong>Project size.</strong> Small projects often suit RAD or Agile, whereas large projects may need the Spiral model, Incremental delivery, or a structured Waterfall or V-Model approach.</li>
+          <li><strong>Requirements stability.</strong> Stable requirements favour Waterfall or the V-Model, while volatile requirements favour Agile or the Prototype model.</li>
+          <li><strong>Risk level.</strong> High-risk projects benefit from the Spiral model, whereas lower-risk projects can use Waterfall or Incremental approaches.</li>
+          <li><strong>Customer availability.</strong> When customers can participate frequently, Agile or RAD is appropriate; when they cannot, Waterfall with a detailed SRS is more practical.</li>
+          <li><strong>Time-to-market.</strong> Urgent delivery favours RAD, Agile, or Incremental models, while a flexible schedule allows Waterfall or the V-Model.</li>
+          <li><strong>Regulatory and documentation needs.</strong> Strict audit or safety requirements favour the V-Model or Waterfall, whereas minimal documentation pressure allows a lighter Agile process.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Model comparison and selection</div>
+          <p><strong>Q:</strong> Compare major SDLC models in a table. What criteria should a project manager use to select a model?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Draw the master comparison table and explain each model’s nature, requirements handling, risk handling, delivery pattern, and best use in full sentences.</li>
+            <li>Explain selection criteria such as project size, requirements stability, risk level, customer involvement, schedule pressure, and documentation needs.</li>
+            <li>Support the answer with scenario examples, such as a hospital system (V-Model), a startup app (Agile), or an ERP module delivered in increments.</li>
+            <li>Conclude that no single model is best for every project because the right choice depends on context.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-2-17">
+        <h2>2.17 Pairwise Model Comparisons</h2>
+        <p>
+          Exams frequently ask <strong>"difference between X and Y"</strong> questions. Below are the four most
+          common pairwise comparisons with tabular answers.
+        </p>
+
+        <h3>Waterfall vs Incremental</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall</th><th>Incremental</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Delivery</td><td>Waterfall delivers the complete product in a single release at the end.</td><td>The Incremental model delivers multiple partial releases throughout the project.</td></tr>
+            <tr><td>Feedback</td><td>Customer feedback arrives late, after the full system is built.</td><td>Customer feedback arrives early, after each increment is delivered.</td></tr>
+            <tr><td>Requirements</td><td>Waterfall expects requirements to be complete before development starts.</td><td>The Incremental model partitions requirements by priority across increments.</td></tr>
+            <tr><td>Risk</td><td>Waterfall carries a high risk of building the wrong product if direction was wrong from the start.</td><td>The Incremental model lowers that risk because early increments validate the project direction.</td></tr>
+            <tr><td>Architecture</td><td>Waterfall designs the architecture once for the whole system.</td><td>The Incremental model must plan for extensibility upfront so later increments can be added safely.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Waterfall vs Spiral</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall</th><th>Spiral</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Iterations</td><td>Waterfall usually runs as a single pass, or allows feedback loops only in its iterative variant.</td><td>The Spiral model runs multiple risk-driven cycles until the product is complete.</td></tr>
+            <tr><td>Risk analysis</td><td>Waterfall treats risk analysis as implicit and often discovers problems late.</td><td>The Spiral model makes risk analysis explicit in every cycle.</td></tr>
+            <tr><td>Cost</td><td>Waterfall is lower in cost for simple projects with stable requirements.</td><td>The Spiral model is higher in cost because it uses multiple cycles and prototypes.</td></tr>
+            <tr><td>Prototyping</td><td>Prototyping is not built into classical Waterfall.</td><td>The Spiral model uses prototypes whenever they help resolve risks.</td></tr>
+            <tr><td>Best for</td><td>Waterfall is best for small projects with stable requirements.</td><td>The Spiral model is best for large, complex, high-risk projects.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Agile vs V-Model</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Agile</th><th>V-Model</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Flexibility</td><td>Agile is very flexible and welcomes changing requirements throughout the project.</td><td>The V-Model has low flexibility because requirements and test plans are fixed early.</td></tr>
+            <tr><td>Documentation</td><td>Agile keeps documentation minimal and prioritises working software.</td><td>The V-Model requires extensive test and design documentation for each phase.</td></tr>
+            <tr><td>Testing</td><td>Testing runs continuously throughout every sprint.</td><td>Testing is planned in pairs that align with each development phase.</td></tr>
+            <tr><td>Customer role</td><td>The customer collaborates with the team daily or weekly.</td><td>The customer is involved mainly during requirements definition and final acceptance.</td></tr>
+            <tr><td>Best for</td><td>Agile is best for dynamic requirements and startup-style products.</td><td>The V-Model is best for regulated and safety-critical systems.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>V-Model vs Waterfall</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>V-Model</th><th>Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Testing</td><td>The V-Model plans testing from the start and pairs each development phase with a matching test phase.</td><td>Classical Waterfall concentrates testing mainly after the coding phase is complete.</td></tr>
+            <tr><td>Traceability</td><td>The V-Model provides strong traceability from each requirement to its corresponding tests.</td><td>Waterfall provides weaker traceability unless the team maintains it manually.</td></tr>
+            <tr><td>Structure</td><td>The V-Model uses the same sequential development phases as Waterfall but adds a parallel testing arm.</td><td>Waterfall follows linear phases without formally paired test stages.</td></tr>
+            <tr><td>Verification/Validation</td><td>The V-Model makes an explicit distinction between verification and validation.</td><td>Waterfall does not formally distinguish verification from validation.</td></tr>
+            <tr><td>Use case</td><td>The V-Model is used for medical devices, aerospace, and banking systems that need strict compliance.</td><td>Waterfall is used for general projects with fixed requirements and conventional documentation needs.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Pairwise comparisons</div>
+          <p><strong>Q:</strong> Differentiate: (a) Waterfall vs Incremental, (b) Waterfall vs Spiral, (c) Agile vs V-Model, (d) V-Model vs Waterfall.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Use the four comparison tables above and write at least four or five complete comparison points for each pair.</li>
+            <li>Explain key contrasts such as delivery timing, risk, flexibility, testing approach, and the customer’s role in the project.</li>
+            <li>Always state when each model is preferred, not only how the two models differ.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> Which model is most suitable for high-risk, large projects? — <strong>(C) Spiral Model</strong>.</p>
+        </div>
+      </section>
+
+      <section id="sec-2-18">
+        <h2>2.18 Integrating Risk Management in SDLC</h2>
+        <p>
+          <strong>Risk management</strong> is the systematic process of identifying, analysing, prioritising, and
+          mitigating risks that could threaten project success. While any SDLC model benefits from risk management,
+          the <strong>Spiral model</strong> (<a href="#sec-2-5">§2.5</a>) embeds it explicitly in every cycle.
+          Risk management connects to Topic 1's theme of reducing project failure
+          (<a href="01-introduction-and-fundamentals.html#sec-1-13">§1.13</a>).
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-risk-caption">
+          <img src="../../assets/images/se-topic-02/spiral.webp"
+               alt="Risk management in SDLC — spiral model with explicit risk analysis in each iteration"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-risk-caption">Risk management integrated into SDLC — strongest in the Spiral model (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Risk management process (three sets — GFG series)</h3>
+        <h4>Set 1 — Identification and classification</h4>
+        <ul>
+          <li><strong>Identify risks.</strong> The team brainstorms technical, schedule, cost, staffing, and external risks that could affect the project.</li>
+          <li><strong>Classify risks.</strong> Each risk is grouped as a project risk (budget or schedule), a technical risk (technology or performance), or a business risk (market or compliance).</li>
+          <li><strong>Risk items.</strong> Every risk is recorded with a clear description, its source, and the SDLC phase it would affect.</li>
+        </ul>
+        <h4>Set 2 — Analysis and prioritisation</h4>
+        <ul>
+          <li><strong>Probability.</strong> The team estimates how likely each risk is to occur (high, medium, or low).</li>
+          <li><strong>Impact.</strong> The team estimates the consequence if the risk happens, such as cost overrun, product failure, or schedule delay.</li>
+          <li><strong>Risk exposure.</strong> Exposure is calculated as probability multiplied by impact, and risks are ranked by this score.</li>
+          <li><strong>Risk matrix.</strong> Risks are plotted on a probability–impact grid so the team can see which ones need attention first.</li>
+        </ul>
+        <h4>Set 3 — Mitigation, monitoring, and contingency</h4>
+        <ul>
+          <li><strong>Mitigation strategies.</strong> The team may avoid the risk by changing the plan, transfer it (for example through insurance or outsourcing), mitigate it by reducing probability or impact, or accept it and monitor it only.</li>
+          <li><strong>Contingency plans.</strong> For important risks, the team prepares predefined actions such as switching to a backup vendor or reducing scope if the risk occurs.</li>
+          <li><strong>Monitoring.</strong> Risk indicators are tracked throughout the SDLC and reassessed at major milestones.</li>
+          <li><strong>Link to Spiral.</strong> In the Spiral model, quadrant 2 (identify and resolve risks) carries out this process in every cycle.</li>
+        </ul>
+
+        <h3>Common software project risks</h3>
+        <ul>
+          <li>Requirements may change or remain incomplete throughout the project.</li>
+          <li>The chosen technology may become obsolete or may be unproven at the required scale.</li>
+          <li>Key personnel may leave, taking critical knowledge with them.</li>
+          <li>The team may underestimate system complexity or integration difficulty.</li>
+          <li>Security vulnerabilities may be discovered only late in testing or after release.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Risk Management in SDLC</div>
+          <p><strong>Q:</strong> Explain how risk management is integrated into the SDLC. Describe the risk management process and link it to the Spiral model.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Explain that risk management means identifying, analysing, prioritising, mitigating, and monitoring risks throughout the SDLC.</li>
+            <li>Describe Set 1: identify and classify risks as project, technical, or business risks.</li>
+            <li>Describe Set 2: estimate probability and impact, compute exposure, and use a risk matrix to rank risks.</li>
+            <li>Describe Set 3: choose strategies (avoid, transfer, mitigate, accept), prepare contingency plans, and monitor risks continuously.</li>
+            <li>Link to the Spiral model: risk analysis in quadrant 2 of every cycle is the strongest built-in integration of risk management in an SDLC model.</li>
+            <li>Cross-reference <a href="#sec-2-5">§2.5</a> and <a href="01-introduction-and-fundamentals.html#sec-1-13">Topic 1 §1.13</a> where relevant.</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="callout exam" id="key-takeaways">
+        <div class="callout-title">Key takeaways — exam revision</div>
+        <ul>
+          <li><strong>SDLC</strong> is a phased framework from planning to maintenance. An SDLC <em>model</em> (Waterfall, Spiral, Agile, and others) defines how those phases are ordered or repeated.</li>
+          <li><strong>Classical Waterfall</strong> is strictly sequential and suits stable requirements, but it delivers working software late and resists change.</li>
+          <li><strong>Iterative Waterfall</strong> keeps the same phase order but allows controlled feedback when later phases discover errors in earlier work.</li>
+          <li><strong>Prototype model / Software Prototyping</strong> uses early working models; throwaway prototyping clarifies requirements, while evolutionary prototyping grows the prototype into the final product.</li>
+          <li><strong>Spiral model</strong> (Boehm, 1986) is risk-driven, uses four quadrants per cycle, and fits large, high-risk projects.</li>
+          <li><strong>Evolutionary development</strong> builds successive versions so requirements and design co-evolve; examples include evolutionary prototyping, Spiral, Incremental, and Agile approaches.</li>
+          <li><strong>Iterative Enhancement</strong> plans architecture upfront and adds or refines modules in each iteration on that stable base.</li>
+          <li><strong>Incremental model</strong> delivers the system in chunks, each developed through a mini-Waterfall, so users receive partial working software early.</li>
+          <li><strong>RAD</strong> emphasises time-boxing, user workshops, and CASE tools for fast delivery when users are highly engaged.</li>
+          <li><strong>Agile</strong> follows the Manifesto values and short sprints. <strong>XP</strong> extends Agile with pair programming, test-driven development, and continuous integration.</li>
+          <li><strong>V-Model</strong> pairs each development phase with a test phase and distinguishes verification from validation; it suits regulated and safety-critical systems.</li>
+          <li><strong>IS and DB life cycles</strong> are domain-specific extensions of the generic SDLC for information systems and database applications.</li>
+          <li><strong>Model selection</strong> depends on project size, requirements stability, risk, customer availability, schedule pressure, and documentation needs.</li>
+          <li><strong>Risk management</strong> runs through identify, analyse, prioritise, mitigate, and monitor steps; the Spiral model embeds this explicitly in every cycle.</li>
+        </ul>
+      </div>
+
+      <section class="references">
+        <h2>References</h2>
+        <ul>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/software-development-life-cycle-sdlc/" rel="noopener noreferrer">GeeksforGeeks — Software Development Life Cycle (SDLC)</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/software-engineering-waterfall-model/" rel="noopener noreferrer">GeeksforGeeks — Waterfall Model</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/software-engineering-iterative-waterfall-model/" rel="noopener noreferrer">GeeksforGeeks — Iterative Waterfall Model</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/software-engineering-prototyping-model/" rel="noopener noreferrer">GeeksforGeeks — Prototyping Model</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/software-engineering-spiral-model/" rel="noopener noreferrer">GeeksforGeeks — Spiral Model</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/software-engineering-incremental-process-model/" rel="noopener noreferrer">GeeksforGeeks — Incremental Process Model</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/rapid-application-development-model-rad/" rel="noopener noreferrer">GeeksforGeeks — Rapid Application Development (RAD)</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/agile-software-development/" rel="noopener noreferrer">GeeksforGeeks — Agile Software Development</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/extreme-programming-xp/" rel="noopener noreferrer">GeeksforGeeks — Extreme Programming (XP)</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/software-engineering-sdlc-v-model/" rel="noopener noreferrer">GeeksforGeeks — SDLC V-Model</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/information-system-life-cycle/" rel="noopener noreferrer">GeeksforGeeks — Information System Life Cycle</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/database-application-system-life-cycle/" rel="noopener noreferrer">GeeksforGeeks — Database Application System Life Cycle</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/comparison-of-different-life-cycle-models/" rel="noopener noreferrer">GeeksforGeeks — Comparison of Different Life Cycle Models</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/integrating-risk-management-in-sdlc-set-1/" rel="noopener noreferrer">GeeksforGeeks — Integrating Risk Management in SDLC (Set 1)</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/integrating-risk-management-in-sdlc-set-2/" rel="noopener noreferrer">GeeksforGeeks — Integrating Risk Management in SDLC (Set 2)</a></li>
+          <li><a href="https://www.geeksforgeeks.org/software-engineering/integrating-risk-management-in-sdlc-set-3/" rel="noopener noreferrer">GeeksforGeeks — Integrating Risk Management in SDLC (Set 3)</a></li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
