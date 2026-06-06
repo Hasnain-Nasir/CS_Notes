@@ -67,7 +67,7 @@
     var brand = document.createElement("a");
     brand.className = "global-brand";
     brand.href = prefix + "index.html";
-    brand.textContent = "Hasnain's Notes";
+    brand.textContent = "Notes By Nain";
 
     var toggle = document.createElement("button");
     toggle.type = "button";
