@@ -2,28 +2,40 @@
   var BOOKS = [
     { id: "home", label: "Home", title: "Home", path: "index.html" },
     { id: "infosec", label: "Info Sec", title: "Information Security", path: "info-sec/index.html" },
-    { id: "se", label: "Software Eng", title: "Software Engineering", path: "software-engineering/index.html" },
-    { id: "coa", label: "Org and Assembly Lang", title: "Computer Organization and Assembly Language", path: "coa/index.html" },
+    { id: "se", label: "Software Eng.", title: "Software Engineering", path: "software-engineering/index.html" },
+    { id: "coa", label: "Comp Org & ASM", title: "Computer Organization and Assembly Language", path: "coa/index.html" },
     { id: "la", label: "Linear Algebra", title: "Linear Algebra", path: "linear-algebra/index.html" },
-    { id: "tbw", label: "Tech and Business Writing", title: "Technical and Business Writing", path: "technical-writing/index.html" },
+    { id: "tbw", label: "Tech & Bus. Writing", title: "Technical and Business Writing", path: "technical-writing/index.html" },
     { id: "civics", label: "Civics", title: "Civics and Community Engagement", path: "civics/index.html" },
-    { id: "mgmt", label: "Intro to Management", title: "Introduction to Management", path: "management/index.html" }
+    { id: "mgmt", label: "Management", title: "Introduction to Management", path: "management/index.html" }
   ];
 
   var FOOTER_INFOSEC = [
-    { label: "Intro to InfoSec", file: "01-introduction-to-info-sec.html" },
-    { label: "Authentication Models", file: "02-authentication-models.html" },
-    { label: "Advanced Cryptography", file: "05-advanced-cryptography.html" },
-    { label: "Hashing & Signatures", file: "06-hashing-and-digital-signatures.html" },
-    { label: "Intrusion Detection", file: "08-intrusion-detection-and-response.html" }
+    { label: "Introduction to InfoSec", soon: true },
+    { label: "Authentication Models", soon: true },
+    { label: "Protection Models", soon: true },
+    { label: "Cryptography & Hashing", soon: true },
+    { label: "Intrusion Detection", soon: true },
+    { label: "All Info Sec Topics", path: "info-sec/index.html" }
   ];
 
   var FOOTER_SE = [
-    { label: "SDLC & Process Models", hash: "" },
-    { label: "Requirements Engineering", hash: "" },
-    { label: "Software Design", hash: "" },
-    { label: "Software Testing", hash: "" },
-    { label: "All SE Topics", file: null, bookIndex: true }
+    { label: "Intro to Software Engineering", path: "software-engineering/topics/01-introduction-and-fundamentals/index.html" },
+    { label: "SDLC & Process Models", path: "software-engineering/topics/02-sdlc-and-process-models/index.html" },
+    { label: "Classical Waterfall Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-02-classical-waterfall.html" },
+    { label: "Agile Software Development", path: "software-engineering/topics/02-sdlc-and-process-models/02-11-agile.html" },
+    { label: "Spiral Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-05-spiral.html" },
+    { label: "Process Model Comparison", path: "software-engineering/topics/02-sdlc-and-process-models/02-16-comparison.html" },
+    { label: "All SE Topics", path: "software-engineering/index.html" }
+  ];
+
+  var FOOTER_SITE = [
+    { label: "Home", path: "index.html" },
+    { label: "Past Papers", path: "index.html#past-papers" },
+    { label: "Software Engineering", path: "software-engineering/index.html" },
+    { label: "Information Security", path: "info-sec/index.html" },
+    { label: "Linear Algebra", path: "linear-algebra/index.html" },
+    { label: "Computer Org. & Assembly", path: "coa/index.html" }
   ];
 
   function getDepth() {
@@ -112,13 +124,62 @@
     return header;
   }
 
+  function buildFooterColumn(title, items, hrefForItem) {
+    var col = document.createElement("div");
+    col.className = "global-footer-col";
+
+    var heading = document.createElement("h3");
+    heading.textContent = title;
+    col.appendChild(heading);
+
+    var list = document.createElement("ul");
+    items.forEach(function (item) {
+      var li = document.createElement("li");
+      if (item.soon) {
+        var soon = document.createElement("span");
+        soon.className = "footer-soon";
+        soon.textContent = item.label;
+        li.appendChild(soon);
+      } else {
+        var link = document.createElement("a");
+        link.href = hrefForItem(item);
+        link.textContent = item.label;
+        li.appendChild(link);
+      }
+      list.appendChild(li);
+    });
+    col.appendChild(list);
+    return col;
+  }
+
   function buildFooter(prefix, depth) {
     var footer = document.createElement("footer");
     footer.className = "global-footer";
     footer.setAttribute("role", "contentinfo");
 
     var inner = document.createElement("div");
-    inner.className = "global-footer-inner global-footer-minimal";
+    inner.className = "global-footer-inner";
+
+    var grid = document.createElement("div");
+    grid.className = "global-footer-grid";
+
+    grid.appendChild(
+      buildFooterColumn("Software Engineering", FOOTER_SE, function (item) {
+        return prefix + item.path;
+      })
+    );
+    grid.appendChild(
+      buildFooterColumn("Information Security", FOOTER_INFOSEC, function (item) {
+        return prefix + item.path;
+      })
+    );
+    grid.appendChild(
+      buildFooterColumn("Site", FOOTER_SITE, function (item) {
+        return prefix + item.path;
+      })
+    );
+
+    inner.appendChild(grid);
 
     var bottom = document.createElement("div");
     bottom.className = "global-footer-bottom";
