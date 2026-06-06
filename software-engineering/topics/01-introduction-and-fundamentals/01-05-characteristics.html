@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.5 Software Characteristics</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.5 Software Characteristics</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-5">
+        <p>
+          Software differs fundamentally from physical products. Understanding these characteristics explains
+          why conventional manufacturing approaches do not map directly onto software development and why
+          specialised engineering discipline is required.
+        </p>
+
+        <h3>1. Software development vs manufacturing</h3>
+        <p>
+          Software is <strong>crafted</strong> through coding and development — it is not mass-produced in
+          factories like cars or chips. Each build may involve unique design decisions. There is no assembly
+          line that stamps out identical copies from raw materials.
+        </p>
+
+        <h3>2. No physical wear and tear</h3>
+        <p>
+          Software does <strong>not deteriorate</strong> over time due to physical use. A program does not
+          "rust" or "wear out" like hardware. However, it may become <em>obsolete</em> because of changing
+          requirements, platforms, or environments — this is logical decay, not physical decay.
+        </p>
+
+        <h3>3. Custom-built nature</h3>
+        <p>
+          Most software is <strong>specially designed</strong> to meet specific needs. Even when using
+          frameworks or libraries, the final product often requires unique configuration, integration, and
+          business logic. Off-the-shelf components exist, but complete systems are rarely identical.
+        </p>
+
+        <h3>4. Intangibility</h3>
+        <p>
+          Software cannot be touched or weighed. It exists as <strong>code, data, and behaviour</strong> inside
+          computers. Progress is hard to measure by physical inspection — you cannot "see" 60% of a program
+          the way you can see 60% of a building constructed. This makes management and estimation challenging.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Characteristics of Software</div>
+          <p><strong>Q:</strong> Explain the main characteristics of software that distinguish it from hardware products.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Software is developed through coding and design, not manufactured in factories like physical products.</li>
+            <li>Software does not suffer physical wear and tear, but it can become obsolete when requirements or technology change.</li>
+            <li>Most software is custom-built to meet specific user or organisational requirements.</li>
+            <li>Software is intangible, so progress and quality are harder to judge by physical inspection alone.</li>
+            <li>These characteristics link to <a href="01-10-se-vs-conventional.html#sec-1-10">§1.10</a>, which explains how software has a different lifecycle and cost model compared with hardware.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-04-components.html">&larr; 1.4 Software Components</a>
+        <a class="btn-back chapter-nav-next" href="01-06-crisis.html">1.6 Software Crisis &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

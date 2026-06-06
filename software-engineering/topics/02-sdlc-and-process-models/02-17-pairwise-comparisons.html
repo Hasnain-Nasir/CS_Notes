@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.17 Pairwise Model Comparisons</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.17 Pairwise Model Comparisons</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-17">
+        <p>
+          Exams frequently ask <strong>"difference between X and Y"</strong> questions. Below are the four most
+          common pairwise comparisons with tabular answers.
+        </p>
+
+        <h3>Waterfall vs Incremental</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall</th><th>Incremental</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Delivery</td><td>Waterfall delivers the complete product in a single release at the end.</td><td>The Incremental model delivers multiple partial releases throughout the project.</td></tr>
+            <tr><td>Feedback</td><td>Customer feedback arrives late, after the full system is built.</td><td>Customer feedback arrives early, after each increment is delivered.</td></tr>
+            <tr><td>Requirements</td><td>Waterfall expects requirements to be complete before development starts.</td><td>The Incremental model partitions requirements by priority across increments.</td></tr>
+            <tr><td>Risk</td><td>Waterfall carries a high risk of building the wrong product if direction was wrong from the start.</td><td>The Incremental model lowers that risk because early increments validate the project direction.</td></tr>
+            <tr><td>Architecture</td><td>Waterfall designs the architecture once for the whole system.</td><td>The Incremental model must plan for extensibility upfront so later increments can be added safely.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Waterfall vs Spiral</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall</th><th>Spiral</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Iterations</td><td>Waterfall usually runs as a single pass, or allows feedback loops only in its iterative variant.</td><td>The Spiral model runs multiple risk-driven cycles until the product is complete.</td></tr>
+            <tr><td>Risk analysis</td><td>Waterfall treats risk analysis as implicit and often discovers problems late.</td><td>The Spiral model makes risk analysis explicit in every cycle.</td></tr>
+            <tr><td>Cost</td><td>Waterfall is lower in cost for simple projects with stable requirements.</td><td>The Spiral model is higher in cost because it uses multiple cycles and prototypes.</td></tr>
+            <tr><td>Prototyping</td><td>Prototyping is not built into classical Waterfall.</td><td>The Spiral model uses prototypes whenever they help resolve risks.</td></tr>
+            <tr><td>Best for</td><td>Waterfall is best for small projects with stable requirements.</td><td>The Spiral model is best for large, complex, high-risk projects.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Agile vs V-Model</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Agile</th><th>V-Model</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Flexibility</td><td>Agile is very flexible and welcomes changing requirements throughout the project.</td><td>The V-Model has low flexibility because requirements and test plans are fixed early.</td></tr>
+            <tr><td>Documentation</td><td>Agile keeps documentation minimal and prioritises working software.</td><td>The V-Model requires extensive test and design documentation for each phase.</td></tr>
+            <tr><td>Testing</td><td>Testing runs continuously throughout every sprint.</td><td>Testing is planned in pairs that align with each development phase.</td></tr>
+            <tr><td>Customer role</td><td>The customer collaborates with the team daily or weekly.</td><td>The customer is involved mainly during requirements definition and final acceptance.</td></tr>
+            <tr><td>Best for</td><td>Agile is best for dynamic requirements and startup-style products.</td><td>The V-Model is best for regulated and safety-critical systems.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>V-Model vs Waterfall</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>V-Model</th><th>Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Testing</td><td>The V-Model plans testing from the start and pairs each development phase with a matching test phase.</td><td>Classical Waterfall concentrates testing mainly after the coding phase is complete.</td></tr>
+            <tr><td>Traceability</td><td>The V-Model provides strong traceability from each requirement to its corresponding tests.</td><td>Waterfall provides weaker traceability unless the team maintains it manually.</td></tr>
+            <tr><td>Structure</td><td>The V-Model uses the same sequential development phases as Waterfall but adds a parallel testing arm.</td><td>Waterfall follows linear phases without formally paired test stages.</td></tr>
+            <tr><td>Verification/Validation</td><td>The V-Model makes an explicit distinction between verification and validation.</td><td>Waterfall does not formally distinguish verification from validation.</td></tr>
+            <tr><td>Use case</td><td>The V-Model is used for medical devices, aerospace, and banking systems that need strict compliance.</td><td>Waterfall is used for general projects with fixed requirements and conventional documentation needs.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Pairwise comparisons</div>
+          <p><strong>Q:</strong> Differentiate: (a) Waterfall vs Incremental, (b) Waterfall vs Spiral, (c) Agile vs V-Model, (d) V-Model vs Waterfall.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Use the four comparison tables above and write at least four or five complete comparison points for each pair.</li>
+            <li>Explain key contrasts such as delivery timing, risk, flexibility, testing approach, and the customer’s role in the project.</li>
+            <li>Always state when each model is preferred, not only how the two models differ.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> Which model is most suitable for high-risk, large projects? — <strong>(C) Spiral Model</strong>.</p>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-16-comparison.html">&larr; 2.16 Comparison of Life Cycle Models</a>
+        <a class="btn-back chapter-nav-next" href="02-18-risk-management.html">2.18 Risk Management in SDLC &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>SDLC</strong> is a phased framework from planning to maintenance. An SDLC <em>model</em> (Waterfall, Spiral, Agile, and others) defines how those phases are ordered or repeated.</li>
+          <li><strong>Classical Waterfall</strong> is strictly sequential and suits stable requirements, but it delivers working software late and resists change.</li>
+          <li><strong>Iterative Waterfall</strong> keeps the same phase order but allows controlled feedback when later phases discover errors in earlier work.</li>
+          <li><strong>Prototype model / Software Prototyping</strong> uses early working models; throwaway prototyping clarifies requirements, while evolutionary prototyping grows the prototype into the final product.</li>
+          <li><strong>Spiral model</strong> (Boehm, 1986) is risk-driven, uses four quadrants per cycle, and fits large, high-risk projects.</li>
+          <li><strong>Evolutionary development</strong> builds successive versions so requirements and design co-evolve; examples include evolutionary prototyping, Spiral, Incremental, and Agile approaches.</li>
+          <li><strong>Iterative Enhancement</strong> plans architecture upfront and adds or refines modules in each iteration on that stable base.</li>
+          <li><strong>Incremental model</strong> delivers the system in chunks, each developed through a mini-Waterfall, so users receive partial working software early.</li>
+          <li><strong>RAD</strong> emphasises time-boxing, user workshops, and CASE tools for fast delivery when users are highly engaged.</li>
+          <li><strong>Agile</strong> follows the Manifesto values and short sprints. <strong>XP</strong> extends Agile with pair programming, test-driven development, and continuous integration.</li>
+          <li><strong>V-Model</strong> pairs each development phase with a test phase and distinguishes verification from validation; it suits regulated and safety-critical systems.</li>
+          <li><strong>IS and DB life cycles</strong> are domain-specific extensions of the generic SDLC for information systems and database applications.</li>
+          <li><strong>Model selection</strong> depends on project size, requirements stability, risk, customer availability, schedule pressure, and documentation needs.</li>
+          <li><strong>Risk management</strong> runs through identify, analyse, prioritise, mitigate, and monitor steps; the Spiral model embeds this explicitly in every cycle.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-18-risk-management.html">&larr; 2.18 Risk Management in SDLC</a>
+        <span class="btn-back chapter-nav-next is-disabled">Next &rarr;</span>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

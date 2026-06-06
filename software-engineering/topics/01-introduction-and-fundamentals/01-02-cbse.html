@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.2 Computer-based System Engineering</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.2 Computer-based System Engineering</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-2">
+        <p>
+          <strong>Computer-based System Engineering (CBSE)</strong> is an engineering discipline concerned with
+          designing and building <strong>complete systems</strong> in which software plays a central role but is
+          not the whole picture. A computer-based system includes <strong>hardware, software, people, data,
+          procedures, and documentation</strong> working together to achieve an organisational or user goal.
+        </p>
+        <p>
+          Software Engineering is a <em>part</em> of CBSE. When you engineer a hospital information system, an
+          air-traffic control system, or a university portal, you must consider networks, servers, databases,
+          user interfaces, staff training, operational procedures, and legal compliance — not just source code.
+        </p>
+
+        <h3>Dual role of software</h3>
+        <p>Software plays two distinct roles in industry:</p>
+        <h4>1. Software as a product</h4>
+        <ul>
+          <li>Software delivers computing potential across networks of hardware by running instructions on physical machines.</li>
+          <li>Software enables hardware to provide its expected functionality, because hardware alone cannot perform useful tasks without programs.</li>
+          <li>Software acts as an <strong>information transformer</strong> because it produces, manages, acquires, modifies, displays, or transmits information for users and organisations.</li>
+        </ul>
+        <h4>2. Software as a vehicle for delivering a product</h4>
+        <ul>
+          <li>Software provides the core functionality of many systems, such as a payroll system that calculates and records employee salaries.</li>
+          <li>Software controls other software, as an operating system manages and runs application programs on a computer.</li>
+          <li>Software helps build other software through tools such as compilers, IDEs, and testing frameworks that support the development process.</li>
+        </ul>
+
+        <h3>Example — University course portal</h3>
+        <p>
+          A course notes website is a computer-based system. Its <strong>software</strong> includes the HTML, CSS,
+          JavaScript, and hosting platform that serve the pages. <strong>Hardware</strong> consists of servers and
+          the devices students use to access the site. <strong>People</strong> include students who read the notes
+          and the author who maintains them. <strong>Data</strong> is the lecture content stored and displayed on
+          the site. <strong>Procedures</strong> describe how users navigate topics and follow the syllabus.
+          <strong>Documentation</strong> maps each page to syllabus items. CBSE ensures all these elements are
+          designed and integrated coherently.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — CBSE vs Software Engineering</div>
+          <p><strong>Q:</strong> What is Computer-based System Engineering? How does it relate to Software Engineering?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>CBSE is the engineering of complete systems that combine hardware, software, people, data, procedures, and documentation.</li>
+            <li>Software Engineering is the disciplined development of the software component within such computer-based systems.</li>
+            <li>Software plays a dual role because it can be a product itself and also a vehicle or tool for delivering other products.</li>
+            <li>The syllabus topic "Introduction to Computer-based System Engineering" covers this broader systems view beyond software alone.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-01-intro-to-se.html">&larr; 1.1 Introduction to Software Engineering</a>
+        <a class="btn-back chapter-nav-next" href="01-03-software-classification.html">1.3 What is Software / Classification &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

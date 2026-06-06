@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.16 Comparison of Life Cycle Models</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.16 Comparison of Life Cycle Models</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-16">
+        <p>
+          No single SDLC model fits all projects. Examiners often ask for a <strong>master comparison</strong>
+          and <strong>selection criteria</strong>. Use the table below as a revision anchor.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-comparison-caption">
+          <img src="../../../assets/images/se-topic-02/sdlc-models-comparison.webp"
+               alt="Overview of SDLC models — Waterfall, Iterative, V-Model, Spiral, Incremental, RAD, Agile, and related approaches"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-comparison-caption">SDLC models overview — from sequential (Waterfall) to highly iterative (Agile) (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Master comparison table</h3>
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Nature</th><th>Requirements</th><th>Risk handling</th><th>Delivery</th><th>Best suited for</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Waterfall</td><td>It follows a strictly sequential process.</td><td>Requirements are fixed upfront.</td><td>Risks are often discovered late.</td><td>The customer receives the product at the end of the project.</td><td>It suits stable specifications and small or simple projects.</td></tr>
+            <tr><td>Iterative Waterfall</td><td>It is sequential but allows controlled feedback between phases.</td><td>Requirements are mostly fixed, with limited revision.</td><td>Some risk is reduced through backtracking when errors are found.</td><td>Delivery still occurs mainly at the end of the project.</td><td>It suits projects with moderate requirement stability.</td></tr>
+            <tr><td>Prototype</td><td>It is iterative and centred on building prototypes.</td><td>Requirements are unclear at first and are clarified through prototyping.</td><td>Early user feedback reduces requirements risk.</td><td>A prototype is delivered first, then the final product.</td><td>It suits novel user interfaces and vague initial requirements.</td></tr>
+            <tr><td>Spiral</td><td>It is iterative and explicitly risk-driven.</td><td>Requirements evolve across cycles.</td><td>Risks are analysed and addressed in every cycle.</td><td>Deliverables are produced at the end of each spiral cycle.</td><td>It suits large, complex, high-risk projects.</td></tr>
+            <tr><td>Incremental</td><td>It uses multiple mini-Waterfall cycles.</td><td>Requirements are partitioned into increments.</td><td>Partial early delivery reduces overall delivery risk.</td><td>Each increment is delivered separately to the customer.</td><td>It suits projects with prioritised features that can be released in parts.</td></tr>
+            <tr><td>RAD</td><td>It is time-boxed and tool-driven.</td><td>Requirements evolve during rapid development.</td><td>User workshops help surface risks early.</td><td>Working software is delivered in fast iterations.</td><td>It suits small or medium projects with tight schedules.</td></tr>
+            <tr><td>Agile/XP</td><td>It uses short iterative sprints.</td><td>Requirements are highly changeable.</td><td>Continuous customer feedback manages risk.</td><td>Working software is delivered every sprint.</td><td>It suits dynamic requirements and fast-changing markets.</td></tr>
+            <tr><td>V-Model</td><td>It is sequential with paired test phases.</td><td>Requirements are fixed upfront.</td><td>Test planning begins early, which improves risk control.</td><td>Delivery occurs at the end of the project.</td><td>It suits safety-critical and regulated systems.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Selection criteria (exam checklist)</h3>
+        <ul>
+          <li><strong>Project size.</strong> Small projects often suit RAD or Agile, whereas large projects may need the Spiral model, Incremental delivery, or a structured Waterfall or V-Model approach.</li>
+          <li><strong>Requirements stability.</strong> Stable requirements favour Waterfall or the V-Model, while volatile requirements favour Agile or the Prototype model.</li>
+          <li><strong>Risk level.</strong> High-risk projects benefit from the Spiral model, whereas lower-risk projects can use Waterfall or Incremental approaches.</li>
+          <li><strong>Customer availability.</strong> When customers can participate frequently, Agile or RAD is appropriate; when they cannot, Waterfall with a detailed SRS is more practical.</li>
+          <li><strong>Time-to-market.</strong> Urgent delivery favours RAD, Agile, or Incremental models, while a flexible schedule allows Waterfall or the V-Model.</li>
+          <li><strong>Regulatory and documentation needs.</strong> Strict audit or safety requirements favour the V-Model or Waterfall, whereas minimal documentation pressure allows a lighter Agile process.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Model comparison and selection</div>
+          <p><strong>Q:</strong> Compare major SDLC models in a table. What criteria should a project manager use to select a model?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Draw the master comparison table and explain each model’s nature, requirements handling, risk handling, delivery pattern, and best use in full sentences.</li>
+            <li>Explain selection criteria such as project size, requirements stability, risk level, customer involvement, schedule pressure, and documentation needs.</li>
+            <li>Support the answer with scenario examples, such as a hospital system (V-Model), a startup app (Agile), or an ERP module delivered in increments.</li>
+            <li>Conclude that no single model is best for every project because the right choice depends on context.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-15-db-life-cycle.html">&larr; 2.15 Database Application System Life Cycle</a>
+        <a class="btn-back chapter-nav-next" href="02-17-pairwise-comparisons.html">2.17 Pairwise Model Comparisons &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>SE</strong> = systematic design, development, testing, maintenance of software.</li>
+          <li><strong>CBSE</strong> = software + hardware + people + data + procedures in complete systems.</li>
+          <li><strong>Software</strong> = program + documentation; classified by application and license.</li>
+          <li><strong>Components:</strong> program, documents, operating manuals.</li>
+          <li><strong>Characteristics:</strong> not manufactured, no wear, custom-built, intangible.</li>
+          <li><strong>Crisis:</strong> 1960s–70s cost/time/quality failures → birth of SE discipline.</li>
+          <li><strong>Need for SE:</strong> complexity, cost, time, quality, maintainability.</li>
+          <li><strong>Process activities:</strong> feasibility → requirements → design → coding → testing → deployment → maintenance.</li>
+          <li><strong>vs conventional eng:</strong> intangible, easy to change, different cost/lifecycle curves.</li>
+          <li><strong>Quality:</strong> attributes list + fitness of purpose is insufficient + QMS evolution.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-13-complexity-risk.html">&larr; 1.13 Managing Complexity & Risk</a>
+        <span class="btn-back chapter-nav-next is-disabled">Next &rarr;</span>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

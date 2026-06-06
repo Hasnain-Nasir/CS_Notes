@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Computer Organization and Assembly Language — Course Notes</title>
+  <link rel="stylesheet" href="../assets/css/notes.css">
+  <script src="../assets/js/site-nav.js" defer></script>
+  <script src="../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="1" data-nav-book="coa/index.html">
+  <div class="index-hero">
+    <header class="site-header site-header--book">
+      <div class="site-header-text">
+        <h1>Computer Organization and Assembly Language</h1>
+        <p class="topic-meta">3 credit hours (Lectures: 2 / Labs: 1)</p>
+      </div>
+    </header>
+
+    <h2>Topic Notes</h2>
+    <p>Detailed topic notes are in preparation. The syllabus roadmap below shows the full course outline.</p>
+
+    <div class="topic-cards">
+      <div class="topic-card">
+        <span class="badge soon">Coming soon</span>
+        <h3>All topic notes</h3>
+        <p>
+          Microprocessor bus structure, memory organization, registers and flags, instruction sets, programme control,
+          subroutines and stack, interrupts, high-level language interfacing, and assembly language programming —
+          publishing soon.
+        </p>
+      </div>
+    </div>
+
+    <section class="roadmap">
+      <h2>Syllabus Roadmap</h2>
+      <p class="topic-meta">Full course outline from the official syllabus.</p>
+      <ul>
+        <li class="pending">Microprocessor bus structure — addressing, data, and control</li>
+        <li class="pending">Memory organization and structure (segmented and linear models)</li>
+        <li class="pending">Introduction to registers and flags</li>
+        <li class="pending">Data movement, arithmetic, and logic</li>
+        <li class="pending">Programme control</li>
+        <li class="pending">Subroutines</li>
+        <li class="pending">Stack and its operation</li>
+        <li class="pending">Peripheral control and interrupts</li>
+        <li class="pending">Interfacing with high-level languages</li>
+        <li class="pending">Real-time applications</li>
+        <li class="pending">Objectives and perspectives of assembly language</li>
+        <li class="pending">Addressing modes</li>
+        <li class="pending">Introduction to the assembler and debugger</li>
+        <li class="pending">Manipulate and translate machine and assembly code</li>
+        <li class="pending">Describe actions inside the processing chip</li>
+        <li class="pending">Discuss operations performed by an instruction set</li>
+        <li class="pending">Write a fully documented program</li>
+        <li class="pending">Using an assembler of choice</li>
+      </ul>
+    </section>
+
+    <section class="references">
+      <h2>Reference Material</h2>
+      <ul>
+        <li><em>Computer Organization &amp; Architecture</em> (7th ed., 2006) — William Stallings, Prentice Hall</li>
+        <li><em>Assembly Language for Intel-based Computers</em> (5th ed., 2007) — Kip R. Irvine, Prentice Hall</li>
+        <li><em>Computer Organization and Design: The Hardware/Software Interface</em> (4th ed., 2008) — David A. Patterson &amp; John L. Hennessy, Elsevier</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

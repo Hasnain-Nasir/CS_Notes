@@ -1,8 +1,13 @@
 (function () {
   var BOOKS = [
-    { id: "home", label: "Home", path: "index.html" },
-    { id: "infosec", label: "Information Security", path: "info-sec/index.html" },
-    { id: "se", label: "Software Engineering", path: "software-engineering/index.html" }
+    { id: "home", label: "Home", title: "Home", path: "index.html" },
+    { id: "infosec", label: "Info Sec", title: "Information Security", path: "info-sec/index.html" },
+    { id: "se", label: "Software Eng", title: "Software Engineering", path: "software-engineering/index.html" },
+    { id: "coa", label: "Org and Assembly Lang", title: "Computer Organization and Assembly Language", path: "coa/index.html" },
+    { id: "la", label: "Linear Algebra", title: "Linear Algebra", path: "linear-algebra/index.html" },
+    { id: "tbw", label: "Tech and Business Writing", title: "Technical and Business Writing", path: "technical-writing/index.html" },
+    { id: "civics", label: "Civics", title: "Civics and Community Engagement", path: "civics/index.html" },
+    { id: "mgmt", label: "Intro to Management", title: "Introduction to Management", path: "management/index.html" }
   ];
 
   var FOOTER_INFOSEC = [
@@ -23,10 +28,11 @@
 
   function getDepth() {
     var d = document.body.getAttribute("data-nav-depth");
-    return d === "1" || d === "2" ? parseInt(d, 10) : 0;
+    return d === "1" || d === "2" || d === "3" ? parseInt(d, 10) : 0;
   }
 
   function rootPrefix(depth) {
+    if (depth === 3) return "../../../";
     if (depth === 2) return "../../";
     if (depth === 1) return "../";
     return "";
@@ -71,6 +77,7 @@
       var a = document.createElement("a");
       a.href = prefix + book.path;
       a.textContent = book.label;
+      if (book.title) a.setAttribute("title", book.title);
       if (book.id === "home" && depth === 0) a.setAttribute("aria-current", "page");
       nav.appendChild(a);
     });

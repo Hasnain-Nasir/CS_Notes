@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.6 Evolutionary Development Models</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.6 Evolutionary Development Models</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-6">
+        <p>
+          <strong>Evolutionary development models</strong> treat software as something that
+          <strong>grows and changes over time</strong> rather than being fully specified and built in a single pass.
+          The system is developed through a sequence of <strong>versions</strong> (increments), where each version
+          refines, extends, or corrects the previous one. Requirements, design, and implementation
+          <strong>co-evolve</strong> as stakeholders learn from each release — in contrast to Waterfall, which tries to
+          freeze requirements before construction.
+        </p>
+        <p>
+          “Evolutionary” is a <strong>family of approaches</strong>, not one diagram with a single name. Several named
+          SDLC models — evolutionary prototyping (§2.4), Spiral (§2.5), Incremental (§2.8), and Agile (§2.11) — are all
+          evolutionary in spirit. Exams often ask for the <strong>general concept</strong> first, then examples.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-evolutionary-caption">
+          <img src="../../../assets/images/se-topic-02/evolutionary-sdlc.webp"
+               alt="Evolution of SDLC methodologies — from Waterfall through iterative, evolutionary, and Agile approaches"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-evolutionary-caption">Evolution of SDLC methodologies — evolutionary approaches emphasise successive refinement and adaptation (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Definition and core idea</h3>
+        <p>
+          In evolutionary development, the team delivers an <strong>initial version quickly</strong> with the most
+          important or best-understood functionality. Users and developers learn from that version; the next version
+          adds features, improves quality, or fixes misunderstandings. The final product is reached by
+          <strong>successive refinement</strong>, not by executing one frozen plan from day one.
+        </p>
+        <p>
+          <strong>Key phrase for exams:</strong> “The system evolves from a partial, imperfect first version into a
+          complete product through multiple iterations.”
+        </p>
+
+        <h3>Key characteristics of evolutionary development</h3>
+        <ul>
+          <li>
+            <strong>Partial early delivery</strong> — users receive usable software (or a strong prototype) long before
+            the full feature set exists; feedback drives later versions.
+          </li>
+          <li>
+            <strong>Co-evolving requirements and design</strong> — the SRS is not fixed at the start; it is updated after
+            each release based on experience.
+          </li>
+          <li>
+            <strong>Adaptation over prediction</strong> — the process embraces change in business needs, technology, and
+            understanding rather than treating change as failure of planning.
+          </li>
+          <li>
+            <strong>Successive versions</strong> — version 1.0, 1.1, 2.0, or sprint releases each build on the previous codebase or design.</li>
+          <li>
+            <strong>User-centred learning</strong> — especially when UI or workflow is critical; same motivation as prototyping, but evolutionary models may deliver production code each cycle.</li>
+          <li>
+            <strong>Architecture must be managed</strong> — without refactoring and standards, repeated extension leads to unmaintainable “big ball of mud” systems.</li>
+        </ul>
+
+        <h3>Evolutionary vs other development styles</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall (classical)</th><th>Evolutionary development</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Requirements</td><td>In classical Waterfall, requirements are treated as fixed early in the project.</td><td>In evolutionary development, requirements emerge and change across successive versions.</td></tr>
+            <tr><td>Planning horizon</td><td>Waterfall plans the whole project in detail at the start.</td><td>Evolutionary development plans the next version in detail while keeping only a high-level roadmap for the whole effort.</td></tr>
+            <tr><td>First user-visible result</td><td>Waterfall delivers a user-visible result late in the lifecycle.</td><td>Evolutionary development delivers a core product or release early.</td></tr>
+            <tr><td>Response to change</td><td>Waterfall tends to resist change because changes are costly after sign-off.</td><td>Evolutionary development expects change and plans for it in each new version.</td></tr>
+            <tr><td>Risk of wrong product</td><td>Waterfall carries a high risk of building the wrong product if requirements were wrong from the start.</td><td>Evolutionary development lowers that risk because mistakes can be corrected in later versions.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Major examples of evolutionary models (know each for exams)</h3>
+
+        <h4>1. Evolutionary prototyping (Prototype Model — §2.4)</h4>
+        <p>
+          The <strong>prototype becomes the product</strong>. Version 1 is a minimal prototype; later versions add modules
+          and refactor. Same codebase grows until it is the delivered system. Best when requirements are unclear but
+          something usable must appear quickly.
+        </p>
+        <ul>
+          <li><strong>Strength.</strong> This approach gives fast feedback and shows continuous visible progress to stakeholders.</li>
+          <li><strong>Weakness.</strong> Technical debt can grow quickly if code quality is ignored between versions.</li>
+        </ul>
+
+        <h4>2. Spiral model (§2.5)</h4>
+        <p>
+          Each spiral cycle delivers a <strong>more complete evolutionary increment</strong> while emphasising
+          <strong>risk reduction</strong> before engineering. Evolution happens around the spiral; risk analysis distinguishes
+          Spiral from simple “build version 1, then version 2” without structure.
+        </p>
+
+        <h4>3. Incremental process model (§2.8)</h4>
+        <p>
+          The system is split into <strong>increments</strong> (chunks of functionality). Each increment is often developed
+          like a mini-Waterfall and delivered to the customer. Overall architecture is usually planned early; evolution
+          is in <em>features delivered</em>, not in discovering the whole architecture from scratch.
+        </p>
+        <ul>
+          <li><strong>Contrast.</strong> The Incremental model uses planned partitions of functionality, whereas pure evolutionary prototyping may let architecture emerge over time.</li>
+        </ul>
+
+        <h4>4. Agile software development (§2.11)</h4>
+        <p>
+          Short <strong>sprints</strong> deliver working software every few weeks. Requirements live in a backlog that
+          changes every sprint. Agile is the most widely used evolutionary approach in industry today (Scrum, Kanban, etc.).
+        </p>
+
+        <h3>Evolutionary development vs Iterative Enhancement (§2.7)</h3>
+        <p>
+          Exams often contrast these two — read §2.7 in full, but summarise here:
+        </p>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Evolutionary development</th><th>Iterative Enhancement</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Overall architecture</td><td>In evolutionary development, the architecture may emerge or change during early versions.</td><td>In iterative enhancement, the architecture is usually defined upfront and kept stable.</td></tr>
+            <tr><td>Requirements</td><td>Evolutionary requirements are highly fluid and co-evolve with the product.</td><td>Iterative enhancement keeps requirements more stable while each iteration adds planned modules.</td></tr>
+            <tr><td>Goal of iteration</td><td>Each evolutionary iteration aims to learn from users and adapt the product.</td><td>Each iterative-enhancement iteration aims to implement the next planned part of a known structure.</td></tr>
+            <tr><td>Example metaphor</td><td>Evolutionary development is like growing an organism over time.</td><td>Iterative enhancement is like filling in the rooms of a house that was already designed.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Process view — how an evolutionary project unfolds</h3>
+        <ol>
+          <li><strong>Vision and priorities.</strong> The team defines a thin first release (a minimum viable product) that includes only must-have features.</li>
+          <li><strong>Build version 1.</strong> The team accepts some imperfection but documents known gaps and technical debt items openly.</li>
+          <li><strong>Deploy and gather feedback.</strong> Real users reveal missing business rules, performance problems, and new requirements.</li>
+          <li><strong>Reprioritise backlog.</strong> The product owner chooses the next features and fixes for version 2 based on feedback.</li>
+          <li><strong>Refactor and extend.</strong> The team improves architecture where needed, adds modules, and runs regression tests before the next release.</li>
+          <li><strong>Repeat</strong> the cycle until acceptance criteria for the full product are met or the product is retired.</li>
+        </ol>
+
+        <h3>Advantages of evolutionary development</h3>
+        <ul>
+          <li>
+            <strong>Handles changing requirements</strong> — business, law, and competition change; evolutionary models absorb change without treating it as project failure.
+          </li>
+          <li>
+            <strong>Early business value</strong> — partial system can generate revenue, support pilots, or satisfy regulators incrementally.
+          </li>
+          <li>
+            <strong>Continuous stakeholder engagement</strong> — users stay involved; reduces gap between expectation and delivery.</li>
+          <li>
+            <strong>Lower risk of total wrong product</strong> — mistakes corrected in the next version rather than after a multi-year monolith fails acceptance.</li>
+          <li>
+            <strong>Morale and transparency</strong> — visible progress motivates team and sponsors.</li>
+        </ul>
+
+        <h3>Disadvantages and risks</h3>
+        <ul>
+          <li>
+            <strong>Scope creep</strong> — without disciplined backlog control, “just one more feature” never ends; budgets explode.
+          </li>
+          <li>
+            <strong>Architecture erosion</strong> — quick fixes in version 1 and 2 make version 3 slow and buggy unless refactoring is scheduled.</li>
+          <li>
+            <strong>Hard upfront estimation</strong> — total cost and end date are uncertain; fixed-price contracts are difficult.</li>
+          <li>
+            <strong>Documentation lag</strong> — teams may skip updating specs; maintenance and audit suffer.</li>
+          <li>
+            <strong>Process discipline required</strong> — evolution is not chaos; needs product owner, priorities, and quality gates.</li>
+          <li>
+            <strong>Integration complexity</strong> — each new version must integrate with existing modules and data; regression testing load grows.</li>
+        </ul>
+
+        <h3>When to use evolutionary development</h3>
+        <ul>
+          <li>Requirements are <strong>incomplete, volatile, or market-driven</strong> (e-commerce, social apps, internal tools).</li>
+          <li><strong>Competitive pressure</strong> to ship early and improve often.</li>
+          <li>Stakeholders can participate in regular reviews or sprint demos.</li>
+          <li>Domain allows <strong>incremental rollout</strong> (beta users, pilot departments, feature flags).</li>
+        </ul>
+
+        <h3>When NOT to use (or use with care)</h3>
+        <ul>
+          <li>Requirements are fully fixed by law or contract and will not change (strict Waterfall/V-Model may be simpler to audit).</li>
+          <li>System must be <strong>100% complete and certified</strong> before any deployment (some safety-critical systems use evolution internally but release only after full validation).</li>
+          <li>Team or client cannot commit to ongoing involvement. Evolutionary without feedback becomes uncontrolled hacking.</li>
+        </ul>
+
+        <h3>Real-world examples</h3>
+        <p>
+          <strong>Example 1 — E-commerce website:</strong> Version 1: catalogue and cart. Version 2: payment gateway.
+          Version 3: reviews and recommendations. Requirements evolved after each sales season; Agile sprints are a common implementation.
+        </p>
+        <p>
+          <strong>Example 2 — Evolutionary prototyping:</strong> A GIS mapping tool for a city council starts as a basic map viewer;
+          planners request layer overlays and export; the same codebase grows over two years into the production system.
+        </p>
+        <p>
+          <strong>Example 3 — Spiral + evolution:</strong> A defence contractor delivers increasing capability each spiral cycle while
+          running formal risk analysis — evolution with heavy process.
+        </p>
+
+        <h3>Summary table — evolutionary models at a glance</h3>
+        <table>
+          <thead>
+            <tr><th>Model</th><th>What evolves each iteration?</th><th>Distinctive feature</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Evolutionary prototyping</td><td>Each iteration extends the same prototype codebase.</td><td>Its distinctive feature is that the prototype gradually becomes the final product.</td></tr>
+            <tr><td>Spiral</td><td>Each cycle increases product completeness and process maturity.</td><td>Its distinctive feature is explicit risk analysis in every cycle.</td></tr>
+            <tr><td>Incremental</td><td>Each iteration delivers another chunk of functionality.</td><td>Its distinctive feature is a mini-Waterfall for every increment.</td></tr>
+            <tr><td>Agile</td><td>Each sprint evolves backlog priorities and working software.</td><td>Its distinctive feature is short sprints guided by Agile Manifesto values.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Evolutionary Development Models</div>
+          <p><strong>Q:</strong> What are evolutionary development models in software engineering? Explain their characteristics and how they differ from the Classical Waterfall model. Describe at least three examples of evolutionary models and compare evolutionary development with iterative enhancement. Discuss advantages, disadvantages, and when such models are appropriate.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define evolutionary development as building software through successive versions in which each version refines the last and requirements co-evolve with the product.</li>
+            <li>Compare with Waterfall using a table that contrasts fixed versus emerging requirements, late versus early delivery, and resistance to change versus expected change.</li>
+            <li>Describe key characteristics such as partial early delivery, adaptation, continuous user feedback, and the need for disciplined refactoring.</li>
+            <li>Give at least three examples (evolutionary prototyping, Spiral, Incremental, Agile) and explain what evolves in each.</li>
+            <li>Contrast with Iterative Enhancement, where architecture is planned upfront rather than emerging over time.</li>
+            <li>Outline the process from minimum viable product through feedback, reprioritisation, refactoring, and repeat cycles.</li>
+            <li>Discuss advantages, disadvantages, when to use or avoid the approach, and support with real examples.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> Evolutionary development is most appropriate when — <strong>(C) Requirements are likely to change during the project</strong>.</p>
+          <p><strong>MCQ:</strong> Which is NOT an evolutionary approach? — <strong>(A) Classical Waterfall with no iteration</strong>.</p>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-05-spiral.html">&larr; 2.5 Spiral Model</a>
+        <a class="btn-back chapter-nav-next" href="02-07-iterative-enhancement.html">2.7 Iterative Enhancement Models &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

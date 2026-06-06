@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.6 Software Crisis</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.6 Software Crisis</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-6">
+        <p>
+          The <strong>software crisis</strong> refers to the set of serious problems faced by the software
+          industry during the <strong>1960s and 1970s</strong> (and still partially today). Old ad-hoc methods
+          could not keep up with rapidly growing demand, complexity, and expectations. Projects suffered
+          <strong>cost overruns, missed deadlines, poor quality, and failure to meet user requirements</strong>.
+        </p>
+        <p>
+          Edsger Dijkstra famously captured the scale of the problem:
+        </p>
+        <blockquote>
+          "As long as there were no machines, programming was no problem at all; when we had a few weak
+          computers, programming became a mild problem, and now we have gigantic computers, programming has
+          become an equally gigantic problem."
+          — <em>Edsger Dijkstra, The Humble Programmer (EWD340)</em>
+        </blockquote>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-crisis-caption">
+          <img src="../../../assets/images/se-topic-01/software-crisis.png"
+               alt="Software crisis — budget, quality, efficiency, management, and delivery problems when demand outpaces methods"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-crisis-caption">Software Crisis — using the same workforce, methods, and tools while demand and complexity grow.</figcaption>
+        </figure>
+
+        <h3>Symptoms and causes</h3>
+        <ul>
+          <li>Many projects ran overtime, and the average project overshot its schedule by about half.</li>
+          <li>Software was often delivered late, over budget, or not delivered at all.</li>
+          <li>Delivered software had low quality because it contained many bugs and defects at release.</li>
+          <li>The cost of owning and maintaining software became as expensive as developing it in the first place.</li>
+          <li>Software frequently failed to meet the actual needs and requirements of users.</li>
+          <li>As systems grew more complex, they became difficult to alter, debug, and enhance.</li>
+        </ul>
+
+        <h3>Major problems in software development</h3>
+        <ul>
+          <li><strong>Inadequate requirements gathering:</strong> Requirements were often ambiguous or incomplete, and communication with stakeholders was poor.</li>
+          <li><strong>Poor project management:</strong> Projects suffered from weak planning, poor monitoring, inadequate risk assessment, and unsuitable technology choices.</li>
+          <li><strong>Insufficient time and budget:</strong> Deadlines were unrealistic and resources were not allocated properly for the work required.</li>
+          <li><strong>Lack of skilled personnel:</strong> Teams often lacked adequate expertise, and high staff turnover disrupted continuity.</li>
+          <li><strong>Resistance to change:</strong> Organisations were reluctant to adopt new processes even as technology changed rapidly.</li>
+        </ul>
+
+        <h3>Contributing factors</h3>
+        <ul>
+          <li>Poor project management and a lack of adequate training in software engineering practices made large projects harder to control.</li>
+          <li>Teams often included less skilled members, and productivity did not improve enough to match growing demand.</li>
+          <li>There was a lack of standardisation, proper tools, and established methodologies in the early decades of computing.</li>
+        </ul>
+
+        <h3>Exploratory / build-and-fix style (what caused the crisis)</h3>
+        <p>
+          Before formal SE, many projects used an <strong>exploratory (build-and-fix)</strong> style: brief
+          customer briefing → immediate coding → test and fix bugs in a loop until "good enough." No formal
+          requirements analysis or process. This works only for tiny programs; for large systems it causes
+          exponential growth in cost and unmaintainable code.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-exploratory-caption">
+          <img src="../../../assets/images/se-topic-01/exploratory-build-fix.png"
+               alt="Exploratory build-and-fix cycle: briefing, coding, testing, fixing bugs, repeat until done"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-exploratory-caption">Exploratory (build-and-fix) development — no systematic process; suitable only for small programs.</figcaption>
+        </figure>
+
+        <h3>Solution direction</h3>
+        <p>
+          There is no single magic fix. The primary response was the emergence of <strong>Software Engineering</strong>
+          as a systematic, disciplined, quantifiable approach — plus process models, standards, and better project
+          management. Organisations were urged to control budgets, ensure quality, deliver on time, employ skilled
+          people, and meet user requirements.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Crisis</div>
+          <p><strong>Q:</strong> What is the software crisis? Discuss its causes and how Software Engineering addresses it.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>The software crisis was the failure of ad-hoc methods in the 1960s and 1970s, leading to cost overruns, missed deadlines, poor quality, and failed deliveries.</li>
+            <li>Main causes included growing complexity, poor requirements gathering, weak project management, unskilled teams, and a build-and-fix development culture.</li>
+            <li>Including the Dijkstra quote can strengthen the answer and may earn extra marks in descriptive questions.</li>
+            <li>The solution was the rise of Software Engineering as a systematic discipline using defined processes, testing, standards, and a skilled workforce.</li>
+          </ul>
+          <p><strong>MCQ (UGC-NET 2011):</strong> Many causes of the software crisis can be traced to mythology based on — <strong>(D) All of the Above</strong> (Management, Customer, and Practitioner Myths).</p>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-05-characteristics.html">&larr; 1.5 Software Characteristics</a>
+        <a class="btn-back chapter-nav-next" href="01-07-need-for-se.html">1.7 Need of Software Engineering &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

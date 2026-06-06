@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.2 Classical Waterfall Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.2 Classical Waterfall Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-2">
+        <p>
+          The <strong>Classical Waterfall Model</strong> is the oldest and most widely taught SDLC model. It treats
+          software development as a <strong>strictly sequential</strong> process: each phase must be fully completed,
+          reviewed, and signed off before the next phase begins. There is <strong>no overlap</strong> between phases
+          and <strong>no backward movement</strong> — if a mistake is found later, the model does not formally allow
+          returning to fix it without breaking the prescribed flow.
+        </p>
+        <p>
+          The model is associated with <strong>Winston Royce</strong>, who published a paper in <strong>1970</strong>
+          describing a large-system development approach. A common exam trap: students say Royce “invented” pure
+          Waterfall as the ideal method. In reality, Royce illustrated the sequential diagram mainly to
+          <strong>critique</strong> it — he argued that large projects need iteration, prototyping, and risk
+          handling. The <em>classical</em> form (no feedback) became popular in industry and textbooks anyway because
+          of its simplicity and ease of project planning.
+        </p>
+
+        <h3>Definition and core idea</h3>
+        <p>
+          In the Classical Waterfall Model, development flows in one direction like water falling over steps:
+          from <strong>requirements</strong> down to <strong>maintenance</strong>. The underlying assumption is that
+          every requirement can be captured completely at the start, that design can be frozen before coding, and
+          that testing at the end will expose any remaining defects. This mirrors traditional engineering (e.g., bridge
+          design → construction → inspection) and works only when the problem domain is stable and well understood.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-waterfall-caption">
+          <img src="../../../assets/images/se-topic-02/waterfall.webp"
+               alt="Classical Waterfall model — sequential phases from requirements to maintenance"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-waterfall-caption">Classical Waterfall — linear, sequential phases with no feedback loops (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>How to read the Waterfall diagram</h3>
+        <p>
+          The diagram shows boxes or stages arranged vertically or horizontally. Arrows point <strong>downward only</strong>
+          (or left-to-right). Each box represents a phase with defined inputs and outputs. In exams, you should be able
+          to <strong>draw and label</strong> all phases and state that classical Waterfall has <strong>no curved return
+          arrows</strong> — that absence is what distinguishes it from the Iterative Waterfall in §2.3.
+        </p>
+
+        <h3>Phases of the Classical Waterfall Model</h3>
+        <p>
+          Different textbooks list five, six, or seven phases. For exams, use the following six-phase breakdown
+          (aligned with GFG and most university notes). Explain <em>what happens</em> and <em>what is produced</em> in each.
+        </p>
+
+        <h4>Phase 1 — Requirements gathering and analysis</h4>
+        <p>
+          The development team meets customers, users, and stakeholders to collect needs. Analysts study the existing
+          system (if any), identify problems, and document functional and non-functional requirements. Ambiguities must
+          be resolved here because classical Waterfall assumes requirements will not change later.
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> The team conducts interviews and questionnaires, observes users in their environment, runs feasibility studies, and holds requirements workshops.</li>
+          <li><strong>Deliverable.</strong> The main output is the Software Requirements Specification (SRS), which acts as the contract for all later work.</li>
+          <li><strong>Entry criterion.</strong> The project must be approved and scope must be defined at a high level before this phase begins.</li>
+          <li><strong>Exit criterion.</strong> The SRS must be reviewed and signed off by the customer or management.</li>
+        </ul>
+
+        <h4>Phase 2 — System design</h4>
+        <p>
+          Architects and designers transform the SRS into a technical blueprint: module structure, databases, interfaces,
+          algorithms, and hardware/software platform choices. Design is split into <strong>high-level design</strong>
+          (architecture, major components) and <strong>low-level design</strong> (detailed module specs, data structures).
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> Architects perform architectural design, database design, interface design, and security design based on the approved SRS.</li>
+          <li><strong>Deliverable.</strong> The team produces the Design Document Specification (DDS), also called the software design document.</li>
+          <li><strong>Exit criterion.</strong> A formal design review must pass, and no coding should start until the design is frozen.</li>
+        </ul>
+
+        <h4>Phase 3 — Implementation (coding)</h4>
+        <p>
+          Programmers write source code according to the DDS. Unit-level work happens here: choosing languages,
+          following coding standards, version control, and code reviews. In classical Waterfall, integration across
+          modules is minimal until the next phase.
+        </p>
+        <ul>
+          <li><strong>Deliverable.</strong> The phase produces source code, build scripts, and unit-test results for all planned modules.</li>
+          <li><strong>Exit criterion.</strong> All modules must be coded and compiled successfully so that the build is ready for formal testing.</li>
+        </ul>
+
+        <h4>Phase 4 — Testing</h4>
+        <p>
+          Testers verify and validate the product against the SRS. Testing progresses from small to large:
+          <strong>unit testing</strong> → <strong>integration testing</strong> → <strong>system testing</strong> →
+          <strong>acceptance testing</strong> (often with the customer). Defects are logged; in pure classical Waterfall,
+          fixing a requirements-level fault discovered here is extremely costly because the model does not encourage
+          reopening the SRS phase.
+        </p>
+        <ul>
+          <li><strong>Deliverable.</strong> The testing phase produces test plans, test cases, defect reports, and a test summary report.</li>
+          <li><strong>Exit criterion.</strong> Acceptance criteria must be met and all critical defects must be closed or formally waived.</li>
+        </ul>
+
+        <h4>Phase 5 — Deployment (installation / delivery)</h4>
+        <p>
+          The tested product is delivered to the customer environment: installation on servers or client machines,
+          data migration, user training, and cutover from the old system. Release notes and operational manuals are handed over.
+        </p>
+        <ul>
+          <li><strong>Deliverable.</strong> The customer receives the deployed system, release documentation, and training materials.</li>
+          <li><strong>Exit criterion.</strong> The customer signs off on go-live and the warranty or support period begins.</li>
+        </ul>
+
+        <h4>Phase 6 — Maintenance</h4>
+        <p>
+          After delivery, the software enters the longest phase in terms of calendar time. Maintenance includes
+          <strong>corrective</strong> (fix bugs), <strong>adaptive</strong> (adjust to new OS/hardware), and
+          <strong>perfective</strong> (improve performance/features). In strict classical Waterfall, large new features
+          may trigger a new project rather than informal iteration.
+        </p>
+
+        <h3>Assumptions behind the Classical Waterfall</h3>
+        <ul>
+          <li>Requirements are <strong>complete and correct</strong> before design starts.</li>
+          <li>Design is <strong>correct</strong> before coding starts. No prototyping of uncertain areas.</li>
+          <li>Technology and environment will <strong>not change</strong> during the project.</li>
+          <li>Each phase produces a <strong>baseline document</strong> that is not revised.</li>
+          <li>Customer involvement is concentrated at the <strong>start</strong> (requirements) and <strong>end</strong> (acceptance), not throughout.</li>
+        </ul>
+        <p>
+          When any of these assumptions fail — as they do on most commercial software — the classical model becomes
+          risky. That is why later models (Iterative Waterfall, Prototype, Spiral, Agile) were introduced.
+        </p>
+
+        <h3>Advantages of the Classical Waterfall Model</h3>
+        <ul>
+          <li>
+            <strong>Simple and disciplined</strong> — easy to teach, easy for managers to schedule. Each phase has a
+            clear start and end; progress is measured by documents completed, not partial code.
+          </li>
+          <li>
+            <strong>Strong documentation</strong> — SRS, DDS, test plans, and manuals are produced systematically.
+            Useful for audits, government contracts, and long-term maintenance when staff turnover is high.
+          </li>
+          <li>
+            <strong>Milestone-based management</strong> — budgets and timelines map to phases. Stakeholders know when
+            reviews occur and when sign-off is required.
+          </li>
+          <li>
+            <strong>Stable requirements</strong> — if requirements truly will not change (e.g., translating a fixed
+            mathematical specification into code), sequential flow avoids rework and scope creep.
+          </li>
+          <li>
+            <strong>Clear roles</strong> — analysts, designers, programmers, and testers work in separate phases;
+            suitable for large teams with strict separation of duties.
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>Working software appears very late</strong> — customers may wait months or years before seeing
+            anything runnable. Wrong assumptions in requirements are discovered only at acceptance testing.
+          </li>
+          <li>
+            <strong>High cost of late change</strong> — an error in requirements propagates through design and code.
+            Fixing it after testing can mean redoing entire phases; cost grows exponentially with phase distance
+            (the “cost of change” curve is a standard exam point).
+          </li>
+          <li>
+            <strong>No formal feedback</strong> — classical Waterfall does not allow going back; real projects often
+            break the model informally, leading to undocumented rework.
+          </li>
+          <li>
+            <strong>Poor fit for uncertain or evolving requirements</strong> — web apps, startups, and research
+            projects rarely have frozen specs at day one.
+          </li>
+          <li>
+            <strong>Testing is delayed</strong> — quality problems accumulate silently until the testing phase;
+            test-driven or continuous testing is not part of the classical view.
+          </li>
+          <li>
+            <strong>Risk is front-loaded invisibly</strong> — all major risks (wrong product, technology mismatch)
+            materialise near the end, when options to recover are limited.
+          </li>
+        </ul>
+
+        <h3>When to use the Classical Waterfall Model</h3>
+        <ul>
+          <li>Requirements are <strong>fixed, complete, and legally binding</strong> (government, defence, banking regulations).</li>
+          <li>The problem is <strong>well understood</strong> and similar systems have been built before (e.g., porting a known algorithm to a new platform).</li>
+          <li>Project is <strong>small</strong> with few stakeholders and short duration.</li>
+          <li>Technology, standards, and team skills are <strong>stable</strong>.</li>
+          <li>Documentation and traceability matter more than speed (safety-critical or certified systems where process evidence is audited).</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Requirements are unclear, changing, or discovered through use (most modern products).</li>
+          <li>User interface or workflow must be validated early with real users.</li>
+          <li>Project has high technical or business risk that needs early prototyping or spikes.</li>
+          <li>Competitive pressure demands early partial releases (use Incremental, RAD, or Agile instead).</li>
+        </ul>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — Payroll system for a university with fixed government rules:</strong> Salary formulas,
+          tax slabs, and reporting formats are defined by regulation and change only when law changes. The university
+          commissions a vendor to replace an old system. Requirements are written in a tender document; design and
+          testing must prove compliance. Classical Waterfall (or V-Model) fits because scope is stable and documentation
+          for audit is mandatory. Contrast with a student startup building a social app — requirements evolve weekly;
+          Waterfall would fail.
+        </p>
+
+        <h3>Relation to other models</h3>
+        <p>
+          Classical Waterfall is the <strong>baseline</strong> against which other models are compared. The
+          <strong>Iterative Waterfall</strong> (§2.3) adds feedback loops. The <strong>V-Model</strong> (§2.13) keeps
+          sequential ordering but pairs each development phase with a test phase. <strong>Incremental</strong> and
+          <strong>Agile</strong> models deliberately deliver working software early. In exams, always state
+          <em>which variant</em> of Waterfall you mean — classical (no feedback) vs iterative (with feedback).
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Classical Waterfall</div>
+          <p><strong>Q:</strong> Explain the Classical Waterfall model of software development. Describe its phases with deliverables. Discuss the assumptions it makes, its advantages and disadvantages, and give examples of projects where it is appropriate or inappropriate.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define the Classical Waterfall as the oldest SDLC model with strictly sequential phases and no overlap or backward movement.</li>
+            <li>Mention Royce (1970) and note that he warned against using pure sequential flow on large systems.</li>
+            <li>Draw six phases from top to bottom with one-way arrows only.</li>
+            <li>For each phase from requirements through maintenance, state its purpose, main deliverable, and exit criterion.</li>
+            <li>List assumptions such as complete upfront requirements, frozen design, late testing, and limited mid-project customer involvement.</li>
+            <li>Give advantages (simplicity, documentation, milestone control) and disadvantages (late software, costly changes, late risk discovery).</li>
+            <li>Explain when to use the model (stable or regulated projects) and when not to use it (volatile or UI-heavy projects).</li>
+            <li>Support the answer with examples such as a regulated payroll system versus a social-media startup.</li>
+            <li>Contrast with Iterative Waterfall, which adds controlled feedback loops.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-01-sdlc.html">&larr; 2.1 Software Development Life Cycle</a>
+        <a class="btn-back chapter-nav-next" href="02-03-iterative-waterfall.html">2.3 Iterative Waterfall Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

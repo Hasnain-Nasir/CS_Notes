@@ -118,6 +118,50 @@
     });
   }
 
+  function isPageScrollable() {
+    var doc = document.documentElement;
+    return doc.scrollHeight > doc.clientHeight + 1;
+  }
+
+  function initBackToTop() {
+    var btn = null;
+    var threshold = 300;
+
+    function ensureButton() {
+      if (btn) return true;
+      if (!isPageScrollable()) return false;
+
+      btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "back-to-top";
+      btn.setAttribute("aria-label", "Back to top");
+      btn.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<path d="M12 19V5M5 12l7-7 7 7"/>' +
+        "</svg>";
+      btn.addEventListener("click", function () {
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      });
+      document.body.appendChild(btn);
+      return true;
+    }
+
+    function updateVisibility() {
+      if (!ensureButton()) {
+        if (btn) btn.classList.remove("is-visible");
+        return;
+      }
+      var scrolled = window.scrollY || document.documentElement.scrollTop;
+      btn.classList.toggle("is-visible", scrolled >= threshold);
+    }
+
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+    window.addEventListener("load", updateVisibility);
+    updateVisibility();
+  }
+
   function initPageEnhancements() {
     updateToggleLabel(getPreferredTheme());
     const btn = document.querySelector(".global-header .theme-toggle") || document.querySelector(".theme-toggle");
@@ -125,6 +169,7 @@
 
     wrapTables();
     initMobileNav();
+    initBackToTop();
 
     const tocLinks = document.querySelectorAll(".toc nav a[href^='#']");
     if (tocLinks.length && "IntersectionObserver" in window) {

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.11 Agile Software Development</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.11 Agile Software Development</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-11">
+        <p>
+          <strong>Agile</strong> is a family of lightweight, iterative SDLC approaches defined by the
+          <strong>Agile Manifesto (2001)</strong>. Agile values <strong>individuals and interactions, working
+          software, customer collaboration, and responding to change</strong> over processes, documentation,
+          contracts, and rigid plans.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-agile-caption">
+          <img src="../../../assets/images/se-topic-02/agile.png"
+               alt="Agile software development — iterative sprints delivering working increments with customer collaboration"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-agile-caption">Agile — iterative sprints with continuous customer feedback (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Agile Manifesto values</h3>
+        <ul>
+          <li>Individuals and interactions <strong>over</strong> processes and tools.</li>
+          <li>Working software <strong>over</strong> comprehensive documentation.</li>
+          <li>Customer collaboration <strong>over</strong> contract negotiation.</li>
+          <li>Responding to change <strong>over</strong> following a plan.</li>
+        </ul>
+
+        <h3>Agile principles (selected for exams)</h3>
+        <ul>
+          <li>Deliver working software frequently (weeks, not months).</li>
+          <li>Welcome changing requirements, even late in development.</li>
+          <li>Business people and developers cooperate daily.</li>
+          <li>Teams should be self-organising and should reflect regularly so they can improve their process.</li>
+        </ul>
+
+        <h3>Scrum sprints (common Agile framework)</h3>
+        <ul>
+          <li><strong>Sprint.</strong> A sprint is a fixed time-box (usually one to four weeks) in which the team delivers a potentially shippable product increment.</li>
+          <li><strong>Sprint planning.</strong> At the start of the sprint, the team selects which backlog items it will complete.</li>
+          <li><strong>Daily stand-up.</strong> Each day the team holds a short meeting to share progress and surface blockers.</li>
+          <li><strong>Sprint review.</strong> At the end of the sprint, the team demonstrates work to stakeholders and collects feedback.</li>
+          <li><strong>Retrospective.</strong> The team reviews what went well and what to improve before the next sprint begins.</li>
+        </ul>
+
+        <h3>Advantages and disadvantages</h3>
+        <ul>
+          <li><strong>Advantages.</strong> Agile provides fast feedback, adapts well to change, keeps customers involved, and delivers business value early.</li>
+          <li><strong>Disadvantages.</strong> Schedule and cost are harder to predict, the customer must stay engaged, documentation may be lighter, and very large distributed teams need strong discipline to succeed.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Agile</div>
+          <p><strong>Q:</strong> Explain Agile software development. State the four values of the Agile Manifesto and describe how sprints work in Scrum.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define Agile as iterative, incremental, customer-collaborative development based on the Agile Manifesto (2001).</li>
+            <li>State the four values: individuals and interactions, working software, customer collaboration, and responding to change are preferred over rigid process, heavy documentation, contracts, and fixed plans.</li>
+            <li>Explain a Scrum sprint as a time-boxed iteration that includes planning, daily stand-ups, a review demo, and a retrospective.</li>
+            <li>Mention advantages (flexibility and early delivery) and disadvantages (estimation difficulty and need for committed stakeholders).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-10-rad-vs-waterfall.html">&larr; 2.10 RAD vs Waterfall</a>
+        <a class="btn-back chapter-nav-next" href="02-12-xp.html">2.12 Extreme Programming (XP) &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

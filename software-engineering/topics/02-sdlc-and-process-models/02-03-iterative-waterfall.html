@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.3 Iterative Waterfall Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.3 Iterative Waterfall Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-3">
+        <p>
+          The <strong>Iterative Waterfall Model</strong> is a practical refinement of the Classical Waterfall. It
+          keeps the same <strong>phase order</strong> and the same emphasis on documentation, but introduces
+          <strong>feedback loops</strong>: when an error or omission is found in a later phase, the team may return
+          to an earlier phase, update the relevant documents, and then repeat the downstream work. This makes the
+          process closer to what <strong>Winston Royce</strong> actually advocated for large systems — sequential
+          structure plus controlled iteration when reality does not match the plan.
+        </p>
+        <p>
+          Iterative Waterfall is <strong>not</strong> the same as Incremental delivery (§2.8) or Agile sprints (§2.11).
+          In Iterative Waterfall you still aim to build <strong>one complete product</strong> through the full phase
+          chain; you only loop back to <em>fix mistakes</em>, not to release version 1, version 2, version 3 to customers.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-iter-waterfall-caption">
+          <img src="../../../assets/images/se-topic-02/waterfall.webp"
+               alt="Iterative Waterfall model — sequential phases with feedback loops between stages"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-iter-waterfall-caption">Iterative Waterfall — same phases as classical, with backward arrows when defects or gaps are found (GeeksforGeeks). In exams, sketch return paths from testing and design to earlier phases.</figcaption>
+        </figure>
+
+        <h3>Why the Iterative Waterfall model exists</h3>
+        <p>
+          Pure Classical Waterfall assumes perfection in every phase. In practice, requirements are misunderstood,
+          designs omit edge cases, and code introduces defects. Without a formal way to go back, teams either
+          (a) hide rework and patch code informally, or (b) fail acceptance tests. Iterative Waterfall legitimises
+          <strong>controlled backtracking</strong> while keeping management visibility: each return trip updates baselines
+          (SRS, DDS, test plans) and is recorded in change logs.
+        </p>
+
+        <h3>Classical vs Iterative Waterfall — key differences</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Classical Waterfall</th><th>Iterative Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Direction of flow</td><td>Work moves in one direction only, with no formal return to earlier phases.</td><td>Work still moves mainly forward, but the team may return to an earlier phase when errors are found.</td></tr>
+            <tr><td>Handling errors found in testing</td><td>Going back to fix earlier work is discouraged and treated as outside the model.</td><td>The team returns to design or requirements, updates documents, and then moves forward again.</td></tr>
+            <tr><td>Documentation</td><td>Each phase produces a fixed baseline that is not expected to change.</td><td>Documents are revised when feedback occurs, and version numbers track each update.</td></tr>
+            <tr><td>Customer-visible software</td><td>The customer usually sees working software only at the end of the project.</td><td>The customer still sees the full product late, although requirements may improve through feedback.</td></tr>
+            <tr><td>Realism</td><td>The classical form is idealised and is rarely achievable on real projects without informal rework.</td><td>This form is more realistic and is common in regulated industries and large corporate projects.</td></tr>
+            <tr><td>Relation to Royce (1970)</td><td>It reflects an oversimplified reading of Royce’s paper.</td><td>It is closer to what Royce actually recommended for large systems.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phases (same as Classical Waterfall)</h3>
+        <p>
+          The phase names and deliverables are identical to §2.2: requirements → design → implementation → testing →
+          deployment → maintenance. The difference is <strong>what happens when a phase discovers a problem that
+          belongs to an earlier phase</strong>. Below are the standard feedback paths examiners expect you to describe.
+        </p>
+
+        <h3>Feedback paths and rules</h3>
+        <p>
+          Feedback is triggered by <strong>defects, reviews, or failed tests</strong> — not by casual preference to
+          redesign. Each backward move should follow a change-control process (impact analysis, approval, document update).
+        </p>
+
+        <h4>1. Testing → Implementation (coding)</h4>
+        <p>
+          Most common loop. System or integration testing finds a coding bug or wrong module behaviour. Testers log
+          defects; developers fix code, perform unit regression, and testing resumes. The SRS and design usually stay
+          unchanged. This loop is narrow and cheap.
+        </p>
+
+        <h4>2. Testing → Design</h4>
+        <p>
+          Tests show that the design cannot meet performance, security, or correctness requirements — e.g., database
+          schema causes deadlock under load. The team revisits the DDS, updates architecture or module interfaces,
+          then re-implements affected modules and re-runs integration and system tests. Cost is moderate to high.
+        </p>
+
+        <h4>3. Testing or Design → Requirements</h4>
+        <p>
+          The most expensive loop. Stakeholders realise the SRS was wrong or incomplete: a missing business rule,
+          illegal workflow, or misunderstood regulation. Analysts revise the SRS; design and code for affected parts
+          are redone. Schedule and budget impact is large — this illustrates why requirements engineering is critical.
+        </p>
+
+        <h4>4. Implementation → Design (during coding)</h4>
+        <p>
+          While coding, developers discover the specified algorithm is inefficient or an interface is impractical.
+          They request a design change before continuing. Iterative Waterfall allows returning to design without
+          waiting until formal testing — good teams catch this early in code reviews.
+        </p>
+
+        <h4>5. Design → Requirements</h4>
+        <p>
+          During design reviews, architects find conflicting or ambiguous requirements. The SRS must be clarified
+          before design can be completed. This loop prevents building the wrong structure on top of vague requirements.
+        </p>
+
+        <p>
+          <strong>Important exam point:</strong> feedback is typically <strong>local</strong> — you go back only to
+          the phase where the fault originated, not always to the very first phase. Going from testing directly to
+          requirements happens only for major specification errors.
+        </p>
+
+        <h3>Step-by-step scenario (how a loop works in practice)</h3>
+        <p>
+          <strong>Scenario — Online admission system:</strong>
+        </p>
+        <ol>
+          <li>Requirements and design are signed off. Developers implement modules for application form and fee payment.</li>
+          <li>During <strong>system testing</strong>, testers find that partial payments leave applications in an invalid state. A business rule was missing from the SRS.</li>
+          <li>Project manager authorises feedback to <strong>requirements analysis</strong>. SRS is updated (v1.1) with refund/cancel rules.</li>
+          <li><strong>Design</strong> is updated for the payment module and database transactions.</li>
+          <li>Affected code is rewritten. <strong>regression testing</strong> runs on payment and admission modules.</li>
+          <li>When tests pass, flow continues to deployment. Total project time increases, but the product matches real policy.</li>
+        </ol>
+        <p>
+          Under <em>Classical</em> Waterfall, the same discovery at testing might be treated as “scope creep” or fixed
+          with risky patches. Under <em>Iterative</em> Waterfall, the return path is explicit and documented.
+        </p>
+
+        <h3>Documentation and version control</h3>
+        <p>
+          Every feedback loop must update controlled documents:
+        </p>
+        <ul>
+          <li>SRS versions (v1.0, v1.1, …) with change history.</li>
+          <li>Design document revisions linked to requirement IDs.</li>
+          <li>Traceability matrix: requirement ↔ design ↔ test case ↔ code module.</li>
+          <li>Re-test evidence showing old defects are closed and no new ones introduced (regression).</li>
+        </ul>
+        <p>
+          Without version control, Iterative Waterfall degenerates into chaos — multiple developers working from
+          different editions of the SRS. Configuration management (Topic 13) supports this model directly.
+        </p>
+
+        <h3>Advantages of the Iterative Waterfall Model</h3>
+        <ul>
+          <li>
+            <strong>Error correction is built into the process</strong> — mistakes found in design or testing can be
+            fixed at the source instead of patched silently in code.
+          </li>
+          <li>
+            <strong>More realistic than classical Waterfall</strong> — acknowledges that perfect upfront analysis is rare.
+          </li>
+          <li>
+            <strong>Preserves structure and accountability</strong> — phases, reviews, and sign-offs remain; suitable for
+            organisations that cannot adopt Agile but need some flexibility.
+          </li>
+          <li>
+            <strong>Better quality at acceptance</strong> — major specification gaps can be closed before delivery,
+            reducing catastrophic failure at go-live.
+          </li>
+          <li>
+            <strong>Aligns with Royce’s intent</strong> — iteration for risk reduction without abandoning documentation.
+          </li>
+          <li>
+            <strong>Supports regulated industries</strong> — auditors can see change requests and traceability when loops occur.
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>Feedback is expensive</strong> — each return to requirements or design replays downstream work;
+            frequent loops destroy schedule and budget. Not a licence for changing requirements every week.
+          </li>
+          <li>
+            <strong>Still no early product for the customer</strong> — unlike Incremental or Agile, users do not receive
+            working subsets until the full cycle completes (unless combined with another model).
+          </li>
+          <li>
+            <strong>Document proliferation</strong> — multiple SRS/DDS versions; teams need strict CM discipline.
+          </li>
+          <li>
+            <strong>“Waterfall” stigma</strong> — managers may deny that loops are happening, leading to hidden technical debt.
+          </li>
+          <li>
+            <strong>Not for continuous requirement churn</strong> — if the market changes daily, Agile/Spiral/Prototype fit better.
+          </li>
+          <li>
+            <strong>Testing still relatively late</strong> — compared to V-Model or TDD, test planning is not paired at every micro-step unless the organisation adds extra practices.
+          </li>
+        </ul>
+
+        <h3>When to use the Iterative Waterfall Model</h3>
+        <ul>
+          <li>Large projects with <strong>mostly stable requirements</strong> but some risk of discovery during design/testing.</li>
+          <li>Organisations with <strong>mature process culture</strong>: change control boards, traceability, formal reviews.</li>
+          <li>Contracts that require <strong>Waterfall-style reporting</strong> but allow approved change requests.</li>
+          <li>Systems where failures must be traced to document versions (finance, healthcare, aerospace documentation).</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Requirements evolve continuously (use Agile or evolutionary models).</li>
+          <li>Need frequent releases to market (Incremental, RAD).</li>
+          <li>High UI uncertainty. Users must see prototypes early (Prototype model, §2.4).</li>
+          <li>High technical risk needing risk-driven cycles (Spiral model, §2.5).</li>
+        </ul>
+
+        <h3>Combining with other ideas</h3>
+        <p>
+          Iterative Waterfall is often used <strong>inside</strong> each increment of an Incremental model, or as the
+          internal process of a government phase-gate project. It does not replace risk analysis (Spiral) or early
+          prototypes (Prototype model) — those can be added on top where needed.
+        </p>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — Hospital information system upgrade:</strong> Core workflows (patient registration, billing)
+          are regulated and specified in a national health data standard. The hospital uses Iterative Waterfall: baseline
+          SRS from the ministry, design review with clinicians, then development. During integration testing, clinicians
+          find that emergency admissions bypass normal registration — the SRS lacked an exception flow. The team loops
+          back to requirements, updates design, recodes two modules, and re-tests. The project is late by six weeks but
+          passes accreditation. A classical “no feedback” approach would have shipped unsafe workarounds.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Iterative Waterfall</div>
+          <p><strong>Q:</strong> Explain the Iterative Waterfall model. How does it differ from the Classical Waterfall model? Illustrate with a diagram showing feedback paths. Discuss advantages, disadvantages, and suitable application areas with an example.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define Iterative Waterfall as using the same phases as classical Waterfall but allowing controlled feedback when later phases discover errors in earlier work.</li>
+            <li>Explain that pure Waterfall is unrealistic and that Royce recommended iteration with updated documents.</li>
+            <li>Draw six phases and show backward paths from testing to coding, design, or requirements, and from design to requirements, explaining when each path is used.</li>
+            <li>Compare classical and iterative Waterfall using a table (one-way flow versus feedback, document versions, delivery timing, realism).</li>
+            <li>Clarify that Iterative Waterfall is not the same as Incremental delivery or Agile continuous change.</li>
+            <li>State that feedback is triggered by defects or reviews, follows change control, updates the SRS and DDS, and requires regression testing.</li>
+            <li>Walk through a scenario where testing finds a missing requirement, the SRS is updated, design and code are revised, and testing is repeated.</li>
+            <li>List advantages and disadvantages, suitable contexts (for example a hospital system), and when other models are preferable.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-02-classical-waterfall.html">&larr; 2.2 Classical Waterfall Model</a>
+        <a class="btn-back chapter-nav-next" href="02-04-prototype.html">2.4 Prototype Model / Software Prototyping &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

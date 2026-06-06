@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.13 SDLC V-Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.13 SDLC V-Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-13">
+        <p>
+          The <strong>V-Model</strong> (Verification and Validation model) extends Waterfall by mapping each
+          development phase to a corresponding <strong>testing phase</strong>. The left side of the "V" represents
+          development activities; the right side represents testing activities that verify those development stages.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-vmodel-caption">
+          <img src="../../../assets/images/se-topic-02/vmodel.webp"
+               alt="V-Model — development phases on left, corresponding test phases on right forming a V shape"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-vmodel-caption">V-Model — each development phase has a matching test phase (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Verification vs Validation</h3>
+        <ul>
+          <li><strong>Verification</strong> asks whether we are building the product <em>right</em>. It checks conformance to specifications through reviews, inspections, and unit or integration testing.</li>
+          <li><strong>Validation</strong> asks whether we are building the <em>right</em> product. It checks that user needs are met through acceptance testing and user acceptance testing (UAT).</li>
+        </ul>
+
+        <h3>Phase pairs (left → right)</h3>
+        <table>
+          <thead>
+            <tr><th>Development (verification)</th><th>Testing (validation of that stage)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Requirements analysis</td><td>Requirements analysis on the left side of the V is verified by acceptance testing on the right.</td></tr>
+            <tr><td>System design</td><td>System design is paired with system testing to confirm that the overall system meets its specification.</td></tr>
+            <tr><td>Architecture / high-level design</td><td>Architecture or high-level design is paired with integration testing to verify that subsystems work together.</td></tr>
+            <tr><td>Module design</td><td>Detailed module design is paired with unit testing to verify each component in isolation.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Advantages and disadvantages</h3>
+        <ul>
+          <li><strong>Advantages.</strong> Testing is planned from the start, traceability links each requirement to tests, and the model suits safety-critical and regulated systems.</li>
+          <li><strong>Disadvantages.</strong> The V-Model shares Waterfall’s rigidity, provides no early working software, makes late requirement changes expensive, and requires maintaining testing documents alongside design documents.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — V-Model</div>
+          <p><strong>Q:</strong> Explain the V-Model. Differentiate verification and validation. Map development phases to test phases.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Describe the V-Model as Waterfall with a parallel testing arm: the left side is development and the right side is testing.</li>
+            <li>Define verification as building the product correctly against specifications, and validation as building the product the user actually needs.</li>
+            <li>Map phase pairs: requirements with acceptance testing, system design with system testing, high-level design with integration testing, and module design with unit testing.</li>
+            <li>State advantages (early test planning and traceability) and disadvantages (inflexibility, late delivery, and costly changes).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-12-xp.html">&larr; 2.12 Extreme Programming (XP)</a>
+        <a class="btn-back chapter-nav-next" href="02-14-is-life-cycle.html">2.14 Information System Life Cycle &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

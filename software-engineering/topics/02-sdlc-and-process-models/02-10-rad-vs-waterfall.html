@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.10 RAD vs Waterfall</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.10 RAD vs Waterfall</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-10">
+        <p>
+          RAD and the Classical Waterfall represent opposite ends of the SDLC spectrum: Waterfall prioritises
+          <strong>planning and documentation</strong>; RAD prioritises <strong>speed and user feedback</strong>.
+        </p>
+
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>RAD</th><th>Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Speed</td><td>RAD is very fast because work is organised in time-boxed iterations with rapid delivery.</td><td>Waterfall is slow because the customer receives the product only after the full cycle completes.</td></tr>
+            <tr><td>User involvement</td><td>Users are involved continuously through workshops and prototyping sessions.</td><td>Users are involved mainly during requirements definition and final acceptance.</td></tr>
+            <tr><td>Requirements</td><td>Requirements are allowed to evolve during development as users learn more.</td><td>Requirements are fixed upfront in the SRS before construction begins.</td></tr>
+            <tr><td>Documentation</td><td>RAD keeps documentation minimal and prefers working software as the main deliverable.</td><td>Waterfall produces extensive documentation at each phase.</td></tr>
+            <tr><td>Tools</td><td>RAD relies heavily on CASE tools and code generation.</td><td>Waterfall typically uses standard development tools.</td></tr>
+            <tr><td>Team size</td><td>RAD works best with small, skilled teams working closely with users.</td><td>Waterfall can support teams of any size, including very large teams.</td></tr>
+            <tr><td>Flexibility</td><td>RAD is highly flexible because scope is adjusted to fit each time-box.</td><td>Waterfall has low flexibility because changes become costly after sign-off.</td></tr>
+            <tr><td>Best for</td><td>RAD is best for small or medium applications, tight deadlines, and highly engaged users.</td><td>Waterfall is best for fixed requirements, regulatory environments, and large documented projects.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — RAD vs Waterfall</div>
+          <p><strong>Q:</strong> Compare RAD with the Traditional Waterfall SDLC. When would you choose each?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Present a comparison using criteria such as speed, user involvement, requirements handling, documentation, tools, team size, and flexibility.</li>
+            <li>Explain when RAD is appropriate, for example when the schedule is tight, users are available, scope is moderate, and CASE tools exist.</li>
+            <li>Explain when Waterfall is appropriate, for example when requirements are stable, an audit trail is required, or the project is large and regulated.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-09-rad.html">&larr; 2.9 Rapid Application Development (RAD)</a>
+        <a class="btn-back chapter-nav-next" href="02-11-agile.html">2.11 Agile Software Development &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

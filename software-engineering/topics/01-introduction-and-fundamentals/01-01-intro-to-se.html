@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.1 Introduction to Software Engineering</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.1 Introduction to Software Engineering</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-1">
+        <p>
+          <strong>Software Engineering (SE)</strong> is the systematic, disciplined, and quantifiable application
+          of engineering principles to the <strong>design, development, testing, and maintenance</strong> of
+          software. It treats software development as an engineering activity rather than informal programming,
+          so that the final product is <strong>high-quality, reliable, and maintainable</strong> — especially
+          when the system is large, long-lived, or used by many people.
+        </p>
+        <p>
+          To understand the term, split it into two parts. <strong>Software</strong> is a program or set of
+          programs that contain instructions to perform a task on a computer. <strong>Engineering</strong> is
+          the process of designing and building something that serves a purpose efficiently, safely, and within
+          acceptable cost. <strong>Software Engineering</strong> therefore means building software in a planned,
+          repeatable, and measurable way — not by trial-and-error coding alone.
+        </p>
+
+        <h3>Software Engineering vs programming</h3>
+        <p>
+          <strong>Programming</strong> focuses on writing code that solves a problem. <strong>Software Engineering</strong>
+          covers the entire lifecycle: understanding requirements, designing architecture, writing code, testing,
+          deploying, and maintaining the product over time. A small personal script may need only programming; a
+          hospital system, banking app, or university portal needs Software Engineering because many people depend
+          on it, requirements change, and mistakes can be costly.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-se-overview-caption">
+          <img src="../../../assets/images/se-topic-01/se-overview.webp"
+               alt="Software engineering overview — systematic approach to design, development, testing, and maintenance"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-se-overview-caption">Software Engineering — a systematic approach to the full software lifecycle.</figcaption>
+        </figure>
+
+        <h3>Goals of Software Engineering</h3>
+        <p>Software Engineering aims to produce software that satisfies users and organisations. The main goals are:</p>
+        <ul>
+          <li><strong>Correctness:</strong> The software must do what the user and requirements specify, without unexpected behaviour.</li>
+          <li><strong>Reliability:</strong> The software should work consistently under normal use and recover gracefully from errors.</li>
+          <li><strong>Efficiency:</strong> The software should use reasonable time, memory, and other resources.</li>
+          <li><strong>Maintainability:</strong> The software should be easy to understand, modify, and extend when requirements change.</li>
+          <li><strong>On-time delivery:</strong> The project should be completed within the planned schedule.</li>
+          <li><strong>Within budget:</strong> Development and maintenance costs should stay within acceptable limits.</li>
+        </ul>
+
+        <h3>Key principles of Software Engineering</h3>
+        <p>These principles guide how engineers structure and build software systems:</p>
+        <ul>
+          <li><strong>Modularity:</strong> Large software is divided into smaller, independent modules so that each part can be developed, tested, and maintained separately.</li>
+          <li><strong>Abstraction:</strong> Only essential details are shown to the user or other components, while unnecessary internal complexity is hidden.</li>
+          <li><strong>Encapsulation:</strong> Data and the functions that operate on it are grouped together, and direct outside access is restricted to protect integrity.</li>
+          <li><strong>Testing:</strong> Software is checked at different levels to verify that it behaves correctly and meets stated requirements before release.</li>
+          <li><strong>Maintenance:</strong> Software is updated after delivery to fix defects, add features, improve performance, and address security issues.</li>
+          <li><strong>Design patterns:</strong> Engineers reuse proven solutions to common design problems instead of inventing a new approach every time.</li>
+          <li><strong>Agile methodologies:</strong> Development is done in small iterations with regular feedback so the product can adapt to changing needs.</li>
+          <li><strong>CI/CD (Continuous Integration / Continuous Deployment):</strong> Code changes are merged and tested frequently, and updates are released in a controlled, automated way.</li>
+        </ul>
+
+        <h3>What software engineers do</h3>
+        <p>
+          Software engineers work in teams to deliver solutions that meet customer or business needs. Their work
+          spans the full lifecycle, not just writing code. Core responsibilities include the following:
+        </p>
+        <ul>
+          <li><strong>Requirement analysis:</strong> Software engineers meet with clients, users, and managers to understand what the system must do and document those needs clearly.</li>
+          <li><strong>Design and development:</strong> They create system designs and write well-structured, readable code that can be maintained by others in the team.</li>
+          <li><strong>Testing and debugging:</strong> They run unit tests, integration tests, and system tests to find defects, then trace and fix the root cause of each bug.</li>
+          <li><strong>Code review:</strong> They read each other's code to catch mistakes early, enforce standards, and share knowledge across the team.</li>
+          <li><strong>Maintenance:</strong> After release, they update existing systems to fix bugs, add new features, and keep the software compatible with changing environments.</li>
+          <li><strong>Documentation:</strong> They prepare code comments, API documentation, and design documents so that future developers can understand and work on the system.</li>
+        </ul>
+
+        <h3>Why a systematic approach matters</h3>
+        <p>
+          Without Software Engineering, teams often follow an ad-hoc <em>build-and-fix</em> approach: write code,
+          run it, patch errors, and repeat. This may work for tiny programs but fails on large projects because
+          complexity grows faster than the team can control. A systematic approach uses defined processes, standards,
+          reviews, and testing so that quality, cost, and schedule remain manageable. This need became especially
+          clear during the <a href="01-06-crisis.html#sec-1-6">Software Crisis</a> of the 1960s–70s, when many
+          projects ran over budget and delivered unreliable software.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Define Software Engineering</div>
+          <p><strong>Q:</strong> Define Software Engineering and explain why a systematic approach is needed for large projects.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Software Engineering is the systematic application of engineering principles to design, develop, test, and maintain software.</li>
+            <li>Its goals include quality, reliability, maintainability, and delivering the product on time and within budget.</li>
+            <li>Programming alone is not enough for large systems because requirements, teams, and complexity grow beyond informal control.</li>
+            <li>Without SE, ad-hoc coding leads to cost overruns, delays, and poor quality (see <a href="01-06-crisis.html#sec-1-6">§1.6 Software Crisis</a>).</li>
+            <li>SE uses processes, standards, testing, documentation, and project management to control complexity.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <span class="btn-back chapter-nav-prev is-disabled">&larr; Previous</span>
+        <a class="btn-back chapter-nav-next" href="01-02-cbse.html">1.2 Computer-based System Engineering &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

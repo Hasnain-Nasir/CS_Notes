@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.10 SE vs Conventional Engineering</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.10 SE vs Conventional Engineering</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-10">
+        <p>
+          Software Engineering and conventional (physical) engineering share the goal of producing
+          <strong>high-quality, reliable products</strong>, but differ in important ways because software is
+          intangible, easy to change, and has a different cost and failure profile.
+        </p>
+
+        <table>
+          <thead>
+            <tr><th>Dimension</th><th>Similarity</th><th>Difference</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nature of product</td>
+              <td>Both aim for quality and reliability</td>
+              <td>Conventional = physical systems; SE = intangible software systems</td>
+            </tr>
+            <tr>
+              <td>Design &amp; iteration</td>
+              <td>Both use iterative design and prototyping</td>
+              <td>Software easier to modify — no physical retooling</td>
+            </tr>
+            <tr>
+              <td>Quality assurance</td>
+              <td>Both emphasise testing and QA</td>
+              <td>Hardware: physical prototype tests; software: unit, integration, system testing</td>
+            </tr>
+            <tr>
+              <td>Project management</td>
+              <td>Both need PM, collaboration, communication</td>
+              <td>SE often uses distributed teams and digital collaboration tools</td>
+            </tr>
+            <tr>
+              <td>Maintenance &amp; evolution</td>
+              <td>Both require ongoing support</td>
+              <td>Software needs more frequent updates due to fast-changing tech and requirements</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Cost and lifecycle: hardware vs software</h3>
+        <p>
+          For <strong>hardware</strong>, production cost is incurred every time a unit is manufactured.
+          Failure rate often follows a <strong>bathtub curve</strong>: high "infant mortality" at start, low
+          during useful life, then rising "wear-out" failures at end of life.
+        </p>
+        <p>
+          For <strong>software</strong>, production (copying) cost is negligible after the first release.
+          Maintenance dominates total cost. Failure <strong>intensity</strong> typically <em>decreases</em> over
+          time as defects are found and fixed — the opposite pattern to hardware wear-out.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-lifecycle-caption">
+          <img src="../../../assets/images/se-topic-01/hardware-software-lifecycle.svg"
+               alt="Hardware bathtub curve vs software failure intensity decreasing over time"
+               width="640" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-lifecycle-caption">Hardware failure rate (bathtub curve) vs software failure intensity over product lifetime.</figcaption>
+        </figure>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — SE vs Conventional Engineering</div>
+          <p><strong>Q:</strong> Compare Software Engineering with conventional engineering processes.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Both Software Engineering and conventional engineering share goals such as quality, iterative design, testing, project management, and maintenance.</li>
+            <li>They differ because software is intangible, easier to change, tested digitally, and updated more frequently than most physical products.</li>
+            <li>Their cost models differ because hardware incurs repeated production cost per unit, while software has high first-time development cost and dominant maintenance cost.</li>
+            <li>Their lifecycle curves also differ, with hardware following a bathtub curve and software typically showing decreasing failure intensity over time.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-09-processes.html">&larr; 1.9 Software Engineering Processes</a>
+        <a class="btn-back chapter-nav-next" href="01-11-quality-attributes.html">1.11 Software Quality Attributes &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

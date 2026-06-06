@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.7 Need of Software Engineering</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.7 Need of Software Engineering</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-7">
+        <p>
+          Software Engineering is needed because <strong>informal programming is insufficient</strong> for
+          modern, large-scale systems. It provides a systematic, scientific, and disciplined approach to
+          develop, operate, and maintain software on computer systems and electronic devices.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-purpose-se-caption">
+          <img src="../../../assets/images/se-topic-01/purpose-of-se.webp"
+               alt="Purpose of software engineering — handle big projects, manage cost, decrease time, reliable software, effectiveness, reduce complexity, productivity"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-purpose-se-caption">Purpose of Software Engineering — why organisations adopt disciplined methods.</figcaption>
+        </figure>
+
+        <h3>Why Software Engineering is needed (detailed)</h3>
+        <ul>
+          <li><strong>Structured development approach:</strong> Software Engineering provides organised design, development, testing, and maintenance activities that improve consistency and quality.</li>
+          <li><strong>Managing complexity:</strong> Large problems are broken into smaller, manageable parts so that teams can understand and control the system.</li>
+          <li><strong>Quality and reliability assurance:</strong> Standards and testing are applied so that software meets requirements and is as defect-free as possible.</li>
+          <li><strong>Cost and time management:</strong> Proper planning avoids wasted work and helps projects finish on schedule and within budget.</li>
+          <li><strong>Proven methodologies:</strong> Approaches such as Agile, Scrum, and Waterfall improve productivity and team coordination.</li>
+          <li><strong>Testing and QA:</strong> Unit, integration, and acceptance testing help catch defects early before they reach users.</li>
+          <li><strong>Project management and collaboration:</strong> Resources, schedules, budgets, and team coordination are managed in a planned way.</li>
+          <li><strong>Maintainability and evolution:</strong> Software can be updated more easily as user needs and technology change over time.</li>
+        </ul>
+
+        <h3>Practical benefits (summary)</h3>
+        <ul>
+          <li>Software Engineering helps teams handle large projects without chaos or uncontrolled changes.</li>
+          <li>It reduces cost by eliminating unnecessary work and rework during development.</li>
+          <li>It saves time because development follows a planned and monitored process.</li>
+          <li>It helps deliver reliable software on schedule instead of relying on ad-hoc coding.</li>
+          <li>It increases productivity by applying testing and quality checks at every level of the system.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Need of SE</div>
+          <p><strong>Q:</strong> Explain why Software Engineering is needed in the modern software industry.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>The need for Software Engineering is linked to the software crisis, because informal methods fail when projects grow in size and complexity.</li>
+            <li>Software Engineering manages complexity, cost, time, quality, and maintainability through systematic processes.</li>
+            <li>It enables team collaboration and repeatable processes instead of depending on individual coding habits.</li>
+            <li>It should be contrasted with the build-and-fix approach described in <a href="01-06-crisis.html#sec-1-6">§1.6</a>, which works only for small programs.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-06-crisis.html">&larr; 1.6 Software Crisis</a>
+        <a class="btn-back chapter-nav-next" href="01-08-evolution.html">1.8 Software Evolution &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Linear Algebra — Course Notes</title>
+  <link rel="stylesheet" href="../assets/css/notes.css">
+  <script src="../assets/js/site-nav.js" defer></script>
+  <script src="../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="1" data-nav-book="linear-algebra/index.html">
+  <div class="index-hero">
+    <header class="site-header site-header--book">
+      <div class="site-header-text">
+        <h1>Linear Algebra</h1>
+        <p class="topic-meta">3 credit hours (Lectures: 3 / Labs: 0)</p>
+      </div>
+    </header>
+
+    <h2>Topic Notes</h2>
+    <p>Detailed topic notes are in preparation. The syllabus roadmap below shows the full course outline.</p>
+
+    <div class="topic-cards">
+      <div class="topic-card">
+        <span class="badge soon">Coming soon</span>
+        <h3>All topic notes</h3>
+        <p>
+          Vectors, vector spaces, matrices, determinants, linear systems, linear transformations,
+          inner products, eigenvalues, and singular value decomposition — publishing soon.
+        </p>
+      </div>
+    </div>
+
+    <section class="roadmap">
+      <h2>Syllabus Roadmap</h2>
+      <p class="topic-meta">Full course outline from the official syllabus.</p>
+      <ul>
+        <li class="pending">Vectors</li>
+        <li class="pending">Vector spaces</li>
+        <li class="pending">Matrices and determinants</li>
+        <li class="pending">Cofactor and inverse</li>
+        <li class="pending">Rank</li>
+        <li class="pending">Linear independence</li>
+        <li class="pending">Solution of systems of linear equations</li>
+        <li class="pending">Positive definite matrices</li>
+        <li class="pending">Linear transformations</li>
+        <li class="pending">Operations on matrices</li>
+        <li class="pending">Inner products, orthogonality, and least squares</li>
+        <li class="pending">Eigenvalues and eigenvectors</li>
+        <li class="pending">Applications to systems of equations and geometry</li>
+        <li class="pending">Singular value decomposition</li>
+      </ul>
+    </section>
+
+    <section class="references">
+      <h2>Reference Material</h2>
+      <ul>
+        <li><em>Elementary Linear Algebra with Applications</em> (9th ed., 2007) — Bernard Kolman &amp; David Hill, Prentice Hall PTR</li>
+        <li><em>Linear Algebra and Its Applications</em> (4th ed., 2005) — Gilbert Strang et al., Brooks/Cole</li>
+        <li><em>Elementary Linear Algebra: Applications Version</em> (9th ed., 2005) — Howard Anton &amp; Chris Rorres, Wiley</li>
+        <li><em>Linear Algebra and Its Applications</em> (2nd ed., 2000) — David C. Lay, Addison-Wesley</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

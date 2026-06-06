@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.9 Software Engineering Processes</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.9 Software Engineering Processes</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-9">
+        <p>
+          A <strong>software process</strong> (software methodology) is a set of related activities that leads to
+          the production of software — either from scratch or by modifying an existing system. Without a defined
+          process, team members may perform activities in random order, progress cannot be monitored, and the
+          project will likely fail.
+        </p>
+        <p>
+          <em>Note:</em> Specific <strong>SDLC models</strong> (Waterfall, Spiral, Agile, etc.) are covered in
+          <strong>Topic 2</strong>. Here we focus on the <strong>generic activities</strong> that all processes include.
+        </p>
+
+        <h3>Generic software process activities</h3>
+        <ol>
+          <li>
+            <strong>Feasibility study:</strong> The problem is defined in abstract terms, and financial and technical
+            feasibility are checked through cost–benefit analysis, review of infrastructure and human resources, and
+            comparison of alternative strategies.
+          </li>
+          <li>
+            <strong>Requirements analysis and specification:</strong> Complete customer requirements are understood,
+            project data is collected and analysed, and an <strong>SRS</strong> (Software Requirements Specification)
+            is produced in natural language describing <em>what</em> the system must do, not <em>how</em>. Errors at
+            this stage cause severe problems in later stages.
+          </li>
+          <li>
+            <strong>Design:</strong> Requirements are transformed into a structure suitable for coding by choosing
+            architecture and algorithms with attention to coupling and cohesion, and producing an <strong>SDD</strong>
+            (Software Design Description).
+          </li>
+          <li>
+            <strong>Coding:</strong> The design is translated into a programming language in a way that supports later
+            testing and maintenance, with emphasis on readable and maintainable code.
+          </li>
+          <li>
+            <strong>Testing:</strong> The program is executed to find bugs, because a bug that is executed becomes a
+            <strong>failure</strong>, and human errors in development produce faults in the code.
+          </li>
+          <li>
+            <strong>Implementation (deployment):</strong> The software is installed at the user site, users receive
+            training, and hardware requirements are checked before operation begins.
+          </li>
+          <li>
+            <strong>Maintenance:</strong> Any change made after official release is maintenance, which may be
+            <strong>corrective</strong> to fix defects, <strong>adaptive</strong> to respond to environment changes,
+            or <strong>perfective</strong> to improve performance and features.
+          </li>
+        </ol>
+
+        <h3>Four framework activities</h3>
+        <ul>
+          <li><strong>Software specification:</strong> This activity defines what is to be built and the constraints under which the system must operate.</li>
+          <li><strong>Software development:</strong> This activity covers the design and programming work needed to create the system.</li>
+          <li><strong>Software validation:</strong> This activity checks whether the finished product meets requirements and actual user needs.</li>
+          <li><strong>Software evolution:</strong> This activity covers initial development and the later updates made to the system over time.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Process</div>
+          <p><strong>Q:</strong> Describe the main activities in a software engineering process. Why is requirements analysis critical?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>The answer should list all seven activities from feasibility study through to maintenance.</li>
+            <li>A defined software process provides structure, monitoring, and predictability for the project team.</li>
+            <li>Errors in the SRS propagate through later stages, so fixing requirements defects late is extremely costly.</li>
+            <li>Without a defined process, development becomes chaotic, which links back to the software crisis in <a href="01-06-crisis.html#sec-1-6">§1.6</a>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-08-evolution.html">&larr; 1.8 Software Evolution</a>
+        <a class="btn-back chapter-nav-next" href="01-10-se-vs-conventional.html">1.10 SE vs Conventional Engineering &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

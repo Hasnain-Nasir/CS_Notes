@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.1 Software Development Life Cycle</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.1 Software Development Life Cycle</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-1">
+        <p>
+          The <strong>Software Development Life Cycle (SDLC)</strong> is a structured framework that defines the
+          <strong>phases, activities, deliverables, and milestones</strong> through which software is planned, built,
+          tested, deployed, and maintained. An SDLC model is a specific <em>instance</em> of this framework —
+          for example Waterfall, Spiral, or Agile — that prescribes how phases are ordered, overlapped, or repeated.
+        </p>
+        <p>
+          SDLC connects directly to the generic software process activities introduced in
+          <a href="../01-introduction-and-fundamentals.html#sec-1-9">Topic 1 §1.9</a>: feasibility, requirements,
+          design, coding, testing, implementation, and maintenance. The difference is that an SDLC <strong>model</strong>
+          decides whether these activities run strictly in sequence, in loops, in parallel, or in increments.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-sdlc-caption">
+          <img src="../../../assets/images/se-topic-02/sdlc-full.webp"
+               alt="Software Development Life Cycle — phases from planning through deployment and maintenance"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-sdlc-caption">SDLC — a structured sequence of phases from conception to maintenance (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Standard SDLC phases</h3>
+        <ol>
+          <li><strong>Planning / Feasibility.</strong> The organisation defines project scope, checks technical and economic viability, and allocates resources before committing to full development.</li>
+          <li><strong>Requirements analysis.</strong> Analysts elicit and document what the system must do and produce the Software Requirements Specification (SRS).</li>
+          <li><strong>Design.</strong> Architects create high-level and detailed designs and produce the software design document (SDD) and interface specifications.</li>
+          <li><strong>Implementation (coding).</strong> Developers translate the approved design into source code according to coding standards.</li>
+          <li><strong>Testing.</strong> Testers run unit, integration, system, and acceptance testing to find and report defects.</li>
+          <li><strong>Deployment.</strong> The release is installed, configured, and handed over, and users are trained before the system goes live.</li>
+          <li><strong>Maintenance.</strong> The team performs corrective, adaptive, and perfective changes throughout the operational life of the product.</li>
+        </ol>
+
+        <h3>Entry and exit criteria (exam favourite)</h3>
+        <p>Each phase has <strong>entry criteria</strong> (what must be complete before starting) and
+          <strong>exit criteria</strong> (deliverables that must be approved before moving on):</p>
+        <table>
+          <thead>
+            <tr><th>Phase</th><th>Entry criteria</th><th>Exit criteria (deliverables)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Requirements</td><td>The project charter is approved and the feasibility study has been accepted.</td><td>A reviewed and signed-off Software Requirements Specification (SRS) is available.</td></tr>
+            <tr><td>Design</td><td>The SRS has been approved by stakeholders.</td><td>A reviewed software design document, database schema, and user-interface mock-ups are complete.</td></tr>
+            <tr><td>Coding</td><td>The design document has been approved.</td><td>Source code and unit-test results for all modules are ready.</td></tr>
+            <tr><td>Testing</td><td>A testable build exists and the test plan has been approved.</td><td>The test report, defect log, and customer acceptance sign-off are complete.</td></tr>
+            <tr><td>Deployment</td><td>A tested release candidate is ready for installation.</td><td>The system is installed in the target environment and user training is complete.</td></tr>
+            <tr><td>Maintenance</td><td>The system is running in production.</td><td>Change requests are handled according to the agreed service-level agreement.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Choosing an SDLC model</h3>
+        <p>Model selection depends on project context:</p>
+        <ul>
+          <li><strong>Requirements stability.</strong> When specifications are fixed, Waterfall or the V-Model is often appropriate. When requirements change frequently, Agile or the Prototype model is usually a better fit.</li>
+          <li><strong>Project size and complexity.</strong> Large, safety-critical systems need rigorous models with strong documentation. Smaller applications can often use RAD or Agile successfully.</li>
+          <li><strong>Risk level.</strong> High technical or business risk favours the Spiral model (<a href="02-05-spiral.html#sec-2-5">§2.5</a>) or incremental delivery so that risk is reduced early.</li>
+          <li><strong>Customer involvement.</strong> RAD and Agile require active users throughout the project, whereas Waterfall relies on upfront sign-off of requirements and design.</li>
+          <li><strong>Time-to-market.</strong> Incremental development, RAD, and Agile typically deliver working software to users earlier than a single end-of-project release.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — SDLC definition and phases</div>
+          <p><strong>Q:</strong> Define SDLC. List its phases with entry and exit criteria for any three phases. How does SDLC relate to the software process in Topic 1?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define SDLC as a structured framework of phases from planning through maintenance, and explain that an SDLC model is a specific way of ordering, overlapping, or repeating those phases.</li>
+            <li>List all seven standard phases and give entry and exit criteria for at least requirements, design, and testing using the table above.</li>
+            <li>Link to <a href="../01-introduction-and-fundamentals.html#sec-1-9">Topic 1 §1.9</a>: the underlying process activities are the same, but the chosen model defines their sequence, iteration, and overlap.</li>
+            <li>Explain model selection using requirements stability, project size, risk level, customer involvement, and schedule pressure.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <span class="btn-back chapter-nav-prev is-disabled">&larr; Previous</span>
+        <a class="btn-back chapter-nav-next" href="02-02-classical-waterfall.html">2.2 Classical Waterfall Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.7 Iterative Enhancement Models</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.7 Iterative Enhancement Models</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-7">
+        <p>
+          <strong>Iterative Enhancement</strong> is an approach to software development in which the system is built
+          through a series of <strong>iterations</strong>, and each iteration <strong>adds new modules or improves
+          existing ones</strong> on top of a <strong>pre-planned overall architecture</strong>. Unlike pure evolutionary
+          models (§2.6), where structure and requirements may co-evolve unpredictably, iterative enhancement assumes
+          that the team can define a <strong>stable architectural skeleton early</strong> and then fill it in over
+          successive cycles — like completing the rooms of a house whose floor plan was already drawn.
+        </p>
+        <p>
+          Iterative Enhancement is a <strong>development philosophy</strong>, not always a single named diagram.
+          The <strong>Incremental Process Model</strong> (§2.8) is the most common exam example of iterative
+          enhancement in practice. Iterative Waterfall (§2.3) can also be used <em>inside</em> each iteration when
+          the team needs controlled feedback within a single increment. The key exam phrase:
+          <strong>“planned architecture + successive module additions.”</strong>
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-iter-enhance-caption">
+          <img src="../../../assets/images/se-topic-02/incremental.webp"
+               alt="Iterative enhancement — planned architecture with successive module additions per iteration"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-iter-enhance-caption">Iterative Enhancement — each iteration adds modules to a pre-planned architecture (GeeksforGeeks). In exams, show a fixed core structure with new boxes attached in each cycle.</figcaption>
+        </figure>
+
+        <h3>Why iterative enhancement exists</h3>
+        <p>
+          Classical Waterfall tries to build everything in one pass — risky when the system is large or when stakeholders
+          need early proof that the direction is correct. Pure evolutionary development (Agile, evolutionary prototyping)
+          allows architecture to emerge — powerful for uncertain domains but risky when the system must integrate with
+          legacy databases, comply with standards, or scale to millions of users. Iterative Enhancement sits in the
+          <strong>middle ground</strong>: plan the structure once, then grow the product in controlled steps so that
+          each iteration delivers value without redesigning the foundation every month.
+        </p>
+
+        <h3>Core principles</h3>
+        <ul>
+          <li>
+            <strong>Architecture first.</strong> Before the first iteration, architects define modules, interfaces,
+            data models, and integration points. Later iterations must fit this skeleton unless a formal change
+            request authorises structural revision.
+          </li>
+          <li>
+            <strong>Each iteration extends the same codebase.</strong> New modules plug into existing interfaces;
+            the team does not throw away the previous iteration and start from scratch (contrast throwaway prototyping, §2.4).
+          </li>
+          <li>
+            <strong>Requirements are mostly known but may be refined.</strong> The broad feature set is planned early;
+            details within each module can be clarified during the iteration that implements that module.
+          </li>
+          <li>
+            <strong>Integration and regression testing every cycle.</strong> Because each iteration builds on prior work,
+            the team must verify that new code does not break old modules — configuration management and automated
+            tests are essential.
+          </li>
+          <li>
+            <strong>Partial delivery is possible.</strong> When combined with the Incremental model, users may receive
+            working subsets early; when used internally (e.g., alpha builds), stakeholders still see progress before
+            the full product is finished.
+          </li>
+        </ul>
+
+        <h3>Process — how an iterative enhancement project unfolds</h3>
+        <ol>
+          <li>
+            <strong>Initial planning and architecture.</strong> The team produces a high-level requirements overview,
+            system architecture document, module breakdown, and interface specifications. Risk analysis identifies
+            which modules are critical path or technically risky.
+          </li>
+          <li>
+            <strong>Prioritise modules for iteration 1.</strong> Choose the smallest set that forms a coherent, testable
+            subset — often core data handling, authentication, or the most essential business workflow.
+          </li>
+          <li>
+            <strong>Iteration 1 — develop, integrate, test, deliver.</strong> Run requirements → design → code → test
+            for the chosen modules; integrate with any stubs for future modules; deliver to users or internal testers
+            if the Incremental delivery pattern is used.
+          </li>
+          <li>
+            <strong>Review and refine plan.</strong> Feedback from iteration 1 may adjust <em>details</em> of later
+            modules but should not casually rewrite the whole architecture. Major structural changes go through change control.
+          </li>
+          <li>
+            <strong>Iteration 2, 3, … n.</strong> Add the next planned modules, connect them via defined interfaces,
+            run full regression on all prior modules, and optionally release another increment to customers.
+          </li>
+          <li>
+            <strong>Final integration and acceptance.</strong> When all planned modules exist, perform system-wide
+            testing, performance tuning, documentation, and formal acceptance against the original vision.
+          </li>
+        </ol>
+
+        <h3>What happens inside one iteration</h3>
+        <p>
+          Each iteration is not “random coding” — it typically follows a <strong>mini-lifecycle</strong> (often a
+          mini-Waterfall or Iterative Waterfall). Examiners expect you to name the activities:
+        </p>
+        <ul>
+          <li><strong>Requirements for this iteration</strong> — detailed specs for the modules in scope only.</li>
+          <li><strong>Design</strong> — module-level design that conforms to the global architecture (class diagrams, APIs, database tables).</li>
+          <li><strong>Implementation</strong> — coding with reuse of shared libraries and adherence to interface contracts.</li>
+          <li><strong>Unit and integration testing</strong> — test new modules alone and together with existing ones.</li>
+          <li><strong>Regression testing</strong> — re-run tests for all previously delivered modules to catch breakage.</li>
+          <li><strong>Release or internal demo</strong> — deploy increment or show working build to stakeholders.</li>
+        </ul>
+
+        <h3>Iterative Enhancement vs Evolutionary Development</h3>
+        <p>
+          This is the comparison most often asked in long questions. §2.6 covers evolutionary development in full;
+          the table below is the exam-ready summary:
+        </p>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Iterative Enhancement</th><th>Evolutionary Development</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Architecture</td><td>Planned upfront and kept as a stable skeleton; major changes need formal approval.</td><td>May emerge or change significantly across early versions; refactoring is expected.</td></tr>
+            <tr><td>Requirements</td><td>Mostly known at the start; refined per module during each iteration.</td><td>Often unclear initially; discovered and changed through user experience of each version.</td></tr>
+            <tr><td>Goal of each iteration</td><td>Implement the next planned part of a known structure.</td><td>Learn from users and adapt the product — structure and features may shift.</td></tr>
+            <tr><td>Planning horizon</td><td>Detailed plan for the whole system architecture; detailed requirements per iteration.</td><td>Roadmap is high-level; detailed planning mainly for the next version or sprint.</td></tr>
+            <tr><td>Examples</td><td>Incremental model (§2.8); structured multi-release projects with fixed platforms.</td><td>Evolutionary prototyping (§2.4), Spiral (§2.5), Agile (§2.11).</td></tr>
+            <tr><td>Architecture risk</td><td>Lower — structure is fixed early, so integration paths are clearer.</td><td>Higher — “big ball of mud” if refactoring is neglected between versions.</td></tr>
+            <tr><td>Requirements risk</td><td>Higher if upfront requirements were wrong — harder to pivot than in Agile.</td><td>Lower — change is built into the process from the start.</td></tr>
+            <tr><td>Metaphor</td><td>Filling in rooms of a house already designed on paper.</td><td>Growing an organism that changes shape as it matures.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Iterative Enhancement vs Iterative Waterfall (§2.3)</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Iterative Enhancement</th><th>Iterative Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primary goal</td><td>Build the full system in planned stages, adding modules each iteration.</td><td>Build one complete product through one pass of phases, looping back only to fix errors.</td></tr>
+            <tr><td>Customer delivery</td><td>May deliver partial working software after each iteration (especially with Incremental model).</td><td>Customer usually receives the full product only at the end.</td></tr>
+            <tr><td>Feedback loops</td><td>Forward progress through planned increments; feedback refines future modules.</td><td>Backward loops fix defects in earlier phases of the same release.</td></tr>
+            <tr><td>Architecture</td><td>Explicitly planned for all future iterations from the start.</td><td>Designed once for the whole system; loops do not imply multiple customer releases.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Iterative Enhancement vs Incremental Model (§2.8)</h3>
+        <p>
+          <strong>Important exam distinction:</strong> Iterative Enhancement is the <em>concept</em> (planned architecture,
+          successive module additions). The Incremental Process Model is a <em>specific SDLC model</em> that implements
+          iterative enhancement by delivering each chunk through a mini-Waterfall to the customer. Not every iterative
+          enhancement project must ship to customers every iteration — internal alpha builds still follow the philosophy.
+          Every Incremental model project is iterative enhancement; not every iterative enhancement project uses the
+          full Incremental delivery pattern.
+        </p>
+
+        <h3>Architecture and interface planning (critical success factor)</h3>
+        <p>
+          Because later iterations depend on decisions made early, the team must invest in:
+        </p>
+        <ul>
+          <li><strong>Modular decomposition</strong> — clear boundaries so iteration 3 does not require rewriting iteration 1.</li>
+          <li><strong>Stable APIs and data schemas</strong> — version interfaces if change is unavoidable; avoid breaking existing modules.</li>
+          <li><strong>Extension points</strong> — hooks for features planned in later iterations (plugin slots, configurable workflows).</li>
+          <li><strong>Shared infrastructure early</strong> — authentication, logging, error handling, and database access layers in iteration 1.</li>
+          <li><strong>Traceability</strong> — map each module to requirements and test cases so regression is manageable.</li>
+        </ul>
+        <p>
+          Failure to plan interfaces is the main reason iterative enhancement projects collapse into expensive rework —
+          effectively becoming evolutionary development with architectural chaos.
+        </p>
+
+        <h3>Step-by-step scenario</h3>
+        <p><strong>Scenario — University learning management system (LMS):</strong></p>
+        <ol>
+          <li>Architects define modules: user accounts, course catalog, assignments, grading, notifications, analytics. Database schema and REST API conventions are fixed in month 1.</li>
+          <li><strong>Iteration 1:</strong> Login, roles (student/teacher/admin), course enrollment. Delivered to one pilot department.</li>
+          <li><strong>Iteration 2:</strong> Assignment upload and deadline tracking. Integrates with existing user and course modules; regression tests cover iteration 1.</li>
+          <li><strong>Iteration 3:</strong> Online quizzes and auto-grading. Uses same user and course APIs; no change to core schema except one new table planned in the original design.</li>
+          <li><strong>Iteration 4:</strong> Email/SMS notifications and grade export. Pilot feedback adjusts notification templates but not the overall architecture.</li>
+          <li>Full university rollout after acceptance testing across all modules.</li>
+        </ol>
+        <p>
+          If the team had skipped upfront API design, iteration 3 might have forced a rewrite of the course module —
+          the hallmark of failed iterative enhancement.
+        </p>
+
+        <h3>Advantages of Iterative Enhancement</h3>
+        <ul>
+          <li>
+            <strong>Controlled growth on a stable base</strong> — avoids both Waterfall’s big-bang risk and evolutionary
+            models’ architectural drift when discipline is applied.
+          </li>
+          <li>
+            <strong>Early partial functionality</strong> — when paired with Incremental delivery, users gain value before
+            the full system exists.
+          </li>
+          <li>
+            <strong>Easier integration than ad-hoc evolution</strong> — interfaces defined upfront reduce surprises when modules meet.
+          </li>
+          <li>
+            <strong>Manageable team focus</strong> — each iteration has a clear scope (specific modules), improving estimates and morale.
+          </li>
+          <li>
+            <strong>Progress visibility</strong> — sponsors see working software grow iteration by iteration instead of waiting years.
+          </li>
+          <li>
+            <strong>Supports parallel work</strong> — independent modules in different iterations can sometimes be built by separate teams once interfaces are frozen.
+          </li>
+          <li>
+            <strong>Regression catches defects early</strong> — testing after every iteration prevents a pile-up of integration bugs at the end.
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>Upfront architecture must be good</strong> — wrong early decisions propagate through every iteration;
+            fixing them later is expensive (contrast Agile, where refactoring is routine).
+          </li>
+          <li>
+            <strong>Not ideal for highly uncertain requirements</strong> — if the team cannot predict major features,
+            evolutionary or prototype approaches fit better.
+          </li>
+          <li>
+            <strong>Integration overhead</strong> — each iteration must merge with all prior modules; without automation, cost grows.
+          </li>
+          <li>
+            <strong>Total cost may exceed single-pass Waterfall</strong> — repeated testing, documentation per iteration,
+            and release activities add expense.
+          </li>
+          <li>
+            <strong>“Iteration” can be confused with “fix bugs”</strong> — exam answers must clarify that iterations add
+            planned capability, unlike Iterative Waterfall loops that mainly correct earlier-phase errors.
+          </li>
+          <li>
+            <strong>Customer expectations</strong> — early increments may look “unfinished”; stakeholders must understand the roadmap.
+          </li>
+        </ul>
+
+        <h3>When to use Iterative Enhancement</h3>
+        <ul>
+          <li>Large systems where the <strong>overall structure is understandable</strong> early but full implementation takes too long for one pass.</li>
+          <li>Projects needing <strong>early partial delivery</strong> without abandoning architectural discipline (Incremental model).</li>
+          <li>Products that must integrate with <strong>fixed external systems</strong> (legacy ERP, payment gateways, government APIs).</li>
+          <li>Organisations that want <strong>more flexibility than Waterfall</strong> but more structure than pure Agile.</li>
+          <li>Multi-team development where <strong>interface contracts</strong> allow parallel module construction.</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Requirements are unknown or volatile — use evolutionary prototyping, Spiral, or Agile (§2.4, §2.5, §2.11).</li>
+          <li>Small projects completable in one short cycle — overhead of multiple iterations is unnecessary.</li>
+          <li>No skill to design scalable architecture upfront — the model will fail without a solid skeleton.</li>
+          <li>Regulatory need for single documented baseline with no partial releases — classical or V-Model Waterfall may be required.</li>
+        </ul>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — E-commerce platform rebuild:</strong> A retailer replaces a monolithic PHP shop with a
+          microservices architecture. Architects define services for catalog, cart, checkout, inventory, and shipping
+          in quarter 1. Iteration 1 launches catalog browsing and search (read-only, no checkout). Iteration 2 adds
+          cart and guest checkout. Iteration 3 integrates payment and inventory reservation. Iteration 4 adds loyalty
+          points and recommendations. Each release is production-quality on the same platform; the service boundaries
+          chosen in quarter 1 never change. This is iterative enhancement implemented through an Incremental delivery plan.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Iterative Enhancement</div>
+          <p><strong>Q:</strong> Explain the Iterative Enhancement approach to software development. How does it differ from Evolutionary Development models and from the Iterative Waterfall model? Describe the typical process, advantages, disadvantages, and suitable application areas. Illustrate with an example.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define Iterative Enhancement as building software in iterations on a pre-planned architecture, where each cycle adds or improves modules while preserving the structural design.</li>
+            <li>State that it is a philosophy exemplified by the Incremental model (§2.8), distinct from evolutionary approaches where architecture and requirements co-evolve.</li>
+            <li>Explain core principles: architecture first, extend same codebase, mostly known requirements, integration and regression each iteration.</li>
+            <li>Describe the process: plan architecture → prioritise modules → develop/test/deliver iteration 1 → repeat until complete → final acceptance.</li>
+            <li>Contrast with Evolutionary Development using a table (architecture, requirements, goal of iteration, examples, risk).</li>
+            <li>Contrast with Iterative Waterfall: enhancement adds planned modules across releases; Iterative Waterfall loops back to fix errors within one product cycle.</li>
+            <li>Clarify relationship to Incremental model: Incremental is a specific delivery pattern that implements iterative enhancement.</li>
+            <li>Discuss architecture planning (modules, APIs, extension points) as critical success factor.</li>
+            <li>Walk through an example (e.g., LMS or e-commerce) showing iterations adding modules on a fixed skeleton.</li>
+            <li>List advantages (controlled growth, early value, integration clarity) and disadvantages (bad upfront architecture, integration cost, not for volatile requirements).</li>
+            <li>State when to use and when to prefer other models.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> Iterative Enhancement differs from Evolutionary Development mainly because — <strong>(B) Architecture is planned upfront and kept stable</strong>.</p>
+          <p><strong>MCQ:</strong> Which model best exemplifies Iterative Enhancement in exams? — <strong>(C) Incremental Process Model</strong>.</p>
+          <p><strong>MCQ:</strong> In Iterative Enhancement, each iteration primarily — <strong>(A) Adds planned modules to an existing structure</strong>.</p>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-06-evolutionary.html">&larr; 2.6 Evolutionary Development Models</a>
+        <a class="btn-back chapter-nav-next" href="02-08-incremental.html">2.8 Incremental Process Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

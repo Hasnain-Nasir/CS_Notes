@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.4 Prototype Model / Software Prototyping</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.4 Prototype Model / Software Prototyping</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-4">
+        <p>
+          The <strong>Prototype Model</strong> is an SDLC approach in which the team builds a
+          <strong>working model (prototype)</strong> of the system — or of critical parts of it — early in the
+          project so that users and developers can <strong>see, use, and critique</strong> realistic behaviour before
+          committing to full-scale design and coding. The prototype may be a screen mock-up with simulated data,
+          a partial implementation of core workflows, or a throwaway script; the essential idea is
+          <strong>learning by doing</strong> rather than relying only on written requirements.
+        </p>
+        <p>
+          <strong>Software Prototyping</strong> appears as a separate item on the course syllabus outline. In exams,
+          treat it as covering both (1) <strong>prototyping as a requirements-engineering technique</strong> used inside
+          other models (e.g., Spiral risk reduction), and (2) <strong>the Prototype Model</strong> as a named SDLC
+          process where prototyping drives the main flow of the project.
+        </p>
+
+        <h3>Why prototyping is needed</h3>
+        <p>
+          Many projects fail because stakeholders and developers interpret the same words differently. Users often
+          cannot articulate needs until they <em>see</em> a system. Written SRS documents are abstract; prototypes make
+          requirements <strong>concrete</strong>. The Prototype Model is therefore chosen when:
+        </p>
+        <ul>
+          <li>Requirements are <strong>incomplete, ambiguous, or conflicting</strong>.</li>
+          <li>The <strong>user interface</strong> or human workflow is central (booking systems, dashboards, mobile apps).</li>
+          <li>The domain is <strong>new</strong> to the development team (first version of a product category).</li>
+          <li>Stakeholders need <strong>early proof</strong> that an idea is feasible before large funding is approved.</li>
+        </ul>
+        <p>
+          Contrast with Classical Waterfall (§2.2), which assumes requirements are complete before design. Prototyping
+          deliberately delays freezing the SRS until experience with a model reduces uncertainty.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-prototype-caption">
+          <img src="../../../assets/images/se-topic-02/prototype-flow.svg"
+               alt="Prototype model throwaway cycle — requirements, quick design, build prototype, user evaluation, refine SRS, repeat until satisfied, then final implementation"
+               width="720" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-prototype-caption">Prototype Model (throwaway cycle) — loop until requirements stabilise, then discard prototype and build the final system.</figcaption>
+        </figure>
+
+        <h3>Phases of the Prototype Model (general flow)</h3>
+        <p>
+          Textbooks and GFG describe a repeating cycle followed by a final construction phase. Use these phases in
+          long answers and link them to the diagram above.
+        </p>
+        <ol>
+          <li>
+            <strong>Requirement gathering (initial)</strong> — collect a <em>partial</em> set of known requirements;
+            accept that many details are unknown. Produce a draft SRS or user stories, not a final contract.
+          </li>
+          <li>
+            <strong>Quick / rough design</strong> — focus on screens, workflows, and data visible to users; ignore
+            optimisation, full security hardening, and production scalability for now.
+          </li>
+          <li>
+            <strong>Build prototype</strong> — implement using rapid tools (UI builders, scripting languages, mock APIs).
+            Speed matters more than clean architecture in throwaway mode.
+          </li>
+          <li>
+            <strong>User evaluation</strong> — users perform realistic tasks; analysts record gaps, wrong assumptions,
+            and new requirements. Manage expectations: label it a prototype, not the finished product.
+          </li>
+          <li>
+            <strong>Refine requirements</strong> — update SRS, wireframes, and acceptance criteria. If still unclear,
+            loop back to quick design and another prototype version.
+          </li>
+          <li>
+            <strong>Final implementation</strong> — once stakeholders agree on requirements, build the
+            <strong>production system</strong> with proper architecture, testing, and documentation. In throwaway
+            prototyping, the prototype code is <strong>discarded</strong>; in evolutionary prototyping, the prototype
+            is <strong>extended</strong> (see below).
+          </li>
+        </ol>
+
+        <h3>Types of prototyping</h3>
+        <p>
+          Exams almost always ask you to <strong>compare throwaway and evolutionary</strong> prototyping. Learn the
+          table and be able to give examples of each.
+        </p>
+
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Throwaway (rapid) prototyping</th><th>Evolutionary prototyping</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Purpose</td><td>The prototype is used only to clarify and validate requirements.</td><td>The prototype is used to deliver the product incrementally until it becomes the final system.</td></tr>
+            <tr><td>Fate of prototype code</td><td>The prototype code is discarded after the SRS is stable.</td><td>The prototype code is kept and extended in each iteration.</td></tr>
+            <tr><td>Final system</td><td>The final system is built from scratch using proper engineering practices.</td><td>The final system evolves directly from the prototype codebase.</td></tr>
+            <tr><td>Documentation</td><td>Documentation is light during exploration, and the SRS is updated at the end.</td><td>Documentation must improve over time, or technical debt will accumulate.</td></tr>
+            <tr><td>Risk</td><td>Effort is wasted if lessons from the prototype are not captured in the SRS.</td><td>Technical debt and poor structure arise if the team does not refactor regularly.</td></tr>
+            <tr><td>Best when</td><td>Requirements are very unclear and the user interface must be discovered.</td><td>Requirements evolve, but a usable core of the system can be built early.</td></tr>
+          </tbody>
+        </table>
+
+        <h4>1. Throwaway (rapid) prototyping</h4>
+        <p>
+          The team builds a <strong>quick, disposable prototype</strong> solely to explore the problem space. Tools may
+          include paper sketches, Figma mock-ups, or a “quick and dirty” web demo with fake data. When users and analysts
+          agree on what the system should do, developers <strong>throw away</strong> the prototype and implement the real
+          system with maintainable code, proper database design, and full test coverage.
+        </p>
+        <ul>
+          <li><strong>Focus.</strong> The team concentrates on understanding <em>what</em> the system must do, not on how it will be built in production.</li>
+          <li><strong>Speed.</strong> The team uses rapid tools such as 4GLs, scripting, UI generators, or AI-assisted mock-ups to shorten feedback time.</li>
+          <li><strong>Deliverable of the prototyping phase.</strong> The main output is an improved, detailed SRS, not the prototype program itself.</li>
+          <li><strong>Exam trap.</strong> Throwaway prototyping does not mean “no documentation”; the effort is wasted if user feedback is not written into the SRS.</li>
+        </ul>
+        <p>
+          <strong>Example — University course registration:</strong> Students cannot describe every edge case in interviews.
+          The team builds a clickable prototype in two weeks. Users discover needs for wait-lists, prerequisite checks,
+          and mobile layout. The prototype is discarded; the production system is built in Java with a proper database.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-evolutionary-prototype-caption">
+          <img src="../../../assets/images/se-topic-02/prototype-evolutionary.webp"
+               alt="Evolutionary prototyping model — prototype built and refined through iterations until it becomes the final product"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-evolutionary-prototype-caption">Evolutionary prototyping — the prototype is refined over iterations and becomes the final product (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h4>2. Evolutionary prototyping</h4>
+        <p>
+          The first prototype is a <strong>core subset</strong> of the system (e.g., login + one main feature). Users
+          evaluate it; developers <strong>add features and improve quality</strong> in later iterations until the
+          prototype becomes the delivered product. No separate “big bang” rewrite as in throwaway mode.
+        </p>
+        <ul>
+          <li><strong>Advantage:</strong> Working software from early iterations. Users see continuous progress.</li>
+          <li><strong>Risk:</strong> prototype code written for speed may lack modularity. Requires <strong>refactoring</strong> and coding standards in later iterations.</li>
+          <li><strong>Relation to evolutionary development</strong> (§2.6): evolutionary prototyping is one form of building the system through repeated extension.</li>
+        </ul>
+        <p>
+          <strong>Example — Startup mobile app:</strong> Version 0.1 shows profile and feed; version 0.2 adds messaging;
+          each release is the same codebase grown outward. Investors see a live product early.
+        </p>
+
+        <h3>Other prototyping terms (short definitions)</h3>
+        <ul>
+          <li><strong>Horizontal prototype.</strong> This type covers many features at shallow depth, such as many screens with little underlying logic.</li>
+          <li><strong>Vertical prototype.</strong> This type implements one feature fully through all layers (user interface, logic, and database) to prove feasibility.</li>
+          <li><strong>Paper prototype.</strong> These are hand-drawn sketches used in very early workshops; they are the cheapest form of prototyping.</li>
+          <li><strong>Operational prototype.</strong> This type focuses on performance or algorithm behaviour, for example whether search meets the required response time.</li>
+        </ul>
+
+        <h3>Prototype Model vs Waterfall and Iterative Waterfall</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall / Iterative Waterfall</th><th>Prototype Model</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>When requirements are fixed</td><td>Requirements are treated as fixed early, or refined only through formal feedback loops.</td><td>Requirements are frozen only after one or more prototyping cycles.</td></tr>
+            <tr><td>First deliverable to user</td><td>The user first receives documents, and working software appears late.</td><td>The user receives prototype screens or an executable model early in the project.</td></tr>
+            <tr><td>Handling vague UI</td><td>Waterfall is a poor fit when the user interface is unclear.</td><td>The Prototype model is a strong fit when the user interface must be explored.</td></tr>
+            <tr><td>Cost of wrong requirements</td><td>The cost is high if wrong requirements are discovered only during testing.</td><td>The cost is lower because mistakes are often found during prototype evaluation.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Advantages of the Prototype Model</h3>
+        <ul>
+          <li>
+            <strong>Clarifies requirements early</strong> — users react to something tangible; missing rules and conflicting
+            goals surface before large development cost.
+          </li>
+          <li>
+            <strong>Improves communication</strong> — developers, managers, and customers share a common reference (the prototype).
+          </li>
+          <li>
+            <strong>Reduces development risk</strong> — wrong product direction is corrected cheaply compared to rewriting a finished system.
+          </li>
+          <li>
+            <strong>Supports usability evaluation</strong> — navigation, layout, and accessibility can be tested with real users.
+          </li>
+          <li>
+            <strong>Helps estimation</strong> — after a vertical prototype, the team can estimate effort for the full build more accurately.
+          </li>
+          <li>
+            <strong>Stakeholder confidence</strong> — sponsors see progress and are more likely to continue funding (especially evolutionary path).
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>User expectation management</strong> — users may think the rough prototype is nearly finished (“Why does it take six more months?”).
+            Must label versions, use greyscale UI, or disclaim performance.
+          </li>
+          <li>
+            <strong>Scope creep</strong> — each demo invites new features; needs strong product owner and change control.
+          </li>
+          <li>
+            <strong>Throwaway effort wasted</strong> — if the team does not update the SRS, the prototype was pointless.
+          </li>
+          <li>
+            <strong>Evolutionary technical debt</strong> — quick hacks in early iterations may corrupt architecture unless time is budgeted for refactoring.
+          </li>
+          <li>
+            <strong>Non-functional requirements</strong> — security, load, and reliability are hard to judge from a light prototype; separate spikes or benchmarks may be needed.
+          </li>
+          <li>
+            <strong>Not for all domains</strong> — safety-critical firmware or batch-only backends with no UI gain less from UI-centric prototyping.
+          </li>
+          <li>
+            <strong>Documentation neglect</strong> — teams focused on demos may skip traceability; dangerous for regulated systems unless corrected before final build.
+          </li>
+        </ul>
+
+        <h3>When to use the Prototype Model</h3>
+        <ul>
+          <li>Requirements are <strong>unclear or unstable</strong> at project start.</li>
+          <li><strong>Human-computer interaction</strong> is a major success factor.</li>
+          <li>Customer cannot evaluate a paper SRS but <strong>can use a demo</strong>.</li>
+          <li>Project is <strong>medium risk</strong> and needs early validation before Waterfall-style full specification.</li>
+          <li>Combines well with <strong>Spiral model</strong> (§2.5). Prototypes built in the “resolve risks” quadrant.</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Requirements are already complete and legally fixed (strict Waterfall or V-Model may suffice).</li>
+          <li>Primary risks are <strong>algorithmic or performance</strong>. Need vertical/operational prototypes or proofs, not UI mock-ups alone.</li>
+          <li>Organisation lacks discipline to <strong>discard or refactor</strong>. Evolutionary prototypes become unmaintainable legacy code.</li>
+          <li>Tight fixed-price contract with <strong>no allowance</strong> for requirement evolution after demos.</li>
+        </ul>
+
+        <h3>Step-by-step exam scenario (throwaway)</h3>
+        <ol>
+          <li>Bank wants a new loan calculator web app. Business rules are spread across emails and spreadsheets.</li>
+          <li>Analysts run workshops and build a <strong>throwaway</strong> HTML/JS prototype with sample rates.</li>
+          <li>Loan officers test scenarios. Discover missing rules for Islamic finance products and early repayment.</li>
+          <li>SRS v2.0 is written. Prototype is <strong>archived and discarded</strong>.</li>
+          <li>Production system is developed with secure APIs, audit logs, and penetration testing. None of which were in the prototype.</li>
+        </ol>
+
+        <h3>Relation to syllabus and other topics</h3>
+        <ul>
+          <li><strong>Syllabus outline — Software Prototyping:</strong> satisfied by this section (technique + Prototype Model).</li>
+          <li><strong>Spiral model (§2.5):</strong> uses prototypes to reduce specific risks each cycle.</li>
+          <li><strong>RAD (§2.9):</strong> relies on fast prototyping and user workshops. Overlapping ideas, different emphasis (time-boxing).</li>
+          <li><strong>Agile (§2.11):</strong> every sprint delivers incrementally. Similar spirit to evolutionary prototyping.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Prototyping</div>
+          <p><strong>Q:</strong> Explain the Prototype Model of software development. Describe its phases with a diagram. Differentiate between throwaway and evolutionary prototyping with examples. Discuss advantages, disadvantages, and situations where prototyping is appropriate or inappropriate.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define the Prototype model as building an early working model that users evaluate before full development, and note that the syllabus item Software Prototyping covers both the technique and the SDLC model.</li>
+            <li>Explain why prototyping is used when requirements are vague, the user interface is critical, or users cannot express needs from documents alone.</li>
+            <li>Describe the throwaway cycle: requirements, quick design, prototype, user evaluation, refined SRS, repeated loops, then final implementation after discarding the prototype.</li>
+            <li>Describe evolutionary prototyping as repeated refinement of the same codebase until it becomes the delivered product.</li>
+            <li>List the six phases of the prototype model and state the purpose of each in full sentences.</li>
+            <li>Compare throwaway and evolutionary prototyping using purpose, fate of code, documentation, risks, and when to use each.</li>
+            <li>Give examples such as university registration (throwaway) versus a startup app (evolutionary).</li>
+            <li>Mention horizontal, vertical, paper, and operational prototypes if the question asks for types.</li>
+            <li>Discuss advantages, disadvantages, suitable and unsuitable projects, and contrast with Waterfall (late versus early requirements freeze).</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> In throwaway prototyping, the prototype is — <strong>(B) Discarded after requirements are clarified</strong>.</p>
+          <p><strong>MCQ:</strong> In evolutionary prototyping, the final system is — <strong>(C) Developed by extending the prototype over iterations</strong>.</p>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-03-iterative-waterfall.html">&larr; 2.3 Iterative Waterfall Model</a>
+        <a class="btn-back chapter-nav-next" href="02-05-spiral.html">2.5 Spiral Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

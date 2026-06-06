@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.8 Incremental Process Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.8 Incremental Process Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-8">
+        <p>
+          The <strong>Incremental Process Model</strong> (also called the <strong>Incremental Model</strong>) divides
+          the system into <strong>multiple increments</strong> — self-contained chunks of functionality — and develops
+          each increment through a <strong>mini-Waterfall</strong> (requirements → design → implementation → testing)
+          before <strong>delivering it to the customer</strong>. The first increment provides core, usable capability;
+          later increments add features until the full system is complete. Unlike Classical Waterfall, users do not wait
+          until the end of the project to see working software.
+        </p>
+        <p>
+          The Incremental model is the most common <strong>named SDLC model</strong> that implements
+          <strong>Iterative Enhancement</strong> (§2.7): architecture is planned upfront, and each cycle adds modules
+          on that stable base. It is also classified as an <strong>evolutionary</strong> approach (§2.6) because the
+          product grows over time — but evolution here is in <em>delivered features</em>, not in discovering the whole
+          architecture from scratch. The key exam phrase: <strong>“multiple mini-Waterfalls, each delivering a usable increment.”</strong>
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-incremental-caption">
+          <img src="../../../assets/images/se-topic-02/incremental.webp"
+               alt="Incremental model — multiple mini-waterfall cycles delivering successive product increments"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-incremental-caption">Incremental Model — each increment is a complete mini-cycle delivering usable functionality (GeeksforGeeks). In exams, draw stacked or side-by-side mini-Waterfalls labelled Increment 1, 2, 3…</figcaption>
+        </figure>
+
+        <h3>Why the Incremental model exists</h3>
+        <p>
+          Large systems take months or years to build. Classical Waterfall keeps customers waiting until a single
+          “big-bang” release — if requirements were misunderstood, the project fails late and expensively. Pure Agile
+          suits many products but not every organisation (heavy regulation, fixed-price contracts, legacy integration).
+          The Incremental model offers a <strong>structured middle path</strong>: plan the whole architecture once,
+          ship working subsets on a schedule, gather feedback, and adjust later increments — without abandoning
+          documentation or phase discipline entirely.
+        </p>
+
+        <h3>Core characteristics</h3>
+        <ul>
+          <li>
+            <strong>Partitioned requirements.</strong> The full SRS is split into increment-sized pieces, usually
+            ordered by business priority (must-have first, nice-to-have later).
+          </li>
+          <li>
+            <strong>Mini-Waterfall per increment.</strong> Each chunk runs its own requirements refinement, design,
+            coding, and testing before release — not a single monolithic pass through all phases for the whole system.
+          </li>
+          <li>
+            <strong>Customer-visible delivery every increment.</strong> Each release is production-quality (or pilot-quality)
+            software the user can operate, not merely an internal prototype.
+          </li>
+          <li>
+            <strong>Shared architecture from day one.</strong> Database schema, module interfaces, and integration
+            strategy must accommodate all planned increments — see §2.7 on architecture planning.
+          </li>
+          <li>
+            <strong>Cumulative product.</strong> Increment 2 builds on increment 1’s codebase; increment 3 includes
+            everything from 1 and 2 plus new features — the system <em>grows</em>, it is not replaced each time.
+          </li>
+          <li>
+            <strong>Regression testing across increments.</strong> Every new increment must be tested together with all
+            prior increments to ensure nothing breaks.
+          </li>
+        </ul>
+
+        <h3>Process — how an incremental project unfolds</h3>
+        <ol>
+          <li>
+            <strong>Overall requirements and architecture.</strong> Define the full vision, module breakdown, interfaces,
+            and data model. Identify which features belong to which increment (release plan).
+          </li>
+          <li>
+            <strong>Prioritise increments.</strong> Rank by business value, dependency order, and risk — core workflows
+            and shared infrastructure typically go in increment 1.
+          </li>
+          <li>
+            <strong>Increment 1 — mini-Waterfall.</strong> Detailed requirements for increment 1 only → design →
+            implement → test → deploy to users. Document known stubs or placeholders for future increments if needed.
+          </li>
+          <li>
+            <strong>Customer feedback and plan adjustment.</strong> Users report gaps, usability issues, or new priorities.
+            Adjust scope of increment 2 within the fixed architecture; major structural changes need change control.
+          </li>
+          <li>
+            <strong>Increment 2, 3, … n.</strong> Repeat mini-Waterfall for each chunk; integrate with all prior code;
+            run full regression; release to customers.
+          </li>
+          <li>
+            <strong>Final system acceptance.</strong> When all increments are delivered, perform end-to-end system test,
+            performance validation, training, and formal sign-off on the complete product.
+          </li>
+        </ol>
+
+        <h3>Phases inside one increment (mini-Waterfall)</h3>
+        <p>
+          Examiners often ask you to list what happens <em>within</em> a single increment. Typical phases:
+        </p>
+        <ul>
+          <li><strong>Requirements analysis (for this increment)</strong> — refine specs for features in scope; update traceability matrix.</li>
+          <li><strong>Design</strong> — module and interface design consistent with the global architecture; update DDS for new parts only.</li>
+          <li><strong>Implementation</strong> — code new features; reuse shared libraries from earlier increments.</li>
+          <li><strong>Testing</strong> — unit tests for new code; integration tests with prior increments; regression suite for the whole product so far.</li>
+          <li><strong>Delivery / deployment</strong> — release to production or pilot environment; user training for new features; release notes.</li>
+        </ul>
+        <p>
+          If defects found during testing belong to <em>earlier</em> increments, the team may apply
+          <strong>Iterative Waterfall</strong> (§2.3) feedback within that increment — fix design or code and re-test
+          before shipping.
+        </p>
+
+        <h3>Planning increments — horizontal vs vertical slicing</h3>
+        <p>
+          How you split the system affects success. Two common strategies (know both for exams):
+        </p>
+        <table>
+          <thead>
+            <tr><th>Strategy</th><th>Meaning</th><th>Example</th><th>Trade-off</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Horizontal (layer) slicing</strong></td><td>Each increment completes one architectural layer for part of the system.</td><td>Increment 1: database schema for all modules; increment 2: all UI shells; increment 3: all business logic.</td><td>Early increments may not be usable by end users — less common for customer delivery.</td></tr>
+            <tr><td><strong>Vertical (feature) slicing</strong></td><td>Each increment delivers an end-to-end slice of functionality through all layers.</td><td>Increment 1: login and user profile; increment 2: order placement; increment 3: payment and invoicing.</td><td>Preferred for incremental delivery — each release is usable and demo-able.</td></tr>
+          </tbody>
+        </table>
+        <p>
+          <strong>Exam tip:</strong> When asked for an example increment plan, use <strong>vertical slices</strong> —
+          examiners expect customer-visible functionality in every increment.
+        </p>
+
+        <h3>Classical Waterfall vs Incremental Model</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Classical Waterfall</th><th>Incremental Model</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Delivery pattern</td><td>Single release at the end of the project after all phases complete once.</td><td>Multiple partial releases; each increment is delivered when its mini-Waterfall finishes.</td></tr>
+            <tr><td>Requirements</td><td>Complete SRS frozen before design begins.</td><td>High-level SRS for whole system; detailed specs per increment just before that increment starts.</td></tr>
+            <tr><td>Customer involvement</td><td>Mainly at start (requirements) and end (acceptance).</td><td>Continuous — users operate each increment and feedback shapes later ones.</td></tr>
+            <tr><td>Risk of wrong product</td><td>High — mistakes discovered only at final acceptance.</td><td>Lower — early increments validate direction before full investment.</td></tr>
+            <tr><td>Architecture</td><td>Designed once for the entire system before coding.</td><td>Designed once upfront to support all increments; must allow safe extension.</td></tr>
+            <tr><td>Testing</td><td>System testing mainly at the end.</td><td>Testing after every increment plus cumulative regression.</td></tr>
+            <tr><td>Schedule visibility</td><td>Working software invisible until late in the project.</td><td>Visible progress after each increment — good for sponsors and morale.</td></tr>
+            <tr><td>Cost profile</td><td>Lower process overhead if one pass succeeds.</td><td>Higher overhead (repeated releases, regression) but less catastrophic failure risk.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Incremental Model vs Iterative Waterfall (§2.3)</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Incremental Model</th><th>Iterative Waterfall</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Number of customer releases</td><td>Multiple — one per increment.</td><td>Usually one final product; loops fix errors within the same release.</td></tr>
+            <tr><td>Direction of work</td><td>Forward through planned increments, each adding features.</td><td>Mainly forward through phases, with backward loops to correct earlier-phase mistakes.</td></tr>
+            <tr><td>Scope of each cycle</td><td>A subset of total functionality delivered as working software.</td><td>The full product scope, revisiting phases only when defects demand it.</td></tr>
+            <tr><td>Relationship</td><td>Iterative Waterfall can run <em>inside</em> each increment’s mini-Waterfall.</td><td>Does not by itself deliver partial products to customers.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Incremental Model vs Iterative Enhancement (§2.7)</h3>
+        <p>
+          <strong>Iterative Enhancement</strong> is the broader philosophy (planned architecture + successive module additions).
+          The <strong>Incremental Process Model</strong> is a specific way to implement it with formal mini-Waterfalls and
+          customer delivery each cycle. In exam answers: Incremental ⊂ Iterative Enhancement in practice; every Incremental
+          project is iterative enhancement, but you could do iterative enhancement with internal alpha builds only and no
+          customer release until the end.
+        </p>
+
+        <h3>Incremental Model vs Agile (§2.11)</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Incremental Model</th><th>Agile (e.g., Scrum)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Increment planning</td><td>Increments usually planned upfront in a release roadmap.</td><td>Sprints are short; backlog is reprioritised every sprint.</td></tr>
+            <tr><td>Requirements change</td><td>Allowed within limits; major change may require re-planning increments.</td><td>Change is welcomed even late in development (Agile Manifesto).</td></tr>
+            <tr><td>Process formality</td><td>Closer to Waterfall inside each increment — phases and documents.</td><td>Lightweight — working software over comprehensive documentation.</td></tr>
+            <tr><td>Increment size</td><td>Often weeks to months per increment.</td><td>Sprints typically 1–4 weeks.</td></tr>
+            <tr><td>Architecture</td><td>Strong emphasis on upfront architectural plan.</td><td>Architecture emerges; refactor continuously.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Architecture requirements (make or break)</h3>
+        <p>
+          Incremental delivery fails without upfront design for extensibility. Critical decisions include:
+        </p>
+        <ul>
+          <li><strong>Module boundaries</strong> — each increment should touch well-defined components, not scatter changes everywhere.</li>
+          <li><strong>Database evolution</strong> — new tables/columns in later increments should be anticipated; use migration scripts.</li>
+          <li><strong>API versioning</strong> — public interfaces used by increment 1 must remain stable when increment 3 adds consumers.</li>
+          <li><strong>Stub and scaffold strategy</strong> — increment 1 may ship with placeholder menus for features arriving in increment 2, but core integration paths must be real.</li>
+          <li><strong>Configuration management</strong> — one codebase, tagged releases per increment (v1.0, v1.1, v2.0).</li>
+        </ul>
+
+        <h3>Step-by-step scenario</h3>
+        <p><strong>Scenario — Bank mobile banking app:</strong></p>
+        <ol>
+          <li><strong>Architecture (month 1):</strong> API gateway, auth service, accounts module, transfers module, bill-pay module. Security and audit logging built into shared layer.</li>
+          <li><strong>Increment 1 (months 2–4):</strong> Mini-Waterfall for login, balance inquiry, mini-statement. Released to 5% of customers (pilot). Regression: N/A (first release).</li>
+          <li><strong>Feedback:</strong> Users want fingerprint login — added to increment 2 scope; architecture unchanged.</li>
+          <li><strong>Increment 2 (months 5–7):</strong> Fund transfers between own accounts + biometric login. Integrates with increment 1 auth and accounts modules. Full regression on increment 1 features.</li>
+          <li><strong>Increment 3 (months 8–10):</strong> Bill payment and payee management. Uses same API gateway and audit trail. Regression covers increments 1 and 2.</li>
+          <li><strong>Final acceptance:</strong> Penetration test, load test, regulatory sign-off on complete app.</li>
+        </ol>
+
+        <h3>Advantages of the Incremental Model</h3>
+        <ul>
+          <li>
+            <strong>Early working software for the customer</strong> — business value and user feedback begin after
+            increment 1, not after the entire project.
+          </li>
+          <li>
+            <strong>Lower delivery risk</strong> — if increment 1 fails acceptance, the team corrects course before
+            building increments 2 and 3.
+          </li>
+          <li>
+            <strong>Feedback guides later increments</strong> — real usage reveals missing rules, usability problems,
+            and reprioritisation opportunities.
+          </li>
+          <li>
+            <strong>Parallel development possible</strong> — independent increments (e.g., reporting vs payments) can
+            be built by separate teams once interfaces are frozen.
+          </li>
+          <li>
+            <strong>Incremental revenue or compliance</strong> — partial system may satisfy regulators or generate income
+            while development continues.
+          </li>
+          <li>
+            <strong>More realistic for large systems</strong> — avoids single multi-year release that nobody can test until the end.
+          </li>
+          <li>
+            <strong>Structured yet flexible</strong> — more disciplined than ad-hoc coding; more adaptive than pure Waterfall.
+          </li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>Requires strong upfront architecture</strong> — poor early design forces expensive rework across
+            multiple increments.
+          </li>
+          <li>
+            <strong>Integration complexity</strong> — each increment must merge cleanly; interface mistakes compound over time.
+          </li>
+          <li>
+            <strong>Higher total cost than ideal Waterfall</strong> — repeated testing, deployment, training, and
+            documentation per increment add overhead.
+          </li>
+          <li>
+            <strong>Incomplete product perception</strong> — users may complain that “the system is half-finished” until
+            all increments ship; manage expectations with a public roadmap.
+          </li>
+          <li>
+            <strong>Regression effort grows</strong> — increment 5 must retest everything from increments 1–4 unless
+            automation exists.
+          </li>
+          <li>
+            <strong>Contract and pricing complexity</strong> — fixed-price contracts must define what each increment
+            contains and when payment milestones occur.
+          </li>
+          <li>
+            <strong>Not for volatile greenfield exploration</strong> — if requirements are completely unknown, Prototype
+            or Agile may fit better than a fixed increment plan.
+          </li>
+        </ul>
+
+        <h3>When to use the Incremental Model</h3>
+        <ul>
+          <li>Large systems where <strong>features can be prioritised</strong> and delivered in useful subsets.</li>
+          <li>Stakeholders need <strong>early partial product</strong> for operations, pilots, or competitive pressure.</li>
+          <li>Requirements are <strong>mostly stable</strong> at the macro level but details can be refined per increment.</li>
+          <li>Organisation wants <strong>Waterfall-like discipline</strong> with better time-to-market than single release.</li>
+          <li>Integration with <strong>legacy systems</strong> where architecture must be fixed early.</li>
+          <li>Multi-team projects with <strong>clear module boundaries</strong> and interface contracts.</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Small projects deliverable in one short cycle — increment overhead is wasteful.</li>
+          <li>Requirements completely unknown — use Prototype (§2.4) or Agile (§2.11) first.</li>
+          <li>Cannot define extensible architecture upfront — increments will collide.</li>
+          <li>Regulation mandates single atomic go-live with no partial deployment.</li>
+          <li>Need continuous daily requirement churn — Agile sprints fit better than multi-month increments.</li>
+        </ul>
+
+        <h3>Combining with other models</h3>
+        <ul>
+          <li><strong>Iterative Waterfall inside each increment</strong> — when testing finds design errors during increment 2, loop back within that mini-Waterfall.</li>
+          <li><strong>Prototype for risky increment</strong> — spike unknown UI in increment 3 using throwaway prototype before committing.</li>
+          <li><strong>Spiral for high-risk increments</strong> — run risk analysis before building a critical payment increment.</li>
+          <li><strong>V-Model testing</strong> — pair each increment’s design with test plans for stronger verification.</li>
+        </ul>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — Government tax e-filing portal:</strong> The authority launches increment 1 with income
+          declaration for salaried individuals only. Increment 2 adds business filers. Increment 3 adds refund tracking
+          and SMS alerts. Increment 4 integrates with national identity verification. Each increment is a production
+          release used by real taxpayers; architecture (single citizen account, audit log, document store) was defined
+          in the feasibility study. Early increments reduced fraud-support calls by validating workflows before adding
+          complex business rules in later releases.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Incremental Model</div>
+          <p><strong>Q:</strong> Describe the Incremental Process Model. Explain how each increment is developed. How does it differ from the Classical Waterfall model, the Iterative Waterfall model, and the Iterative Enhancement approach? Discuss horizontal vs vertical slicing, advantages, disadvantages, and suitable application areas. Illustrate with an example.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define the Incremental model as splitting the system into priority-ordered chunks, each developed through a mini-Waterfall and delivered to the customer as working software.</li>
+            <li>State its relationship to Iterative Enhancement (§2.7) and evolutionary development (§2.6) — planned architecture, growing product through releases.</li>
+            <li>Describe the overall process: architecture and release plan → increment 1 mini-Waterfall → feedback → increment 2… → final acceptance.</li>
+            <li>List phases inside one increment: requirements, design, implementation, testing, delivery; mention Iterative Waterfall loops within an increment if defects are found.</li>
+            <li>Explain vertical (feature) vs horizontal (layer) slicing; prefer vertical for customer-visible increments.</li>
+            <li>Contrast with Classical Waterfall (single release, late feedback, higher delivery risk).</li>
+            <li>Contrast with Iterative Waterfall (multiple customer releases vs one product with error-correction loops).</li>
+            <li>Contrast with Iterative Enhancement (Incremental is a specific delivery pattern implementing the enhancement philosophy).</li>
+            <li>Discuss architecture requirements: modules, APIs, database evolution, regression testing.</li>
+            <li>Walk through an example (e.g., mobile banking or e-filing portal) with named increments.</li>
+            <li>List advantages (early software, lower risk, feedback, parallel work) and disadvantages (architecture dependency, integration cost, regression growth).</li>
+            <li>State when to use and when to prefer Prototype, Agile, or pure Waterfall.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> In the Incremental model, each increment is developed using — <strong>(B) A mini-Waterfall cycle</strong>.</p>
+          <p><strong>MCQ:</strong> The main advantage of the Incremental model over Classical Waterfall is — <strong>(C) Early delivery of partial working software to the customer</strong>.</p>
+          <p><strong>MCQ:</strong> Vertical slicing in the Incremental model means — <strong>(A) Each increment delivers end-to-end functionality through all layers</strong>.</p>
+          <p><strong>MCQ:</strong> The Incremental model requires — <strong>(D) Upfront architectural planning to accommodate future increments</strong>.</p>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-07-iterative-enhancement.html">&larr; 2.7 Iterative Enhancement Models</a>
+        <a class="btn-back chapter-nav-next" href="02-09-rad.html">2.9 Rapid Application Development (RAD) &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

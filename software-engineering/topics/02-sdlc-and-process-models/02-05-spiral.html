@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.5 Spiral Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.5 Spiral Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-5">
+        <p>
+          The <strong>Spiral Model</strong> is a risk-driven SDLC model proposed by <strong>Barry Boehm in 1986</strong>.
+          Unlike Classical Waterfall, which assumes risks can be ignored until late testing, the Spiral model makes
+          <strong>risk analysis and risk reduction</strong> the organising principle of the project. Each iteration
+          of the project is represented as one <strong>loop (cycle)</strong> of a spiral that grows outward: the team
+          plans objectives, analyses risks, builds and tests product elements, evaluates with the customer, and then
+          decides whether to proceed to the next, larger cycle.
+        </p>
+        <p>
+          The Spiral model <strong>combines</strong> ideas from other approaches: structured phases like Waterfall,
+          prototypes to resolve uncertainty (as in §2.4), and iterative delivery of increasing completeness. It is
+          widely cited in exams as the model best suited to <strong>large, complex, high-risk</strong> software projects.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-spiral-caption">
+          <img src="../../../assets/images/se-topic-02/spiral.webp"
+               alt="Spiral model — iterative cycles expanding outward with four quadrants per loop"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-spiral-caption">Spiral Model — each revolution of the spiral is one iteration; cost and scope grow outward (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-spiral-quadrants-caption">
+          <img src="../../../assets/images/se-topic-02/spiral-quadrants.svg"
+               alt="Spiral model four quadrants — objectives and planning, risk analysis, engineering develop and test, customer evaluation"
+               width="400" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-spiral-quadrants-caption">Four quadrants (sectors) of each spiral cycle — memorise order and purpose for diagrams in exams.</figcaption>
+        </figure>
+
+        <h3>Core idea and philosophy</h3>
+        <p>
+          Boehm observed that many failures come from <strong>unresolved risks</strong> — wrong requirements, new
+          technology that does not scale, performance shortfalls, or staff turnover. The Spiral model forces the team
+          to ask at every cycle: <em>What can go wrong? How serious is it? What will we do now to reduce it?</em>
+          Only after risk-handling activities does the team commit to major development cost for that cycle.
+        </p>
+        <ul>
+          <li>Each loop produces a <strong>more complete product</strong> (requirements slice, design, code, or operational release).</li>
+          <li>Early loops may produce only documents and prototypes. Later loops deliver production-quality software.</li>
+          <li>The customer is involved at the <strong>end of every cycle</strong> in evaluation, not only at project start and finish.</li>
+        </ul>
+
+        <h3>Four quadrants of each spiral cycle</h3>
+        <p>
+          Every revolution of the spiral is divided into <strong>four sectors (quadrants)</strong>. In long answers,
+          describe each quadrant with activities and outputs. Order matters for exams.
+        </p>
+
+        <h4>Quadrant 1 — Determine objectives, alternatives, and constraints</h4>
+        <p>
+          <strong>Planning</strong> for the current cycle. The team defines what this iteration must achieve, what
+          resources are available, and what boundaries apply (budget, schedule, standards, technology choices).
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> The team sets iteration goals, compares alternative solutions (for example database A versus B, or in-house hosting versus cloud), and records constraints from stakeholders and regulation.</li>
+          <li><strong>Outputs.</strong> This quadrant produces an iteration plan, an updated project schedule, and a clear definition of success for the current loop.</li>
+          <li><strong>Exam note.</strong> In an exam answer, state that this quadrant answers the question <em>where are we going in this cycle?</em></li>
+        </ul>
+
+        <h4>Quadrant 2 — Identify and resolve risks</h4>
+        <p>
+          The <strong>distinctive</strong> quadrant of the Spiral model. Risks are identified, prioritised, and
+          mitigated <strong>before</strong> heavy engineering. Mitigation often uses <strong>prototypes, simulations,
+          benchmarks, or feasibility studies</strong> — linking directly to Software Prototyping (§2.4).
+        </p>
+        <ul>
+          <li><strong>Types of risk.</strong> The team considers technical risks (such as performance or security), schedule risks (such as dependency delays), cost risks (such as budget overrun), business risks (such as market change), and staffing risks (such as losing a key person).</li>
+          <li><strong>Activities.</strong> The team runs risk workshops, performs probability and impact analysis, builds throwaway prototypes to test the user interface, runs technical spikes to test API throughput, and arranges legal reviews for compliance where needed.</li>
+          <li><strong>Outputs.</strong> Typical outputs include a risk register, a risk mitigation plan, and prototypes or proof-of-concept results that reduce uncertainty.</li>
+          <li><strong>Exam note.</strong> If a risk cannot be reduced to an acceptable level, the project may <strong>stop or pivot</strong> early, which saves cost compared with discovering failure only at the end of a Waterfall project.</li>
+        </ul>
+
+        <h4>Quadrant 3 — Develop and test</h4>
+        <p>
+          <strong>Engineering</strong> work for this cycle: whatever was planned once risks are understood. May include
+          requirements specification for a subsystem, detailed design, coding, integration, and testing.
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> The team produces the deliverables agreed in quadrant 1, carries out unit, integration, and system testing, and holds technical reviews and inspections.</li>
+          <li><strong>Outputs.</strong> Outputs include code, design documents, test reports, and a working increment of the system for this cycle.</li>
+          <li><strong>Exam note.</strong> This quadrant resembles Waterfall phases, but the work is <strong>scoped to one spiral cycle</strong>, not to the entire project at once.</li>
+        </ul>
+
+        <h4>Quadrant 4 — Plan the next iteration</h4>
+        <p>
+          <strong>Customer evaluation</strong> and decision-making. Stakeholders review progress against objectives,
+          approve the current increment, and plan the next loop (or terminate the project).
+        </p>
+        <ul>
+          <li><strong>Activities.</strong> The team demonstrates results to the customer, collects feedback, updates the requirements backlog, and decides the budget and scope for the next spiral.</li>
+          <li><strong>Outputs.</strong> This quadrant produces an evaluation report, approval to continue (or a decision to stop), and a revised plan for the next cycle.</li>
+          <li><strong>Exam note.</strong> This quadrant is also called customer evaluation and should be linked to stakeholder management and acceptance criteria.</li>
+        </ul>
+
+        <h3>Two dimensions of the Spiral model</h3>
+        <p>
+          Boehm describes progress in two dimensions. Draw the spiral and label both in exam diagrams.
+        </p>
+        <ul>
+          <li>
+            <strong>Angular dimension (horizontal rotation)</strong> — represents progress through the
+            <strong>SDLC phases</strong> (requirements, design, implementation, testing) as the project moves around
+            the spiral. Each full loop advances the product through more of the lifecycle. Over many cycles, the
+            project covers the same kinds of work as Waterfall, but in slices.
+          </li>
+          <li>
+            <strong>Radial dimension (outward movement)</strong> — represents <strong>cumulative cost, effort, and
+            scope</strong>. As the spiral grows outward, more money and people are committed; the system becomes
+            larger and more complete. Outer loops are more expensive than inner loops.
+          </li>
+        </ul>
+        <p>
+          <strong>Memory aid:</strong> angular = <em>which phase angle are we at?</em>; radial = <em>how big and costly is the project now?</em>
+        </p>
+
+        <h3>How one full spiral cycle works (exam scenario)</h3>
+        <ol>
+          <li><strong>Cycle goal:</strong> prove that a new payment gateway can handle peak load for an e-commerce platform.</li>
+          <li><strong>Q1 — Objectives:</strong> Define success as 10,000 transactions/minute with 99.9% success rate. Budget two weeks.</li>
+          <li><strong>Q2 — Risks:</strong> Unknown latency from third-party API. Mitigate with load-test prototype and failover design review.</li>
+          <li><strong>Q3 — Develop/test:</strong> Implement integration module and run automated load tests. Fix bottlenecks.</li>
+          <li><strong>Q4 — Evaluation:</strong> Show results to customer. Approve next cycle for full checkout UI integration, or cancel gateway if risks remain too high.</li>
+        </ol>
+
+        <h3>Spiral Model vs other models</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Waterfall</th><th>Prototype Model</th><th>Spiral Model</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Main driver</td><td>Waterfall is driven by completing sequential phases in order.</td><td>The Prototype model is driven by user feedback on working prototypes.</td><td>The Spiral model is driven by explicit risk reduction in every cycle.</td></tr>
+            <tr><td>Iteration</td><td>Classical Waterfall has no iteration, or feedback only when errors are found.</td><td>Iteration continues until requirements are clear enough to build the final system.</td><td>The team runs planned cycles until the full product is complete.</td></tr>
+            <tr><td>Prototyping</td><td>Prototyping is optional and not central to Waterfall.</td><td>Prototyping is the central activity of the model.</td><td>Prototypes are used in the risk quadrant whenever uncertainty must be reduced.</td></tr>
+            <tr><td>Project size</td><td>Waterfall suits small or simple projects with stable scope.</td><td>The Prototype model suits projects with unclear requirements.</td><td>The Spiral model suits large, high-risk projects.</td></tr>
+            <tr><td>Cost of failure</td><td>In Waterfall, the cost of failure is often discovered late in the project.</td><td>Prototype models reduce the cost of wrong requirements through early evaluation.</td><td>The Spiral model reduces the cost of major risks by addressing them early in each cycle.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Advantages of the Spiral Model</h3>
+        <ul>
+          <li>
+            <strong>Explicit risk management</strong> — risks are documented and addressed every cycle; suitable for
+            safety-critical, financial, aerospace, and large enterprise systems.
+          </li>
+          <li>
+            <strong>Early elimination of bad options</strong> — prototypes and studies in quadrant 2 prevent building
+            the wrong architecture for years.
+          </li>
+          <li>
+            <strong>Flexible use of prototyping</strong> — only where uncertainty exists; not every project phase needs a prototype.
+          </li>
+          <li>
+            <strong>Stakeholder visibility</strong> — customer evaluation each cycle maintains alignment and funding support.</li>
+          <li>
+            <strong>Supports evolution</strong> — product grows incrementally around the spiral (links to §2.6 evolutionary development).</li>
+          <li>
+            <strong>Can absorb requirement change</strong> — objectives for the next iteration can be revised after evaluation.</li>
+        </ul>
+
+        <h3>Disadvantages and limitations</h3>
+        <ul>
+          <li>
+            <strong>High cost and overhead</strong> — risk analysis, reviews, and multiple cycles require experienced staff and time; overkill for small, routine projects.
+          </li>
+          <li>
+            <strong>Depends on risk expertise</strong> — poor risk identification gives false confidence; the model fails if quadrant 2 is done superficially.
+          </li>
+          <li>
+            <strong>Complex to manage</strong> — tracking many cycles, deliverables, and versions needs strong project management and configuration management.</li>
+          <li>
+            <strong>Contract challenges</strong> — fixed-price contracts are harder unless scope per cycle is tightly defined.</li>
+          <li>
+            <strong>Not a substitute for Agile speed</strong> — when the market demands weekly releases, lightweight Agile may outperform a formal Spiral.</li>
+          <li>
+            <strong>Documentation load</strong> — each cycle produces plans, risk logs, and test evidence; can feel heavy for small teams.</li>
+        </ul>
+
+        <h3>When to use the Spiral Model</h3>
+        <ul>
+          <li><strong>Large-scale</strong> projects with long duration and many subsystems.</li>
+          <li><strong>High technical risk.</strong> Examples include new algorithms, hardware integration, or untested third-party services.</li>
+          <li><strong>High business or safety risk.</strong> Failure is unacceptable in domains such as medical devices, air traffic control, or core banking.</li>
+          <li><strong>Requirements partially known.</strong> Requirements may evolve, but each spiral cycle must still be planned and reviewed.</li>
+          <li>Organisation has maturity in <strong>risk management, reviews, and prototyping</strong>.</li>
+        </ul>
+
+        <h3>When NOT to use</h3>
+        <ul>
+          <li>Small projects with well-known technology and stable requirements (Waterfall or Agile is simpler).</li>
+          <li>No access to skilled risk analysts or architects. Quadrant 2 will be checkbox exercise only.</li>
+          <li>Need for very fast MVP with minimal process (startup Agile/RAD).</li>
+          <li>Customer unavailable for end-of-cycle evaluation. Quadrant 4 cannot function properly.</li>
+        </ul>
+
+        <h3>Real-world example</h3>
+        <p>
+          <strong>Example — National tax authority modernisation:</strong> Replace legacy mainframe with a distributed
+          system over five years. Early spirals produce feasibility prototypes for data migration and security; risk
+          analysis identifies legal and fraud risks. Middle spirals deliver pilot regions; outer spirals roll out nationwide.
+          Project stops an approach after a failed prototype rather than after a failed national launch.
+        </p>
+
+        <h3>Link to risk management in SDLC (§2.18)</h3>
+        <p>
+          The Spiral model is the SDLC model most closely aligned with <strong>integrating risk management</strong> into
+          every phase. Topic 2.18 generalises risk identification, mitigation, and monitoring; Spiral embeds them in
+          every cycle’s quadrant 2.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Spiral Model</div>
+          <p><strong>Q:</strong> Explain the Spiral model of software development proposed by Barry Boehm. Describe the four quadrants of each cycle and the angular and radial dimensions. Compare the Spiral model with the Waterfall model. Discuss advantages, disadvantages, and suitable application areas with an example.</p>
+          <p><strong>Model answer outline:</strong></p>
+          <ul>
+            <li>Define the Spiral model (Boehm, 1986) as a risk-driven approach with iterative cycles on an expanding spiral that combines structured phases, prototyping, and customer evaluation.</li>
+            <li>Draw the spiral with four labelled quadrants per loop and show both angular progression through phases and radial growth in cost and completeness.</li>
+            <li>Explain quadrant 1 (objectives, alternatives, and constraints), quadrant 2 (identify and resolve risks using prototypes or simulations), quadrant 3 (develop and test), and quadrant 4 (customer evaluation and planning the next iteration).</li>
+            <li>Walk through one complete cycle, such as validating a payment gateway under peak load.</li>
+            <li>Contrast with Waterfall by noting explicit risk handling each cycle versus late risk discovery in a single pass.</li>
+            <li>Discuss advantages, disadvantages, suitable projects, and link to integrated risk management in §2.18.</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> The Spiral model was proposed by — <strong>(B) Barry Boehm</strong>.</p>
+          <p><strong>MCQ:</strong> Risk analysis in the Spiral model is performed in — <strong>(B) Every cycle (quadrant 2)</strong>.</p>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-04-prototype.html">&larr; 2.4 Prototype Model / Software Prototyping</a>
+        <a class="btn-back chapter-nav-next" href="02-06-evolutionary.html">2.6 Evolutionary Development Models &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

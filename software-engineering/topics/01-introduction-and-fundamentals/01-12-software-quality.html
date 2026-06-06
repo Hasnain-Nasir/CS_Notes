@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.12 Software Quality (General)</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.12 Software Quality (General)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-12">
+        <p>
+          <strong>Software quality</strong> means how good and reliable a product is. Traditionally, quality was
+          defined as <strong>"fitness of purpose"</strong> — the product does what users need. For physical goods
+          (cars, fans) this is often sufficient. For software, fitness of purpose alone is <strong>incomplete</strong>.
+        </p>
+        <p>
+          <strong>Example:</strong> Software may meet all functional requirements in the SRS but have an unusable
+          interface — functionally correct but not high quality. Another product may meet requirements but have
+          unmaintainable code — again, not high quality.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-quality-factors-caption">
+          <img src="../../../assets/images/se-topic-01/software-quality-factors.webp"
+               alt="Factors of software quality — portability, usability, reusability, correctness, maintainability, reliability, efficiency"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-quality-factors-caption">Modern view of software quality — multiple quality factors beyond fitness of purpose.</figcaption>
+        </figure>
+
+        <h3>Factors of software quality</h3>
+        <ul>
+          <li><strong>Portability:</strong> The software works in different environments and can operate with other related products.</li>
+          <li><strong>Usability:</strong> Both expert and novice users can invoke the software's functions easily.</li>
+          <li><strong>Reusability:</strong> Software modules can be reused in new products to reduce development effort.</li>
+          <li><strong>Correctness:</strong> The requirements stated in the SRS are properly implemented in the final product.</li>
+          <li><strong>Maintainability:</strong> Errors can be corrected and features can be added or modified easily over time.</li>
+          <li><strong>Reliability:</strong> The software has fewer failures because it is thoroughly tested and faults are handled properly.</li>
+          <li><strong>Efficiency:</strong> The software makes minimal use of CPU, memory, disk, and network bandwidth.</li>
+        </ul>
+
+        <h3>Software Quality Management System (SQMS)</h3>
+        <p>Methods used to develop products with desired quality include quality system activities such as project auditing and review of the quality system itself.</p>
+
+        <h3>Evolution of quality management</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-qms-caption">
+          <img src="../../../assets/images/se-topic-01/qms-evolution.png"
+               alt="Evolution of quality management: Inspection, Quality Control, Quality Assurance, Total Quality Management"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-qms-caption">Evolution of Quality Management System — Inspection → QC → QA → TQM.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>Inspection:</strong> Products are inspected directly as a basic form of quality control (QC).</li>
+          <li><strong>Quality control (QC):</strong> Defective items are detected, and the causes of defects are found and corrected.</li>
+          <li><strong>Quality assurance (QA):</strong> Defined processes are used to build good quality products, including security checks.</li>
+          <li><strong>Total Quality Management (TQM):</strong> All procedures are continuously improved through regular process measurements.</li>
+        </ol>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Quality</div>
+          <p><strong>Q:</strong> Why is "fitness of purpose" an incomplete definition of software quality? Explain the evolution of quality management.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Fitness of purpose is incomplete because it ignores other important factors such as usability, maintainability, and efficiency.</li>
+            <li>The answer should give a counter-example, such as software that is functionally correct but unusable or unmaintainable.</li>
+            <li>The evolution of quality management should be explained as Inspection, then QC, then QA, and finally TQM, with a brief explanation of each stage.</li>
+          </ul>
+          <p><strong>MCQ (GATE CS 2015):</strong> An SRS document should avoid discussing — <strong>(C) Design Specification</strong> (SRS describes what, not how).</p>
+          <p><strong>MCQ (UGC-NET 2015):</strong> Error → fault → failure chain — <strong>(C) Error leads to fault and fault leads to failure.</strong></p>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-11-quality-attributes.html">&larr; 1.11 Software Quality Attributes</a>
+        <a class="btn-back chapter-nav-next" href="01-13-complexity-risk.html">1.13 Managing Complexity & Risk &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

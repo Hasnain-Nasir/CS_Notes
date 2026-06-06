@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.11 Software Quality Attributes</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.11 Software Quality Attributes</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-11">
+        <p>
+          <strong>Software quality attributes</strong> are measurable or assessable properties that describe
+          how good a software product is. They guide design decisions and are used in acceptance criteria,
+          reviews, and exams as distinct from general "fitness of purpose."
+        </p>
+        <ul>
+          <li><strong>Correctness:</strong> The software performs its intended tasks and meets user requirements accurately.</li>
+          <li><strong>Usability:</strong> The software is easy to learn, operate, and navigate for different classes of users.</li>
+          <li><strong>Reliability:</strong> The software produces consistent and accurate results with stable performance and fewer failures over time.</li>
+          <li><strong>Efficiency:</strong> The software makes optimal use of CPU, memory, disk, network, and other system resources.</li>
+          <li><strong>Maintainability:</strong> The software is easy to correct, adapt, and enhance when requirements change.</li>
+          <li><strong>Portability:</strong> The software can run on different platforms or environments with minimal modification.</li>
+          <li><strong>Scalability:</strong> The software can handle increased workload or more users without a serious drop in performance.</li>
+          <li><strong>Security:</strong> The software protects data and functions against unauthorised access, breaches, and other threats.</li>
+          <li><strong>Modularity:</strong> The software is organised into separate, manageable components that can be updated independently.</li>
+          <li><strong>Reusability:</strong> Software components can be used again in other applications to save development time and cost.</li>
+          <li><strong>Testability:</strong> The software makes it easy to define test criteria and evaluate the system against them.</li>
+        </ul>
+        <p>
+          Two further attributes are <strong>adaptability</strong>, which means the software can satisfy changing
+          constraints, and <strong>interoperability</strong>, which means it can work cooperatively with other systems.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Quality Attributes</div>
+          <p><strong>Q:</strong> Define software quality attributes. Explain any five with examples.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>The answer should select any five attributes, such as correctness, reliability, maintainability, portability, and security.</li>
+            <li>Each selected attribute should be defined clearly and supported with a concrete example, such as a banking app that must be secure and correct.</li>
+            <li>Quality attributes should be distinguished from the broader concept of software quality discussed in <a href="01-12-software-quality.html#sec-1-12">§1.12</a>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-10-se-vs-conventional.html">&larr; 1.10 SE vs Conventional Engineering</a>
+        <a class="btn-back chapter-nav-next" href="01-12-software-quality.html">1.12 Software Quality (General) &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

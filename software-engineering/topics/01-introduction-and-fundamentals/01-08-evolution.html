@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.8 Software Evolution</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.8 Software Evolution</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-8">
+        <p>
+          <strong>Software evolution</strong> is the process of developing software and then <strong>continuously
+          updating it over time</strong> — adding features, improving performance, fixing defects, or removing
+          outdated functionality. The environment surrounding software keeps changing, so static software quickly
+          becomes inadequate.
+        </p>
+
+        <h3>Why software must evolve</h3>
+        <ul>
+          <li><strong>Changing requirements:</strong> Organisations adopt new workflows and business rules, so software must adapt to remain useful.</li>
+          <li><strong>Environmental changes:</strong> New operating system versions, hardware, regulations, and security threats force software to be updated.</li>
+          <li><strong>New features and performance:</strong> Users expect improvements over time, and competitors also push organisations to release updated versions.</li>
+          <li><strong>Security:</strong> Outdated software becomes vulnerable to cyberattacks and must be patched or replaced.</li>
+        </ul>
+
+        <h3>Challenges of evolution</h3>
+        <ul>
+          <li><strong>Increasing cost:</strong> As software grows larger, testing and debugging each change becomes more expensive.</li>
+          <li><strong>Loss of understanding:</strong> When original developers leave, the remaining team may find the code hard to modify safely.</li>
+          <li><strong>Security risks:</strong> Each update can introduce new vulnerabilities if changes are not reviewed and tested carefully.</li>
+          <li><strong>Compatibility problems:</strong> Updates may break linked systems or third-party components that depend on the old version.</li>
+          <li><strong>Pressure to ship quickly:</strong> Rushed updates often receive insufficient testing and result in poor quality releases.</li>
+        </ul>
+
+        <h3>Evolution of Software Engineering as a discipline</h3>
+        <p>
+          Software development evolved from an <strong>art</strong> (individual "hacking" and intuition) to a
+          recognised <strong>engineering discipline</strong>:
+        </p>
+        <ul>
+          <li><strong>1960s–70s:</strong> Structured programming and flowcharts emerged, and the term "software engineering" was coined at a NATO conference.</li>
+          <li><strong>1980s:</strong> Object-oriented programming changed the way software systems were designed and organised.</li>
+          <li><strong>1990s:</strong> Agile methodologies emphasised flexibility, rapid delivery, and close customer feedback.</li>
+          <li><strong>Today:</strong> Software Engineering uses established best practices, process models, metrics, and tools like other engineering disciplines.</li>
+        </ul>
+        <p>
+          Lehman's laws (exam context): large programs are always changed; complexity increases unless work is
+          done to reduce it; evolution is a self-regulating process. Good SE practices (modularity, documentation,
+          testing) make evolution cheaper and safer.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Evolution</div>
+          <p><strong>Q:</strong> What is software evolution? Why is it necessary and what challenges does it present?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Software evolution is the ongoing change and updating of software after its initial delivery.</li>
+            <li>It is necessary because of new requirements, changing environments, demand for new features, and security concerns.</li>
+            <li>Its main challenges include rising cost, growing complexity, compatibility problems, and loss of knowledge about the system.</li>
+            <li>The Software Engineering discipline evolved from an art to a formal engineering field to manage this reality more effectively.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-07-need-for-se.html">&larr; 1.7 Need of Software Engineering</a>
+        <a class="btn-back chapter-nav-next" href="01-09-processes.html">1.9 Software Engineering Processes &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

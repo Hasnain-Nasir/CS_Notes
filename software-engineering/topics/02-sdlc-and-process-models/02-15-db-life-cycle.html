@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.15 Database Application System Life Cycle</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.15 Database Application System Life Cycle</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-15">
+        <p>
+          The <strong>Database Application System Life Cycle</strong> focuses on systems where a
+          <strong>database is the central component</strong>. Phases emphasise data modelling, schema design,
+          normalisation, query optimisation, and data integrity alongside application logic.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-db-lifecycle-caption">
+          <img src="../../../assets/images/se-topic-02/sdlc-stages.webp"
+               alt="Database application life cycle — data modelling, schema design, implementation, and maintenance phases"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-db-lifecycle-caption">Database Application Life Cycle — data-centred phases within SDLC (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>DB application phases</h3>
+        <ol>
+          <li><strong>Planning.</strong> The team defines scope, identifies data sources and users, and confirms feasibility.</li>
+          <li><strong>Requirements collection and analysis.</strong> Analysts document data needs, transactions, reports, and constraints.</li>
+          <li><strong>Conceptual data modelling.</strong> A high-level entity–relationship diagram defines entities, relationships, and attributes.</li>
+          <li><strong>Logical database design.</strong> The schema is normalised (for example to third normal form), and integrity rules are defined.</li>
+          <li><strong>Physical database design.</strong> The team chooses storage structures, indexes, partitioning, and performance tuning options.</li>
+          <li><strong>Application development.</strong> Developers implement SQL, stored procedures, the application layer, and APIs.</li>
+          <li><strong>Testing.</strong> Testers verify data integrity, run load tests, and confirm backup and recovery procedures.</li>
+          <li><strong>Deployment and migration.</strong> Legacy data is loaded, the system is cut over, and parallel running may be used to reduce risk.</li>
+          <li><strong>Maintenance.</strong> The team manages schema evolution, performance monitoring, and security patches over the life of the database.</li>
+        </ol>
+
+        <h3>DB-specific concerns</h3>
+        <ul>
+          <li><strong>Data integrity.</strong> Primary keys, foreign keys, constraints, and triggers keep data consistent and valid.</li>
+          <li><strong>Concurrency.</strong> Locking and transaction isolation allow many users to access the database safely at the same time.</li>
+          <li><strong>Backup and recovery.</strong> Disaster recovery plans and replication protect against data loss.</li>
+          <li><strong>Scalability.</strong> Indexing strategies and sharding help the database grow as data volume increases.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — DB Application Life Cycle</div>
+          <p><strong>Q:</strong> Explain the Database Application System Life Cycle. What phases are specific to database development?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define the Database Application System Life Cycle as an SDLC variant in which the database is the central architectural component.</li>
+            <li>Highlight database-specific phases: conceptual modelling with an ERD, logical design with normalisation, and physical design with indexes and storage tuning.</li>
+            <li>Also mention data migration, integrity testing, backup and recovery, and concurrency control.</li>
+            <li>Explain how this differs from generic SDLC through deeper data modelling and long-term schema maintenance.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-14-is-life-cycle.html">&larr; 2.14 Information System Life Cycle</a>
+        <a class="btn-back chapter-nav-next" href="02-16-comparison.html">2.16 Comparison of Life Cycle Models &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

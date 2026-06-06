@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.13 Managing Complexity & Risk</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.13 Managing Complexity & Risk</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-13">
+        <p>
+          Modern software must be built <strong>systematically, on time, and within budget</strong> while
+          <strong>managing complexity</strong> and <strong>reducing risks</strong>. This is the central promise
+          of Software Engineering and the direct response to the software crisis.
+        </p>
+        <p>
+          The chain of reasoning across this topic is:
+        </p>
+        <ol>
+          <li><strong>Complexity grew</strong> because systems became larger, served more users, and required more integration, as explained in <a href="01-05-characteristics.html#sec-1-5">§1.5</a>.</li>
+          <li><strong>A crisis emerged</strong> because old informal methods could no longer cope, as described in <a href="01-06-crisis.html#sec-1-6">§1.6</a>.</li>
+          <li><strong>A Software Engineering discipline was needed</strong> to provide a structured and disciplined approach, covered in <a href="01-07-need-for-se.html#sec-1-7">§1.7</a>.</li>
+          <li><strong>Processes were defined</strong> as repeatable activities from feasibility to maintenance, as outlined in <a href="01-09-processes.html#sec-1-9">§1.9</a>.</li>
+          <li><strong>Quality was enforced</strong> through attributes, testing, and quality management systems in <a href="01-11-quality-attributes.html#sec-1-11">§1.11</a> and <a href="01-12-software-quality.html#sec-1-12">§1.12</a>.</li>
+          <li><strong>Evolution was planned</strong> so that software could be updated continuously and safely, as discussed in <a href="01-08-evolution.html#sec-1-8">§1.8</a>.</li>
+        </ol>
+
+        <h3>How SE manages complexity</h3>
+        <ul>
+          <li>Software Engineering decomposes systems into modules with clear interfaces using modularity and abstraction.</li>
+          <li>It uses documented processes so teams know what to do at each stage of development.</li>
+          <li>It applies risk management by identifying, assessing, and mitigating project risks early.</li>
+          <li>It encourages reuse of proven components, patterns, and frameworks instead of reinventing solutions.</li>
+          <li>It measures progress through reviews, milestones, and project metrics.</li>
+        </ul>
+
+        <h3>How SE reduces risk</h3>
+        <ul>
+          <li>Early feasibility and requirements work helps avoid building the wrong product.</li>
+          <li>Testing at multiple levels catches defects before the software is released to users.</li>
+          <li>Standards and code review reduce human error during development.</li>
+          <li>Skilled and trained teams replace ad-hoc "hero programming" that depends on one individual.</li>
+          <li>Configuration management controls changes so that updates do not break the existing system.</li>
+        </ul>
+
+        <p>
+          <strong>Computer-based System Engineering</strong> extends this thinking to the full system: software
+          is engineered not in isolation but as part of a larger whole that includes people, hardware, and
+          operational context (<a href="01-02-cbse.html#sec-1-2">§1.2</a>).
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Complexity &amp; Systematic Development</div>
+          <p><strong>Q:</strong> Explain how Software Engineering helps manage complexity and reduce risks in software projects.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>The answer should define the complexity problem and link it to the software crisis described earlier in the topic.</li>
+            <li>Software Engineering manages complexity through processes, modularity, testing, project management, standards, and skilled teams.</li>
+            <li>It reduces risk through early validation, incremental delivery, quality assurance, and planned maintenance.</li>
+            <li>The expected outcome is on-time, within-budget, quality software that can evolve safely after delivery.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-12-software-quality.html">&larr; 1.12 Software Quality (General)</a>
+        <a class="btn-back chapter-nav-next" href="01-14-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

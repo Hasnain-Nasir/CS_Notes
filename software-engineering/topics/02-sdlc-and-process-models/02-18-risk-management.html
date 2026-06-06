@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.18 Risk Management in SDLC</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.18 Risk Management in SDLC</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-18">
+        <p>
+          <strong>Risk management</strong> is the systematic process of identifying, analysing, prioritising, and
+          mitigating risks that could threaten project success. While any SDLC model benefits from risk management,
+          the <strong>Spiral model</strong> (<a href="02-05-spiral.html#sec-2-5">§2.5</a>) embeds it explicitly in every cycle.
+          Risk management connects to Topic 1's theme of reducing project failure
+          (<a href="../01-introduction-and-fundamentals.html#sec-1-13">§1.13</a>).
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-risk-caption">
+          <img src="../../../assets/images/se-topic-02/spiral.webp"
+               alt="Risk management in SDLC — spiral model with explicit risk analysis in each iteration"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-risk-caption">Risk management integrated into SDLC — strongest in the Spiral model (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Risk management process (three sets — GFG series)</h3>
+        <h4>Set 1 — Identification and classification</h4>
+        <ul>
+          <li><strong>Identify risks.</strong> The team brainstorms technical, schedule, cost, staffing, and external risks that could affect the project.</li>
+          <li><strong>Classify risks.</strong> Each risk is grouped as a project risk (budget or schedule), a technical risk (technology or performance), or a business risk (market or compliance).</li>
+          <li><strong>Risk items.</strong> Every risk is recorded with a clear description, its source, and the SDLC phase it would affect.</li>
+        </ul>
+        <h4>Set 2 — Analysis and prioritisation</h4>
+        <ul>
+          <li><strong>Probability.</strong> The team estimates how likely each risk is to occur (high, medium, or low).</li>
+          <li><strong>Impact.</strong> The team estimates the consequence if the risk happens, such as cost overrun, product failure, or schedule delay.</li>
+          <li><strong>Risk exposure.</strong> Exposure is calculated as probability multiplied by impact, and risks are ranked by this score.</li>
+          <li><strong>Risk matrix.</strong> Risks are plotted on a probability–impact grid so the team can see which ones need attention first.</li>
+        </ul>
+        <h4>Set 3 — Mitigation, monitoring, and contingency</h4>
+        <ul>
+          <li><strong>Mitigation strategies.</strong> The team may avoid the risk by changing the plan, transfer it (for example through insurance or outsourcing), mitigate it by reducing probability or impact, or accept it and monitor it only.</li>
+          <li><strong>Contingency plans.</strong> For important risks, the team prepares predefined actions such as switching to a backup vendor or reducing scope if the risk occurs.</li>
+          <li><strong>Monitoring.</strong> Risk indicators are tracked throughout the SDLC and reassessed at major milestones.</li>
+          <li><strong>Link to Spiral.</strong> In the Spiral model, quadrant 2 (identify and resolve risks) carries out this process in every cycle.</li>
+        </ul>
+
+        <h3>Common software project risks</h3>
+        <ul>
+          <li>Requirements may change or remain incomplete throughout the project.</li>
+          <li>The chosen technology may become obsolete or may be unproven at the required scale.</li>
+          <li>Key personnel may leave, taking critical knowledge with them.</li>
+          <li>The team may underestimate system complexity or integration difficulty.</li>
+          <li>Security vulnerabilities may be discovered only late in testing or after release.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Risk Management in SDLC</div>
+          <p><strong>Q:</strong> Explain how risk management is integrated into the SDLC. Describe the risk management process and link it to the Spiral model.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Explain that risk management means identifying, analysing, prioritising, mitigating, and monitoring risks throughout the SDLC.</li>
+            <li>Describe Set 1: identify and classify risks as project, technical, or business risks.</li>
+            <li>Describe Set 2: estimate probability and impact, compute exposure, and use a risk matrix to rank risks.</li>
+            <li>Describe Set 3: choose strategies (avoid, transfer, mitigate, accept), prepare contingency plans, and monitor risks continuously.</li>
+            <li>Link to the Spiral model: risk analysis in quadrant 2 of every cycle is the strongest built-in integration of risk management in an SDLC model.</li>
+            <li>Cross-reference <a href="02-05-spiral.html#sec-2-5">§2.5</a> and <a href="../01-introduction-and-fundamentals.html#sec-1-13">Topic 1 §1.13</a> where relevant.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-17-pairwise-comparisons.html">&larr; 2.17 Pairwise Model Comparisons</a>
+        <a class="btn-back chapter-nav-next" href="02-19-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

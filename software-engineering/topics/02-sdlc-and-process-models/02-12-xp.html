@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.12 Extreme Programming (XP)</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.12 Extreme Programming (XP)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-12">
+        <p>
+          <strong>Extreme Programming (XP)</strong>, introduced by Kent Beck, is an Agile methodology that takes
+          proven practices to <strong>extreme levels</strong>. XP focuses on <strong>technical excellence</strong>,
+          frequent releases, and close customer pairing with developers.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-xp-caption">
+          <img src="../../../assets/images/se-topic-02/agile.png"
+               alt="Extreme Programming — pair programming, test-driven development, continuous integration practices"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-xp-caption">XP — engineering practices taken to the extreme within Agile (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>Core XP practices</h3>
+        <ul>
+          <li><strong>Pair programming.</strong> Two developers share one workstation: the driver writes code while the navigator reviews and thinks ahead, and they swap roles frequently.</li>
+          <li><strong>Test-Driven Development (TDD).</strong> The developer writes a failing test first, writes the minimal code to pass it, and then refactors (the Red, Green, Refactor cycle).</li>
+          <li><strong>Continuous Integration (CI).</strong> The team merges code into a shared repository several times a day and runs automated build and test on each merge.</li>
+          <li><strong>Collective code ownership.</strong> Any member of the team may improve any part of the codebase.</li>
+          <li><strong>Simple design.</strong> The team builds only what is needed now, following the “You Aren’t Gonna Need It” (YAGNI) principle.</li>
+          <li><strong>Refactoring.</strong> The team continuously improves code structure without changing external behaviour.</li>
+          <li><strong>On-site customer.</strong> A user representative is available full-time to answer questions and clarify requirements.</li>
+          <li><strong>Small releases.</strong> The team delivers small, deployable increments frequently rather than waiting for one large release.</li>
+        </ul>
+
+        <h3>Advantages and disadvantages</h3>
+        <ul>
+          <li><strong>Advantages.</strong> XP tends to produce high code quality, fewer defects through TDD and pair review, rapid feedback, and strong communication within the team.</li>
+          <li><strong>Disadvantages.</strong> Pair programming increases staffing cost on coding tasks, the approach needs highly skilled developers, an on-site customer is often impractical, and XP is less suited to very large teams or fixed-price contracts.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Extreme Programming</div>
+          <p><strong>Q:</strong> Describe Extreme Programming. Explain pair programming, TDD, and Continuous Integration with advantages and disadvantages.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define XP as an Agile method introduced by Kent Beck that takes good practices to an extreme level for quality and speed.</li>
+            <li>Explain pair programming as two developers sharing one keyboard for real-time review and knowledge sharing.</li>
+            <li>Explain TDD as writing a test first, then code, then refactoring, which improves coverage and keeps design simple.</li>
+            <li>Explain continuous integration as frequent merges with automated tests that catch defects early.</li>
+            <li>State advantages (quality and fewer defects) and disadvantages (cost of pairing, need for skilled staff and an available customer).</li>
+          </ul>
+          <p><strong>MCQ (GFG style):</strong> In TDD, the first step is — <strong>(A) Write a failing test</strong>.</p>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-11-agile.html">&larr; 2.11 Agile Software Development</a>
+        <a class="btn-back chapter-nav-next" href="02-13-v-model.html">2.13 SDLC V-Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

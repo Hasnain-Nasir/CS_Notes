@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 2 — 2.14 Information System Life Cycle</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>2.14 Information System Life Cycle</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 2</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-2-14">
+        <p>
+          The <strong>Information System (IS) Life Cycle</strong> describes phases specific to developing
+          <strong>information systems</strong> that collect, process, store, and distribute information for
+          organisational decision-making. It extends generic SDLC with IS-specific concerns such as data migration,
+          user training, and organisational change management.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-is-lifecycle-caption">
+          <img src="../../../assets/images/se-topic-02/sdlc-stages.webp"
+               alt="Information System life cycle — feasibility through implementation, operation, and maintenance"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-is-lifecycle-caption">Information System Life Cycle — phases from initiation to retirement (GeeksforGeeks).</figcaption>
+        </figure>
+
+        <h3>IS-specific phases</h3>
+        <ol>
+          <li><strong>Initiation / feasibility.</strong> The organisation identifies the business need, defines scope, performs cost–benefit analysis, and obtains stakeholder approval.</li>
+          <li><strong>Requirements determination.</strong> Analysts study the information needs of users and departments that the system will support.</li>
+          <li><strong>Analysis.</strong> The team models current and proposed processes using tools such as data-flow and entity–relationship diagrams and performs gap analysis.</li>
+          <li><strong>Design.</strong> Architects define system architecture, database design, user interface, security, and integration interfaces.</li>
+          <li><strong>Implementation.</strong> Developers code the system, convert data, test the solution, and train users.</li>
+          <li><strong>Operation and maintenance.</strong> The organisation monitors performance, handles change requests, and maintains backups while the system is live.</li>
+          <li><strong>Retirement / disposal.</strong> When the system is replaced, data is migrated and the legacy system is decommissioned safely.</li>
+        </ol>
+
+        <h3>IS-specific concerns</h3>
+        <ul>
+          <li><strong>Organisational impact.</strong> A new information system changes workflows, so change management and communication are critical.</li>
+          <li><strong>Data quality.</strong> Poor source data leads to poor decisions, so data cleansing during migration is essential.</li>
+          <li><strong>Security and compliance.</strong> The system must provide access control, audit trails, and compliance with relevant regulations.</li>
+          <li><strong>User adoption.</strong> Non-technical staff need training, help-desk support, and clear documentation to use the system effectively.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — IS Life Cycle</div>
+          <p><strong>Q:</strong> Describe the Information System Life Cycle. How does it differ from generic SDLC?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define the Information System Life Cycle as the set of phases used to build systems that manage organisational information and support decisions.</li>
+            <li>List the phases in order from initiation through requirements, analysis, design, implementation, operation, and retirement.</li>
+            <li>Explain IS-specific concerns such as organisational change, data migration, user training, compliance, and data quality.</li>
+            <li>Contrast with generic SDLC by noting that IS life cycles explicitly include business processes and people, not only software construction.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="02-13-v-model.html">&larr; 2.13 SDLC V-Model</a>
+        <a class="btn-back chapter-nav-next" href="02-15-db-life-cycle.html">2.15 Database Application System Life Cycle &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 1 — 1.3 What is Software / Classification</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>1.3 What is Software / Classification</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 1</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-1-3">
+        <p>
+          A <strong>program</strong> is a step-by-step set of instructions written in a programming language to
+          perform a specific task on a computer. <strong>Software</strong> is broader than a program because it
+          includes the program itself along with proper <strong>documentation</strong> (such as requirements,
+          design, coding, and testing records) and <strong>user or operating manuals</strong> that explain how
+          the product is installed and used. In short:
+        </p>
+        <p><strong>Software = Program + Documentation (+ licensing for commercial products)</strong></p>
+        <p>
+          This distinction is important in exams. A student may write a working program for an assignment, but
+          a commercial <strong>software product</strong> must also be documented, tested, and supported so that
+          other developers and end users can understand and use it correctly over time.
+        </p>
+
+        <h3>Program vs Software Product</h3>
+        <p>
+          A program solves a narrow coding problem, while a software product is a complete deliverable intended
+          for real-world use. The table below summarises the main differences:
+        </p>
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>Program</th><th>Software Product</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Definition</td><td>Instructions to achieve a specific task</td><td>Program + documentation + licensing for commercial use</td></tr>
+            <tr><td>Scope</td><td>Limited to a specific problem</td><td>Broader — solves real-world problems</td></tr>
+            <tr><td>Stages</td><td>One stage in software development</td><td>Follows full lifecycle: feasibility, requirements, design, coding, testing</td></tr>
+            <tr><td>Documentation</td><td>Minimal or none</td><td>Proper, complete documentation required</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Classification of Software (by application)</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-classification-caption">
+          <img src="../../../assets/images/se-topic-01/classification.webp"
+               alt="Classification of software by purpose, platform, deployment, license, and other criteria"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-classification-caption">Software can be classified by application type, platform, deployment, license, and more.</figcaption>
+        </figure>
+        <p>Software can be grouped by the type of problem it solves. The main categories are:</p>
+        <ul>
+          <li><strong>System software:</strong> This category includes operating systems, compilers, editors, and device drivers that manage hardware and provide a platform on which other programs can run.</li>
+          <li><strong>Application software:</strong> This software meets end-user needs and can be generic (such as MS Word for word processing) or customised for a specific client or organisation.</li>
+          <li><strong>Networking and web applications:</strong> This software supports communication over networks and includes servers, security tools, and web technologies such as HTML, PHP, and XML.</li>
+          <li><strong>Embedded software:</strong> This software is built into hardware devices (often stored in ROM) and controls products such as washing machines, microwaves, and satellites.</li>
+          <li><strong>Business software:</strong> This software supports organisational operations such as inventory control, accounting, banking, hospital management, and stock market trading.</li>
+          <li><strong>Entertainment and educational software:</strong> This category includes games, language translation tools, mapping applications, and other software used for learning or leisure.</li>
+          <li><strong>Artificial intelligence software:</strong> This software uses techniques such as expert systems, neural networks, and pattern recognition to simulate intelligent behaviour.</li>
+          <li><strong>Scientific and engineering software:</strong> This software supports specialised technical work, with examples such as MATLAB, AutoCAD, and SPICE for domain-specific calculations and design.</li>
+          <li><strong>Utility software:</strong> This software provides supporting services such as antivirus protection, file compression, and voice recognition on a computer.</li>
+          <li><strong>Document management software:</strong> This software helps organisations store documents digitally, control versions, and index content for easy retrieval.</li>
+        </ul>
+
+        <h3>Classification by copyright / license</h3>
+        <p>Software can also be classified by how it is distributed and who owns the rights to use or modify it:</p>
+        <ul>
+          <li><strong>Commercial software:</strong> This software is sold under a license agreement, and the copyright remains with the company that developed it.</li>
+          <li><strong>Shareware:</strong> This software is offered as a free trial, but the user must pay to continue using it after the trial period, and modification is usually not allowed.</li>
+          <li><strong>Freeware:</strong> This software can be copied and distributed free of charge for non-commercial use, and modifications are often permitted by the author.</li>
+          <li><strong>Public domain software:</strong> This software has no copyright protection, so anyone is free to copy, modify, and even reverse-engineer it without restriction.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Program vs Software</div>
+          <p><strong>Q:</strong> Differentiate between a program and software. Classify software with examples.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>A program is a set of instructions only, while software is a program together with documentation and, for commercial products, proper licensing.</li>
+            <li>Software can be classified by application into types such as system, application, embedded, business, and scientific software, and the answer should include one example for each type mentioned.</li>
+            <li>Software can also be classified by license into commercial, shareware, freeware, and public domain categories based on distribution rights and cost.</li>
+            <li>A program alone is not a complete software product because it lacks the documentation and manuals needed for maintenance and everyday use.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="01-02-cbse.html">&larr; 1.2 Computer-based System Engineering</a>
+        <a class="btn-back chapter-nav-next" href="01-04-components.html">1.4 Software Components &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>
