@@ -77,15 +77,41 @@
 
   function updateHeaderAuth(user) {
     var btn = document.getElementById("header-login-btn");
+    var dropdown = document.getElementById("header-user-dropdown");
+    var logoutBtn = document.getElementById("header-logout-btn");
     if (!btn) return;
+
+    function closeUserMenu() {
+      if (!dropdown) return;
+      dropdown.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+    }
+
+    function openUserMenu() {
+      if (!dropdown) return;
+      dropdown.hidden = false;
+      btn.setAttribute("aria-expanded", "true");
+    }
+
     if (user) {
       btn.textContent = user.display_name || user.username;
-      btn.setAttribute("aria-label", "Logout");
-      btn.title = "Click to logout";
-      btn.onclick = function () {
-        logout();
+      btn.setAttribute("aria-label", "Account menu");
+      btn.title = user.display_name || user.username;
+      btn.onclick = function (e) {
+        e.stopPropagation();
+        if (dropdown && dropdown.hidden) openUserMenu();
+        else closeUserMenu();
       };
+      if (logoutBtn && !logoutBtn.dataset.bound) {
+        logoutBtn.dataset.bound = "1";
+        logoutBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          closeUserMenu();
+          logout();
+        });
+      }
     } else {
+      closeUserMenu();
       btn.textContent = "Login";
       btn.setAttribute("aria-label", "Login");
       btn.title = "Login to chat";
@@ -93,6 +119,27 @@
         openLoginModal();
       };
     }
+  }
+
+  function initUserMenuDismiss() {
+    document.addEventListener("click", function (e) {
+      var menu = document.getElementById("header-user-menu");
+      var dropdown = document.getElementById("header-user-dropdown");
+      if (!menu || !dropdown || dropdown.hidden) return;
+      if (!menu.contains(e.target)) {
+        dropdown.hidden = true;
+        var btn = document.getElementById("header-login-btn");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      var dropdown = document.getElementById("header-user-dropdown");
+      if (!dropdown || dropdown.hidden) return;
+      dropdown.hidden = true;
+      var btn = document.getElementById("header-login-btn");
+      if (btn) btn.setAttribute("aria-expanded", "false");
+    });
   }
 
   function ensureLoginModal() {
@@ -106,7 +153,7 @@
       '<div class="auth-modal-panel" role="dialog" aria-labelledby="auth-modal-title">' +
       '<button type="button" class="auth-modal-close" aria-label="Close">&times;</button>' +
       '<h2 id="auth-modal-title">Login</h2>' +
-      '<p class="auth-modal-sub">Sign in to chat with Nigga Bot.</p>' +
+      '<p class="auth-modal-sub">Sign in to chat with the notes assistant.</p>' +
       '<form id="auth-login-form">' +
       '<label>Username <input name="username" autocomplete="username" required></label>' +
       '<label>Password <input name="password" type="password" autocomplete="current-password" required></label>' +
@@ -153,6 +200,7 @@
   };
 
   document.addEventListener("site-nav-ready", function () {
+    initUserMenuDismiss();
     updateHeaderAuth(currentUser);
     checkSession();
   });

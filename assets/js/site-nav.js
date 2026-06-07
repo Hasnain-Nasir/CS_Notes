@@ -107,12 +107,28 @@
     var actions = document.createElement("div");
     actions.className = "global-header-actions";
 
+    var userMenu = document.createElement("div");
+    userMenu.className = "header-user-menu";
+    userMenu.id = "header-user-menu";
+
     var loginBtn = document.createElement("button");
     loginBtn.type = "button";
     loginBtn.className = "header-login-btn";
     loginBtn.id = "header-login-btn";
     loginBtn.textContent = "Login";
     loginBtn.setAttribute("aria-label", "Login");
+    loginBtn.setAttribute("aria-expanded", "false");
+    loginBtn.setAttribute("aria-haspopup", "true");
+
+    var userDropdown = document.createElement("div");
+    userDropdown.className = "header-user-dropdown";
+    userDropdown.id = "header-user-dropdown";
+    userDropdown.hidden = true;
+    userDropdown.innerHTML =
+      '<button type="button" class="header-logout-btn" id="header-logout-btn">Logout</button>';
+
+    userMenu.appendChild(loginBtn);
+    userMenu.appendChild(userDropdown);
 
     var themeBtn = document.createElement("button");
     themeBtn.type = "button";
@@ -124,7 +140,7 @@
       '<svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>' +
       "</span>";
 
-    actions.appendChild(loginBtn);
+    actions.appendChild(userMenu);
     actions.appendChild(themeBtn);
     actions.appendChild(toggle);
     inner.appendChild(brand);
@@ -280,18 +296,18 @@
 
     syncGlobalHeaderHeight();
     window.addEventListener("resize", syncGlobalHeaderHeight);
-    injectChatScripts(prefix);
+    injectChatScripts();
     document.dispatchEvent(new CustomEvent("site-nav-ready"));
   }
 
-  function injectChatScripts(prefix) {
+  function injectChatScripts() {
     if (document.querySelector("[data-nain-chat-loaded]")) return;
     var marker = document.createElement("meta");
     marker.setAttribute("data-nain-chat-loaded", "1");
     document.head.appendChild(marker);
-    ["auth.js", "chatbot.js"].forEach(function (file) {
+    ["notes-auth.js", "notes-chat.js"].forEach(function (file) {
       var s = document.createElement("script");
-      s.src = prefix + "assets/js/" + file + "?v=2";
+      s.src = "/assets/js/" + file + "?v=3";
       s.defer = true;
       document.head.appendChild(s);
     });

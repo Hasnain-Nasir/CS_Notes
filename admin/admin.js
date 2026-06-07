@@ -15,8 +15,35 @@
   }
 
   var logoutBtn = document.getElementById("admin-logout");
+  var userBtn = document.getElementById("admin-user-btn");
+  var userDropdown = document.getElementById("admin-user-dropdown");
+  var userMenu = document.getElementById("admin-user-menu");
+
+  function closeAdminUserMenu() {
+    if (!userDropdown || !userBtn) return;
+    userDropdown.hidden = true;
+    userBtn.setAttribute("aria-expanded", "false");
+  }
+
+  if (userBtn && userDropdown) {
+    userBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = userDropdown.hidden;
+      userDropdown.hidden = !open;
+      userBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.addEventListener("click", function (e) {
+      if (!userMenu || userDropdown.hidden) return;
+      if (!userMenu.contains(e.target)) closeAdminUserMenu();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeAdminUserMenu();
+    });
+  }
+
   if (logoutBtn) {
     logoutBtn.addEventListener("click", function () {
+      closeAdminUserMenu();
       fetch("/api/auth/logout.php", { method: "POST", credentials: "same-origin" }).then(function () {
         window.location.href = "/admin/login.php";
       });
