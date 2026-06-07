@@ -34,11 +34,32 @@
       <section id="sec-4-11">
 
         <p>
-          A <strong>Data Flow Diagram (DFD)</strong> is a graphical representation of the flow of data through a
-          system. It shows external entities, processes that transform data, data stores, and the data flows
-          connecting them. DFDs are a core system modelling tool in requirements engineering (see
+          A <strong>Data Flow Diagram (DFD)</strong> is a graphical tool used to represent how data moves through a
+          system. It shows data inputs, outputs, data stores, and the processes that transform the data. DFDs
+          provide a high-level overview of system functionality and are widely used in structured analysis due to
+          their simplicity and clarity for both technical and non-technical users.
+        </p>
+        <p>
+          DFDs help visualise the major steps in a system and illustrate how information flows between different
+          components. They are a core system modelling tool in requirements engineering (see
           <a href="04-10-system-modelling.html#sec-4-10">§4.10</a>).
         </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-dfd-basic-flow-caption">
+          <img src="../../../assets/images/se-topic-04/dfd-basic-flow.webp"
+               alt="Basic flow of a Data Flow Diagram — external entities, processes, data stores, and data flows"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dfd-basic-flow-caption">Basic flow of a Data Flow Diagram.</figcaption>
+        </figure>
+
+        <h3>Characteristics of a Data Flow Diagram</h3>
+        <ul>
+          <li><strong>Graphical representation:</strong> DFDs use standard symbols (processes, data stores, data flows, external entities) to simplify complex systems into easy-to-read diagrams.</li>
+          <li><strong>Problem analysis:</strong> They help analyse system requirements by clarifying how data is processed, stored, and transferred.</li>
+          <li><strong>Abstraction:</strong> DFDs focus on what the system does, not how it is implemented — technical details are intentionally omitted.</li>
+          <li><strong>Hierarchy:</strong> DFDs are built in levels — Level 0 (context diagram) gives a high-level overview, and Level 1+ provides a more detailed breakdown of system processes.</li>
+        </ul>
+
         <figure class="diagram figure-photo" aria-labelledby="fig-dfd-overview-caption">
           <img src="../../../assets/images/se-topic-04/dfd-overview.webp"
                alt="Data Flow Diagram overview showing processes, data flows, stores, and external entities"
@@ -53,10 +74,10 @@
           <figcaption id="fig-dfd-symbols-caption">Standard symbols used in Data Flow Diagrams.</figcaption>
         </figure>
         <ul>
-          <li><strong>Process (bubble):</strong> An activity that transforms incoming data into outgoing data. Named with a verb phrase (e.g. "Validate Order").</li>
-          <li><strong>Data flow (arrow):</strong> Movement of data between processes, stores, and external entities. Named with a noun phrase describing the data (e.g. "Order Details").</li>
-          <li><strong>Data store (open rectangle):</strong> A repository where data is held for later use (e.g. "Customer File").</li>
-          <li><strong>External entity (square):</strong> A source or destination of data outside the system boundary (e.g. "Customer," "Bank").</li>
+          <li><strong>Process:</strong> Represents input-to-output transformation in a system. Symbol: circle or rounded rectangle. Example: "Validate User," "Generate Bill". Named with a verb phrase.</li>
+          <li><strong>Data flow:</strong> Shows the movement of information between processes, entities, or data stores. Symbol: arrow. Each flow should represent one type of data and be given a relatable name.</li>
+          <li><strong>Data store (warehouse):</strong> Represents where data is stored for later use. Symbol: two horizontal lines. Examples: database, file system, document folder — not restricted to data files only.</li>
+          <li><strong>External entity (terminator):</strong> Users or systems outside the system boundary that interact with it — such as banks, customers, or departments not part of the modelled system.</li>
         </ul>
 
         <h3>Levels of DFD</h3>
@@ -66,10 +87,11 @@
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-dfd-types-caption">Hierarchical levels of Data Flow Diagrams.</figcaption>
         </figure>
+        <p>DFDs are categorised into various levels, with each level providing different degrees of detail. Levels are numbered from 0 onward — the higher the level, the more detailed the diagram becomes.</p>
         <ul>
-          <li><strong>Context diagram (Level 0):</strong> Shows the entire system as a single process with external entities and major data flows. No internal detail.</li>
-          <li><strong>Level 1 DFD:</strong> Explodes the context process into major sub-processes, showing internal data flows and stores.</li>
-          <li><strong>Level 2 and below:</strong> Each Level 1 process can be further decomposed until each process is simple enough to describe in the SRS or map to a module.</li>
+          <li><strong>Level 0 DFD (context diagram):</strong> Represents the entire system as one single process, showing its interaction with external entities. It highlights major inputs and outputs without internal details.</li>
+          <li><strong>Level 1 DFD:</strong> Breaks the Level 0 process into major sub-processes and shows internal data flows and data stores.</li>
+          <li><strong>Level 2 and beyond:</strong> Further decomposes Level 1 sub-processes for a detailed view of specific functional areas — useful for large or complex systems requiring deeper analysis.</li>
         </ul>
         <figure class="diagram figure-photo" aria-labelledby="fig-dfd-level0-caption">
           <img src="../../../assets/images/se-topic-04/dfd-level0.jpg"
@@ -77,24 +99,62 @@
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-dfd-level0-caption">Example context diagram — Level 0 DFD.</figcaption>
         </figure>
-        <h3>Logical vs physical DFD</h3>
-        <ul>
-          <li><strong>Logical DFD:</strong> Shows what the system does regardless of how it is implemented. Used during requirements analysis to capture business processes.</li>
-          <li><strong>Physical DFD:</strong> Shows how the system is actually implemented — specific files, devices, and human roles. Used later in design.</li>
-        </ul>
+        <h3>Types of Data Flow Diagram</h3>
+        <p>DFDs can be classified into <strong>two main types</strong>, each focusing on a different perspective of system design:</p>
 
-        <h3>DFD drawing rules</h3>
+        <h4>1. Logical DFD</h4>
+        <ul>
+          <li>The logical DFD mainly focuses on system processes and illustrates how data flows in the system without diving into technical implementation details.</li>
+          <li>Logical DFDs are used in various organisations for smooth system operation — for example, in a banking software system to describe how data is moved from one entity to another.</li>
+        </ul>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dfd-logical-caption">
+          <img src="../../../assets/images/se-topic-04/dfd-logical.webp"
+               alt="Logical Data Flow Diagram of an online grocery store"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dfd-logical-caption">Logical Data Flow Diagram — online grocery store example.</figcaption>
+        </figure>
+
+        <h4>2. Physical DFD</h4>
+        <ul>
+          <li>The physical DFD shows how data flow is actually implemented in the system, including hardware, software, databases, file structures, and actual data movement and storage mechanisms.</li>
+          <li>Physical DFDs are more specific and closer to implementation than logical DFDs.</li>
+        </ul>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dfd-physical-caption">
+          <img src="../../../assets/images/se-topic-04/dfd-physical.webp"
+               alt="Physical Data Flow Diagram of an online grocery store"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dfd-physical-caption">Physical Data Flow Diagram — online grocery store example.</figcaption>
+        </figure>
+
+        <h3>Rules of DFD</h3>
+        <p><strong>Data can flow from:</strong></p>
+        <ul>
+          <li>External entity → Process</li>
+          <li>Process → External entity</li>
+          <li>Process → Data store</li>
+          <li>Data store → Process</li>
+          <li>Process → Process</li>
+        </ul>
+        <p><strong>Data cannot flow from:</strong></p>
+        <ul>
+          <li>External entity → External entity (directly)</li>
+          <li>External entity → Data store (directly)</li>
+          <li>Data store → External entity (directly)</li>
+          <li>Data store → Data store (directly)</li>
+        </ul>
         <ul>
           <li>Each process must have at least one input and one output.</li>
           <li>Data flows must be labelled; unlabelled arrows are ambiguous.</li>
-          <li>A data store is accessed by at least one process (no "orphan" stores).</li>
-          <li>External entities cannot communicate directly with each other — all interaction goes through the system.</li>
           <li>Processes are numbered hierarchically (1, 1.1, 1.1.1) to show decomposition levels.</li>
           <li>Avoid control flow (decision diamonds) — DFDs show data flow, not control logic.</li>
         </ul>
 
-        <h3>Railway reservation example</h3>
-        <p>A railway reservation system illustrates DFD levelling:</p>
+        <h3>Example: Railway Reservation System</h3>
+        <p>
+          A railway reservation system illustrates how DFD levels are created. This example shows how data moves
+          between users, processes, and data stores — such as passenger information, booking records, schedules,
+          and payments — at different levels of detail.
+        </p>
         <figure class="diagram figure-photo" aria-labelledby="fig-dfd-railway-l0-caption">
           <img src="../../../assets/images/se-topic-04/dfd-railway-l0.webp"
                alt="Railway reservation system — context diagram (Level 0)"
@@ -108,9 +168,36 @@
           <figcaption id="fig-dfd-railway-l1-caption">Railway reservation system — Level 1 DFD.</figcaption>
         </figure>
         <ul>
-          <li><strong>Level 0:</strong> A single "Railway Reservation System" process interacts with Passenger, Payment Gateway, and Railway Admin external entities.</li>
-          <li><strong>Level 1:</strong> The system is decomposed into sub-processes such as Search Trains, Book Ticket, Process Payment, and Generate Ticket, with data stores for Reservation Database and Train Schedule.</li>
+          <li><strong>Level 0:</strong> Shows the reservation system as one process interacting with Passenger (external entity), Payment system, and Database (data store).</li>
+          <li><strong>Level 1:</strong> Breaks the system into sub-processes such as Search Train, Book Ticket, Cancel Ticket, and Process Payment.</li>
+          <li><strong>Level 2:</strong> Further decomposes sub-processes — for example, "Book Ticket" → Verify Availability → Calculate Fare → Confirm Booking.</li>
         </ul>
+
+        <h3>Advantages and disadvantages of DFD</h3>
+        <table>
+          <thead>
+            <tr><th>Advantages</th><th>Disadvantages</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Helps understand how data moves through the system.</td>
+              <td>Can be time-consuming to create for large systems.</td>
+            </tr>
+            <tr>
+              <td>Offers a clear graphical representation for both technical and non-technical users.</td>
+              <td>Focuses only on data flow — does not show control flow, performance, or UI details.</td>
+            </tr>
+            <tr>
+              <td>Breaks the system into smaller processes for better clarity and documentation.</td>
+              <td>Needs regular updates; diagrams easily become outdated if the system changes.</td>
+            </tr>
+            <tr>
+              <td>Useful for system analysis, requirement gathering, and documentation.</td>
+              <td>Requires proper knowledge to create accurate and meaningful diagrams.</td>
+            </tr>
+          </tbody>
+        </table>
+
         <div class="callout exam">
           <div class="callout-title">Exam question — DFD components and levels</div>
           <p><strong>Q:</strong> Explain DFD components and levels. What are the main drawing rules?</p>
@@ -119,8 +206,10 @@
             <li>Name four components: process, data flow, data store, external entity.</li>
             <li>Describe Level 0 (context), Level 1, and further decomposition.</li>
             <li>Distinguish logical DFD (what) from physical DFD (how).</li>
-            <li>State rules: labelled flows, no direct entity-to-entity, hierarchical numbering, no control flow.</li>
-            <li>Sketch or describe railway reservation Level 0 and Level 1 example.</li>
+            <li>State rules: data can flow entity→process, process→store, process→process; cannot flow entity→entity, store→store directly.</li>
+            <li>Distinguish logical DFD (what, no implementation detail) from physical DFD (how, with hardware/software/databases).</li>
+            <li>Mention advantages (clarity, documentation) and disadvantages (no control flow, needs updates).</li>
+            <li>Describe railway reservation Level 0, Level 1, and Level 2 decomposition example.</li>
           </ul>
         </div>
       </section>

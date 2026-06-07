@@ -801,6 +801,10 @@ section {
   box-sizing: border-box;
 }
 
+.index-hero.master-index {
+  padding-top: 1.25rem;
+}
+
 .index-hero h1 {
   font-size: 2rem;
   color: var(--heading);
@@ -1199,7 +1203,7 @@ section {
   }
 
   .master-index .book-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .book-card .badge {
@@ -2330,6 +2334,10 @@ body.site-menu-open {
   .index-hero {
     padding-top: 2rem;
     padding-bottom: 3rem;
+  }
+
+  .index-hero.master-index {
+    padding-top: 1rem;
   }
 }
 

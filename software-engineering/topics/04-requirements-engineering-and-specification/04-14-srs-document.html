@@ -32,30 +32,151 @@
       </header>
 
       <section id="sec-4-14">
-
         <p>
-          A <strong>Software Requirements Specification (SRS)</strong> is the primary deliverable of requirements
-          specification. It is a complete, formal description of the behaviour, functions, performance, and constraints
-          of a software system. The SRS serves as the contract between customer and developer and as the baseline
-          for design, testing, and acceptance.
+          A <strong>Software Requirements Specification (SRS)</strong> is a complete specification and description of
+          the requirements of the software that need to be fulfilled for the successful development of the software
+          system. These requirements can be functional as well as non-functional depending upon the type of requirement.
         </p>
+        <p>
+          SRS is a document that describes what the features of the software will be and what its behaviour will be —
+          that is, how it will perform. It is like the <strong>layout of the software</strong> which the user can
+          review to see whether it is made according to their needs. The advantage of SRS is that it takes less time
+          and effort for developers to develop software when requirements are clearly documented upfront.
+        </p>
+        <ul>
+          <li>SRS is a kind of <strong>agreement between the customer and the company</strong>, containing complete information about the requirements desired by the customer and the product to be made by the company.</li>
+          <li>Interaction between customers and contractors is necessary to fully understand customer needs before the SRS is developed.</li>
+          <li>The SRS may include changes and modifications needed to increase product quality and satisfy customer demand.</li>
+          <li>SRS serves as the primary deliverable of the <strong>requirements specification</strong> phase in the <a href="04-02-re-process.html#sec-4-2">RE process (§4.2)</a> and as the baseline for design, testing, and acceptance.</li>
+        </ul>
+
         <figure class="diagram figure-photo" aria-labelledby="fig-srs-format-caption">
           <img src="../../../assets/images/se-topic-04/srs-format.png"
                alt="SRS document structure — introduction, description, functional and non-functional requirements"
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-srs-format-caption">Typical structure of a Software Requirements Specification document.</figcaption>
         </figure>
+
         <h3>Main sections of an SRS document</h3>
+        <p>To form a good SRS, the following sections should be considered and included:</p>
+
+        <h4>1. Introduction</h4>
         <ul>
-          <li><strong>Introduction:</strong> Purpose of the document, scope of the product, definitions and acronyms, references, and overview of the remainder of the document.</li>
-          <li><strong>General description:</strong> Product perspective (how the system fits into the larger environment), product functions at a high level, user characteristics, general constraints, and assumptions/dependencies.</li>
-          <li><strong>Functional requirements:</strong> Detailed description of each function the system must perform, usually organised by feature or use case. Each requirement should be uniquely identified.</li>
-          <li><strong>Interface requirements:</strong> User interfaces, hardware interfaces, software interfaces (APIs), and communication interfaces the system must support.</li>
-          <li><strong>Performance requirements:</strong> Speed, throughput, response time, capacity, and availability targets.</li>
-          <li><strong>Design constraints:</strong> Restrictions on design choices — standards, hardware limitations, technology mandates.</li>
-          <li><strong>Non-functional requirements:</strong> Security, reliability, maintainability, portability, usability, and other quality attributes not covered above.</li>
-          <li><strong>Schedule and budget constraints:</strong> Delivery milestones, resource limits, and cost boundaries imposed on the project (links to <a href="../03-software-project-management/03-02-project-management-process.html#sec-3-2">Topic 3 planning</a>).</li>
-          <li><strong>Appendices:</strong> Supporting material such as sample input/output, glossary, analysis models (DFD, ERD), and traceability matrices.</li>
+          <li><strong>Purpose of this document:</strong> The main aim of why this document is necessary and what its purpose is explained and described.</li>
+          <li><strong>Scope of this document:</strong> The overall working and main objective of the document and what value it will provide to the customer is described. It also includes a description of development cost and time required.</li>
+          <li><strong>Overview:</strong> A summary or overall review of the product is provided.</li>
+          <li>Additional standard subsections include definitions and acronyms, references, and an overview of the remainder of the document.</li>
+        </ul>
+
+        <h4>2. General description</h4>
+        <ul>
+          <li>This section describes the general functions of the product, including the objective of the user, user characteristics, features, and benefits.</li>
+          <li>It explains why the product is important and describes features of the user community.</li>
+          <li>It also covers product perspective (how the system fits into the larger environment), general constraints, and assumptions or dependencies.</li>
+        </ul>
+
+        <h4>3. Functional requirements</h4>
+        <ul>
+          <li>This section fully explains the possible outcomes of the software system, including effects due to operation of the program.</li>
+          <li>All functional requirements — which may include calculations, data processing, etc. — are placed in ranked order.</li>
+          <li>Functional requirements specify the expected behaviour of the system — which outputs should be produced from the given inputs.</li>
+          <li>They describe the relationship between the input and output of the system.</li>
+          <li>For each functional requirement, a detailed description of all data inputs and their source, the units of measure, and the range of valid inputs must be specified.</li>
+          <li>Each requirement should be uniquely identified for traceability (see <a href="04-09-requirements-classification.html#sec-4-9">§4.9</a>).</li>
+        </ul>
+        <p>Functionally, the system can be viewed as performing a group of high-level functions F<sub>i</sub>, where each function F<sub>i</sub> is a transformation of a set of input data I<sub>i</sub> to a corresponding set of output data O<sub>i</sub>.</p>
+
+        <h4>4. Interface requirements</h4>
+        <ul>
+          <li>This section describes software interfaces — how software programs communicate with each other or with users, either in the form of language, code, or messages.</li>
+          <li>Examples include shared memory, data streams, user interfaces, hardware interfaces, software interfaces (APIs), and communication interfaces.</li>
+        </ul>
+
+        <h4>5. Performance requirements</h4>
+        <ul>
+          <li>This section explains how a software system performs desired functions under specific conditions.</li>
+          <li>It specifies required time, required memory, maximum error rate, throughput, response time, capacity, and availability targets.</li>
+          <li>All requirements relating to the performance characteristics of the system must be clearly specified.</li>
+          <li><strong>Static performance requirements</strong> are those that do not impose constraints on the execution characteristics of the system.</li>
+          <li><strong>Dynamic performance requirements</strong> specify constraints on the execution behaviour of the system.</li>
+        </ul>
+
+        <h4>6. Design constraints</h4>
+        <ul>
+          <li>This section specifies limitations or restrictions for the design team — for example, use of a particular algorithm, or hardware and software limitations.</li>
+          <li>Factors in the client's environment that may restrict design choices include standards that must be followed, resource limits, operating environment, reliability and security requirements, and organisational policies.</li>
+          <li>An SRS should identify and specify all such constraints.</li>
+        </ul>
+
+        <h4>7. Non-functional attributes</h4>
+        <ul>
+          <li>This section explains non-functional attributes required by the software system for better performance.</li>
+          <li>Examples include security, portability, reliability, reusability, application compatibility, data integrity, scalability, maintainability, and usability.</li>
+          <li>Non-functional necessities accommodate characteristics of the system that may not be expressed as functions — such as maintainability, mobility, and usability of the system.</li>
+          <li>They may also include reliability issues, accuracy of results, human-computer interface issues, and constraints on system implementation.</li>
+        </ul>
+
+        <h4>8. Preliminary schedule and budget</h4>
+        <ul>
+          <li>This section explains the initial version of the project plan, including overall time duration and overall cost required for development of the project.</li>
+          <li>It links directly to project planning in <a href="../03-software-project-management/03-02-project-management-process.html#sec-3-2">Topic 3 §3.2</a> and cost estimation in <a href="../03-software-project-management/03-05-size-estimation.html#sec-3-5">§3.5</a>.</li>
+        </ul>
+
+        <h4>9. Appendices</h4>
+        <ul>
+          <li>Additional information such as references from where information was gathered, definitions of specific terms, acronyms, and abbreviations are given and explained.</li>
+          <li>Supporting material may include sample input/output, glossary, analysis models (<a href="04-11-dfd.html#sec-4-11">DFD</a>, <a href="04-12-erd.html#sec-4-12">ERD</a>), decision tables, and traceability matrices.</li>
+        </ul>
+
+        <h4>10. Goals of implementation</h4>
+        <ul>
+          <li>This section documents general suggestions relating to development that guide trade-offs among design goals.</li>
+          <li>It may document future revisions to system functionalities, new devices to be supported in the future, and reusability issues.</li>
+          <li>These are things developers should keep in mind during development so the system can meet aspects not immediately required but important for long-term evolution.</li>
+        </ul>
+
+        <h3>Uses of the SRS document</h3>
+        <ul>
+          <li>The <strong>development team</strong> requires it for developing the product according to customer needs.</li>
+          <li><strong>Test plans</strong> are generated by the testing group based on the described external behaviour.</li>
+          <li><strong>Maintenance and support staff</strong> need it to understand what the software product is supposed to do.</li>
+          <li>The <strong>project manager</strong> bases plans and estimates of schedule, effort, and resources on it.</li>
+          <li>The <strong>customer</strong> relies on it to know what product they can expect.</li>
+          <li>It serves as a <strong>contract between developer and customer</strong>.</li>
+          <li>It is used for <strong>documentation</strong> purposes throughout the project lifecycle.</li>
+        </ul>
+
+        <h3>Importance of the SRS document</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-srs-importance-caption">
+          <img src="../../../assets/images/se-topic-04/srs-importance.jpg"
+               alt="Importance of Software Requirements Specification document"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-srs-importance-caption">Importance of the Software Requirements Specification document.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Clarity and understanding:</strong> The SRS provides a common communication channel between stakeholders so everyone agrees on what the project aims at. It reduces ambiguity and the risk of misunderstandings by clearly defining requirements.</li>
+          <li><strong>Basis for project planning:</strong> The SRS provides the information project managers need to define realistic timelines, assign appropriate resources, and set milestones. It allows teams to accurately estimate costs and schedules.</li>
+          <li><strong>Guidance for development teams:</strong> The SRS guides developers in understanding functional specifications and how the software will be designed. It offers an overview of system architecture, user interfaces, and data structures.</li>
+          <li><strong>Facilitates testing and quality assurance:</strong> QA and testing teams use the SRS to design test cases that verify the software conforms to what was specified, making testing more systematic.</li>
+          <li><strong>Change management:</strong> The SRS provides a baseline against which any proposed changes can be judged, ensuring changes are recorded, approved, and properly implemented without scope creep (see <a href="04-07-review-management.html#sec-4-7">§4.7</a>).</li>
+          <li><strong>Client and stakeholder satisfaction:</strong> The SRS acts as a contract between the development team and the client. When the final product meets what was documented, client satisfaction and trust increase.</li>
+          <li><strong>Risk mitigation:</strong> The SRS helps in risk assessment by specifying dependencies, constraints, and potential risks early in the software development life cycle.</li>
+          <li><strong>Enhanced collaboration:</strong> The SRS fosters team spirit and a single shared vision among cross-functional teams, making the development process more integrated and efficient.</li>
+        </ul>
+
+        <h3>Characteristics of a good SRS</h3>
+        <p>A good SRS document should possess the following characteristics (full detail in <a href="04-16-srs-quality.html#sec-4-16">§4.16</a>):</p>
+        <ul>
+          <li><strong>Complete:</strong> All software requirements should be mentioned in the SRS.</li>
+          <li><strong>Correct:</strong> Requirements should be according to the needs of the customer.</li>
+          <li><strong>Clear:</strong> Requirements should be clearly declared and easy to understand.</li>
+          <li><strong>Accurate:</strong> If the SRS is not accurate, the software cannot be developed correctly.</li>
+          <li><strong>Consistent:</strong> There should be no contradiction between any two requirements from beginning to end.</li>
+          <li><strong>Verifiable:</strong> Requirements should be verifiable by experts and testers.</li>
+          <li><strong>Modifiable:</strong> All requirements should be modifiable when the structure of the SRS is well-balanced.</li>
+          <li><strong>Traceable:</strong> Each requirement should be uniquely identified so it can be traced to design and test cases.</li>
+          <li><strong>Testable:</strong> Requirements should be capable of being tested in some way.</li>
+          <li><strong>Unambiguous:</strong> Each requirement should have only one interpretation.</li>
         </ul>
 
         <h3>SRS audience</h3>
@@ -68,21 +189,31 @@
         </ul>
 
         <h3>SRS and the SDLC</h3>
-        <p>
-          The approved SRS marks the end of the requirements phase in the
-          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a> and the input to the design phase.
-          Changes after approval require formal change control (see <a href="04-07-review-management.html#sec-4-7">§4.7</a>).
-        </p>
+        <ul>
+          <li>The approved SRS marks the end of the requirements phase in the <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a> and the input to the design phase.</li>
+          <li>Changes after approval require formal change control through requirements management (see <a href="04-07-review-management.html#sec-4-7">§4.7</a>).</li>
+          <li>Ignoring the importance of a correct SRS can mean project failure, increased development costs, and dissatisfied stakeholders.</li>
+          <li>Developing a powerful SRS is the first step on the road to success for any software development project.</li>
+        </ul>
+
+        <h3>Two SRS documents (customer vs developer)</h3>
+        <ul>
+          <li>In practice, two SRS documents are sometimes written: the <strong>first SRS</strong> is written by the customer to define their expectations of the user, and the <strong>second SRS</strong> is written by the developer to serve as a contract document between customer and developer.</li>
+          <li>Further guidance on writing a good SRS is covered in <a href="04-15-write-good-srs.html#sec-4-15">§4.15</a>, and IEEE standard structure in <a href="04-17-ieee-srs.html#sec-4-17">§4.17</a>.</li>
+        </ul>
+
         <div class="callout exam">
-          <div class="callout-title">Exam question — SRS structure</div>
-          <p><strong>Q:</strong> What is an SRS document? List its main sections and explain the purpose of each.</p>
+          <div class="callout-title">Exam question — SRS document</div>
+          <p><strong>Q:</strong> What is a Software Requirements Specification (SRS)? Describe its main sections, uses, importance, and characteristics of a good SRS.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Define SRS as formal complete description of system behaviour, functions, performance, constraints.</li>
-            <li>List sections: introduction, general description, functional, interface, performance, design constraints, non-functional, schedule/budget, appendices.</li>
-            <li>Explain purpose of each section briefly.</li>
-            <li>Name audience: customers, PM, designers, testers, maintainers.</li>
-            <li>State SRS as requirements phase output and design phase input; link to change control.</li>
+            <li>Define SRS as complete description of software requirements (functional + non-functional); agreement/contract between customer and developer; layout of software behaviour.</li>
+            <li><strong>Sections:</strong> Introduction (purpose, scope, overview) → General description → Functional (input/output, ranked) → Interface → Performance (static/dynamic) → Design constraints → Non-functional attributes → Schedule/budget → Appendices → Goals of implementation.</li>
+            <li><strong>Uses:</strong> development guide, test plan basis, maintenance reference, PM planning, customer expectation, contract, documentation.</li>
+            <li><strong>Importance:</strong> clarity, project planning, dev guidance, testing/QA, change management, client satisfaction, risk mitigation, collaboration.</li>
+            <li><strong>Characteristics:</strong> complete, correct, clear, accurate, consistent, verifiable, modifiable, traceable, testable, unambiguous.</li>
+            <li>State SRS as requirements phase output and design phase input; changes need formal control.</li>
+            <li>Mention two SRS concept: customer SRS (expectations) and developer SRS (contract).</li>
           </ul>
         </div>
       </section>

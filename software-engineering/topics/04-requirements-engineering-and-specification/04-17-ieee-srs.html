@@ -32,66 +32,225 @@
       </header>
 
       <section id="sec-4-17">
-
         <p>
-          The IEEE has published standards that define recommended structure and content for Software Requirements
-          Specifications. The most widely referenced are <strong>IEEE Std 830-1998</strong> (superseded but still
-          cited in exams) and <strong>IEEE Std 29148-2011</strong>, which consolidates and updates earlier RE standards.
+          The <strong>IEEE (Institute of Electrical and Electronics Engineers)</strong> has published standards
+          that define the recommended structure, content, and quality characteristics for Software Requirements
+          Specifications. These standards provide a recognised template so that no important section is omitted and
+          requirements are documented in a consistent, verifiable way.
         </p>
-
-        <h3>IEEE 830 SRS recommended structure</h3>
-        <p>IEEE 830 defines the following major sections for an SRS:</p>
-        <ol>
-          <li><strong>Introduction</strong> — purpose, scope, definitions, references, overview.</li>
-          <li><strong>Overall description</strong> — product perspective, functions, user characteristics, constraints, assumptions and dependencies.</li>
-          <li><strong>Specific requirements</strong> — the bulk of the document:
-            <ul>
-              <li>External interface requirements (user, hardware, software, communication).</li>
-              <li>Functional requirements.</li>
-              <li>Performance requirements.</li>
-              <li>Design constraints.</li>
-              <li>Software system attributes (reliability, availability, security, maintainability, portability).</li>
-              <li>Other relevant requirements (database, internationalisation, legal).</li>
-            </ul>
-          </li>
-          <li><strong>Appendices</strong> — sample I/O, glossary, analysis models.</li>
-          <li><strong>Index</strong> — optional cross-reference index.</li>
-        </ol>
-
-        <h3>IEEE 29148 key concepts</h3>
-        <p>IEEE 29148 (2011) extends IEEE 830 and covers the full RE process, not only the SRS document:</p>
+        <p>The most widely referenced standards for exams are:</p>
         <ul>
-          <li>Defines terms for requirements, stakeholder, verification, and validation consistent with ISO/IEC/IEEE 15288 (systems engineering).</li>
-          <li>Specifies content for three types of requirements information: <strong>stakeholder requirements</strong> (what stakeholders need), <strong>system requirements</strong> (what the system shall do), and <strong>software requirements</strong> (detailed SW-level specs).</li>
-          <li>Requires each requirement to include: a unique ID, a statement, rationale, source, priority, and verification method (inspection, analysis, demonstration, test).</li>
-          <li>Emphasises bidirectional traceability between stakeholder requirements, system requirements, design, code, and tests.</li>
+          <li><strong>IEEE Std 830-1998</strong> — Recommended Practice for Software Requirements Specifications (superseded but still heavily cited in exams and textbooks).</li>
+          <li><strong>IEEE Std 29148-2011</strong> — Systems and software engineering — Life cycle processes — Requirements engineering (current international standard; consolidates and updates earlier RE standards).</li>
+          <li><strong>IEEE Std 729-1983</strong> — Glossary of software engineering terminology (defines "requirement" — see <a href="04-09-requirements-classification.html#sec-4-9">§4.9</a>).</li>
         </ul>
 
-        <h3>IEEE 729 — vocabulary</h3>
+        <h3>What is IEEE 830?</h3>
         <p>
-          IEEE Std 729-1983 provides the standard glossary for software engineering terminology, including the
-          definition of "requirement" used throughout this topic (see
-          <a href="04-01-re-overview.html#sec-4-1">§4.1</a> and
-          <a href="04-09-requirements-classification.html#sec-4-9">§4.9</a>).
+          IEEE 830-1998 is a <strong>recommended practice</strong> (not a mandatory standard) that describes
+          recommended approaches for the specification of software requirements. It is based on a model in which
+          the result of the SRS process is an <strong>unambiguous and complete specification document</strong>.
         </p>
+        <p>IEEE 830 helps:</p>
+        <ul>
+          <li><strong>Software customers</strong> to accurately describe what they wish to obtain.</li>
+          <li><strong>Software suppliers</strong> to understand exactly what the customer wants.</li>
+          <li><strong>Organisations</strong> to develop a standard SRS outline, define format and content, and create SRS quality checklists or writer's handbooks.</li>
+        </ul>
+
+        <h3>Benefits of a good SRS (IEEE 830)</h3>
+        <ul>
+          <li><strong>Basis for agreement:</strong> Establishes agreement between customers and suppliers on what the software product is to do.</li>
+          <li><strong>Reduces development effort:</strong> Forces all concerned groups to consider requirements rigorously before design begins, reducing later redesign, recoding, and retesting.</li>
+          <li><strong>Cost and schedule estimation:</strong> Provides a realistic basis for estimating project costs and obtaining approval for bids or price estimates.</li>
+          <li><strong>Validation and verification baseline:</strong> Provides a baseline against which compliance can be measured; organisations can develop V&amp;V plans more productively.</li>
+          <li><strong>Facilitates transfer:</strong> Makes it easier to transfer the software product to new users or new machines.</li>
+          <li><strong>Basis for enhancement:</strong> Serves as a foundation for later enhancement of the finished product because it discusses the product, not the project that developed it.</li>
+        </ul>
+
+        <h3>IEEE 830 SRS document structure</h3>
+        <p>IEEE 830 defines the following major sections for an SRS (see also <a href="04-14-srs-document.html#sec-4-14">§4.14</a>):</p>
+
+        <h4>Section 1 — Introduction</h4>
+        <ul>
+          <li><strong>1.1 Purpose:</strong> The purpose of the requirements document and its intended audience.</li>
+          <li><strong>1.2 Scope:</strong> The scope of the product — what it will and will not do.</li>
+          <li><strong>1.3 Definitions, acronyms, and abbreviations:</strong> Glossary of terms used in the document.</li>
+          <li><strong>1.4 References:</strong> List of referenced documents.</li>
+          <li><strong>1.5 Overview:</strong> Overview of the remainder of the SRS document.</li>
+        </ul>
+
+        <h4>Section 2 — Overall description</h4>
+        <p>This section describes general factors affecting the product — it does <strong>not</strong> state specific requirements but provides background for Section 3:</p>
+        <ul>
+          <li><strong>2.1 Product perspective:</strong> How the proposed system fits into the business context and its relationship with other systems.</li>
+          <li><strong>2.2 Product functions:</strong> Summary of major functional capabilities (may include use case diagram or DFD).</li>
+          <li><strong>2.3 User characteristics:</strong> Education, experience, and technical expertise of each user class.</li>
+          <li><strong>2.4 Constraints:</strong> General constraints on the product (memory, operational, site adaptation).</li>
+          <li><strong>2.5 Assumptions and dependencies:</strong> Factors assumed to be true and external dependencies.</li>
+          <li><strong>2.6 Apportioning of requirements:</strong> Which requirements are deferred to future releases.</li>
+        </ul>
+
+        <h4>Section 3 — Specific requirements</h4>
+        <p>
+          This is the <strong>largest and most important</strong> section. Requirements must be detailed enough
+          for designers to design and testers to verify. Every input, output, and function must be described.
+        </p>
+        <ul>
+          <li><strong>3.1 External interface requirements:</strong> Detailed description of all inputs and outputs — user interfaces, hardware interfaces, software interfaces, and communication interfaces. Includes name, purpose, source/destination, valid range, units, timing, screen/window formats, data formats, and command formats.</li>
+          <li><strong>3.2 Functional requirements:</strong> Fundamental actions the software must perform — validity checks, sequence of operations, error handling, input/output relationships. Written as "shall" statements (e.g. "The system shall…").</li>
+          <li><strong>3.3 Performance requirements:</strong> Static requirements (terminals supported, simultaneous users, data volume) and dynamic requirements (transactions per second, response time under normal and peak load). Must be stated in <strong>measurable terms</strong> — e.g. "95% of transactions shall be processed in less than 1 second."</li>
+          <li><strong>3.4 Logical database requirements:</strong> Types of information, frequency of use, access capabilities, data entities and relationships, integrity constraints, and data retention.</li>
+          <li><strong>3.5 Design constraints:</strong> Restrictions imposed by standards, hardware limitations, implementation language, etc. Includes standards compliance (report format, data naming, audit tracing).</li>
+          <li><strong>3.6 Software system attributes:</strong> Reliability, availability, security, maintainability, and portability — must be specified so achievement can be objectively verified.</li>
+          <li><strong>3.7 Organising specific requirements:</strong> Requirements may be organised by system mode, user class, objects, features, stimulus, response, or functional hierarchy.</li>
+          <li><strong>3.8 Other requirements:</strong> Any additional requirements such as internationalisation, legal, or regulatory requirements.</li>
+        </ul>
+
+        <h4>Section 4 — Supporting information</h4>
+        <ul>
+          <li><strong>Appendices:</strong> Sample input/output, analysis models (DFD, ERD), glossary, traceability matrices.</li>
+          <li><strong>Index:</strong> Optional cross-reference index.</li>
+        </ul>
+
+        <h3>Five basic issues an SRS must address (IEEE 830 §4.1)</h3>
+        <ul>
+          <li><strong>Functionality:</strong> What is the software supposed to do?</li>
+          <li><strong>External interfaces:</strong> How does the software interact with people, hardware, and other software?</li>
+          <li><strong>Performance:</strong> What are the speed, availability, response time, and recovery time requirements?</li>
+          <li><strong>Attributes:</strong> What are the portability, correctness, maintainability, and security considerations?</li>
+          <li><strong>Design constraints:</strong> Are there required standards, implementation language, database policies, resource limits, or operating environment constraints?</li>
+        </ul>
+        <ul>
+          <li>The SRS writer should <strong>avoid placing design or project requirements</strong> in the SRS — design belongs in the design stage, and project requirements belong in the project plan.</li>
+        </ul>
+
+        <h3>Characteristics of a good SRS (IEEE 830 §4.3)</h3>
+        <p>An SRS should be (full detail in <a href="04-16-srs-quality.html#sec-4-16">§4.16</a>):</p>
+        <ul>
+          <li><strong>Correct:</strong> Every requirement stated is one that the software shall meet.</li>
+          <li><strong>Unambiguous:</strong> Every requirement has only one interpretation; each term has a single unique meaning.</li>
+          <li><strong>Complete:</strong> All significant requirements are included — functional, performance, design constraints, attributes, and interfaces.</li>
+          <li><strong>Consistent:</strong> No requirement conflicts with another; terminology is used consistently throughout.</li>
+          <li><strong>Ranked for importance and/or stability:</strong> Requirements are prioritised so trade-off decisions can be made.</li>
+          <li><strong>Verifiable:</strong> Every requirement can be objectively verified — avoid vague terms like "user-friendly" or "fast."</li>
+          <li><strong>Modifiable:</strong> Structure allows changes without excessive rework; cross-references and unique IDs help.</li>
+          <li><strong>Traceable:</strong> Source of every requirement is defined; requirements can be traced to design and test cases.</li>
+        </ul>
+
+        <h3>SRS as a "black box" specification</h3>
+        <ul>
+          <li>The SRS is sometimes called a <strong>"black box"</strong> specification because it focuses on what the software should do from an external user's perspective without detailing internal workings or implementation.</li>
+          <li>A properly written SRS <strong>limits the range of valid designs</strong> but does not specify any particular design.</li>
+          <li>The SRS should not describe design or implementation details — these belong in the Software Design Description (IEEE 1016).</li>
+        </ul>
+
+        <h3>SRS document checklist (IEEE-based review)</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-srs-checklist-caption">
+          <img src="../../../assets/images/se-topic-04/srs-checklist.webp"
+               alt="Elements of an SRS document checklist"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-srs-checklist-caption">Elements of an SRS document checklist.</figcaption>
+        </figure>
+        <p>A checklist is a verification tool used during SRS review (peer reviews, walkthroughs, inspections). An SRS checklist should address:</p>
+
+        <h4>Elements to include in the SRS</h4>
+        <ul>
+          <li><strong>Purpose and scope:</strong> High-level overview, intended audience, constraints, assumptions, and dependencies.</li>
+          <li><strong>Functional requirements:</strong> Specific, measurable, testable features, user interface, and data processing.</li>
+          <li><strong>Non-functional requirements:</strong> Performance, security, reliability, and usability.</li>
+          <li><strong>System architecture:</strong> High-level design — components, interfaces, and data flow.</li>
+          <li><strong>Data management:</strong> Database, data storage, backup, and recovery.</li>
+          <li><strong>User documentation:</strong> User interface, manuals, and help documents.</li>
+          <li><strong>Testing requirements:</strong> Test cases, test environment, and test data.</li>
+          <li><strong>Acceptance criteria:</strong> Acceptance tests, validation criteria, and sign-off procedures.</li>
+          <li><strong>Project timeline:</strong> Milestones, deliverables, and deadlines.</li>
+          <li><strong>Stakeholder list:</strong> Roles, responsibilities, and contact information.</li>
+        </ul>
+
+        <h4>Quality checks during review</h4>
+        <ul>
+          <li><strong>Correctness:</strong> Every requirement correctly represents an expectation from the proposed software; all safety and security requirements identified; all inputs and outputs are sufficient for specified processing.</li>
+          <li><strong>Ambiguity:</strong> Each requirement has a single meaning; avoid words with multiple interpretations; requirements should be short, correct, precise, and clear.</li>
+          <li><strong>Completeness:</strong> All important functional requirements included (hardware faults, I/O errors, computational errors, buffer overflow, etc.) plus all non-functional requirements.</li>
+          <li><strong>Consistency:</strong> No requirement varies from another; each object referred to with a unique name; mathematical equations, acronyms, and abbreviations used consistently.</li>
+          <li><strong>Verifiability:</strong> Every requirement is verifiable; avoid non-verifiable terms like "good interfaces," "excellent response time," "usually," or "well"; use "shall," "will," "may" and measurable terms only.</li>
+          <li><strong>Traceability:</strong> Source of every requirement is defined to help future development and design.</li>
+          <li><strong>Feasibility:</strong> Requirements that cannot be implemented due to technical or resource limitations are identified and removed.</li>
+        </ul>
+
+        <h3>Considerations when producing an SRS (IEEE 830 §4)</h3>
+        <ul>
+          <li><strong>Joint preparation:</strong> IEEE 830 recommends that both customer and supplier representatives participate in writing the SRS.</li>
+          <li><strong>SRS evolution:</strong> The SRS is a living document that may be updated as understanding grows, but changes must be controlled.</li>
+          <li><strong>Prototyping:</strong> Prototypes can help clarify requirements before the final SRS is approved.</li>
+          <li><strong>Do not embed design:</strong> Design details belong in the design document, not the SRS.</li>
+          <li><strong>Do not embed project requirements:</strong> Schedule, budget, and staffing belong in the project plan, not the SRS.</li>
+        </ul>
+
+        <h3>IEEE 29148-2011 (current standard)</h3>
+        <p>
+          IEEE 29148 (2011) extends IEEE 830 and covers the <strong>full requirements engineering process</strong>,
+          not only the SRS document. It has been adopted as ISO/IEC/IEEE 29148.
+        </p>
+        <ul>
+          <li>Defines terms for requirements, stakeholder, verification, and validation consistent with ISO/IEC/IEEE 15288 (systems engineering).</li>
+          <li>Specifies content for three levels of requirements information:
+            <ul>
+              <li><strong>Stakeholder requirements</strong> — what stakeholders need (business/user view).</li>
+              <li><strong>System requirements</strong> — what the overall system shall do.</li>
+              <li><strong>Software requirements</strong> — detailed software-level specifications (the SRS).</li>
+            </ul>
+          </li>
+          <li>Requires each requirement to include: a <strong>unique ID</strong>, a <strong>statement</strong>, <strong>rationale</strong>, <strong>source</strong>, <strong>priority</strong>, and <strong>verification method</strong> (inspection, analysis, demonstration, or test).</li>
+          <li>Emphasises <strong>bidirectional traceability</strong> between stakeholder requirements, system requirements, design, code, and tests.</li>
+        </ul>
+
+        <h3>IEEE 729 — software engineering glossary</h3>
+        <p>
+          IEEE Std 729-1983 (also referenced as IEEE 610.12) provides the standard glossary for software
+          engineering terminology. The definition of "requirement" from IEEE 729 is used throughout this topic:
+        </p>
+        <ul>
+          <li>A condition or capability needed by a user to solve a problem or achieve an objective.</li>
+          <li>A condition or capability that must be met or possessed by a system to satisfy a contract, standard, or specification.</li>
+          <li>A documented representation of a condition or capability.</li>
+        </ul>
+
+        <h3>Related standards</h3>
+        <ul>
+          <li><strong>IEEE 1074-1997:</strong> Standard for developing software life cycle processes — describes steps and applicable inputs for each step.</li>
+          <li><strong>IEEE 1016-1998:</strong> Recommended practice for software design descriptions — where design details go after the SRS.</li>
+          <li><strong>IEEE 1028-1997:</strong> Standard for software reviews — used when reviewing the SRS.</li>
+          <li><strong>ISO/IEC 12207:</strong> Software life cycle processes — SRS is a key life cycle data item.</li>
+          <li><strong>ISO/IEC/IEEE 15288:</strong> Systems engineering life cycle — parent framework for 29148.</li>
+        </ul>
 
         <h3>Why follow IEEE standards?</h3>
         <ul>
           <li>Provides a recognised, complete template so no important section is omitted.</li>
           <li>Facilitates review and contractual agreement between customer and supplier.</li>
-          <li>Supports certification and compliance in regulated industries.</li>
+          <li>Supports certification and compliance in regulated industries (healthcare, finance, aerospace).</li>
           <li>Aligns with international systems and software engineering standards (ISO/IEC 12207, 15288).</li>
+          <li>Ensures requirements are correct, complete, consistent, verifiable, and traceable — reducing project failure risk.</li>
+          <li>Although IEEE 830 is not ideal as an organisational standard on its own, it is an excellent general framework that can be tailored to an organisation's needs.</li>
         </ul>
+
         <div class="callout exam">
           <div class="callout-title">Exam question — IEEE SRS standards</div>
-          <p><strong>Q:</strong> Describe the IEEE recommended structure for an SRS. How does IEEE 29148 extend IEEE 830?</p>
+          <p><strong>Q:</strong> Explain the IEEE recommended structure for an SRS document. Describe the characteristics of a good SRS, the SRS checklist, and how IEEE 29148 extends IEEE 830.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>State IEEE 830 sections: introduction, overall description, specific requirements (interfaces, functional, performance, constraints, attributes), appendices.</li>
-            <li>Explain IEEE 29148 covers full RE process; stakeholder/system/software requirements levels.</li>
-            <li>List requirement attributes in 29148: ID, statement, rationale, source, priority, verification method.</li>
-            <li>Mention IEEE 729 glossary definition of requirement.</li>
-            <li>State benefits: complete template, contractual clarity, compliance, international alignment.</li>
+            <li>IEEE 830-1998: recommended practice for SRS; unambiguous complete specification; helps customer, supplier, and organisation.</li>
+            <li><strong>Structure:</strong> §1 Introduction (purpose, scope, definitions, references, overview) → §2 Overall description (perspective, functions, users, constraints, assumptions, apportioning) → §3 Specific requirements (external interfaces, functions, performance, database, design constraints, system attributes) → Appendices/Index.</li>
+            <li><strong>Five issues SRS must address:</strong> functionality, external interfaces, performance, attributes, design constraints.</li>
+            <li><strong>8 characteristics (IEEE 830 §4.3):</strong> correct, unambiguous, complete, consistent, ranked, verifiable, modifiable, traceable.</li>
+            <li><strong>Black box:</strong> SRS describes what software does externally, not internal design.</li>
+            <li><strong>Checklist checks:</strong> correctness, ambiguity, completeness, consistency, verifiability, traceability, feasibility.</li>
+            <li><strong>IEEE 29148:</strong> full RE process; stakeholder/system/software requirement levels; req attributes (ID, statement, rationale, source, priority, verification method); bidirectional traceability.</li>
+            <li><strong>IEEE 729:</strong> glossary; defines "requirement."</li>
+            <li>Benefits: agreement baseline, cost estimation, V&amp;V, transfer, enhancement; aligns with ISO 12207/15288.</li>
+            <li>Do NOT embed design or project requirements in SRS.</li>
           </ul>
         </div>
       </section>

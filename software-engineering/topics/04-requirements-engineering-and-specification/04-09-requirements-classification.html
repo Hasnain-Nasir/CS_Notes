@@ -32,64 +32,162 @@
       </header>
 
       <section id="sec-4-9">
-
         <p>
-          Software requirements are classified into categories so that analysts, designers, and testers can address
-          each type appropriately. Classification also helps prioritise, trace, and verify requirements systematically.
+          <strong>Classification of software requirements</strong> is important in the software development process.
+          It organises requirements into different categories that make them easier to manage, prioritise, and track.
+          The main types of software requirements are <strong>functional</strong>, <strong>non-functional</strong>,
+          and <strong>domain</strong> requirements.
         </p>
 
-        <h3>IEEE 729 definition</h3>
-        <p>
-          IEEE 729 defines a <strong>requirement</strong> as: (1) a condition or capability needed by a user to solve
-          a problem or achieve an objective; or (2) a condition or capability that must be met or possessed by a
-          system or system component to satisfy a contract, standard, specification, or other formally imposed document.
-        </p>
+        <h3>What is a software requirement?</h3>
+        <p>According to <strong>IEEE standard 729</strong>, a requirement is defined as follows:</p>
+        <ul>
+          <li>A condition or capability needed by a user to solve a problem or achieve an objective.</li>
+          <li>A condition or capability that must be met or possessed by a system or system component to satisfy a contract, standard, specification, or other formally imposed document.</li>
+          <li>A documented representation of a condition or capability, as in the two points above.</li>
+        </ul>
 
-        <h3>Primary classification: functional, non-functional, domain</h3>
+        <h3>Types of software requirements</h3>
+        <p>Software requirements are mainly classified into <strong>three types</strong>:</p>
+
         <figure class="diagram figure-photo" aria-labelledby="fig-req-types-caption">
           <img src="../../../assets/images/se-topic-04/req-types.webp"
                alt="Classification of software requirements — functional, non-functional, and domain requirements"
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-req-types-caption">Main categories of software requirements.</figcaption>
         </figure>
+
         <ul>
-          <li><strong>Functional requirements:</strong> Describe what the system must do — the services, behaviours, and functions it provides. Example: "The system shall allow a user to reset their password via email verification."</li>
-          <li><strong>Non-functional requirements (quality attributes):</strong> Describe how well the system performs its functions — constraints on performance, security, usability, reliability, maintainability, and portability. Example: "The login page shall load within 2 seconds under normal load."</li>
-          <li><strong>Domain requirements:</strong> Requirements that arise from the application domain and may be functional or non-functional. They often reflect business rules, regulations, or industry standards that the system must comply with.</li>
+          <li><strong>Functional requirements</strong></li>
+          <li><strong>Non-functional requirements</strong></li>
+          <li><strong>Domain requirements</strong></li>
         </ul>
 
-        <h3>Classification by source / perspective</h3>
+        <h4>1. Functional requirements</h4>
         <ul>
-          <li><strong>User requirements:</strong> High-level statements of what users need, usually in natural language for customer review.</li>
-          <li><strong>System requirements:</strong> Detailed, technical descriptions of what the system must do, derived from user requirements for developers.</li>
-          <li><strong>Business requirements:</strong> Goals and objectives the organisation wants to achieve through the software (e.g. increase sales by 20%).</li>
-          <li><strong>Regulatory requirements:</strong> Legal, safety, or compliance constraints imposed by external authorities.</li>
+          <li><strong>Definition:</strong> Functional requirements describe what the software should do. They define the functions or features that the system must have.</li>
+          <li><strong>User authentication example:</strong> The system must allow users to log in using a username and password.</li>
+          <li><strong>Search functionality example:</strong> The software should enable users to search for products by name or category.</li>
+          <li><strong>Report generation example:</strong> The system should be able to generate sales reports for a specified date range.</li>
+          <li>Functional requirements specify the actions that the software needs to perform — these are the basic features and functionalities that users expect from the software.</li>
         </ul>
 
-        <h3>Classification by type of constraint</h3>
+        <h4>2. Non-functional requirements</h4>
         <ul>
-          <li><strong>Interface requirements:</strong> Specify how the system interacts with users, other systems, or hardware (UI layout, API formats, communication protocols).</li>
-          <li><strong>Design constraints:</strong> Restrictions on design choices imposed by the customer or environment (must use a specific database, must run on Linux).</li>
-          <li><strong>Performance requirements:</strong> A subset of non-functional requirements specifying speed, throughput, response time, and capacity.</li>
+          <li><strong>Definition:</strong> Non-functional requirements describe how the software performs a task rather than what it should do. They define the quality attributes, performance criteria, and constraints.</li>
+          <li><strong>Performance example:</strong> The system should process 1,000 transactions per second.</li>
+          <li><strong>Usability example:</strong> The software should be easy to use and have a user-friendly interface.</li>
+          <li><strong>Reliability example:</strong> The system must have 99.9% uptime.</li>
+          <li><strong>Security example:</strong> Data must be encrypted during transmission and storage.</li>
+          <li>Non-functional requirements are about the system's behaviour, quality, and constraints. They ensure that the software meets certain standards of performance, usability, reliability, and security.</li>
         </ul>
 
-        <h3>Why classification matters</h3>
+        <h4>3. Domain requirements</h4>
         <ul>
-          <li>Functional requirements drive feature design and functional testing.</li>
-          <li>Non-functional requirements drive architecture decisions and performance/security testing.</li>
-          <li>Domain and regulatory requirements must not be overlooked because they carry legal or business risk.</li>
-          <li>Separate treatment in the SRS makes the document easier to review and trace.</li>
+          <li><strong>Definition:</strong> Domain requirements are specific to the domain or industry in which the software operates. They include terminology, rules, and standards relevant to that particular domain.</li>
+          <li><strong>Healthcare example:</strong> The software must comply with HIPAA regulations for handling patient data.</li>
+          <li><strong>Finance example:</strong> The system should adhere to GAAP standards for financial reporting.</li>
+          <li><strong>E-commerce example:</strong> The software should support various payment gateways like PayPal, Stripe, and credit cards.</li>
+          <li>Domain requirements reflect the unique needs and constraints of a particular industry. They ensure that the software is relevant and compliant with industry-specific regulations and standards.</li>
         </ul>
+
+        <h3>What are functional requirements?</h3>
+        <ul>
+          <li>Functional requirements are the requirements that the end user specifically demands as basic facilities that the system should offer.</li>
+          <li>They can be a calculation, data manipulation, business process, user interaction, or any other specific functionality that defines what function a system is likely to perform.</li>
+          <li>All these functionalities need to be necessarily incorporated into the system as a part of the contract.</li>
+          <li>They are represented or stated in the form of input to be given to the system, the operation performed, and the output expected.</li>
+          <li>They are the requirements stated by the user which one can see directly in the final product, unlike non-functional requirements — for example, in a hospital management system, a doctor should be able to retrieve the information of his patients.</li>
+          <li>Each high-level functional requirement may involve several interactions or dialogues between the system and the outside world.</li>
+          <li>To accurately describe functional requirements, all scenarios must be enumerated.</li>
+          <li>There are many ways of expressing functional requirements — natural language, a structured or formatted language with no rigorous syntax, and formal specification language with proper syntax.</li>
+          <li>Functional requirements in software engineering are also called <strong>functional specification</strong>.</li>
+        </ul>
+
+        <h3>What are non-functional requirements?</h3>
+        <ul>
+          <li>Non-functional requirements are basically the quality constraints that the system must satisfy according to the project contract.</li>
+          <li>They are not related to system functionality — rather, they define how the system should perform.</li>
+          <li>The priority or extent to which these factors are implemented varies from one project to another.</li>
+          <li>They are also called <strong>non-behavioral requirements</strong>.</li>
+        </ul>
+        <p>They basically deal with issues like:</p>
+        <ul>
+          <li>Portability, security, maintainability, reliability, scalability, performance, reusability, and flexibility.</li>
+        </ul>
+        <p><strong>Non-functional requirements are classified into the following types:</strong></p>
+        <ul>
+          <li><strong>Interface constraints</strong></li>
+          <li><strong>Performance constraints:</strong> response time, security, storage space, etc.</li>
+          <li><strong>Operating constraints</strong></li>
+          <li><strong>Life cycle constraints:</strong> maintainability, portability, etc.</li>
+          <li><strong>Economic constraints</strong></li>
+        </ul>
+        <ul>
+          <li>The process of specifying non-functional requirements requires knowledge of the functionality of the system as well as the context within which the system will operate.</li>
+        </ul>
+        <p>They are divided into two main categories:</p>
+        <ul>
+          <li><strong>Execution qualities:</strong> These consist of things like security and usability, which are observable at run time.</li>
+          <li><strong>Evolution qualities:</strong> These consist of things like testability, maintainability, extensibility, and scalability that are embodied in the static structure of the software system.</li>
+        </ul>
+
+        <h3>What are domain requirements?</h3>
+        <ul>
+          <li>Domain requirements are the requirements that are characteristic of a particular category or domain of projects.</li>
+          <li>Domain requirements can be functional or non-functional.</li>
+          <li>Domain requirements engineering is a continuous process of proactively defining the requirements for all foreseeable applications to be developed in the software product line.</li>
+          <li>The basic functions that a system of a specific domain must necessarily exhibit come under this category.</li>
+          <li>For instance, in academic software that maintains records of a school or college, the functionality of being able to access the list of faculty and list of students of each grade is a domain requirement.</li>
+          <li>These requirements are identified from the domain model and are not user-specific.</li>
+        </ul>
+
+        <h3>Other common classifications of software requirements</h3>
+        <ul>
+          <li><strong>User requirements:</strong> These describe what the end-user wants from the software system. User requirements are usually expressed in natural language and are typically gathered through interviews, surveys, or user feedback.</li>
+          <li><strong>System requirements:</strong> These specify the technical characteristics of the software system, such as its architecture, hardware requirements, software components, and interfaces. System requirements are typically expressed in technical terms and are often used as a basis for system design.</li>
+          <li><strong>Business requirements:</strong> These describe the business goals and objectives that the software system is expected to achieve. Business requirements are usually expressed in terms of revenue, market share, customer satisfaction, or other business metrics.</li>
+          <li><strong>Regulatory requirements:</strong> These specify the legal or regulatory standards that the software system must meet. Regulatory requirements may include data privacy, security, accessibility, or other legal compliance requirements.</li>
+          <li><strong>Interface requirements:</strong> These specify the interactions between the software system and external systems or components, such as databases, web services, or other software applications.</li>
+          <li><strong>Design requirements:</strong> These describe the technical design of the software system. They include information about the software architecture, data structures, algorithms, and other technical aspects of the software.</li>
+        </ul>
+        <p>
+          By classifying software requirements, it becomes easier to manage, prioritise, and document them effectively.
+          It also helps ensure that all important aspects of the system are considered during the development process.
+        </p>
+
+        <h3>Advantages of classifying software requirements</h3>
+        <ul>
+          <li><strong>Better organisation:</strong> Classifying requirements helps organise them into groups that are easier to manage, prioritise, and track throughout the development process.</li>
+          <li><strong>Improved communication:</strong> Clear classification makes it easier to communicate requirements to stakeholders, developers, and other team members, and ensures everyone is on the same page about what is required.</li>
+          <li><strong>Increased quality:</strong> By classifying requirements, potential conflicts or gaps can be identified early in the development process, reducing the risk of errors, omissions, or misunderstandings and leading to higher-quality software.</li>
+          <li><strong>Improved traceability:</strong> Classifying requirements helps establish traceability, which is essential for demonstrating compliance with regulatory or quality standards.</li>
+        </ul>
+
+        <h3>Disadvantages of classifying software requirements</h3>
+        <ul>
+          <li><strong>Complexity:</strong> Classifying requirements can be complex, especially if there are many stakeholders with different needs. It can also be time-consuming to identify and classify all requirements.</li>
+          <li><strong>Rigid structure:</strong> A rigid classification structure may limit the ability to accommodate changes or evolving needs during development. It can also lead to a siloed approach that prevents the integration of new ideas or insights.</li>
+          <li><strong>Misclassification:</strong> Misclassifying requirements can lead to errors or misunderstandings that can be costly to correct later in the development process.</li>
+        </ul>
+        <p>
+          Overall, the advantages of classifying software requirements outweigh the disadvantages, as it helps
+          ensure that the software system meets the needs of all stakeholders and is delivered on time, within
+          budget, and with the required quality.
+        </p>
+
         <div class="callout exam">
-          <div class="callout-title">Exam question — Requirements classification</div>
-          <p><strong>Q:</strong> Classify software requirements. Give examples of functional, non-functional, and domain requirements.</p>
+          <div class="callout-title">Exam question — Classification of software requirements</div>
+          <p><strong>Q:</strong> Classify software requirements. Explain functional, non-functional, and domain requirements with examples, and discuss the advantages and disadvantages of classification.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>State IEEE 729 definition of a requirement.</li>
-            <li>Define functional (what system does), non-functional (quality attributes/constraints), domain (from application area).</li>
-            <li>Distinguish user vs system vs business vs regulatory requirements.</li>
-            <li>Mention interface, design, and performance requirement types.</li>
-            <li>Give one example of each main category; explain why classification aids design and testing.</li>
+            <li>State IEEE 729 definition: condition/capability needed by user OR required by system to satisfy contract/standard; plus documented representation.</li>
+            <li><strong>Functional:</strong> what system does — authentication, search, report generation; stated as input/operation/output; also called functional specification.</li>
+            <li><strong>Non-functional:</strong> how system performs — performance, usability, reliability, security; quality constraints; types: interface, performance, operating, life cycle, economic; execution qualities (runtime) vs evolution qualities (maintainability, scalability).</li>
+            <li><strong>Domain:</strong> industry-specific — HIPAA (healthcare), GAAP (finance), payment gateways (e-commerce); from domain model, not user-specific; can be functional or non-functional.</li>
+            <li><strong>Other classifications:</strong> user, system, business, regulatory, interface, design requirements.</li>
+            <li><strong>Advantages:</strong> better organisation, improved communication, increased quality, improved traceability.</li>
+            <li><strong>Disadvantages:</strong> complexity, rigid structure, misclassification risk — but advantages outweigh disadvantages.</li>
           </ul>
         </div>
       </section>
