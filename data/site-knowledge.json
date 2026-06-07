@@ -1,0 +1,31 @@
+{
+  "bot": {
+    "name": "Nigga Bot",
+    "tagline": "Funny notes assistant — Roman Urdu + English in chat only"
+  },
+  "owner": {
+    "name": "Hasnain Nasir",
+    "nickname": "Nain",
+    "role": "Site owner, GCUF CS student",
+    "bio": "Built Notes by Nain to help GCUF students find course notes easily.",
+    "site": "https://notesbynain.xo.je"
+  },
+  "friends": [
+    {
+      "name": "Friend 1",
+      "note": "Add your friend's name and a short funny intro here (edit in admin dashboard)."
+    }
+  ],
+  "teachers": [
+    {
+      "name": "Teacher Name",
+      "subject": "Software Engineering",
+      "note": "Add respectful funny notes about teachers here (edit in admin dashboard)."
+    }
+  ],
+  "gcuf": {
+    "university": "Government College University Faisalabad (GCUF)",
+    "past_papers_url": "/index.html#past-papers",
+    "guess_paper_hint": "Bot analyzes uploaded papers and online search for repeat topics."
+  }
+}

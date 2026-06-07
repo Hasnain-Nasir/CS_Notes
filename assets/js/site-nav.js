@@ -107,6 +107,13 @@
     var actions = document.createElement("div");
     actions.className = "global-header-actions";
 
+    var loginBtn = document.createElement("button");
+    loginBtn.type = "button";
+    loginBtn.className = "header-login-btn";
+    loginBtn.id = "header-login-btn";
+    loginBtn.textContent = "Login";
+    loginBtn.setAttribute("aria-label", "Login");
+
     var themeBtn = document.createElement("button");
     themeBtn.type = "button";
     themeBtn.className = "theme-toggle theme-toggle--icon";
@@ -117,6 +124,7 @@
       '<svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>' +
       "</span>";
 
+    actions.appendChild(loginBtn);
     actions.appendChild(themeBtn);
     actions.appendChild(toggle);
     inner.appendChild(brand);
@@ -272,7 +280,21 @@
 
     syncGlobalHeaderHeight();
     window.addEventListener("resize", syncGlobalHeaderHeight);
+    injectChatScripts(prefix);
     document.dispatchEvent(new CustomEvent("site-nav-ready"));
+  }
+
+  function injectChatScripts(prefix) {
+    if (document.querySelector("[data-nain-chat-loaded]")) return;
+    var marker = document.createElement("meta");
+    marker.setAttribute("data-nain-chat-loaded", "1");
+    document.head.appendChild(marker);
+    ["auth.js", "chatbot.js"].forEach(function (file) {
+      var s = document.createElement("script");
+      s.src = prefix + "assets/js/" + file;
+      s.defer = true;
+      document.head.appendChild(s);
+    });
   }
 
   if (document.readyState === "loading") {
