@@ -296,26 +296,437 @@
 
     syncGlobalHeaderHeight();
     window.addEventListener("resize", syncGlobalHeaderHeight);
-    injectChatScripts();
-    document.dispatchEvent(new CustomEvent("site-nav-ready"));
   }
 
-  function injectChatScripts() {
-    if (document.querySelector("[data-nain-chat-loaded]")) return;
-    var marker = document.createElement("meta");
-    marker.setAttribute("data-nain-chat-loaded", "1");
-    document.head.appendChild(marker);
-    ["notes-auth.js", "notes-chat.js"].forEach(function (file) {
-      var s = document.createElement("script");
-      s.src = "/assets/js/" + file + "?v=3";
-      s.defer = true;
-      document.head.appendChild(s);
+  window.__notesInitSiteNav = initSiteNav;
+})();
+/* Bundled below: notes-auth.js + notes-chat.js (InfinityFree blocks separate loads) */
+(function () {
+  var API = "/api";
+  var currentUser = null;
+  var listeners = [];
+
+  function emit() {
+    listeners.forEach(function (fn) { fn(currentUser); });
+    updateHeaderAuth(currentUser);
+  }
+
+  function api(path, opts) {
+    opts = opts || {};
+    return fetch(API + path, {
+      method: opts.method || "GET",
+      credentials: "same-origin",
+      headers: opts.body ? { "Content-Type": "application/json" } : {},
+      body: opts.body ? JSON.stringify(opts.body) : undefined
+    }).then(function (r) {
+      return r.json().then(function (d) {
+        if (!r.ok && r.status !== 401) {
+          throw new Error((d && d.error) || "Request failed");
+        }
+        return d;
+      });
     });
   }
 
+  function checkSession() {
+    return api("/auth/me.php").then(function (d) {
+      currentUser = d.user || null;
+      emit();
+      return currentUser;
+    }).catch(function () {
+      currentUser = null;
+      emit();
+      return null;
+    });
+  }
+
+  function login(username, password) {
+    return api("/auth/login.php", {
+      method: "POST",
+      body: { username: username, password: password }
+    }).then(function (d) {
+      currentUser = d.user;
+      emit();
+      if (d.redirect) {
+        window.location.href = d.redirect;
+        return d;
+      }
+      closeLoginModal();
+      document.dispatchEvent(new CustomEvent("auth-login", { detail: d.user }));
+      return d;
+    });
+  }
+
+  function logout() {
+    return api("/auth/logout.php", { method: "POST" }).then(function () {
+      currentUser = null;
+      emit();
+      document.dispatchEvent(new CustomEvent("auth-logout"));
+    });
+  }
+
+  function onAuthChange(fn) {
+    listeners.push(fn);
+    fn(currentUser);
+  }
+
+  function isLoggedIn() {
+    return !!currentUser;
+  }
+
+  function getUser() {
+    return currentUser;
+  }
+
+  function updateHeaderAuth(user) {
+    var btn = document.getElementById("header-login-btn");
+    var dropdown = document.getElementById("header-user-dropdown");
+    var logoutBtn = document.getElementById("header-logout-btn");
+    if (!btn) return;
+
+    function closeUserMenu() {
+      if (!dropdown) return;
+      dropdown.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+    }
+
+    function openUserMenu() {
+      if (!dropdown) return;
+      dropdown.hidden = false;
+      btn.setAttribute("aria-expanded", "true");
+    }
+
+    if (user) {
+      btn.textContent = user.display_name || user.username;
+      btn.setAttribute("aria-label", "Account menu");
+      btn.title = user.display_name || user.username;
+      btn.onclick = function (e) {
+        e.stopPropagation();
+        if (dropdown && dropdown.hidden) openUserMenu();
+        else closeUserMenu();
+      };
+      if (logoutBtn && !logoutBtn.dataset.bound) {
+        logoutBtn.dataset.bound = "1";
+        logoutBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          closeUserMenu();
+          logout();
+        });
+      }
+    } else {
+      closeUserMenu();
+      btn.textContent = "Login";
+      btn.setAttribute("aria-label", "Login");
+      btn.title = "Login to chat";
+      btn.onclick = function () {
+        openLoginModal();
+      };
+    }
+  }
+
+  function initUserMenuDismiss() {
+    document.addEventListener("click", function (e) {
+      var menu = document.getElementById("header-user-menu");
+      var dropdown = document.getElementById("header-user-dropdown");
+      if (!menu || !dropdown || dropdown.hidden) return;
+      if (!menu.contains(e.target)) {
+        dropdown.hidden = true;
+        var btn = document.getElementById("header-login-btn");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      var dropdown = document.getElementById("header-user-dropdown");
+      if (!dropdown || dropdown.hidden) return;
+      dropdown.hidden = true;
+      var btn = document.getElementById("header-login-btn");
+      if (btn) btn.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function ensureLoginModal() {
+    if (document.getElementById("auth-modal")) return;
+
+    var overlay = document.createElement("div");
+    overlay.id = "auth-modal";
+    overlay.className = "auth-modal";
+    overlay.hidden = true;
+    overlay.innerHTML =
+      '<div class="auth-modal-panel" role="dialog" aria-labelledby="auth-modal-title">' +
+      '<button type="button" class="auth-modal-close" aria-label="Close">&times;</button>' +
+      '<h2 id="auth-modal-title">Login</h2>' +
+      '<p class="auth-modal-sub">Sign in to chat with the notes assistant.</p>' +
+      '<form id="auth-login-form">' +
+      '<label>Username <input name="username" autocomplete="username" required></label>' +
+      '<label>Password <input name="password" type="password" autocomplete="current-password" required></label>' +
+      '<p class="auth-error" hidden></p>' +
+      '<button type="submit">Login</button>' +
+      '</form></div>';
+    document.body.appendChild(overlay);
+
+    overlay.querySelector(".auth-modal-close").addEventListener("click", closeLoginModal);
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeLoginModal();
+    });
+    overlay.querySelector("#auth-login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var fd = new FormData(e.target);
+      var errEl = overlay.querySelector(".auth-error");
+      errEl.hidden = true;
+      login(fd.get("username"), fd.get("password")).catch(function (err) {
+        errEl.textContent = err.message || "Login failed";
+        errEl.hidden = false;
+      });
+    });
+  }
+
+  function openLoginModal() {
+    ensureLoginModal();
+    document.getElementById("auth-modal").hidden = false;
+  }
+
+  function closeLoginModal() {
+    var m = document.getElementById("auth-modal");
+    if (m) m.hidden = true;
+  }
+
+  window.NotesAuth = {
+    checkSession: checkSession,
+    login: login,
+    logout: logout,
+    onAuthChange: onAuthChange,
+    isLoggedIn: isLoggedIn,
+    getUser: getUser,
+    openLoginModal: openLoginModal,
+    closeLoginModal: closeLoginModal
+  };
+
+  document.addEventListener("site-nav-ready", function () {
+    initUserMenuDismiss();
+    updateHeaderAuth(currentUser);
+    checkSession();
+  });
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initSiteNav);
+    document.addEventListener("DOMContentLoaded", checkSession);
   } else {
-    initSiteNav();
+    checkSession();
+  }
+})();
+(function () {
+  var DEFAULT_UI = {
+    name: "Notes Bot",
+    tagline: "Notes assistant",
+    login_gate: "Login first to chat."
+  };
+
+  function escHtml(s) {
+    var d = document.createElement("div");
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function renderMarkdown(text) {
+    var html = escHtml(text);
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    html = html.replace(/\n/g, "<br>");
+    return html;
+  }
+
+  function getPageUrl() {
+    var p = window.location.pathname;
+    if (p.endsWith("/")) p += "index.html";
+    return p;
+  }
+
+  function loadBotUi() {
+    return fetch("/data/site-knowledge.json", { credentials: "same-origin" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        var bot = (data && data.bot) || {};
+        return {
+          name: bot.name || DEFAULT_UI.name,
+          tagline: bot.tagline || DEFAULT_UI.tagline,
+          login_gate: bot.login_gate || DEFAULT_UI.login_gate
+        };
+      })
+      .catch(function () {
+        return DEFAULT_UI;
+      });
+  }
+
+  function buildWidget(ui) {
+    if (document.getElementById("nain-chat-widget")) return;
+
+    var root = document.createElement("div");
+    root.id = "nain-chat-widget";
+    root.className = "nain-chat-widget";
+    root.innerHTML =
+      '<button type="button" class="nain-chat-toggle" aria-expanded="false" aria-controls="nain-chat-panel">' +
+      escHtml(ui.name) + "</button>" +
+      '<div id="nain-chat-panel" class="nain-chat-panel">' +
+      '<header class="nain-chat-header">' +
+      "<div><strong>" + escHtml(ui.name) + '</strong><span class="nain-chat-sub">' +
+      escHtml(ui.tagline) + "</span></div>" +
+      '<button type="button" class="nain-chat-close" aria-label="Close chat">&times;</button>' +
+      "</header>" +
+      '<div class="nain-chat-login-gate">' +
+      "<p>" + escHtml(ui.login_gate) + "</p>" +
+      "</div>" +
+      '<div class="nain-chat-messages" role="log" aria-live="polite" hidden></div>' +
+      '<form class="nain-chat-form" hidden>' +
+      '<input type="text" name="message" placeholder="Ask anything..." autocomplete="off" maxlength="4000">' +
+      '<button type="submit" aria-label="Send">Send</button>' +
+      "</form></div>";
+    document.body.appendChild(root);
+
+    var toggle = root.querySelector(".nain-chat-toggle");
+    var panel = root.querySelector(".nain-chat-panel");
+    var closeBtn = root.querySelector(".nain-chat-close");
+    var messagesEl = root.querySelector(".nain-chat-messages");
+    var form = root.querySelector(".nain-chat-form");
+    var input = form.querySelector("input");
+    var gate = root.querySelector(".nain-chat-login-gate");
+    var isOpen = false;
+    var sending = false;
+
+    function setOpen(open) {
+      isOpen = !!open;
+      panel.classList.toggle("is-open", isOpen);
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      if (isOpen && window.NotesAuth && window.NotesAuth.isLoggedIn()) {
+        loadHistory();
+      }
+    }
+
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setOpen(!isOpen);
+    });
+
+    closeBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(false);
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!isOpen) return;
+      if (!root.contains(e.target)) setOpen(false);
+    });
+
+    panel.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+
+    function updateAuthUI(user) {
+      if (user) {
+        gate.hidden = true;
+        messagesEl.hidden = false;
+        form.hidden = false;
+        input.disabled = false;
+      } else {
+        gate.hidden = false;
+        messagesEl.hidden = true;
+        form.hidden = true;
+        input.disabled = true;
+        messagesEl.innerHTML = "";
+      }
+    }
+
+    function appendMessage(role, content) {
+      var div = document.createElement("div");
+      div.className = "nain-chat-msg nain-chat-msg--" + role;
+      div.innerHTML = renderMarkdown(content);
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function loadHistory() {
+      fetch("/api/chat/history.php", { credentials: "same-origin" })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (!d.ok) return;
+          messagesEl.innerHTML = "";
+          d.messages.forEach(function (m) {
+            appendMessage(m.role, m.content);
+          });
+        })
+        .catch(function () {});
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!window.NotesAuth || !window.NotesAuth.isLoggedIn()) {
+        gate.hidden = false;
+        return;
+      }
+      var text = input.value.trim();
+      if (!text || sending) return;
+      sending = true;
+      input.value = "";
+      appendMessage("user", text);
+
+      fetch("/api/chat/send.php", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text, page_url: getPageUrl() })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (!d.ok) throw new Error(d.error || "Failed");
+          appendMessage("assistant", d.reply);
+        })
+        .catch(function (err) {
+          appendMessage("assistant", "Error: " + (err.message || "Something went wrong"));
+        })
+        .finally(function () {
+          sending = false;
+          input.focus();
+        });
+    });
+
+    function bindAuth() {
+      if (!window.NotesAuth) return;
+      window.NotesAuth.onAuthChange(updateAuthUI);
+      document.addEventListener("auth-login", function () {
+        updateAuthUI(window.NotesAuth.getUser());
+        if (isOpen) loadHistory();
+      });
+      document.addEventListener("auth-logout", function () {
+        updateAuthUI(null);
+      });
+    }
+
+    bindAuth();
+    document.addEventListener("DOMContentLoaded", bindAuth);
+  }
+
+  function init() {
+    loadBotUi().then(buildWidget);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
+(function () {
+  function bootNotesApp() {
+    if (document.body.classList.contains("site-body") && window.__notesInitSiteNav) {
+      window.__notesInitSiteNav();
+    }
+    document.dispatchEvent(new CustomEvent("site-nav-ready"));
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootNotesApp);
+  } else {
+    bootNotesApp();
   }
 })();

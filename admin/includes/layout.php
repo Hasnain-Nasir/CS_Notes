@@ -41,7 +41,7 @@ function admin_header(string $title, string $active = ''): void
   <link rel="stylesheet" href="/assets/css/notes.css">
   <link rel="stylesheet" href="/admin/admin.css">
 </head>
-<body class="site-body admin-body">
+<body class="admin-body">
   <div class="admin-shell">
     <aside class="admin-sidebar">
       <a class="admin-brand" href="/admin/">Notes by Nain</a>

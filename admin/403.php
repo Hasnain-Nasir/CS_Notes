@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/assets/css/notes.css">
   <link rel="stylesheet" href="/admin/admin.css">
 </head>
-<body class="site-body admin-body">
+<body class="admin-body">
   <div class="admin-forbidden">
     <h1>403 — Forbidden</h1>
     <p>Normal users cannot access the admin dashboard.</p>

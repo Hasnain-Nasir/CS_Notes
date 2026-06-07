@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="/assets/css/notes.css">
   <link rel="stylesheet" href="/admin/admin.css">
 </head>
-<body class="site-body admin-body">
+<body class="admin-body">
   <div class="admin-login-wrap">
     <form class="admin-login-form" method="post">
       <div class="admin-login-head">
