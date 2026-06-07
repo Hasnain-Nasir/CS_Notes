@@ -1,7 +1,8 @@
 {
   "bot": {
     "name": "Nigga Bot",
-    "tagline": "Funny notes assistant — Roman Urdu + English in chat only"
+    "tagline": "Funny notes assistant — Roman Urdu + English in chat only",
+    "login_gate": "You dumb ass niga login first"
   },
   "owner": {
     "name": "Hasnain Nasir",

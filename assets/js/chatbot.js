@@ -1,4 +1,10 @@
 (function () {
+  var DEFAULT_UI = {
+    name: "Notes Bot",
+    tagline: "Notes assistant",
+    login_gate: "Login first to chat."
+  };
+
   function escHtml(s) {
     var d = document.createElement("div");
     d.textContent = s;
@@ -19,7 +25,23 @@
     return p;
   }
 
-  function buildWidget() {
+  function loadBotUi() {
+    return fetch("/data/site-knowledge.json", { credentials: "same-origin" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        var bot = (data && data.bot) || {};
+        return {
+          name: bot.name || DEFAULT_UI.name,
+          tagline: bot.tagline || DEFAULT_UI.tagline,
+          login_gate: bot.login_gate || DEFAULT_UI.login_gate
+        };
+      })
+      .catch(function () {
+        return DEFAULT_UI;
+      });
+  }
+
+  function buildWidget(ui) {
     if (document.getElementById("nain-chat-widget")) return;
 
     var root = document.createElement("div");
@@ -27,20 +49,21 @@
     root.className = "nain-chat-widget";
     root.innerHTML =
       '<button type="button" class="nain-chat-toggle" aria-expanded="false" aria-controls="nain-chat-panel">' +
-      'Nigga Bot</button>' +
+      escHtml(ui.name) + "</button>" +
       '<div id="nain-chat-panel" class="nain-chat-panel">' +
       '<header class="nain-chat-header">' +
-      '<div><strong>Nigga Bot</strong><span class="nain-chat-sub">Notes assistant</span></div>' +
+      "<div><strong>" + escHtml(ui.name) + '</strong><span class="nain-chat-sub">' +
+      escHtml(ui.tagline) + "</span></div>" +
       '<button type="button" class="nain-chat-close" aria-label="Close chat">&times;</button>' +
-      '</header>' +
+      "</header>" +
       '<div class="nain-chat-login-gate">' +
-      '<p>You dumb ass niga login first</p>' +
-      '</div>' +
+      "<p>" + escHtml(ui.login_gate) + "</p>" +
+      "</div>" +
       '<div class="nain-chat-messages" role="log" aria-live="polite" hidden></div>' +
       '<form class="nain-chat-form" hidden>' +
       '<input type="text" name="message" placeholder="Ask anything..." autocomplete="off" maxlength="4000">' +
       '<button type="submit" aria-label="Send">Send</button>' +
-      '</form></div>';
+      "</form></div>";
     document.body.appendChild(root);
 
     var toggle = root.querySelector(".nain-chat-toggle");
@@ -166,9 +189,13 @@
     document.addEventListener("DOMContentLoaded", bindAuth);
   }
 
+  function init() {
+    loadBotUi().then(buildWidget);
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", buildWidget);
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    buildWidget();
+    init();
   }
 })();

@@ -291,7 +291,7 @@
     document.head.appendChild(marker);
     ["auth.js", "chatbot.js"].forEach(function (file) {
       var s = document.createElement("script");
-      s.src = prefix + "assets/js/" + file;
+      s.src = prefix + "assets/js/" + file + "?v=2";
       s.defer = true;
       document.head.appendChild(s);
     });
