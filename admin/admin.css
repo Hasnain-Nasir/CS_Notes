@@ -273,8 +273,49 @@
   display: inline-block;
 }
 
+.admin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.admin-table-wrap:empty,
+.admin-table-wrap > p:only-child {
+  padding: 1.25rem;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.admin-toolbar label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  min-width: 160px;
+}
+
+.admin-toolbar input {
+  min-width: 140px;
+}
+
 .admin-table-wrap {
   overflow-x: auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .admin-table {
@@ -286,9 +327,21 @@
 .admin-table th,
 .admin-table td {
   border: 1px solid var(--border);
-  padding: 0.5rem 0.65rem;
+  padding: 0.65rem 0.85rem;
   text-align: left;
   vertical-align: top;
+}
+
+.admin-table th {
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-elevated));
+  font-weight: 600;
+  color: var(--heading);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  word-break: break-word;
+  max-width: 420px;
 }
 
 .admin-chat-row {

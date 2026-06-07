@@ -55,7 +55,7 @@
     function loadChats() {
       var uid = document.getElementById("filter-user").value;
       var q = uid ? "?user_id=" + encodeURIComponent(uid) : "";
-      api("chats.php" + q).then(function (d) {
+      api("messages.php" + q).then(function (d) {
         chatsList.innerHTML = d.chats.map(function (c) {
           return '<div class="admin-chat-row ' + c.role + '"><span class="meta">#' + c.user_id + " " + c.username + " · " + c.created_at + "</span><p>" + esc(c.content) + "</p></div>";
         }).join("") || "<p>No chats yet.</p>";

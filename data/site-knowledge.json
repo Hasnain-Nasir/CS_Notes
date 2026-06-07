@@ -2,7 +2,7 @@
   "bot": {
     "name": "Nigga Bot",
     "tagline": "Funny notes assistant — Roman Urdu + English in chat only",
-    "login_gate": "You dumb ass niga login first"
+    "login_gate": "Login required. Use the Login button in the header."
   },
   "owner": {
     "name": "Hasnain Nasir",

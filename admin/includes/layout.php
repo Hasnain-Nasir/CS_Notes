@@ -48,7 +48,7 @@ function admin_header(string $title, string $active = ''): void
       <p class="admin-sidebar-label">Admin panel</p>
       <nav class="admin-nav" aria-label="Admin">
         <a href="/admin/" class="<?= $active === 'overview' ? 'is-active' : '' ?>">Overview</a>
-        <a href="/admin/chats.php" class="<?= $active === 'chats' ? 'is-active' : '' ?>">Chats</a>
+        <a href="/admin/messages.php" class="<?= $active === 'messages' ? 'is-active' : '' ?>">Chats</a>
         <a href="/admin/memories.php" class="<?= $active === 'memories' ? 'is-active' : '' ?>">Memories</a>
         <a href="/admin/users.php" class="<?= $active === 'users' ? 'is-active' : '' ?>">Users</a>
         <a href="/admin/keys.php" class="<?= $active === 'keys' ? 'is-active' : '' ?>">API Keys</a>

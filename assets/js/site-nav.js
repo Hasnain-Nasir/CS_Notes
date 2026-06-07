@@ -516,9 +516,9 @@
 })();
 (function () {
   var DEFAULT_UI = {
-    name: "Notes Bot",
-    tagline: "Notes assistant",
-    login_gate: "Login first to chat."
+    name: "notes-bot",
+    tagline: "Notes assistant terminal",
+    login_gate: "Login required. Use the Login button in the header."
   };
 
   function escHtml(s) {
@@ -549,7 +549,7 @@
         return {
           name: bot.name || DEFAULT_UI.name,
           tagline: bot.tagline || DEFAULT_UI.tagline,
-          login_gate: bot.login_gate || DEFAULT_UI.login_gate
+          login_gate: DEFAULT_UI.login_gate
         };
       })
       .catch(function () {
@@ -560,35 +560,41 @@
   function buildWidget(ui) {
     if (document.getElementById("nain-chat-widget")) return;
 
+    var botSlug = (ui.name || "notes-bot").toLowerCase().replace(/\s+/g, "-");
+
     var root = document.createElement("div");
     root.id = "nain-chat-widget";
-    root.className = "nain-chat-widget";
+    root.className = "nain-chat-widget nain-term-widget";
     root.innerHTML =
-      '<button type="button" class="nain-chat-toggle" aria-expanded="false" aria-controls="nain-chat-panel">' +
-      escHtml(ui.name) + "</button>" +
-      '<div id="nain-chat-panel" class="nain-chat-panel">' +
-      '<header class="nain-chat-header">' +
-      "<div><strong>" + escHtml(ui.name) + '</strong><span class="nain-chat-sub">' +
-      escHtml(ui.tagline) + "</span></div>" +
-      '<button type="button" class="nain-chat-close" aria-label="Close chat">&times;</button>' +
-      "</header>" +
-      '<div class="nain-chat-login-gate">' +
-      "<p>" + escHtml(ui.login_gate) + "</p>" +
+      '<button type="button" class="nain-term-toggle" aria-expanded="false" aria-controls="nain-chat-panel" aria-label="Open terminal">' +
+      '<span class="nain-term-toggle-icon" aria-hidden="true">&gt;_</span></button>' +
+      '<div id="nain-chat-panel" class="nain-term-panel">' +
+      '<div class="nain-term-titlebar">' +
+      '<span class="nain-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>' +
+      '<span class="nain-term-title">' + escHtml(ui.name) + " — terminal</span>" +
+      '<button type="button" class="nain-term-close" aria-label="Close terminal">&times;</button>' +
       "</div>" +
-      '<div class="nain-chat-messages" role="log" aria-live="polite" hidden></div>' +
-      '<form class="nain-chat-form" hidden>' +
-      '<input type="text" name="message" placeholder="Ask anything..." autocomplete="off" maxlength="4000">' +
-      '<button type="submit" aria-label="Send">Send</button>' +
+      '<div class="nain-term-screen" role="log" aria-live="polite">' +
+      '<div class="nain-term-line nain-term-line--system"><span class="nain-term-prompt">$</span> ' +
+      escHtml(ui.tagline) + " · type a message and press Enter.</div>" +
+      '<div class="nain-term-login-gate"><span class="nain-term-prompt">!</span> ' +
+      escHtml(ui.login_gate) + "</div>" +
+      '<div class="nain-term-log" hidden></div>' +
+      "</div>" +
+      '<form class="nain-term-inputline" hidden autocomplete="off">' +
+      '<span class="nain-term-prompt" data-term-prompt>guest@nain:~$</span>' +
+      '<input type="text" name="message" aria-label="Terminal input" autocomplete="off" maxlength="4000" spellcheck="false">' +
       "</form></div>";
     document.body.appendChild(root);
 
-    var toggle = root.querySelector(".nain-chat-toggle");
-    var panel = root.querySelector(".nain-chat-panel");
-    var closeBtn = root.querySelector(".nain-chat-close");
-    var messagesEl = root.querySelector(".nain-chat-messages");
-    var form = root.querySelector(".nain-chat-form");
+    var toggle = root.querySelector(".nain-term-toggle");
+    var panel = root.querySelector(".nain-term-panel");
+    var closeBtn = root.querySelector(".nain-term-close");
+    var logEl = root.querySelector(".nain-term-log");
+    var form = root.querySelector(".nain-term-inputline");
     var input = form.querySelector("input");
-    var gate = root.querySelector(".nain-chat-login-gate");
+    var gate = root.querySelector(".nain-term-login-gate");
+    var promptEl = root.querySelector("[data-term-prompt]");
     var isOpen = false;
     var sending = false;
 
@@ -598,6 +604,7 @@
       toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
       if (isOpen && window.NotesAuth && window.NotesAuth.isLoggedIn()) {
         loadHistory();
+        input.focus();
       }
     }
 
@@ -624,24 +631,36 @@
     function updateAuthUI(user) {
       if (user) {
         gate.hidden = true;
-        messagesEl.hidden = false;
+        logEl.hidden = false;
         form.hidden = false;
         input.disabled = false;
+        promptEl.textContent = (user.username || "user") + "@nain:~$";
       } else {
         gate.hidden = false;
-        messagesEl.hidden = true;
+        logEl.hidden = true;
         form.hidden = true;
         input.disabled = true;
-        messagesEl.innerHTML = "";
+        logEl.innerHTML = "";
+        promptEl.textContent = "guest@nain:~$";
       }
     }
 
     function appendMessage(role, content) {
-      var div = document.createElement("div");
-      div.className = "nain-chat-msg nain-chat-msg--" + role;
-      div.innerHTML = renderMarkdown(content);
-      messagesEl.appendChild(div);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      var line = document.createElement("div");
+      line.className = "nain-term-line nain-term-line--" + role;
+      if (role === "user") {
+        line.innerHTML =
+          '<span class="nain-term-prompt">' + escHtml(promptEl.textContent) + "</span> " +
+          renderMarkdown(content);
+      } else if (role === "assistant") {
+        line.innerHTML =
+          '<span class="nain-term-prompt">' + escHtml(botSlug) + "&gt;</span> " +
+          renderMarkdown(content);
+      } else {
+        line.innerHTML = renderMarkdown(content);
+      }
+      logEl.appendChild(line);
+      logEl.scrollTop = logEl.scrollHeight;
     }
 
     function loadHistory() {
@@ -649,7 +668,7 @@
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (!d.ok) return;
-          messagesEl.innerHTML = "";
+          logEl.innerHTML = "";
           d.messages.forEach(function (m) {
             appendMessage(m.role, m.content);
           });
