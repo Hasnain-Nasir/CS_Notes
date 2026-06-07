@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.17 IEEE Standards for SRS</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.17 IEEE Standards for SRS</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-17">
+
+        <p>
+          The IEEE has published standards that define recommended structure and content for Software Requirements
+          Specifications. The most widely referenced are <strong>IEEE Std 830-1998</strong> (superseded but still
+          cited in exams) and <strong>IEEE Std 29148-2011</strong>, which consolidates and updates earlier RE standards.
+        </p>
+
+        <h3>IEEE 830 SRS recommended structure</h3>
+        <p>IEEE 830 defines the following major sections for an SRS:</p>
+        <ol>
+          <li><strong>Introduction</strong> — purpose, scope, definitions, references, overview.</li>
+          <li><strong>Overall description</strong> — product perspective, functions, user characteristics, constraints, assumptions and dependencies.</li>
+          <li><strong>Specific requirements</strong> — the bulk of the document:
+            <ul>
+              <li>External interface requirements (user, hardware, software, communication).</li>
+              <li>Functional requirements.</li>
+              <li>Performance requirements.</li>
+              <li>Design constraints.</li>
+              <li>Software system attributes (reliability, availability, security, maintainability, portability).</li>
+              <li>Other relevant requirements (database, internationalisation, legal).</li>
+            </ul>
+          </li>
+          <li><strong>Appendices</strong> — sample I/O, glossary, analysis models.</li>
+          <li><strong>Index</strong> — optional cross-reference index.</li>
+        </ol>
+
+        <h3>IEEE 29148 key concepts</h3>
+        <p>IEEE 29148 (2011) extends IEEE 830 and covers the full RE process, not only the SRS document:</p>
+        <ul>
+          <li>Defines terms for requirements, stakeholder, verification, and validation consistent with ISO/IEC/IEEE 15288 (systems engineering).</li>
+          <li>Specifies content for three types of requirements information: <strong>stakeholder requirements</strong> (what stakeholders need), <strong>system requirements</strong> (what the system shall do), and <strong>software requirements</strong> (detailed SW-level specs).</li>
+          <li>Requires each requirement to include: a unique ID, a statement, rationale, source, priority, and verification method (inspection, analysis, demonstration, test).</li>
+          <li>Emphasises bidirectional traceability between stakeholder requirements, system requirements, design, code, and tests.</li>
+        </ul>
+
+        <h3>IEEE 729 — vocabulary</h3>
+        <p>
+          IEEE Std 729-1983 provides the standard glossary for software engineering terminology, including the
+          definition of "requirement" used throughout this topic (see
+          <a href="04-01-re-overview.html#sec-4-1">§4.1</a> and
+          <a href="04-09-requirements-classification.html#sec-4-9">§4.9</a>).
+        </p>
+
+        <h3>Why follow IEEE standards?</h3>
+        <ul>
+          <li>Provides a recognised, complete template so no important section is omitted.</li>
+          <li>Facilitates review and contractual agreement between customer and supplier.</li>
+          <li>Supports certification and compliance in regulated industries.</li>
+          <li>Aligns with international systems and software engineering standards (ISO/IEC 12207, 15288).</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — IEEE SRS standards</div>
+          <p><strong>Q:</strong> Describe the IEEE recommended structure for an SRS. How does IEEE 29148 extend IEEE 830?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>State IEEE 830 sections: introduction, overall description, specific requirements (interfaces, functional, performance, constraints, attributes), appendices.</li>
+            <li>Explain IEEE 29148 covers full RE process; stakeholder/system/software requirements levels.</li>
+            <li>List requirement attributes in 29148: ID, statement, rationale, source, priority, verification method.</li>
+            <li>Mention IEEE 729 glossary definition of requirement.</li>
+            <li>State benefits: complete template, contractual clarity, compliance, international alignment.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-16-srs-quality.html">&larr; 4.16 SRS Quality</a>
+        <a class="btn-back chapter-nav-next" href="04-18-software-specification.html">4.18 Software Specification &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

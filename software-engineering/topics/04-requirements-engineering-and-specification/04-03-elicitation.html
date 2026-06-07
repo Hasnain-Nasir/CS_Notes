@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.3 Elicitation / Requirements Elicitation</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.3 Elicitation / Requirements Elicitation</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-3">
+
+        <p>
+          <strong>Requirements elicitation</strong> is the process of gathering, discovering, and extracting
+          requirements from stakeholders, existing systems, documents, and the problem domain. It is the first
+          active step after feasibility approval and is often the most difficult RE activity because stakeholders
+          may not fully understand their own needs or may express them inconsistently.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-req-elicitation-caption">
+          <img src="../../../assets/images/se-topic-04/req-elicitation.webp"
+               alt="Requirements elicitation — discovering stakeholder needs"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-req-elicitation-caption">Overview of the requirements elicitation process.</figcaption>
+        </figure>
+        <h3>Importance of elicitation</h3>
+        <ul>
+          <li>Elicitation is the primary source of all downstream requirements — errors here propagate through design, coding, and testing.</li>
+          <li>It builds stakeholder engagement and trust by involving users early in the project.</li>
+          <li>It reveals hidden assumptions, constraints, and conflicts before they become expensive to fix.</li>
+          <li>It provides the raw material for analysis, specification, and validation in later RE phases.</li>
+        </ul>
+
+        <h3>Common elicitation techniques</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-elicitation-techniques-caption">
+          <img src="../../../assets/images/se-topic-04/elicitation-techniques.webp"
+               alt="Requirements elicitation techniques — interviews, brainstorming, observation, prototyping, and more"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-elicitation-techniques-caption">Common requirements elicitation techniques.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Interviews:</strong> One-on-one or group conversations with stakeholders to explore needs, workflows, and pain points. Structured interviews follow a prepared question list; unstructured interviews allow open exploration.</li>
+          <li><strong>Brainstorming:</strong> A facilitated group session that generates a large number of ideas quickly without immediate criticism, useful for discovering features and constraints.</li>
+          <li><strong>Facilitated Application Specification Technique (FAST):</strong> A joint workshop where customers and developers meet together to define requirements collaboratively, reducing miscommunication.</li>
+          <li><strong>Quality Function Deployment (QFD):</strong> A structured method that translates customer needs (the "voice of the customer") into technical requirements and prioritises them by importance.</li>
+          <li><strong>Use cases / scenarios:</strong> Narrative descriptions of how users interact with the system to achieve goals; they clarify functional requirements in concrete terms.</li>
+          <li><strong>Observation / ethnography:</strong> Analysts watch users perform their actual work to discover requirements users cannot articulate in an interview.</li>
+          <li><strong>Questionnaires / surveys:</strong> Useful when many stakeholders are geographically dispersed or when quantitative preference data is needed.</li>
+          <li><strong>Document analysis:</strong> Review of existing manuals, regulations, legacy system specs, and business process documents to extract implicit requirements.</li>
+          <li><strong>Prototyping:</strong> Building a quick mock-up so stakeholders can react to something tangible; closely linked to prototyping in <a href="../02-sdlc-and-process-models/02-14-prototyping-model.html#sec-2-14">Topic 2 §2.14</a>.</li>
+        </ul>
+
+        <h3>Steps in the elicitation process</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-elicitation-steps-caption">
+          <img src="../../../assets/images/se-topic-04/elicitation-steps.webp"
+               alt="Steps in requirements elicitation — identify stakeholders, discover needs, record, and validate"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-elicitation-steps-caption">Typical steps in the requirements elicitation process.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>Identify stakeholders:</strong> List all people and organisations affected by or influencing the system.</li>
+          <li><strong>Understand the problem domain:</strong> Learn the business context, terminology, and existing workflows before asking detailed questions.</li>
+          <li><strong>Select elicitation techniques:</strong> Choose methods appropriate to stakeholder availability, project size, and domain complexity.</li>
+          <li><strong>Conduct elicitation sessions:</strong> Gather raw requirements using the selected techniques.</li>
+          <li><strong>Record and organise findings:</strong> Document needs in a structured form ready for analysis (see <a href="04-05-analysis.html#sec-4-5">§4.5</a>).</li>
+          <li><strong>Validate with stakeholders:</strong> Confirm that recorded needs accurately reflect what was intended.</li>
+        </ol>
+
+        <h3>Advantages and disadvantages</h3>
+        <ul>
+          <li><strong>Advantages:</strong> Direct contact with stakeholders improves accuracy; multiple techniques compensate for individual weaknesses; early involvement reduces late change requests.</li>
+          <li><strong>Disadvantages:</strong> Stakeholders may give conflicting information; sessions are time-consuming; dominant personalities can skew group techniques; users may request unnecessary features.</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Elicitation techniques</div>
+          <p><strong>Q:</strong> What is requirements elicitation? Describe at least four techniques and their appropriate use.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define elicitation as discovering/gathering requirements from stakeholders and domain.</li>
+            <li>Explain importance: primary source of requirements, stakeholder engagement.</li>
+            <li>Describe interviews, brainstorming, FAST, QFD, use cases, observation, prototyping.</li>
+            <li>Outline elicitation steps: identify stakeholders → understand domain → select techniques → conduct → record → validate.</li>
+            <li>Mention advantages (accuracy, early involvement) and disadvantages (conflicts, time, bias).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-02-re-process.html">&larr; 4.2 RE Process</a>
+        <a class="btn-back chapter-nav-next" href="04-04-elicitation-challenges.html">4.4 Elicitation Challenges &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

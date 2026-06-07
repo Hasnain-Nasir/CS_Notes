@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.7 Resource Allocation Models</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.7 Resource Allocation Models</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-7">
+        <p>
+          <strong>Resource allocation models</strong> are strategies and techniques used to distribute project
+          resources — personnel, time, budget, and computing capacity — across the tasks of a software project.
+          Effective allocation helps the project manager meet deadlines, maintain product quality, and stay within
+          budget. Poor allocation, by contrast, is a major cause of schedule slippage and cost overrun identified
+          in the <a href="03-01-spm-overview.html#sec-3-1">SPM overview (§3.1)</a>.
+        </p>
+        <p>
+          Once effort and duration have been estimated (see <a href="03-05-size-estimation.html#sec-3-5">§3.5</a>
+          and <a href="03-06-cocomo.html#sec-3-6">§3.6</a>), the manager must decide <em>who</em> does <em>what</em>
+          and <em>when</em>. Resource allocation models provide the scheduling and levelling tools for this decision.
+        </p>
+
+        <h3>Major resource allocation techniques</h3>
+        <h4>Critical Path Method (CPM)</h4>
+        <p>
+          CPM is a step-by-step scheduling technique that identifies the <strong>critical path</strong> — the
+          longest sequence of dependent tasks that determines the minimum project duration. Tasks on the critical
+          path have <strong>zero slack</strong>; any delay on these tasks delays the entire project. Non-critical
+          tasks have float time and can be shifted without affecting the end date. CPM helps managers focus
+          resources on bottleneck activities.
+        </p>
+
+        <h4>Program Evaluation and Review Technique (PERT)</h4>
+        <p>
+          PERT is a statistical scheduling tool that estimates project duration when task times are uncertain.
+          Each activity is assigned three time estimates — <strong>optimistic (t<sub>o</sub>)</strong>,
+          <strong>most likely (t<sub>m</sub>)</strong>, and <strong>pessimistic (t<sub>p</sub>)</strong> — and
+          the expected duration is computed as (t<sub>o</sub> + 4t<sub>m</sub> + t<sub>p</sub>) ÷ 6. PERT is
+          useful early in planning when little historical data exists.
+        </p>
+
+        <h4>Gantt chart</h4>
+        <p>
+          A <strong>Gantt chart</strong> is a bar chart that lists tasks on the vertical axis and time intervals
+          on the horizontal axis. Each bar shows when a task starts and ends. Gantt charts are easy to read and
+          are the most common visual tool for communicating schedules to stakeholders. They can also show
+          resource assignments and milestone markers.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-gantt-caption">
+          <img src="../../../assets/images/se-topic-03/gantt-chart.png"
+               alt="Gantt chart example — project tasks plotted on a timeline with dependencies"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-gantt-caption">Gantt chart — ERP project schedule showing task timelines.</figcaption>
+        </figure>
+
+        <p>A Gantt chart reads as follows:</p>
+        <ul>
+          <li><strong>Left column:</strong> Lists all project tasks or phases (e.g. requirements analysis, system design, module development, testing, deployment).</li>
+          <li><strong>Top row:</strong> Shows the timeline — months or quarters across the project duration.</li>
+          <li><strong>Horizontal bars:</strong> Each bar represents one task's start date, end date, and duration. Overlapping bars show parallel work.</li>
+          <li><strong>Dependencies:</strong> When one task must finish before another starts, the bar positions reflect that sequence.</li>
+        </ul>
+        <p>
+          In the ERP example above, module development for Finance, HR, and Inventory can run in parallel,
+          while integration testing and UAT follow sequentially once development is complete.
+        </p>
+
+        <h4>Resource levelling (resource smoothing)</h4>
+        <p>
+          <strong>Resource levelling</strong> adjusts the project schedule to balance the demand for resources
+          (especially people) against the available supply. Without levelling, several tasks may demand the same
+          specialist at the same time, causing overload. Levelling shifts non-critical tasks within their float
+          to smooth the workload, though it may extend the project duration if critical-path tasks are affected.
+        </p>
+
+        <h4>Agile resource allocation</h4>
+        <p>
+          In Agile teams, resources are allocated per iteration (sprint) based on <strong>team velocity</strong>,
+          the <strong>priority of user stories</strong>, and the <strong>size of tasks</strong> (often measured
+          in story points). The product owner prioritises the backlog and the team commits to what it can deliver
+          in each sprint. This model replaces long upfront scheduling with continuous reallocation.
+        </p>
+
+        <h3>Relationship to effort formulas</h3>
+        <p>
+          Resource allocation connects directly to the estimation relationships from §3.5: if total effort is
+          120 person-months and the deadline is 12 months, the manager needs approximately 10 full-time staff.
+          CPM and PERT determine whether that staffing level can complete the critical-path work in time;
+          resource levelling ensures no individual is over-allocated.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Resource allocation models</div>
+          <p><strong>Q:</strong> What are resource allocation models in software engineering? Explain CPM, PERT, Gantt charts, and resource levelling.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Resource allocation distributes personnel, time, budget, and tools across project tasks.</li>
+            <li>CPM: identifies critical path (longest dependent task chain); zero slack on critical tasks.</li>
+            <li>PERT: three time estimates (optimistic, likely, pessimistic); expected time = (t<sub>o</sub>+4t<sub>m</sub>+t<sub>p</sub>)/6.</li>
+            <li>Gantt chart: bar chart of tasks vs time; visual schedule communication.</li>
+            <li>Resource levelling: balance demand vs supply; shift non-critical tasks to avoid overload.</li>
+            <li>Agile: allocate per sprint based on velocity and story priority.</li>
+            <li>Link to effort formula: Team Size = Effort ÷ Duration.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-06-cocomo.html">&larr; 3.6 COCOMO</a>
+        <a class="btn-back chapter-nav-next" href="03-08-risk-analysis.html">3.8 Risk Analysis &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

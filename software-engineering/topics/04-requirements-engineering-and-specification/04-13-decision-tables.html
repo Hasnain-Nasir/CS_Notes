@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.13 Decision Tables</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.13 Decision Tables</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-13">
+
+        <p>
+          A <strong>decision table</strong> is a tabular representation of complex conditional logic. It lists all
+          combinations of conditions and the corresponding actions the system should take. Decision tables are used
+          during requirements analysis and specification when prose descriptions of business rules would be ambiguous
+          or error-prone (see <a href="04-05-analysis.html#sec-4-5">§4.5</a>).
+        </p>
+
+        <h3>Structure of a decision table</h3>
+        <ul>
+          <li><strong>Condition stubs:</strong> Rows listing the conditions (inputs) that affect the decision, such as "Account balance sufficient?" or "Customer type = Premium?"</li>
+          <li><strong>Action stubs:</strong> Rows listing the possible actions (outputs) the system can take, such as "Approve transaction" or "Apply discount."</li>
+          <li><strong>Condition entries:</strong> Columns showing Y (yes/true), N (no/false), or — (don't care/not applicable) for each condition under each rule column.</li>
+          <li><strong>Action entries:</strong> Cells indicating which actions are executed (marked X) for each rule column.</li>
+        </ul>
+
+        <h3>Cause-effect table</h3>
+        <p>
+          A <strong>cause-effect table</strong> is closely related to a decision table. Causes are input conditions;
+          effects are output actions. The table maps every meaningful combination of causes to the resulting effects,
+          making it useful for deriving test cases as well as specifying requirements.
+        </p>
+
+        <h3>Example: loan approval</h3>
+        <p>Consider conditions: Credit score ≥ 700, Income ≥ threshold, Existing debt low. Actions: Approve loan, Reject loan, Request manual review. Each column represents one rule; the analyst fills in which actions fire for each condition combination.</p>
+
+        <h3>Advantages of decision tables</h3>
+        <ul>
+          <li>They make complex conditional logic explicit and unambiguous — no interpretation needed.</li>
+          <li>They reveal missing rules: if a condition combination has no action, a gap exists in the requirements.</li>
+          <li>They reveal redundant or contradictory rules when two columns specify conflicting actions for the same conditions.</li>
+          <li>They serve directly as a basis for test case design — each column is one test scenario.</li>
+          <li>They are compact compared to lengthy nested if–else prose in an SRS.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Tables become very large when there are many conditions (2<sup>n</sup> combinations for n binary conditions).</li>
+          <li>They are best suited to discrete, boolean conditions rather than continuous numeric ranges.</li>
+          <li>Stakeholders unfamiliar with the notation may need explanation during review.</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Decision tables</div>
+          <p><strong>Q:</strong> What is a decision table? Explain its components and advantages.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define decision table as tabular representation of conditional logic.</li>
+            <li>Name components: condition stubs, action stubs, condition entries (Y/N/—), action entries (X).</li>
+            <li>Explain cause-effect relationship and link to test case derivation.</li>
+            <li>List advantages: unambiguous, reveals gaps/redundancy, compact, testable.</li>
+            <li>Mention limitation: exponential growth with many conditions.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-12-erd.html">&larr; 4.12 ERD</a>
+        <a class="btn-back chapter-nav-next" href="04-14-srs-document.html">4.14 SRS Document &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

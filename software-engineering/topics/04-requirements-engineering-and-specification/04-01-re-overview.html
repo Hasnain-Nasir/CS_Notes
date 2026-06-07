@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.1 Requirements Engineering — Overview</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.1 Requirements Engineering — Overview</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-1">
+
+        <p>
+          <strong>Requirements Engineering (RE)</strong> is the systematic process of discovering, documenting,
+          analysing, validating, and managing what a software system must do and the constraints under which it
+          must operate. It is the bridge between the customer's problem domain and the developer's solution domain,
+          and it is the first major technical phase of the
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a> after project initiation.
+        </p>
+        <p>
+          A <strong>requirement</strong> is a condition or capability that a system must satisfy — either because
+          a user needs it to solve a problem, or because an external standard, contract, or regulation demands it.
+          IEEE 729 defines a requirement as a condition or capability needed by a user to solve a problem or achieve
+          an objective, or a condition or capability that must be met or possessed by a system to satisfy a contract,
+          standard, specification, or other formally imposed document.
+        </p>
+
+        <h3>Why requirements engineering matters</h3>
+        <p>Poor requirements are one of the most common causes of software project failure. RE aims to prevent:</p>
+        <ul>
+          <li><strong>Scope creep:</strong> Uncontrolled growth of features because the original scope was never clearly defined or agreed.</li>
+          <li><strong>Wrong product:</strong> The team builds software that works correctly but does not solve the user's real problem.</li>
+          <li><strong>Cost and schedule overrun:</strong> Late discovery of missing or incorrect requirements forces expensive rework during design, coding, or testing.</li>
+          <li><strong>Customer dissatisfaction:</strong> Stakeholders reject the delivered system because their needs were never captured or validated.</li>
+        </ul>
+        <p>
+          Requirements engineering connects directly to
+          <a href="../03-software-project-management/03-01-spm-overview.html#sec-3-1">Software Project Management</a>:
+          clear requirements enable accurate estimation, realistic scheduling, and effective change control.
+        </p>
+
+        <h3>Core RE activities at a glance</h3>
+        <p>The RE process (detailed in <a href="04-02-re-process.html#sec-4-2">§4.2</a>) typically includes:</p>
+        <ul>
+          <li><strong>Feasibility study:</strong> Determine whether the proposed system is technically, economically, and operationally viable before committing resources.</li>
+          <li><strong>Requirements elicitation:</strong> Discover and gather requirements from stakeholders through interviews, workshops, observation, and other techniques.</li>
+          <li><strong>Requirements analysis:</strong> Structure, clarify, prioritise, and resolve conflicts among the gathered needs.</li>
+          <li><strong>Requirements specification:</strong> Document requirements in a formal Software Requirements Specification (SRS) document.</li>
+          <li><strong>Requirements validation (V&amp;V):</strong> Review, prototype, and test requirements to confirm they are correct, complete, and feasible.</li>
+          <li><strong>Requirements management:</strong> Track changes, maintain traceability, and keep requirements aligned with the evolving project.</li>
+        </ul>
+
+        <h3>Requirements vs design</h3>
+        <p>
+          Requirements describe <em>what</em> the system must do and the constraints it must satisfy; design describes
+          <em>how</em> those requirements will be implemented. A good SRS stays at the requirements level — it should
+          not prescribe internal data structures, algorithms, or UI layout unless those are genuine constraints imposed
+          by the customer or environment.
+        </p>
+
+        <h3>Key stakeholders in RE</h3>
+        <ul>
+          <li><strong>End users:</strong> People who will operate the system daily and whose tasks the software must support.</li>
+          <li><strong>Customers / clients:</strong> Those who pay for the system and define business objectives.</li>
+          <li><strong>Domain experts:</strong> Specialists who understand the business rules, regulations, and workflows the system must reflect.</li>
+          <li><strong>Developers and testers:</strong> The team that must implement and verify the requirements.</li>
+          <li><strong>Project managers:</strong> Responsible for scope, schedule, and change control based on the agreed requirements baseline.</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Define Requirements Engineering</div>
+          <p><strong>Q:</strong> What is Requirements Engineering? Why is it critical in the SDLC?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define RE as the systematic process of discovering, documenting, analysing, validating, and managing system requirements.</li>
+            <li>Give IEEE 729 definition of a requirement (condition/capability needed by user or imposed by contract/standard).</li>
+            <li>List core activities: feasibility, elicitation, analysis, specification, validation, management.</li>
+            <li>Explain consequences of poor RE: scope creep, wrong product, cost overrun, customer rejection.</li>
+            <li>Distinguish requirements (what) from design (how); link to SDLC and SPM.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <span class="btn-back chapter-nav-prev is-disabled">&larr; Previous</span>
+        <a class="btn-back chapter-nav-next" href="04-02-re-process.html">4.2 RE Process &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

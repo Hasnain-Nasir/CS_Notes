@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.11 Data Flow Diagrams (DFD)</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.11 Data Flow Diagrams (DFD)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-11">
+
+        <p>
+          A <strong>Data Flow Diagram (DFD)</strong> is a graphical representation of the flow of data through a
+          system. It shows external entities, processes that transform data, data stores, and the data flows
+          connecting them. DFDs are a core system modelling tool in requirements engineering (see
+          <a href="04-10-system-modelling.html#sec-4-10">§4.10</a>).
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dfd-overview-caption">
+          <img src="../../../assets/images/se-topic-04/dfd-overview.webp"
+               alt="Data Flow Diagram overview showing processes, data flows, stores, and external entities"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dfd-overview-caption">Overview of a Data Flow Diagram.</figcaption>
+        </figure>
+        <h3>Four basic DFD components</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dfd-symbols-caption">
+          <img src="../../../assets/images/se-topic-04/dfd-symbols.webp"
+               alt="DFD symbols — process, data flow, data store, and external entity"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dfd-symbols-caption">Standard symbols used in Data Flow Diagrams.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Process (bubble):</strong> An activity that transforms incoming data into outgoing data. Named with a verb phrase (e.g. "Validate Order").</li>
+          <li><strong>Data flow (arrow):</strong> Movement of data between processes, stores, and external entities. Named with a noun phrase describing the data (e.g. "Order Details").</li>
+          <li><strong>Data store (open rectangle):</strong> A repository where data is held for later use (e.g. "Customer File").</li>
+          <li><strong>External entity (square):</strong> A source or destination of data outside the system boundary (e.g. "Customer," "Bank").</li>
+        </ul>
+
+        <h3>Levels of DFD</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dfd-types-caption">
+          <img src="../../../assets/images/se-topic-04/dfd-types.webp"
+               alt="DFD levels — context diagram (Level 0), Level 1, and lower-level diagrams"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dfd-types-caption">Hierarchical levels of Data Flow Diagrams.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Context diagram (Level 0):</strong> Shows the entire system as a single process with external entities and major data flows. No internal detail.</li>
+          <li><strong>Level 1 DFD:</strong> Explodes the context process into major sub-processes, showing internal data flows and stores.</li>
+          <li><strong>Level 2 and below:</strong> Each Level 1 process can be further decomposed until each process is simple enough to describe in the SRS or map to a module.</li>
+        </ul>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dfd-level0-caption">
+          <img src="../../../assets/images/se-topic-04/dfd-level0.jpg"
+               alt="Example context diagram (Level 0 DFD)"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dfd-level0-caption">Example context diagram — Level 0 DFD.</figcaption>
+        </figure>
+        <h3>Logical vs physical DFD</h3>
+        <ul>
+          <li><strong>Logical DFD:</strong> Shows what the system does regardless of how it is implemented. Used during requirements analysis to capture business processes.</li>
+          <li><strong>Physical DFD:</strong> Shows how the system is actually implemented — specific files, devices, and human roles. Used later in design.</li>
+        </ul>
+
+        <h3>DFD drawing rules</h3>
+        <ul>
+          <li>Each process must have at least one input and one output.</li>
+          <li>Data flows must be labelled; unlabelled arrows are ambiguous.</li>
+          <li>A data store is accessed by at least one process (no "orphan" stores).</li>
+          <li>External entities cannot communicate directly with each other — all interaction goes through the system.</li>
+          <li>Processes are numbered hierarchically (1, 1.1, 1.1.1) to show decomposition levels.</li>
+          <li>Avoid control flow (decision diamonds) — DFDs show data flow, not control logic.</li>
+        </ul>
+
+        <h3>Railway reservation example</h3>
+        <p>A railway reservation system illustrates DFD levelling:</p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dfd-railway-l0-caption">
+          <img src="../../../assets/images/se-topic-04/dfd-railway-l0.webp"
+               alt="Railway reservation system — context diagram (Level 0)"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dfd-railway-l0-caption">Railway reservation system — context diagram (Level 0).</figcaption>
+        </figure>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dfd-railway-l1-caption">
+          <img src="../../../assets/images/se-topic-04/dfd-railway-l1.webp"
+               alt="Railway reservation system — Level 1 DFD with sub-processes"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dfd-railway-l1-caption">Railway reservation system — Level 1 DFD.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Level 0:</strong> A single "Railway Reservation System" process interacts with Passenger, Payment Gateway, and Railway Admin external entities.</li>
+          <li><strong>Level 1:</strong> The system is decomposed into sub-processes such as Search Trains, Book Ticket, Process Payment, and Generate Ticket, with data stores for Reservation Database and Train Schedule.</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — DFD components and levels</div>
+          <p><strong>Q:</strong> Explain DFD components and levels. What are the main drawing rules?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Name four components: process, data flow, data store, external entity.</li>
+            <li>Describe Level 0 (context), Level 1, and further decomposition.</li>
+            <li>Distinguish logical DFD (what) from physical DFD (how).</li>
+            <li>State rules: labelled flows, no direct entity-to-entity, hierarchical numbering, no control flow.</li>
+            <li>Sketch or describe railway reservation Level 0 and Level 1 example.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-10-system-modelling.html">&larr; 4.10 System Modelling</a>
+        <a class="btn-back chapter-nav-next" href="04-12-erd.html">4.12 ERD &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

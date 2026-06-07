@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.8 Feasibility Study</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.8 Feasibility Study</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-8">
+
+        <p>
+          A <strong>feasibility study</strong> evaluates whether a proposed software project is worth pursuing before
+          the organisation commits significant resources. It is typically conducted during project initiation in the
+          <a href="../03-software-project-management/03-02-project-management-process.html#sec-3-2">project management process</a>
+          and as the first step of the RE process in <a href="04-02-re-process.html#sec-4-2">§4.2</a>.
+        </p>
+
+        <h3>Four types of feasibility</h3>
+        <ul>
+          <li><strong>Technical feasibility:</strong> Can the required technology, skills, and infrastructure support the proposed system? Are there proven solutions or must unproven technology be used?</li>
+          <li><strong>Economic feasibility:</strong> Do the expected benefits (cost savings, revenue, efficiency) justify the development and operational costs? A cost–benefit analysis or return-on-investment calculation is performed.</li>
+          <li><strong>Operational feasibility:</strong> Will the organisation and its users accept and effectively use the new system? Are workflows compatible? Is adequate training available?</li>
+          <li><strong>Schedule feasibility:</strong> Can the system be delivered within the required timeframe given available resources and estimated effort?</li>
+        </ul>
+
+        <h3>Additional feasibility dimensions</h3>
+        <ul>
+          <li><strong>Legal/regulatory feasibility:</strong> Does the system comply with applicable laws, data protection rules, and industry regulations?</li>
+          <li><strong>Social feasibility:</strong> Will the system have acceptable social or ethical impacts on employees, customers, or society?</li>
+        </ul>
+
+        <h3>Feasibility study process</h3>
+        <ol>
+          <li>Define the project scope and objectives at a high level.</li>
+          <li>Identify alternative solutions (build, buy, outsource, do nothing).</li>
+          <li>Evaluate each alternative against the feasibility dimensions.</li>
+          <li>Estimate rough cost, schedule, and resource needs (link to <a href="../03-software-project-management/03-05-size-estimation.html#sec-3-5">Topic 3 §3.5</a>).</li>
+          <li>Prepare a feasibility report with a recommended option and go/no-go decision.</li>
+        </ol>
+
+        <h3>Output and decision</h3>
+        <p>
+          The feasibility report informs the project charter and the management decision to proceed, defer, or
+          cancel the project. A "no-go" at this stage saves far more cost than discovering infeasibility during
+          design or coding.
+        </p>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Feasibility study</div>
+          <p><strong>Q:</strong> What is a feasibility study? Describe the four main types and the decision it supports.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define feasibility study as pre-commitment evaluation of project viability.</li>
+            <li>Describe technical, economic, operational, and schedule feasibility.</li>
+            <li>Mention legal/regulatory and social dimensions.</li>
+            <li>Outline process: scope → alternatives → evaluate → estimate → report → go/no-go.</li>
+            <li>Link to PM initiation phase and RE process first step.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-07-review-management.html">&larr; 4.7 Review & Management</a>
+        <a class="btn-back chapter-nav-next" href="04-09-requirements-classification.html">4.9 Requirements Classification &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

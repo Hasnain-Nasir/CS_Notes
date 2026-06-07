@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.2 Requirements Engineering Process</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.2 Requirements Engineering Process</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-2">
+        <p>
+          <strong>Requirements Engineering (RE)</strong> is the process of identifying, eliciting, analyzing,
+          specifying, validating, and managing the needs and expectations of stakeholders for a software system.
+        </p>
+        <p>
+          A systematic and strict approach to the definition, creation, and verification of requirements for a
+          software system is known as <strong>requirements engineering</strong>. To guarantee the effective
+          creation of a software product, the RE process entails several tasks that help in understanding,
+          recording, and managing the demands of stakeholders. It runs during the requirements phase of the
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a> and feeds directly into
+          design, implementation, and testing.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-re-process-caption">
+          <img src="../../../assets/images/se-topic-04/re-process.webp"
+               alt="Requirements engineering process — feasibility, elicitation, specification, validation, and management"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-re-process-caption">The Requirements Engineering process and its main activities.</figcaption>
+        </figure>
+
+        <h3>1. Feasibility study</h3>
+        <p>
+          The feasibility study mainly concentrates on <strong>five areas</strong> listed below. Among these,
+          <strong>economic feasibility</strong> is the most important part of the feasibility analysis, and
+          <strong>legal feasibility</strong> is less commonly considered in practice.
+        </p>
+        <ul>
+          <li><strong>Technical feasibility:</strong> Current resources — both hardware and software — along with the required technology are analyzed to assess whether the project can be developed. This study reports whether the correct resources and technologies are available, whether the technical team has the required skills and capabilities, whether existing technology can be used, and whether maintenance and upgradation will be easy for the chosen technology.</li>
+          <li><strong>Operational feasibility:</strong> The degree to which the system can provide the required service is analyzed, along with how easy the product will be to operate and maintain after deployment. Other operational scopes include determining the usability of the product and whether the solution suggested by the software development team is acceptable to the users.</li>
+          <li><strong>Economic feasibility:</strong> The cost and benefit of the project are analyzed in detail. This includes all costs for final development — hardware and software resources, design and development costs, and operational costs. After that, it is analyzed whether the project will be financially beneficial for the organization or not.</li>
+          <li><strong>Legal feasibility:</strong> The project is ensured to comply with all relevant laws, regulations, and standards. It identifies any legal constraints that could impact the project and reviews existing contracts and agreements. Legal feasibility also considers intellectual property issues such as patents and copyrights to safeguard the project's innovation and originality.</li>
+          <li><strong>Schedule feasibility:</strong> The project timeline is evaluated to determine if it is realistic and achievable. Significant milestones are identified, deadlines are established, and resource availability is assessed to ensure that necessary resources are accessible to meet the project schedule. Any time constraints that might affect project delivery are also considered.</li>
+        </ul>
+        <p>Further detail is covered in <a href="04-08-feasibility-study.html#sec-4-8">§4.8</a> and SPM initiation in <a href="../03-software-project-management/03-02-project-management-process.html#sec-3-2">Topic 3 §3.2</a>.</p>
+
+        <h3>2. Requirements elicitation</h3>
+        <p>
+          Requirements elicitation is related to the various ways used to gain knowledge about the project domain
+          and requirements. The various sources of domain knowledge include customers, business manuals, existing
+          software of the same type, standards, and other stakeholders of the project.
+        </p>
+        <ul>
+          <li>Elicitation does not produce formal models of the requirements understood — instead, it widens the domain knowledge of the analyst and helps in providing input to the next stage.</li>
+          <li>Requirements elicitation is the process of gathering information about the needs and expectations of stakeholders for a software system, and it is critical to the success of the software development project.</li>
+          <li>The goal of this step is to understand the problem that the software system is intended to solve and the needs and expectations of the stakeholders who will use the system.</li>
+        </ul>
+        <p><strong>Techniques used for requirements elicitation include:</strong></p>
+        <ul>
+          <li><strong>Interviews:</strong> One-on-one conversations with stakeholders to gather information about their needs and expectations.</li>
+          <li><strong>Surveys:</strong> Questionnaires distributed to stakeholders to gather information about their needs and expectations.</li>
+          <li><strong>Focus groups:</strong> Small groups of stakeholders brought together to discuss their needs and expectations for the software system.</li>
+          <li><strong>Observation:</strong> Observing stakeholders in their work environment to gather information about their needs and expectations.</li>
+          <li><strong>Prototyping:</strong> Creating a working model of the software system to gather feedback from stakeholders and validate requirements.</li>
+          <li>Other techniques include brainstorming, task analysis, and the Delphi technique (see <a href="04-03-elicitation.html#sec-4-3">§4.3</a>).</li>
+        </ul>
+        <ul>
+          <li>It is important to document, organize, and prioritize the requirements obtained from all these techniques to ensure that they are complete, consistent, and accurate.</li>
+        </ul>
+
+        <h3>3. Requirements specification</h3>
+        <p>
+          Requirements specification is used to produce formal software requirement models. All requirements —
+          including functional, non-functional, and constraints — are specified by these models in totality.
+        </p>
+        <ul>
+          <li>During specification, more knowledge about the problem may be required, which can again trigger the elicitation process.</li>
+          <li>The models used at this stage include ER diagrams, data flow diagrams (DFDs), function decomposition diagrams (FDDs), and data dictionaries (see <a href="04-10-system-modelling.html#sec-4-10">§4.10</a>, <a href="04-11-dfd.html#sec-4-11">§4.11</a>, <a href="04-12-erd.html#sec-4-12">§4.12</a>).</li>
+          <li>Requirements specification is the process of documenting the requirements identified in the analysis step in a clear, consistent, and unambiguous manner, and it also involves prioritizing and grouping requirements into manageable chunks.</li>
+          <li>The goal is to create a clear and comprehensive document that describes the requirements for the software system and is understandable by both the development team and the stakeholders.</li>
+        </ul>
+        <p><strong>Types of requirements commonly specified:</strong></p>
+        <ul>
+          <li><strong>Functional requirements:</strong> These describe what the software system should do — functionality such as input validation, data storage, and user interface.</li>
+          <li><strong>Non-functional requirements:</strong> These describe how well the software system should perform — quality attributes such as performance, reliability, usability, and security.</li>
+          <li><strong>Constraints:</strong> These describe any limitations or restrictions that must be considered when developing the software system.</li>
+          <li><strong>Acceptance criteria:</strong> These describe the conditions that must be met for the software system to be considered complete and ready for release.</li>
+        </ul>
+        <ul>
+          <li>Requirements should be written in natural language using simple terms, avoiding technical jargon, and using a consistent format throughout the document.</li>
+          <li>Diagrams, models, and other visual aids should be used to communicate the requirements effectively.</li>
+          <li>Once specified, requirements must be reviewed and validated by stakeholders and the development team to ensure they are complete, consistent, and accurate (see <a href="04-14-srs-document.html#sec-4-14">§4.14</a>).</li>
+        </ul>
+
+        <h3>4. Requirements verification and validation (V&amp;V)</h3>
+        <ul>
+          <li><strong>Verification:</strong> Refers to the set of tasks that ensure the software correctly implements a specific function — checking that requirements are complete, consistent, accurate, clear, testable, and free of errors.</li>
+          <li><strong>Validation:</strong> Refers to a different set of tasks that ensure the software that has been built is traceable to customer requirements — checking that requirements meet the needs and expectations of stakeholders.</li>
+        </ul>
+        <p>If requirements are not validated, errors in the requirement definitions would propagate to successive stages, resulting in a lot of modification and rework.</p>
+        <p><strong>Main checks in the V&amp;V process:</strong></p>
+        <ul>
+          <li>Requirements should be <strong>consistent</strong> with all other requirements — no two requirements should conflict with each other.</li>
+          <li>Requirements should be <strong>complete</strong> in every sense.</li>
+          <li>Requirements should be <strong>practically achievable</strong>.</li>
+        </ul>
+        <p><strong>Methods used for V&amp;V:</strong></p>
+        <ul>
+          <li>Reviews, buddy checks, and making test cases are some of the methods used for verification and validation.</li>
+          <li>Verification involves reviewing the requirements document, models, and diagrams, and holding meetings and walkthroughs with stakeholders.</li>
+          <li>Validation involves testing requirements through simulation, prototypes, and the final version of the software.</li>
+          <li>V&amp;V is an <strong>iterative process</strong> that occurs throughout the software development life cycle — it is not a one-time activity and should continue even in the maintenance stage.</li>
+          <li>It is important to involve both stakeholders and the development team in the V&amp;V process.</li>
+        </ul>
+
+        <h3>5. Requirements management</h3>
+        <p>
+          Requirements management is the process of analyzing, documenting, tracking, prioritizing, and agreeing
+          on requirements and controlling communication with relevant stakeholders. This stage takes care of the
+          changing nature of requirements.
+        </p>
+        <ul>
+          <li>The SRS should be as modifiable as possible to incorporate changes in requirements specified by end users at later stages.</li>
+          <li>Modifying the software as per requirements in a systematic and controlled manner is an extremely important part of the requirements engineering process.</li>
+          <li>The goal of requirements management is to ensure that the software system meets stakeholder needs and is developed on time, within budget, and to the required quality.</li>
+        </ul>
+        <p><strong>Key activities in requirements management:</strong></p>
+        <ul>
+          <li><strong>Tracking and controlling changes:</strong> Monitoring changes throughout development, identifying the source of each change, assessing its impact, and approving or rejecting it.</li>
+          <li><strong>Version control:</strong> Keeping track of different versions of the requirements document and other related artifacts.</li>
+          <li><strong>Traceability:</strong> Linking requirements to other elements of the development process such as design, testing, and validation.</li>
+          <li><strong>Communication:</strong> Ensuring requirements are communicated effectively to all stakeholders and that changes or issues are addressed promptly.</li>
+          <li><strong>Monitoring and reporting:</strong> Monitoring development progress and reporting on the status of requirements.</li>
+        </ul>
+        <ul>
+          <li>Requirements management helps prevent scope creep and ensures that requirements stay aligned with project goals (see <a href="04-07-review-management.html#sec-4-7">§4.7</a>).</li>
+        </ul>
+
+        <h3>Supporting activities: analysis and documentation</h3>
+        <p>Analysis and documentation run throughout the RE process rather than as isolated one-time steps:</p>
+        <ul>
+          <li><strong>Requirements analysis</strong> (<a href="04-05-analysis.html#sec-4-5">§4.5</a>) structures raw elicited information, determines feasibility, consistency, and completeness, resolves conflicts, and assigns priorities.</li>
+          <li><strong>Requirements documentation</strong> (<a href="04-06-documentation.html#sec-4-6">§4.6</a>) records requirements in natural language, models, decision tables, and use cases.</li>
+        </ul>
+
+        <h3>Tools involved in requirements engineering</h3>
+        <ul>
+          <li><strong>Observation reports</strong> — for recording findings from stakeholder observation sessions.</li>
+          <li><strong>Questionnaires (surveys, polls)</strong> — for collecting structured input from many stakeholders.</li>
+          <li><strong>Use cases and user stories</strong> — for describing functional requirements from the user's perspective.</li>
+          <li><strong>Requirement workshops</strong> — for collaborative, facilitated sessions with multiple stakeholders.</li>
+          <li><strong>Mind mapping</strong> — for visually organising ideas and relationships during elicitation.</li>
+          <li><strong>Role-playing</strong> — for simulating user scenarios to discover hidden requirements.</li>
+          <li><strong>Prototyping</strong> — for validating requirements with working or mock-up models before full development.</li>
+        </ul>
+
+        <h3>Stages in the software engineering process (summary view)</h3>
+        <p>Requirements engineering is a critical process that involves identifying, analyzing, documenting, and managing requirements. The stages are:</p>
+        <ul>
+          <li><strong>Elicitation:</strong> Requirements are gathered from customers, users, and domain experts to identify the features and functionalities the software system should provide.</li>
+          <li><strong>Analysis:</strong> Requirements are analyzed to determine feasibility, consistency, and completeness, and to identify and resolve conflicts or contradictions.</li>
+          <li><strong>Specification:</strong> Requirements are documented in a clear, concise, and unambiguous manner so all stakeholders can understand them.</li>
+          <li><strong>Validation:</strong> Requirements are reviewed and validated to ensure they meet the needs of all stakeholders and are accurate, complete, and consistent.</li>
+          <li><strong>Management:</strong> Requirements are managed throughout the software development lifecycle, and any changes are properly documented and communicated.</li>
+        </ul>
+        <p>Effective requirements engineering is crucial to project success — it helps ensure the software system meets stakeholder needs and is delivered on time, within budget, and to the required quality standards.</p>
+
+        <h3>Advantages of the requirements engineering process</h3>
+        <ul>
+          <li>Helps ensure that the software being developed meets the needs and expectations of stakeholders.</li>
+          <li>Can help identify potential issues or problems early in the development process, allowing adjustments before significant cost is incurred.</li>
+          <li>Helps ensure that the software is developed in a cost-effective and efficient manner.</li>
+          <li>Can improve communication and collaboration between the development team and stakeholders.</li>
+          <li>Provides an unambiguous description of requirements, which helps reduce misunderstandings and errors.</li>
+          <li>Helps identify potential conflicts and contradictions in requirements, which can be resolved before development begins.</li>
+          <li>Helps ensure the software system is delivered on time, within budget, and to the required quality standards.</li>
+          <li>Provides a solid foundation for the development process, which helps reduce the risk of failure.</li>
+        </ul>
+
+        <h3>Disadvantages of the requirements engineering process</h3>
+        <ul>
+          <li>Can be time-consuming and costly, particularly if the requirements-gathering process is not well-managed.</li>
+          <li>Can be difficult to ensure that all stakeholders' needs and expectations are taken into account.</li>
+          <li>It can be challenging to ensure that requirements are clear, consistent, and complete.</li>
+          <li>Changes in requirements can lead to delays and increased costs in the development process.</li>
+          <li>It can be time-consuming and expensive, especially if requirements are complex.</li>
+          <li>It can be difficult to elicit requirements from stakeholders who have different needs and priorities.</li>
+          <li>Requirements may change over time, which can result in delays and additional costs.</li>
+          <li>There may be conflicts between stakeholders, which can be difficult to resolve.</li>
+          <li>It may be challenging to ensure that all stakeholders understand and agree on the requirements.</li>
+        </ul>
+        <ul>
+          <li>As a best practice, requirements engineering should be flexible, adaptable, and aligned with the overall project goals.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Requirements Engineering process</div>
+          <p><strong>Q:</strong> Explain the Requirements Engineering process. Describe all five main phases with their key activities, and state the advantages and disadvantages of a formal RE process.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define RE as identifying, eliciting, analyzing, specifying, validating, and managing stakeholder needs for a software system.</li>
+            <li><strong>Feasibility study:</strong> five types — technical (resources, technology, team skills), operational (usability, maintainability), economic (cost-benefit, most important), legal (laws, IP), schedule (timeline, milestones, resources).</li>
+            <li><strong>Elicitation:</strong> gather domain knowledge from customers, manuals, existing systems; techniques — interviews, surveys, focus groups, observation, prototyping; document and prioritize results.</li>
+            <li><strong>Specification:</strong> produce formal models (DFD, ERD, FDD, data dictionary); specify functional, non-functional, constraints, acceptance criteria; write in clear natural language with diagrams.</li>
+            <li><strong>V&amp;V:</strong> verification = requirements correct and consistent; validation = requirements meet stakeholder needs; checks — complete, consistent, achievable; methods — reviews, buddy checks, test cases; iterative throughout SDLC.</li>
+            <li><strong>Management:</strong> track changes, version control, traceability, communication, monitoring; prevent scope creep; SRS should be modifiable.</li>
+            <li>Tools: observation reports, questionnaires, use cases, workshops, mind mapping, role-playing, prototyping.</li>
+            <li>Advantages: shared baseline, early error detection, cost-effective development, better communication, reduced failure risk.</li>
+            <li>Disadvantages: time-consuming, changing requirements, stakeholder conflicts, difficulty achieving completeness and agreement.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-01-re-overview.html">&larr; 4.1 RE Overview</a>
+        <a class="btn-back chapter-nav-next" href="04-03-elicitation.html">4.3 Elicitation &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

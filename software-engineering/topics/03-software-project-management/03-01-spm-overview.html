@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.1 Software Project Management — Overview</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.1 Software Project Management — Overview</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-1">
+        <p>
+          <strong>Software Project Management (SPM)</strong> is the disciplined application of knowledge, skills,
+          tools, and techniques to plan, organise, monitor, and control a software development project so that it
+          delivers the required product <strong>on time, within budget, and to the agreed quality</strong>. Unlike
+          writing code for a single program, SPM deals with coordinating people, schedules, costs, risks, and
+          stakeholder expectations across the entire software lifecycle introduced in
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">Topic 2 §2.1</a>.
+        </p>
+        <p>
+          Software projects are especially vulnerable to failure when management is weak. Common causes include
+          inadequate planning and monitoring, lack of risk assessment, unrealistic deadlines, inefficient resource
+          allocation, and selection of the wrong technology or SDLC model. SPM exists to reduce these failures by
+          making development <strong>predictable and measurable</strong> rather than ad hoc.
+        </p>
+
+        <figure class="diagram figure-photo figure-photo--compact" aria-labelledby="fig-spm-aspects-caption">
+          <img src="../../../assets/images/se-topic-03/spm-aspects.jpg"
+               alt="Four core SPM activities — Planning, Execution, Monitoring, and Control"
+               width="400" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-spm-aspects-caption">Four core activities of Software Project Management.</figcaption>
+        </figure>
+
+        <h3>Four core activities of SPM</h3>
+        <p>At its heart, Software Project Management is a repeating cycle of four connected activities:</p>
+        <ul>
+          <li><strong>Planning:</strong> The manager defines project goals, scope, schedule, budget, and the strategy for how work will be done before development starts.</li>
+          <li><strong>Execution:</strong> The team carries out the planned work — requirements, design, coding, testing, and delivery — while the manager coordinates people and resources.</li>
+          <li><strong>Monitoring:</strong> The manager continuously tracks progress, cost, effort, and quality against the plan to detect slippage or deviations early.</li>
+          <li><strong>Control:</strong> When monitoring reveals a gap, the manager takes corrective action — adjusting scope, schedule, resources, or approach — to bring the project back on track.</li>
+        </ul>
+        <p>
+          These four activities repeat throughout the project lifecycle. Monitoring and control run alongside
+          execution, not only after it. The full five-phase management process in
+          <a href="03-02-project-management-process.html#sec-3-2">§3.2</a> expands on this cycle in more detail.
+        </p>
+
+        <h3>Why SPM matters in Software Engineering</h3>
+        <p>
+          Software is intangible — you cannot physically watch it being assembled like a car on a production line.
+          Progress is therefore harder to observe, and schedule slippage is one of the most frequent project risks.
+          SPM provides the structures (plans, milestones, metrics, reviews) that make invisible work visible and
+          keep the project aligned with business goals. It connects directly to the themes of managing complexity
+          and reducing risk from
+          <a href="../01-introduction-and-fundamentals/01-13-complexity-risk.html#sec-1-13">Topic 1 §1.13</a>.
+        </p>
+
+        <h3>Core objectives of SPM</h3>
+        <p>The project manager and the management process aim to achieve the following throughout the project:</p>
+        <ul>
+          <li><strong>Scope management:</strong> Deliver exactly what was agreed in the requirements — no more, no less — and control scope creep through formal change control.</li>
+          <li><strong>Time management:</strong> Produce realistic schedules, track milestones, and recover when tasks slip.</li>
+          <li><strong>Cost management:</strong> Estimate and control development cost so the project stays within the approved budget.</li>
+          <li><strong>Quality management:</strong> Ensure the product meets functional and non-functional requirements and passes agreed testing gates.</li>
+          <li><strong>Resource management:</strong> Assign the right people, tools, and computing resources to tasks at the right time.</li>
+          <li><strong>Risk management:</strong> Identify threats early, prioritise them, and apply mitigation before they derail the project (see <a href="03-08-risk-analysis.html#sec-3-8">§3.8</a>).</li>
+          <li><strong>Stakeholder communication:</strong> Keep customers, sponsors, and the development team informed so expectations stay aligned.</li>
+        </ul>
+
+        <h3>SPM vs general project management</h3>
+        <p>
+          SPM shares the same fundamental principles as project management in other industries — planning, leading,
+          organising, and controlling — but software projects add unique challenges: rapidly changing requirements,
+          intangible deliverables, high dependence on skilled personnel, and technology that may be unproven.
+          These factors make estimation harder and make SPM a specialised discipline within Software Engineering.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Define SPM and its objectives</div>
+          <p><strong>Q:</strong> What is Software Project Management? Why is it needed, and what are its main objectives?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define SPM as planning, organising, monitoring, and controlling software projects to deliver on time, within budget, and to required quality.</li>
+            <li>Explain that software is intangible, making progress hard to track and schedule slippage a major risk.</li>
+            <li>List objectives: scope, time, cost, quality, resource, risk, and stakeholder management.</li>
+            <li>Link to poor project management as a cause of the software crisis and project failure.</li>
+            <li>Mention that SPM applies across the SDLC, not only during coding.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <span class="btn-back chapter-nav-prev is-disabled">&larr; Previous</span>
+        <a class="btn-back chapter-nav-next" href="03-02-project-management-process.html">3.2 Project Management Process &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

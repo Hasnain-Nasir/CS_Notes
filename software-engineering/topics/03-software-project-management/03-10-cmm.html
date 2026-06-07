@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.10 Capability Maturity Model (CMM)</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.10 Capability Maturity Model (CMM) / SEI-CMM</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-10">
+        <p>
+          The <strong>Capability Maturity Model (CMM)</strong> is a framework developed by the
+          <strong>Software Engineering Institute (SEI)</strong> at Carnegie Mellon University after studying
+          organisations that contracted with the U.S. Department of Defence. CMM is a <strong>strategy for
+          improving the software process</strong> so that an organisation can consistently produce quality
+          software. It is used to <strong>judge the maturity of an organisation's software process</strong> and to
+          identify the key practices needed to increase that maturity.
+        </p>
+        <p>
+          The term <strong>"maturity"</strong> refers to the degree of formality and optimisation of processes —
+          from ad hoc practices, through formally defined steps, to managed metrics, and finally to active
+          optimisation. A more mature process is more predictable in terms of time, cost, and quality.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-cmm-caption">
+          <img src="../../../assets/images/se-topic-03/cmm.jpg"
+               alt="Capability Maturity Model — five maturity levels from Initial to Optimizing"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-cmm-caption">SEI Capability Maturity Model (CMM) — five maturity levels.</figcaption>
+        </figure>
+
+        <h3>Five maturity levels</h3>
+        <p>CMM defines five sequential maturity levels. An organisation must stabilise each level before advancing to the next.</p>
+
+        <h4>Level 1 — Initial</h4>
+        <p>
+          The process is <strong>unpredictable and poorly controlled</strong>. There is no real engineering
+          management; everything is done on an ad hoc basis. Success depends heavily on the current staff — when
+          people leave, the process leaves with them. Time and cost estimates are unreliable.
+        </p>
+
+        <h4>Level 2 — Repeatable</h4>
+        <p>
+          <strong>Basic project management</strong> practices are established. Planning and managing new projects
+          are based on experience with similar previous projects. The organisation can repeat earlier successes
+          on projects with comparable applications. Realistic plans are built on documented performance data
+          from past work. Requirements management and software project tracking begin at this level.
+        </p>
+
+        <h4>Level 3 — Defined</h4>
+        <p>
+          The software process for developing and maintaining software is <strong>standardised and documented</strong>
+          across the entire organisation, covering both engineering and management activities. Training programs
+          ensure staff have the required skills. <strong>Risk management</strong> processes are integrated.
+          Individual projects tailor the organisation's standard process to their needs rather than inventing
+          their own from scratch.
+        </p>
+
+        <h4>Level 4 — Managed</h4>
+        <p>
+          The organisation sets <strong>quantitative quality goals</strong> for both products and processes.
+          Process performance is measured with statistical techniques. The process becomes <strong>predictable
+          with respect to time and cost</strong> because variation is understood and controlled.
+        </p>
+
+        <h4>Level 5 — Optimizing</h4>
+        <p>
+          The organisation analyses defects to determine their root causes and focuses on <strong>preventing
+          defect occurrence</strong>. The company <strong>continuously improves</strong> process performance
+          through incremental and innovative technological changes. This is the highest maturity level.
+        </p>
+
+        <table>
+          <thead>
+            <tr><th>Level</th><th>Name</th><th>Key characteristic</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Initial</td><td>Ad hoc, chaotic, success depends on heroes</td></tr>
+            <tr><td>2</td><td>Repeatable</td><td>Basic PM; plans based on past project data</td></tr>
+            <tr><td>3</td><td>Defined</td><td>Standardised, documented process organisation-wide</td></tr>
+            <tr><td>4</td><td>Managed</td><td>Quantitative goals; predictable time and cost</td></tr>
+            <tr><td>5</td><td>Optimizing</td><td>Continuous defect prevention and process improvement</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Key Process Areas (KPAs) at each level</h3>
+        <p>Each maturity level is defined by specific Key Process Areas that an organisation must implement:</p>
+        <table>
+          <thead>
+            <tr><th>Level</th><th>Key Process Areas</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1 — Initial</td><td>No formal KPAs — processes are ad hoc</td></tr>
+            <tr><td>2 — Repeatable</td><td>Project planning, configuration management, requirements management, sub-contract management, software quality assurance</td></tr>
+            <tr><td>3 — Defined</td><td>Peer reviews, inter-group coordination, organisation process definition, organisation process focus, training programs</td></tr>
+            <tr><td>4 — Managed</td><td>Software quality management, quantitative process management</td></tr>
+            <tr><td>5 — Optimizing</td><td>Process change management, technology change management, defect prevention</td></tr>
+          </tbody>
+        </table>
+
+        <h3>CMM vs CMMI</h3>
+        <p>
+          CMM was later extended to <strong>CMMI (Capability Maturity Model Integration)</strong>, which combines
+          software engineering with systems engineering and other disciplines. For exam purposes, knowing the five
+          CMM levels and their characteristics is usually sufficient. CMMI is also referenced in SQA topics
+          (Topic 8).
+        </p>
+
+        <h3>Why CMM matters for SPM</h3>
+        <p>
+          CMM does not manage a single project — it improves the <strong>organisation's ability</strong> to manage
+          all projects. A Level 1 organisation will struggle with estimation, risk management, and monitoring no
+          matter how skilled the individual project manager is. Advancing to Level 2 and above institutionalises
+          the SPM practices covered in this topic: planning, tracking, risk management, and quantitative control.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — CMM maturity levels</div>
+          <p><strong>Q:</strong> What is the Capability Maturity Model? Describe the five maturity levels with key characteristics of each.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>CMM (SEI): framework to assess and improve software process maturity.</li>
+            <li>Maturity = degree of formality and optimisation of processes.</li>
+            <li>Level 1 Initial: ad hoc, unpredictable, no engineering management.</li>
+            <li>Level 2 Repeatable: basic PM, plans from past experience.</li>
+            <li>Level 3 Defined: standardised, documented process; training; risk management.</li>
+            <li>Level 4 Managed: quantitative goals; predictable time and cost.</li>
+            <li>Level 5 Optimizing: continuous improvement; defect root-cause analysis.</li>
+            <li>Levels are sequential — must stabilise each before advancing.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-09-monitoring-control.html">&larr; 3.9 Monitoring &amp; Control</a>
+        <a class="btn-back chapter-nav-next" href="03-11-quasi-renewal.html">3.11 Quasi Renewal &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

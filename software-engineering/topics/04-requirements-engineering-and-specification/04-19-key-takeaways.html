@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>Requirements Engineering (RE):</strong> Systematic process of discovering, documenting, analysing, validating, and managing requirements. IEEE 729: condition/capability needed by user or imposed by contract/standard.</li>
+          <li><strong>RE process (5 phases):</strong> Feasibility (technical, operational, economic, legal, schedule) → Elicitation (interviews, surveys, focus groups, observation, prototyping) → Specification (functional, non-functional, constraints, acceptance criteria; DFD/ERD/FDD) → V&amp;V (verification = correct; validation = meets needs; iterative) → Management (change control, traceability, version control). Tools: workshops, use cases, mind mapping, role-playing, prototyping.</li>
+          <li><strong>Feasibility types:</strong> Technical, economic, operational, schedule (+ legal, social). Output: feasibility report → go/no-go.</li>
+          <li><strong>Elicitation techniques:</strong> Interviews, brainstorming, FAST, QFD, use cases, observation, questionnaires, document analysis, prototyping. Steps: identify stakeholders → understand domain → select techniques → conduct → record → validate.</li>
+          <li><strong>Elicitation challenges:</strong> Unknown needs, conflicts, changing requirements, terminology gaps, implicit assumptions, domain complexity. Strategies: multiple techniques, prototyping, glossary, prioritisation, change control.</li>
+          <li><strong>Analysis objectives:</strong> Resolve conflicts, find gaps/redundancies, clarify ambiguity, prioritise (MoSCoW), classify, model. Outputs: refined list, models, traceability matrix.</li>
+          <li><strong>Documentation forms:</strong> SRS (natural language), DFD/ERD models, decision tables, use cases, glossary. Rules: unique ID, one req per statement, version control, baseline.</li>
+          <li><strong>Review vs management:</strong> Review = validation before design (inspections, walkthroughs, prototyping). Management = version control, change control (CCB), traceability, impact analysis throughout SDLC.</li>
+          <li><strong>Requirements classification:</strong> Functional (what), non-functional (quality attributes), domain (from application area). Also: user/system/business/regulatory; interface/design/performance constraints.</li>
+          <li><strong>System modelling:</strong> DFD (data flow), ERD (data structure), decision tables, use cases. DFD stores must align with ERD entities.</li>
+          <li><strong>DFD:</strong> Components — process, data flow, data store, external entity. Levels: context (0), 1, 2… Logical (what) vs physical (how). Rules: labelled flows, no entity-to-entity direct, hierarchical numbering.</li>
+          <li><strong>ERD:</strong> Entity, attribute, relationship, key. Cardinality: 1:1, 1:N, M:N. Strong vs weak entity. Steps: identify entities → attributes/keys → relationships → draw → review.</li>
+          <li><strong>Decision tables:</strong> Condition stubs, action stubs, entries (Y/N/—, X). Cause-effect. Advantages: unambiguous, reveals gaps/redundancy, basis for test cases.</li>
+          <li><strong>SRS sections:</strong> Introduction, general description, functional, interface, performance, design constraints, non-functional, schedule/budget, appendices.</li>
+          <li><strong>SRS quality (12):</strong> Correct, complete, consistent, unambiguous, ranked, modifiable, verifiable, traceable, design-independent, testable, understandable, right abstraction level.</li>
+          <li><strong>IEEE standards:</strong> 830 SRS structure (intro, overall description, specific requirements, appendices). 29148: stakeholder/system/software req levels; req attributes (ID, rationale, source, priority, verification method). 729: glossary.</li>
+          <li><strong>Software specification:</strong> Formal documented expression of requirements (SRS + models). Requirements → specification → design. Methods: natural language, structured, graphical, formal, executable.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-18-software-specification.html">&larr; 4.18 Software Specification</a>
+        <span class="btn-back chapter-nav-next is-disabled">Next &rarr;</span>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

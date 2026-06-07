@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.14 Requirements Specifications / SRS Document</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.14 Requirements Specifications / SRS Document</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-14">
+
+        <p>
+          A <strong>Software Requirements Specification (SRS)</strong> is the primary deliverable of requirements
+          specification. It is a complete, formal description of the behaviour, functions, performance, and constraints
+          of a software system. The SRS serves as the contract between customer and developer and as the baseline
+          for design, testing, and acceptance.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-srs-format-caption">
+          <img src="../../../assets/images/se-topic-04/srs-format.png"
+               alt="SRS document structure — introduction, description, functional and non-functional requirements"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-srs-format-caption">Typical structure of a Software Requirements Specification document.</figcaption>
+        </figure>
+        <h3>Main sections of an SRS document</h3>
+        <ul>
+          <li><strong>Introduction:</strong> Purpose of the document, scope of the product, definitions and acronyms, references, and overview of the remainder of the document.</li>
+          <li><strong>General description:</strong> Product perspective (how the system fits into the larger environment), product functions at a high level, user characteristics, general constraints, and assumptions/dependencies.</li>
+          <li><strong>Functional requirements:</strong> Detailed description of each function the system must perform, usually organised by feature or use case. Each requirement should be uniquely identified.</li>
+          <li><strong>Interface requirements:</strong> User interfaces, hardware interfaces, software interfaces (APIs), and communication interfaces the system must support.</li>
+          <li><strong>Performance requirements:</strong> Speed, throughput, response time, capacity, and availability targets.</li>
+          <li><strong>Design constraints:</strong> Restrictions on design choices — standards, hardware limitations, technology mandates.</li>
+          <li><strong>Non-functional requirements:</strong> Security, reliability, maintainability, portability, usability, and other quality attributes not covered above.</li>
+          <li><strong>Schedule and budget constraints:</strong> Delivery milestones, resource limits, and cost boundaries imposed on the project (links to <a href="../03-software-project-management/03-02-project-management-process.html#sec-3-2">Topic 3 planning</a>).</li>
+          <li><strong>Appendices:</strong> Supporting material such as sample input/output, glossary, analysis models (DFD, ERD), and traceability matrices.</li>
+        </ul>
+
+        <h3>SRS audience</h3>
+        <ul>
+          <li><strong>Customers and users</strong> review the SRS to confirm the system will meet their needs.</li>
+          <li><strong>Project managers</strong> use it for planning, estimation, and change control.</li>
+          <li><strong>Designers and developers</strong> implement the specified behaviour.</li>
+          <li><strong>Testers</strong> derive test cases from each requirement for verification and acceptance testing.</li>
+          <li><strong>Maintenance engineers</strong> refer to the SRS when modifying the system after delivery.</li>
+        </ul>
+
+        <h3>SRS and the SDLC</h3>
+        <p>
+          The approved SRS marks the end of the requirements phase in the
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a> and the input to the design phase.
+          Changes after approval require formal change control (see <a href="04-07-review-management.html#sec-4-7">§4.7</a>).
+        </p>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — SRS structure</div>
+          <p><strong>Q:</strong> What is an SRS document? List its main sections and explain the purpose of each.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define SRS as formal complete description of system behaviour, functions, performance, constraints.</li>
+            <li>List sections: introduction, general description, functional, interface, performance, design constraints, non-functional, schedule/budget, appendices.</li>
+            <li>Explain purpose of each section briefly.</li>
+            <li>Name audience: customers, PM, designers, testers, maintainers.</li>
+            <li>State SRS as requirements phase output and design phase input; link to change control.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-13-decision-tables.html">&larr; 4.13 Decision Tables</a>
+        <a class="btn-back chapter-nav-next" href="04-15-write-good-srs.html">4.15 Write Good SRS &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

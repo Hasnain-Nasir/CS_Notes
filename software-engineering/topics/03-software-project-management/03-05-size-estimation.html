@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.5 Project Size Estimation Techniques</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.5 Project Size Estimation Techniques</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-5">
+        <p>
+          <strong>Project size estimation</strong> is the process of predicting how large a software project is
+          before development begins, so that the manager can derive <strong>effort, duration, cost, and team
+          size</strong>. Estimation is one of the most critical and most difficult activities in SPM because
+          errors at this stage propagate through the entire project plan. The two quantities most commonly
+          estimated are <strong>time</strong> and <strong>cost</strong> of development.
+        </p>
+        <p>
+          Estimation techniques fall into four broad categories. The choice depends on how much is known about
+          the project, how large it is, and how much accuracy is required.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-cost-estimation-caption">
+          <img src="../../../assets/images/se-topic-03/cost-estimation.png"
+               alt="Predominant cost estimation process — management sets target cost, modelers justify estimate, risks and trade-offs feed back"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-cost-estimation-caption">The predominant cost estimation process in practice.</figcaption>
+        </figure>
+
+        <h3>Predominant cost estimation process</h3>
+        <p>
+          In many real projects, estimation does not start from a blank technical analysis. Instead, it follows a
+          top-down flow driven by business constraints:
+        </p>
+        <ul>
+          <li><strong>Management sets a target:</strong> Senior managers may state that the project must cost a fixed amount to win the business or fit the available budget.</li>
+          <li><strong>Cost modelers justify the figure:</strong> Estimators or cost models (such as COCOMO) are then used to show how the project can be delivered within that target cost.</li>
+          <li><strong>Risks and trade-offs emerge:</strong> Fitting the project into a pre-set budget often forces choices about scope, quality, staffing, or technology — these are documented as risks, options, and alternatives.</li>
+          <li><strong>Feedback to management:</strong> The identified risks and trade-offs are reported back to management so informed decisions can be made before committing to the plan.</li>
+        </ul>
+        <p>
+          This top-down approach is common in competitive bidding but can be dangerous if the target cost is
+          unrealistic. Bottom-up and decomposition techniques (below) provide a more independent technical
+          estimate to compare against any business-imposed figure.
+        </p>
+
+        <h3>Four types of estimation</h3>
+        <h4>1. Post (delayed) estimation</h4>
+        <p>
+          When the client is friendly, the technology is well known, and the relationship is informal, the team
+          may choose <strong>not to estimate</strong> time or cost formally because support is expected in every
+          situation. This approach is rare in professional or contract work but can occur in internal or research
+          projects with flexible funding.
+        </p>
+        <h4>2. Base (experience-based) estimation</h4>
+        <p>
+          In <strong>base estimation</strong>, the manager predicts the cost and duration of the entire project
+          based on experience gained from similar past projects. This is quick and inexpensive but accurate only
+          when the new project closely resembles previous ones in size, technology, and team capability.
+        </p>
+        <h4>3. Decomposition-based estimation</h4>
+        <p>
+          For large projects, the problem is broken into smaller sub-problems and each part is estimated
+          separately. Two approaches are used within decomposition:
+        </p>
+        <ul>
+          <li><strong>Direct estimation (white box):</strong> Size is measured using <strong>size-oriented metrics</strong> such as KLOC (thousands of lines of code). Effort is then derived from productivity figures.</li>
+          <li><strong>Indirect estimation (black box):</strong> Size is measured using <strong>function-oriented metrics</strong> such as Function Points (FP), which count inputs, outputs, inquiries, files, and interfaces rather than lines of code.</li>
+        </ul>
+        <p>
+          Decomposition estimates are summed to produce the total project estimate. This is more accurate than
+          a single top-down guess for large systems.
+        </p>
+        <h4>4. Empirical model estimation</h4>
+        <p>
+          <strong>Empirical models</strong> use mathematically derived formulas based on historical project data.
+          Different authors propose different equations using either LOC or FP as the size input. The most widely
+          accepted empirical model is <strong>COCOMO</strong> (<a href="03-06-cocomo.html#sec-3-6">§3.6</a>).
+          Other examples include the Walston-Felix, Bailey-Basili, and simple Boehm models.
+        </p>
+
+        <h3>Key estimation relationships</h3>
+        <p>Regardless of technique, the following relationships connect size, effort, duration, cost, and team size:</p>
+        <table>
+          <thead>
+            <tr><th>Relationship</th><th>Formula</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Effort from size and productivity</td><td>Effort = Size ÷ Productivity</td></tr>
+            <tr><td>Productivity</td><td>Productivity = Size ÷ Effort</td></tr>
+            <tr><td>Cost</td><td>Cost = Effort × Pay rate</td></tr>
+            <tr><td>Duration from effort and team</td><td>Duration = Effort ÷ Team Size</td></tr>
+            <tr><td>Team size from effort and duration</td><td>Team Size = Effort ÷ Duration</td></tr>
+            <tr><td>Effort from duration and team</td><td>Effort = Duration × Team Size</td></tr>
+          </tbody>
+        </table>
+        <p>
+          These formulas are exam favourites. For example, if a module requires 5,400 LOC and team productivity
+          is 300 LOC per person-month, the effort for that module is 5,400 ÷ 300 = 18 person-months.
+        </p>
+
+        <h3>Choosing an estimation technique</h3>
+        <p>
+          Early in a project when requirements are vague, base or top-down estimation may be the only option.
+          As the design matures, decomposition and empirical models provide better accuracy. No single technique
+          is perfect; experienced managers often use <strong>multiple methods and compare results</strong> to
+          produce a range rather than a single point estimate.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Estimation techniques</div>
+          <p><strong>Q:</strong> What are the four types of software project estimation? Explain decomposition-based estimation and write the key estimation formulas.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Four types: post/delayed, base/experience-based, decomposition-based, empirical model.</li>
+            <li>Post estimation: no formal estimate when client and technology are well known.</li>
+            <li>Base estimation: predict from similar past projects.</li>
+            <li>Decomposition: break into sub-problems; direct (KLOC/white box) vs indirect (FP/black box).</li>
+            <li>Empirical: mathematical formulas from historical data — COCOMO is the main example.</li>
+            <li>Write formulas: Effort = Size/Productivity; Duration = Effort/Team Size; Cost = Effort × Pay.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-04-spm-complexities.html">&larr; 3.4 SPM Complexities</a>
+        <a class="btn-back chapter-nav-next" href="03-06-cocomo.html">3.6 COCOMO Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

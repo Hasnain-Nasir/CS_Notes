@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.15 How to Write a Good SRS</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.15 How to Write a Good SRS</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-15">
+
+        <p>
+          Writing a good SRS requires discipline, stakeholder involvement, and adherence to quality guidelines.
+          A poorly written SRS causes the same failures as poor requirements — misunderstandings, rework, and
+          rejected deliverables. This section provides practical guidance; quality characteristics are detailed
+          in <a href="04-16-srs-quality.html#sec-4-16">§4.16</a> and IEEE structure in
+          <a href="04-17-ieee-srs.html#sec-4-17">§4.17</a>.
+        </p>
+
+        <h3>Before writing</h3>
+        <ul>
+          <li>Complete elicitation and analysis so the SRS reflects validated, prioritised requirements (see <a href="04-03-elicitation.html#sec-4-3">§4.3</a>, <a href="04-05-analysis.html#sec-4-5">§4.5</a>).</li>
+          <li>Agree on the document template and standard (e.g. IEEE 830 / 29148) with all stakeholders.</li>
+          <li>Establish a glossary of domain terms before drafting detailed requirements.</li>
+          <li>Identify the audience for each section so the level of detail is appropriate.</li>
+        </ul>
+
+        <h3>Writing guidelines</h3>
+        <ul>
+          <li><strong>One requirement per statement:</strong> Avoid compound requirements that combine multiple needs in one sentence; split them so each is independently testable.</li>
+          <li><strong>Use active voice:</strong> "The system shall generate a report" is clearer than "A report shall be generated."</li>
+          <li><strong>Be specific and measurable:</strong> Replace vague terms ("fast," "user-friendly") with quantifiable criteria ("response time ≤ 2 seconds").</li>
+          <li><strong>Avoid design details:</strong> State what is required, not how to implement it, unless a design constraint is genuinely imposed.</li>
+          <li><strong>Assign unique identifiers:</strong> Every requirement gets an ID (e.g. REQ-F-001) for traceability.</li>
+          <li><strong>Use consistent terminology:</strong> Refer to the glossary; do not use synonyms for the same concept.</li>
+          <li><strong>Include rationale where helpful:</strong> Brief notes on why a requirement exists aid review and future maintenance.</li>
+          <li><strong>Cross-reference models:</strong> Link functional requirements to DFD processes and ERD entities where applicable.</li>
+        </ul>
+
+        <h3>Review and iteration</h3>
+        <ul>
+          <li>Draft the SRS iteratively — produce an outline first, then fill sections in priority order.</li>
+          <li>Conduct formal reviews with customers, developers, and testers before declaring the baseline (see <a href="04-07-review-management.html#sec-4-7">§4.7</a>).</li>
+          <li>Use a requirements quality checklist covering correctness, completeness, consistency, and testability.</li>
+          <li>Prototype ambiguous areas before finalising the corresponding SRS sections.</li>
+        </ul>
+
+        <h3>Common mistakes to avoid</h3>
+        <ul>
+          <li>Gold-plating — adding features stakeholders did not request.</li>
+          <li>Copying from a previous project's SRS without adapting to the current context.</li>
+          <li>Leaving TBD ("to be determined") placeholders in the approved baseline.</li>
+          <li>Mixing requirements with project plan details (team structure, coding standards) that belong elsewhere.</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Writing a good SRS</div>
+          <p><strong>Q:</strong> What guidelines should be followed when writing an SRS document?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Mention preparation: complete elicitation/analysis, agree template, glossary, audience.</li>
+            <li>State writing rules: one req per statement, active voice, measurable, no design detail, unique ID, consistent terms.</li>
+            <li>Describe iterative drafting and formal review with stakeholders.</li>
+            <li>List common mistakes: gold-plating, copy-paste, TBD in baseline, mixing plan with requirements.</li>
+            <li>Cross-reference quality characteristics and IEEE standard.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-14-srs-document.html">&larr; 4.14 SRS Document</a>
+        <a class="btn-back chapter-nav-next" href="04-16-srs-quality.html">4.16 SRS Quality &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.3 Role &amp; Responsibilities of Project Manager</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.3 Role &amp; Responsibilities of Software Project Manager</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-3">
+        <p>
+          The <strong>Software Project Manager (SPM)</strong> is the professional responsible for planning,
+          organising, executing, and closing a software project from initiation to delivery. The manager acts as
+          the <strong>central coordinator</strong> who connects developers, testers, designers, data scientists,
+          customers, and senior management. They have authority to run the project within agreed constraints of
+          scope, schedule, budget, and quality.
+        </p>
+        <p>
+          The role is demanding because the manager is accountable for the success of the entire project — not
+          just their own technical work. Tight deadlines, limited resources, changing requirements, and
+          unexpected risks create constant pressure. Effective managers combine technical awareness with strong
+          leadership, communication, and problem-solving skills.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-pm-role-caption">
+          <img src="../../../assets/images/se-topic-03/project-manager.webp"
+               alt="What a project manager does — planning, leading, executing, and coordinating stakeholders"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-pm-role-caption">Role and responsibilities of a Software Project Manager.</figcaption>
+        </figure>
+
+        <h3>Primary responsibilities</h3>
+        <p>A software project manager's day-to-day work covers the following areas:</p>
+        <ul>
+          <li><strong>Project planning:</strong> The manager defines goals and creates the project plan covering scope, schedule, budget, and resource allocation. This blueprint guides the entire team.</li>
+          <li><strong>Team leadership:</strong> The manager assembles and leads the team, assigns tasks, fosters collaboration, and resolves interpersonal conflicts before they affect delivery.</li>
+          <li><strong>Stakeholder communication:</strong> The manager communicates clearly with customers, executives, and team members through status reports, meetings, and formal reviews.</li>
+          <li><strong>Progress tracking:</strong> The manager monitors day-to-day execution, compares actual progress against the plan, and identifies slippage early enough to take corrective action.</li>
+          <li><strong>Risk management:</strong> The manager identifies, analyses, and mitigates risks such as schedule delays, cost overruns, and quality defects (see <a href="03-08-risk-analysis.html#sec-3-8">§3.8</a>).</li>
+          <li><strong>Change control:</strong> When requirements or scope change, the manager evaluates the impact on schedule and cost and obtains approval before the team proceeds.</li>
+          <li><strong>Quality assurance:</strong> The manager ensures that reviews, testing, and standards compliance happen at the right milestones so defects are caught early.</li>
+          <li><strong>Delivery and closure:</strong> The manager ensures the product is delivered on time, within budget, and to the required quality, then formally closes the project with stakeholder sign-off.</li>
+        </ul>
+
+        <h3>Essential skills of a project manager</h3>
+        <p>Examiners often ask which skills a project manager needs. The most important are:</p>
+        <ul>
+          <li><strong>Planning skills:</strong> Creating realistic schedules and work breakdown structures.</li>
+          <li><strong>Leadership skills:</strong> Motivating the team and setting direction.</li>
+          <li><strong>Communication skills:</strong> Explaining technical progress to non-technical stakeholders.</li>
+          <li><strong>Negotiation skills:</strong> Resolving conflicts between scope, time, and cost.</li>
+          <li><strong>Budget management:</strong> Tracking expenditure against the approved budget.</li>
+          <li><strong>Time management:</strong> Ensuring milestones are met and priorities are clear.</li>
+          <li><strong>Reporting skills:</strong> Preparing accurate progress reports and project documentation.</li>
+        </ul>
+
+        <h3>Consequences of poor project management</h3>
+        <p>
+          When a software project manager lacks the necessary expertise, several problems arise: resources are
+          wasted, schedules become unreliable, data protection may be neglected, and conflicts develop between
+          developers and stakeholders. Over-complicating the management process itself can confuse teams and
+          delay completion. Cross-functional teams that are not fully dedicated to the project add further
+          complexity because members juggle project work with their regular duties.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Role of the Software Project Manager</div>
+          <p><strong>Q:</strong> Describe the role and responsibilities of a Software Project Manager. What skills are essential?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define the SPM as central coordinator with authority over scope, schedule, budget, and quality.</li>
+            <li>List responsibilities: planning, team leadership, stakeholder communication, progress tracking, risk management, change control, quality assurance, delivery.</li>
+            <li>Name essential skills: planning, leadership, communication, negotiation, budget and time management, reporting.</li>
+            <li>Mention consequences of poor management: resource loss, schedule slippage, conflicts, project failure.</li>
+            <li>Contrast with the technical role of developers — the manager coordinates rather than writes all the code.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-02-project-management-process.html">&larr; 3.2 PM Process</a>
+        <a class="btn-back chapter-nav-next" href="03-04-spm-complexities.html">3.4 SPM Complexities &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.12 Entity Relationship Diagrams (ERD)</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.12 Entity Relationship Diagrams (ERD)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-12">
+
+        <p>
+          An <strong>Entity Relationship Diagram (ERD)</strong> models the static data structure of a system —
+          the entities (things of interest), their attributes (properties), and the relationships between them.
+          ERDs complement DFDs: where a DFD shows how data moves, an ERD shows what data exists and how it is
+          organised (see <a href="04-10-system-modelling.html#sec-4-10">§4.10</a>).
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-er-model-intro-caption">
+          <img src="../../../assets/images/se-topic-04/er-model-intro.webp"
+               alt="Entity Relationship model — entities, attributes, and relationships"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-er-model-intro-caption">Introduction to the Entity Relationship model.</figcaption>
+        </figure>
+        <h3>ER model components</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-er-symbols-caption">
+          <img src="../../../assets/images/se-topic-04/er-symbols.webp"
+               alt="ERD symbols — entity, attribute, relationship, and cardinality notation"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-er-symbols-caption">Standard symbols used in Entity Relationship Diagrams.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Entity:</strong> A person, place, object, or concept about which data is stored (e.g. Student, Course, Employee). Represented as a rectangle.</li>
+          <li><strong>Attribute:</strong> A property or characteristic of an entity (e.g. StudentID, Name, DateOfBirth). The set of attributes defines an entity's data.</li>
+          <li><strong>Relationship:</strong> An association between two or more entities (e.g. Student <em>enrolls in</em> Course). Represented as a diamond or line with cardinality labels.</li>
+          <li><strong>Key attribute:</strong> Uniquely identifies an entity instance (primary key), such as StudentID.</li>
+        </ul>
+
+        <h3>Cardinality and participation</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-er-cardinality-caption">
+          <img src="../../../assets/images/se-topic-04/er-cardinality.webp"
+               alt="ERD cardinality — one-to-one, one-to-many, and many-to-many relationships"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-er-cardinality-caption">Cardinality notation in Entity Relationship Diagrams.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>One-to-one (1:1):</strong> Each instance of entity A relates to at most one instance of entity B, and vice versa (e.g. Employee — EmployeeDetails).</li>
+          <li><strong>One-to-many (1:N):</strong> One instance of A relates to many instances of B (e.g. Department has many Employees).</li>
+          <li><strong>Many-to-many (M:N):</strong> Many instances of A relate to many instances of B (e.g. Student enrolls in many Courses; each Course has many Students). Resolved in design by an associative entity.</li>
+          <li><strong>Participation:</strong> Total participation (mandatory — every entity instance must participate) vs partial participation (optional).</li>
+        </ul>
+
+        <h3>Strong vs weak entities</h3>
+        <ul>
+          <li><strong>Strong entity:</strong> Has its own primary key and can exist independently (e.g. Department).</li>
+          <li><strong>Weak entity:</strong> Depends on another entity (owner) for identification; its key is partially derived from the owner (e.g. Dependent of Employee, identified by EmployeeID + DependentName).</li>
+        </ul>
+
+        <h3>How to draw an ERD</h3>
+        <ol>
+          <li>Identify entities from nouns in requirements documents and user interviews.</li>
+          <li>List attributes for each entity and mark the primary key.</li>
+          <li>Identify relationships between entities and determine cardinality.</li>
+          <li>Draw the diagram using standard notation and label all relationships.</li>
+          <li>Review with stakeholders and cross-check against the DFD data stores for consistency.</li>
+        </ol>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — ERD components</div>
+          <p><strong>Q:</strong> What is an ERD? Explain entities, attributes, relationships, and cardinality with examples.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define ERD as static data structure model (entities, attributes, relationships).</li>
+            <li>Explain entity, attribute, key, relationship with examples.</li>
+            <li>Describe 1:1, 1:N, M:N cardinality and total vs partial participation.</li>
+            <li>Distinguish strong entity (own PK) from weak entity (depends on owner).</li>
+            <li>Outline drawing steps; mention consistency with DFD data stores.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-11-dfd.html">&larr; 4.11 DFD</a>
+        <a class="btn-back chapter-nav-next" href="04-13-decision-tables.html">4.13 Decision Tables &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

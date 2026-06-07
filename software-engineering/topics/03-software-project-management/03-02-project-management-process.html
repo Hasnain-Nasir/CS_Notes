@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.2 Project Management Process</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.2 Project Management Process</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-2">
+        <p>
+          The <strong>project management process</strong> is the systematic set of activities through which a
+          software project is planned, executed, monitored, controlled, and closed. It is the discipline of
+          identifying scope, estimating the work involved, creating a project schedule, keeping the team
+          informed about progress, handling problems, and discussing solutions.
+        </p>
+        <p>
+          This process runs <strong>in parallel with the SDLC</strong> from
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">Topic 2 §2.1</a>. The SDLC tells
+          <em>what technical work</em> must be done, while the project management process tells
+          <em>how that work is governed</em>. A software project manager lays out the complete blueprint in a
+          <strong>project plan</strong> that defines scope, resources, timelines, techniques, communication,
+          testing, and maintenance steps.
+        </p>
+
+        <h3>Five phases of the project management process</h3>
+        <p>
+          All software projects pass through five phases: <strong>initiation, planning, execution, monitoring
+          and control, and closure</strong>. These are also called process groups, the project management cycle,
+          or the project life cycle. Phases 3 and 4 are <strong>not strictly sequential</strong> — monitoring
+          runs continuously alongside execution until the project ends.
+        </p>
+        <p>
+          A shorter four-stage view is also used: <strong>feasibility study, project planning, project
+          execution, and project termination</strong>. Feasibility sits inside initiation, and termination is
+          part of closure.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-pm-phases-caption">
+          <img src="../../../assets/images/se-topic-03/pm-phases.png"
+               alt="Phases of the project management process — initiation, planning, execution, monitoring and control, closure"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-pm-phases-caption">Five phases of the project management process.</figcaption>
+        </figure>
+
+        <p>Each phase has a distinct focus, as shown in the diagram above:</p>
+        <ul>
+          <li><strong>Initiation:</strong> Define project goals, create the business case, complete the project charter, and identify stakeholders.</li>
+          <li><strong>Planning:</strong> Define scope, create the project plan, set the budget baseline, and assign roles and responsibilities.</li>
+          <li><strong>Execution:</strong> Allocate and manage resources, build the product, and resolve issues through regular team meetings.</li>
+          <li><strong>Monitoring &amp; control:</strong> Track effort and cost, monitor progress, ensure adherence to the plan, and prevent disruptions.</li>
+          <li><strong>Closure:</strong> Hand over deliverables, review and get approval, and document lessons learned for future projects.</li>
+        </ul>
+
+        <h4>Phase 1 — Project initiation / feasibility study</h4>
+        <p>Initiation is where the organisation decides whether the project should exist at all.</p>
+        <ul>
+          <li>A <strong>feasibility study</strong> explores system requirements and checks whether the project can realistically be completed.</li>
+          <li><strong>Economic feasibility</strong> checks whether the benefits justify the cost.</li>
+          <li><strong>Technical feasibility</strong> checks whether the required technology can deliver the solution.</li>
+          <li><strong>Operational feasibility</strong> checks whether the system will work in the organisation's day-to-day environment.</li>
+          <li>The study takes user requirements and domain details as input and produces a recommendation to proceed or not proceed, along with any constraints.</li>
+        </ul>
+        <p>Key documents and activities in this phase:</p>
+        <ul>
+          <li>The <strong>business case</strong> explains why the project is needed and what return on investment is expected.</li>
+          <li>The <strong>feasibility study</strong> confirms the project can be done on time and within budget.</li>
+          <li>The <strong>project charter</strong> formally states the project's goals, objectives, and high-level scope.</li>
+          <li>The manager forms the project team, may set up a project management office, and holds a <strong>kickoff meeting</strong> to communicate goals and scope.</li>
+          <li>Stakeholders are identified so their expectations are known from the start.</li>
+        </ul>
+
+        <h4>Phase 2 — Project planning</h4>
+        <p>
+          Planning is where the manager defines exactly how the project will be carried out. The output is a
+          <strong>detailed project plan</strong> — a roadmap for execution.
+        </p>
+        <p>Key planning activities:</p>
+        <ul>
+          <li>The manager sets project objectives and goals that are specific and measurable.</li>
+          <li>The manager develops strategies, project policies, procedures, and courses of action.</li>
+          <li>The manager develops and documents the software project plan formally.</li>
+          <li>The manager prepares the project budget and allocates funds to tasks.</li>
+          <li>The manager conducts risk management and plans mitigation before work begins (see <a href="03-08-risk-analysis.html#sec-3-8">§3.8</a>).</li>
+          <li>The manager builds a <strong>Work Breakdown Structure (WBS)</strong> that decomposes the project into manageable tasks.</li>
+          <li>The manager performs size, effort, schedule, and cost estimation using <a href="03-05-size-estimation.html#sec-3-5">§3.5</a> and COCOMO (<a href="03-06-cocomo.html#sec-3-6">§3.6</a>).</li>
+        </ul>
+        <p>Documents and subsidiary plans produced during planning:</p>
+        <ul>
+          <li>The <strong>project schedule</strong> shows when each task will be completed and how resources are distributed — often as a Gantt chart (<a href="03-07-resource-allocation.html#sec-3-7">§3.7</a>).</li>
+          <li>The <strong>scope management plan</strong> defines how scope will be tracked and controlled as the project progresses.</li>
+          <li>The <strong>risk management plan</strong> lists potential risks and their mitigation strategies.</li>
+          <li>The <strong>resource management plan</strong> describes how people, tools, and budget will be acquired and assigned.</li>
+          <li>The <strong>stakeholder management plan</strong> identifies all stakeholders and sets rules for keeping them informed.</li>
+          <li>The <strong>quality plan</strong> defines standards, review points, and testing milestones.</li>
+          <li>The <strong>communication plan</strong> specifies who receives which reports and how often meetings occur.</li>
+        </ul>
+
+        <h4>Phase 3 — Project execution</h4>
+        <p>Execution is where the plan is put into action.</p>
+        <ul>
+          <li>The development team performs the actual technical work while the manager coordinates people, resolves conflicts, and keeps stakeholders informed.</li>
+          <li>A critical decision is choosing the appropriate <strong>SDLC model</strong> based on project size, nature, time and budget constraints, and domain requirements.</li>
+          <li>An inappropriate SDLC choice can lead directly to project failure.</li>
+          <li>During execution the SDLC phases run in practice: requirements analysis, design, coding, testing, implementation, delivery, and maintenance.</li>
+          <li>The manager ensures each stage completes successfully by measuring progress, monitoring team performance, generating status reports, and resolving issues.</li>
+          <li>In Agile projects, execution happens in short sprints, but the manager's coordinating role remains the same.</li>
+        </ul>
+
+        <h4>Phase 4 — Project monitoring and control</h4>
+        <p>Monitoring and control run <strong>throughout execution</strong>, not only after it.</p>
+        <ul>
+          <li>The manager tracks project progress and compares actual results against the project plan.</li>
+          <li>Cost and effort are tracked continuously to keep the current project on budget and to improve future estimates.</li>
+          <li>Quality assurance is applied through quality control techniques at each milestone.</li>
+          <li>Status reports, timesheets, workload reports, allocation reports, and expense reports keep the manager and stakeholders informed.</li>
+          <li>When deviations appear, the manager takes corrective action such as reassigning resources, adjusting the schedule, or escalating to senior management.</li>
+          <li>Further detail is covered in <a href="03-09-monitoring-control.html#sec-3-9">§3.9</a>.</li>
+        </ul>
+
+        <h4>Phase 5 — Project closure / termination</h4>
+        <p>Closure marks the formal end of the project.</p>
+        <ul>
+          <li>The manager presents completed deliverables to stakeholders and obtains their acceptance.</li>
+          <li>Resources are released, documentation is finished, and all open items are signed off.</li>
+          <li>For software, handover includes source code, user manuals, test reports, and maintenance agreements.</li>
+          <li>A project may close after successful completion or terminate early without completion.</li>
+          <li>Common reasons for early termination include rapidly changing technology, running out of time, organisational politics, excessive requirement changes, or exceeding the budget.</li>
+          <li>After closure, a <strong>post-performance analysis</strong> is conducted and a final report records lessons learned and recommendations for future projects.</li>
+        </ul>
+
+        <h3>Principles of effective project planning</h3>
+        <ul>
+          <li><strong>Planning is necessary:</strong> Planning must be done before the project begins, not improvised during execution.</li>
+          <li><strong>Risk analysis:</strong> Senior management and the project team should consider risks before starting and include them in the plan.</li>
+          <li><strong>Tracking the project plan:</strong> Once prepared, the plan must be tracked and updated as conditions change.</li>
+          <li><strong>Quality standards:</strong> The plan must identify processes that ensure quality deliverables at every stage.</li>
+          <li><strong>Flexibility for change:</strong> The project plan should accommodate new changes while the project is in progress, within controlled change management.</li>
+        </ul>
+
+        <h3>Types of management within SPM</h3>
+        <p>Beyond the five phases, SPM involves several specialised management activities that run across the project lifecycle:</p>
+        <ul>
+          <li><strong>Conflict management:</strong> The manager restricts the negative effects of conflict while increasing its positive effects, such as better ideas from debate.</li>
+          <li><strong>Risk management:</strong> The manager identifies, analyses, and mitigates risks so their probability or impact stays at an acceptable level (see <a href="03-08-risk-analysis.html#sec-3-8">§3.8</a>).</li>
+          <li><strong>Requirement management:</strong> The manager analyses, prioritises, tracks, and documents requirements, then supervises changes and communicates them to stakeholders.</li>
+          <li><strong>Change management:</strong> The manager handles transitions in goals, processes, or technology in a systematic and controlled way.</li>
+          <li><strong>Software configuration management (SCM):</strong> The team controls and tracks changes in software, including revision control and baselines (Topic 9).</li>
+          <li><strong>Release management:</strong> The manager plans, controls, and schedules software releases so new services reach the customer while existing services remain stable.</li>
+        </ul>
+
+        <h3>Key aspects the manager oversees</h3>
+        <ul>
+          <li><strong>Planning:</strong> The manager lays out the complete project blueprint covering scope, resources, timelines, strategy, communication, testing, and maintenance.</li>
+          <li><strong>Leading:</strong> The manager brings together and leads engineers, designers, and other specialists through strong communication and interpersonal skills.</li>
+          <li><strong>Execution:</strong> The manager ensures each SDLC stage completes successfully, measures progress, and generates status reports.</li>
+          <li><strong>Time management:</strong> The manager abides by timelines despite unavoidable changes to the original charter.</li>
+          <li><strong>Budget management:</strong> The manager creates the budget, controls spending, and reassigns funds when necessary.</li>
+          <li><strong>Maintenance planning:</strong> The manager ensures continuous testing, defect fixing, and product adjustment so the delivered software meets client needs.</li>
+        </ul>
+
+        <h3>Advantages and limitations</h3>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+          <li>The process provides a structured approach to managing projects.</li>
+          <li>It helps define project objectives and requirements clearly.</li>
+          <li>It improves communication and collaboration among team members.</li>
+          <li>It helps manage project risks and issues proactively.</li>
+          <li>It increases the chance that the project is delivered on time and within budget.</li>
+        </ul>
+        <p><strong>Limitations:</strong></p>
+        <ul>
+          <li>The process can be time-consuming and bureaucratic.</li>
+          <li>It may be inflexible when requirements change rapidly.</li>
+          <li>It requires a skilled project manager to implement effectively.</li>
+          <li>It may not be worth the overhead for very small or simple projects.</li>
+        </ul>
+
+        <h3>Integration with the SDLC</h3>
+        <ul>
+          <li>Project management does not replace the SDLC — it wraps around it.</li>
+          <li>During requirements, the manager ensures the SRS is reviewed on schedule.</li>
+          <li>During design, the manager checks that the SDD aligns with scope.</li>
+          <li>During coding, the manager tracks milestone or sprint completion.</li>
+          <li>During testing, the manager monitors defect trends and decides whether the release date must slip.</li>
+          <li>Choosing the wrong SDLC model during execution is itself a project management failure.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Project management process</div>
+          <p><strong>Q:</strong> Explain the project management process in software engineering. Describe all five phases with their key activities, and state the principles of effective project planning.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define PM process: systematic planning, executing, monitoring, controlling, and closing a software project within scope, time, budget, and quality.</li>
+            <li>State that PM runs parallel to SDLC; PM governs how work is done, SDLC defines what technical work is done.</li>
+            <li><strong>Phase 1 — Initiation:</strong> feasibility study (economic, technical, operational); business case, project charter; stakeholder identification; kickoff meeting; go/no-go decision.</li>
+            <li><strong>Phase 2 — Planning:</strong> WBS, schedule, budget, risk management, size/effort/cost estimation; subsidiary plans (scope, risk, resource, stakeholder, quality, communication).</li>
+            <li><strong>Phase 3 — Execution:</strong> implement plan; choose appropriate SDLC model; team performs requirements → design → coding → testing → delivery; manager coordinates, reports, resolves issues.</li>
+            <li><strong>Phase 4 — Monitoring &amp; control:</strong> runs alongside execution; track cost, effort, quality; compare actual vs plan; corrective action; status reports.</li>
+            <li><strong>Phase 5 — Closure:</strong> deliverable acceptance, documentation, resource release; post-performance analysis and lessons learned; early termination reasons (budget, time, changing requirements).</li>
+            <li><strong>Five planning principles:</strong> plan before start, risk analysis upfront, track and update plan, quality standards in plan, flexibility for controlled change.</li>
+            <li>Mention types of management: conflict, risk, requirement, change, SCM, release management.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-01-spm-overview.html">&larr; 3.1 SPM Overview</a>
+        <a class="btn-back chapter-nav-next" href="03-03-project-manager-role.html">3.3 Project Manager Role &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.9 Project Monitoring &amp; Control</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.9 Project Monitoring &amp; Control</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-9">
+        <p>
+          <strong>Project monitoring and control</strong> is the ongoing process of measuring actual project
+          performance against the baseline plan and taking corrective action when deviations occur. Monitoring
+          answers the question "Where are we now?" while control answers "What must we do to get back on track?"
+          Together they form the fourth process group in the project management lifecycle described in
+          <a href="03-02-project-management-process.html#sec-3-2">§3.2</a>.
+        </p>
+        <p>
+          Because software is intangible, monitoring is harder than in manufacturing — yet it is even more
+          essential. Without regular measurement, schedule slippage and cost overruns may remain hidden until
+          they are too large to recover from.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-monitoring-caption">
+          <img src="../../../assets/images/se-topic-03/pm-seven-steps.webp"
+               alt="Seven steps to successful project management"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-monitoring-caption">Seven steps to successful project management.</figcaption>
+        </figure>
+
+        <h3>Seven steps to successful project management</h3>
+        <p>Effective monitoring and control are part of a broader discipline. The seven steps are:</p>
+        <ul>
+          <li><strong>Self-evaluation:</strong> The manager assesses their own skills, available time, and capacity before taking on the project.</li>
+          <li><strong>Set realistic goals:</strong> Objectives should be specific, measurable, achievable, relevant, and time-bound (SMART).</li>
+          <li><strong>Set scope, budget, and time:</strong> The manager defines what is included and excluded, allocates the budget, and sets deadlines for key deliverables.</li>
+          <li><strong>Milestone planning:</strong> The project is broken into milestones so progress can be tracked and course corrections made early.</li>
+          <li><strong>Build the project team:</strong> The right people are assigned or hired based on the skills each task requires.</li>
+          <li><strong>Communicate regularly:</strong> Status meetings, progress updates, and open reporting keep the team and stakeholders aligned.</li>
+          <li><strong>Record lessons learned:</strong> After completion, the team documents what worked and what failed so future projects improve.</li>
+        </ul>
+
+        <h3>What is monitored</h3>
+        <p>The project manager tracks performance across several dimensions throughout the SDLC:</p>
+        <ul>
+          <li><strong>Schedule performance:</strong> Are milestones being met? Which tasks are behind? Is the critical path slipping (see <a href="03-07-resource-allocation.html#sec-3-7">§3.7</a> CPM)?</li>
+          <li><strong>Cost performance:</strong> Is actual expenditure within the approved budget? Are labour hours tracking against the estimate from COCOMO or decomposition?</li>
+          <li><strong>Scope performance:</strong> Is the team building what was agreed, or is scope creeping through unapproved changes?</li>
+          <li><strong>Quality performance:</strong> What is the defect rate? Are reviews and tests passing at each gate?</li>
+          <li><strong>Resource utilisation:</strong> Are team members over- or under-allocated? Are key skills available when needed?</li>
+          <li><strong>Risk status:</strong> Have identified risks materialised? Have mitigation actions been effective? Are new risks emerging?</li>
+        </ul>
+
+        <h3>Monitoring techniques</h3>
+        <p>Common techniques used to gather and present monitoring data include:</p>
+        <ul>
+          <li><strong>Status meetings and stand-ups:</strong> Regular short meetings where team members report progress, blockers, and plans for the next period.</li>
+          <li><strong>Milestone reviews:</strong> Formal checkpoints at the end of SDLC phases (SRS approved, design reviewed, test plan signed off) where deliverables are compared against entry/exit criteria.</li>
+          <li><strong>Earned Value Management (EVM):</strong> Compares planned value, earned value (work actually completed), and actual cost to compute schedule and cost variances.</li>
+          <li><strong>Gantt chart updates:</strong> The schedule chart is updated to show actual vs planned progress visually.</li>
+          <li><strong>Defect and metrics tracking:</strong> Trend charts of open defects, test coverage, and code churn indicate quality health.</li>
+          <li><strong>Progress reports:</strong> Written reports to stakeholders summarising accomplishments, variances, risks, and forecast completion date.</li>
+        </ul>
+
+        <h3>Corrective and preventive action</h3>
+        <p>
+          When monitoring reveals a deviation, the manager must decide on a response. <strong>Corrective action</strong>
+          fixes an existing problem — for example, adding staff to a slipping task, descoping a low-priority feature,
+          or extending the deadline with stakeholder approval. <strong>Preventive action</strong> addresses a potential
+          future problem identified during risk monitoring — for example, cross-training a second developer before
+          the only expert goes on leave.
+        </p>
+        <p>
+          Change control is tightly linked to monitoring: any change to scope, schedule, or resources must be
+          formally evaluated for impact and approved before the team acts on it. Uncontrolled changes are one of
+          the fastest routes to project failure.
+        </p>
+
+        <h3>Agile monitoring</h3>
+        <p>
+          In Agile projects, monitoring happens every sprint through <strong>sprint reviews</strong>,
+          <strong>burndown charts</strong>, and <strong>velocity tracking</strong>. The team compares completed
+          story points against the sprint commitment and adjusts the backlog for the next iteration. The principles
+          are the same as in traditional monitoring — measure, compare, correct — but the cycle is much shorter.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Monitoring and control</div>
+          <p><strong>Q:</strong> What is project monitoring and control? What dimensions are tracked and what corrective actions can a manager take?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Monitoring = measuring actual vs planned; control = corrective action to close gaps.</li>
+            <li>Track schedule, cost, scope, quality, resources, and risk status.</li>
+            <li>Techniques: status meetings, milestone reviews, EVM, Gantt updates, defect metrics, progress reports.</li>
+            <li>Corrective action fixes current deviation; preventive action addresses future risk.</li>
+            <li>Change control: formal approval before scope/schedule/resource changes.</li>
+            <li>Explain difficulty of monitoring intangible software products.</li>
+            <li>Agile equivalent: sprint reviews, burndown charts, velocity.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-08-risk-analysis.html">&larr; 3.8 Risk Analysis</a>
+        <a class="btn-back chapter-nav-next" href="03-10-cmm.html">3.10 CMM &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

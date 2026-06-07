@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.4 Challenges in Eliciting Requirements</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.4 Challenges in Eliciting Requirements</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-4">
+
+        <p>
+          Requirements elicitation is inherently difficult because stakeholders, analysts, and developers each
+          bring different perspectives, vocabularies, and levels of knowledge. Understanding these challenges
+          helps analysts select appropriate techniques and manage expectations.
+        </p>
+
+        <h3>Stakeholder-related challenges</h3>
+        <ul>
+          <li><strong>Stakeholders do not know what they want:</strong> Users often cannot articulate needs until they see a working system or prototype.</li>
+          <li><strong>Conflicting requirements:</strong> Different stakeholders want incompatible features or priorities, requiring negotiation and trade-offs.</li>
+          <li><strong>Changing requirements:</strong> Business conditions evolve during elicitation, making the requirements baseline unstable.</li>
+          <li><strong>Stakeholder unavailability:</strong> Key domain experts may have limited time, delaying or limiting elicitation sessions.</li>
+          <li><strong>Political and organisational barriers:</strong> Power dynamics, departmental silos, or fear of job displacement can suppress honest input.</li>
+        </ul>
+
+        <h3>Analyst and communication challenges</h3>
+        <ul>
+          <li><strong>Language and terminology gaps:</strong> Users speak in business terms; developers speak in technical terms; misunderstandings are common.</li>
+          <li><strong>Implicit assumptions:</strong> Stakeholders assume "obvious" requirements need not be stated, but developers lack that domain knowledge.</li>
+          <li><strong>Ambiguity and vagueness:</strong> Words like "fast," "user-friendly," or "secure" mean different things to different people.</li>
+          <li><strong>Analyst bias:</strong> The analyst may unconsciously impose a preferred solution rather than capturing the true need.</li>
+        </ul>
+
+        <h3>Domain and system challenges</h3>
+        <ul>
+          <li><strong>Complex or unfamiliar domains:</strong> Safety-critical, financial, or scientific systems require deep domain expertise that the development team may lack.</li>
+          <li><strong>Legacy system constraints:</strong> Existing data formats, interfaces, and business rules constrain the new system but may be poorly documented.</li>
+          <li><strong>Regulatory requirements:</strong> Legal and compliance rules must be discovered from external documents, not from user interviews alone.</li>
+          <li><strong>Scale:</strong> Large systems with many stakeholder groups make complete elicitation impractical without prioritisation.</li>
+        </ul>
+
+        <h3>Strategies to overcome elicitation challenges</h3>
+        <ul>
+          <li>Use multiple elicitation techniques to cross-check and fill gaps (see <a href="04-03-elicitation.html#sec-4-3">§4.3</a>).</li>
+          <li>Build prototypes early so stakeholders can react to something concrete.</li>
+          <li>Establish a glossary of domain terms shared by all parties.</li>
+          <li>Prioritise stakeholders and requirements using MoSCoW or similar ranking (see <a href="04-05-analysis.html#sec-4-5">§4.5</a>).</li>
+          <li>Apply formal change control once a baseline is agreed (see <a href="04-07-review-management.html#sec-4-7">§4.7</a> and SPM change management in <a href="../03-software-project-management/03-01-spm-overview.html#sec-3-1">Topic 3</a>).</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Elicitation challenges</div>
+          <p><strong>Q:</strong> What are the main challenges in eliciting software requirements? How can they be addressed?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>List stakeholder challenges: unknown needs, conflicts, changing requirements, unavailability.</li>
+            <li>List communication challenges: terminology gaps, implicit assumptions, ambiguity.</li>
+            <li>List domain challenges: complexity, legacy constraints, regulations, scale.</li>
+            <li>Propose strategies: multiple techniques, prototyping, glossary, prioritisation, change control.</li>
+            <li>Link to elicitation techniques and requirements management.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-03-elicitation.html">&larr; 4.3 Elicitation</a>
+        <a class="btn-back chapter-nav-next" href="04-05-analysis.html">4.5 Analysis &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

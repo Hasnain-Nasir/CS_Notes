@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.7 Review &amp; Management of User Needs</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.7 Review &amp; Management of User Needs</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-7">
+
+        <p>
+          <strong>Requirements review</strong> and <strong>requirements management</strong> ensure that documented
+          requirements are correct, complete, and agreed upon, and that they remain controlled as the project
+          evolves. Together they protect the requirements baseline throughout the
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a>.
+        </p>
+
+        <h3>Requirements review (validation)</h3>
+        <p>Review is a structured examination of the requirements document to find defects before design begins:</p>
+        <ul>
+          <li><strong>Formal inspections:</strong> A trained team systematically checks the SRS against a checklist (completeness, consistency, testability).</li>
+          <li><strong>Walkthroughs:</strong> The author presents the document to stakeholders who ask questions and suggest corrections.</li>
+          <li><strong>Prototyping:</strong> Stakeholders interact with a mock-up to confirm that requirements match their expectations.</li>
+          <li><strong>Test-case generation:</strong> If test cases cannot be written for a requirement, it is probably ambiguous or untestable.</li>
+          <li><strong>Consistency checks:</strong> Models (DFD, ERD) are compared with the written SRS to detect contradictions.</li>
+        </ul>
+
+        <h3>Requirements management</h3>
+        <p>Management continues after the baseline is approved and covers the full project lifecycle:</p>
+        <ul>
+          <li><strong>Version control:</strong> Each revision of the requirements document is numbered and stored so the team always knows which version is current.</li>
+          <li><strong>Change control:</strong> Proposed changes are logged, assessed for impact on cost, schedule, and design, and approved or rejected by a change control board (CCB). This aligns with SPM scope management in <a href="../03-software-project-management/03-09-monitoring-control.html#sec-3-9">Topic 3 §3.9</a>.</li>
+          <li><strong>Traceability:</strong> Each requirement is linked forward to design elements, code modules, and test cases, and backward to its elicitation source.</li>
+          <li><strong>Status tracking:</strong> Requirements are marked as proposed, approved, implemented, verified, or deferred.</li>
+          <li><strong>Impact analysis:</strong> Before accepting a change, the team evaluates which design, code, and test artefacts are affected.</li>
+        </ul>
+
+        <h3>Managing user needs over time</h3>
+        <ul>
+          <li>User needs evolve as the business environment changes; the management process must accommodate controlled change without losing stability.</li>
+          <li>Prioritisation (MoSCoW or ranking) helps decide which new needs fit the current release and which are deferred.</li>
+          <li>Regular stakeholder reviews during development catch drift between implemented software and agreed requirements.</li>
+          <li>Traceability matrices make it visible when a user need has no corresponding design or test, or vice versa.</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Review and management</div>
+          <p><strong>Q:</strong> Distinguish requirements review from requirements management. Why is each needed?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define review/validation: structured examination to find defects before design (inspections, walkthroughs, prototyping).</li>
+            <li>Define management: version control, change control, traceability, status tracking, impact analysis.</li>
+            <li>Explain review catches errors early; management handles evolving needs with controlled change.</li>
+            <li>Link change control to SPM scope management and CCB.</li>
+            <li>Mention traceability forward (design/test) and backward (source).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-06-documentation.html">&larr; 4.6 Documentation</a>
+        <a class="btn-back chapter-nav-next" href="04-08-feasibility-study.html">4.8 Feasibility Study &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

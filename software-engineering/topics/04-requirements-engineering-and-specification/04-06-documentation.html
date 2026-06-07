@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.6 Documentation</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.6 Documentation</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-6">
+
+        <p>
+          <strong>Requirements documentation</strong> is the activity of recording analysed requirements in a form
+          that is understandable, reviewable, and maintainable. The primary deliverable is usually the
+          <strong>Software Requirements Specification (SRS)</strong>, but documentation also includes models,
+          glossaries, and supporting artefacts.
+        </p>
+
+        <h3>Why document requirements?</h3>
+        <ul>
+          <li>Documentation creates a shared contract between customer and development team.</li>
+          <li>It provides the baseline for design, implementation, testing, and acceptance.</li>
+          <li>It supports traceability — each requirement can be linked to its source and to test cases.</li>
+          <li>It enables impact analysis when changes are proposed during the project.</li>
+          <li>It preserves knowledge when team members leave or when the system enters maintenance.</li>
+        </ul>
+
+        <h3>Forms of requirements documentation</h3>
+        <ul>
+          <li><strong>Natural language (SRS):</strong> The main written document describing functional and non-functional requirements in prose (see <a href="04-14-srs-document.html#sec-4-14">§4.14</a>).</li>
+          <li><strong>Graphical models:</strong> DFDs, ERDs, use-case diagrams, and state diagrams that complement the text (see <a href="04-11-dfd.html#sec-4-11">§4.11</a>, <a href="04-12-erd.html#sec-4-12">§4.12</a>).</li>
+          <li><strong>Structured notations:</strong> Decision tables for complex conditional logic (see <a href="04-13-decision-tables.html#sec-4-13">§4.13</a>).</li>
+          <li><strong>User stories / use cases:</strong> Scenario-based descriptions favoured in Agile methods.</li>
+          <li><strong>Glossary and data dictionary:</strong> Definitions of domain terms and data elements to prevent ambiguity.</li>
+        </ul>
+
+        <h3>Documentation standards and guidelines</h3>
+        <ul>
+          <li>Each requirement should have a unique identifier for traceability.</li>
+          <li>Requirements should be stated at a consistent level of abstraction — neither too vague nor too detailed.</li>
+          <li>Each statement should express a single requirement; compound sentences should be split.</li>
+          <li>Active voice and defined terminology improve clarity.</li>
+          <li>IEEE 830 / IEEE 29148 provide standard SRS structure (see <a href="04-17-ieee-srs.html#sec-4-17">§4.17</a>).</li>
+        </ul>
+
+        <h3>Document control</h3>
+        <p>
+          Requirements documents must be version-controlled and subject to formal review. Only approved versions
+          become the requirements baseline. Changes after baseline approval follow the project's change control
+          process, managed as part of requirements management in
+          <a href="04-07-review-management.html#sec-4-7">§4.7</a> and SPM scope control in
+          <a href="../03-software-project-management/03-09-monitoring-control.html#sec-3-9">Topic 3 §3.9</a>.
+        </p>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Requirements documentation</div>
+          <p><strong>Q:</strong> Why must requirements be documented? What forms of documentation are used?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Explain purpose: shared contract, design/test baseline, traceability, change impact, knowledge preservation.</li>
+            <li>List forms: SRS (natural language), graphical models (DFD/ERD), decision tables, use cases, glossary.</li>
+            <li>State documentation rules: unique ID, consistent abstraction, one req per statement, defined terms.</li>
+            <li>Mention IEEE SRS standard structure and document version control/baseline.</li>
+            <li>Link to review, management, and SPM change control.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-05-analysis.html">&larr; 4.5 Analysis</a>
+        <a class="btn-back chapter-nav-next" href="04-07-review-management.html">4.7 Review & Management &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

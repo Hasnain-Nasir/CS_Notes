@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.10 System Modelling / Information Modeling</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.10 System Modelling / Information Modeling</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-10">
+
+        <p>
+          <strong>System modelling</strong> (also called <strong>information modelling</strong>) uses graphical and
+          structured notations to represent requirements visually. Models complement the written SRS by making data
+          flows, data structures, and system behaviour easier to understand, review, and validate.
+        </p>
+
+        <h3>Why model during requirements engineering?</h3>
+        <ul>
+          <li>Models expose gaps, inconsistencies, and ambiguities that prose alone may hide.</li>
+          <li>They provide a shared visual language between analysts, developers, and stakeholders.</li>
+          <li>They serve as a bridge from requirements to design — many design diagrams evolve directly from RE models.</li>
+          <li>They support validation: stakeholders can confirm that a diagram matches their understanding of the system.</li>
+        </ul>
+
+        <h3>Common modelling techniques in RE</h3>
+        <ul>
+          <li><strong>Data Flow Diagrams (DFD):</strong> Show how data moves through the system, which processes transform it, and where it is stored. Covered in <a href="04-11-dfd.html#sec-4-11">§4.11</a>.</li>
+          <li><strong>Entity Relationship Diagrams (ERD):</strong> Show the data entities, their attributes, and the relationships between them. Covered in <a href="04-12-erd.html#sec-4-12">§4.12</a>.</li>
+          <li><strong>Decision tables:</strong> Tabulate complex conditional logic for unambiguous specification. Covered in <a href="04-13-decision-tables.html#sec-4-13">§4.13</a>.</li>
+          <li><strong>Use case diagrams:</strong> Show actors and the use cases (services) they interact with — common in object-oriented RE.</li>
+          <li><strong>State transition diagrams:</strong> Show how the system or an entity changes state in response to events.</li>
+        </ul>
+
+        <h3>Information modelling concepts</h3>
+        <ul>
+          <li><strong>Data flow modelling</strong> focuses on functional processing — what happens to data as it moves through the system (DFD).</li>
+          <li><strong>Data structure modelling</strong> focuses on what data exists and how entities relate (ERD).</li>
+          <li>Both views must be consistent: every data store in a DFD should correspond to entities in the ERD, and every process should be supported by the documented functional requirements.</li>
+        </ul>
+
+        <h3>Modelling guidelines</h3>
+        <ul>
+          <li>Keep models at the requirements level — avoid premature design detail such as specific algorithms or UI widgets.</li>
+          <li>Use standard notation so all team members interpret symbols consistently.</li>
+          <li>Number and cross-reference diagrams in the SRS document.</li>
+          <li>Review models with stakeholders alongside the written requirements.</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — System modelling</div>
+          <p><strong>Q:</strong> Why is system modelling used in requirements engineering? Name three modelling techniques.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Explain purpose: expose gaps/inconsistencies, shared visual language, bridge to design, support validation.</li>
+            <li>Name DFD (data flow), ERD (data structure), decision tables, use cases, state diagrams.</li>
+            <li>Distinguish data flow modelling from data structure modelling.</li>
+            <li>State consistency rule: DFD data stores align with ERD entities.</li>
+            <li>Give modelling guidelines: requirements-level, standard notation, cross-reference, stakeholder review.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-09-requirements-classification.html">&larr; 4.9 Requirements Classification</a>
+        <a class="btn-back chapter-nav-next" href="04-11-dfd.html">4.11 DFD &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.6 COCOMO Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.6 COCOMO Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-6">
+        <p>
+          The <strong>Constructive Cost Model (COCOMO)</strong> was proposed by <strong>Barry Boehm in 1981</strong>
+          and is based on the study of <strong>63 projects</strong>, which makes it one of the best-documented
+          models in software engineering.
+        </p>
+        <p>
+          It is a <strong>software cost estimation model</strong> that helps predict the effort, cost, and
+          schedule required for a software development project. COCOMO belongs to the empirical model category
+          introduced in <a href="03-05-size-estimation.html#sec-3-5">§3.5</a> — it uses mathematically derived
+          formulas based on project size measured in <strong>KLOC</strong> (thousands of lines of code).
+        </p>
+
+        <h3>What is the COCOMO Model?</h3>
+        <ul>
+          <li>COCOMO is a <strong>procedural cost estimate model</strong> for software projects and is often used to reliably predict parameters such as size, effort, cost, time, and quality.</li>
+          <li>The key parameters that define the quality of any software product — and are also outcomes of COCOMO — are primarily <strong>effort</strong> and <strong>schedule</strong>.</li>
+          <li>COCOMO helps a project manager prepare a realistic budget, allocate resources, and check project feasibility before full development begins.</li>
+        </ul>
+
+        <h3>Types of projects in the COCOMO model</h3>
+        <p>
+          In the COCOMO model, software projects are categorised into <strong>three types</strong> based on
+          their complexity, size, and development environment.
+        </p>
+        <ul>
+          <li><strong>Organic:</strong> A project is organic when the required team size is adequately small, the problem is well understood and has been solved before, and team members have nominal experience with the problem domain.</li>
+          <li><strong>Semi-detached:</strong> A project is semi-detached when vital characteristics such as team size, experience, and knowledge of programming environments lie between organic and embedded. These projects are less familiar and harder to develop than organic ones and need more experience, guidance, and creativity — for example, compilers or embedded systems.</li>
+          <li><strong>Embedded:</strong> A project falls under embedded when it requires the highest level of complexity, creativity, and experience. Such software needs a larger team, and developers must be sufficiently experienced and creative to handle strict requirements and complex interfaces — for example, flight control software.</li>
+        </ul>
+
+        <h3>Comparison of project types in COCOMO</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Organic</th><th>Semi-detached</th><th>Embedded</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Project size</strong></td>
+              <td>Typically ranges from 2 to 50 KLOC.</td>
+              <td>Usually falls between 50 and 300 KLOC.</td>
+              <td>Generally 300 KLOC and above.</td>
+            </tr>
+            <tr>
+              <td><strong>Complexity</strong></td>
+              <td>Complexity is low because the problem is familiar.</td>
+              <td>Complexity is medium with moderate innovation required.</td>
+              <td>Complexity is high with strict and rigorous requirements.</td>
+            </tr>
+            <tr>
+              <td><strong>Team experience</strong></td>
+              <td>The team is highly experienced in the problem area.</td>
+              <td>The team includes both experienced and inexperienced staff.</td>
+              <td>The team has mixed experience but must include domain experts.</td>
+            </tr>
+            <tr>
+              <td><strong>Environment</strong></td>
+              <td>The environment is flexible with fewer constraints.</td>
+              <td>The environment is somewhat flexible with moderate constraints.</td>
+              <td>The environment is highly rigorous with strict requirements.</td>
+            </tr>
+            <tr>
+              <td><strong>Effort equation (example)</strong></td>
+              <td>E = 2.4 × (400)<sup>1.05</sup></td>
+              <td>E = 3.0 × (400)<sup>1.12</sup></td>
+              <td>E = 3.6 × (400)<sup>1.20</sup></td>
+            </tr>
+            <tr>
+              <td><strong>Example</strong></td>
+              <td>A simple payroll system is a typical organic project.</td>
+              <td>A new system interfacing with existing systems is semi-detached.</td>
+              <td>Flight control software is a classic embedded project.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Structure of the COCOMO model</h3>
+        <p>
+          <strong>Detailed COCOMO</strong> incorporates all characteristics of the intermediate version with an
+          assessment of each cost driver's impact on every step of the software engineering process.
+        </p>
+        <ul>
+          <li>In detailed COCOMO, the whole software is divided into different modules, COCOMO is applied to each module separately, and the individual effort estimates are summed to get the total project effort.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-cocomo-phases-caption">
+          <img src="../../../assets/images/se-topic-03/cocomo-six-phases.png"
+               alt="Six phases of the COCOMO model — planning and requirements through cost constructive model"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-cocomo-phases-caption">Six phases of the detailed COCOMO model.</figcaption>
+        </figure>
+
+        <h4>Phases of the COCOMO model</h4>
+        <ul>
+          <li><strong>Planning and requirements:</strong> This initial phase involves defining the scope, objectives, and constraints of the project and developing a project plan that outlines the schedule, resources, and milestones.</li>
+          <li><strong>System design:</strong> In this phase, the high-level architecture of the software system is created, including major components, their interactions, and the data flow between them.</li>
+          <li><strong>Detailed design:</strong> This phase breaks the system design into detailed specifications for each module, including data structures, algorithms, and interfaces.</li>
+          <li><strong>Module code and test:</strong> This involves writing the actual source code for each module, implementing algorithms, and developing interfaces as defined in the detailed design.</li>
+          <li><strong>Integration and test:</strong> This phase combines individual modules into a complete system and ensures they work together as intended.</li>
+          <li><strong>Cost constructive model:</strong> The final phase applies the Constructive Cost Model to refine the cost and effort estimate based on all project characteristics gathered in earlier phases.</li>
+        </ul>
+        <p>
+          Different models of COCOMO have been proposed to predict cost estimation at different levels, based on
+          the amount of accuracy required. All models can be applied to a variety of projects, and the project
+          characteristics determine which constants are used in subsequent calculations.
+        </p>
+
+        <h3>Importance of the COCOMO model</h3>
+        <ul>
+          <li><strong>Cost estimation:</strong> COCOMO offers a methodical approach to software development cost estimation, which helps with resource planning and project budgeting.</li>
+          <li><strong>Resource management:</strong> By taking team experience, project size, and complexity into account, the model supports efficient resource allocation.</li>
+          <li><strong>Project planning:</strong> COCOMO assists in developing practical project plans with attainable objectives, deadlines, and milestones.</li>
+          <li><strong>Risk management:</strong> By including risk-related factors through cost drivers, COCOMO helps identify and mitigate potential hazards early in development.</li>
+          <li><strong>Support for decisions:</strong> During project planning, the model provides a quantitative foundation for choices about scope, priorities, and resource allocation.</li>
+          <li><strong>Benchmarking:</strong> COCOMO offers a benchmark to compare and assess various software development projects against industry standards.</li>
+          <li><strong>Resource optimisation:</strong> The model helps maximise the use of resources, which raises productivity and lowers costs.</li>
+        </ul>
+
+        <h3>Types of COCOMO model</h3>
+        <p>There are <strong>three types</strong> of COCOMO model, each offering a different level of estimation accuracy.</p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-cocomo-types-caption">
+          <img src="../../../assets/images/se-topic-03/cocomo-model-types.png"
+               alt="Three types of COCOMO model — Basic, Intermediate, and Detailed"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-cocomo-types-caption">Three types of the COCOMO model — Basic, Intermediate, and Detailed.</figcaption>
+        </figure>
+
+        <h4>1. Basic COCOMO model</h4>
+        <ul>
+          <li>The Basic COCOMO model is a straightforward way to estimate the effort needed for a software development project using a simple mathematical formula based on project size in KLOC.</li>
+          <li>It estimates effort and development time using the following expressions:</li>
+        </ul>
+        <ul>
+          <li><strong>E = a × (KLOC)<sup>b</sup></strong> &nbsp;→&nbsp; effort in person-months (PM)</li>
+          <li><strong>T<sub>dev</sub> = c × (E)<sup>d</sup></strong> &nbsp;→&nbsp; development time in months</li>
+          <li><strong>Persons required = Effort ÷ Time</strong></li>
+        </ul>
+        <p>Where <strong>E</strong> is effort in person-months, <strong>KLOC</strong> is the estimated size in kilo lines of code, <strong>T<sub>dev</sub></strong> is development time in months, and <strong>a, b, c, d</strong> are constants determined by the project category.</p>
+
+        <table>
+          <thead>
+            <tr><th>Software project</th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Organic projects use constants</td><td>2.4</td><td>1.05</td><td>2.5</td><td>0.38</td></tr>
+            <tr><td>Semi-detached projects use constants</td><td>3.0</td><td>1.12</td><td>2.5</td><td>0.35</td></tr>
+            <tr><td>Embedded projects use constants</td><td>3.6</td><td>1.20</td><td>2.5</td><td>0.32</td></tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>Effort is measured in person-months and depends on KLOC, while development time is measured in months.</li>
+          <li>These formulas are used as-is in Basic COCOMO calculations, and because factors such as reliability and team expertise are not considered, the estimate is rough but fast to compute.</li>
+        </ul>
+
+        <p><strong>Example — Basic COCOMO (400 KLOC):</strong></p>
+        <ul>
+          <li><strong>Organic:</strong> E = 2.4 × (400)<sup>1.05</sup> ≈ 1295 person-months; T<sub>dev</sub> = 2.5 × (1295)<sup>0.38</sup> ≈ 38 months.</li>
+          <li><strong>Semi-detached:</strong> E = 3.0 × (400)<sup>1.12</sup> ≈ 2462 person-months; T<sub>dev</sub> = 2.5 × (2462)<sup>0.35</sup> ≈ 38 months.</li>
+          <li><strong>Embedded:</strong> E = 3.6 × (400)<sup>1.20</sup> ≈ 4772 person-months; T<sub>dev</sub> = 2.5 × (4772)<sup>0.32</sup> ≈ 38 months.</li>
+        </ul>
+
+        <p>The following C++ program implements Basic COCOMO and selects the mode automatically based on project size:</p>
+
+        <div class="terminal" aria-label="C++ source code for Basic COCOMO">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">basic_cocomo.cpp</span>
+          </div>
+          <pre><code>// C++ program to implement Basic COCOMO
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int fround(float x) {
+    x = x + 0.5;
+    return (int)x;
+}
+
+void calculate(float table[][4], char mode[][15], int size) {
+    float effort, time, staff;
+    int model;
+
+    if (size &gt;= 2 &amp;&amp; size &lt;= 50)
+        model = 0;          // organic
+    else if (size &gt; 50 &amp;&amp; size &lt;= 300)
+        model = 1;          // semi-detached
+    else if (size &gt; 300)
+        model = 2;          // embedded
+
+    cout &lt;&lt; "The mode is " &lt;&lt; mode[model];
+
+    effort = table[model][0] * pow(size, table[model][1]);
+    time   = table[model][2] * pow(effort, table[model][3]);
+    staff  = effort / time;
+
+    cout &lt;&lt; "\nEffort = " &lt;&lt; effort &lt;&lt; " Person-Month";
+    cout &lt;&lt; "\nDevelopment Time = " &lt;&lt; time &lt;&lt; " Months";
+    cout &lt;&lt; "\nAverage Staff Required = " &lt;&lt; fround(staff) &lt;&lt; " Persons";
+}
+
+int main() {
+    float table[3][4] = {2.4, 1.05, 2.5, 0.38,
+                         3.0, 1.12, 2.5, 0.35,
+                         3.6, 1.20, 2.5, 0.32};
+    char mode[][15] = {"Organic", "Semi-Detached", "Embedded"};
+    int size = 4;
+    calculate(table, mode, size);
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="terminal terminal--output" aria-label="Program output">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Output</span>
+          </div>
+          <pre><code>The mode is Organic
+Effort = 10.289 Person-Month
+Development Time = 6.06237 Months
+Average Staff Required = 2 Persons</code></pre>
+        </div>
+
+        <h4>2. Intermediate COCOMO model</h4>
+        <ul>
+          <li>The Basic COCOMO model assumes effort is only a function of KLOC and mode constants, but in reality factors such as reliability, experience, and capability also affect cost.</li>
+          <li>These factors are called <strong>cost drivers</strong> (multipliers), and the Intermediate model uses <strong>15 such drivers</strong> for cost estimation.</li>
+        </ul>
+
+        <p><strong>Classification of cost drivers and their attributes:</strong></p>
+        <ul>
+          <li><strong>Product attributes:</strong> Required software reliability, size of the application database, and complexity of the product.</li>
+          <li><strong>Hardware attributes:</strong> Run-time performance constraints, memory constraints, volatility of the virtual machine environment, and required turnaround time.</li>
+          <li><strong>Personnel attributes:</strong> Analyst capability, software engineering capability, application experience, virtual machine experience, and programming language experience.</li>
+          <li><strong>Project attributes:</strong> Use of software tools, application of software engineering methods, and required development schedule.</li>
+        </ul>
+        <ul>
+          <li>Each of the 15 attributes can be rated on a six-point scale from <strong>very low</strong> to <strong>extra high</strong>, and each rating has a fixed effort multiplier.</li>
+          <li>The <strong>Effort Adjustment Factor (EAF)</strong> is determined by multiplying the effort multipliers of all 15 attributes together.</li>
+          <li>EAF is used to refine the Basic COCOMO estimate with the formula: <strong>E = a × (KLOC)<sup>b</sup> × EAF</strong>, and <strong>T<sub>dev</sub> = c × (E)<sup>d</sup></strong> as before.</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr><th>Software project</th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Organic projects use Intermediate constants</td><td>3.2</td><td>1.05</td><td>2.5</td><td>0.38</td></tr>
+            <tr><td>Semi-detached projects use Intermediate constants</td><td>3.0</td><td>1.12</td><td>2.5</td><td>0.35</td></tr>
+            <tr><td>Embedded projects use Intermediate constants</td><td>2.8</td><td>1.20</td><td>2.5</td><td>0.32</td></tr>
+          </tbody>
+        </table>
+
+        <h4>3. Detailed COCOMO model</h4>
+        <ul>
+          <li>Detailed COCOMO goes beyond Basic and Intermediate COCOMO by diving deeper into project-specific factors such as team experience, development practices, and software complexity.</li>
+          <li>By analysing these factors in more detail across each module and development phase, Detailed COCOMO provides a highly accurate estimation of effort, time, and cost for software projects.</li>
+          <li>It is like zooming in on a project's unique characteristics to get a clearer picture of what it will take to complete it successfully.</li>
+        </ul>
+
+        <h3>Case studies and examples</h3>
+        <ul>
+          <li><strong>NASA Space Shuttle software development:</strong> NASA used COCOMO to estimate the time and money needed for Space Shuttle software, enabling well-informed decisions on resource allocation and project scheduling.</li>
+          <li><strong>Big business software development:</strong> Large organisations have widely used COCOMO to project the time and cost of intricate business software systems and to plan resource allocation more effectively.</li>
+          <li><strong>Commercial software products:</strong> Software firms creating commercial products have used COCOMO to decide on pricing, time-to-market, and resource allocation by accurately calculating development time and cost.</li>
+          <li><strong>Academic research initiatives:</strong> Research projects have employed COCOMO to estimate the time and expense of creating software prototypes or carrying out experimental studies.</li>
+        </ul>
+
+        <h3>Advantages of the COCOMO model</h3>
+        <ul>
+          <li>COCOMO provides a <strong>systematic way</strong> to estimate the cost and effort of a software project.</li>
+          <li>It can be used to estimate cost and effort at <strong>different stages</strong> of the development process.</li>
+          <li>It helps identify the <strong>factors with the greatest impact</strong> on project cost and effort.</li>
+          <li>It can be used to <strong>evaluate the feasibility</strong> of a project by estimating the cost and effort required to complete it.</li>
+        </ul>
+
+        <h3>Disadvantages of the COCOMO model</h3>
+        <ul>
+          <li>COCOMO assumes that <strong>project size (KLOC)</strong> is the main factor determining cost and effort, which may not always be true.</li>
+          <li>It does not fully account for the <strong>specific characteristics of the development team</strong>, which can significantly affect cost and effort.</li>
+          <li>It does not provide a <strong>precise estimate</strong> because it is based on assumptions and averages from historical data.</li>
+        </ul>
+
+        <h3>Best practices for using the COCOMO model</h3>
+        <ul>
+          <li><strong>Recognise the assumptions:</strong> Become familiar with COCOMO's underlying assumptions about team experience, size, and complexity, and understand that it offers useful approximations rather than exact predictions.</li>
+          <li><strong>Customise the model:</strong> Adapt COCOMO's inputs and parameters to your project's unique requirements, including organisational capacity, development processes, and industry standards.</li>
+          <li><strong>Utilise historical data:</strong> Collect and analyse data from previous projects to verify COCOMO inputs and improve estimation parameters.</li>
+          <li><strong>Verify and validate:</strong> Compare COCOMO estimates with actual project outcomes and adjust estimation procedures based on feedback and lessons learned.</li>
+          <li><strong>Combine with other techniques:</strong> Add COCOMO estimates to other methods such as expert judgment, analogous estimation, and bottom-up estimation to triangulate results and reduce bias.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — COCOMO model</div>
+          <p><strong>Q:</strong> Explain the COCOMO model. Describe the three project types, the three levels of COCOMO, the 15 cost drivers, and solve a Basic COCOMO numerical example.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>COCOMO (Boehm, 1981): empirical model based on 63 projects; predicts effort (PM), development time (months), and team size from KLOC.</li>
+            <li>Three project types: Organic (small, familiar, 2–50 KLOC), Semi-detached (medium, mixed team, 50–300 KLOC), Embedded (large, complex, 300+ KLOC).</li>
+            <li>Three levels: Basic (KLOC + mode constants, rough) → Intermediate (adds EAF from 15 cost drivers) → Detailed (per-module, six phases, most accurate).</li>
+            <li>Basic formulas: E = a(KLOC)<sup>b</sup>, T<sub>dev</sub> = c(E)<sup>d</sup>, team = E/T. Constants — organic (2.4, 1.05, 2.5, 0.38), semi (3.0, 1.12, 2.5, 0.35), embedded (3.6, 1.20, 2.5, 0.32).</li>
+            <li>Intermediate: E = a(KLOC)<sup>b</sup> × EAF; 15 cost drivers in 4 categories (product, hardware, personnel, project); each rated very low to extra high.</li>
+            <li>Detailed: software divided into modules; COCOMO applied per module across six phases; efforts summed.</li>
+            <li>Numerical: state KLOC, pick mode, substitute constants, compute E then T<sub>dev</sub> then team size.</li>
+            <li>Limitations: depends on KLOC accuracy, rough in Basic form, based on averages.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-05-size-estimation.html">&larr; 3.5 Size Estimation</a>
+        <a class="btn-back chapter-nav-next" href="03-07-resource-allocation.html">3.7 Resource Allocation &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.11 Quasi Renewal Processes</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.11 Quasi Renewal Processes</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-11">
+        <p>
+          <strong>Quasi renewal processes</strong> appear in the syllabus in two related senses: as a
+          <strong>mathematical reliability model</strong> used during software testing, and as a
+          <strong>software maintenance strategy</strong> in which the system is continuously updated rather than
+          periodically replaced.           Both interpretations are exam-relevant and are covered below.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-quasi-renewal-caption">
+          <img src="../../../assets/images/se-topic-03/pm-phases.png"
+               alt="Software process lifecycle — continuous update and maintenance versus full replacement"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-quasi-renewal-caption">Project management cycle applied to each software update release.</figcaption>
+        </figure>
+
+        <p>
+          In a quasi-renewal process, each software update or release goes through its own mini-cycle of
+          planning, execution, monitoring, and closure — rather than treating the entire product as a one-time
+          project. This is why continuous-update projects still need structured project management at every release.
+        </p>
+
+        <h3>Mathematical definition (reliability modelling)</h3>
+        <p>
+          Let {N(t), t ≥ 0} be a counting process and let X<sub>n</sub> be the time between the (n−1)<sup>th</sup>
+          and the n<sup>th</sup> event. If the sequence of non-negative random variables {X<sub>1</sub>, X<sub>2</sub>, …}
+          is independent and X<sub>i</sub> = α · X<sub>i−1</sub> for i ≥ 2, where α &gt; 0 is a constant, then
+          {N(t), t ≥ 0} is a <strong>quasi-renewal process</strong> with parameter α and first inter-arrival time
+          X<sub>1</sub>.
+        </p>
+        <p>
+          When <strong>α = 1</strong>, the process reduces to an ordinary <strong>renewal process</strong>. When
+          <strong>α &gt; 1</strong>, the process models <strong>reliability growth</strong> during software testing
+          or hardware burn-in — the intervals between failures grow longer as faults are removed. When α is less
+          than 1, it can model hardware maintenance where failure intervals shrink over time.
+        </p>
+        <p>
+          If inter-arrival times represent <strong>error-free time</strong> (time until the next fault), a quasi-renewal
+          process is suitable for modelling software reliability growth because the shape parameters of the
+          error-free distribution remain the same after each debugging cycle. The expected number of remaining
+          faults at time t is m<sub>r</sub>(t) = m(T<sub>c</sub>) − m(t), where m(T<sub>c</sub>) is the total faults
+          eventually detected over the software lifecycle.
+        </p>
+
+        <h3>Software process interpretation</h3>
+        <p>
+          In project and maintenance management, a quasi-renewal process contrasts with a full
+          <strong>renewal process</strong>:
+        </p>
+        <ul>
+          <li><strong>Renewal process:</strong> The software system is periodically replaced with a completely new version. This suits critical systems such as financial or medical software where major version upgrades are planned events.</li>
+          <li><strong>Quasi-renewal process:</strong> The software system is <strong>updated and maintained continuously</strong> rather than replaced wholesale. This suits less critical systems such as web applications and mobile apps where frequent small updates are normal.</li>
+        </ul>
+
+        <h3>Advantages of quasi-renewal (continuous update) approach</h3>
+        <p>The continuous-update model offers several benefits for SPM and maintenance planning:</p>
+        <ul>
+          <li>Frequent, smaller updates make it easier to fix bugs and add features incrementally.</li>
+          <li>Customer satisfaction improves because new capabilities and security patches arrive regularly.</li>
+          <li>The team can adapt more flexibly to changing customer needs and requirements.</li>
+          <li>Security vulnerabilities can be patched quickly rather than waiting for a major release.</li>
+          <li>Smaller updates require fewer resources and less time than large-scale releases.</li>
+          <li>The release schedule becomes more predictable when updates follow a regular cadence.</li>
+        </ul>
+
+        <h3>Disadvantages and SPM challenges</h3>
+        <p>
+          From a project management perspective, quasi-renewal processes introduce significant complexities.
+          It is harder to plan and manage a project that is updated continuously because there is no clear
+          "end date." Ensuring long-term stability and reliability becomes more difficult when the codebase
+          changes frequently. Each update requires testing and verification before release, which demands
+          more resources. Maintaining backward compatibility across versions adds further complexity.
+          Feature creep and scope creep are more likely when updates are frequent and stakeholder requests
+          accumulate without a formal project boundary.
+        </p>
+        <p>
+          Organisations must evaluate project requirements and their own capacity before adopting a quasi-renewal
+          approach. Critical, safety-related systems typically need the controlled, milestone-driven management
+          of traditional SPM, while web and mobile products often benefit from continuous delivery models that
+          resemble quasi-renewal in practice.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Quasi renewal processes</div>
+          <p><strong>Q:</strong> What is a quasi-renewal process? Distinguish it from a renewal process and discuss its advantages and disadvantages.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Mathematical: X<sub>i</sub> = αX<sub>i−1</sub>; when α=1 → ordinary renewal process; α&gt;1 → reliability growth in testing.</li>
+            <li>Process: continuous update/maintenance vs periodic full replacement (renewal).</li>
+            <li>Renewal: new version replaces old — suits critical systems (finance, medical).</li>
+            <li>Quasi-renewal: continuous small updates — suits web/mobile apps.</li>
+            <li>Advantages: faster bug fixes, flexible adaptation, predictable small releases, quicker security patches.</li>
+            <li>Disadvantages: harder to plan/manage, stability risk, more testing per update, backward compatibility, feature creep.</li>
+            <li>Link to reliability growth models (Topic 11) for mathematical depth if asked.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-10-cmm.html">&larr; 3.10 CMM</a>
+        <a class="btn-back chapter-nav-next" href="03-12-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

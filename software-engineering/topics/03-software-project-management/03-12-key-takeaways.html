@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>SPM</strong> plans, organises, monitors, and controls software projects to deliver on time, within budget, and to required quality. Software intangibility makes this harder than physical projects.</li>
+          <li><strong>PM process (5 phases):</strong> initiation/feasibility (business case, charter, go/no-go) → planning (WBS, schedule, budget, risk, estimation) → execution (SDLC work + SDLC model choice) → monitoring &amp; control (runs alongside execution) → closure (acceptance, lessons learned). Phases 3 &amp; 4 overlap.</li>
+          <li><strong>Planning principles:</strong> plan before start, risk analysis upfront, track/update plan, quality standards, flexibility for controlled change.</li>
+          <li><strong>SPM management types:</strong> conflict, risk, requirement, change, SCM, release management.</li>
+          <li><strong>Project manager</strong> is the central coordinator responsible for planning, team leadership, stakeholder communication, risk management, change control, and delivery.</li>
+          <li><strong>SPM complexities:</strong> management-area (time, cost, quality, risk, HR, communication, procurement, integration), technical (infrastructure, deployment, API), and software-specific (invisibility, changeability, interaction, uniqueness, exactness, team work, estimation). Factors: changing requirements, resource/schedule constraints, technical challenges, QA, stakeholders, risks.</li>
+          <li><strong>Four estimation types:</strong> post/delayed, base/experience, decomposition (KLOC white-box / FP black-box), empirical (COCOMO).</li>
+          <li><strong>Key formulas:</strong> Effort = Size/Productivity; Duration = Effort/Team Size; Cost = Effort × Pay rate.</li>
+          <li><strong>COCOMO (Boehm, 1981, 63 projects):</strong> empirical cost model; E = a(KLOC)<sup>b</sup>, T = c(E)<sup>d</sup>, team = E/T. Project types: Organic (2–50 KLOC, familiar), Semi-detached (50–300, mixed team), Embedded (300+, complex). Basic constants: organic (2.4, 1.05, 2.5, 0.38), semi (3.0, 1.12, 2.5, 0.35), embedded (3.6, 1.20, 2.5, 0.32).</li>
+          <li><strong>COCOMO levels:</strong> Basic (KLOC + mode, rough) → Intermediate (E = a(KLOC)<sup>b</sup> × EAF; 15 cost drivers in product/hardware/personnel/project categories) → Detailed (per-module across six phases, most accurate).</li>
+          <li><strong>Resource allocation:</strong> CPM (critical path), PERT (three time estimates), Gantt charts, resource levelling, Agile sprint allocation.</li>
+          <li><strong>Risk categories:</strong> project (schedule/budget), technical (design/performance), business (market/funding).</li>
+          <li><strong>Risk process:</strong> identify → analyse → assess → mitigate (avoid/transfer/mitigate/accept) → monitor. Exposure = probability × impact.</li>
+          <li><strong>Monitoring &amp; control:</strong> track schedule, cost, scope, quality, resources, risks; take corrective/preventive action; enforce change control.</li>
+          <li><strong>CMM (SEI) five levels:</strong> 1 Initial (ad hoc) → 2 Repeatable (basic PM) → 3 Defined (standardised) → 4 Managed (quantitative) → 5 Optimizing (continuous improvement).</li>
+          <li><strong>Quasi-renewal:</strong> mathematically X<sub>i</sub> = αX<sub>i−1</sub> (α=1 → renewal; α&gt;1 → reliability growth); as a process = continuous updates vs full replacement.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-11-quasi-renewal.html">&larr; 3.11 Quasi Renewal</a>
+        <a class="btn-back chapter-nav-next" href="../04-requirements-engineering-and-specification/index.html">Topic 4 &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

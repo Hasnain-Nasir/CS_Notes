@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.5 Analysis</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.5 Analysis</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-5">
+
+        <p>
+          <strong>Requirements analysis</strong> is the process of structuring, refining, and evaluating the raw
+          requirements gathered during elicitation. Its goal is to produce a consistent, complete, unambiguous, and
+          prioritised set of requirements ready for specification and validation.
+        </p>
+
+        <h3>Objectives of requirements analysis</h3>
+        <ul>
+          <li><strong>Detect and resolve conflicts:</strong> Identify contradictory requirements from different stakeholders and negotiate a resolution.</li>
+          <li><strong>Identify gaps and redundancies:</strong> Find missing requirements and remove duplicate or overlapping statements.</li>
+          <li><strong>Clarify ambiguity:</strong> Replace vague terms with measurable, testable statements.</li>
+          <li><strong>Prioritise requirements:</strong> Rank requirements by business value, risk, or dependency so the team knows what to build first.</li>
+          <li><strong>Classify requirements:</strong> Separate functional from non-functional, user from system, and domain-specific needs (see <a href="04-09-requirements-classification.html#sec-4-9">§4.9</a>).</li>
+          <li><strong>Model the system:</strong> Create DFDs, ERDs, and use-case diagrams to represent requirements visually (see <a href="04-10-system-modelling.html#sec-4-10">§4.10</a>).</li>
+        </ul>
+
+        <h3>Analysis techniques</h3>
+        <ul>
+          <li><strong>Requirements categorisation:</strong> Group requirements by feature, subsystem, or stakeholder to reveal structure.</li>
+          <li><strong>Conflict analysis:</strong> Compare requirements pairwise or in workshops to expose contradictions.</li>
+          <li><strong>Prioritisation methods:</strong> MoSCoW (Must/Should/Could/Won't), ranking, or weighted scoring assign relative importance.</li>
+          <li><strong>Decision tables:</strong> Tabulate complex conditional logic for unambiguous analysis (see <a href="04-13-decision-tables.html#sec-4-13">§4.13</a>).</li>
+          <li><strong>Modelling:</strong> DFDs show data movement; ERDs show data structure; both expose inconsistencies in the written requirements.</li>
+          <li><strong>Prototyping:</strong> A throwaway or evolutionary prototype reveals gaps when stakeholders interact with it.</li>
+        </ul>
+
+        <h3>Outputs of analysis</h3>
+        <ul>
+          <li>A refined, prioritised requirements list with conflicts resolved.</li>
+          <li>System models (DFD, ERD, use-case diagrams) consistent with the written requirements.</li>
+          <li>A requirements traceability matrix linking needs to sources and later design elements.</li>
+          <li>Identified risks and assumptions documented for the project manager (link to <a href="../03-software-project-management/03-08-risk-analysis.html#sec-3-8">Topic 3 §3.8</a>).</li>
+        </ul>
+
+        <h3>Common analysis pitfalls</h3>
+        <ul>
+          <li>Skipping analysis and moving directly to coding, discovering conflicts late in development.</li>
+          <li>Analysis paralysis — spending too long refining requirements without reaching a baseline.</li>
+          <li>Allowing design decisions to creep into requirements during analysis workshops.</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Requirements analysis</div>
+          <p><strong>Q:</strong> What is requirements analysis? What are its objectives and main techniques?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define analysis as structuring, refining, and evaluating elicited requirements.</li>
+            <li>List objectives: resolve conflicts, find gaps, clarify ambiguity, prioritise, classify, model.</li>
+            <li>Describe techniques: categorisation, conflict analysis, MoSCoW, decision tables, modelling, prototyping.</li>
+            <li>Name outputs: prioritised list, models, traceability matrix, risks/assumptions.</li>
+            <li>Mention pitfalls: skipping analysis, analysis paralysis, design creep.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-04-elicitation-challenges.html">&larr; 4.4 Elicitation Challenges</a>
+        <a class="btn-back chapter-nav-next" href="04-06-documentation.html">4.6 Documentation &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

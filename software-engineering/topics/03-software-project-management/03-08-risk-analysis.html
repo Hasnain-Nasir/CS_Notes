@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 3 — 3.8 Software Risk Analysis &amp; Management</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>3.8 Software Risk Analysis &amp; Management</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 3</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-3-8">
+        <p>
+          <strong>Software risk analysis and management</strong> is the process of identifying risks that could
+          negatively impact a software project's success, assessing their likelihood and consequences, and taking
+          steps to reduce them to an acceptable level. A <strong>risk</strong> is an uncertain future event that
+          has a probability of occurring and may harm the project in terms of cost, schedule, quality, or
+          performance if it materialises.
+        </p>
+        <p>
+          Risk management is a core SPM activity and also integrates with the SDLC — especially in the
+          <strong>Spiral model</strong> where risk analysis is built into every cycle (see
+          <a href="../02-sdlc-and-process-models/02-18-risk-management.html#sec-2-18">Topic 2 §2.18</a>).
+          This section focuses on the SPM perspective: how the project manager handles risk as part of planning
+          and control.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-risk-process-caption">
+          <img src="../../../assets/images/se-topic-03/risk-process.webp"
+               alt="Software risk management process — identification, analysis, mitigation, and monitoring"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-risk-process-caption">Software risk management process.</figcaption>
+        </figure>
+
+        <h3>Three categories of software project risk</h3>
+        <p>Risks are classified into three main categories for systematic identification:</p>
+        <ul>
+          <li><strong>Project risks:</strong> These threaten the project plan itself — schedule slippage, budget overrun, resource shortages, and personnel turnover. Schedule slippage is especially common in software because the product is intangible and progress is hard to observe.</li>
+          <li><strong>Technical risks:</strong> These threaten the quality or performance of the software — design flaws, integration failures, technology obsolescence, insufficient testing, and high implementation complexity.</li>
+          <li><strong>Business risks:</strong> These threaten the product's viability in the market — changing customer needs, competitor products, regulatory changes, and loss of management support or funding.</li>
+        </ul>
+        <p>
+          <strong>Exam example:</strong> In a satellite-based mobile communication project, a project risk is
+          schedule delay due to integration problems; a technical risk is failure of the communication protocol
+          under load; a business risk is a competitor launching a similar service first.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-risk-types-caption">
+          <img src="../../../assets/images/se-topic-03/risk-types.webp"
+               alt="Various kinds of risks in software development — project, technical, and business risks"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-risk-types-caption">Types of risks in software project development.</figcaption>
+        </figure>
+
+        <p>Common examples of risks in each category include:</p>
+        <ul>
+          <li><strong>Project risks:</strong> Schedule slippage, budget overrun, loss of key staff, unrealistic deadlines.</li>
+          <li><strong>Technical risks:</strong> Frequent requirement changes, unproven technology, insufficient skilled developers, high implementation complexity, improper module integration.</li>
+          <li><strong>Business risks:</strong> Competitor products, loss of funding, changing market needs, regulatory changes.</li>
+        </ul>
+
+        <h3>Risk management process</h3>
+        <p>The risk management lifecycle consists of five continuous steps:</p>
+        <ol>
+          <li><strong>Risk identification.</strong> The team brainstorms and documents all potential risks, noting their source and the SDLC phase they would affect. Output: a risk register.</li>
+          <li><strong>Risk analysis.</strong> Each identified risk is analysed for its likelihood of occurrence, severity of impact, and triggering conditions. Analysis can be qualitative (high/medium/low) or quantitative (numerical probability and cost).</li>
+          <li><strong>Risk assessment / evaluation.</strong> Risks are compared against predefined acceptance criteria and prioritised. High-probability, high-impact risks demand immediate attention; low risks may be accepted and monitored only.</li>
+          <li><strong>Risk mitigation.</strong> The team selects a strategy for each important risk: <strong>avoid</strong> (change the plan to eliminate the risk), <strong>transfer</strong> (shift responsibility, e.g. insurance or outsourcing), <strong>mitigate</strong> (reduce probability or impact), or <strong>accept</strong> (acknowledge and monitor). Contingency plans are prepared for risks that cannot be fully eliminated.</li>
+          <li><strong>Risk monitoring.</strong> Identified and mitigated risks are tracked throughout the project lifecycle. New risks are added as they emerge. Monitoring is ongoing, not a one-time activity.</li>
+        </ol>
+
+        <h3>Risk exposure and prioritisation</h3>
+        <p>
+          <strong>Risk exposure</strong> = Probability × Impact. Risks are ranked by exposure and plotted on a
+          probability–impact matrix so the manager can focus resources on the highest-exposure items first.
+          This quantitative approach complements the three-set framework covered in Topic 2 §2.18.
+        </p>
+
+        <h3>Common software project risks</h3>
+        <p>Examiners frequently ask for examples. Typical risks include:</p>
+        <ul>
+          <li>Frequent or incomplete requirements changes.</li>
+          <li>Use of unproven or rapidly changing technology.</li>
+          <li>Insufficient skilled personnel on the team.</li>
+          <li>High complexity in design or module integration.</li>
+          <li>Security vulnerabilities discovered late in testing.</li>
+          <li>Loss of a key team member during critical development phases.</li>
+        </ul>
+
+        <h3>Goal of risk management</h3>
+        <p>
+          In summary, software risk analysis and management aims to <strong>anticipate what might go wrong and
+          prepare a response</strong> before crises occur. Effective risk management increases the probability
+          of delivering the project on time, within budget, and to the required quality. The success or failure
+          of a software project often depends more on how well risks are handled than on the technical skill of
+          the developers alone.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software risk management</div>
+          <p><strong>Q:</strong> What is software risk management? Describe the process and classify risks with examples.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define risk as uncertain event with probability and negative impact on cost, schedule, or quality.</li>
+            <li>Three categories: project (schedule, budget), technical (design, performance), business (market, funding).</li>
+            <li>Five steps: identification → analysis → assessment → mitigation → monitoring.</li>
+            <li>Mitigation strategies: avoid, transfer, mitigate, accept; include contingency plans.</li>
+            <li>Risk exposure = probability × impact; use risk matrix for prioritisation.</li>
+            <li>Link intangibility of software to schedule slippage as a major project risk.</li>
+            <li>Cross-reference Spiral model (Topic 2 §2.18) for SDLC integration.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="03-07-resource-allocation.html">&larr; 3.7 Resource Allocation</a>
+        <a class="btn-back chapter-nav-next" href="03-09-monitoring-control.html">3.9 Monitoring &amp; Control &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -67,7 +67,17 @@
     var brand = document.createElement("a");
     brand.className = "global-brand";
     brand.href = prefix + "index.html";
-    brand.textContent = "Notes By Nain";
+    brand.setAttribute("aria-label", "Notes By Nain");
+    brand.innerHTML =
+      '<span class="global-brand-text" aria-hidden="true">' +
+      '<span class="global-brand-word">Notes</span>' +
+      '<span class="global-brand-by">by</span>' +
+      '<span class="global-brand-name">' +
+      '<span class="global-brand-letter" style="--i:0">N</span>' +
+      '<span class="global-brand-letter" style="--i:1">a</span>' +
+      '<span class="global-brand-letter" style="--i:2">i</span>' +
+      '<span class="global-brand-letter" style="--i:3">n</span>' +
+      "</span></span>";
 
     var toggle = document.createElement("button");
     toggle.type = "button";

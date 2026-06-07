@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 4 — 4.16 Quality Characteristics of a Good SRS</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>4.16 Quality Characteristics of a Good SRS</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-4-16">
+
+        <p>
+          A good SRS is judged not only by its content but by how well it satisfies a set of quality characteristics.
+          These characteristics guide both writing and review, and they map closely to the principles in IEEE 830
+          and IEEE 29148 (see <a href="04-17-ieee-srs.html#sec-4-17">§4.17</a>).
+        </p>
+
+        <h3>Twelve quality characteristics</h3>
+        <ul>
+          <li><strong>Correctness:</strong> Every requirement accurately reflects a genuine user need or constraint. No false or outdated statements.</li>
+          <li><strong>Completeness:</strong> All significant functional and non-functional requirements are included. Nothing important is missing.</li>
+          <li><strong>Consistency:</strong> Requirements do not contradict each other internally or with referenced models (DFD, ERD).</li>
+          <li><strong>Unambiguous:</strong> Each requirement has only one interpretation. Vague adjectives are replaced with precise criteria.</li>
+          <li><strong>Ranking:</strong> Requirements are prioritised (essential, conditional, optional) so the team knows what to defer under pressure.</li>
+          <li><strong>Modifiable:</strong> The document structure allows changes without corrupting unrelated sections — unique IDs and modular sections help.</li>
+          <li><strong>Verifiable:</strong> Each requirement can be checked by inspection, analysis, demonstration, or test. If you cannot verify it, rewrite it.</li>
+          <li><strong>Traceable:</strong> Each requirement can be traced to its source (stakeholder, regulation) and forward to design and test artefacts.</li>
+          <li><strong>Design independence:</strong> The SRS states what is needed, not how to build it, preserving freedom for designers.</li>
+          <li><strong>Testable:</strong> Test cases can be derived directly from each requirement without further interpretation.</li>
+          <li><strong>Understandable:</strong> Stakeholders, developers, and testers can read and comprehend the document without specialised knowledge beyond the glossary.</li>
+          <li><strong>Right abstraction level:</strong> Requirements are neither too high-level (useless for design) nor too low-level (design disguised as requirements).</li>
+        </ul>
+
+        <h3>Using quality characteristics in review</h3>
+        <p>During a formal SRS review, each section is checked against this checklist:</p>
+        <ul>
+          <li>Are all functional requirements correct and complete?</li>
+          <li>Do any two requirements conflict (consistency)?</li>
+          <li>Can a tester write a test case for every requirement (testable/verifiable)?</li>
+          <li>Does every requirement have an ID and a trace link (traceable)?</li>
+          <li>Are priorities assigned (ranking)?</li>
+        </ul>
+        <div class="callout exam">
+          <div class="callout-title">Exam question — SRS quality characteristics</div>
+          <p><strong>Q:</strong> List and explain the quality characteristics of a good SRS.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Name characteristics: correctness, completeness, consistency, unambiguous, ranking, modifiable, verifiable, traceable, design independence, testable, understandable, right abstraction level.</li>
+            <li>Give one-sentence explanation of each.</li>
+            <li>Explain how verifiable/testable link to acceptance testing.</li>
+            <li>Explain traceability forward and backward.</li>
+            <li>Describe use of checklist in formal SRS review.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="04-15-write-good-srs.html">&larr; 4.15 Write Good SRS</a>
+        <a class="btn-back chapter-nav-next" href="04-17-ieee-srs.html">4.17 IEEE SRS &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>
