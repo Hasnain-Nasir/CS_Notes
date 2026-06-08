@@ -63,19 +63,74 @@
     });
   }
 
-  var chatsList = document.getElementById("chats-list");
-  if (chatsList) {
-    function loadChats() {
-      var uid = document.getElementById("filter-user").value;
-      var q = uid ? "?user_id=" + encodeURIComponent(uid) : "";
-      api("messages.php" + q).then(function (d) {
-        chatsList.innerHTML = d.chats.map(function (c) {
-          return '<div class="admin-chat-row ' + c.role + '"><span class="meta">#' + c.user_id + " " + c.username + " · " + c.created_at + "</span><p>" + esc(c.content) + "</p></div>";
-        }).join("") || "<p>No chats yet.</p>";
-      }).catch(function (e) { chatsList.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>"; });
+  var chatsUsers = document.getElementById("chats-users");
+  var chatsMessages = document.getElementById("chats-messages");
+  if (chatsUsers && chatsMessages) {
+    var activeChatUser = null;
+
+    function formatChatTime(ts) {
+      if (!ts) return "";
+      var d = new Date(ts.replace(" ", "T"));
+      if (isNaN(d.getTime())) return ts;
+      return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
     }
-    document.getElementById("reload-chats").addEventListener("click", loadChats);
-    loadChats();
+
+    function renderChatMessages(chats) {
+      if (!chats.length) {
+        chatsMessages.innerHTML = "<p class='admin-chats-empty'>No messages for this user yet.</p>";
+        return;
+      }
+      chatsMessages.innerHTML = '<div class="admin-chat-thread">' + chats.map(function (c) {
+        var side = c.role === "user" ? "out" : "in";
+        return '<div class="admin-chat-bubble admin-chat-bubble--' + side + '">' +
+          '<div class="admin-chat-bubble-text">' + esc(c.content) + "</div>" +
+          '<div class="admin-chat-bubble-time">' + esc(formatChatTime(c.created_at)) + "</div></div>";
+      }).join("") + "</div>";
+      var thread = chatsMessages.querySelector(".admin-chat-thread");
+      if (thread) thread.scrollTop = thread.scrollHeight;
+    }
+
+    function loadUserChat(userId) {
+      activeChatUser = userId;
+      chatsUsers.querySelectorAll("[data-chat-user]").forEach(function (btn) {
+        btn.classList.toggle("is-active", +btn.dataset.chatUser === userId);
+      });
+      chatsMessages.innerHTML = "<p class='admin-chats-empty'>Loading chat…</p>";
+      api("messages.php?user_id=" + encodeURIComponent(userId)).then(function (d) {
+        renderChatMessages(d.chats || []);
+      }).catch(function (e) {
+        chatsMessages.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>";
+      });
+    }
+
+    function loadChatUsers() {
+      api("messages.php").then(function (d) {
+        var users = d.users || [];
+        if (!users.length) {
+          chatsUsers.innerHTML = "";
+          chatsMessages.innerHTML = "<p class='admin-chats-empty'>No chats yet.</p>";
+          return;
+        }
+        chatsUsers.innerHTML = users.map(function (u) {
+          var name = u.display_name || u.username;
+          return '<button type="button" class="admin-chat-user' + (activeChatUser === u.id ? " is-active" : "") +
+            '" data-chat-user="' + u.id + '"><span class="admin-chat-user-name">' + esc(name) + '</span>' +
+            '<span class="admin-chat-user-meta">' + u.message_count + " msgs</span></button>";
+        }).join("");
+        chatsUsers.querySelectorAll("[data-chat-user]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            loadUserChat(+btn.dataset.chatUser);
+          });
+        });
+        if (!activeChatUser || !users.some(function (u) { return u.id === activeChatUser; })) {
+          loadUserChat(users[0].id);
+        }
+      }).catch(function (e) {
+        chatsMessages.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>";
+      });
+    }
+
+    loadChatUsers();
   }
 
   var memList = document.getElementById("memories-list");
@@ -122,17 +177,24 @@
   if (usersList) {
     function loadUsers() {
       api("users.php").then(function (d) {
-        usersList.innerHTML = "<table class='admin-table'><tr><th>ID</th><th>User</th><th>Role</th><th>Active</th><th>Actions</th></tr>" +
+        if (!d.users.length) {
+          usersList.innerHTML = "<p>No users yet.</p>";
+          return;
+        }
+        usersList.innerHTML = "<table class='admin-table admin-table--users'><tr><th>ID</th><th>User</th><th>Display name</th><th>Role</th><th>Status</th><th>Actions</th></tr>" +
           d.users.map(function (u) {
-            return "<tr><td>" + u.id + "</td><td>" + esc(u.username) + "</td><td>" + u.role + "</td><td>" + (u.is_active ? "Yes" : "No") +
-              "</td><td><button data-toggle='" + u.id + "' data-active='" + (u.is_active ? "0" : "1") + "'>" + (u.is_active ? "Deactivate" : "Activate") + "</button></td></tr>";
+            return "<tr><td><span class='admin-meta'>#" + u.id + "</span></td><td><strong>" + esc(u.username) + "</strong></td><td>" + esc(u.display_name || "—") +
+              "</td><td><span class='admin-badge" + (u.role === "admin" ? " admin-badge--admin" : "") + "'>" + esc(u.role) + "</span></td><td>" +
+              "<span class='admin-status " + (u.is_active ? "is-active" : "is-inactive") + "'>" + (u.is_active ? "Active" : "Inactive") + "</span></td><td class='admin-actions'>" +
+              "<button type='button' class='admin-btn-sm" + (u.is_active ? " admin-btn-danger" : "") + "' data-toggle='" + u.id + "' data-active='" + (u.is_active ? "0" : "1") + "'>" +
+              (u.is_active ? "Deactivate" : "Activate") + "</button></td></tr>";
           }).join("") + "</table>";
         usersList.querySelectorAll("[data-toggle]").forEach(function (btn) {
           btn.addEventListener("click", function () {
             api("users.php", { method: "POST", body: { action: "toggle", id: +btn.dataset.toggle, is_active: btn.dataset.active === "1" } }).then(loadUsers);
           });
         });
-      });
+      }).catch(function (e) { usersList.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>"; });
     }
     if (createUser) {
       createUser.addEventListener("submit", function (e) {

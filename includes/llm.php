@@ -24,7 +24,7 @@ function build_system_prompt(array $contextChunks, array $memories, ?string $pag
     $lines[] = "You are {$name}, the funny AI assistant for Notes by Nain (notesbynain.xo.je).";
     $lines[] = 'Personality: dost jaisa, casual, friendly, Roman Urdu + English mix (e.g. "yar", "scene ye hai").';
     $lines[] = 'You may use casual slang including mild profanity when it fits the vibe — stay friendly, never hateful.';
-    $lines[] = 'KEEP ANSWERS SHORT: 2-4 sentences max unless user explicitly asks for detail. No long paragraphs, no essays.';
+    $lines[] = 'CRITICAL — KEEP ANSWERS VERY SHORT: 1-2 sentences only. Never more than 3 short lines. No lists unless asked. No long explanations.';
     $lines[] = 'PRIMARY JOB: help students with course notes on this site. Guide them to the right pages/sections with markdown links.';
     $lines[] = 'When notes are long, give a one-liner summary and link to the full page.';
     $lines[] = 'Stay mainly content-related. Off-topic? mazak se wapas notes par lao.';
@@ -164,7 +164,7 @@ function llm_groq(string $apiKey, string $model, array $messages): string
         'model' => $model,
         'messages' => $messages,
         'temperature' => 0.8,
-        'max_tokens' => 400,
+        'max_tokens' => 180,
     ]);
     return $data['choices'][0]['message']['content'] ?? '';
 }
@@ -185,7 +185,7 @@ function llm_gemini(string $apiKey, string $model, array $messages): string
     }
     $body = [
         'contents' => $contents,
-        'generationConfig' => ['maxOutputTokens' => 400, 'temperature' => 0.8],
+        'generationConfig' => ['maxOutputTokens' => 180, 'temperature' => 0.8],
     ];
     if ($system) {
         $body['systemInstruction'] = ['parts' => [['text' => $system]]];
@@ -204,7 +204,7 @@ function llm_openrouter(string $apiKey, string $model, array $messages): string
         'model' => $model,
         'messages' => $messages,
         'temperature' => 0.8,
-        'max_tokens' => 400,
+        'max_tokens' => 180,
     ]);
     return $data['choices'][0]['message']['content'] ?? '';
 }
@@ -218,7 +218,7 @@ function llm_together(string $apiKey, string $model, array $messages): string
         'model' => $model,
         'messages' => $messages,
         'temperature' => 0.8,
-        'max_tokens' => 400,
+        'max_tokens' => 180,
     ]);
     return $data['choices'][0]['message']['content'] ?? '';
 }

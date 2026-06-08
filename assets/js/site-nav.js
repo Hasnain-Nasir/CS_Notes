@@ -124,10 +124,20 @@
     userDropdown.className = "header-user-dropdown";
     userDropdown.id = "header-user-dropdown";
     userDropdown.hidden = true;
+    var menuBtn = document.createElement("button");
+    menuBtn.type = "button";
+    menuBtn.className = "header-user-caret";
+    menuBtn.id = "header-user-caret";
+    menuBtn.hidden = true;
+    menuBtn.setAttribute("aria-label", "Account menu");
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.innerHTML = "&#9662;";
+
     userDropdown.innerHTML =
       '<button type="button" class="header-logout-btn" id="header-logout-btn">Logout</button>';
 
     userMenu.appendChild(loginBtn);
+    userMenu.appendChild(menuBtn);
     userMenu.appendChild(userDropdown);
 
     var themeBtn = document.createElement("button");
@@ -380,6 +390,7 @@
 
   function updateHeaderAuth(user) {
     var btn = document.getElementById("header-login-btn");
+    var caret = document.getElementById("header-user-caret");
     var dropdown = document.getElementById("header-user-dropdown");
     var logoutBtn = document.getElementById("header-logout-btn");
     if (!btn) return;
@@ -387,24 +398,44 @@
     function closeUserMenu() {
       if (!dropdown) return;
       dropdown.hidden = true;
-      btn.setAttribute("aria-expanded", "false");
+      if (caret) caret.setAttribute("aria-expanded", "false");
     }
 
     function openUserMenu() {
       if (!dropdown) return;
       dropdown.hidden = false;
-      btn.setAttribute("aria-expanded", "true");
+      if (caret) caret.setAttribute("aria-expanded", "true");
     }
 
     if (user) {
-      btn.textContent = user.display_name || user.username;
-      btn.setAttribute("aria-label", "Account menu");
-      btn.title = user.display_name || user.username;
-      btn.onclick = function (e) {
-        e.stopPropagation();
-        if (dropdown && dropdown.hidden) openUserMenu();
-        else closeUserMenu();
-      };
+      var label = user.display_name || user.username;
+      btn.textContent = label;
+      btn.title = label;
+      if (caret) caret.hidden = false;
+
+      if (user.role === "admin") {
+        btn.setAttribute("aria-label", "Open admin dashboard");
+        btn.onclick = function () {
+          window.location.href = "/admin/";
+        };
+      } else {
+        btn.setAttribute("aria-label", "Account");
+        btn.onclick = function (e) {
+          e.stopPropagation();
+          if (dropdown && dropdown.hidden) openUserMenu();
+          else closeUserMenu();
+        };
+      }
+
+      if (caret && !caret.dataset.bound) {
+        caret.dataset.bound = "1";
+        caret.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (dropdown && dropdown.hidden) openUserMenu();
+          else closeUserMenu();
+        });
+      }
+
       if (logoutBtn && !logoutBtn.dataset.bound) {
         logoutBtn.dataset.bound = "1";
         logoutBtn.addEventListener("click", function (e) {
@@ -415,6 +446,7 @@
       }
     } else {
       closeUserMenu();
+      if (caret) caret.hidden = true;
       btn.textContent = "Login";
       btn.setAttribute("aria-label", "Login");
       btn.title = "Login to chat";
@@ -431,8 +463,8 @@
       if (!menu || !dropdown || dropdown.hidden) return;
       if (!menu.contains(e.target)) {
         dropdown.hidden = true;
-        var btn = document.getElementById("header-login-btn");
-        if (btn) btn.setAttribute("aria-expanded", "false");
+        var caretBtn = document.getElementById("header-user-caret");
+        if (caretBtn) caretBtn.setAttribute("aria-expanded", "false");
       }
     });
     document.addEventListener("keydown", function (e) {
@@ -440,8 +472,8 @@
       var dropdown = document.getElementById("header-user-dropdown");
       if (!dropdown || dropdown.hidden) return;
       dropdown.hidden = true;
-      var btn = document.getElementById("header-login-btn");
-      if (btn) btn.setAttribute("aria-expanded", "false");
+      var caretBtn = document.getElementById("header-user-caret");
+      if (caretBtn) caretBtn.setAttribute("aria-expanded", "false");
     });
   }
 
@@ -598,6 +630,24 @@
     var sendBtn = root.querySelector(".nain-term-send");
     var isOpen = false;
     var sending = false;
+    var typingTimer = null;
+
+    function getClearKey() {
+      var user = window.NotesAuth && window.NotesAuth.getUser();
+      return user ? "nain-term-cleared-" + user.id : null;
+    }
+
+    function isTerminalCleared() {
+      var key = getClearKey();
+      return !!(key && sessionStorage.getItem(key) === "1");
+    }
+
+    function setTerminalCleared(cleared) {
+      var key = getClearKey();
+      if (!key) return;
+      if (cleared) sessionStorage.setItem(key, "1");
+      else sessionStorage.removeItem(key);
+    }
 
     function setOpen(open) {
       isOpen = !!open;
@@ -646,7 +696,7 @@
       }
     }
 
-    function appendMessage(role, content) {
+    function appendMessage(role, content, instant) {
       var line = document.createElement("div");
       line.className = "nain-term-line nain-term-line--" + role;
       if (role === "user") {
@@ -662,16 +712,77 @@
       }
       logEl.appendChild(line);
       logEl.scrollTop = logEl.scrollHeight;
+      if (instant) return Promise.resolve();
+      return Promise.resolve();
+    }
+
+    function appendMessageTyping(role, content) {
+      if (role !== "assistant") return appendMessage(role, content, true);
+
+      return new Promise(function (resolve) {
+        if (typingTimer) clearTimeout(typingTimer);
+
+        var line = document.createElement("div");
+        line.className = "nain-term-line nain-term-line--assistant";
+        var promptSpan = document.createElement("span");
+        promptSpan.className = "nain-term-prompt";
+        promptSpan.textContent = botSlug + ">";
+        var textWrap = document.createElement("span");
+        textWrap.className = "nain-term-typed";
+        var cursor = document.createElement("span");
+        cursor.className = "nain-term-cursor";
+        cursor.setAttribute("aria-hidden", "true");
+        cursor.textContent = "\u2588";
+
+        line.appendChild(promptSpan);
+        line.appendChild(document.createTextNode(" "));
+        line.appendChild(textWrap);
+        line.appendChild(cursor);
+        logEl.appendChild(line);
+
+        var i = 0;
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function finish() {
+          textWrap.innerHTML = renderMarkdown(content);
+          if (cursor.parentNode) cursor.remove();
+          logEl.scrollTop = logEl.scrollHeight;
+          resolve();
+        }
+
+        if (reduceMotion) {
+          finish();
+          return;
+        }
+
+        function step() {
+          if (i < content.length) {
+            textWrap.textContent = content.slice(0, i + 1);
+            i += 1;
+            logEl.scrollTop = logEl.scrollHeight;
+            typingTimer = setTimeout(step, 12 + Math.random() * 18);
+          } else {
+            typingTimer = null;
+            finish();
+          }
+        }
+
+        step();
+      });
     }
 
     function loadHistory() {
+      if (isTerminalCleared()) {
+        logEl.innerHTML = "";
+        return;
+      }
       fetch("/api/chat/history.php", { credentials: "same-origin" })
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (!d.ok) return;
           logEl.innerHTML = "";
           d.messages.forEach(function (m) {
-            appendMessage(m.role, m.content);
+            appendMessage(m.role, m.content, true);
           });
         })
         .catch(function () {});
@@ -688,13 +799,15 @@
       input.value = "";
 
       if (text.toLowerCase() === "clear") {
+        setTerminalCleared(true);
         logEl.innerHTML = "";
         return;
       }
 
+      setTerminalCleared(false);
       sending = true;
       if (sendBtn) sendBtn.disabled = true;
-      appendMessage("user", text);
+      appendMessage("user", text, true);
 
       fetch("/api/chat/send.php", {
         method: "POST",
@@ -705,10 +818,10 @@
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (!d.ok) throw new Error(d.error || "Failed");
-          appendMessage("assistant", d.reply);
+          return appendMessageTyping("assistant", d.reply);
         })
         .catch(function (err) {
-          appendMessage("assistant", "Error: " + (err.message || "Something went wrong"));
+          return appendMessageTyping("assistant", "Error: " + (err.message || "Something went wrong"));
         })
         .finally(function () {
           sending = false;

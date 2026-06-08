@@ -2060,6 +2060,28 @@ pre.diagram-flow {
 
 .header-user-menu {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.header-user-caret {
+  font: inherit;
+  font-size: 0.7rem;
+  line-height: 1;
+  padding: 0.35rem 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.header-user-caret:hover,
+.header-user-caret[aria-expanded="true"] {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .header-user-dropdown {
@@ -2706,6 +2728,22 @@ body.fab-stacked .nain-term-widget {
 
 .nain-term-line--assistant {
   color: #7ee787;
+}
+
+.nain-term-typed {
+  white-space: pre-wrap;
+}
+
+.nain-term-cursor {
+  display: inline-block;
+  color: #7ee787;
+  animation: nain-term-blink 0.9s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes nain-term-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .nain-term-line a {

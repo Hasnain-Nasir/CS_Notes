@@ -2,11 +2,10 @@
 require_once __DIR__ . '/includes/layout.php';
 admin_header('Chats', 'messages');
 ?>
-<div class="admin-section">
-  <div class="admin-toolbar">
-    <label>Filter user ID <input type="number" id="filter-user" min="0" placeholder="All"></label>
-    <button type="button" id="reload-chats">Reload</button>
+<div class="admin-section admin-chats-section">
+  <div id="chats-users" class="admin-chats-users"></div>
+  <div id="chats-messages" class="admin-chats-messages">
+    <p class="admin-chats-empty">Select a user above to view their chat.</p>
   </div>
-  <div id="chats-list" class="admin-table-wrap"></div>
 </div>
 <?php admin_footer(); ?>
