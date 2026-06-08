@@ -114,8 +114,7 @@
         chatsUsers.innerHTML = users.map(function (u) {
           var name = u.display_name || u.username;
           return '<button type="button" class="admin-chat-user' + (activeChatUser === u.id ? " is-active" : "") +
-            '" data-chat-user="' + u.id + '"><span class="admin-chat-user-name">' + esc(name) + '</span>' +
-            '<span class="admin-chat-user-meta">' + u.message_count + " msgs</span></button>";
+            '" data-chat-user="' + u.id + '">' + esc(name) + "</button>";
         }).join("");
         chatsUsers.querySelectorAll("[data-chat-user]").forEach(function (btn) {
           btn.addEventListener("click", function () {
