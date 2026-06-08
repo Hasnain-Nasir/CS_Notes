@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.13 Top-Down and Bottom-Up Design</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.13 Top-Down and Bottom-Up Design</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-13">
+
+        <p>
+          <strong>Top-down</strong> and <strong>bottom-up</strong> are the two fundamental design approaches used to
+          decompose and compose software systems. They represent opposite directions of design thinking and are
+          linked to function-oriented design (top-down) and object-oriented design (bottom-up).
+        </p>
+
+        <h3>Top-down design</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-top-down-caption">
+          <img src="../../../assets/images/se-topic-05/top-down.jpeg"
+               alt="Top-down design — decomposing a system from high level to detailed modules"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-top-down-caption">Top-down design — progressive decomposition from system to modules.</figcaption>
+        </figure>
+        <ul>
+          <li>Top-down design views the software system as a complete entity first, then progressively divides it into smaller subsystems and components.</li>
+          <li>Decomposition continues until the lowest-level modules are reached, forming a hierarchical system structure.</li>
+          <li>The complete system is obtained by combining the definitions of all subsystems and components.</li>
+          <li>Also called <strong>stepwise refinement</strong>: start with a high-level description of what the program does, then in each step take one part and refine it in greater detail until statement-level logic is reached.</li>
+          <li>Refinement is a process of elaboration — from a highly conceptual model to lower-level details.</li>
+        </ul>
+
+        <h4>Advantages of top-down design</h4>
+        <ul>
+          <li><strong>More systematic:</strong> Provides a clear, structured path from requirements to implementation.</li>
+          <li><strong>Easy to understand:</strong> Produces a modular architecture that is straightforward to explain.</li>
+          <li><strong>Cost and time prediction:</strong> In correspondence with user requirements, cost and time prediction is possible.</li>
+          <li><strong>Most commonly used</strong> for small and medium-sized products.</li>
+        </ul>
+
+        <h4>Disadvantages of top-down design</h4>
+        <ul>
+          <li>When a problem is very complex and very large, the entire problem cannot be understood as a whole.</li>
+          <li>Difficult to apply to systems where low-level components must be reused from existing libraries.</li>
+        </ul>
+
+        <h3>Bottom-up design</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-bottom-up-caption">
+          <img src="../../../assets/images/se-topic-05/bottom-up.webp"
+               alt="Bottom-up design — building a system by integrating low-level components"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-bottom-up-caption">Bottom-up design — integrating low-level components into a complete system.</figcaption>
+        </figure>
+        <ul>
+          <li>Bottom-up design begins with the development of low-level components and subsystems.</li>
+          <li>These components are gradually combined to form higher-level modules until the complete system is built.</li>
+          <li>As the design progresses upward, the level of abstraction increases.</li>
+          <li>When the problem is very difficult to understand, solve sub-problems first and repeat until the entire problem is solved.</li>
+          <li>Commonly used with OOP languages (C++, Java, Python) where individual objects are identified and developed first.</li>
+        </ul>
+
+        <h4>Advantages of bottom-up design</h4>
+        <ul>
+          <li><strong>Suitable for large projects</strong> where the full system scope is hard to define upfront.</li>
+          <li><strong>Easy for designers</strong> to work incrementally — build and test components independently.</li>
+          <li><strong>Reusable components</strong> can be integrated from existing libraries or prior projects.</li>
+          <li>A working program of components is available early in the process.</li>
+        </ul>
+
+        <h4>Disadvantages of bottom-up design</h4>
+        <ul>
+          <li>Produces a <strong>complex architecture</strong> that is very difficult to understand and manage.</li>
+          <li>Overall system structure may emerge inconsistently if components are not designed with integration in mind.</li>
+          <li>Harder to predict total cost and schedule upfront.</li>
+        </ul>
+
+        <h3>Link to design paradigms</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Top-Down (FOD)</th><th>Bottom-Up (OOD)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Paradigm</strong></td>
+              <td>Function-oriented design — see <a href="05-14-function-oriented-design.html#sec-5-14">§5.14</a>.</td>
+              <td>Object-oriented design — see <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.</td>
+            </tr>
+            <tr>
+              <td><strong>Decomposition level</strong></td>
+              <td>Function/procedure level using DFDs and structure charts.</td>
+              <td>Class/object level using UML diagrams.</td>
+            </tr>
+            <tr>
+              <td><strong>Focus</strong></td>
+              <td>Functions the program performs (what it does).</td>
+              <td>Data/entities to be manipulated (what it operates on).</td>
+            </tr>
+            <tr>
+              <td><strong>Tools</strong></td>
+              <td>Structured analysis and design — DFD, structure charts.</td>
+              <td>UML — class, sequence, use case diagrams.</td>
+            </tr>
+            <tr>
+              <td><strong>Begins with</strong></td>
+              <td>High-level functional description; use case scenarios.</td>
+              <td>Identifying objects and classes from the real world.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Top-down vs bottom-up</div>
+          <p><strong>Q:</strong> Explain top-down and bottom-up design. Give advantages and disadvantages of each.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Top-down: decompose whole → parts; stepwise refinement; small/medium; systematic.</li>
+            <li>Bottom-up: build components → integrate; large projects; incremental.</li>
+            <li>Top-down advantages: systematic, modular, predictable; disadvantage: large complex problems.</li>
+            <li>Bottom-up advantages: large projects, reusable components; disadvantage: complex architecture.</li>
+            <li>Link: top-down = FOD; bottom-up = OOD.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-12-design-strategies.html">&larr; 5.12 Design Strategies</a>
+        <a class="btn-back chapter-nav-next" href="05-14-function-oriented-design.html">5.14 Function-Oriented Design &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

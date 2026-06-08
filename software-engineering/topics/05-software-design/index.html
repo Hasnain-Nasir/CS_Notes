@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — Software Design</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="index-hero topic-hub">
+    <header class="site-header site-header--hub">
+      <div class="site-header-top">
+        <h1>5. Software Design</h1>
+        <div class="site-header-actions">
+          <a class="btn-back" href="../04-requirements-engineering-and-specification/index.html">&larr; Topic 4</a>
+        </div>
+      </div>
+      <div class="outline-coverage" id="outline-coverage">
+        <div class="outline-coverage-title">Syllabus outline covered in this topic</div>
+        <ul>
+          <li>Software Design — Architectural Design</li>
+          <li>Software Design — Object-Oriented Design</li>
+          <li>Software Design — UML Modelling</li>
+          <li>Software Design — Function-Oriented Design</li>
+          <li>Software Design — User Interface Design</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="subtopic-cards">
+      <a class="subtopic-card" href="05-01-basic-concept.html">
+        <span class="subtopic-card-circle">5.1</span>
+        <span class="subtopic-card-label">Basic Concept of Software Design</span>
+      </a>
+      <a class="subtopic-card" href="05-02-design-process.html">
+        <span class="subtopic-card-circle">5.2</span>
+        <span class="subtopic-card-label">Software Design Process (Set 1 &amp; 2)</span>
+      </a>
+      <a class="subtopic-card" href="05-03-design-principles.html">
+        <span class="subtopic-card-circle">5.3</span>
+        <span class="subtopic-card-label">Software Design Principles</span>
+      </a>
+      <a class="subtopic-card" href="05-04-architectural-design.html">
+        <span class="subtopic-card-circle">5.4</span>
+        <span class="subtopic-card-label">Architectural Design / Software Architecture</span>
+      </a>
+      <a class="subtopic-card" href="05-05-low-level-design.html">
+        <span class="subtopic-card-circle">5.5</span>
+        <span class="subtopic-card-label">Low Level Design</span>
+      </a>
+      <a class="subtopic-card" href="05-06-modularization.html">
+        <span class="subtopic-card-circle">5.6</span>
+        <span class="subtopic-card-label">Modularization</span>
+      </a>
+      <a class="subtopic-card" href="05-07-structure-charts.html">
+        <span class="subtopic-card-circle">5.7</span>
+        <span class="subtopic-card-label">Design Structure Charts</span>
+      </a>
+      <a class="subtopic-card" href="05-08-pseudocode.html">
+        <span class="subtopic-card-circle">5.8</span>
+        <span class="subtopic-card-label">Pseudo Code</span>
+      </a>
+      <a class="subtopic-card" href="05-09-flowcharts.html">
+        <span class="subtopic-card-circle">5.9</span>
+        <span class="subtopic-card-label">Flow Charts</span>
+      </a>
+      <a class="subtopic-card" href="05-10-coupling-cohesion.html">
+        <span class="subtopic-card-circle">5.10</span>
+        <span class="subtopic-card-label">Coupling and Cohesion (+ Measures)</span>
+      </a>
+      <a class="subtopic-card" href="05-11-cohesion-vs-coupling.html">
+        <span class="subtopic-card-circle">5.11</span>
+        <span class="subtopic-card-label">Cohesion vs Coupling (comparison)</span>
+      </a>
+      <a class="subtopic-card" href="05-12-design-strategies.html">
+        <span class="subtopic-card-circle">5.12</span>
+        <span class="subtopic-card-label">Design Strategies</span>
+      </a>
+      <a class="subtopic-card" href="05-13-top-down-bottom-up.html">
+        <span class="subtopic-card-circle">5.13</span>
+        <span class="subtopic-card-label">Top-Down and Bottom-Up Design</span>
+      </a>
+      <a class="subtopic-card" href="05-14-function-oriented-design.html">
+        <span class="subtopic-card-circle">5.14</span>
+        <span class="subtopic-card-label">Function-Oriented Design</span>
+      </a>
+      <a class="subtopic-card" href="05-15-object-oriented-design.html">
+        <span class="subtopic-card-circle">5.15</span>
+        <span class="subtopic-card-label">Object-Oriented Design</span>
+      </a>
+      <a class="subtopic-card" href="05-16-uml-modelling.html">
+        <span class="subtopic-card-circle">5.16</span>
+        <span class="subtopic-card-label">UML Modelling</span>
+      </a>
+      <a class="subtopic-card" href="05-17-user-interface-design.html">
+        <span class="subtopic-card-circle">5.17</span>
+        <span class="subtopic-card-label">User Interface Design</span>
+      </a>
+      <a class="subtopic-card" href="05-18-key-takeaways.html">
+        <span class="subtopic-card-circle">✓</span>
+        <span class="subtopic-card-label">Key takeaways</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

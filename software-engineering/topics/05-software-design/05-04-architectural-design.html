@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.4 Architectural Design / Software Architecture</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.4 Architectural Design / Software Architecture</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-4">
+
+        <p>
+          <strong>Architectural design</strong> is the specification of the major components of a system, their
+          responsibilities, properties, interfaces, and the relationships and interactions between them. IEEE defines
+          architectural design as <em>"the process of defining a collection of hardware and software components and their
+          interfaces to establish the framework for the development of a computer system."</em>
+        </p>
+        <p>
+          At the architectural level, the overall structure is chosen but internal details of major components are
+          ignored — modules are treated as black boxes. Designers focus on coupling and cohesion between modules
+          (see <a href="05-10-coupling-cohesion.html#sec-5-10">§5.10</a>).
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-program-arch-caption">
+          <img src="../../../assets/images/se-topic-05/program-architecture.png"
+               alt="Program architecture showing major components and their interactions"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-program-arch-caption">Program architecture — major components and their relationships.</figcaption>
+        </figure>
+
+        <h3>Elements of software architecture</h3>
+        <ul>
+          <li><strong>Components:</strong> A set of elements (e.g., database, computational modules) that perform functions required by the system.</li>
+          <li><strong>Connectors:</strong> Mechanisms that coordinate, communicate, and cooperate between components.</li>
+          <li><strong>Constraints:</strong> Rules defining how components can be integrated to form the complete system.</li>
+          <li><strong>Semantic models:</strong> Models that help the designer understand overall system properties such as performance and reliability.</li>
+        </ul>
+
+        <h3>Issues in architectural design</h3>
+        <ul>
+          <li><strong>Gross decomposition:</strong> Breaking the system into major components or subsystems.</li>
+          <li><strong>Functional allocation:</strong> Assigning each required function to the appropriate component.</li>
+          <li><strong>Component interfaces:</strong> Defining how components communicate — APIs, message formats, protocols.</li>
+          <li><strong>Non-functional properties:</strong> Scaling, performance, resource consumption, reliability of each component.</li>
+          <li><strong>Communication and interaction:</strong> How components exchange data and control signals.</li>
+        </ul>
+
+        <h3>Common architectural styles</h3>
+
+        <h4>1. Layered (N-tier) architecture</h4>
+        <figure class="diagram figure-photo" aria-labelledby="fig-layered-caption">
+          <img src="../../../assets/images/se-topic-05/arch-layered.png"
+               alt="Layered architecture with presentation, business, application, and data layers"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-layered-caption">Layered (N-tier) architecture — components arranged in independent layers.</figcaption>
+        </figure>
+        <ul>
+          <li>Components are separated into layers of subtasks, arranged one above another; each layer performs a well-defined set of operations.</li>
+          <li>Each layer is independent — code in one layer can be modified without affecting others.</li>
+          <li>Typical four layers: <strong>presentation</strong> (user interface), <strong>business</strong> (business logic), <strong>application</strong> (communication medium), and <strong>data</strong> (database/storage).</li>
+          <li>Most commonly used pattern for the majority of software systems.</li>
+        </ul>
+
+        <h4>2. Object-oriented architecture</h4>
+        <figure class="diagram figure-photo" aria-labelledby="fig-oo-arch-caption">
+          <img src="../../../assets/images/se-topic-05/arch-object-oriented.png"
+               alt="Object-oriented architecture with components encapsulating data and operations"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-oo-arch-caption">Object-oriented architecture — components encapsulate data and communicate via message passing.</figcaption>
+        </figure>
+        <ul>
+          <li>Components of the system encapsulate data and the operations applied to manipulate that data.</li>
+          <li>Coordination and communication between components is established via message passing.</li>
+          <li>Links to object-oriented design in <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.</li>
+        </ul>
+
+        <h4>3. Other architectural styles (exam awareness)</h4>
+        <ul>
+          <li><strong>Client-server:</strong> Clients request services; servers provide them — common in distributed systems.</li>
+          <li><strong>Pipe-and-filter:</strong> Data flows through a sequence of processing filters — common in compilers and data pipelines.</li>
+          <li><strong>Event-driven:</strong> Components react to events — common in GUI and real-time systems.</li>
+          <li><strong>Microservices:</strong> System decomposed into small, independently deployable services communicating over a network.</li>
+        </ul>
+
+        <h3>Architecture vs detailed design</h3>
+        <ul>
+          <li>Architectural design adds important structural details ignored during interface design but still hides internal module implementation.</li>
+          <li>Detailed design of individual modules is deferred until the architectural structure is agreed (see <a href="05-05-low-level-design.html#sec-5-5">§5.5</a>).</li>
+          <li>The architecture provides <strong>conceptual integrity</strong> — a coherent overall structure that all developers follow.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Architectural design</div>
+          <p><strong>Q:</strong> What is architectural design? List issues addressed at this level. Explain one architectural style.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define architectural design: major components, responsibilities, interfaces, interactions.</li>
+            <li>Issues: decomposition, functional allocation, interfaces, non-functional properties, communication.</li>
+            <li>Explain layered architecture: 4 layers, independence, most common pattern.</li>
+            <li>Elements: components, connectors, constraints, semantic models.</li>
+            <li>Modules treated as black boxes; coupling/cohesion focus.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-03-design-principles.html">&larr; 5.3 Design Principles</a>
+        <a class="btn-back chapter-nav-next" href="05-05-low-level-design.html">5.5 Low Level Design &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

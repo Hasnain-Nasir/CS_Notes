@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.8 Pseudo Code</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.8 Pseudo Code</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-8">
+
+        <p>
+          <strong>Pseudocode</strong> is a simplified, informal representation of an algorithm or program that uses
+          a mix of natural language and programming constructs. It is used during the design phase to illustrate the
+          high-level structure and logic of an algorithm without the syntactic details of a specific programming language.
+        </p>
+
+        <h3>Characteristics of pseudocode</h3>
+        <ul>
+          <li>Pseudocode is <strong>language-independent</strong> — it is not tied to any particular programming language syntax.</li>
+          <li>It uses familiar programming constructs (IF, WHILE, FOR, assignments) combined with plain English descriptions.</li>
+          <li>It focuses on the <strong>logic and steps</strong> of an algorithm, not on declaration syntax or memory management.</li>
+          <li>It is more structured than plain prose but less rigid than actual code.</li>
+        </ul>
+
+        <h3>Purpose of pseudocode in software design</h3>
+        <ul>
+          <li>Pseudocode helps developers <strong>plan and discuss algorithms</strong> before writing actual code.</li>
+          <li>It makes it easier to understand and translate the design into code later in the development process.</li>
+          <li>During detailed design, each module's algorithm is expressed in pseudocode before coding begins.</li>
+          <li>Pseudocode, along with structure charts and flowcharts, becomes part of the project documentation handed to programmers and testers.</li>
+        </ul>
+
+        <h3>Pseudocode vs algorithm vs code</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Algorithm</th><th>Pseudocode</th><th>Actual code</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Formality</strong></td>
+              <td>Step-by-step procedure in natural language or mathematical notation.</td>
+              <td>Structured mix of natural language and programming-like constructs.</td>
+              <td>Strict syntax of a specific programming language.</td>
+            </tr>
+            <tr>
+              <td><strong>When used</strong></td>
+              <td>Problem-solving, mathematical procedures.</td>
+              <td>Design phase — planning module logic.</td>
+              <td>Implementation (coding) phase.</td>
+            </tr>
+            <tr>
+              <td><strong>Executability</strong></td>
+              <td>Not directly executable.</td>
+              <td>Not directly executable.</td>
+              <td>Directly executable by a compiler/interpreter.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Example — finding the maximum of three numbers</h3>
+        <pre><code>BEGIN
+  INPUT num1, num2, num3
+  SET max = num1
+  IF num2 &gt; max THEN
+    SET max = num2
+  END IF
+  IF num3 &gt; max THEN
+    SET max = num3
+  END IF
+  OUTPUT max
+END</code></pre>
+        <ul>
+          <li>This pseudocode can be directly translated into C, Java, Python, or any language without changing the logic.</li>
+          <li>Indentation and keywords (BEGIN, IF, SET, OUTPUT) make the control flow clear without language-specific syntax.</li>
+        </ul>
+
+        <h3>Example — calculating average marks</h3>
+        <pre><code>BEGIN
+  INPUT total_students
+  SET sum = 0
+  SET count = 0
+  WHILE count &lt; total_students DO
+    INPUT mark
+    SET sum = sum + mark
+    SET count = count + 1
+  END WHILE
+  SET average = sum / total_students
+  OUTPUT average
+END</code></pre>
+
+        <h3>Guidelines for writing good pseudocode</h3>
+        <ul>
+          <li>Use clear, descriptive variable names that reflect their purpose.</li>
+          <li>Use standard control structures (sequence, selection, iteration) consistently.</li>
+          <li>One logical step per line; use indentation to show nesting.</li>
+          <li>Avoid language-specific features (pointers, specific library calls) unless necessary.</li>
+          <li>Keep each pseudocode block focused on one module or one algorithm.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Pseudocode</div>
+          <p><strong>Q:</strong> What is pseudocode? Why is it used in the design phase? Write pseudocode for a simple task.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define: informal algorithm representation using natural language + programming constructs.</li>
+            <li>Purpose: plan algorithms, discuss logic, bridge design to code, part of documentation.</li>
+            <li>Properties: language-independent, not executable, structured.</li>
+            <li>Write small example (e.g., find max of three numbers or calculate average).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-07-structure-charts.html">&larr; 5.7 Structure Charts</a>
+        <a class="btn-back chapter-nav-next" href="05-09-flowcharts.html">5.9 Flow Charts &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

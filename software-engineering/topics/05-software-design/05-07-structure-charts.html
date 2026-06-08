@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.7 Design Structure Charts</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.7 Design Structure Charts</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-7">
+
+        <p>
+          A <strong>structure chart</strong> (also called a <strong>design structure chart</strong>) represents the
+          hierarchical structure of modules in a system. It breaks the entire system into the lowest functional modules,
+          describing functions and sub-functions of each module in greater detail than a
+          <a href="../04-requirements-engineering-and-specification/04-11-dfd.html#sec-4-11">DFD</a>.
+        </p>
+        <p>
+          Structure charts partition the system into <strong>black boxes</strong> — the functionality of each module is
+          known to users, but inner details are unknown. Inputs are given to black boxes and appropriate outputs are
+          generated.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-sc-dfd-caption">
+          <img src="../../../assets/images/se-topic-05/structure-chart-dfd.jpeg"
+               alt="Relationship between DFD and structure chart in function-oriented design"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-sc-dfd-caption">From DFD to structure chart — function-oriented design representation.</figcaption>
+        </figure>
+
+        <h3>Purpose of structure charts</h3>
+        <ul>
+          <li>Structure charts represent the <strong>software architecture</strong> — the various modules making up the system and their dependencies.</li>
+          <li>They show the hierarchical calling structure: which module invokes which sub-module.</li>
+          <li>Components are read from top to bottom and left to right.</li>
+          <li>When a module calls another, it views the called module as a black box, passing required parameters and receiving results.</li>
+          <li>Structure chart representation can be directly implemented using common programming languages (procedures/functions).</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-sc-example-caption">
+          <img src="../../../assets/images/se-topic-05/structure-chart-example.jpeg"
+               alt="Example structure chart showing hierarchical module decomposition"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-sc-example-caption">Example structure chart — hierarchical module decomposition.</figcaption>
+        </figure>
+
+        <h3>Module types in structure charts</h3>
+        <ul>
+          <li><strong>Control module:</strong> A module that branches to more than one sub-module — the top-level coordinator.</li>
+          <li><strong>Sub-module (child module):</strong> A module that is part of (child of) another module.</li>
+          <li><strong>Library module:</strong> A reusable module invokable from any module in the system.</li>
+        </ul>
+
+        <h3>Symbols used in structure charts</h3>
+        <ul>
+          <li><strong>Module box:</strong> Represents a process or task of the system (rectangle).</li>
+          <li><strong>Conditional call:</strong> Indicates that the control module can select any sub-module based on some condition (diamond or annotated arrow).</li>
+          <li><strong>Loop (repetitive call):</strong> A curved arrow covering sub-modules indicates repetitive execution — all covered sub-modules repeat.</li>
+          <li><strong>Data flow:</strong> Directed arrow with an <strong>empty circle</strong> at the end — represents data passed between modules.</li>
+          <li><strong>Control flow:</strong> Directed arrow with a <strong>filled circle</strong> at the end — represents control passed between modules.</li>
+          <li><strong>Physical storage:</strong> Symbol representing where information is stored (database, file).</li>
+        </ul>
+
+        <h3>Module categories in function-oriented design</h3>
+        <ul>
+          <li><strong>Input module:</strong> Obtains data from external sources or subordinates and passes it upward.</li>
+          <li><strong>Output module:</strong> Sends processed data to external destinations or superordinates.</li>
+          <li><strong>Transform module:</strong> Performs computation or data transformation on input data.</li>
+          <li><strong>Coordinate module:</strong> Manages the flow of data to and from different subordinates.</li>
+          <li><strong>Edit module:</strong> Validates or modifies data before further processing.</li>
+        </ul>
+
+        <h3>Benefits of structure charts</h3>
+        <ul>
+          <li><strong>Improved understanding</strong> of system architecture and module hierarchy.</li>
+          <li><strong>Simplified communication</strong> between team members through a shared visual representation.</li>
+          <li><strong>Easier identification</strong> of potential issues and dependencies between modules.</li>
+          <li><strong>Support for modular and maintainable</strong> software design.</li>
+        </ul>
+
+        <h3>Structure chart vs flowchart</h3>
+        <p>A brief preview — full comparison in <a href="05-09-flowcharts.html#sec-5-9">§5.9</a>:</p>
+        <ul>
+          <li>Structure chart represents <strong>software architecture</strong> (module hierarchy); flowchart represents <strong>control flow within a program</strong>.</li>
+          <li>Structure chart shows data interchange between modules; flowchart does not show inter-module data flow.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Design structure charts</div>
+          <p><strong>Q:</strong> What is a structure chart? Draw and explain its symbols. How does it differ from a flowchart?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define: hierarchical representation of modules; black-box decomposition.</li>
+            <li>Symbols: module box, conditional call, loop, data flow (empty circle), control flow (filled circle), storage.</li>
+            <li>Module types: control, sub, library; categories: input, output, transform, coordinate.</li>
+            <li>Benefits: understanding, communication, issue identification, modularity.</li>
+            <li>vs flowchart: architecture vs control flow; shows inter-module data vs single-program logic.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-06-modularization.html">&larr; 5.6 Modularization</a>
+        <a class="btn-back chapter-nav-next" href="05-08-pseudocode.html">5.8 Pseudo Code &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

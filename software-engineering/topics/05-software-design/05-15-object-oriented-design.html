@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.15 Object-Oriented Design</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.15 Object-Oriented Design</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-15">
+
+        <p>
+          <strong>Object-oriented design (OOD)</strong> is a design technique that solves software problems by building
+          a system of interrelated objects. Instead of focusing on functions, OOD focuses on the
+          <em>data to be manipulated</em> — organising software around objects that combine data and behaviour.
+        </p>
+        <p>
+          OOD is orthogonal to function-oriented design (<a href="05-14-function-oriented-design.html#sec-5-14">§5.14</a>):
+          where FOD asks "what does the program do?", OOD asks "what entities exist and how do they interact?"
+        </p>
+
+        <h3>Core OOD concepts</h3>
+
+        <h4>1. Objects and classes</h4>
+        <ul>
+          <li>An <strong>object</strong> is an independent entity with individual characteristics (attributes) and behaviours (methods).</li>
+          <li>A <strong>class</strong> is a blueprint that defines the attributes and methods shared by all objects of that type.</li>
+          <li>OOD begins by examining real-world "things" and identifying the objects and classes that represent them.</li>
+        </ul>
+
+        <h4>2. Encapsulation</h4>
+        <figure class="diagram figure-photo" aria-labelledby="fig-encap-caption">
+          <img src="../../../assets/images/se-topic-05/ood-encapsulation.webp"
+               alt="Encapsulation — bundling data and methods within an object, hiding internal details"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-encap-caption">Encapsulation — data and methods bundled within an object; internal details hidden.</figcaption>
+        </figure>
+        <ul>
+          <li>Encapsulation bundles data and the methods that operate on that data within a single unit (object).</li>
+          <li>Internal state and representation information is held within the object itself — objects can be changed without affecting others.</li>
+          <li>External access is through well-defined public interfaces (methods).</li>
+        </ul>
+
+        <h4>3. Abstraction</h4>
+        <figure class="diagram figure-photo" aria-labelledby="fig-abstract-caption">
+          <img src="../../../assets/images/se-topic-05/ood-abstraction.webp"
+               alt="Abstraction — showing essential features while hiding implementation complexity"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-abstract-caption">Abstraction — essential features exposed; complex implementation hidden.</figcaption>
+        </figure>
+        <ul>
+          <li>Abstraction hides complex implementation details and shows only the essential features of an object.</li>
+          <li>It helps manage complexity by allowing designers to focus on interactions at a higher level.</li>
+        </ul>
+
+        <h4>4. Inheritance</h4>
+        <figure class="diagram figure-photo" aria-labelledby="fig-inherit-caption">
+          <img src="../../../assets/images/se-topic-05/ood-inheritance.webp"
+               alt="Inheritance — a child class inherits properties and methods from a parent class"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-inherit-caption">Inheritance — derived classes inherit attributes and methods from a base class.</figcaption>
+        </figure>
+        <ul>
+          <li>Inheritance allows a new class to inherit properties and behaviours (methods) from an existing class.</li>
+          <li>It promotes code reuse and establishes a natural hierarchy between classes (e.g., Vehicle → Car, Truck).</li>
+        </ul>
+
+        <h4>5. Polymorphism</h4>
+        <figure class="diagram figure-photo" aria-labelledby="fig-poly-caption">
+          <img src="../../../assets/images/se-topic-05/ood-polymorphism.png"
+               alt="Polymorphism — different classes respond to the same method call in different ways"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-poly-caption">Polymorphism — same interface, different implementations across classes.</figcaption>
+        </figure>
+        <ul>
+          <li>Polymorphism allows objects of different classes to respond to the same method call in different ways.</li>
+          <li>Example: a <code>draw()</code> method behaves differently for Circle, Rectangle, and Triangle objects.</li>
+          <li>It enables flexible, extensible designs without modifying existing code.</li>
+        </ul>
+
+        <h3>OOD process</h3>
+        <ul>
+          <li><strong>Identify objects and classes</strong> from the problem domain (real-world entities).</li>
+          <li><strong>Define attributes and methods</strong> for each class based on requirements.</li>
+          <li><strong>Establish relationships</strong> between classes — inheritance, association, aggregation, composition.</li>
+          <li><strong>Design interactions</strong> between objects using sequence and collaboration diagrams.</li>
+          <li><strong>Apply design principles</strong> — high cohesion within classes, low coupling between classes.</li>
+        </ul>
+
+        <h3>OOD vs function-oriented design</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Function-Oriented Design</th><th>Object-Oriented Design</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Focus</strong></td>
+              <td>Functions the program performs.</td>
+              <td>Data/entities to be manipulated.</td>
+            </tr>
+            <tr>
+              <td><strong>Approach</strong></td>
+              <td>Top-down (stepwise refinement).</td>
+              <td>Bottom-up (identify objects first).</td>
+            </tr>
+            <tr>
+              <td><strong>Decomposition</strong></td>
+              <td>Function/procedure level.</td>
+              <td>Class/object level.</td>
+            </tr>
+            <tr>
+              <td><strong>Grouping basis</strong></td>
+              <td>Functions grouped to obtain higher-level functions.</td>
+              <td>Functions grouped by the data they operate on (classes).</td>
+            </tr>
+            <tr>
+              <td><strong>Design tools</strong></td>
+              <td>DFD, structure charts.</td>
+              <td>UML diagrams (class, sequence, use case).</td>
+            </tr>
+            <tr>
+              <td><strong>Real-world mapping</strong></td>
+              <td>Functions are not real-world entities.</td>
+              <td>Objects represent real-world entities with state and behaviour.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Benefits of OOD</h3>
+        <ul>
+          <li>Produces a system architecture that is modular, adaptable, and easy to understand and maintain.</li>
+          <li>Objects are independent entities — can be distributed and can execute sequentially or in parallel.</li>
+          <li>Encapsulation, inheritance, and polymorphism promote reusability and extensibility.</li>
+          <li>UML diagrams provide a standard visual language for OOD — see <a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Object-oriented design</div>
+          <p><strong>Q:</strong> Explain OOD. What are its core concepts? How does it differ from FOD?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define OOD: system of interrelated objects combining data + behaviour.</li>
+            <li>Four pillars: encapsulation, abstraction, inheritance, polymorphism — with brief explanation each.</li>
+            <li>Process: identify objects/classes → attributes/methods → relationships → interactions.</li>
+            <li>vs FOD: data focus vs function focus; bottom-up vs top-down; UML vs DFD/structure charts.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-14-function-oriented-design.html">&larr; 5.14 Function-Oriented Design</a>
+        <a class="btn-back chapter-nav-next" href="05-16-uml-modelling.html">5.16 UML Modelling &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

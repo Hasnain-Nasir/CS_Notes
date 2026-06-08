@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.14 Function-Oriented Design</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.14 Function-Oriented Design</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-14">
+
+        <p>
+          <strong>Function-oriented design (FOD)</strong> is an approach to software design where the system is
+          decomposed into a set of interacting units, each with a clearly defined function. The focus is on
+          <em>what the program does</em> — the functions it performs — rather than the data it manipulates.
+        </p>
+        <p>
+          FOD uses a <strong>top-down</strong> strategy (<a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a>)
+          and is carried out using structured analysis and structured design techniques.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-fod-sc-caption">
+          <img src="../../../assets/images/se-topic-05/structure-chart-dfd.jpeg"
+               alt="Function-oriented design — from DFD to structure chart"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-fod-sc-caption">Function-oriented design — from DFD analysis to structure chart design.</figcaption>
+        </figure>
+
+        <h3>Two levels of the design process</h3>
+        <ul>
+          <li><strong>Level 1:</strong> Decide which modules are needed based on the SRS and how modules should be interconnected.</li>
+          <li><strong>Level 2:</strong> Design the internal logic of each module — algorithms, data structures, control flow.</li>
+        </ul>
+
+        <h3>Stepwise refinement</h3>
+        <ul>
+          <li>Function-oriented design is based on <strong>stepwise refinement</strong> — a top-down strategy where a program is refined as a hierarchy of increasing levels of detail.</li>
+          <li>Start with a high-level description of what the software/program does.</li>
+          <li>Refine each part by specifying in greater detail the functionality of each part.</li>
+          <li>Continue until each module's logic is at the statement level of the programming language.</li>
+          <li>Refinement is a process of elaboration — from a highly conceptual model to lower-level details.</li>
+        </ul>
+
+        <h3>Key tools in function-oriented design</h3>
+
+        <h4>1. Data Flow Diagram (DFD)</h4>
+        <ul>
+          <li>A DFD maps out the flow of information for any process or system — showing inputs, outputs, processes, data stores, and external entities.</li>
+          <li>DFDs are created during requirements analysis and refined during design.</li>
+          <li>Full coverage in <a href="../04-requirements-engineering-and-specification/04-11-dfd.html#sec-4-11">§4.11</a>.</li>
+        </ul>
+
+        <h4>2. Structure chart</h4>
+        <ul>
+          <li>For function-oriented design, the design is represented graphically by structure charts.</li>
+          <li>The structure of a program is made up of modules together with interconnections between modules.</li>
+          <li>Structure chart is a nice representation for a design that uses functional abstraction.</li>
+          <li>Full coverage in <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-fod-sc2-caption">
+          <img src="../../../assets/images/se-topic-05/structure-chart-example.jpeg"
+               alt="Structure chart representing function-oriented module hierarchy"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-fod-sc2-caption">Structure chart — hierarchical representation of function-oriented modules.</figcaption>
+        </figure>
+
+        <h3>Module categories in FOD</h3>
+        <ul>
+          <li><strong>Input module:</strong> Obtains data from external sources or subordinates and passes it upward to the calling module.</li>
+          <li><strong>Output module:</strong> Sends processed data to external destinations or to superordinate modules.</li>
+          <li><strong>Transform module:</strong> Performs computation or data transformation on input data.</li>
+          <li><strong>Edit module:</strong> Validates, formats, or modifies data before further processing.</li>
+          <li><strong>Coordinate module:</strong> Primary concern is managing the flow of data to and from different subordinates.</li>
+          <li><strong>Get/put modules:</strong> Some modules obtain information from subordinates and pass it to superordinates (get); others receive from superordinates and pass to subordinates (put).</li>
+        </ul>
+
+        <h3>FOD vs object-oriented design</h3>
+        <ul>
+          <li>FOD focuses on <strong>functions</strong>; OOD focuses on <strong>data/objects</strong> — they are orthogonal approaches.</li>
+          <li>FOD uses top-down decomposition; OOD uses bottom-up composition.</li>
+          <li>FOD tools: DFD, structure charts; OOD tools: UML diagrams.</li>
+          <li>Full comparison in <a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a> and <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Function-oriented design</div>
+          <p><strong>Q:</strong> Explain function-oriented design. What tools are used? Describe stepwise refinement.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define FOD: decompose into interacting functional units; focus on what program does.</li>
+            <li>Top-down stepwise refinement: high-level description → refine to statement level.</li>
+            <li>Tools: DFD (analysis), structure chart (design representation).</li>
+            <li>Module categories: input, output, transform, edit, coordinate.</li>
+            <li>vs OOD: functions vs objects; top-down vs bottom-up.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-13-top-down-bottom-up.html">&larr; 5.13 Top-Down &amp; Bottom-Up</a>
+        <a class="btn-back chapter-nav-next" href="05-15-object-oriented-design.html">5.15 Object-Oriented Design &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

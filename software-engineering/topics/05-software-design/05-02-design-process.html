@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.2 Software Design Process (Set 1 &amp; 2)</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.2 Software Design Process (Set 1 &amp; 2)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-2">
+
+        <p>
+          The <strong>software design process</strong> is the structured method by which developers plan how to turn
+          requirements into a working system. Instead of jumping straight into code, the team breaks complex requirements
+          into manageable pieces, designs the system architecture, and decides how all components will fit together.
+        </p>
+        <p>
+          The design phase takes the SRS as input and produces the SDD as output. The process can be understood at two
+          complementary levels: the <strong>three design levels</strong> (Set 1) and the <strong>design activities and
+          deliverables</strong> (Set 2).
+        </p>
+
+        <h3>Set 1 — Three levels of design</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-three-levels-caption">
+          <img src="../../../assets/images/se-topic-05/design-levels.webp"
+               alt="Interface design, architectural design, and detailed design levels"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-three-levels-caption">Three levels of the software design process.</figcaption>
+        </figure>
+
+        <h4>1. Interface design</h4>
+        <ul>
+          <li>Interface design specifies the interaction between a system and its environment — users, devices, and other systems (collectively called <strong>agents</strong>).</li>
+          <li>The system is treated as a <strong>black box</strong>: internal workings are ignored; only inputs and outputs are defined.</li>
+          <li>Interface design must document: precise description of incoming events/messages the system must respond to; outgoing events/messages the system must produce; data formats for inputs and outputs; ordering and timing relationships between incoming and outgoing events.</li>
+        </ul>
+
+        <h4>2. Architectural design</h4>
+        <ul>
+          <li>Architectural design specifies the major components of a system, their responsibilities, properties, interfaces, and the relationships and interactions between them.</li>
+          <li>The overall structure is chosen, but internal details of individual components are still ignored — modules remain black boxes.</li>
+          <li>Key issues: gross decomposition into major components; allocation of functional responsibilities; component interfaces; scaling, performance, reliability, and resource properties; communication and interaction between components.</li>
+          <li>At this level, designers focus on <strong>coupling and cohesion</strong> between modules rather than internal module logic (see <a href="05-10-coupling-cohesion.html#sec-5-10">§5.10</a>).</li>
+        </ul>
+
+        <h4>3. Detailed design (low-level design)</h4>
+        <ul>
+          <li>Detailed design specifies the internal elements of all major system components — their properties, relationships, processing, algorithms, and data structures.</li>
+          <li>It includes: decomposition of major components into program units; allocation of functional responsibilities to units; user interfaces at module level; unit states and state changes; data and control interaction between units; data packaging, scope, and visibility; algorithms and data structures.</li>
+        </ul>
+
+        <h3>Set 2 — Design activities and deliverables</h3>
+        <p>During the design phase, the following items are designed and documented:</p>
+        <ul>
+          <li><strong>Different modules required</strong> and their responsibilities.</li>
+          <li><strong>Control relationships</strong> among modules (which module calls which, and under what conditions).</li>
+          <li><strong>Interfaces</strong> among different modules (parameters, return values, shared data).</li>
+          <li><strong>Data structures</strong> used within and between modules.</li>
+          <li><strong>Algorithms</strong> to be implemented within individual modules.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-design-concepts-caption">
+          <img src="../../../assets/images/se-topic-05/software-design-concepts.webp"
+               alt="Software design concepts — architectural, preliminary, and detailed design stages"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-design-concepts-caption">Design stages — architectural design, preliminary (high-level) design, and detailed design.</figcaption>
+        </figure>
+
+        <h4>Preliminary (high-level) design</h4>
+        <ul>
+          <li>The problem is decomposed into a set of modules; control relationships and interfaces among modules are identified.</li>
+          <li>The outcome is called the <strong>program architecture</strong>.</li>
+          <li>Representation techniques: structure charts and UML diagrams (see <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>, <a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>).</li>
+        </ul>
+
+        <h4>Detailed design</h4>
+        <ul>
+          <li>Each module is examined in detail to design its data structures and algorithms.</li>
+          <li>The outcome is documented as a <strong>module specification document</strong>.</li>
+        </ul>
+
+        <h3>Software design phases (activity sequence)</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-design-phases-caption">
+          <img src="../../../assets/images/se-topic-05/design-phases.webp"
+               alt="Software design phases from understanding requirements to prototyping"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-design-phases-caption">Phases of the software design process.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Understanding project requirements:</strong> The team confirms user needs, business goals, and potential challenges before designing.</li>
+          <li><strong>Research, analysis, and planning:</strong> Data is gathered through interviews, surveys, and focus groups to design with the user in mind.</li>
+          <li><strong>Designing the software:</strong> Wireframes, user stories, and flow diagrams map out system behaviour; prototypes are created and refined based on feedback.</li>
+          <li><strong>Technical design:</strong> A thorough technical document outlines how the software will be implemented, including specific components and their interactions.</li>
+          <li><strong>User interface design:</strong> UI designers work on visual elements, navigation, and overall user experience (see <a href="05-17-user-interface-design.html#sec-5-17">§5.17</a>).</li>
+          <li><strong>Prototyping:</strong> Low-fidelity wireframes or high-fidelity interactive models visualise design and functionality before full development.</li>
+        </ul>
+
+        <h3>Elements of software design</h3>
+        <ul>
+          <li><strong>Architecture:</strong> The conceptual model defining structure, behaviour, and views of the system.</li>
+          <li><strong>Modules:</strong> Building blocks of the system — each handles a specific task or feature.</li>
+          <li><strong>Components:</strong> Groups of related functions, made up of modules; keep code clean and adaptable.</li>
+          <li><strong>Interfaces:</strong> Shared boundaries across which components exchange information.</li>
+          <li><strong>Data:</strong> How information is stored, accessed, and shared throughout the system.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software design process</div>
+          <p><strong>Q:</strong> Explain the three levels of software design. What is produced at each level?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Interface design: black-box I/O specification; events, data formats, timing.</li>
+            <li>Architectural design: major modules, responsibilities, interfaces, coupling/cohesion focus.</li>
+            <li>Detailed design: internal algorithms, data structures, unit interactions.</li>
+            <li>Set 2 deliverables: modules, control relationships, interfaces, data structures, algorithms.</li>
+            <li>Preliminary design → program architecture; detailed design → module specification document.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-01-basic-concept.html">&larr; 5.1 Basic Concept</a>
+        <a class="btn-back chapter-nav-next" href="05-03-design-principles.html">5.3 Design Principles &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

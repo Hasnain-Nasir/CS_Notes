@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.6 Modularization</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.6 Modularization</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-6">
+
+        <p>
+          <strong>Modularization</strong> is the design principle of dividing a software system into well-defined,
+          conceptually simple, and independent units (modules) that interact through well-defined interfaces. It is
+          the foundation of manageable software architecture and is essential for teams working on large systems.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-modularity-caption">
+          <img src="../../../assets/images/se-topic-05/modularity-example.png"
+               alt="Modular software design with independent modules connected through defined interfaces"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-modularity-caption">Modular architecture — independent units interacting through defined interfaces.</figcaption>
+        </figure>
+
+        <h3>What is a module?</h3>
+        <ul>
+          <li>A module is a building block of the system — a function, procedure, class, or component that handles a specific task or feature.</li>
+          <li>Modules are combined to form the complete system; each module should have a clear, well-defined responsibility.</li>
+          <li>Modules communicate through interfaces — passing data or control signals without exposing internal implementation.</li>
+        </ul>
+
+        <h3>Modular architecture definition</h3>
+        <ul>
+          <li>In a modular architecture, the system is composed of well-defined, conceptually simple, and independent units.</li>
+          <li>Units interact only through well-defined interfaces, keeping internal details hidden.</li>
+          <li>Modularity reduces complexity by letting developers focus on one module at a time.</li>
+        </ul>
+
+        <h3>Advantages of modular architecture</h3>
+        <ul>
+          <li><strong>Easy to understand and explain:</strong> Each module has a clear purpose, making the overall system easier to comprehend.</li>
+          <li><strong>Easy to design and document:</strong> Modules can be designed and documented independently before integration.</li>
+          <li><strong>Easy to code and test:</strong> Each module can be implemented and unit-tested in isolation.</li>
+          <li><strong>Easy to maintain:</strong> Changes to one module are localised and do not require rewriting the entire system.</li>
+        </ul>
+
+        <h3>Effective modular design</h3>
+        <ul>
+          <li>Effective modular design requires both <strong>high cohesion</strong> (elements within a module work together) and <strong>low coupling</strong> (modules depend minimally on each other).</li>
+          <li>Modularity is subdividing a system into smaller parts so they can be created, tested, and maintained independently.</li>
+          <li>Poor modularization — modules that are too large, too tightly coupled, or have mixed responsibilities — leads to fragile, hard-to-maintain systems.</li>
+          <li>See <a href="05-10-coupling-cohesion.html#sec-5-10">§5.10</a> for the quality metrics that evaluate modular design.</li>
+        </ul>
+
+        <h3>Modularity across design levels</h3>
+        <ul>
+          <li>At <strong>architectural level</strong>, modularity means decomposing the system into major subsystems or components.</li>
+          <li>At <strong>detailed level</strong>, modularity means breaking each component into functions, classes, or procedures.</li>
+          <li>Structure charts (<a href="05-07-structure-charts.html#sec-5-7">§5.7</a>) visually represent modular hierarchy.</li>
+          <li>Object-oriented design (<a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>) achieves modularity through classes and objects.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Modularization</div>
+          <p><strong>Q:</strong> Define modularization. List advantages of modular architecture. What makes modular design effective?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define: system divided into independent units with well-defined interfaces.</li>
+            <li>Four advantages: easy to understand, design/document, code/test, maintain.</li>
+            <li>Effective design = high cohesion + low coupling within/between modules.</li>
+            <li>Modules are building blocks; each handles one specific task.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-05-low-level-design.html">&larr; 5.5 Low Level Design</a>
+        <a class="btn-back chapter-nav-next" href="05-07-structure-charts.html">5.7 Structure Charts &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

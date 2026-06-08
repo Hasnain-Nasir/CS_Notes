@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.17 User Interface Design</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.17 User Interface Design</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-17">
+
+        <p>
+          The <strong>user interface (UI)</strong> is the front-end application view through which the user interacts
+          to use the software. UI design is a crucial aspect of software engineering — it is the primary means by
+          which users experience the application. A well-designed interface improves usability, user experience,
+          and overall effectiveness of the software.
+        </p>
+        <p>
+          UI design spans both the <strong>interface design level</strong> (system as black box — inputs/outputs at
+          the architectural level) and the dedicated <strong>UI design process</strong> (analysis, design,
+          construction, and validation of the actual user-facing screens and controls).
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-ui-overview-caption">
+          <img src="../../../assets/images/se-topic-05/ui-design-overview.webp"
+               alt="Overview of user interface design — goals, types, process, and golden rules"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-ui-overview-caption">Overview of user interface design.</figcaption>
+        </figure>
+
+        <h3>Qualities of a good user interface</h3>
+        <p>Software becomes more popular when its user interface is:</p>
+        <ul>
+          <li><strong>Attractive:</strong> Visually appealing layout, colour scheme, and typography that engage the user without distracting from the task.</li>
+          <li><strong>Simple to use:</strong> Clear navigation and minimal steps to accomplish common tasks — users should not need extensive training.</li>
+          <li><strong>Responsive in a short time:</strong> The interface reacts quickly to user actions; long delays frustrate users and reduce productivity.</li>
+          <li><strong>Clear to understand:</strong> Labels, messages, and controls are unambiguous — users always know what each element does.</li>
+          <li><strong>Consistent on all interface screens:</strong> Similar actions look and behave the same way throughout the application — same icons, colours, and navigation patterns on every screen.</li>
+        </ul>
+
+        <h3>Types of user interface</h3>
+        <ul>
+          <li><strong>Command Line Interface (CLI):</strong> Provides a command prompt where the user types commands and feeds them to the system. The user must remember the syntax of each command and its correct use — no graphical aids. Examples: terminal, DOS prompt, Linux shell.</li>
+          <li><strong>Graphical User Interface (GUI):</strong> Provides a simple, interactive visual interface using windows, icons, menus, and pointers. GUI can be a combination of both hardware and software components. The user interprets and interacts with the software through visual elements rather than typed commands. Examples: desktop applications, web browsers, mobile apps.</li>
+        </ul>
+
+        <h3>Interface design level (system black box)</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-interface-caption">
+          <img src="../../../assets/images/se-topic-05/design-levels.webp"
+               alt="Interface design — system treated as black box with defined inputs and outputs"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-interface-caption">Interface design — system as black box; focus on inputs, outputs, and interaction with agents.</figcaption>
+        </figure>
+        <ul>
+          <li>At the interface design level (see <a href="05-02-design-process.html#sec-5-2">§5.2</a>), the system is treated as a black box — internal workings are ignored.</li>
+          <li>Attention is focused on the dialogue between the target system and users, devices, and other systems (agents).</li>
+          <li>Interface design must specify: precise description of incoming events/messages the system must respond to; outgoing events/messages the system must produce; data formats for inputs and outputs; ordering and timing relationships between incoming and outgoing events.</li>
+        </ul>
+
+        <h3>User interface design process</h3>
+        <p>
+          The analysis and design of a user interface is <strong>iterative</strong> and can be represented by a
+          spiral model — the design is refined through repeated cycles of analysis, design, prototype, and validation.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-ui-stages-caption">
+          <img src="../../../assets/images/se-topic-05/ui-design-stages.webp"
+               alt="Four stages of the user interface design process"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-ui-stages-caption">Four framework activities of the user interface design process.</figcaption>
+        </figure>
+        <p>The UI design process consists of four framework activities:</p>
+
+        <h4>1. User, task, environmental analysis, and modelling</h4>
+        <ul>
+          <li>Initially, the focus is on the profile of users who will interact with the system — understanding their skills, knowledge, and type of user.</li>
+          <li>Based on user profiles, users are categorised and requirements are gathered from each category.</li>
+          <li>From the requirements, developers understand how to develop the interface.</li>
+          <li>Once all requirements are gathered, a detailed analysis is conducted.</li>
+          <li><strong>Task analysis:</strong> Tasks that the user performs to establish the goals of the system are identified, described, and elaborated.</li>
+          <li><strong>Environmental analysis:</strong> Focuses on the physical work environment. Key questions include: Where will the interface be located physically? Will the user be sitting, standing, or performing other tasks? Does the interface hardware accommodate space, light, or noise constraints? Are there special human factors considerations driven by environmental factors?</li>
+        </ul>
+
+        <h4>2. Interface design</h4>
+        <ul>
+          <li>The goal is to define the set of interface objects and actions — control mechanisms that enable the user to perform desired tasks.</li>
+          <li>Indicate how these control mechanisms affect the system.</li>
+          <li>Specify the action sequence of tasks and subtasks — also called a <strong>user scenario</strong>.</li>
+          <li>Indicate the state of the system when the user performs a particular task.</li>
+          <li>Design issues considered during refinement: response time, command and action structure, error handling, and help facilities.</li>
+          <li>Always follow the three golden rules stated by Theo Mandel (see below).</li>
+          <li>This phase serves as the foundation for the implementation phase.</li>
+        </ul>
+
+        <h4>3. Interface construction and implementation</h4>
+        <ul>
+          <li>Implementation begins with the creation of a <strong>prototype (model)</strong> that enables usage scenarios to be evaluated.</li>
+          <li>As the iterative design process continues, a User Interface toolkit is used — allowing creation of windows, menus, device interaction, error messages, commands, and other elements of an interactive environment.</li>
+          <li>Wireframes, mock-ups, and high-fidelity prototypes are built and refined based on user feedback before final coding.</li>
+        </ul>
+
+        <h4>4. Interface validation</h4>
+        <ul>
+          <li>This phase focuses on testing the interface.</li>
+          <li>The interface must perform tasks correctly and handle a variety of tasks reliably.</li>
+          <li>It must achieve all user requirements.</li>
+          <li>It must be easy to use and easy to learn.</li>
+          <li>Users should accept the interface as useful in their work.</li>
+        </ul>
+
+        <h3>Theo Mandel's golden rules of UI design</h3>
+        <p>Three golden rules must be followed during interface design:</p>
+
+        <h4>Rule 1 — Place the user in control</h4>
+        <ul>
+          <li><strong>Do not force unnecessary actions:</strong> Define interaction modes so the user is not forced into unnecessary or undesired actions — the user should easily enter and exit any mode with little effort.</li>
+          <li><strong>Provide flexible interaction:</strong> Different users prefer different mechanisms — keyboard commands, mouse, touch screen — so all interaction mechanisms should be supported where appropriate.</li>
+          <li><strong>Allow interruptible and undoable interaction:</strong> When a user performs a sequence of actions, they must be able to interrupt the sequence to do other work without losing completed work; undo operations must be supported.</li>
+          <li><strong>Streamline interaction as skill advances:</strong> Advanced users should be able to customise the interface and use faster interaction mechanisms (shortcuts, macros) so they are not limited by beginner-level controls.</li>
+          <li><strong>Hide technical internals:</strong> Casual users should not be aware of internal technical details — they interact with the interface only to do their work.</li>
+          <li><strong>Design for direct interaction with on-screen objects:</strong> Users should manipulate objects that appear on the screen directly (drag, click, resize) to perform tasks — this gives a sense of control.</li>
+        </ul>
+
+        <h4>Rule 2 — Reduce the user's memory load</h4>
+        <ul>
+          <li><strong>Reduce short-term memory demand:</strong> During complex tasks, demand on short-term memory is significant — the interface should reduce the need to remember previously done actions, given inputs, and results.</li>
+          <li><strong>Establish meaningful defaults:</strong> Provide sensible initial defaults for the average user; advanced users can add or change features as needed.</li>
+          <li><strong>Define intuitive shortcuts:</strong> Use mnemonics — keyboard shortcuts that are easy to remember and map to common actions.</li>
+          <li><strong>Use real-world metaphors:</strong> Represent on-screen elements as metaphors for real-world entities (folder, trash bin, desktop) so users understand them immediately.</li>
+          <li><strong>Disclose information progressively:</strong> Organise the interface hierarchically — present high-level information first; reveal more detail only after the user indicates interest (e.g., click to expand).</li>
+        </ul>
+
+        <h4>Rule 3 — Make the interface consistent</h4>
+        <ul>
+          <li><strong>Provide meaningful context:</strong> Many interfaces have dozens of screens — provide consistent indicators so the user always knows where they are, which page they came from, and where they can navigate next.</li>
+          <li><strong>Maintain consistency across a family of applications:</strong> When developing a set of related applications, all should follow and implement the same design rules so consistency is maintained across the product family.</li>
+          <li><strong>Do not change established conventions without reason:</strong> If past interactive models have created user expectations, do not make changes unless there is a compelling reason to do so.</li>
+        </ul>
+
+        <h3>Key principles for designing user interfaces</h3>
+        <ul>
+          <li><strong>User-centred design:</strong> UI design should focus on the needs and preferences of the user — understand the user's goals, tasks, and context of use, and design interfaces that meet their needs and expectations.</li>
+          <li><strong>Consistency:</strong> Consistent design elements (icons, colour schemes, navigation menus, terminology) should be used throughout the application so users can learn once and apply everywhere.</li>
+          <li><strong>Simplicity:</strong> Interfaces should use clear, concise language and intuitive navigation — users should accomplish tasks without being overwhelmed by unnecessary complexity.</li>
+          <li><strong>Feedback:</strong> Users must understand the results of their actions — feedback can take the form of visual cues, messages, progress indicators, or sounds confirming that an action succeeded or failed.</li>
+          <li><strong>Accessibility:</strong> Interfaces should be accessible to all users regardless of ability — consider colour contrast, font size, keyboard navigation, and assistive technologies such as screen readers.</li>
+          <li><strong>Flexibility:</strong> Interfaces should be customisable so users can tailor the interface to their own preferences and skill level — supporting both novice and expert users.</li>
+        </ul>
+
+        <h3>UI design patterns</h3>
+        <p>UI design patterns are reusable solutions to common interface design problems:</p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-ui-patterns-caption">
+          <img src="../../../assets/images/se-topic-05/ui-patterns.webp"
+               alt="Common user interface design patterns"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-ui-patterns-caption">Common user interface design patterns.</figcaption>
+        </figure>
+        <figure class="diagram figure-photo" aria-labelledby="fig-ui-model-caption">
+          <img src="../../../assets/images/se-topic-05/ui-pattern-model.jpg"
+               alt="UI design pattern model — problem, context, solution, examples"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-ui-model-caption">UI design pattern model — problem, context, solution, and examples.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Navigation patterns:</strong> Menu bars, breadcrumbs, tabs, and sidebars that help users move through the application.</li>
+          <li><strong>Form design patterns:</strong> Standard layouts for input forms — clear labels, logical field order, inline validation.</li>
+          <li><strong>Modal patterns:</strong> Pop-ups or overlays for specific interactions — confirming actions, displaying additional information.</li>
+          <li><strong>Card patterns:</strong> Container elements for presenting information in a structured, scannable format — common in dashboards and lists.</li>
+          <li><strong>Search and filter patterns:</strong> Search bars, filters, and sorting controls for finding content in large datasets.</li>
+        </ul>
+        <p>The UI design pattern model has four elements: <strong>Problem</strong> (what needs solving), <strong>Context</strong> (where the problem occurs), <strong>Solution</strong> (the pattern applied), and <strong>Examples</strong> (real-world use).</p>
+
+        <h3>Relationship to other design topics</h3>
+        <ul>
+          <li>Interface design is the first of the three design levels (<a href="05-02-design-process.html#sec-5-2">§5.2</a>).</li>
+          <li>Use case diagrams (<a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>) help outline how users interact with the system and define user scenarios during design.</li>
+          <li>Detailed design specifies module-level UI elements — forms, screens, dialogues (<a href="05-05-low-level-design.html#sec-5-5">§5.5</a>).</li>
+          <li>A well-designed architecture isolates UI concerns from business logic — interface changes should not affect core system functionality.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — User interface design</div>
+          <p><strong>Q:</strong> What is user interface design? Describe the four stages of the UI design process. State Theo Mandel's golden rules.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define UI: front-end view for user interaction; qualities: attractive, simple, responsive, clear, consistent.</li>
+            <li>Types: CLI (command prompt, must remember syntax) vs GUI (visual, windows/icons/menus).</li>
+            <li>Four stages: (1) user/task/environment analysis — profiles, tasks, physical environment; (2) interface design — objects, actions, user scenarios, Mandel's rules; (3) construction — prototype, UI toolkit; (4) validation — test correctness, usability, learnability, user acceptance.</li>
+            <li>Mandel's 3 rules: place user in control (flexible, undoable, hide internals); reduce memory load (defaults, metaphors, progressive disclosure); make consistent (context, family of apps, don't break conventions).</li>
+            <li>Principles: user-centred, consistency, simplicity, feedback, accessibility, flexibility.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-16-uml-modelling.html">&larr; 5.16 UML Modelling</a>
+        <a class="btn-back chapter-nav-next" href="05-18-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

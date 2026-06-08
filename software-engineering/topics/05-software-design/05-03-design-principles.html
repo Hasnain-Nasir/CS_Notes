@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.3 Software Design Principles</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.3 Software Design Principles</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-3">
+
+        <p>
+          Good software design follows a set of guiding principles that make systems easier to manage, maintain, test,
+          and extend. These principles apply at every level — from overall architecture down to individual modules —
+          and are central to exam questions on design quality.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-design-elements-caption">
+          <img src="../../../assets/images/se-topic-05/design-elements.webp"
+               alt="Core elements of software design — architecture, modules, components, interfaces, and data"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-design-elements-caption">Core elements and principles of software design.</figcaption>
+        </figure>
+
+        <h3>Key design principles</h3>
+
+        <h4>1. Modularity</h4>
+        <ul>
+          <li>Modularity means breaking software into smaller, independent sections or modules, each handling a specific task.</li>
+          <li>Each module can be developed, tested, and maintained separately without affecting the entire system.</li>
+          <li>See <a href="05-06-modularization.html#sec-5-6">§5.6</a> for detailed coverage.</li>
+        </ul>
+
+        <h4>2. Low coupling</h4>
+        <ul>
+          <li>Coupling measures how much one part of the software depends on another.</li>
+          <li>The goal is to minimise connections between modules so that changing one module does not ripple through others.</li>
+          <li>Low coupling makes software more flexible and easier to update.</li>
+          <li>Full coupling types covered in <a href="05-10-coupling-cohesion.html#sec-5-10">§5.10</a>.</li>
+        </ul>
+
+        <h4>3. High cohesion</h4>
+        <ul>
+          <li>Cohesion measures how closely related the elements within a module are — how well they work together for a single purpose.</li>
+          <li>High cohesion means each module does one well-defined job; low cohesion means unrelated tasks are grouped together.</li>
+          <li>Design goal: <strong>high cohesion, low coupling</strong>.</li>
+        </ul>
+
+        <h4>4. Abstraction</h4>
+        <ul>
+          <li>Abstraction simplifies software by hiding unnecessary complexity and showing only essential features.</li>
+          <li>It makes software easier to use and understand without overwhelming users or developers with implementation details.</li>
+          <li>At design time, abstraction lets designers focus on what a module does before deciding how it does it.</li>
+        </ul>
+
+        <h4>5. Anticipation of change</h4>
+        <ul>
+          <li>Software should be designed with future changes in mind — new features, new technologies, or evolving requirements.</li>
+          <li>Modular, loosely coupled designs adapt more easily than monolithic, tightly coupled ones.</li>
+        </ul>
+
+        <h4>6. Simplicity</h4>
+        <ul>
+          <li>Simple designs have fewer errors and are easier to maintain and improve over time.</li>
+          <li>Avoid over-engineering: include only what is needed to satisfy requirements, not unnecessary complexity.</li>
+        </ul>
+
+        <h4>7. Sufficiency and completeness</h4>
+        <ul>
+          <li>The design must meet all required functions without unnecessary extras.</li>
+          <li>Every SRS requirement must map to a design element; avoid gold-plating features not in the specification.</li>
+        </ul>
+
+        <h3>Design principles in practice</h3>
+        <ul>
+          <li>At <strong>architectural level</strong>, modularity and low coupling guide how major components are separated.</li>
+          <li>At <strong>module level</strong>, high cohesion ensures each unit has a clear, single responsibility.</li>
+          <li>At <strong>interface level</strong>, abstraction hides internal details behind clean, stable APIs.</li>
+          <li>These principles underpin both function-oriented design (<a href="05-14-function-oriented-design.html#sec-5-14">§5.14</a>) and object-oriented design (<a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>).</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Design principles</div>
+          <p><strong>Q:</strong> List important software design principles. Why are high cohesion and low coupling desirable?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>List: modularity, low coupling, high cohesion, abstraction, anticipation of change, simplicity, sufficiency/completeness.</li>
+            <li>High cohesion: module elements work together for one purpose → easier to understand, test, reuse.</li>
+            <li>Low coupling: modules independent → changes isolated, system flexible.</li>
+            <li>State design goal: high cohesion + low coupling = good modular design.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-02-design-process.html">&larr; 5.2 Design Process</a>
+        <a class="btn-back chapter-nav-next" href="05-04-architectural-design.html">5.4 Architectural Design &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

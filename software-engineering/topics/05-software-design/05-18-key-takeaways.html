@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>Software design:</strong> Transforms SRS → SDD; most creative SDLC phase; decides how requirements are implemented. Good SDD: complete w.r.t. SRS, readable, covers data/functional/behavioural domains.</li>
+          <li><strong>Conceptual vs technical design:</strong> Conceptual = what system will do (for customer); technical = how builders implement it (hardware, modules, data structures).</li>
+          <li><strong>Three design levels:</strong> Interface (black-box I/O, events, data formats, timing) → Architectural (major modules, responsibilities, coupling/cohesion) → Detailed/LLD (algorithms, data structures, unit internals).</li>
+          <li><strong>Design process (Set 2):</strong> Modules, control relationships, interfaces, data structures, algorithms designed. Preliminary design → program architecture; detailed design → module specification document.</li>
+          <li><strong>Design phases:</strong> Understand requirements → research/plan → design → technical design → UI design → prototyping.</li>
+          <li><strong>Design elements:</strong> Architecture, modules, components, interfaces, data.</li>
+          <li><strong>Design principles:</strong> Modularity, low coupling, high cohesion, abstraction, anticipation of change, simplicity, sufficiency/completeness. Goal: high cohesion + low coupling.</li>
+          <li><strong>Architectural design:</strong> IEEE — components + connectors + constraints + semantic models. Styles: layered (4-tier: presentation/business/application/data), OO (message passing), client-server, pipe-filter, event-driven, microservices.</li>
+          <li><strong>LLD vs HLD:</strong> HLD = module decomposition, black boxes; LLD = internal white-box detail, algorithms, data structures. Deliverable = module specification document. Techniques: pseudocode, flowcharts, structure charts, UML.</li>
+          <li><strong>Modularization:</strong> Independent units + well-defined interfaces. Advantages: easy to understand, design/document, code/test, maintain.</li>
+          <li><strong>Structure charts:</strong> Hierarchical module architecture; black-box modules. Symbols: module box, conditional call, loop (curved arrow), data flow (empty circle), control flow (filled circle), storage. Module types: control, sub, library. Categories: input, output, transform, edit, coordinate.</li>
+          <li><strong>Pseudocode:</strong> Language-independent algorithm planning; mix of natural language + programming constructs; not executable; part of SDD documentation.</li>
+          <li><strong>Flowcharts:</strong> Graphical control flow; symbols: terminal (oval), process (rectangle), decision (diamond), I/O (parallelogram), connector, arrows. vs structure chart: control flow vs architecture; no inter-module data.</li>
+          <li><strong>Coupling (6 types, worst→best):</strong> Content (module modifies another's internals) → Common (shared global data) → External (hardware/external format) → Control (flags/mode switches) → Stamp (passes data structure) → Data (simple parameter passing — best).</li>
+          <li><strong>Cohesion (7 types, worst→best):</strong> Coincidental (random grouping) → Logical (similar ops, different purposes) → Temporal (same time span) → Procedural (algorithm steps) → Communicational (same data structure) → Sequential (output→input chain) → Functional (single task — best).</li>
+          <li><strong>Cohesion vs coupling:</strong> Cohesion = intra-module strength (want HIGH); coupling = inter-module dependence (want LOW). Cohesion = functional strength; coupling = independence. Best: functional cohesion + data coupling.</li>
+          <li><strong>Design strategies:</strong> Top-down (stepwise refinement, small/medium, FOD), bottom-up (build components first, large, OOD), iterative, incremental, agile.</li>
+          <li><strong>Top-down advantages:</strong> Systematic, modular, predictable cost/time. Disadvantage: very large/complex problems. <strong>Bottom-up advantages:</strong> Large projects, reusable components. Disadvantage: complex architecture.</li>
+          <li><strong>Function-oriented design:</strong> Top-down; focus on functions; tools = DFD + structure charts; stepwise refinement to statement level; module categories: input, output, transform, edit, coordinate.</li>
+          <li><strong>Object-oriented design:</strong> Bottom-up; focus on data/objects; four pillars: encapsulation, abstraction, inheritance, polymorphism; tools = UML; objects = independent entities with state + behaviour.</li>
+          <li><strong>FOD vs OOD:</strong> Functions vs data focus; top-down vs bottom-up; DFD/structure charts vs UML; procedure-level vs class-level decomposition.</li>
+          <li><strong>UML:</strong> Standard visual language for OOD. Structural: class (attributes, methods, associations, inheritance, multiplicity), component, deployment, package. Behavioural: use case (actors, boundary, include/extend), sequence (lifelines, messages, activation), activity (workflow, decisions, fork/join), state.</li>
+          <li><strong>Use case diagram:</strong> Actors, use cases (ovals), system boundary (rectangle), association, include (dashed), extend (dashed). High-level functionality view.</li>
+          <li><strong>Class diagram:</strong> Class = name + attributes + methods; relationships: association, inheritance (hollow arrow), aggregation (hollow diamond), composition (filled diamond); multiplicity (1, *, 1..n).</li>
+          <li><strong>Sequence diagram:</strong> Lifelines, activation bars, messages (solid=sync, dashed=async); shows interaction order over time.</li>
+          <li><strong>Activity diagram:</strong> Activities, decision/merge nodes, fork/join bars, initial/final nodes; workflow and use case steps.</li>
+          <li><strong>UI design:</strong> Front-end view for user interaction. Good UI: attractive, simple, responsive, clear, consistent. Types: CLI (command prompt, remember syntax) vs GUI (visual, windows/icons/menus).</li>
+          <li><strong>Interface level (black box):</strong> Incoming/outgoing events, data formats, ordering/timing; system internals ignored.</li>
+          <li><strong>UI design process (4 stages, iterative/spiral):</strong> (1) User/task/environment analysis — user profiles, task identification, physical environment questions; (2) Interface design — interface objects, control mechanisms, user scenarios, response time, error handling, Mandel's rules; (3) Construction — prototype, UI toolkit (windows, menus, commands); (4) Validation — correct tasks, variety of tasks, easy to use/learn, user acceptance.</li>
+          <li><strong>Theo Mandel's 3 golden rules:</strong> (1) Place user in control — no forced actions, flexible interaction, interruptible/undoable, customisable for experts, hide internals, direct object manipulation; (2) Reduce memory load — less short-term memory demand, meaningful defaults, intuitive mnemonics/shortcuts, real-world metaphors, progressive disclosure; (3) Make consistent — meaningful context/navigation indicators, consistency across app family, don't break established conventions.</li>
+          <li><strong>UI design principles:</strong> User-centred design, consistency, simplicity, feedback (visual/message/sound), accessibility (contrast, font, screen readers), flexibility/customisation.</li>
+          <li><strong>UI patterns:</strong> Navigation, forms, modals, cards, search/filter. Pattern model: problem → context → solution → examples.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-17-user-interface-design.html">&larr; 5.17 User Interface Design</a>
+        <span class="btn-back chapter-nav-next is-disabled">Next &rarr;</span>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

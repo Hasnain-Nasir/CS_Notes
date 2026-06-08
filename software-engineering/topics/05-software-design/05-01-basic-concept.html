@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.1 Basic Concept of Software Design</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.1 Basic Concept of Software Design</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-1">
+
+        <p>
+          <strong>Software design</strong> is the phase of the
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a> in which approved requirements
+          from the <a href="../04-requirements-engineering-and-specification/04-14-srs-document.html#sec-4-14">SRS</a>
+          are transformed into a structure suitable for implementation in a programming language. It is often described
+          as the most creative phase of software development, because here the team decides <em>how</em> the problem
+          will be solved — not merely <em>what</em> the system must do.
+        </p>
+        <p>
+          The input to the design phase is the SRS document; the primary output is the
+          <strong>Software Design Description (SDD)</strong>, also called the design document, which explains how the
+          system will perform its required functionality.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-design-flow-caption">
+          <img src="../../../assets/images/se-topic-05/software-design-concepts.webp"
+               alt="Software design — transforming SRS requirements into an implementable SDD"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-design-flow-caption">Software design transforms the SRS into a design document (SDD) ready for coding.</figcaption>
+        </figure>
+
+        <h3>SRS → Design → SDD</h3>
+        <ul>
+          <li><strong>SRS (input):</strong> Describes what the system must do — functional and non-functional requirements, constraints, and acceptance criteria — without prescribing internal implementation.</li>
+          <li><strong>Design (process):</strong> Chooses overall architecture, module structure, algorithms, data structures, and interfaces that satisfy the SRS.</li>
+          <li><strong>SDD (output):</strong> Documents the chosen design so developers can code, testers can plan tests, and maintainers can understand the system structure.</li>
+        </ul>
+
+        <h3>Characteristics of a good SDD</h3>
+        <ul>
+          <li><strong>Complete w.r.t. SRS:</strong> The SDD must address every requirement stated in the SRS — no approved requirement should be left without a design decision.</li>
+          <li><strong>Readable and maintainable:</strong> The document must be easy to understand and update as the project evolves.</li>
+          <li><strong>Covers all domains:</strong> A good SDD describes the data domain (what data exists and how it is stored), the functional domain (what processing occurs), and the behavioural domain (how the system responds to events and state changes).</li>
+        </ul>
+
+        <h3>Conceptual design vs technical design</h3>
+        <p>Design is often described as a two-part iterative process:</p>
+        <ul>
+          <li><strong>Conceptual design:</strong> Tells the customer and stakeholders what the system will do at a high level — focused on user-visible behaviour and system boundaries.</li>
+          <li><strong>Technical design:</strong> Tells the builders what hardware, software, modules, data structures, and algorithms are needed to implement the solution.</li>
+        </ul>
+        <p>
+          Conceptual design items include hardware components, software component hierarchy, software architecture,
+          network architecture, data structures, data flow, I/O components, and user interfaces.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-design-levels-caption">
+          <img src="../../../assets/images/se-topic-05/design-levels.webp"
+               alt="Three levels of software design — interface, architectural, and detailed design"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-design-levels-caption">Three levels of software design — interface, architectural, and detailed design.</figcaption>
+        </figure>
+
+        <h3>Three levels of design (overview)</h3>
+        <ul>
+          <li><strong>Interface design:</strong> Specifies interaction between the system and its environment; the system is treated as a black box — only inputs and outputs matter.</li>
+          <li><strong>Architectural design:</strong> Identifies major modules, their responsibilities, and how they communicate; internal module details are ignored.</li>
+          <li><strong>Detailed (low-level) design:</strong> Specifies internal elements of every module — algorithms, data structures, control flow, and interfaces between units.</li>
+        </ul>
+        <p>These three levels are covered in detail in <a href="05-02-design-process.html#sec-5-2">§5.2</a> and <a href="05-05-low-level-design.html#sec-5-5">§5.5</a>.</p>
+
+        <h3>Design in the SDLC context</h3>
+        <ul>
+          <li>Design follows requirements engineering (<a href="../04-requirements-engineering-and-specification/index.html">Topic 4</a>) and precedes coding and testing.</li>
+          <li>Overall architecture and algorithmic strategy are chosen during design, with attention to coupling and cohesion between modules (see <a href="05-10-coupling-cohesion.html#sec-5-10">§5.10</a>).</li>
+          <li>Poor design is expensive to fix later — errors found during design cost far less to correct than errors found during coding or maintenance.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Basic concept of software design</div>
+          <p><strong>Q:</strong> Define software design. What are the inputs and outputs of the design phase? List characteristics of a good SDD.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define design as transforming SRS requirements into an implementable structure (SDD).</li>
+            <li>Input = SRS; output = SDD (software design description).</li>
+            <li>Good SDD: complete w.r.t. SRS, readable/maintainable, covers data/functional/behavioural domains.</li>
+            <li>Name three design levels: interface, architectural, detailed.</li>
+            <li>Distinguish conceptual design (what for customer) from technical design (how for builders).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="index.html">&larr; Topic 5</a>
+        <a class="btn-back chapter-nav-next" href="05-02-design-process.html">5.2 Design Process &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

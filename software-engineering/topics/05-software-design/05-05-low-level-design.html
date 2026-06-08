@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.5 Low Level Design</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.5 Low Level Design</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-5">
+
+        <p>
+          <strong>Low-level design (LLD)</strong>, also called <strong>detailed design</strong>, is the third and most
+          granular level of software design. Once architectural design identifies major modules, LLD specifies the
+          internal elements of every module — their functions, processing methods, data structures, algorithms, and
+          control flow.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-lld-roadmap-caption">
+          <img src="../../../assets/images/se-topic-05/lld-roadmap.webp"
+               alt="Roadmap from high-level design to low-level design"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-lld-roadmap-caption">Transition from high-level design to low-level design (LLD).</figcaption>
+        </figure>
+
+        <h3>HLD vs LLD</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>High-Level Design (HLD)</th><th>Low-Level Design (LLD)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Also called</strong></td>
+              <td>Preliminary design, architectural design, program architecture.</td>
+              <td>Detailed design, module-level design.</td>
+            </tr>
+            <tr>
+              <td><strong>Focus</strong></td>
+              <td>Module decomposition, control relationships, interfaces between modules.</td>
+              <td>Internal logic, algorithms, data structures within each module.</td>
+            </tr>
+            <tr>
+              <td><strong>Deliverable</strong></td>
+              <td>Program architecture document; structure charts, UML overview diagrams.</td>
+              <td>Module specification document; pseudocode, flowcharts, class diagrams.</td>
+            </tr>
+            <tr>
+              <td><strong>Abstraction</strong></td>
+              <td>Modules treated as black boxes.</td>
+              <td>Internal white-box detail of every module.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>What detailed design specifies</h3>
+        <ul>
+          <li><strong>Decomposition</strong> of major system components into program units (functions, classes, procedures).</li>
+          <li><strong>Allocation</strong> of functional responsibilities to each unit.</li>
+          <li><strong>User interfaces</strong> at the module level (forms, screens, dialogues).</li>
+          <li><strong>Unit states</strong> and state changes (e.g., order status: pending → confirmed → shipped).</li>
+          <li><strong>Data and control interaction</strong> between units within a module.</li>
+          <li><strong>Data packaging and implementation</strong> — scope and visibility of program elements.</li>
+          <li><strong>Algorithms and data structures</strong> for each unit.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-lld-design-caption">
+          <img src="../../../assets/images/se-topic-05/lld-design.webp"
+               alt="Low-level design components and their internal structure"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-lld-design-caption">Low-level design — internal structure of modules and components.</figcaption>
+        </figure>
+
+        <h3>LLD representation techniques</h3>
+        <ul>
+          <li><strong>Pseudocode:</strong> Language-independent algorithm description — see <a href="05-08-pseudocode.html#sec-5-8">§5.8</a>.</li>
+          <li><strong>Flowcharts:</strong> Graphical control-flow diagrams — see <a href="05-09-flowcharts.html#sec-5-9">§5.9</a>.</li>
+          <li><strong>Structure charts:</strong> Hierarchical module invocation — see <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>.</li>
+          <li><strong>UML diagrams:</strong> Class, sequence, and activity diagrams for OOD — see <a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>.</li>
+        </ul>
+
+        <h3>LLD design guidelines</h3>
+        <ul>
+          <li><strong>Modular design:</strong> Break the system into small, independent components with specific functionalities.</li>
+          <li><strong>Clear interfaces:</strong> Define methods, inputs, and outputs for each component to maintain proper communication.</li>
+          <li><strong>Design patterns and OOP principles:</strong> Apply encapsulation, inheritance, polymorphism, and proven patterns for reusability and maintainability.</li>
+          <li><strong>Error handling:</strong> Plan exception handling and error recovery at the module level.</li>
+        </ul>
+
+        <h3>Module specification document</h3>
+        <ul>
+          <li>After detailed design of each module, the outcome is documented in a <strong>module specification document</strong>.</li>
+          <li>This document is handed to programmers for coding and to testers for deriving unit test cases.</li>
+          <li>Structure charts, pseudocode, flowcharts, and decision tables developed during design become part of project documentation.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Low-level design</div>
+          <p><strong>Q:</strong> What is low-level design? How does it differ from high-level design? What does detailed design specify?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>LLD = internal specification of all modules — algorithms, data structures, control flow.</li>
+            <li>HLD = module decomposition and interfaces; LLD = internal white-box detail.</li>
+            <li>List 7 detailed design items: decomposition, allocation, UI, states, data/control interaction, packaging, algorithms.</li>
+            <li>Deliverable = module specification document.</li>
+            <li>Techniques: pseudocode, flowcharts, structure charts, UML.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-04-architectural-design.html">&larr; 5.4 Architectural Design</a>
+        <a class="btn-back chapter-nav-next" href="05-06-modularization.html">5.6 Modularization &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

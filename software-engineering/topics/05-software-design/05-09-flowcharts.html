@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 5 — 5.9 Flow Charts</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>5.9 Flow Charts</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-5-9">
+
+        <p>
+          A <strong>flowchart</strong> (also called a <strong>control flow chart</strong> or <strong>control flow
+          diagram</strong>) is a graphical representation of how control flows during the execution of a program or
+          algorithm. It uses standard symbols connected by arrows to show the sequence of operations, decisions, and
+          loops.
+        </p>
+        <p>
+          Flowcharts are widely used as a program-planning tool during the design phase to visualise logic before coding.
+          They represent the <strong>control flow within a program</strong>, unlike structure charts which represent
+          module architecture (see <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>).
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-flowchart-symbols-caption">
+          <img src="../../../assets/images/se-topic-05/flowchart-symbols.png"
+               alt="Standard flowchart symbols — terminal, process, decision, input/output, connector"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-flowchart-symbols-caption">Standard flowchart symbols used to represent control flow.</figcaption>
+        </figure>
+
+        <h3>Standard flowchart symbols</h3>
+        <ul>
+          <li><strong>Terminal (oval):</strong> Marks the start or end of a program — "START" and "STOP".</li>
+          <li><strong>Process (rectangle):</strong> Represents a computation or action — e.g., "Calculate total", "Sort list".</li>
+          <li><strong>Decision (diamond):</strong> Represents a conditional branch — e.g., "Is x &gt; 0?" with Yes/No paths.</li>
+          <li><strong>Input/Output (parallelogram):</strong> Represents data input from or output to the user — e.g., "Read n", "Print result".</li>
+          <li><strong>Connector (circle):</strong> Connects parts of a flowchart on the same page or across pages.</li>
+          <li><strong>Flow lines (arrows):</strong> Show the direction of control flow between symbols.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-flowchart-example-caption">
+          <img src="../../../assets/images/se-topic-05/flowchart-example.png"
+               alt="Example flowchart for software installation process"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-flowchart-example-caption">Example flowchart — software installation process.</figcaption>
+        </figure>
+
+        <h3>Example — software installation flowchart</h3>
+        <ul>
+          <li>Start → Check system requirements → If requirements met, proceed to download; else display error and stop.</li>
+          <li>Download installer → Run installer → Accept licence agreement → Choose installation directory.</li>
+          <li>Install files → Configure settings → Verify installation → Display success message → End.</li>
+          <li>Each step is a process box; each condition is a decision diamond with Yes/No branches.</li>
+        </ul>
+
+        <h3>Flowchart vs structure chart</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Structure Chart</th><th>Flowchart</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Represents</strong></td>
+              <td>Software architecture — hierarchical module structure.</td>
+              <td>Control flow within a program or algorithm.</td>
+            </tr>
+            <tr>
+              <td><strong>Module identification</strong></td>
+              <td>Easy to identify different modules of the software.</td>
+              <td>Difficult to identify separate modules from a flowchart.</td>
+            </tr>
+            <tr>
+              <td><strong>Data interchange</strong></td>
+              <td>Shows data interchange between different modules.</td>
+              <td>Does not represent data interchange among modules.</td>
+            </tr>
+            <tr>
+              <td><strong>Arrows</strong></td>
+              <td>Different arrow types for data flow (empty circle) and control flow (filled circle).</td>
+              <td>Single arrow type for control flow.</td>
+            </tr>
+            <tr>
+              <td><strong>Sequential ordering</strong></td>
+              <td>Suppresses sequential ordering of tasks inherent in a flowchart.</td>
+              <td>Demonstrates sequential ordering of tasks explicitly.</td>
+            </tr>
+            <tr>
+              <td><strong>Complexity</strong></td>
+              <td>More complex to construct than a flowchart.</td>
+              <td>Easier to construct; easier to understand for simple logic.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>When to use flowcharts</h3>
+        <ul>
+          <li>During detailed design to plan the logic of individual modules or algorithms.</li>
+          <li>As documentation alongside pseudocode and structure charts in the SDD.</li>
+          <li>For deriving test cases — each path through the flowchart represents a potential test path.</li>
+          <li>For explaining complex conditional logic to non-programmers.</li>
+        </ul>
+
+        <h3>Limitations of flowcharts</h3>
+        <ul>
+          <li>Large programs produce very complex, hard-to-read flowcharts.</li>
+          <li>Flowcharts do not show module hierarchy or inter-module relationships.</li>
+          <li>Changes to the program require redrawing the flowchart, which can be time-consuming.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Flow charts</div>
+          <p><strong>Q:</strong> What is a flowchart? Draw and explain its symbols. How does it differ from a structure chart?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Define: graphical representation of control flow during program execution.</li>
+            <li>Symbols: terminal (oval), process (rectangle), decision (diamond), I/O (parallelogram), connector, arrows.</li>
+            <li>Example: software installation or simple algorithm.</li>
+            <li>vs structure chart: control flow vs architecture; no inter-module data; simpler to draw.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="05-08-pseudocode.html">&larr; 5.8 Pseudo Code</a>
+        <a class="btn-back chapter-nav-next" href="05-10-coupling-cohesion.html">5.10 Coupling &amp; Cohesion &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>
