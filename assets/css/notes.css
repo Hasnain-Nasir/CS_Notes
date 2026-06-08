@@ -2410,17 +2410,25 @@ body.site-menu-open {
   }
 }
 
+/* Floating buttons — shared column (terminal above, back-to-top below) */
+:root {
+  --fab-right: clamp(1rem, 2.5vw, 1.75rem);
+  --fab-bottom: clamp(1rem, 2.5vw, 1.75rem);
+  --fab-size: 2.75rem;
+  --fab-gap: 0.5rem;
+}
+
 /* Back to top */
 .back-to-top {
   position: fixed;
-  right: clamp(1rem, 2.5vw, 1.75rem);
-  bottom: clamp(1rem, 2.5vw, 1.75rem);
-  z-index: 1090;
+  right: var(--fab-right);
+  bottom: var(--fab-bottom);
+  z-index: 1080;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: var(--fab-size);
+  height: var(--fab-size);
   padding: 0;
   font-family: inherit;
   color: var(--text);
@@ -2550,19 +2558,34 @@ body.site-menu-open {
 .nain-chat-widget,
 .nain-term-widget {
   position: fixed;
-  right: 1rem;
-  bottom: 1rem;
+  right: var(--fab-right);
+  bottom: var(--fab-bottom);
   z-index: 9000;
   font-size: 0.82rem;
+  transition: bottom 0.25s ease;
+}
+
+body.fab-stacked .nain-chat-widget,
+body.fab-stacked .nain-term-widget {
+  bottom: calc(var(--fab-bottom) + var(--fab-size) + var(--fab-gap));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nain-chat-widget,
+  .nain-term-widget {
+    transition: none;
+  }
 }
 
 .nain-term-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 3rem;
-  min-height: 2.35rem;
-  padding: 0.45rem 0.75rem;
+  width: var(--fab-size);
+  height: var(--fab-size);
+  min-width: var(--fab-size);
+  min-height: var(--fab-size);
+  padding: 0;
   border: 1px solid #3fb950;
   border-radius: 8px;
   background: #0d1117;
@@ -2726,6 +2749,33 @@ body.site-menu-open {
 
 .nain-term-inputline input::placeholder {
   color: #484f58;
+}
+
+.nain-term-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.65rem;
+  height: 1.65rem;
+  padding: 0;
+  border: 1px solid #3fb950;
+  border-radius: 5px;
+  background: transparent;
+  color: #3fb950;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.nain-term-send:hover:not(:disabled) {
+  background: #3fb950;
+  color: #0d1117;
+  border-color: #3fb950;
+}
+
+.nain-term-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* ——— Auth login modal ——— */

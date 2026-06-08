@@ -575,8 +575,6 @@
       '<button type="button" class="nain-term-close" aria-label="Close terminal">&times;</button>' +
       "</div>" +
       '<div class="nain-term-screen" role="log" aria-live="polite">' +
-      '<div class="nain-term-line nain-term-line--system"><span class="nain-term-prompt">$</span> ' +
-      escHtml(ui.tagline) + " · type a message and press Enter.</div>" +
       '<div class="nain-term-login-gate"><span class="nain-term-prompt">!</span> ' +
       escHtml(ui.login_gate) + "</div>" +
       '<div class="nain-term-log" hidden></div>' +
@@ -584,7 +582,9 @@
       '<form class="nain-term-inputline" hidden autocomplete="off">' +
       '<span class="nain-term-prompt" data-term-prompt>guest@nain:~$</span>' +
       '<input type="text" name="message" aria-label="Terminal input" autocomplete="off" maxlength="4000" spellcheck="false">' +
-      "</form></div>";
+      '<button type="submit" class="nain-term-send" aria-label="Send message" title="Send">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9z"/></svg>' +
+      "</button></form></div>";
     document.body.appendChild(root);
 
     var toggle = root.querySelector(".nain-term-toggle");
@@ -595,6 +595,7 @@
     var input = form.querySelector("input");
     var gate = root.querySelector(".nain-term-login-gate");
     var promptEl = root.querySelector("[data-term-prompt]");
+    var sendBtn = root.querySelector(".nain-term-send");
     var isOpen = false;
     var sending = false;
 
@@ -684,8 +685,15 @@
       }
       var text = input.value.trim();
       if (!text || sending) return;
-      sending = true;
       input.value = "";
+
+      if (text.toLowerCase() === "clear") {
+        logEl.innerHTML = "";
+        return;
+      }
+
+      sending = true;
+      if (sendBtn) sendBtn.disabled = true;
       appendMessage("user", text);
 
       fetch("/api/chat/send.php", {
@@ -704,6 +712,7 @@
         })
         .finally(function () {
           sending = false;
+          if (sendBtn) sendBtn.disabled = false;
           input.focus();
         });
     });

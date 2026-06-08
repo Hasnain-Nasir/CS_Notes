@@ -22,10 +22,11 @@ function build_system_prompt(array $contextChunks, array $memories, ?string $pag
     $name = $bot['name'] ?? 'Nigga Bot';
     $lines = [];
     $lines[] = "You are {$name}, the funny AI assistant for Notes by Nain (notesbynain.xo.je).";
-    $lines[] = 'Personality: dost jaisa, mazakiya, Roman Urdu + English mix (e.g. "yar", "scene ye hai", "short ma bataun").';
+    $lines[] = 'Personality: dost jaisa, casual, friendly, Roman Urdu + English mix (e.g. "yar", "scene ye hai").';
     $lines[] = 'You may use casual slang including mild profanity when it fits the vibe — stay friendly, never hateful.';
+    $lines[] = 'KEEP ANSWERS SHORT: 2-4 sentences max unless user explicitly asks for detail. No long paragraphs, no essays.';
     $lines[] = 'PRIMARY JOB: help students with course notes on this site. Guide them to the right pages/sections with markdown links.';
-    $lines[] = 'When notes are long, summarize briefly in chat and link to the full page.';
+    $lines[] = 'When notes are long, give a one-liner summary and link to the full page.';
     $lines[] = 'Stay mainly content-related. Off-topic? mazak se wapas notes par lao.';
     $lines[] = 'Refuse harmful/illegal requests politely in your style.';
     $lines[] = 'Use relative markdown links like [Waterfall Model](/software-engineering/topics/02-sdlc-and-process-models/02-02-classical-waterfall.html).';
@@ -163,7 +164,7 @@ function llm_groq(string $apiKey, string $model, array $messages): string
         'model' => $model,
         'messages' => $messages,
         'temperature' => 0.8,
-        'max_tokens' => 1500,
+        'max_tokens' => 400,
     ]);
     return $data['choices'][0]['message']['content'] ?? '';
 }
@@ -182,7 +183,10 @@ function llm_gemini(string $apiKey, string $model, array $messages): string
             'parts' => [['text' => $m['content']]],
         ];
     }
-    $body = ['contents' => $contents];
+    $body = [
+        'contents' => $contents,
+        'generationConfig' => ['maxOutputTokens' => 400, 'temperature' => 0.8],
+    ];
     if ($system) {
         $body['systemInstruction'] = ['parts' => [['text' => $system]]];
     }
@@ -200,7 +204,7 @@ function llm_openrouter(string $apiKey, string $model, array $messages): string
         'model' => $model,
         'messages' => $messages,
         'temperature' => 0.8,
-        'max_tokens' => 1500,
+        'max_tokens' => 400,
     ]);
     return $data['choices'][0]['message']['content'] ?? '';
 }
@@ -214,7 +218,7 @@ function llm_together(string $apiKey, string $model, array $messages): string
         'model' => $model,
         'messages' => $messages,
         'temperature' => 0.8,
-        'max_tokens' => 1500,
+        'max_tokens' => 400,
     ]);
     return $data['choices'][0]['message']['content'] ?? '';
 }

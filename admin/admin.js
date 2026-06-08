@@ -7,10 +7,23 @@
       headers: opts.body instanceof FormData ? {} : { "Content-Type": "application/json" },
       body: opts.body instanceof FormData ? opts.body : opts.body ? JSON.stringify(opts.body) : undefined
     }).then(function (r) {
-      return r.json().then(function (d) {
-        if (!r.ok || !d.ok) throw new Error(d.error || "Request failed");
+      return r.text().then(function (text) {
+        var d = {};
+        if (text) {
+          try {
+            d = JSON.parse(text);
+          } catch (e) {
+            throw new Error(r.ok ? "Invalid server response" : "Server error (" + r.status + ")");
+          }
+        }
+        if (!r.ok || !d.ok) throw new Error(d.error || "Request failed (" + r.status + ")");
         return d;
       });
+    }).catch(function (e) {
+      if (e.message === "Failed to fetch") {
+        throw new Error("Could not reach server — check connection or reload the page");
+      }
+      throw e;
     });
   }
 
@@ -66,16 +79,39 @@
   }
 
   var memList = document.getElementById("memories-list");
+  var addMemory = document.getElementById("add-memory-form");
   if (memList) {
     function loadMemories() {
       var uid = document.getElementById("filter-user").value;
       var q = uid ? "?user_id=" + encodeURIComponent(uid) : "";
       api("memories.php" + q).then(function (d) {
-        memList.innerHTML = "<table class='admin-table'><tr><th>User</th><th>Memory</th><th>When</th></tr>" +
+        if (!d.memories.length) {
+          memList.innerHTML = "<p>No memories yet. Add one above.</p>";
+          return;
+        }
+        memList.innerHTML = "<table class='admin-table'><tr><th>User</th><th>Memory</th><th>Source</th><th>When</th><th></th></tr>" +
           d.memories.map(function (m) {
-            return "<tr><td>" + esc(m.username) + "</td><td>" + esc(m.memory_text) + "</td><td>" + esc(m.created_at) + "</td></tr>";
+            return "<tr><td>" + esc(m.username) + " <span class='admin-meta'>#" + m.user_id + "</span></td><td>" + esc(m.memory_text) +
+              "</td><td><span class='admin-badge'>" + esc(m.source) + "</span></td><td>" + esc(m.created_at) +
+              "</td><td><button type='button' class='admin-btn-sm admin-btn-danger' data-mdel='" + m.id + "'>Delete</button></td></tr>";
           }).join("") + "</table>";
+        memList.querySelectorAll("[data-mdel]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (!confirm("Delete this memory?")) return;
+            api("memories.php", { method: "POST", body: { action: "delete", id: +btn.dataset.mdel } }).then(loadMemories);
+          });
+        });
       }).catch(function (e) { memList.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>"; });
+    }
+    if (addMemory) {
+      addMemory.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var fd = new FormData(addMemory);
+        api("memories.php", {
+          method: "POST",
+          body: { action: "save", user_id: +fd.get("user_id"), memory_text: fd.get("memory_text") }
+        }).then(function () { addMemory.reset(); loadMemories(); }).catch(function (err) { alert(err.message); });
+      });
     }
     document.getElementById("reload-memories").addEventListener("click", loadMemories);
     loadMemories();
@@ -116,14 +152,24 @@
   if (keysList) {
     function loadKeys() {
       api("api-keys.php").then(function (d) {
-        keysList.innerHTML = "<table class='admin-table'><tr><th>Label</th><th>Provider</th><th>Priority</th><th>Active</th><th>Test</th><th>Delete</th></tr>" +
+        if (!d.keys.length) {
+          keysList.innerHTML = "<p>No API keys yet. Add one above.</p>";
+          return;
+        }
+        keysList.innerHTML = "<table class='admin-table admin-table--keys'><tr><th>Label</th><th>Provider</th><th>Model</th><th>Priority</th><th>Status</th><th>Actions</th></tr>" +
           d.keys.map(function (k) {
-            return "<tr><td>" + esc(k.label) + "</td><td>" + k.provider + "</td><td>" + k.priority + "</td><td>" + (k.is_active ? "Yes" : "No") +
-              "</td><td><button data-test='" + k.id + "'>Test</button></td><td><button data-del='" + k.id + "'>Delete</button></td></tr>";
+            return "<tr><td><strong>" + esc(k.label) + "</strong></td><td><span class='admin-badge admin-badge--provider'>" + esc(k.provider) + "</span></td><td class='admin-muted'>" + esc(k.model || "default") +
+              "</td><td>" + k.priority + "</td><td><span class='admin-status " + (k.is_active ? "is-active" : "is-inactive") + "'>" + (k.is_active ? "Active" : "Inactive") + "</span></td><td class='admin-actions'>" +
+              "<button type='button' class='admin-btn-sm' data-test='" + k.id + "'>Test</button>" +
+              "<button type='button' class='admin-btn-sm admin-btn-danger' data-del='" + k.id + "'>Delete</button></td></tr>";
           }).join("") + "</table>";
         keysList.querySelectorAll("[data-test]").forEach(function (btn) {
           btn.addEventListener("click", function () {
-            api("api-keys.php", { method: "POST", body: { action: "test", id: +btn.dataset.test } }).then(function (r) { alert("OK: " + r.reply); }).catch(function (e) { alert(e.message); });
+            btn.disabled = true;
+            api("api-keys.php", { method: "POST", body: { action: "test", id: +btn.dataset.test } })
+              .then(function (r) { alert("OK: " + r.reply); })
+              .catch(function (e) { alert(e.message); })
+              .finally(function () { btn.disabled = false; });
           });
         });
         keysList.querySelectorAll("[data-del]").forEach(function (btn) {
@@ -132,7 +178,7 @@
             api("api-keys.php", { method: "POST", body: { action: "delete", id: +btn.dataset.del } }).then(loadKeys);
           });
         });
-      });
+      }).catch(function (e) { keysList.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>"; });
     }
     if (addKey) {
       addKey.addEventListener("submit", function (e) {

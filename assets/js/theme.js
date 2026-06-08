@@ -150,10 +150,13 @@
     function updateVisibility() {
       if (!ensureButton()) {
         if (btn) btn.classList.remove("is-visible");
+        document.body.classList.remove("fab-stacked");
         return;
       }
       var scrolled = window.scrollY || document.documentElement.scrollTop;
-      btn.classList.toggle("is-visible", scrolled >= threshold);
+      var showFab = scrolled >= threshold;
+      btn.classList.toggle("is-visible", showFab);
+      document.body.classList.toggle("fab-stacked", showFab);
     }
 
     window.addEventListener("scroll", updateVisibility, { passive: true });

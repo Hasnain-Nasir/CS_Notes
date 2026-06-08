@@ -63,10 +63,6 @@ $pdo->prepare('INSERT INTO chat_messages (user_id, role, content, page_url) VALU
     ->execute([$user['id'], 'assistant', $reply, $pageUrl ?: null]);
 backup_append_chat((int) $user['id'], 'assistant', $reply, $pageUrl ?: null);
 
-if (count($history) >= 4 && count($history) % 5 === 0) {
-    extract_memories((int) $user['id'], $history);
-}
-
 json_response([
     'ok' => true,
     'reply' => $reply,
