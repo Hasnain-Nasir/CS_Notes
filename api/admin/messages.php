@@ -1,6 +1,30 @@
 <?php
 require_once dirname(__DIR__, 2) . '/includes/bootstrap.php';
-require_admin();
+
+$admin = require_admin();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $body = read_json_body();
+    $action = $body['action'] ?? '';
+
+    if ($action === 'delete_user_chat') {
+        $userId = (int) ($body['user_id'] ?? 0);
+        if ($userId <= 0) {
+            json_response(['ok' => false, 'error' => 'User ID required'], 400);
+        }
+        $check = db()->prepare('SELECT id FROM users WHERE id = ? LIMIT 1');
+        $check->execute([$userId]);
+        if (!$check->fetch()) {
+            json_response(['ok' => false, 'error' => 'User not found'], 404);
+        }
+        $stmt = db()->prepare('DELETE FROM chat_messages WHERE user_id = ?');
+        $stmt->execute([$userId]);
+        audit_log((int) $admin['id'], 'chat_delete', "user={$userId}");
+        json_response(['ok' => true, 'deleted' => $stmt->rowCount()]);
+    }
+
+    json_response(['ok' => false, 'error' => 'Unknown action'], 400);
+}
 
 $userId = (int) ($_GET['user_id'] ?? 0);
 $limit = min(500, max(1, (int) ($_GET['limit'] ?? 200)));

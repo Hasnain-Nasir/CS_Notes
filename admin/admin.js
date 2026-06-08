@@ -65,8 +65,12 @@
 
   var chatsUsers = document.getElementById("chats-users");
   var chatsMessages = document.getElementById("chats-messages");
+  var chatsToolbar = document.getElementById("chats-toolbar");
+  var chatsActiveLabel = document.getElementById("chats-active-label");
+  var deleteUserChatBtn = document.getElementById("delete-user-chat");
   if (chatsUsers && chatsMessages) {
     var activeChatUser = null;
+    var activeChatName = "";
 
     function formatChatTime(ts) {
       if (!ts) return "";
@@ -90,8 +94,11 @@
       if (thread) thread.scrollTop = thread.scrollHeight;
     }
 
-    function loadUserChat(userId) {
+    function loadUserChat(userId, userName) {
       activeChatUser = userId;
+      activeChatName = userName || "";
+      if (chatsToolbar) chatsToolbar.hidden = false;
+      if (chatsActiveLabel) chatsActiveLabel.textContent = activeChatName || "Chat";
       chatsUsers.querySelectorAll("[data-chat-user]").forEach(function (btn) {
         btn.classList.toggle("is-active", +btn.dataset.chatUser === userId);
       });
@@ -101,6 +108,23 @@
       }).catch(function (e) {
         chatsMessages.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>";
       });
+    }
+
+    function deleteActiveChat() {
+      if (!activeChatUser) return;
+      if (!confirm("Delete all chat messages for " + (activeChatName || "this user") + "? This cannot be undone.")) return;
+      api("messages.php", { method: "POST", body: { action: "delete_user_chat", user_id: activeChatUser } })
+        .then(function () {
+          activeChatUser = null;
+          activeChatName = "";
+          if (chatsToolbar) chatsToolbar.hidden = true;
+          loadChatUsers();
+        })
+        .catch(function (e) { alert(e.message); });
+    }
+
+    if (deleteUserChatBtn) {
+      deleteUserChatBtn.addEventListener("click", deleteActiveChat);
     }
 
     function loadChatUsers() {
@@ -118,11 +142,12 @@
         }).join("");
         chatsUsers.querySelectorAll("[data-chat-user]").forEach(function (btn) {
           btn.addEventListener("click", function () {
-            loadUserChat(+btn.dataset.chatUser);
+            loadUserChat(+btn.dataset.chatUser, btn.textContent.trim());
           });
         });
         if (!activeChatUser || !users.some(function (u) { return u.id === activeChatUser; })) {
-          loadUserChat(users[0].id);
+          var first = users[0];
+          loadUserChat(first.id, first.display_name || first.username);
         }
       }).catch(function (e) {
         chatsMessages.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>";

@@ -717,16 +717,14 @@
     }
 
     function appendMessageTyping(role, content) {
-      if (role !== "assistant") return appendMessage(role, content, true);
-
       return new Promise(function (resolve) {
         if (typingTimer) clearTimeout(typingTimer);
 
         var line = document.createElement("div");
-        line.className = "nain-term-line nain-term-line--assistant";
+        line.className = "nain-term-line nain-term-line--" + role;
         var promptSpan = document.createElement("span");
         promptSpan.className = "nain-term-prompt";
-        promptSpan.textContent = botSlug + ">";
+        promptSpan.textContent = role === "user" ? promptEl.textContent : botSlug + ">";
         var textWrap = document.createElement("span");
         textWrap.className = "nain-term-typed";
         var cursor = document.createElement("span");
@@ -807,13 +805,14 @@
       setTerminalCleared(false);
       sending = true;
       if (sendBtn) sendBtn.disabled = true;
-      appendMessage("user", text, true);
 
-      fetch("/api/chat/send.php", {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, page_url: getPageUrl() })
+      appendMessageTyping("user", text).then(function () {
+        return fetch("/api/chat/send.php", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text, page_url: getPageUrl() })
+        });
       })
         .then(function (r) { return r.json(); })
         .then(function (d) {

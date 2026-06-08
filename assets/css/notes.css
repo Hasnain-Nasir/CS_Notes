@@ -2741,6 +2741,10 @@ body.fab-stacked .nain-term-widget {
   margin-left: 1px;
 }
 
+.nain-term-line--user .nain-term-cursor {
+  color: #79c0ff;
+}
+
 @keyframes nain-term-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
