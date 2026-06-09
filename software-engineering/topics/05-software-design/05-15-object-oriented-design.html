@@ -35,21 +35,119 @@
 
         <p>
           <strong>Object-oriented design (OOD)</strong> is a design technique that solves software problems by building
-          a system of interrelated objects. Instead of focusing on functions, OOD focuses on the
-          <em>data to be manipulated</em> — organising software around objects that combine data and behaviour.
+          a system of interrelated objects. It uses the concepts of classes and objects, encapsulation, inheritance,
+          and polymorphism to model real-world entities and their interactions. A system architecture that is modular,
+          adaptable, and simple to understand and maintain is produced using OOD.
         </p>
         <p>
-          OOD is orthogonal to function-oriented design (<a href="05-14-function-oriented-design.html#sec-5-14">§5.14</a>):
-          where FOD asks "what does the program do?", OOD asks "what entities exist and how do they interact?"
+          OOD is orthogonal to
+          <a href="05-14-function-oriented-design.html#sec-5-14">function-oriented design</a>:
+          where FOD asks <em>"what does the program do?"</em>, OOD asks <em>"what entities exist and how do they interact?"</em>
         </p>
 
+        <figure class="diagram figure-photo" aria-labelledby="fig-paradigms-caption">
+          <img src="../../../assets/images/se-topic-05/programming-paradigms-hierarchy.png"
+               alt="Hierarchy of programming paradigms — machine language to object-oriented programming"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-paradigms-caption">Hierarchy of programming paradigms — OOP builds on structured and procedural programming.</figcaption>
+        </figure>
+
+        <h3>Object-oriented system</h3>
+        <p>
+          An <strong>object-oriented system</strong> is a development model where objects are used to specify different
+          aspects of an application. Everything — data, information, processes, functions, and so on — is considered an
+          object. The software developer focuses on the task, not on the tools, and organises the application on the
+          basis of object-oriented concepts. The behaviour of the system depends on the collaboration between different
+          objects.
+        </p>
+
+        <h3>Phases of object-oriented software development</h3>
+        <p>
+          Object-oriented development is a structured approach to design and build software systems using the
+          principles of object-oriented programming. The process promotes modularity and reusability, helping
+          developers manage the system throughout the lifecycle.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-ood-phases-caption">
+          <img src="../../../assets/images/se-topic-05/ood-development-phases.png"
+               alt="Phases of object-oriented software development — requirements, design, implementation, verification, maintenance"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-ood-phases-caption">Phases of object-oriented software development.</figcaption>
+        </figure>
+
+        <h4>1. Object-oriented analysis (OOA)</h4>
+        <ul>
+          <li>OOA is the initial phase that focuses on understanding user requirements in terms of objects.</li>
+          <li>It helps in understanding, organising, and defining the problem before moving into design and implementation.</li>
+          <li>OOA focuses on how the model should function and how it must be developed.</li>
+          <li>The output is a clear and detailed understanding of the problem statement and system requirements.</li>
+        </ul>
+
+        <h4>2. Object-oriented design (OOD)</h4>
+        <p>
+          OOD is the key phase that follows OOA. It creates a well-structured design based on the object-oriented
+          paradigm, turning the models and insights from analysis into an efficient software system. OOD includes both:
+        </p>
+        <ul>
+          <li><strong>System design:</strong> Designs the software system based on information gathered during analysis. It provides the roadmap for how various components and modules work together according to the proposed architecture.</li>
+          <li><strong>Object design:</strong> Focuses on the detailed design of individual classes and objects — specifying how they are implemented. Object design is the foundation of writing actual code and must ensure the system is efficient, maintainable, and extensible.</li>
+        </ul>
+
+        <h4>3. Object-oriented implementation</h4>
+        <ul>
+          <li>Implementation translates the design model from OOA and OOD into actual code using an OOP language such as Java, C++, or Python.</li>
+          <li>Classes and objects defined during design are coded with their attributes, methods, and relationships.</li>
+        </ul>
+
+        <h4>Example — Book class (implementation)</h4>
+        <div class="terminal" aria-label="Python Book class implementation">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">book.py</span>
+          </div>
+          <pre><code>class Book:
+    def __init__(self, title, author, available=True):
+        self.title = title
+        self.author = author
+        self.available = available
+
+# Book objects
+book1 = Book("XYZ", "Ashutosh", True)
+book2 = Book("Yzx", "Amit", False)</code></pre>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Book class</th><th>Details</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Attributes</strong></td><td><code>title</code>, <code>author</code>, <code>available</code></td></tr>
+              <tr><td><strong>Objects</strong></td><td><code>book1</code> (XYZ, Ashutosh, available), <code>book2</code> (Yzx, Amit, not available)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>4. Object-oriented testing</h4>
+        <ul>
+          <li>Testing is the final phase that verifies and validates the functionality of the software system.</li>
+          <li>It tests the actual code and performance of the object-oriented system using specialised techniques.</li>
+          <li>It encompasses unit testing, integration testing, system testing, and more.</li>
+          <li>Object-oriented testing ensures the reliability and quality of the software system.</li>
+        </ul>
+
         <h3>Core OOD concepts</h3>
+        <p>
+          Object-oriented design includes a number of fundamental ideas that make it easier to create reliable,
+          scalable, and maintainable software.
+        </p>
 
         <h4>1. Objects and classes</h4>
         <ul>
           <li>An <strong>object</strong> is an independent entity with individual characteristics (attributes) and behaviours (methods).</li>
           <li>A <strong>class</strong> is a blueprint that defines the attributes and methods shared by all objects of that type.</li>
-          <li>OOD begins by examining real-world "things" and identifying the objects and classes that represent them.</li>
+          <li>OOD begins by examining real-world entities and identifying the objects and classes that represent them.</li>
         </ul>
 
         <h4>2. Encapsulation</h4>
@@ -60,10 +158,56 @@
           <figcaption id="fig-encap-caption">Encapsulation — data and methods bundled within an object; internal details hidden.</figcaption>
         </figure>
         <ul>
-          <li>Encapsulation bundles data and the methods that operate on that data within a single unit (object).</li>
-          <li>Internal state and representation information is held within the object itself — objects can be changed without affecting others.</li>
-          <li>External access is through well-defined public interfaces (methods).</li>
+          <li>Encapsulation bundles data (attributes) and methods (functions) that operate on the data into a single unit called a class.</li>
+          <li>It restricts direct access to some of the object's components, preventing accidental interference and misuse of data.</li>
+          <li>Example: a <code>Car</code> class with private attributes <code>speed</code> and <code>fuelLevel</code> and public methods <code>accelerate()</code>, <code>brake()</code>, and <code>refuel()</code>.</li>
         </ul>
+        <div class="terminal" aria-label="C++ Car class — encapsulation example">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">car_encapsulation.cpp</span>
+          </div>
+          <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Car {
+private:
+    int speed;
+    double fuelLevel;
+public:
+    Car() : speed(0), fuelLevel(100.0) {}
+    void accelerate(int amount) {
+        speed += amount;
+        fuelLevel -= amount * 0.1;
+    }
+    void brake() { speed = 0; }
+    void refuel(double amount) { fuelLevel += amount; }
+    void display() {
+        cout &lt;&lt; "Speed: " &lt;&lt; speed
+             &lt;&lt; ", Fuel Level: " &lt;&lt; fuelLevel &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Car myCar;
+    myCar.accelerate(10);
+    myCar.brake();
+    myCar.refuel(20);
+    myCar.display();
+    return 0;
+}</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Car encapsulation output">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Output</span>
+          </div>
+          <pre><code>Speed: 0, Fuel Level: 119</code></pre>
+        </div>
 
         <h4>3. Abstraction</h4>
         <figure class="diagram figure-photo" aria-labelledby="fig-abstract-caption">
@@ -74,8 +218,54 @@
         </figure>
         <ul>
           <li>Abstraction hides complex implementation details and shows only the essential features of an object.</li>
-          <li>It helps manage complexity by allowing designers to focus on interactions at a higher level.</li>
+          <li>It helps manage complexity by allowing the designer to focus on interactions at a higher level.</li>
+          <li>Example: an <code>Animal</code> class represents general properties without detailing each specific animal type.</li>
         </ul>
+        <div class="terminal" aria-label="C++ Animal class — abstraction example">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">animal_abstraction.cpp</span>
+          </div>
+          <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Animal {
+public:
+    virtual string makeSound() const = 0;
+};
+
+class Dog : public Animal {
+public:
+    string makeSound() const override { return "Bark"; }
+};
+
+class Cat : public Animal {
+public:
+    string makeSound() const override { return "Meow"; }
+};
+
+int main() {
+    Animal* dog = new Dog();
+    Animal* cat = new Cat();
+    cout &lt;&lt; dog-&gt;makeSound() &lt;&lt; endl;
+    cout &lt;&lt; cat-&gt;makeSound() &lt;&lt; endl;
+    delete dog; delete cat;
+    return 0;
+}</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Animal abstraction output">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Output</span>
+          </div>
+          <pre><code>Bark
+Meow</code></pre>
+        </div>
 
         <h4>4. Inheritance</h4>
         <figure class="diagram figure-photo" aria-labelledby="fig-inherit-caption">
@@ -85,9 +275,68 @@
           <figcaption id="fig-inherit-caption">Inheritance — derived classes inherit attributes and methods from a base class.</figcaption>
         </figure>
         <ul>
-          <li>Inheritance allows a new class to inherit properties and behaviours (methods) from an existing class.</li>
-          <li>It promotes code reuse and establishes a natural hierarchy between classes (e.g., Vehicle → Car, Truck).</li>
+          <li>Inheritance is a mechanism where a new class inherits properties and behaviours from an existing class.</li>
+          <li>It promotes code reuse and establishes a natural hierarchy between classes.</li>
+          <li>Example: a <code>Vehicle</code> parent class with <code>make</code> and <code>model</code>; child classes <code>Car</code> and <code>Bike</code> add specific properties.</li>
         </ul>
+        <div class="terminal" aria-label="C++ Vehicle inheritance example">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">vehicle_inheritance.cpp</span>
+          </div>
+          <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Vehicle {
+protected:
+    string make, model;
+public:
+    Vehicle(string make, string model) : make(make), model(model) {}
+};
+
+class Car : public Vehicle {
+    int num_doors;
+public:
+    Car(string make, string model, int doors)
+        : Vehicle(make, model), num_doors(doors) {}
+    void display() {
+        cout &lt;&lt; "Make: " &lt;&lt; make &lt;&lt; ", Model: " &lt;&lt; model
+             &lt;&lt; ", Doors: " &lt;&lt; num_doors &lt;&lt; endl;
+    }
+};
+
+class Bike : public Vehicle {
+    string type_bike;
+public:
+    Bike(string make, string model, string type)
+        : Vehicle(make, model), type_bike(type) {}
+    void display() {
+        cout &lt;&lt; "Make: " &lt;&lt; make &lt;&lt; ", Model: " &lt;&lt; model
+             &lt;&lt; ", Type: " &lt;&lt; type_bike &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Car myCar("Toyota", "Corolla", 4);
+    Bike myBike("Yamaha", "MT-07", "Sport");
+    myCar.display();
+    myBike.display();
+    return 0;
+}</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Vehicle inheritance output">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Output</span>
+          </div>
+          <pre><code>Make: Toyota, Model: Corolla, Doors: 4
+Make: Yamaha, Model: MT-07, Type: Sport</code></pre>
+        </div>
 
         <h4>5. Polymorphism</h4>
         <figure class="diagram figure-photo" aria-labelledby="fig-poly-caption">
@@ -97,76 +346,230 @@
           <figcaption id="fig-poly-caption">Polymorphism — same interface, different implementations across classes.</figcaption>
         </figure>
         <ul>
-          <li>Polymorphism allows objects of different classes to respond to the same method call in different ways.</li>
-          <li>Example: a <code>draw()</code> method behaves differently for Circle, Rectangle, and Triangle objects.</li>
-          <li>It enables flexible, extensible designs without modifying existing code.</li>
+          <li>Polymorphism allows objects of different classes to be treated as objects of a common superclass.</li>
+          <li>It enables a single interface to represent different underlying types.</li>
+          <li>Example: <code>Dog</code> and <code>Cat</code> both inherit from <code>Animal</code>; a function can call <code>makeSound()</code> on any <code>Animal</code> object.</li>
         </ul>
+        <div class="terminal" aria-label="C++ polymorphism example">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">polymorphism.cpp</span>
+          </div>
+          <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
 
-        <h3>OOD process</h3>
+class Animal {
+public:
+    virtual string makeSound() const = 0;
+};
+
+class Dog : public Animal {
+public:
+    string makeSound() const override { return "Bark"; }
+};
+
+class Cat : public Animal {
+public:
+    string makeSound() const override { return "Meow"; }
+};
+
+void animalSound(const Animal&amp; animal) {
+    cout &lt;&lt; animal.makeSound() &lt;&lt; endl;
+}
+
+int main() {
+    Dog dog;
+    Cat cat;
+    animalSound(dog);
+    animalSound(cat);
+    return 0;
+}</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Polymorphism output">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Output</span>
+          </div>
+          <pre><code>Bark
+Meow</code></pre>
+        </div>
+
+        <h4>6. Composition</h4>
+        <figure class="diagram figure-photo" aria-labelledby="fig-composition-caption">
+          <img src="../../../assets/images/se-topic-05/ood-composition.png"
+               alt="Composition — University container object contains Department contained objects"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-composition-caption">Composition — a container object contains one or more contained objects (has-a relationship).</figcaption>
+        </figure>
         <ul>
-          <li><strong>Identify objects and classes</strong> from the problem domain (real-world entities).</li>
-          <li><strong>Define attributes and methods</strong> for each class based on requirements.</li>
-          <li><strong>Establish relationships</strong> between classes — inheritance, association, aggregation, composition.</li>
-          <li><strong>Design interactions</strong> between objects using sequence and collaboration diagrams.</li>
-          <li><strong>Apply design principles</strong> — high cohesion within classes, low coupling between classes.</li>
+          <li>Composition is a design principle where a class is composed of one or more objects of other classes, rather than inheriting from them.</li>
+          <li>This promotes flexibility and reusability through a <strong>has-a</strong> relationship.</li>
+          <li>Example: a <code>Library</code> class is composed of <code>Book</code> objects instead of inheriting from <code>Book</code>.</li>
+        </ul>
+        <div class="terminal" aria-label="C++ Library composition example">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">library_composition.cpp</span>
+          </div>
+          <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Book {
+    string title, author;
+public:
+    Book(string title, string author) : title(title), author(author) {}
+    string getTitle() const { return title; }
+    string getAuthor() const { return author; }
+};
+
+class Library {
+    vector&lt;Book&gt; books;
+public:
+    void addBook(const Book&amp; book) { books.push_back(book); }
+    void listBooks() const {
+        for (const auto&amp; book : books)
+            cout &lt;&lt; book.getTitle() &lt;&lt; " by " &lt;&lt; book.getAuthor() &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Library library;
+    library.addBook(Book("1984", "George Orwell"));
+    library.addBook(Book("To Kill a Mockingbird", "Harper Lee"));
+    library.listBooks();
+    return 0;
+}</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Library composition output">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Output</span>
+          </div>
+          <pre><code>1984 by George Orwell
+To Kill a Mockingbird by Harper Lee</code></pre>
+        </div>
+
+        <h3>Design patterns in OOD</h3>
+        <p>
+          Design patterns are proven solutions to common problems in software design. They provide templates that help
+          structure code in an efficient and maintainable way.
+        </p>
+        <ul>
+          <li><strong>Creational patterns</strong> deal with object creation — e.g., <strong>Singleton</strong> (one instance, global access) and <strong>Factory Method</strong> (interface for creating objects, subclasses decide the type).</li>
+          <li><strong>Structural patterns</strong> deal with object composition — e.g., <strong>Adapter</strong> (converts one interface to another) and <strong>Composite</strong> (tree structures for part-whole hierarchies).</li>
+          <li><strong>Behavioural patterns</strong> deal with communication between objects — e.g., <strong>Observer</strong> (one-to-many notification on state change) and <strong>Strategy</strong> (family of interchangeable algorithms).</li>
         </ul>
 
-        <h3>OOD vs function-oriented design</h3>
-        <table>
-          <thead>
-            <tr><th>Aspect</th><th>Function-Oriented Design</th><th>Object-Oriented Design</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Focus</strong></td>
-              <td>Functions the program performs.</td>
-              <td>Data/entities to be manipulated.</td>
-            </tr>
-            <tr>
-              <td><strong>Approach</strong></td>
-              <td>Top-down (stepwise refinement).</td>
-              <td>Bottom-up (identify objects first).</td>
-            </tr>
-            <tr>
-              <td><strong>Decomposition</strong></td>
-              <td>Function/procedure level.</td>
-              <td>Class/object level.</td>
-            </tr>
-            <tr>
-              <td><strong>Grouping basis</strong></td>
-              <td>Functions grouped to obtain higher-level functions.</td>
-              <td>Functions grouped by the data they operate on (classes).</td>
-            </tr>
-            <tr>
-              <td><strong>Design tools</strong></td>
-              <td>DFD, structure charts.</td>
-              <td>UML diagrams (class, sequence, use case).</td>
-            </tr>
-            <tr>
-              <td><strong>Real-world mapping</strong></td>
-              <td>Functions are not real-world entities.</td>
-              <td>Objects represent real-world entities with state and behaviour.</td>
-            </tr>
-          </tbody>
-        </table>
+        <h3>UML diagrams for visualizing OOD</h3>
+        <p>
+          UML diagrams serve as a blueprint for object-oriented systems, making complex concepts easier to understand
+          and communicate. Full coverage in <a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>.
+        </p>
+        <ul>
+          <li><strong>Class diagrams</strong> show classes, their attributes, methods, and relationships — the foundation of OOD structure.</li>
+          <li><strong>Sequence diagrams</strong> illustrate how objects interact over time, showing the order of messages and actions.</li>
+          <li><strong>State diagrams</strong> represent the various states of an object and transitions between them in response to events.</li>
+        </ul>
+
+        <h3>Common challenges in OOD</h3>
+        <ul>
+          <li><strong>Over-engineering:</strong> Designing for future needs that may never arise adds unnecessary complexity. Mitigation: focus on current requirements and add extensibility only when clearly needed.</li>
+          <li><strong>Under-engineering:</strong> Not foreseeing future demands leads to an inflexible system. Mitigation: apply SOLID principles and design patterns that facilitate flexibility.</li>
+          <li><strong>Performance vs encapsulation:</strong> Encapsulation can add abstraction layers that impact performance. Mitigation: use encapsulation judiciously and optimise critical paths.</li>
+          <li><strong>Abstraction level:</strong> Too much abstraction obscures functionality; too little leads to code duplication. Mitigation: aim for clear abstractions that represent the problem domain.</li>
+        </ul>
+
+        <h3>Common anti-patterns in OOD</h3>
+        <ul>
+          <li><strong>God object:</strong> A single class takes on too many responsibilities, violating the Single Responsibility Principle.</li>
+          <li><strong>Spaghetti code:</strong> Complex and tangled control structure that is difficult to follow and maintain.</li>
+          <li><strong>Lava flow:</strong> Dead code, outdated design elements, and obsolete components that remain in the codebase.</li>
+          <li><strong>Object orgy:</strong> Excessive sharing of data and methods between classes, leading to tight coupling and lack of encapsulation.</li>
+        </ul>
+
+        <h3>FOD vs object-oriented design</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Comparison factor</th><th>Function-oriented design</th><th>Object-oriented design</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Abstraction</strong></td>
+                <td>Basic abstractions are real-world functions given to the user.</td>
+                <td>Basic abstractions are data abstractions where real-world entities are represented as objects.</td>
+              </tr>
+              <tr>
+                <td><strong>Function grouping</strong></td>
+                <td>Functions are grouped together to obtain a higher-level function.</td>
+                <td>Functions are grouped on the basis of the data they operate on, since classes are associated with their methods.</td>
+              </tr>
+              <tr>
+                <td><strong>Execution / tools</strong></td>
+                <td>Carried out using structured analysis and design — DFD, structure charts.</td>
+                <td>Carried out using UML diagrams.</td>
+              </tr>
+              <tr>
+                <td><strong>State information</strong></td>
+                <td>State information is often represented in a centralised shared memory.</td>
+                <td>State information is distributed among the objects of the system, not in centralised memory.</td>
+              </tr>
+              <tr>
+                <td><strong>Approach</strong></td>
+                <td>Top-down approach.</td>
+                <td>Bottom-up approach.</td>
+              </tr>
+              <tr>
+                <td><strong>Begins with</strong></td>
+                <td>Begins by considering use case diagrams and scenarios.</td>
+                <td>Begins by identifying objects and classes.</td>
+              </tr>
+              <tr>
+                <td><strong>Decomposition</strong></td>
+                <td>Decompose at function/procedure level.</td>
+                <td>Decompose at class level.</td>
+              </tr>
+              <tr>
+                <td><strong>Best suited for</strong></td>
+                <td>Computation-sensitive applications.</td>
+                <td>Evolving systems that mimic a business or business case.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>See also <a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a> and <a href="05-14-function-oriented-design.html#sec-5-14">§5.14</a>.</p>
 
         <h3>Benefits of OOD</h3>
         <ul>
           <li>Produces a system architecture that is modular, adaptable, and easy to understand and maintain.</li>
-          <li>Objects are independent entities — can be distributed and can execute sequentially or in parallel.</li>
-          <li>Encapsulation, inheritance, and polymorphism promote reusability and extensibility.</li>
-          <li>UML diagrams provide a standard visual language for OOD — see <a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>.</li>
+          <li>Objects are independent entities that can be distributed and can execute sequentially or in parallel.</li>
+          <li>Encapsulation, inheritance, polymorphism, and composition promote reusability and extensibility.</li>
+          <li>UML diagrams provide a standard visual language for communicating OOD decisions.</li>
         </ul>
 
         <div class="callout exam">
           <div class="callout-title">Exam question — Object-oriented design</div>
-          <p><strong>Q:</strong> Explain OOD. What are its core concepts? How does it differ from FOD?</p>
+          <p><strong>Q:</strong> Explain OOD. What are its core concepts and phases? How does it differ from FOD?</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Define OOD: system of interrelated objects combining data + behaviour.</li>
-            <li>Four pillars: encapsulation, abstraction, inheritance, polymorphism — with brief explanation each.</li>
-            <li>Process: identify objects/classes → attributes/methods → relationships → interactions.</li>
-            <li>vs FOD: data focus vs function focus; bottom-up vs top-down; UML vs DFD/structure charts.</li>
+            <li>Define OOD: system of interrelated objects; data + behaviour; modular and maintainable architecture.</li>
+            <li>Phases: OOA (understand requirements as objects) → OOD (system design + object design) → implementation → testing.</li>
+            <li>Core concepts: encapsulation, abstraction, inheritance, polymorphism, composition — with examples.</li>
+            <li>Design patterns: creational (Singleton, Factory), structural (Adapter, Composite), behavioural (Observer, Strategy).</li>
+            <li>UML: class, sequence, state diagrams.</li>
+            <li>Anti-patterns: God object, spaghetti code, lava flow, object orgy.</li>
+            <li>vs FOD: data abstraction vs functions; bottom-up vs top-down; UML vs DFD; distributed state vs centralised memory.</li>
           </ul>
         </div>
       </section>

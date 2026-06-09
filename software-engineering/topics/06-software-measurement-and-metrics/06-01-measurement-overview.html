@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 6 — 6.1 Software Measurement and Metrics</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>6.1 Software Measurement and Metrics (overview)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 6</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-6-1">
+
+        <p>
+          <strong>Software measurement</strong> is the process of assigning numbers or symbols to attributes of a
+          software product or the software process so that the team can understand, control, and improve quality,
+          cost, and schedule. A <strong>metric</strong> is a quantitative measure derived from those measurements —
+          for example, defect density, function points, or cyclomatic complexity.
+        </p>
+        <p>
+          Measurement makes software development <strong>disciplined and quantifiable</strong>, which is one of the
+          core goals of Software Engineering. Without metrics, managers cannot estimate effort reliably, testers cannot
+          judge coverage, and designers cannot compare alternative solutions objectively.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-metrics-types-caption">
+          <img src="../../../assets/images/se-topic-06/types-of-software-metrics.webp"
+               alt="Types of software metrics — product, process, and project metrics"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-metrics-types-caption">Software metrics are classified into product, process, and project metrics.</figcaption>
+        </figure>
+
+        <h3>Measurement vs metric</h3>
+        <ul>
+          <li>A <strong>measurement</strong> is a manifestation of the size, quantity, amount, or dimension of a particular attribute of a product or process.</li>
+          <li>A <strong>metric</strong> is a measurement of the level at which any input belongs to a system, product, or process.</li>
+          <li>Measurements provide raw data; metrics interpret that data into indicators useful for decision-making.</li>
+        </ul>
+
+        <h3>Why software is measured</h3>
+        <ul>
+          <li>Measurement helps assess the <strong>current quality</strong> of a product or process and anticipate future quality trends.</li>
+          <li>It supports <strong>data-driven project planning</strong> — budget control, schedule tracking, and resource allocation.</li>
+          <li>Metrics identify bottlenecks and weak areas so the team can target process improvement activities.</li>
+          <li>They help ensure compliance with industry standards and organisational quality goals.</li>
+          <li>Measurement gives a quantitative basis for evaluating design alternatives, testing depth, and maintenance effort.</li>
+        </ul>
+
+        <h3>Direct vs indirect measurement</h3>
+        <ul>
+          <li><strong>Direct measurement:</strong> The product, process, or attribute is measured directly using a standard scale — e.g., counting lines of code or function points.</li>
+          <li><strong>Indirect measurement:</strong> The quantity is estimated through related parameters — e.g., using productivity (LOC per person-month) to infer effort from size.</li>
+        </ul>
+
+        <h3>The five activities of the measurement process</h3>
+        <p>The software measurement process (governed by ISO standards) consists of five activities:</p>
+        <ul>
+          <li><strong>Formulation:</strong> Derive appropriate measures and metrics to represent the software being studied.</li>
+          <li><strong>Collection:</strong> Accumulate the data required to compute the formulated metrics.</li>
+          <li><strong>Analysis:</strong> Compute metric values and apply mathematical or statistical tools.</li>
+          <li><strong>Interpretation:</strong> Evaluate metric results to gain insight into quality, size, or process performance.</li>
+          <li><strong>Feedback:</strong> Transmit recommendations derived from metrics back to the development team for corrective action.</li>
+        </ul>
+
+        <h3>Characteristics of good software metrics</h3>
+        <ul>
+          <li><strong>Quantitative:</strong> Metrics must be expressible as numerical values.</li>
+          <li><strong>Understandable:</strong> The computation method must be clearly defined and easy to explain.</li>
+          <li><strong>Applicable early:</strong> Metrics should be usable in the initial phases of development, not only after coding is complete.</li>
+          <li><strong>Repeatable:</strong> Repeated measurement under the same conditions should yield consistent results.</li>
+          <li><strong>Economical:</strong> Collecting and computing the metric should not cost more than the value it provides.</li>
+          <li><strong>Language independent:</strong> Effective metrics should not depend on a specific programming language (function points are a good example).</li>
+        </ul>
+
+        <h3>Four management functions of metrics</h3>
+        <ul>
+          <li><strong>Planning:</strong> Metrics support effort and cost estimation before development begins.</li>
+          <li><strong>Organising:</strong> Metrics help allocate staff, modules, and testing resources across the project.</li>
+          <li><strong>Controlling:</strong> Metrics track progress against plan — schedule deviation, cost variance, defect trends.</li>
+          <li><strong>Improving:</strong> Metrics highlight areas where the process or product quality can be raised in future projects.</li>
+        </ul>
+
+        <h3>Types of software metrics</h3>
+        <h4>Product metrics</h4>
+        <ul>
+          <li>Product metrics describe attributes of the software itself — size, complexity, reliability, and maintainability.</li>
+          <li>Examples: LOC, function points, Halstead volume, cyclomatic complexity, defect density.</li>
+          <li>Size and complexity are classified as <strong>product metrics</strong> in exams (UGC-NET).</li>
+        </ul>
+        <h4>Process metrics</h4>
+        <ul>
+          <li>Process metrics describe the development process that creates the software body.</li>
+          <li>Examples: lead time, cycle time, defect density per iteration, process compliance.</li>
+          <li>Process quality is assumed to influence product quality — better process → more reliable product.</li>
+        </ul>
+        <h4>Project metrics</h4>
+        <ul>
+          <li>Project metrics describe the characteristics and execution of a project as a whole.</li>
+          <li>Examples: number of developers, staffing patterns over the lifecycle, cost, schedule, productivity, effort estimation accuracy.</li>
+        </ul>
+
+        <h3>Size-oriented vs function-oriented metrics (overview)</h3>
+        <p>The course groups the main size measures into two families — covered in detail in later sections:</p>
+        <ul>
+          <li><strong>Size-oriented (white-box / direct):</strong> LOC, KLOC, Halstead metrics — based on the actual code or token structure.</li>
+          <li><strong>Function-oriented (black-box / indirect):</strong> Function Point Analysis — based on user-visible functionality, not implementation language.</li>
+          <li><strong>Complexity metrics:</strong> Cyclomatic complexity — measures control-flow complexity via a Control Flow Graph (CFG).</li>
+        </ul>
+        <p>
+          These metrics feed into project estimation models such as COCOMO
+          (<a href="../03-software-project-management/03-06-cocomo.html#sec-3-6">§3.6</a>) and size estimation techniques
+          (<a href="../03-software-project-management/03-05-size-estimation.html#sec-3-5">§3.5</a>).
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software measurement overview</div>
+          <p><strong>Q:</strong> Define software measurement and software metrics. List the five activities of the measurement process and three types of metrics.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Measurement = assigning numbers to product/process attributes; metric = quantitative indicator derived from measurements.</li>
+            <li>Five activities: formulation, collection, analysis, interpretation, feedback.</li>
+            <li>Three types: product (software attributes), process (development activities), project (cost/schedule/staffing).</li>
+            <li>Good metric characteristics: quantitative, understandable, repeatable, economical, language independent.</li>
+            <li>Direct vs indirect measurement; size-oriented (LOC, Halstead) vs function-oriented (FP).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="index.html">&larr; Topic 6</a>
+        <a class="btn-back chapter-nav-next" href="06-02-people-process-metrics.html">6.2 People &amp; Process Metrics &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 6 — 6.6 Cyclomatic Complexity / Control Flow Graphs</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>6.6 Cyclomatic Complexity / Control Flow Graphs</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 6</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-6-6">
+
+        <p>
+          <strong>Cyclomatic complexity</strong>, developed by Thomas McCabe, is a software metric that measures
+          the complexity of a program's <strong>control flow</strong> by counting the number of linearly independent
+          paths through the source code. It is computed from the program's <strong>Control Flow Graph (CFG)</strong>.
+        </p>
+        <p>
+          Lower cyclomatic complexity means simpler logic, easier maintenance, and fewer test paths. Higher values
+          signal harder-to-understand code that may need refactoring and more thorough testing.
+        </p>
+
+        <h3>Control Flow Graph (CFG)</h3>
+        <ul>
+          <li>A CFG is a directed graph representing the flow of control in a program.</li>
+          <li><strong>Nodes</strong> represent basic blocks — the smallest sequence of commands with no branches in or out except at the start and end.</li>
+          <li><strong>Edges</strong> represent possible transfers of control from one block to the next.</li>
+          <li>Decision statements (<code>if</code>, <code>while</code>, <code>for</code>, <code>case</code>) create branches — each branch adds independent paths.</li>
+          <li>If source code has no control-flow statements, cyclomatic complexity = <strong>1</strong> (single path).</li>
+          <li>If source code has one <code>if</code> (true/false), cyclomatic complexity = <strong>2</strong>.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-cfg-caption">
+          <img src="../../../assets/images/se-topic-06/cyclomatic-complexity-cfg.webp"
+               alt="Control flow graph example — nodes and edges used to compute cyclomatic complexity"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-cfg-caption">Control Flow Graph — cyclomatic complexity is derived from nodes, edges, and decision points.</figcaption>
+        </figure>
+
+        <h3>Cyclomatic complexity formulas</h3>
+        <p>For a connected CFG with one entry point (single method/module, P = 1):</p>
+        <table>
+          <thead>
+            <tr><th>Formula</th><th>Expression</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Edge-node formula</td><td><strong>V(G) = E − N + 2</strong></td><td>E = edges, N = nodes, P = 1 connected component</td></tr>
+            <tr><td>Region formula</td><td><strong>V(G) = R + 1</strong></td><td>R = number of bounded regions (areas enclosed by nodes and edges)</td></tr>
+            <tr><td>Decision formula</td><td><strong>V(G) = D + 1</strong></td><td>D = number of decision/predicate nodes (if, while, for, case, etc.)</td></tr>
+            <tr><td>General formula</td><td><strong>V(G) = E − N + 2P</strong></td><td>P = number of connected components</td></tr>
+          </tbody>
+        </table>
+
+        <h3>CFG example</h3>
+        <p>Consider this code segment:</p>
+        <pre><code>A = 10
+IF B &gt; C THEN
+   A = B
+ELSE
+   A = C
+ENDIF
+Print A
+Print B
+Print C</code></pre>
+        <ul>
+          <li>The CFG has 7 nodes and 7 edges.</li>
+          <li>V(G) = E − N + 2 = 7 − 7 + 2 = <strong>2</strong>.</li>
+          <li>One decision (<code>IF B &gt; C</code>) → V(G) = D + 1 = 1 + 1 = <strong>2</strong> — consistent.</li>
+        </ul>
+
+        <h3>Steps to calculate cyclomatic complexity</h3>
+        <ol>
+          <li>Construct the Control Flow Graph from the source code (identify nodes and edges).</li>
+          <li>Identify all linearly independent paths through the graph.</li>
+          <li>Apply any of the three equivalent formulas above.</li>
+          <li>Use the result to design test cases — at least V(G) independent paths should be tested for path coverage.</li>
+        </ol>
+
+        <h3>Need and objectives</h3>
+        <ul>
+          <li>Cyclomatic complexity assesses code <strong>maintainability and readability</strong>.</li>
+          <li>It identifies high-risk modules that are more likely to contain errors.</li>
+          <li>It determines the <strong>minimum number of test cases</strong> needed for basis path testing.</li>
+          <li>It guides refactoring — modules with very high V(G) should be simplified or split.</li>
+          <li>It quantifies control complexity to support better development decisions.</li>
+          <li>It is faster to compute than Halstead metrics and is easy to apply automatically.</li>
+        </ul>
+
+        <h3>Interpretation of values</h3>
+        <ul>
+          <li><strong>Low V(G):</strong> Lower complexity — easier to maintain, test, and understand.</li>
+          <li><strong>High V(G):</strong> Higher complexity — harder to maintain and test; may require refactoring.</li>
+          <li>McCabe suggested V(G) &gt; 10 indicates a module that should be split or redesigned (common rule of thumb in industry).</li>
+          <li>Cyclomatic complexity measures <strong>control complexity only</strong> — it does not reflect data complexity or overall software quality.</li>
+        </ul>
+
+        <h3>Use in testing</h3>
+        <ul>
+          <li>V(G) equals the number of linearly independent paths — the minimum test cases for basis path testing.</li>
+          <li>Each independent path should be executed at least once during white-box testing.</li>
+          <li>Cyclomatic complexity helps testers focus on uncovered paths and improve code coverage.</li>
+          <li>Using V(G) early in development reduces testing risk before integration.</li>
+        </ul>
+
+        <h3>GATE-style solved examples</h3>
+        <h4>Example 1 — Module with while and if (GATE CS 2004)</h4>
+        <pre><code>int module1(int x, int y) {
+  while (x != y) {
+    if (x > y) x = x - y;
+    else y = y - x;
+  }
+  return x;
+}</code></pre>
+        <ul>
+          <li>Decision points: one <code>while</code> + one <code>if</code> → D = 2.</li>
+          <li>V(G) = D + 1 = <strong>3</strong> — answer <strong>(C)</strong>.</li>
+        </ul>
+
+        <h4>Example 2 — Which expressions give V(G)? (GATE CS 2006)</h4>
+        <p>For a connected CFG: P+1 and E−N+2 both equal V(G). Answer: <strong>(C) 2 or 4</strong> — expressions (ii) E−N+2 and (iv) P+1.</p>
+
+        <h4>Example 3 — True statements (GATE CS 2009)</h4>
+        <ul>
+          <li><strong>II.</strong> V(G) = number of decisions + 1 — TRUE.</li>
+          <li><strong>III.</strong> V(G) = number of linearly independent paths for path coverage testing — TRUE.</li>
+          <li>Answer: <strong>(B) II and III</strong>.</li>
+        </ul>
+
+        <h4>Example 4 — Binary search segment (GATE CS 2015)</h4>
+        <pre><code>while (first &lt;= last) {
+  if (array[middle] &lt; search)
+    first = middle + 1;
+  else if (array[middle] == search)
+    found = True;
+  else last = middle - 1;
+  middle = (first + last) / 2;
+}
+if (first &lt; last) notPresent = True;</code></pre>
+        <ul>
+          <li>Decision points: <code>while</code>, first <code>if</code>, <code>else if</code>, final <code>if</code> → D = 4.</li>
+          <li>V(G) = 4 + 1 = <strong>5</strong> — answer <strong>(C)</strong>.</li>
+        </ul>
+
+        <h3>Limitations for exams</h3>
+        <ul>
+          <li>Cyclomatic complexity measures control-flow complexity only — not data structure complexity or overall design quality.</li>
+          <li>Nested conditional structures may be harder to understand than the V(G) number alone suggests.</li>
+          <li>Simple comparisons can sometimes produce misleading complexity figures when predicates are trivial.</li>
+          <li>It does not replace other metrics such as Halstead volume or function points for size estimation.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Cyclomatic complexity</div>
+          <p><strong>Q:</strong> Define cyclomatic complexity. Write three formulas for V(G). How is it used in testing?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>McCabe metric; counts linearly independent paths through program control flow; computed from CFG.</li>
+            <li>V(G) = E−N+2; V(G) = R+1 (bounded regions); V(G) = D+1 (decisions + 1).</li>
+            <li>Minimum test cases for basis path testing = V(G); low value = simpler code; high value = refactor candidate.</li>
+            <li>Control complexity only — not data complexity; white-box / structural testing metric.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="06-05-lines-of-code.html">&larr; 6.5 Lines of Code</a>
+        <a class="btn-back chapter-nav-next" href="06-07-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

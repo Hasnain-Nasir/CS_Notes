@@ -127,6 +127,35 @@
           <li>These principles apply at every design level — from individual functions up to architectural components.</li>
         </ul>
 
+        <h3>Example — high cohesion and low coupling (library system)</h3>
+        <p>
+          The diagram below shows a library system design that demonstrates <strong>high cohesion</strong> within the
+          User module and <strong>low coupling</strong> between the Book, Member, and User modules.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-cc-library-caption">
+          <img src="../../../assets/images/se-topic-05/cohesion-coupling-library-example.png"
+               alt="Library system example — User module with high cohesion; Book and Member modules with low coupling"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-cc-library-caption">High cohesion and low coupling — library system example.</figcaption>
+        </figure>
+
+        <h4>High cohesion — User module</h4>
+        <p>The User module is designed to handle all user-related functionalities:</p>
+        <ul>
+          <li><strong>Attributes:</strong> <code>id</code>, <code>name</code>, and <code>email</code>.</li>
+          <li><strong>Functions:</strong> <code>register()</code>, <code>login()</code>, and <code>logout()</code>.</li>
+          <li><strong>Why high cohesion?</strong> All functions in the User module are related to managing users. Everything in this module is focused on one specific task — handling user operations.</li>
+        </ul>
+
+        <h4>Low coupling — Book and Member modules</h4>
+        <p>The library system consists of two separate modules: Book and Member.</p>
+        <ul>
+          <li><strong>Book module:</strong> Attributes include <code>title</code> and <code>author</code>; functions include <code>addBook()</code> and <code>removeBook()</code>.</li>
+          <li><strong>Member module:</strong> Attributes include <code>memberId</code> and <code>memberName</code>; functions include <code>addMember()</code> and <code>removeMember()</code>.</li>
+          <li><strong>Why low coupling?</strong> The Book and Member modules operate independently. They have their own specific functions and attributes and do not need to know the internal workings of each other.</li>
+          <li><strong>Minimal interaction:</strong> The User module interacts with Book and Member only through simple actions such as borrowing a book or managing memberships, but the modules do not rely on each other for their main tasks.</li>
+        </ul>
+
         <div class="callout exam">
           <div class="callout-title">Exam question — Cohesion vs coupling</div>
           <p><strong>Q:</strong> Differentiate between cohesion and coupling. Why are their desired levels opposite?</p>

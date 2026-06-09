@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 6 — 6.4 Function Point (FP) Analysis</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>6.4 Function Point (FP) Analysis</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 6</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-6-4">
+
+        <p>
+          <strong>Function Point Analysis (FPA)</strong> is a function-oriented (black-box) size metric developed by
+          Allan J. Albrecht at IBM in 1979 and later standardised by IFPUG (1984). It measures software size based
+          on <strong>functionality delivered to the user</strong>, not on lines of code or programming language.
+          The result is a dimensionless number called <strong>function points (FP)</strong>.
+        </p>
+        <p>
+          FP is preferred for business and information systems because the functional size of a system stays
+          <strong>constant regardless of implementation language</strong> — the same requirements yield the same FP
+          whether coded in Java, Python, or COBOL.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-fp-types-caption">
+          <img src="../../../assets/images/se-topic-06/types-of-fp-analysis.webp"
+               alt="Types of functional point analysis — transactional and data functional types"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-fp-types-caption">Function points are classified into transactional and data functional types.</figcaption>
+        </figure>
+
+        <h3>Five information-domain components</h3>
+        <p>FP counts five types of user-visible functions in the information domain:</p>
+        <table>
+          <thead>
+            <tr><th>Component</th><th>Abbreviation</th><th>Description</th><th>Examples</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>External Inputs</td><td>EI</td><td>User data or control sent into the application boundary</td><td>Input screens, forms, tables</td></tr>
+            <tr><td>External Outputs</td><td>EO</td><td>Data or control sent outside the application boundary</td><td>Reports, output screens, error messages</td></tr>
+            <tr><td>External Inquiries</td><td>EQ</td><td>Input-output combination resulting in data retrieval (no update)</td><td>Prompts, interrupts, lookup queries</td></tr>
+            <tr><td>Internal Logical Files</td><td>ILF</td><td>Logically related data maintained inside the application</td><td>Databases, directories, data structures</td></tr>
+            <tr><td>External Interface Files</td><td>EIF</td><td>Data referenced by this application but maintained by another system</td><td>Shared databases, shared routines</td></tr>
+          </tbody>
+        </table>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-fp-analysis-caption">
+          <img src="../../../assets/images/se-topic-06/functional-point-analysis.png"
+               alt="Function point analysis — five components and calculation flow from UFP to adjusted FP"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-fp-analysis-caption">Function Point Analysis — count components, compute UFP, apply complexity adjustment factor.</figcaption>
+        </figure>
+
+        <h3>Complexity weights (2D FP — information domain)</h3>
+        <p>Each component is rated as <strong>Simple</strong>, <strong>Average</strong>, or <strong>Complex</strong> and multiplied by a weight:</p>
+        <table>
+          <thead>
+            <tr><th>Measurement parameter</th><th>Simple</th><th>Average</th><th>Complex</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>External Inputs (EI)</td><td>3</td><td>4</td><td>6</td></tr>
+            <tr><td>External Outputs (EO)</td><td>4</td><td>5</td><td>7</td></tr>
+            <tr><td>External Inquiries (EQ)</td><td>3</td><td>4</td><td>6</td></tr>
+            <tr><td>Internal Logical Files (ILF)</td><td>7</td><td>10</td><td>15</td></tr>
+            <tr><td>External Interface Files (EIF)</td><td>5</td><td>7</td><td>10</td></tr>
+          </tbody>
+        </table>
+
+        <h3>FP calculation steps</h3>
+        <h4>Step 1 — Count functions and compute Unadjusted Function Points (UFP)</h4>
+        <ul>
+          <li>Count each EI, EO, EQ, ILF, and EIF; classify each as simple, average, or complex.</li>
+          <li>Multiply each count by its weight and sum all weighted values.</li>
+          <li><strong>UFP = Σ (count<sub>i</sub> × weight<sub>i</sub>)</strong> for all five component types.</li>
+        </ul>
+        <p><strong>Example counts (average complexity):</strong></p>
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>Count</th><th>Weight</th><th>Weighted total</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>EI</td><td>32</td><td>4</td><td>128</td></tr>
+            <tr><td>EO</td><td>60</td><td>5</td><td>300</td></tr>
+            <tr><td>EQ</td><td>24</td><td>4</td><td>96</td></tr>
+            <tr><td>ILF</td><td>8</td><td>10</td><td>80</td></tr>
+            <tr><td>EIF</td><td>2</td><td>7</td><td>14</td></tr>
+            <tr><td colspan="3"><strong>UFP total</strong></td><td><strong>618</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h4>Step 2 — Rate 14 general system characteristics (fi)</h4>
+        <p>
+          Fourteen factors indirectly influence development effort. Each is rated on a scale of
+          <strong>0 (no influence) to 5 (essential)</strong>:
+        </p>
+        <ol>
+          <li>Reliable backup and recovery required</li>
+          <li>Data communication required</li>
+          <li>Distributed processing functions</li>
+          <li>Performance critical</li>
+          <li>Heavily utilised operational environment</li>
+          <li>Online data entry required</li>
+          <li>Online data entry over multiple screens/operations</li>
+          <li>Master files updated online</li>
+          <li>Complex inputs, outputs, files, or inquiries</li>
+          <li>Complex internal processing</li>
+          <li>Code designed to be reusable</li>
+          <li>Conversion and installation included in design</li>
+          <li>System designed for multiple installations/organisations</li>
+          <li>Application designed to facilitate change and ease of use</li>
+        </ol>
+
+        <h4>Step 3 — Compute Complexity Adjustment Factor (CAF / EAF)</h4>
+        <ul>
+          <li><strong>CAF = 0.65 + 0.01 × Σ(fi)</strong>, where Σ(fi) is the sum of all 14 factor ratings.</li>
+          <li>When all factors = 0: CAF = 0.65 (minimum).</li>
+          <li>When all factors = 5: Σ(fi) = 70, CAF = 0.65 + 0.70 = <strong>1.35</strong> (maximum).</li>
+          <li>CAF range: <strong>0.65 to 1.35</strong>.</li>
+        </ul>
+
+        <h4>Step 4 — Compute adjusted Function Points</h4>
+        <ul>
+          <li><strong>Unadjusted case:</strong> FP = UFP (no adjustment applied).</li>
+          <li><strong>Adjusted case:</strong> <strong>FP = UFP × CAF</strong> (also written FP = UFP × EAF).</li>
+        </ul>
+
+        <h3>Worked example</h3>
+        <p>Given: EI=50, EO=40, EQ=35, ILF=6, EIF=4 — all at average complexity; all 14 factors rated average (3 each).</p>
+        <ul>
+          <li>Σ(fi) = 14 × 3 = 42; CAF = 0.65 + 0.01 × 42 = <strong>1.07</strong>.</li>
+          <li>UFP = (50×4) + (40×5) + (35×4) + (6×10) + (4×7) = 200 + 200 + 140 + 60 + 28 = <strong>628</strong>.</li>
+          <li>FP = 628 × 1.07 = <strong>671.96</strong>.</li>
+        </ul>
+
+        <h3>GATE example (CS 2015)</h3>
+        <p>
+          I=30, O=60, E=23, F=8, N=2 with weights 4, 5, 4, 10, 7. Of 14 adjustment factors: 4 not applicable (0),
+          four rated 3, and the remaining six rated 4.
+        </p>
+        <ul>
+          <li>UFP = 30×4 + 60×5 + 23×4 + 8×10 + 2×7 = 120 + 300 + 92 + 80 + 14 = <strong>606</strong>.</li>
+          <li>Σ(fi) = 4×3 + 6×4 = 12 + 24 = 36; CAF = 0.65 + 0.36 = <strong>1.01</strong>.</li>
+          <li>FP = 606 × 1.01 = <strong>612.06</strong> — answer <strong>(A)</strong>.</li>
+        </ul>
+
+        <h3>2D vs 3D function points</h3>
+        <ul>
+          <li><strong>2D FP:</strong> Considers only the <strong>information domain</strong> — the five components above (inputs, outputs, inquiries, files, interfaces).</li>
+          <li><strong>3D FP:</strong> Extends 2D FP by also considering the <strong>function domain</strong> and <strong>behaviour domain</strong> of the system.</li>
+          <li>Both support unadjusted and adjusted (CAF/EAF) calculation.</li>
+        </ul>
+
+        <h3>Objectives and uses of FP</h3>
+        <ul>
+          <li>FP supports early project estimation before coding begins — effort, time, and cost can be derived from FP counts.</li>
+          <li>It enables benchmarking and comparison across projects and organisations using a common functional measure.</li>
+          <li>It aligns development effort with business objectives by focusing on user-visible functionality.</li>
+          <li>FP feeds empirical models such as COCOMO when size is expressed in function points rather than KLOC.</li>
+          <li>FP is primarily used for <strong>business and information systems</strong> (MIS, banking, ERP) rather than real-time embedded systems.</li>
+        </ul>
+
+        <h3>FP vs LOC (summary)</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Function Point (FP)</th><th>Lines of Code (LOC)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Basis</td><td>Specification-based (user functions)</td><td>Code-based (analogy to past projects)</td></tr>
+            <tr><td>Language</td><td>Language independent</td><td>Language dependent</td></tr>
+            <tr><td>Orientation</td><td>User-oriented</td><td>Design/implementation-oriented</td></tr>
+            <tr><td>When usable</td><td>Early in project (from requirements)</td><td>After or during coding</td></tr>
+            <tr><td>Best for</td><td>Data processing / business systems</td><td>Comparing productivity within same language</td></tr>
+          </tbody>
+        </table>
+        <p>See <a href="06-05-lines-of-code.html#sec-6-5">§6.5</a> for full LOC discussion and exam comparison.</p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam questions — Function Point Analysis</div>
+          <p><strong>Q1 (UGC-NET):</strong> LOC and FP are used to measure — (B) Size of Software.</p>
+          <p><strong>Q2 (UGC-NET):</strong> Number of complexity adjustment factors in FP analysis — (C) 14.</p>
+          <p><strong>Q3:</strong> Write the steps to calculate function points. What is CAF?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Count EI, EO, EQ, ILF, EIF; classify simple/average/complex; compute UFP = Σ(count × weight).</li>
+            <li>Rate 14 general system characteristics (0–5 each); CAF = 0.65 + 0.01×Σ(fi); range 0.65–1.35.</li>
+            <li>FP = UFP × CAF. Albrecht 1979; language independent; user-oriented black-box metric.</li>
+            <li>Five components with weights: EI(3/4/6), EO(4/5/7), EQ(3/4/6), ILF(7/10/15), EIF(5/7/10).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="06-03-halstead-metrics.html">&larr; 6.3 Halstead Metrics</a>
+        <a class="btn-back chapter-nav-next" href="06-05-lines-of-code.html">6.5 Lines of Code &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

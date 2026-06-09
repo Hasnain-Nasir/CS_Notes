@@ -34,30 +34,32 @@
       <section id="sec-5-4">
 
         <p>
+          Software needs an <strong>architectural design</strong> to represent the overall structure of the system.
           <strong>Architectural design</strong> is the specification of the major components of a system, their
-          responsibilities, properties, interfaces, and the relationships and interactions between them. IEEE defines
-          architectural design as <em>"the process of defining a collection of hardware and software components and their
-          interfaces to establish the framework for the development of a computer system."</em>
+          responsibilities, properties, interfaces, and the relationships and interactions between them.
+        </p>
+        <p>
+          IEEE defines architectural design as <em>"the process of defining a collection of hardware and software
+          components and their interfaces to establish the framework for the development of a computer system."</em>
+          The software built for computer-based systems can exhibit one of many <strong>architectural styles</strong>.
         </p>
         <p>
           At the architectural level, the overall structure is chosen but internal details of major components are
           ignored — modules are treated as black boxes. Designers focus on coupling and cohesion between modules
-          (see <a href="05-10-coupling-cohesion.html#sec-5-10">§5.10</a>).
+          (see <a href="05-10-coupling-cohesion.html#sec-5-10">§5.10</a> and
+          <a href="05-02-design-process.html#sec-5-2">§5.2</a>).
         </p>
 
-        <figure class="diagram figure-photo" aria-labelledby="fig-program-arch-caption">
-          <img src="../../../assets/images/se-topic-05/program-architecture.png"
-               alt="Program architecture showing major components and their interactions"
-               width="660" height="auto" loading="lazy" decoding="async" />
-          <figcaption id="fig-program-arch-caption">Program architecture — major components and their relationships.</figcaption>
-        </figure>
-
-        <h3>Elements of software architecture</h3>
+        <h3>System category consists of</h3>
+        <p>
+          Every software architecture is built from four fundamental building blocks. The use of architectural styles
+          is to establish a structure for all the components of the system.
+        </p>
         <ul>
-          <li><strong>Components:</strong> A set of elements (e.g., database, computational modules) that perform functions required by the system.</li>
-          <li><strong>Connectors:</strong> Mechanisms that coordinate, communicate, and cooperate between components.</li>
-          <li><strong>Constraints:</strong> Rules defining how components can be integrated to form the complete system.</li>
-          <li><strong>Semantic models:</strong> Models that help the designer understand overall system properties such as performance and reliability.</li>
+          <li><strong>Components:</strong> A set of elements (e.g., a database, computational modules) that perform a function required by the system.</li>
+          <li><strong>Connectors:</strong> A set of connectors that help in coordination, communication, and cooperation between the components.</li>
+          <li><strong>Constraints:</strong> Conditions that define how components can be integrated to form the complete system.</li>
+          <li><strong>Semantic models:</strong> Models that help the designer understand the overall properties of the system (performance, reliability, scalability).</li>
         </ul>
 
         <h3>Issues in architectural design</h3>
@@ -69,39 +71,177 @@
           <li><strong>Communication and interaction:</strong> How components exchange data and control signals.</li>
         </ul>
 
-        <h3>Common architectural styles</h3>
+        <h3>Taxonomy of architectural styles</h3>
+        <p>
+          An <strong>architectural style</strong> is a recurring organisational pattern for the components and
+          connectors of a system. The five major styles covered in the syllabus are: data-centered, data flow,
+          call-and-return, object-oriented, and layered.
+        </p>
 
-        <h4>1. Layered (N-tier) architecture</h4>
-        <figure class="diagram figure-photo" aria-labelledby="fig-layered-caption">
-          <img src="../../../assets/images/se-topic-05/arch-layered.png"
-               alt="Layered architecture with presentation, business, application, and data layers"
+        <h4>1. Data-centered architecture</h4>
+        <p>
+          A <strong>data store</strong> resides at the centre of this architecture and is accessed frequently by other
+          components that update, add, delete, or modify the data present within the store.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-data-centered-caption">
+          <img src="../../../assets/images/se-topic-05/arch-data-centered.png"
+               alt="Data-centered architecture — client software components connected to a central data store repository"
                width="660" height="auto" loading="lazy" decoding="async" />
-          <figcaption id="fig-layered-caption">Layered (N-tier) architecture — components arranged in independent layers.</figcaption>
+          <figcaption id="fig-data-centered-caption">Data-centered architecture — clients access a central repository (blackboard).</figcaption>
         </figure>
         <ul>
-          <li>Components are separated into layers of subtasks, arranged one above another; each layer performs a well-defined set of operations.</li>
-          <li>Each layer is independent — code in one layer can be modified without affecting others.</li>
-          <li>Typical four layers: <strong>presentation</strong> (user interface), <strong>business</strong> (business logic), <strong>application</strong> (communication medium), and <strong>data</strong> (database/storage).</li>
-          <li>Most commonly used pattern for the majority of software systems.</li>
+          <li>Client software accesses a <strong>central repository</strong>. Variations transform the repository into a <strong>blackboard</strong> — when data of interest changes, notifications are sent to client software.</li>
+          <li>Data can be passed among clients using the blackboard mechanism.</li>
+          <li>Clients do not communicate directly with each other — all sharing goes through the central store.</li>
+          <li>This style <strong>promotes integrability</strong>: existing components can be changed and new client components can be added without the permission or concern of other clients.</li>
+        </ul>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+          <li>Repository of data is independent of clients.</li>
+          <li>Clients work independently of each other.</li>
+          <li>It may be simple to add additional clients.</li>
+          <li>Modification can be very easy.</li>
         </ul>
 
-        <h4>2. Object-oriented architecture</h4>
+        <h4>2. Data flow architecture</h4>
+        <p>
+          This architecture is used when <strong>input data is transformed into output data</strong> through a series
+          of computational or manipulative components. The most common form is <strong>pipe-and-filter</strong>
+          architecture.
+        </p>
+        <ul>
+          <li>A set of components called <strong>filters</strong> are connected by <strong>pipes</strong>.</li>
+          <li><strong>Pipes</strong> transmit data from one component to the next.</li>
+          <li>Each filter works <strong>independently</strong> — designed to take data input of a certain form and produce data output of a specified form for the next filter.</li>
+          <li>Filters do not require any knowledge of the working of neighbouring filters.</li>
+          <li>If the data flow degenerates into a <strong>single line of transforms</strong>, it is termed <strong>batch sequential</strong> — accepts a batch of data and applies a series of sequential components to transform it.</li>
+        </ul>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+          <li>Encourages upkeep, repurposing, and modification.</li>
+          <li>Supports concurrent execution.</li>
+        </ul>
+        <p><strong>Disadvantages:</strong></p>
+        <ul>
+          <li>Frequently degenerates to a batch sequential system.</li>
+          <li>Does not suit applications that require greater user engagement (interactive systems).</li>
+          <li>Not easy to coordinate two different but related data streams.</li>
+        </ul>
+
+        <h4>3. Call-and-return architecture</h4>
+        <p>
+          Used to create a program that is easy to <strong>scale and modify</strong>. Many sub-styles exist within
+          this category. Two important sub-styles are:
+        </p>
+
+        <h5>Main program or subprogram architecture</h5>
+        <figure class="diagram figure-photo" aria-labelledby="fig-program-arch-caption">
+          <img src="../../../assets/images/se-topic-05/program-architecture.png"
+               alt="Main program architecture with subprograms in a control hierarchy"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-program-arch-caption">Main program / subprogram architecture — control hierarchy.</figcaption>
+        </figure>
+        <ul>
+          <li>The main program structure decomposes into a number of subprograms or functions arranged in a <strong>control hierarchy</strong>.</li>
+          <li>The main program contains subprograms that can invoke other components.</li>
+          <li>Closely related to function-oriented design (see <a href="05-14-function-oriented-design.html#sec-5-14">§5.14</a>) and top-down design (<a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a>).</li>
+        </ul>
+
+        <h5>Remote procedure call (RPC) architecture</h5>
+        <ul>
+          <li>Components of a main program or subprogram architecture are <strong>distributed among multiple computers</strong> on a network.</li>
+          <li>A component in one machine can invoke a procedure on another machine as if it were a local call.</li>
+          <li>Common in client-server and distributed systems.</li>
+        </ul>
+
+        <h4>4. Object-oriented architecture</h4>
         <figure class="diagram figure-photo" aria-labelledby="fig-oo-arch-caption">
           <img src="../../../assets/images/se-topic-05/arch-object-oriented.png"
                alt="Object-oriented architecture with components encapsulating data and operations"
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-oo-arch-caption">Object-oriented architecture — components encapsulate data and communicate via message passing.</figcaption>
         </figure>
+        <p>
+          The components of the system <strong>encapsulate data</strong> and the operations that must be applied to
+          manipulate the data. Coordination and communication between components are established via
+          <strong>message passing</strong>.
+        </p>
+        <p><strong>Characteristics:</strong></p>
         <ul>
-          <li>Components of the system encapsulate data and the operations applied to manipulate that data.</li>
-          <li>Coordination and communication between components is established via message passing.</li>
-          <li>Links to object-oriented design in <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.</li>
+          <li>Objects protect the system's integrity.</li>
+          <li>An object is unaware of the internal representation of other objects.</li>
+        </ul>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+          <li>Enables the designer to decompose a problem into a collection of autonomous objects.</li>
+          <li>Other objects are unaware of an object's implementation details, so changes can be made without impacting other objects.</li>
+        </ul>
+        <p>
+          Links to object-oriented design in <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.
+        </p>
+
+        <h4>5. Layered architecture</h4>
+        <figure class="diagram figure-photo" aria-labelledby="fig-layered-caption">
+          <img src="../../../assets/images/se-topic-05/arch-layered.png"
+               alt="Layered architecture with presentation, business, application, and data layers"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-layered-caption">Layered architecture — components arranged in independent layers.</figcaption>
+        </figure>
+        <p>
+          A number of different <strong>layers</strong> are defined, with each layer performing a well-defined set of
+          operations. Each layer performs operations that become progressively closer to the machine instruction set.
+        </p>
+        <ul>
+          <li>At the <strong>outer layer</strong>, components receive user interface operations.</li>
+          <li>At the <strong>inner layers</strong>, components perform operating system interfacing — communication and coordination with the OS.</li>
+          <li><strong>Intermediate layers</strong> provide utility services and application software functions.</li>
+          <li>Each layer is independent — code in one layer can be modified without affecting others.</li>
+          <li>Typical four layers in business systems: <strong>presentation</strong> (UI), <strong>business</strong> (logic), <strong>application</strong> (communication), and <strong>data</strong> (database/storage).</li>
+          <li>Classic example: <strong>OSI-ISO</strong> (Open Systems Interconnection — International Organisation for Standardisation) communication model — seven layers from physical to application.</li>
+          <li>Most commonly used pattern for the majority of software systems.</li>
         </ul>
 
-        <h4>3. Other architectural styles (exam awareness)</h4>
+        <h3>Comparison of architectural styles</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>Key idea</th>
+              <th>Best suited for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data-centered</td>
+              <td>Central repository / blackboard</td>
+              <td>Shared data, multiple independent clients</td>
+            </tr>
+            <tr>
+              <td>Data flow</td>
+              <td>Pipe-and-filter transforms</td>
+              <td>Compilers, data pipelines, batch processing</td>
+            </tr>
+            <tr>
+              <td>Call-and-return</td>
+              <td>Control hierarchy / RPC</td>
+              <td>Procedural programs, distributed systems</td>
+            </tr>
+            <tr>
+              <td>Object-oriented</td>
+              <td>Encapsulated objects, message passing</td>
+              <td>Complex domains with interacting entities</td>
+            </tr>
+            <tr>
+              <td>Layered</td>
+              <td>Stacked layers of abstraction</td>
+              <td>Business apps, network protocols (OSI)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Other architectural styles (exam awareness)</h3>
         <ul>
-          <li><strong>Client-server:</strong> Clients request services; servers provide them — common in distributed systems.</li>
-          <li><strong>Pipe-and-filter:</strong> Data flows through a sequence of processing filters — common in compilers and data pipelines.</li>
+          <li><strong>Client-server:</strong> Clients request services; servers provide them — common in distributed systems (sub-style of call-and-return).</li>
           <li><strong>Event-driven:</strong> Components react to events — common in GUI and real-time systems.</li>
           <li><strong>Microservices:</strong> System decomposed into small, independently deployable services communicating over a network.</li>
         </ul>
@@ -115,14 +255,17 @@
 
         <div class="callout exam">
           <div class="callout-title">Exam question — Architectural design</div>
-          <p><strong>Q:</strong> What is architectural design? List issues addressed at this level. Explain one architectural style.</p>
+          <p><strong>Q:</strong> What is architectural design? Explain the taxonomy of architectural styles with examples.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Define architectural design: major components, responsibilities, interfaces, interactions.</li>
-            <li>Issues: decomposition, functional allocation, interfaces, non-functional properties, communication.</li>
-            <li>Explain layered architecture: 4 layers, independence, most common pattern.</li>
-            <li>Elements: components, connectors, constraints, semantic models.</li>
-            <li>Modules treated as black boxes; coupling/cohesion focus.</li>
+            <li>IEEE definition: hardware/software components + interfaces → framework for system development.</li>
+            <li>System category: components, connectors, constraints, semantic models.</li>
+            <li>Data-centered: central repository/blackboard; clients independent; promotes integrability.</li>
+            <li>Data flow: pipe-and-filter; batch sequential variant; advantages (concurrency) vs disadvantages (not interactive).</li>
+            <li>Call-and-return: main program/subprogram hierarchy; RPC for distributed systems.</li>
+            <li>Object-oriented: encapsulation + message passing; changes isolated per object.</li>
+            <li>Layered: outer UI layer → inner OS layer; OSI-ISO example; most common style.</li>
+            <li>Modules treated as black boxes at architectural level; coupling/cohesion focus.</li>
           </ul>
         </div>
       </section>

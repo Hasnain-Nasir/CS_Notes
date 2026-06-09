@@ -35,9 +35,16 @@
 
         <p>
           <strong>Low-level design (LLD)</strong>, also called <strong>detailed design</strong>, is the third and most
-          granular level of software design. Once architectural design identifies major modules, LLD specifies the
-          internal elements of every module — their functions, processing methods, data structures, algorithms, and
-          control flow.
+          granular level of software design. Once
+          <a href="05-04-architectural-design.html#sec-5-4">architectural design</a> identifies major modules, LLD
+          specifies the internal elements of every module — their functions, processing methods, data structures,
+          algorithms, and control flow.
+        </p>
+        <p>
+          LLD is the <strong>blueprint</strong> that guides developers on how to implement specific components of a
+          system — classes, methods, algorithms, and data structures. Whether the system is a microservice
+          architecture, a web application, or a mobile app, a clear LLD is essential for building scalable,
+          maintainable, and efficient software.
         </p>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-lld-roadmap-caption">
@@ -48,6 +55,18 @@
         </figure>
 
         <h3>HLD vs LLD</h3>
+        <p>
+          HLD and LLD are both important in system design, but they focus on different levels of detail. HLD gives a
+          big-picture view of the system; LLD focuses on the detailed implementation of each component.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-hld-lld-caption">
+          <img src="../../../assets/images/se-topic-05/hld-vs-lld.png"
+               alt="Comparison of high-level design and low-level design — scope, focus, and deliverables"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-hld-lld-caption">High-level design (HLD) vs low-level design (LLD).</figcaption>
+        </figure>
+
         <table>
           <thead>
             <tr><th>Aspect</th><th>High-Level Design (HLD)</th><th>Low-Level Design (LLD)</th></tr>
@@ -60,8 +79,8 @@
             </tr>
             <tr>
               <td><strong>Focus</strong></td>
-              <td>Module decomposition, control relationships, interfaces between modules.</td>
-              <td>Internal logic, algorithms, data structures within each module.</td>
+              <td>Overall system architecture — frameworks, databases, component integration, and how the system works at a broader level.</td>
+              <td>Detailed design of components and modules — interactions, behaviour, algorithms, and data structures.</td>
             </tr>
             <tr>
               <td><strong>Deliverable</strong></td>
@@ -75,6 +94,13 @@
             </tr>
           </tbody>
         </table>
+
+        <p>
+          <strong>Example — e-commerce system:</strong> HLD decides the major components — user service, payment
+          service, inventory service, and database. LLD defines how the <code>Order</code> class works, what methods
+          it has, how it interacts with <code>Payment</code> and <code>Inventory</code> classes, and which algorithms
+          process an order.
+        </p>
 
         <h3>What detailed design specifies</h3>
         <ul>
@@ -94,20 +120,99 @@
           <figcaption id="fig-lld-design-caption">Low-level design — internal structure of modules and components.</figcaption>
         </figure>
 
+        <h3>Converting HLD to LLD — roadmap</h3>
+        <p>
+          To move from HLD to LLD, designers typically use <strong>UML diagrams</strong> together with
+          <strong>OOP principles</strong>, <strong>SOLID principles</strong>, and <strong>design patterns</strong>.
+          The process can be broken into five steps:
+        </p>
+
+        <h4>Step 1 — Understand object-oriented principles</h4>
+        <p>
+          User requirements are translated into design using OOP concepts, which form the foundation of LLD. A strong
+          understanding of OOP helps build maintainable, scalable, and well-structured components. Full coverage in
+          <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.
+        </p>
+        <ul>
+          <li><strong>Encapsulation:</strong> Bundling data and the methods that operate on that data within one unit.</li>
+          <li><strong>Inheritance:</strong> A new class inherits the properties and methods of an existing class.</li>
+          <li><strong>Polymorphism:</strong> Different classes respond to the same method in different ways.</li>
+          <li><strong>Abstraction:</strong> Hiding complex implementation details while showing only essential features.</li>
+        </ul>
+
+        <h4>Step 2 — Analyse and design components</h4>
+        <p>
+          LLD requires analysing real-world problems and breaking them down into object-world problems using OOP
+          concepts. Real-world entities are modelled into objects and classes.
+        </p>
+        <ul>
+          <li>Identify classes and objects based on system requirements.</li>
+          <li>Determine relationships between entities — associations, inheritance, aggregation, composition.</li>
+          <li>Apply <strong>SOLID principles</strong> to ensure the design is clean, maintainable, and scalable (see below).</li>
+        </ul>
+
+        <h4>Step 3 — Apply design patterns</h4>
+        <p>
+          Design patterns provide reusable solutions to common problems and support scalable, maintainable
+          object-oriented design:
+        </p>
+        <ul>
+          <li><strong>Creational patterns</strong> (e.g., Singleton, Factory): deal with object creation — creating objects in a way appropriate to the situation.</li>
+          <li><strong>Behavioural patterns</strong> (e.g., Observer, Strategy): focus on communication between objects and how they interact.</li>
+          <li><strong>Structural patterns</strong> (e.g., Adapter, Composite): simplify the structure of the system and its components.</li>
+        </ul>
+
+        <h4>Step 4 — Use UML diagrams in LLD</h4>
+        <p>
+          <strong>Unified Modeling Language (UML)</strong> visually models components and their relationships, making
+          the transition from HLD to LLD easier for developers. Full UML coverage in
+          <a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>.
+        </p>
+        <ul>
+          <li><strong>Class diagrams:</strong> Structure of the system — classes and their relationships.</li>
+          <li><strong>Sequence diagrams:</strong> How objects interact over time — the sequence of method calls.</li>
+          <li><strong>Activity diagrams:</strong> Workflow or activities of a system component.</li>
+          <li><strong>State diagrams:</strong> Different states of a component and transitions between them.</li>
+          <li><strong>Use case diagrams:</strong> Functional requirements — different user interactions with the system.</li>
+        </ul>
+
+        <h4>Step 5 — Apply SOLID principles</h4>
+        <p>
+          SOLID is a set of five principles for writing scalable, flexible, maintainable, and reusable code. They are
+          guidelines — not strict rules — and should be balanced against business requirements and constraints:
+        </p>
+        <ul>
+          <li><strong>Single Responsibility Principle (SRP):</strong> A class should have only one reason to change — one well-defined responsibility.</li>
+          <li><strong>Open-Closed Principle (OCP):</strong> Software entities should be open for extension but closed for modification.</li>
+          <li><strong>Liskov Substitution Principle (LSP):</strong> Subtypes must be substitutable for their base types without breaking behaviour.</li>
+          <li><strong>Interface Segregation Principle (ISP):</strong> Clients should not be forced to depend on interfaces they do not use.</li>
+          <li><strong>Dependency Inversion Principle (DIP):</strong> High-level modules should not depend on low-level modules; both should depend on abstractions.</li>
+        </ul>
+
         <h3>LLD representation techniques</h3>
         <ul>
           <li><strong>Pseudocode:</strong> Language-independent algorithm description — see <a href="05-08-pseudocode.html#sec-5-8">§5.8</a>.</li>
           <li><strong>Flowcharts:</strong> Graphical control-flow diagrams — see <a href="05-09-flowcharts.html#sec-5-9">§5.9</a>.</li>
           <li><strong>Structure charts:</strong> Hierarchical module invocation — see <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>.</li>
-          <li><strong>UML diagrams:</strong> Class, sequence, and activity diagrams for OOD — see <a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>.</li>
+          <li><strong>UML diagrams:</strong> Class, sequence, activity, and state diagrams for OOD — see <a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>.</li>
         </ul>
 
-        <h3>LLD design guidelines</h3>
+        <h3>Benefits of low-level design</h3>
         <ul>
-          <li><strong>Modular design:</strong> Break the system into small, independent components with specific functionalities.</li>
+          <li><strong>Clear component functionality:</strong> LLD provides a detailed plan for how each part of the software works, making development and debugging easier.</li>
+          <li><strong>Scalability and flexibility:</strong> A well-structured design makes it simpler to update or fix parts of the system without affecting the whole.</li>
+          <li><strong>Improved communication:</strong> Team members share a clear understanding of how components work.</li>
+          <li><strong>Cleaner code:</strong> Following design principles in LLD leads to more organised code that is less prone to errors.</li>
+          <li><strong>Faster coding:</strong> Developers can follow the detailed plan instead of making design decisions during implementation.</li>
+        </ul>
+
+        <h3>Best practices for LLD</h3>
+        <ul>
+          <li><strong>Modular design:</strong> Break the system into small, independent components with specific functionalities — see <a href="05-06-modularization.html#sec-5-6">§5.6</a>.</li>
           <li><strong>Clear interfaces:</strong> Define methods, inputs, and outputs for each component to maintain proper communication.</li>
-          <li><strong>Design patterns and OOP principles:</strong> Apply encapsulation, inheritance, polymorphism, and proven patterns for reusability and maintainability.</li>
-          <li><strong>Error handling:</strong> Plan exception handling and error recovery at the module level.</li>
+          <li><strong>Use design patterns:</strong> Apply proven OOP patterns to promote code reusability, flexibility, and maintainability.</li>
+          <li><strong>Adopt SOLID principles:</strong> Follow SOLID guidelines for a more robust and maintainable design.</li>
+          <li><strong>Error handling:</strong> Plan exception handling, validation checks, and error recovery at the module level.</li>
         </ul>
 
         <h3>Module specification document</h3>
@@ -122,11 +227,13 @@
           <p><strong>Q:</strong> What is low-level design? How does it differ from high-level design? What does detailed design specify?</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>LLD = internal specification of all modules — algorithms, data structures, control flow.</li>
-            <li>HLD = module decomposition and interfaces; LLD = internal white-box detail.</li>
+            <li>LLD = internal specification of all modules — algorithms, data structures, control flow; blueprint for developers.</li>
+            <li>HLD = module decomposition and interfaces (black boxes); LLD = internal white-box detail of every module.</li>
             <li>List 7 detailed design items: decomposition, allocation, UI, states, data/control interaction, packaging, algorithms.</li>
+            <li>HLD → LLD roadmap: OOP principles → component analysis → design patterns → UML → SOLID.</li>
             <li>Deliverable = module specification document.</li>
             <li>Techniques: pseudocode, flowcharts, structure charts, UML.</li>
+            <li>Benefits: clear functionality, scalability, communication, cleaner code, faster coding.</li>
           </ul>
         </div>
       </section>

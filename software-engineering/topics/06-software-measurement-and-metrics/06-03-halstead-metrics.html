@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 6 — 6.3 Halstead's Software Science / Metrics</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>6.3 Halstead's Software Science / Metrics</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 6</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-6-3">
+
+        <p>
+          <strong>Halstead's Software Science</strong> (also called Halstead's Software Metrics) was proposed by
+          Maurice Halstead in 1977. It treats a computer program as a collection of <strong>tokens</strong> classified
+          as either <strong>operators</strong> (symbols that perform actions) or <strong>operands</strong> (entities
+          on which actions are performed). All Halstead metrics are derived from four basic counts.
+        </p>
+
+        <h3>Basic token counts</h3>
+        <table>
+          <thead>
+            <tr><th>Symbol</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>n1</strong></td><td>Number of <em>distinct</em> operators</td></tr>
+            <tr><td><strong>n2</strong></td><td>Number of <em>distinct</em> operands</td></tr>
+            <tr><td><strong>N1</strong></td><td>Total occurrences of operators</td></tr>
+            <tr><td><strong>N2</strong></td><td>Total occurrences of operands</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Core Halstead metrics and formulas</h3>
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>Formula</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Program length (N)</td><td>N = N1 + N2</td><td>Total operator and operand occurrences</td></tr>
+            <tr><td>Vocabulary (n)</td><td>n = n1 + n2</td><td>Total distinct operators and operands</td></tr>
+            <tr><td>Volume (V)</td><td>V = N × log<sub>2</sub>(n)</td><td>Program size in bits; reflects information content</td></tr>
+            <tr><td>Difficulty (D)</td><td>D = (n1 / 2) × (N2 / n2)</td><td>How hard the program is to understand or write</td></tr>
+            <tr><td>Level (L)</td><td>L = 1 / D = n2 / (n1 × N2) × 2</td><td>Abstraction level; higher L = simpler program</td></tr>
+            <tr><td>Effort (E)</td><td>E = V × D = V / L</td><td>Mental effort to implement the program</td></tr>
+            <tr><td>Time (T)</td><td>T = E / (S × f)</td><td>Estimated implementation time in seconds</td></tr>
+            <tr><td>Estimated length (N̂)</td><td>N̂ = n1·log<sub>2</sub>(n1) + n2·log<sub>2</sub>(n2)</td><td>Predicted program length from vocabulary</td></tr>
+            <tr><td>Potential minimum volume (V*)</td><td>V* = (2 + n2*) × log<sub>2</sub>(2 + n2*)</td><td>Smallest possible volume for the problem</td></tr>
+            <tr><td>Intelligence content (I)</td><td>I = V / D</td><td>Amount of intelligence expressed in the program</td></tr>
+            <tr><td>Estimated errors</td><td>Errors ≈ V / 3000</td><td>Predicted number of defects in the program</td></tr>
+          </tbody>
+        </table>
+        <p>
+          For time calculation, Halstead uses the <strong>Stroud number S = 18</strong> (moments per second of human
+          decision-making) and <strong>f = 60</strong> (seconds-to-minutes conversion factor).
+        </p>
+
+        <h3>Counting rules for C programs</h3>
+        <ul>
+          <li>Comments, identifier declarations, and function declarations are <strong>not</strong> counted.</li>
+          <li>All variables and constants are counted as <strong>operands</strong>.</li>
+          <li>Function calls are counted as <strong>operators</strong>.</li>
+          <li>Control statements (<code>if</code>, <code>else</code>, <code>for</code>, <code>while</code>, <code>do</code>, <code>switch</code>, <code>case</code>, <code>return</code>, <code>break</code>, <code>continue</code>) are counted as operators.</li>
+          <li>Brackets, commas, semicolons, and terminators are counted as operators.</li>
+          <li><code>GOTO</code> is an operator; its label is an operand.</li>
+          <li>Unary and binary occurrences of <code>+</code>, <code>-</code>, and <code>*</code> are counted separately.</li>
+          <li>In <code>array[index]</code>, the array name and index are operands; <code>[ ]</code> is an operator.</li>
+          <li>In <code>struct.member</code> or <code>struct-&gt;member</code>, struct name and member name are operands; <code>.</code> and <code>-&gt;</code> are operators.</li>
+          <li>Preprocessor directives (<code>#include</code>, <code>#define</code>, etc.) are ignored.</li>
+          <li>Global variables used in multiple modules count as multiple occurrences of the same operand.</li>
+          <li>Local variables with the same name in different functions count as unique operands.</li>
+        </ul>
+
+        <h3>Worked example — sorting function</h3>
+        <p>Consider a C sorting function. After applying counting rules:</p>
+        <table>
+          <thead>
+            <tr><th></th><th>Distinct (n)</th><th>Total (N)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Operators</td><td>n1 = 14</td><td>N1 = 53</td></tr>
+            <tr><td>Operands</td><td>n2 = 10</td><td>N2 = 38</td></tr>
+          </tbody>
+        </table>
+        <ul>
+          <li><strong>Program length:</strong> N = N1 + N2 = 53 + 38 = <strong>91</strong>.</li>
+          <li><strong>Vocabulary:</strong> n = n1 + n2 = 14 + 10 = <strong>24</strong>.</li>
+          <li><strong>Volume:</strong> V = N × log<sub>2</sub>(n) = 91 × log<sub>2</sub>(24) ≈ <strong>417.23 bits</strong>.</li>
+          <li><strong>Estimated length:</strong> N̂ = n1·log<sub>2</sub>(n1) + n2·log<sub>2</sub>(n2) ≈ <strong>86.51</strong>.</li>
+          <li><strong>Difficulty:</strong> D = (n1/2) × (N2/n2) = (14/2) × (38/10) = <strong>26.6</strong> (≈ 37.03 with n2* adjustment in full analysis).</li>
+          <li><strong>Effort:</strong> E = V × D ≈ <strong>15,400</strong> (mental effort units).</li>
+          <li><strong>Time:</strong> T = E / (18 × 60) ≈ <strong>610 seconds</strong> (~10 minutes).</li>
+          <li><strong>Predicted errors:</strong> V / 3000 ≈ <strong>0.14</strong> defects.</li>
+        </ul>
+
+        <h3>Interpretation of Halstead metrics</h3>
+        <ul>
+          <li>As program volume increases, difficulty rises and the program level decreases — redundant operands and failure to use higher-level constructs increase both volume and difficulty.</li>
+          <li>Higher language level (L) means less effort is needed — Pascal requires less effort than Assembler for the same algorithm.</li>
+          <li>Volume, program length (N), and lines of code are shown to be <strong>linearly related</strong> — all are valid for comparing relative program size.</li>
+          <li>Halstead metrics can be computed automatically from source code without full structural analysis of the program architecture.</li>
+          <li>They predict maintenance effort, error rate, and scheduling needs for a module.</li>
+        </ul>
+
+        <h3>Limitations to remember for exams</h3>
+        <ul>
+          <li>Halstead metrics require the <strong>complete source code</strong> — they cannot estimate size before coding is done.</li>
+          <li>They assume all operators and operands are equally important, which is not always true in practice.</li>
+          <li>They focus on code complexity and effort — they do not directly measure reliability, usability, or maintainability.</li>
+          <li>They are less useful as a predictive estimating model for entire projects compared to function points or COCOMO.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Halstead metrics</div>
+          <p><strong>Q:</strong> Define Halstead's Software Science. Write the formulas for program length, vocabulary, volume, difficulty, effort, and time. What do n1, n2, N1, and N2 represent?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Halstead treats a program as tokens — operators (actions) and operands (data acted upon).</li>
+            <li>n1 = distinct operators; n2 = distinct operands; N1 = total operator occurrences; N2 = total operand occurrences.</li>
+            <li>N = N1+N2; n = n1+n2; V = N·log<sub>2</sub>(n); D = (n1/2)·(N2/n2); E = V·D; T = E/(18×60).</li>
+            <li>Volume measures size in bits; difficulty measures how hard code is to handle; effort = mental work; time uses Stroud number S=18.</li>
+            <li>Predicted errors ≈ V/3000. Requires complete code; size-oriented (white-box) metric.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="06-02-people-process-metrics.html">&larr; 6.2 People &amp; Process Metrics</a>
+        <a class="btn-back chapter-nav-next" href="06-04-function-point-analysis.html">6.4 Function Point Analysis &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

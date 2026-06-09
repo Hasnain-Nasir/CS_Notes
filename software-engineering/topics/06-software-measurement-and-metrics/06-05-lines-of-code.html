@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 6 — 6.5 Lines of Code (LOC)</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>6.5 Lines of Code (LOC)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 6</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-6-5">
+
+        <p>
+          <strong>Lines of Code (LOC)</strong> is the oldest and simplest size-oriented software metric. A line of
+          code is any line of program text that is not a comment or blank line — including header lines, variable
+          declarations, and both executable and non-executable statements.
+        </p>
+        <p>
+          LOC is a <strong>direct (white-box) measurement</strong>: it counts the actual volume of source code.
+          In project management, size is often expressed as <strong>KLOC</strong> (thousands of lines of code).
+          LOC feeds effort estimation through productivity formulas covered in
+          <a href="../03-software-project-management/03-05-size-estimation.html#sec-3-5">§3.5</a>.
+        </p>
+
+        <h3>What counts as a line of code</h3>
+        <ul>
+          <li>LOC includes lines with variable declarations, executable statements, and non-executable statements such as type definitions.</li>
+          <li>LOC excludes blank lines and comment lines.</li>
+          <li>Some counting methods also exclude header/include lines — always follow the counting convention stated in the exam question.</li>
+          <li>A single physical line may contain multiple statements; it still counts as one LOC unless the question specifies statement counting.</li>
+        </ul>
+
+        <h3>Features of LOC as a metric</h3>
+        <ul>
+          <li><strong>Ease of computation:</strong> LOC is simple to calculate automatically or manually with minimal effort.</li>
+          <li><strong>Easy to understand:</strong> Stakeholders — even non-technical managers — grasp "lines of code" intuitively.</li>
+          <li><strong>Change tracking:</strong> Variations in LOC over time show whether a codebase is growing or shrinking during development and maintenance.</li>
+          <li><strong>Benchmarking:</strong> LOC can compare different versions of the same program to see how changes affect total code size.</li>
+          <li><strong>Productivity measure:</strong> LOC per person-month is widely used to compare developer or team productivity within the same language and coding standard.</li>
+          <li><strong>Limitation — complexity:</strong> Two programs with the same LOC can have very different logical complexity; LOC measures volume, not quality.</li>
+          <li><strong>Limitation — language dependency:</strong> LOC is meaningful only when comparing projects in the same language with similar coding standards.</li>
+        </ul>
+
+        <h3>LOC counting example</h3>
+        <p>Consider a simple sorting function. If every physical line is counted:</p>
+        <ul>
+          <li>Total physical lines including comments = <strong>13 LOC</strong>.</li>
+          <li>After excluding comments and blank lines = <strong>12 LOC</strong>.</li>
+        </ul>
+        <p>
+          Exam questions often specify whether comments and blanks are excluded — read the question carefully before
+          counting.
+        </p>
+
+        <h3>LOC in project estimation</h3>
+        <ul>
+          <li>LOC is used in <strong>direct (white-box) decomposition estimation</strong>: break the system into modules, count LOC per module, sum to get total size.</li>
+          <li>Key relationships (from <a href="../03-software-project-management/03-05-size-estimation.html#sec-3-5">§3.5</a>):</li>
+        </ul>
+        <table>
+          <thead>
+            <tr><th>Formula</th><th>Expression</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Effort</td><td>Effort = Size ÷ Productivity</td></tr>
+            <tr><td>Productivity</td><td>Productivity = Size ÷ Effort (e.g., LOC per person-month)</td></tr>
+            <tr><td>Cost</td><td>Cost = Effort × Pay rate</td></tr>
+            <tr><td>Duration</td><td>Duration = Effort ÷ Team size</td></tr>
+            <tr><td>Team size</td><td>Team size = Effort ÷ Duration</td></tr>
+          </tbody>
+        </table>
+
+        <h3>PDF worked examples</h3>
+        <h4>Example 1 — Banking application modules</h4>
+        <ul>
+          <li>User Interface = 5,400 LOC; Database = 8,500 LOC; Server = 7,300 LOC; Client = 5,500 LOC.</li>
+          <li>Total size = 5,400 + 8,500 + 7,300 + 5,500 = <strong>26,700 LOC</strong>.</li>
+          <li>Productivity = 870 LOC/month; salary = $1,500/month per developer.</li>
+          <li>Effort = 26,700 ÷ 870 ≈ <strong>30.7 person-months</strong>; cost = 30.7 × 1,500 ≈ <strong>$46,000</strong>.</li>
+        </ul>
+        <h4>Example 2 — Three modules in KLOC</h4>
+        <ul>
+          <li>M1 = 14.4 KLOC; M2 = 21.5 KLOC; M3 = 8.4 KLOC; total = <strong>44.3 KLOC</strong>.</li>
+          <li>Cost of writing 1 KLOC = $50 → total cost = 44.3 × 50 = <strong>$2,215</strong>.</li>
+          <li>Productivity = 4 KLOC/month → effort = 44.3 ÷ 4 ≈ <strong>11.1 person-months</strong>.</li>
+        </ul>
+        <h4>Example 3 — PERT-style expected size</h4>
+        <ul>
+          <li>M1 = 4,600 LOC (optimistic); M2 = 6,900 (most likely); M3 = 8,600 (pessimistic).</li>
+          <li>Expected size = (S<sub>optimistic</sub> + 4 × S<sub>likely</sub> + S<sub>pessimistic</sub>) ÷ 6.</li>
+          <li>Per module: (4600 + 4×6900 + 8600) ÷ 6 = (4600 + 27600 + 8600) ÷ 6 ≈ <strong>6,867 LOC</strong> for M2-style calculation; sum all three modules for total expected size.</li>
+        </ul>
+
+        <h3>LOC and empirical models</h3>
+        <ul>
+          <li>Most parametric estimation models — especially <strong>COCOMO</strong> — accept size in KLOC as primary input.</li>
+          <li>Basic COCOMO: DE = a × (KLOC)<sup>b</sup>; DD = c × (KLOC)<sup>d</sup>; Team size = DE ÷ DD.</li>
+          <li>Other KLOC-based models: Walston-Felix E = 5.2 × (KLOC)<sup>0.91</sup>; Bailey-Basili; Simple Boehm; Doty model.</li>
+          <li>Research shows a rough correlation between LOC and total development cost, duration, and number of defects — lower LOC often means lower cost and fewer bugs, but this depends on quality of code, not volume alone.</li>
+        </ul>
+
+        <h3>LOC vs Function Points</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>LOC</th><th>Function Point (FP)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Metric type</td><td>Size-oriented (white-box / direct)</td><td>Function-oriented (black-box / indirect)</td></tr>
+            <tr><td>Basis</td><td>Analogy to past code volume</td><td>Specification of user-visible functions</td></tr>
+            <tr><td>Language</td><td>Dependent on programming language</td><td>Independent of programming language</td></tr>
+            <tr><td>Orientation</td><td>Design / implementation oriented</td><td>User oriented</td></tr>
+            <tr><td>When available</td><td>During or after coding</td><td>Early — from requirements / SRS</td></tr>
+            <tr><td>Primary use</td><td>Programmer productivity comparison</td><td>Business system size and project timeline</td></tr>
+            <tr><td>Conversion</td><td>Can be converted to FP (backfiring)</td><td>Can be extended/converted to LOC estimates</td></tr>
+            <tr><td>Complexity</td><td>Larger LOC ≠ necessarily more complex logic</td><td>Considers logical complexity of functions</td></tr>
+          </tbody>
+        </table>
+        <p>
+          In practice, FP is preferred for business systems because functional size remains constant regardless of
+          implementation language. LOC remains useful for comparing productivity within a single language and team.
+          See <a href="06-04-function-point-analysis.html#sec-6-4">§6.4</a> for full FP calculation.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam questions — Lines of Code</div>
+          <p><strong>Q1 (UGC-NET):</strong> LOC and FP measure — (B) Size of Software.</p>
+          <p><strong>Q2:</strong> Differentiate LOC and Function Point with four points.</p>
+          <p><strong>Q3:</strong> A project has modules of 5400, 8500, 7300, and 5500 LOC. Productivity is 870 LOC/month and pay is $1500/month. Find effort and cost.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>LOC = non-comment, non-blank program lines; KLOC = thousands of LOC; white-box/direct metric.</li>
+            <li>Effort = Size/Productivity; Cost = Effort × Pay; used in COCOMO and decomposition estimation.</li>
+            <li>LOC is language-dependent; FP is language-independent and user-oriented.</li>
+            <li>Example: total 26,700 LOC; effort ≈ 30.7 PM; cost ≈ $46,000 at given productivity and pay.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="06-04-function-point-analysis.html">&larr; 6.4 Function Point Analysis</a>
+        <a class="btn-back chapter-nav-next" href="06-06-cyclomatic-complexity.html">6.6 Cyclomatic Complexity &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

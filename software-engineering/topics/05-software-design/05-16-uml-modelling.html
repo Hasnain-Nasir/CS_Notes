@@ -34,62 +34,80 @@
       <section id="sec-5-16">
 
         <p>
-          The <strong>Unified Modeling Language (UML)</strong> is a standardised visual language for specifying,
-          visualising, constructing, and documenting software systems. UML is closely linked to
-          <a href="05-15-object-oriented-design.html#sec-5-15">object-oriented design</a> and provides diagrams
-          that communicate design decisions to both technical and non-technical stakeholders.
+          The <strong>Unified Modeling Language (UML)</strong> is a general-purpose modeling language. The main aim of
+          UML is to define a standard way to visualize how a system has been designed. It is quite similar to blueprints
+          used in other fields of engineering. UML is <strong>not a programming language</strong> — it is a
+          <strong>visual language</strong>.
         </p>
         <p>
-          Complex applications require collaboration among multiple teams — UML provides a clear, concise way to
-          communicate requirements, functionality, and processes without going into implementation details.
+          UML is a standardized modeling language (approved by <strong>ISO</strong>) that provides a common way for teams
+          to visualize and communicate system design. UML is closely linked to
+          <a href="05-15-object-oriented-design.html#sec-5-15">object-oriented design</a>.
+        </p>
+        <ul>
+          <li>We use UML diagrams to show the <strong>behavior</strong> and <strong>structure</strong> of a system.</li>
+          <li>UML helps software engineers, businessmen, and system architects with modeling, design, and analysis.</li>
+          <li>The International Organization for Standardization (ISO) published UML as an approved standard in 2005. UML has been revised over the years and is reviewed periodically.</li>
+          <li><strong>Example:</strong> In an e-commerce system, a UML diagram can show components like User, Product, and Order, and how they interact during processes like placing an order.</li>
+        </ul>
+
+        <h3>Need of UML</h3>
+        <p>UML is essential for clearly visualizing and communicating system design among different stakeholders:</p>
+        <ul>
+          <li>Complex applications need collaboration and planning from multiple teams, so a clear and concise way of communication is required.</li>
+          <li>Business stakeholders may not understand code, so UML helps explain system requirements, functionalities, and processes in a simple visual way.</li>
+          <li>It saves time by allowing teams to visualize workflows, user interactions, and system structure before actual development.</li>
+          <li>It bridges the gap between abstract requirements and concrete implementation.</li>
+        </ul>
+
+        <h3>Types of UML diagrams</h3>
+        <p>
+          UML is linked with object-oriented design and analysis. UML makes use of elements and forms associations
+          between them to form diagrams. Diagrams in UML can be broadly classified as:
         </p>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-uml-overview-caption">
           <img src="../../../assets/images/se-topic-05/uml-overview.webp"
                alt="Overview of UML diagram types — structural and behavioural"
                width="660" height="auto" loading="lazy" decoding="async" />
-          <figcaption id="fig-uml-overview-caption">Overview of UML diagram types.</figcaption>
+          <figcaption id="fig-uml-overview-caption">UML diagrams — structural (static) and behavioural (dynamic).</figcaption>
         </figure>
 
-        <h3>Why UML is used</h3>
-        <ul>
-          <li>UML provides a standard visual notation understood across the software industry.</li>
-          <li>It bridges the gap between abstract requirements and concrete implementation.</li>
-          <li>It helps communicate with non-programmers about essential requirements, functionalities, and processes.</li>
-          <li>It supports both structural (static) and behavioural (dynamic) views of a system.</li>
-        </ul>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Category</th><th>Diagram type</th><th>Purpose</th></tr>
+            </thead>
+            <tbody>
+              <tr><td rowspan="6"><strong>Structural</strong></td><td>Class diagram</td><td>Static structure — classes, attributes, methods, relationships</td></tr>
+              <tr><td>Composite structure diagram</td><td>Internal structure of a class — parts, ports, connectors</td></tr>
+              <tr><td>Object diagram</td><td>Snapshot of object instances at a point in time</td></tr>
+              <tr><td>Component diagram</td><td>Physical organisation of software components</td></tr>
+              <tr><td>Deployment diagram</td><td>Hardware nodes and software deployment</td></tr>
+              <tr><td>Package diagram</td><td>Organisation of packages and dependencies</td></tr>
+              <tr><td rowspan="7"><strong>Behavioural</strong></td><td>State machine diagram</td><td>Object states and transitions over time</td></tr>
+              <tr><td>Activity diagram</td><td>Workflow and control flow</td></tr>
+              <tr><td>Use case diagram</td><td>System functionality and actor interactions</td></tr>
+              <tr><td>Sequence diagram</td><td>Object interactions in chronological order</td></tr>
+              <tr><td>Communication diagram</td><td>Object interactions emphasising links</td></tr>
+              <tr><td>Interaction overview diagram</td><td>High-level overview of interaction flows</td></tr>
+              <tr><td>Timing diagram</td><td>State changes over time (UML 2.0)</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-        <h3>UML diagram categories</h3>
-        <ul>
-          <li><strong>Structural diagrams</strong> show the static structure — classes, objects, components, and their relationships.</li>
-          <li><strong>Behavioural diagrams</strong> show dynamic behaviour — how objects interact over time, workflows, and state changes.</li>
-        </ul>
+        <h3>1. Structural UML diagrams</h3>
+        <p>
+          Structural UML diagrams depict the <strong>static aspects</strong> of a system — classes, objects, components,
+          and their relationships — providing a clear view of the system's architecture.
+        </p>
 
-        <h3>1. Use Case Diagram</h3>
-        <figure class="diagram figure-photo" aria-labelledby="fig-usecase-notations-caption">
-          <img src="../../../assets/images/se-topic-05/use-case-notations.webp"
-               alt="Use case diagram notations — actor, use case, system boundary, associations"
-               width="660" height="auto" loading="lazy" decoding="async" />
-          <figcaption id="fig-usecase-notations-caption">Use case diagram notations.</figcaption>
-        </figure>
-        <ul>
-          <li>Use case diagrams depict the functionality of a system and its interaction with external agents (actors).</li>
-          <li>They provide a high-level view of what the system does without implementation details.</li>
-          <li><strong>Actor:</strong> A user or external system that interacts with the system (stick figure).</li>
-          <li><strong>Use case:</strong> A service or function the system provides to an actor (oval).</li>
-          <li><strong>System boundary:</strong> A rectangle enclosing all use cases — defines the scope of the system.</li>
-          <li><strong>Association:</strong> A line connecting an actor to a use case they interact with.</li>
-          <li><strong>Include relationship:</strong> Dashed arrow — one use case includes the functionality of another (promotes reuse).</li>
-          <li><strong>Extend relationship:</strong> Dashed arrow — one use case optionally extends another under certain conditions.</li>
-        </ul>
-        <figure class="diagram figure-photo" aria-labelledby="fig-usecase-example-caption">
-          <img src="../../../assets/images/se-topic-05/use-case-system-boundary.webp"
-               alt="Example use case diagram with actors, use cases, and system boundary"
-               width="660" height="auto" loading="lazy" decoding="async" />
-          <figcaption id="fig-usecase-example-caption">Example use case diagram with system boundary, actors, and use cases.</figcaption>
-        </figure>
-
-        <h3>2. Class Diagram</h3>
+        <h4>1.1 Class diagram</h4>
+        <p>
+          The most widely used UML diagram. It is the building block of all object-oriented software systems. Class
+          diagrams depict the static structure by showing classes, their methods, attributes, and relationships between
+          classes or objects.
+        </p>
         <figure class="diagram figure-photo" aria-labelledby="fig-class-caption">
           <img src="../../../assets/images/se-topic-05/uml-class-example.webp"
                alt="Class diagram showing classes, attributes, methods, and inheritance"
@@ -97,80 +115,253 @@
           <figcaption id="fig-class-caption">Class diagram — classes with attributes, methods, and relationships.</figcaption>
         </figure>
         <ul>
-          <li>Class diagrams show the structure of a system by highlighting classes, their attributes, methods, and relationships.</li>
-          <li>They are the foundation of object-oriented design — visualising how data and behaviours are organised.</li>
-          <li><strong>Class:</strong> Represented as a rectangle divided into three compartments — class name, attributes, methods.</li>
-          <li><strong>Association:</strong> A line connecting two classes that interact — may show multiplicity (1, *, 1..n).</li>
-          <li><strong>Inheritance (generalisation):</strong> A hollow arrow from subclass to superclass — "is-a" relationship.</li>
-          <li><strong>Aggregation:</strong> A hollow diamond — "has-a" relationship where parts can exist independently.</li>
-          <li><strong>Composition:</strong> A filled diamond — "part-of" relationship where parts cannot exist without the whole.</li>
-          <li><strong>Multiplicity:</strong> Numbers at association ends indicating how many objects participate (e.g., 1, 0..*, 1..5).</li>
+          <li><strong>Class:</strong> Rectangle divided into three compartments — class name, attributes, methods.</li>
+          <li><strong>Association:</strong> Line connecting two interacting classes — may show multiplicity (1, *, 1..n).</li>
+          <li><strong>Inheritance (generalisation):</strong> Hollow arrow from subclass to superclass — "is-a" relationship.</li>
+          <li><strong>Aggregation:</strong> Hollow diamond — "has-a" where parts can exist independently.</li>
+          <li><strong>Composition:</strong> Filled diamond — "part-of" where parts cannot exist without the whole.</li>
         </ul>
 
-        <h3>3. Sequence Diagram</h3>
-        <figure class="diagram figure-photo" aria-labelledby="fig-sequence-caption">
-          <img src="../../../assets/images/se-topic-05/sequence-diagram.jpg"
-               alt="Sequence diagram showing object interactions over time"
+        <h4>1.2 Composite structure diagram</h4>
+        <ul>
+          <li>Represents the internal structure of a class and its interaction points with other parts of the system.</li>
+          <li>Shows the relationship between parts and their configuration, which determines how the classifier (class, component, or deployment node) behaves.</li>
+          <li>Uses <strong>parts</strong>, <strong>ports</strong>, and <strong>connectors</strong> to represent internal structure.</li>
+          <li>Similar to class diagrams but represents individual parts in detail rather than the entire class.</li>
+        </ul>
+
+        <h4>1.3 Object diagram</h4>
+        <p>
+          An object diagram can be referred to as a <strong>screenshot</strong> of the instances in a system and the
+          relationships that exist between them at a particular point in time.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-object-caption">
+          <img src="../../../assets/images/se-topic-05/uml-object-college-student.png"
+               alt="Object diagram — College A linked to Student 3030 with attribute values"
                width="660" height="auto" loading="lazy" decoding="async" />
-          <figcaption id="fig-sequence-caption">Sequence diagram — object interactions in chronological order.</figcaption>
+          <figcaption id="fig-object-caption">Object diagram — an object of class Student linked to an object of class College.</figcaption>
         </figure>
         <ul>
-          <li>Sequence diagrams depict interaction between objects in a sequential order — the order in which messages are exchanged.</li>
-          <li>Also called event diagrams or event scenarios.</li>
-          <li><strong>Lifeline:</strong> A vertical dashed line below each object — represents the object's existence over time.</li>
-          <li><strong>Activation bar:</strong> A thin rectangle on a lifeline — shows when an object is actively processing.</li>
-          <li><strong>Message:</strong> A horizontal arrow between lifelines — represents a method call or signal (solid = synchronous, dashed = asynchronous).</li>
-          <li>Used for use case analysis, system architecture planning, and documenting dynamic processes.</li>
+          <li>Similar to a class diagram but shows <strong>specific instances</strong> of classes with actual attribute values.</li>
+          <li>Class diagrams show general classifiers and relationships; object diagrams show instances at a point in time.</li>
+          <li>A <strong>link</strong> is an instance of an association between two objects.</li>
         </ul>
-        <figure class="diagram figure-photo" aria-labelledby="fig-sequence-example-caption">
-          <img src="../../../assets/images/se-topic-05/sequence-example.jpg"
-               alt="Detailed sequence diagram example with messages between objects"
-               width="660" height="auto" loading="lazy" decoding="async" />
-          <figcaption id="fig-sequence-example-caption">Example sequence diagram — messages exchanged between objects over time.</figcaption>
-        </figure>
 
-        <h3>4. Activity Diagram</h3>
+        <h4>1.4 Component diagram</h4>
+        <p>
+          Component diagrams represent how physical components in a system have been organized. They model
+          implementation details and structural relationships between software system elements.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-component-caption">
+          <img src="../../../assets/images/se-topic-05/uml-component-online-store.png"
+               alt="Component diagram — OnlineStore with Order, Customer, and Product components"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-component-caption">Component diagram — OnlineStore with Order, Customer, and Product components.</figcaption>
+        </figure>
+        <ul>
+          <li>Help verify that functional requirements have been covered by planned development.</li>
+          <li>Essential for designing and building complex systems.</li>
+          <li><strong>Interfaces</strong> (lollipop and socket notation) are used by components to communicate with each other.</li>
+          <li>Widely used in <strong>microservices architecture</strong> to represent service boundaries, APIs, and communication between services.</li>
+        </ul>
+
+        <h4>1.5 Deployment diagram</h4>
+        <p>
+          Deployment diagrams represent system hardware and its software — what hardware components exist and what
+          software components run on them.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-deployment-caption">
+          <img src="../../../assets/images/se-topic-05/uml-deployment-mobile-banking.png"
+               alt="Deployment diagram for mobile banking Android services"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-deployment-caption">Deployment diagram — mobile banking Android services across client, web, application server, and data storage nodes.</figcaption>
+        </figure>
+        <ul>
+          <li>Illustrate system architecture as distribution of software artifacts over distributed targets.</li>
+          <li>An <strong>artifact</strong> is information generated by system software.</li>
+          <li>Primarily used when software is used, distributed, or deployed over multiple machines with different configurations.</li>
+          <li><strong>Nodes</strong> represent hardware; <strong>artifacts/components</strong> represent deployed software.</li>
+        </ul>
+
+        <h4>1.6 Package diagram</h4>
+        <ul>
+          <li>Depicts how packages and their elements have been organized.</li>
+          <li>Shows dependencies between different packages and internal composition of packages.</li>
+          <li>Packages help organize UML diagrams into meaningful groups and make diagrams easier to understand.</li>
+          <li>Primarily used to organize class and use case diagrams in large systems — e.g., grouping web shopping use cases and classes into separate packages.</li>
+        </ul>
+
+        <h3>2. Behavioural UML diagrams</h3>
+        <p>
+          Behavioural UML diagrams depict the <strong>dynamic aspects</strong> of a system — how objects interact and
+          behave over time in response to events.
+        </p>
+
+        <h4>2.1 State machine diagram</h4>
+        <p>
+          A state diagram represents the condition of the system or part of the system at finite instances of time. It
+          models dynamic behaviour using finite state transitions.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-state-caption">
+          <img src="../../../assets/images/se-topic-05/uml-state-machine-pin.png"
+               alt="State machine diagram — card swiped, waiting for PIN, pin verification, user identified"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-state-caption">State machine diagram — PIN authentication flow (card swiped → waiting → verification → identified).</figcaption>
+        </figure>
+        <ul>
+          <li>Also referred to as <strong>state machines</strong> and <strong>state-chart diagrams</strong> — terms used interchangeably.</li>
+          <li>Models the dynamic behaviour of a class in response to time and changing external stimuli.</li>
+          <li><strong>State:</strong> Rounded rectangle — a condition of an object at a point in time.</li>
+          <li><strong>Transition:</strong> Arrow with event label — change from one state to another.</li>
+          <li><strong>Initial state:</strong> Filled circle; <strong>final state:</strong> circle with inner dot.</li>
+        </ul>
+
+        <h4>2.2 Activity diagram</h4>
+        <p>
+          Activity diagrams illustrate the flow of control in a system. They can also represent the steps involved in
+          executing a use case.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-activity-odd-caption">
+          <img src="../../../assets/images/se-topic-05/uml-activity-odd-number.png"
+               alt="Activity diagram — input number, check if odd, display or show error"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-activity-odd-caption">Activity diagram — check if a number is odd.</figcaption>
+        </figure>
+        <ul>
+          <li>Model sequential and concurrent activities — depict workflows visually.</li>
+          <li>Focus on condition of flow and the sequence in which it happens.</li>
+          <li>Describe what causes a particular event using decision nodes and guard conditions.</li>
+          <li><strong>Activity:</strong> Rounded rectangle; <strong>decision node:</strong> diamond; <strong>fork/join:</strong> bar for parallel activities.</li>
+        </ul>
         <figure class="diagram figure-photo" aria-labelledby="fig-activity-caption">
           <img src="../../../assets/images/se-topic-05/uml-activity-example.webp"
                alt="Activity diagram showing workflow with decisions and parallel activities"
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-activity-caption">Activity diagram — workflow with decision points and parallel paths.</figcaption>
         </figure>
+
+        <h4>2.3 Use case diagram</h4>
+        <p>
+          Use case diagrams depict the functionality of a system or part of a system and its interaction with external
+          agents (actors).
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-usecase-notations-caption">
+          <img src="../../../assets/images/se-topic-05/use-case-notations.webp"
+               alt="Use case diagram notations — actor, use case, system boundary, associations"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-usecase-notations-caption">Use case diagram notations.</figcaption>
+        </figure>
         <ul>
-          <li>Activity diagrams illustrate the flow of control in a system — workflows and business processes.</li>
-          <li>They can also represent the steps involved in executing a use case.</li>
-          <li><strong>Activity:</strong> Rounded rectangle — an action or step in the workflow.</li>
-          <li><strong>Decision node:</strong> Diamond — a branch point with multiple outgoing paths (if/else logic).</li>
-          <li><strong>Merge node:</strong> Diamond — where multiple paths combine back into one.</li>
-          <li><strong>Fork/join:</strong> Bar — represents parallel (concurrent) activities.</li>
-          <li><strong>Initial/final node:</strong> Filled circle (start) and circle with inner dot (end).</li>
+          <li>A use case represents different scenarios where the system can be used.</li>
+          <li>Provides a high-level view of what the system does without going into implementation details.</li>
+          <li><strong>Actor:</strong> User or external system (stick figure); <strong>use case:</strong> System function (oval).</li>
+          <li><strong>System boundary:</strong> Rectangle enclosing use cases; <strong>generalisation:</strong> Actor inheritance (e.g., Registered Customer is a Web Customer).</li>
+          <li><strong>Include/extend:</strong> Dashed arrows for reusable or optional use case behaviour.</li>
+        </ul>
+        <figure class="diagram figure-photo" aria-labelledby="fig-usecase-shopping-caption">
+          <img src="../../../assets/images/se-topic-05/uml-use-case-online-shopping.png"
+               alt="Use case diagram — online shopping subsystem with customers, authentication, and payment services"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-usecase-shopping-caption">Use case diagram — online shopping subsystem with actors and external services.</figcaption>
+        </figure>
+
+        <h4>2.4 Sequence diagram</h4>
+        <p>
+          A sequence diagram depicts interaction between objects in a sequential order — the order in which interactions
+          take place.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-sequence-mood-caption">
+          <img src="../../../assets/images/se-topic-05/uml-sequence-mood-music.png"
+               alt="Sequence diagram — user, device, and database for mood detection and music playlist"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-sequence-mood-caption">Sequence diagram — mood detection and music playlist generation.</figcaption>
+        </figure>
+        <ul>
+          <li>Also called <strong>event diagrams</strong> or <strong>event scenarios</strong>.</li>
+          <li>Describes how and in what order objects in a system function.</li>
+          <li><strong>Lifeline:</strong> Vertical dashed line below each object; <strong>activation bar:</strong> thin rectangle showing active processing.</li>
+          <li><strong>Message:</strong> Horizontal arrow — solid for synchronous, dashed for return/asynchronous.</li>
+          <li>Widely used to document and understand requirements for new and existing systems.</li>
         </ul>
 
-        <h3>5. Other UML diagrams (exam awareness)</h3>
+        <h4>2.5 Communication diagram</h4>
+        <p>
+          A communication diagram (known as <strong>collaboration diagram</strong> in UML 1.x) shows sequenced messages
+          exchanged between objects, focusing primarily on objects and their relationships.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-communication-caption">
+          <img src="../../../assets/images/se-topic-05/uml-communication-event.png"
+               alt="Communication diagram — event request window, calendar, event, and email alert"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-communication-caption">Communication diagram — event request, calendar check, and email alert.</figcaption>
+        </figure>
         <ul>
-          <li><strong>State diagram:</strong> Shows states of an object and transitions triggered by events — useful for objects with distinct lifecycle states.</li>
-          <li><strong>Component diagram:</strong> Shows how physical software components are organised and how they depend on each other.</li>
-          <li><strong>Deployment diagram:</strong> Shows how software components are deployed on hardware nodes.</li>
-          <li><strong>Package diagram:</strong> Organises model elements into groups/packages for large systems.</li>
+          <li>Similar information to sequence diagrams but represents objects and links in a <strong>free-form</strong> layout.</li>
+          <li>Messages are numbered to show sequence (e.g., 1, 1.1, 1.2, 2a, 2b).</li>
+          <li>Emphasises <strong>structural relationships</strong> between objects rather than time ordering.</li>
+        </ul>
+
+        <h4>2.6 Interaction overview diagram</h4>
+        <p>
+          An interaction overview diagram illustrates the flow of interactions between elements in a system, providing
+          a high-level overview of how interactions occur — including sequence of actions, decisions, and interactions
+          between components.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-interaction-overview-caption">
+          <img src="../../../assets/images/se-topic-05/uml-interaction-overview-shopping.png"
+               alt="Interaction overview diagram — online shopping flow with search, browse, cart, and checkout"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-interaction-overview-caption">Interaction overview diagram — online shopping interaction flow.</figcaption>
+        </figure>
+        <ul>
+          <li>Combines activity diagram notation with references to detailed interaction diagrams (ref boxes).</li>
+          <li>Shows the "big picture" of complex logic by nesting detailed interactions within a high-level flow.</li>
+          <li>Uses decision nodes with guard conditions (e.g., [search], [browse], [like it], [checkout]).</li>
+        </ul>
+
+        <h4>2.7 Timing diagram (UML 2.0 — exam awareness)</h4>
+        <ul>
+          <li>Shows state changes of objects over time along a timeline axis.</li>
+          <li>Added in UML 2.0; useful for real-time and embedded systems.</li>
+        </ul>
+
+        <h3>Additions in UML 2.0</h3>
+        <ul>
+          <li>Software development methodologies like agile have been incorporated and the scope of the original UML specification has been broadened.</li>
+          <li>Originally UML specified <strong>9 diagrams</strong>. UML 2.x increased the number from 9 to <strong>13</strong>.</li>
+          <li>The <strong>four diagrams added</strong> in UML 2.x: timing diagram, communication diagram, interaction overview diagram, and composite structure diagram.</li>
+          <li>UML 2.x renamed statechart diagrams to <strong>state machine diagrams</strong>.</li>
+          <li>UML 2.x added the ability to decompose a software system into components and sub-components.</li>
+        </ul>
+
+        <h3>Tools for creating UML diagrams</h3>
+        <ul>
+          <li><strong>Lucidchart:</strong> Web-based diagramming tool; user-friendly and collaborative with real-time multi-user editing.</li>
+          <li><strong>Draw.io (diagrams.net):</strong> Free web-based tool supporting UML; integrates with cloud storage and works offline.</li>
+          <li><strong>Visual Paradigm:</strong> Comprehensive suite for software development with UML diagramming; online and desktop versions.</li>
+          <li><strong>StarUML:</strong> Open-source UML modeling tool with a user-friendly interface; supports UML 2.x and plugin extensions.</li>
         </ul>
 
         <h3>UML in the design process</h3>
         <ul>
-          <li>During high-level design, use case and class diagrams define scope and structure.</li>
-          <li>During low-level design, sequence and activity diagrams detail object interactions and workflows.</li>
-          <li>UML diagrams become part of the SDD and guide coding in OOP languages.</li>
+          <li>During <strong>high-level design</strong>, use case and class diagrams define scope and structure.</li>
+          <li>During <strong>low-level design</strong>, sequence, activity, and state diagrams detail object interactions and workflows.</li>
+          <li>Component and deployment diagrams model implementation and physical architecture.</li>
+          <li>UML diagrams become part of the SDD and guide coding in OOP languages — see <a href="05-05-low-level-design.html#sec-5-5">§5.5</a>.</li>
         </ul>
 
         <div class="callout exam">
           <div class="callout-title">Exam question — UML modelling</div>
-          <p><strong>Q:</strong> What is UML? Explain use case, class, and sequence diagrams with their key elements.</p>
+          <p><strong>Q:</strong> What is UML? Classify UML diagrams. Explain key structural and behavioural diagrams with examples.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Define UML: standard visual language for software design; linked to OOD.</li>
-            <li>Use case: actors, use cases, system boundary, include/extend — shows system functionality.</li>
-            <li>Class: classes with attributes/methods, associations, inheritance, multiplicity.</li>
-            <li>Sequence: lifelines, messages, activation bars — shows interaction over time.</li>
-            <li>Activity: workflow, decisions, parallel paths — shows control flow.</li>
+            <li>Define UML: visual language (not programming); ISO standard; blueprints for system design; linked to OOD.</li>
+            <li>Need: stakeholder communication, visualize before coding, non-programmers understand requirements.</li>
+            <li>Structural (6): class, composite structure, object, component, deployment, package.</li>
+            <li>Behavioural (7): state machine, activity, use case, sequence, communication, interaction overview, timing.</li>
+            <li>UML 2.0: 9 → 13 diagrams; added timing, communication, interaction overview, composite structure.</li>
+            <li>Key examples: class (static structure), object (instances snapshot), component (OnlineStore), deployment (mobile banking), state (PIN auth), activity (odd number check), use case (online shopping), sequence (mood/music), communication (event request).</li>
+            <li>Tools: Lucidchart, Draw.io, Visual Paradigm, StarUML.</li>
           </ul>
         </div>
       </section>

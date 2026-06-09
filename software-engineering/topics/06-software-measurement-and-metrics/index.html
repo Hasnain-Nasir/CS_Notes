@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 6 — Software Measurement &amp; Metrics</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="index-hero topic-hub">
+    <header class="site-header site-header--hub">
+      <div class="site-header-top">
+        <h1>6. Software Measurement &amp; Metrics</h1>
+        <div class="site-header-actions">
+          <a class="btn-back" href="../../index.html">&larr; Software Engineering</a>
+        </div>
+      </div>
+      <div class="outline-coverage" id="outline-coverage">
+        <div class="outline-coverage-title">Syllabus outline covered in this topic</div>
+        <ul>
+          <li>Software Measurement and Metrics (exam depth for design &amp; quality assurance)</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="subtopic-cards">
+      <a class="subtopic-card" href="06-01-measurement-overview.html">
+        <span class="subtopic-card-circle">6.1</span>
+        <span class="subtopic-card-label">Software Measurement and Metrics (overview)</span>
+      </a>
+      <a class="subtopic-card" href="06-02-people-process-metrics.html">
+        <span class="subtopic-card-circle">6.2</span>
+        <span class="subtopic-card-label">People Metrics &amp; Process Metrics</span>
+      </a>
+      <a class="subtopic-card" href="06-03-halstead-metrics.html">
+        <span class="subtopic-card-circle">6.3</span>
+        <span class="subtopic-card-label">Halstead's Software Science / Metrics</span>
+      </a>
+      <a class="subtopic-card" href="06-04-function-point-analysis.html">
+        <span class="subtopic-card-circle">6.4</span>
+        <span class="subtopic-card-label">Function Point (FP) Analysis</span>
+      </a>
+      <a class="subtopic-card" href="06-05-lines-of-code.html">
+        <span class="subtopic-card-circle">6.5</span>
+        <span class="subtopic-card-label">Lines of Code (LOC)</span>
+      </a>
+      <a class="subtopic-card" href="06-06-cyclomatic-complexity.html">
+        <span class="subtopic-card-circle">6.6</span>
+        <span class="subtopic-card-label">Cyclomatic Complexity / Control Flow Graphs</span>
+      </a>
+      <a class="subtopic-card" href="06-07-key-takeaways.html">
+        <span class="subtopic-card-circle">✓</span>
+        <span class="subtopic-card-label">Key takeaways</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

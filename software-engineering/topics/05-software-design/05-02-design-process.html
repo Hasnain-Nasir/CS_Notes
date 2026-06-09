@@ -34,17 +34,34 @@
       <section id="sec-5-2">
 
         <p>
-          The <strong>software design process</strong> is the structured method by which developers plan how to turn
-          requirements into a working system. Instead of jumping straight into code, the team breaks complex requirements
-          into manageable pieces, designs the system architecture, and decides how all components will fit together.
+          The <strong>design phase</strong> of software development deals with transforming customer requirements —
+          as described in the
+          <a href="../04-requirements-engineering-and-specification/04-14-srs-document.html#sec-4-14">SRS</a>
+          (Software Requirements Specification) — into a form that can be implemented using a programming language.
+          It is the bridge between <em>what</em> the system must do (requirements) and <em>how</em> it will be built
+          (implementation).
+        </p>
+
+        <h3>What is the software design process?</h3>
+        <p>
+          The <strong>software design process</strong> is the phase where developers plan how to turn a set of
+          requirements into a working system. Think of it as a <strong>blueprint</strong> for the software: instead of
+          going straight into writing code, the team breaks complex requirements into smaller, manageable pieces, designs
+          the system architecture, and decides how everything will fit together and work.
         </p>
         <p>
-          The design phase takes the SRS as input and produces the SDD as output. The process can be understood at two
-          complementary levels: the <strong>three design levels</strong> (Set 1) and the <strong>design activities and
+          The design phase takes the SRS as input and produces the
+          <strong>Software Design Description (SDD)</strong> as output (see
+          <a href="05-01-basic-concept.html#sec-5-1">§5.1</a>). The process can be understood at two complementary
+          levels: the <strong>three design levels</strong> (Set 1) and the <strong>design activities and
           deliverables</strong> (Set 2).
         </p>
 
         <h3>Set 1 — Three levels of design</h3>
+        <p>
+          The software design process is divided into three levels or phases of design, each at a different level of
+          abstraction. Higher levels hide internal detail; lower levels expose it progressively.
+        </p>
         <figure class="diagram figure-photo" aria-labelledby="fig-three-levels-caption">
           <img src="../../../assets/images/se-topic-05/design-levels.webp"
                alt="Interface design, architectural design, and detailed design levels"
@@ -53,24 +70,50 @@
         </figure>
 
         <h4>1. Interface design</h4>
+        <p>
+          Interface design is the specification of the interaction between a system and its environment. This phase
+          proceeds at a high level of abstraction — the internal workings of the system are completely ignored and the
+          system is treated as a <strong>black box</strong>. Attention is focused on the dialogue between the target
+          system and the users, devices, and other systems with which it interacts.
+        </p>
         <ul>
-          <li>Interface design specifies the interaction between a system and its environment — users, devices, and other systems (collectively called <strong>agents</strong>).</li>
-          <li>The system is treated as a <strong>black box</strong>: internal workings are ignored; only inputs and outputs are defined.</li>
-          <li>Interface design must document: precise description of incoming events/messages the system must respond to; outgoing events/messages the system must produce; data formats for inputs and outputs; ordering and timing relationships between incoming and outgoing events.</li>
+          <li>The people, other systems, and devices that interact with the system are collectively called <strong>agents</strong>. The design problem statement produced during problem analysis should identify these agents.</li>
+          <li><strong>Incoming events/messages:</strong> Precise description of events in the environment, or messages from agents, to which the system must respond.</li>
+          <li><strong>Outgoing events/messages:</strong> Precise description of the events or messages that the system must produce.</li>
+          <li><strong>Data formats:</strong> Specification of the data, and the formats of data, coming into and going out of the system.</li>
+          <li><strong>Ordering and timing:</strong> Specification of the ordering and timing relationships between incoming events or messages, and outgoing events or outputs.</li>
         </ul>
 
         <h4>2. Architectural design</h4>
+        <p>
+          Architectural design is the specification of the major components of a system — their responsibilities, properties,
+          interfaces, and the relationships and interactions between them. The overall structure of the system is chosen,
+          but the internal details of major components are still ignored.
+        </p>
         <ul>
-          <li>Architectural design specifies the major components of a system, their responsibilities, properties, interfaces, and the relationships and interactions between them.</li>
-          <li>The overall structure is chosen, but internal details of individual components are still ignored — modules remain black boxes.</li>
-          <li>Key issues: gross decomposition into major components; allocation of functional responsibilities; component interfaces; scaling, performance, reliability, and resource properties; communication and interaction between components.</li>
+          <li>Architectural design adds important details ignored during interface design. Design of the internals of major components is deferred until the detailed design phase.</li>
+          <li><strong>Gross decomposition</strong> of the system into major components.</li>
+          <li><strong>Allocation</strong> of functional responsibilities to components.</li>
+          <li><strong>Component interfaces</strong> — how components connect and exchange data.</li>
+          <li><strong>Non-functional properties:</strong> Component scaling, performance, resource consumption, and reliability.</li>
+          <li><strong>Communication and interaction</strong> between components.</li>
           <li>At this level, designers focus on <strong>coupling and cohesion</strong> between modules rather than internal module logic (see <a href="05-10-coupling-cohesion.html#sec-5-10">§5.10</a>).</li>
         </ul>
 
         <h4>3. Detailed design (low-level design)</h4>
+        <p>
+          Detailed design is the specification of the internal elements of all major system components — their properties,
+          relationships, processing, and often their algorithms and data structures. See also
+          <a href="05-05-low-level-design.html#sec-5-5">§5.5</a>.
+        </p>
         <ul>
-          <li>Detailed design specifies the internal elements of all major system components — their properties, relationships, processing, algorithms, and data structures.</li>
-          <li>It includes: decomposition of major components into program units; allocation of functional responsibilities to units; user interfaces at module level; unit states and state changes; data and control interaction between units; data packaging, scope, and visibility; algorithms and data structures.</li>
+          <li>Decomposition of major system components into program units.</li>
+          <li>Allocation of functional responsibilities to units.</li>
+          <li>User interfaces at module level.</li>
+          <li>Unit states and state changes.</li>
+          <li>Data and control interaction between units.</li>
+          <li>Data packaging and implementation, including scope and visibility of program elements.</li>
+          <li>Algorithms and data structures.</li>
         </ul>
 
         <h3>Set 2 — Design activities and deliverables</h3>
@@ -104,40 +147,204 @@
         </ul>
 
         <h3>Software design phases (activity sequence)</h3>
+        <p>
+          The actual software design process moves from one end to the other — from understanding requirements to a
+          complete, implementable design. The following phases are typically followed in sequence:
+        </p>
         <figure class="diagram figure-photo" aria-labelledby="fig-design-phases-caption">
           <img src="../../../assets/images/se-topic-05/design-phases.webp"
                alt="Software design phases from understanding requirements to prototyping"
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-design-phases-caption">Phases of the software design process.</figcaption>
         </figure>
-        <ul>
-          <li><strong>Understanding project requirements:</strong> The team confirms user needs, business goals, and potential challenges before designing.</li>
-          <li><strong>Research, analysis, and planning:</strong> Data is gathered through interviews, surveys, and focus groups to design with the user in mind.</li>
-          <li><strong>Designing the software:</strong> Wireframes, user stories, and flow diagrams map out system behaviour; prototypes are created and refined based on feedback.</li>
-          <li><strong>Technical design:</strong> A thorough technical document outlines how the software will be implemented, including specific components and their interactions.</li>
-          <li><strong>User interface design:</strong> UI designers work on visual elements, navigation, and overall user experience (see <a href="05-17-user-interface-design.html#sec-5-17">§5.17</a>).</li>
-          <li><strong>Prototyping:</strong> Low-fidelity wireframes or high-fidelity interactive models visualise design and functionality before full development.</li>
-        </ul>
+
+        <h4>1. Understanding project requirements</h4>
+        <p>
+          Before jumping into design, the team must understand what users need, what the business goals are, and any
+          potential challenges. This understanding sets the foundation for a design that meets both user and business needs.
+        </p>
+
+        <h4>2. Research, analysis, and planning</h4>
+        <p>
+          The team gathers data through methods such as interviews, surveys, and focus groups. This produces a clearer
+          picture of what users want and allows the team to design with the user in mind.
+        </p>
+
+        <h4>3. Designing the software</h4>
+        <p>
+          The team creates visual elements — wireframes, user stories, and flow diagrams — to map out how the system will
+          work. Prototypes are created and fine-tuned based on feedback to ensure the design is moving in the right direction.
+        </p>
+
+        <h4>4. Technical design</h4>
+        <p>
+          After gathering feedback, the team produces a thorough technical document that outlines exactly how the software
+          will be implemented, including specific components and how they will work together.
+        </p>
+
+        <h4>5. User interface design</h4>
+        <p>
+          The focus shifts to usability. UI designers work on visual elements, navigation, and overall user experience
+          to ensure the interface is intuitive and friendly. See <a href="05-17-user-interface-design.html#sec-5-17">§5.17</a>.
+        </p>
+
+        <h4>6. Prototyping</h4>
+        <p>
+          Prototypes visualise the design and functionality before full development begins. These range from simple
+          low-fidelity wireframes to fully interactive high-fidelity models, depending on the stage of development.
+        </p>
 
         <h3>Elements of software design</h3>
+        <p>
+          Good software design is built on several core elements that work together to create an effective system.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-design-elements-caption">
+          <img src="../../../assets/images/se-topic-05/design-elements.webp"
+               alt="Core elements of software design — architecture, modules, components, interfaces, and data"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-design-elements-caption">Core elements of the software design process.</figcaption>
+        </figure>
         <ul>
-          <li><strong>Architecture:</strong> The conceptual model defining structure, behaviour, and views of the system.</li>
-          <li><strong>Modules:</strong> Building blocks of the system — each handles a specific task or feature.</li>
-          <li><strong>Components:</strong> Groups of related functions, made up of modules; keep code clean and adaptable.</li>
-          <li><strong>Interfaces:</strong> Shared boundaries across which components exchange information.</li>
-          <li><strong>Data:</strong> How information is stored, accessed, and shared throughout the system.</li>
+          <li><strong>Architecture:</strong> The conceptual model that defines the structure, behaviour, and views of a system. Flowcharts and structure charts can be used to represent architecture. A solid architecture ensures the system is flexible, stable, and easy to maintain over time.</li>
+          <li><strong>Modules:</strong> The building blocks of the system — each handles a specific task or feature. Breaking a system into smaller modules makes it easier to develop, test, and maintain. A combination of modules makes up the complete system.</li>
+          <li><strong>Components:</strong> Groups of related functions that provide a particular capability. Components are made up of modules. Organising the system into components keeps the code clean and makes the system more adaptable.</li>
+          <li><strong>Interfaces:</strong> The shared boundary across which the components of a system exchange information and interact. Interfaces define how modules and components connect without exposing internal implementation.</li>
+          <li><strong>Data:</strong> Data is at the heart of any system. This element covers how information is stored, accessed, and shared — the management of information and data flow throughout the system.</li>
+        </ul>
+
+        <h3>How software design fits into the SDLC</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-sdlc-design-caption">
+          <img src="../../../assets/images/se-topic-05/design-process-flowchart.png"
+               alt="Software design phase within the software development life cycle"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-sdlc-design-caption">Software design in the SDLC — after requirements, before development.</figcaption>
+        </figure>
+        <p>
+          Software design comes after project requirements are complete and before the actual development (coding) phase
+          begins. In the broader
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a>, the sequence is:
+        </p>
+        <ul>
+          <li><strong>Requirements phase:</strong> User needs are captured and documented in the SRS.</li>
+          <li><strong>Design phase:</strong> The team uses tools such as wireframes,
+            <a href="../04-requirements-engineering-and-specification/04-11-dfd.html#sec-4-11">data flow diagrams</a>,
+            and UI designs to map out how the system will work — drawing the roadmap for how everything will come together.</li>
+          <li><strong>Development phase:</strong> After design is approved, the actual coding and implementation begins.</li>
+        </ul>
+        <p>
+          Design is therefore the critical planning step that converts the SRS into an implementable blueprint, reducing
+          rework and guiding developers during construction.
+        </p>
+
+        <h3>Software design principles (overview)</h3>
+        <p>
+          To ensure software is easy to manage, maintain, and update, the following principles should guide the design
+          process. Full coverage is in <a href="05-03-design-principles.html#sec-5-3">§5.3</a>.
+        </p>
+        <ul>
+          <li><strong>Modularity:</strong> Break software into smaller, independent modules — each handling a specific task — so modules can be tested, maintained, and updated without affecting the entire system.</li>
+          <li><strong>Coupling:</strong> Minimise dependencies between modules so that changing one module does not impact others, making the software more flexible.</li>
+          <li><strong>Abstraction:</strong> Simplify by hiding complexity and showing only essential features, making the software easier to use and understand.</li>
+          <li><strong>Anticipation of change:</strong> Design with future updates, new features, and new technologies in mind.</li>
+          <li><strong>Simplicity:</strong> Keep designs clean and efficient — simple designs have fewer errors and are easier to maintain.</li>
+          <li><strong>Sufficiency and completeness:</strong> Meet all required functions without unnecessary extras — avoid gold-plating features not in the specification.</li>
+        </ul>
+
+        <h3>Tools for software design</h3>
+        <p>
+          Many tools make the design process easier and more efficient — whether working on wireframes, prototypes, or
+          documentation. Popular tools include:
+        </p>
+        <ul>
+          <li><strong>Figma</strong> — collaborative UI/UX design and prototyping.</li>
+          <li><strong>Balsamiq</strong> — low-fidelity wireframing for rapid layout sketches.</li>
+          <li><strong>Axure RP</strong> — high-fidelity prototypes with interactive behaviour.</li>
+          <li><strong>Sketch</strong> — vector-based UI design for macOS.</li>
+          <li><strong>InVision Studio</strong> — design, prototype, and animation for digital products.</li>
+        </ul>
+        <p>
+          For technical design documentation, teams also use structure charts, UML tools, and pseudocode/flowchart editors
+          (see <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>, <a href="05-08-pseudocode.html#sec-5-8">§5.8</a>,
+          <a href="05-09-flowcharts.html#sec-5-9">§5.9</a>).
+        </p>
+
+        <h3>Points to be considered while designing software</h3>
+        <p>
+          During the design process, several fundamental concepts guide how a solution is structured, refined, and
+          simplified. Different levels of abstraction are applied at each stage so that errors can be found and removed,
+          improving the efficiency and quality of the final software solution.
+        </p>
+
+        <h4>1. Abstraction (hide irrelevant data)</h4>
+        <ul>
+          <li>Abstraction means hiding unnecessary details to reduce complexity and increase efficiency or quality.</li>
+          <li>Different levels of abstraction are necessary at each stage of the design process.</li>
+          <li>At a <strong>higher level</strong>, the solution is described in broad terms covering a wide range of concerns.</li>
+          <li>At a <strong>lower level</strong>, a more detailed description of the software solution is given.</li>
+          <li>See also <a href="05-03-design-principles.html#sec-5-3">§5.3</a> for abstraction as a design principle.</li>
+        </ul>
+
+        <h4>2. Modularity (subdivide the system)</h4>
+        <ul>
+          <li>Modularity means dividing the system or project into smaller parts to reduce complexity.</li>
+          <li>In design, the system is subdivided so that parts can be created independently and reused in different systems to perform different functions.</li>
+          <li>Monolithic software is hard to grasp; modularity has become both a trend and a necessity in modern design.</li>
+          <li>A system with fewer, larger components is more complex and costly; dividing it into components reduces effort and cost.</li>
+          <li>Detailed coverage in <a href="05-06-modularization.html#sec-5-6">§5.6</a>.</li>
+        </ul>
+
+        <h4>3. Architecture (design a structure)</h4>
+        <ul>
+          <li>Architecture is a technique for designing the structure of a system.</li>
+          <li>In software design, architecture focuses on the various elements of the structure and the data they use.</li>
+          <li>Components interact with each other and share the data defined by the architectural structure.</li>
+          <li>See <a href="05-04-architectural-design.html#sec-5-4">§5.4</a> for architectural design in detail.</li>
+        </ul>
+
+        <h4>4. Refinement (remove impurities)</h4>
+        <ul>
+          <li>Refinement means elaborating a system or software in greater detail to remove errors and increase quality.</li>
+          <li>It is a process of developing or presenting the software in a more detailed manner — finding errors and reducing them.</li>
+          <li>Refinement is closely linked to <strong>stepwise refinement</strong> in top-down design (see <a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a>).</li>
+        </ul>
+
+        <h4>5. Pattern (a repeated form)</h4>
+        <ul>
+          <li>A pattern is a repeated form or design in which the same solution shape is applied several times.</li>
+          <li>In the design process, a pattern means the repetition of a solution to a common, recurring problem within a certain context.</li>
+          <li>Design patterns are proven, reusable solutions at the design level — a pattern repeats a successful approach to a recurring problem (Gang of Four categories covered in syllabus gap topic Design Patterns).</li>
+        </ul>
+
+        <h4>6. Information hiding (hide the information)</h4>
+        <ul>
+          <li>Information hiding means concealing information so that it cannot be accessed by unwanted parties.</li>
+          <li>In software design, modules are designed so that information contained in one module is hidden and cannot be directly accessed by other modules.</li>
+          <li>This reduces coupling and protects internal implementation details — closely related to encapsulation in OOD (<a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>).</li>
+        </ul>
+
+        <h4>7. Refactoring (reconstruct something)</h4>
+        <ul>
+          <li>Refactoring means reconstructing something in a way that does not affect the behaviour of other features.</li>
+          <li>In software design, refactoring reconstructs the design to reduce complexity and simplify it without impacting behaviour or functions.</li>
+          <li>Fowler defines refactoring as: <em>"the process of changing a software system in a way that it won't impact the behaviour of the design and improves the internal structure."</em></li>
         </ul>
 
         <div class="callout exam">
           <div class="callout-title">Exam question — Software design process</div>
-          <p><strong>Q:</strong> Explain the three levels of software design. What is produced at each level?</p>
+          <p><strong>Q:</strong> Explain the software design process. What are the three levels of design and where does design fit in the SDLC?</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Interface design: black-box I/O specification; events, data formats, timing.</li>
-            <li>Architectural design: major modules, responsibilities, interfaces, coupling/cohesion focus.</li>
-            <li>Detailed design: internal algorithms, data structures, unit interactions.</li>
+            <li>Design phase transforms SRS requirements into an implementable structure (SDD) — blueprint before coding.</li>
+            <li>Interface design: black-box I/O specification; agents; events, data formats, ordering/timing.</li>
+            <li>Architectural design: major components, responsibilities, interfaces, non-functional properties; internals deferred.</li>
+            <li>Detailed design: internal algorithms, data structures, unit states, scope/visibility.</li>
             <li>Set 2 deliverables: modules, control relationships, interfaces, data structures, algorithms.</li>
             <li>Preliminary design → program architecture; detailed design → module specification document.</li>
+            <li>Activity phases: understand requirements → research/plan → design → technical design → UI design → prototyping.</li>
+            <li>Core elements: architecture, modules, components, interfaces, data.</li>
+            <li>SDLC position: after requirements (SRS), before development (coding).</li>
+            <li>Design principles: modularity, low coupling, abstraction, anticipation of change, simplicity, sufficiency.</li>
+            <li>Design considerations: abstraction, modularity, architecture, refinement, pattern, information hiding, refactoring.</li>
           </ul>
         </div>
       </section>

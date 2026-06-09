@@ -34,113 +34,272 @@
       <section id="sec-5-13">
 
         <p>
-          <strong>Top-down</strong> and <strong>bottom-up</strong> are the two fundamental design approaches used to
-          decompose and compose software systems. They represent opposite directions of design thinking and are
-          linked to function-oriented design (top-down) and object-oriented design (bottom-up).
+          When designing complex systems, choosing the right approach for software development is important. Two
+          fundamental design approaches are <strong>top-down design</strong> and <strong>bottom-up design</strong>. Each
+          has its own advantages, disadvantages, and use cases. They represent opposite directions of design thinking
+          and are linked to
+          <a href="05-14-function-oriented-design.html#sec-5-14">function-oriented design</a> (top-down) and
+          <a href="05-15-object-oriented-design.html#sec-5-15">object-oriented design</a> (bottom-up).
         </p>
 
-        <h3>Top-down design</h3>
+        <h3>Top-down design model</h3>
+        <p>
+          In the top-down model, an overview of the system is formulated without going into detail for any part of it.
+          Each part is then refined into more detail, defining it further until the entire specification is detailed
+          enough to validate the model.
+        </p>
+        <p>
+          If we look at a problem as a whole, it may appear impossible because it is so complicated. Complicated
+          problems can be solved using top-down design, also called <strong>stepwise refinement</strong>.
+        </p>
+
         <figure class="diagram figure-photo" aria-labelledby="fig-top-down-caption">
           <img src="../../../assets/images/se-topic-05/top-down.jpeg"
                alt="Top-down design — decomposing a system from high level to detailed modules"
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-top-down-caption">Top-down design — progressive decomposition from system to modules.</figcaption>
         </figure>
+
+        <h4>How the top-down approach works</h4>
         <ul>
-          <li>Top-down design views the software system as a complete entity first, then progressively divides it into smaller subsystems and components.</li>
-          <li>Decomposition continues until the lowest-level modules are reached, forming a hierarchical system structure.</li>
-          <li>The complete system is obtained by combining the definitions of all subsystems and components.</li>
-          <li>Also called <strong>stepwise refinement</strong>: start with a high-level description of what the program does, then in each step take one part and refine it in greater detail until statement-level logic is reached.</li>
+          <li>The problem is broken into major components first.</li>
+          <li>Each component is refined into smaller subcomponents.</li>
+          <li>This process continues until every part is simple enough to implement.</li>
           <li>Refinement is a process of elaboration — from a highly conceptual model to lower-level details.</li>
+          <li>The complete system is obtained by combining the definitions of all subsystems and components.</li>
+        </ul>
+
+        <h4>Example — university management system (top-down)</h4>
+        <p>Consider designing a university management system using top-down design:</p>
+        <ul>
+          <li><strong>Level 0 — System overview:</strong> University Management System.</li>
+          <li><strong>Level 1 — Major modules:</strong> Student Management, Faculty Management, Course Management, Examination System.</li>
+          <li><strong>Level 2 — Submodules:</strong> Student Management breaks into Admission, Registration, and Fee Payment.</li>
+          <li><strong>Level 3 — Detailed functions:</strong> Admission breaks into Validate Application, Assign Roll Number, and Generate ID Card.</li>
+          <li>Each level is refined further until every function can be implemented directly in code.</li>
+        </ul>
+
+        <h4>Example — word processor (top-down)</h4>
+        <p>Designing a word processor also follows stepwise refinement:</p>
+        <ul>
+          <li><strong>Level 0:</strong> Word Processor Application.</li>
+          <li><strong>Level 1:</strong> File Handling, Text Editing, Formatting, Print Module.</li>
+          <li><strong>Level 2:</strong> Text Editing breaks into Insert Text, Delete Text, Copy/Paste, and Find/Replace.</li>
+          <li><strong>Level 3:</strong> Find/Replace breaks into Search String, Match Case, and Replace All.</li>
+          <li>Starting from the whole application and refining downward makes the complexity manageable.</li>
         </ul>
 
         <h4>Advantages of top-down design</h4>
         <ul>
+          <li><strong>Simplifies complex problems:</strong> Breaking problems into smaller parts helps identify what needs to be done.</li>
+          <li><strong>Easy to identify requirements:</strong> At each step of refinement, new parts become less complex and therefore easier to solve.</li>
+          <li><strong>Promotes reusability:</strong> Parts of the solution may turn out to be reusable in other systems.</li>
+          <li><strong>Collaboration-friendly:</strong> Breaking problems into parts allows more than one person to work on the problem simultaneously.</li>
           <li><strong>More systematic:</strong> Provides a clear, structured path from requirements to implementation.</li>
-          <li><strong>Easy to understand:</strong> Produces a modular architecture that is straightforward to explain.</li>
           <li><strong>Cost and time prediction:</strong> In correspondence with user requirements, cost and time prediction is possible.</li>
           <li><strong>Most commonly used</strong> for small and medium-sized products.</li>
         </ul>
 
         <h4>Disadvantages of top-down design</h4>
         <ul>
-          <li>When a problem is very complex and very large, the entire problem cannot be understood as a whole.</li>
-          <li>Difficult to apply to systems where low-level components must be reused from existing libraries.</li>
+          <li>When a problem is very complex and very large, the entire problem cannot always be understood as a whole.</li>
+          <li>The top function of the system might be hard to identify in some domains.</li>
+          <li>Implementation details can vary throughout the process, which may cause inconsistency.</li>
+          <li>Each part is programmed separately, which can introduce redundancy.</li>
+          <li>Difficult to apply when low-level components must be reused from existing libraries.</li>
         </ul>
 
-        <h3>Bottom-up design</h3>
+        <h3>Bottom-up design model</h3>
+        <p>
+          In contrast, the bottom-up design model starts by defining the system's individual parts first. Once the
+          individual components are detailed, they are integrated into larger modules. This process continues until the
+          system is fully integrated.
+        </p>
+        <p>
+          The bottom-up approach is often used in object-oriented programming languages like C++, Java, and Python,
+          where individual objects are identified and developed first.
+        </p>
+
         <figure class="diagram figure-photo" aria-labelledby="fig-bottom-up-caption">
           <img src="../../../assets/images/se-topic-05/bottom-up.webp"
                alt="Bottom-up design — building a system by integrating low-level components"
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-bottom-up-caption">Bottom-up design — integrating low-level components into a complete system.</figcaption>
         </figure>
+
+        <h4>How the bottom-up approach works</h4>
         <ul>
-          <li>Bottom-up design begins with the development of low-level components and subsystems.</li>
-          <li>These components are gradually combined to form higher-level modules until the complete system is built.</li>
+          <li>Smaller components or objects are identified and specified first.</li>
+          <li>These smaller parts are linked together to form larger components.</li>
+          <li>Integration continues until the complete system is built.</li>
           <li>As the design progresses upward, the level of abstraction increases.</li>
-          <li>When the problem is very difficult to understand, solve sub-problems first and repeat until the entire problem is solved.</li>
-          <li>Commonly used with OOP languages (C++, Java, Python) where individual objects are identified and developed first.</li>
+          <li>This method focuses on creating well-defined and reusable low-level components before deciding how to integrate them.</li>
+        </ul>
+
+        <h4>Example — online shopping system (bottom-up)</h4>
+        <p>Consider building an online shopping system using bottom-up design:</p>
+        <ul>
+          <li><strong>Step 1 — Low-level classes:</strong> Build <code>Product</code> (title, price, stock), <code>Customer</code> (name, email, address), and <code>Payment</code> (method, amount, status) classes first.</li>
+          <li><strong>Step 2 — Mid-level modules:</strong> Combine classes into <code>ShoppingCart</code> (uses Product + Customer) and <code>Order</code> (uses Product + Payment).</li>
+          <li><strong>Step 3 — High-level system:</strong> Integrate ShoppingCart and Order into the complete E-Commerce Application.</li>
+          <li>Each class is designed, coded, and tested independently before integration.</li>
+        </ul>
+
+        <h4>Example — library system (bottom-up)</h4>
+        <p>Building a library system from the bottom up:</p>
+        <ul>
+          <li><strong>Step 1:</strong> Create <code>Book</code> class (ISBN, title, author) and <code>Member</code> class (memberId, name) as independent components.</li>
+          <li><strong>Step 2:</strong> Build <code>IssueRecord</code> class that links a Book and a Member for borrowing.</li>
+          <li><strong>Step 3:</strong> Integrate all classes into the <code>LibrarySystem</code> that manages books, members, and issue records.</li>
+          <li>Reusable low-level classes like Book and Member can be used in other systems as well.</li>
         </ul>
 
         <h4>Advantages of bottom-up design</h4>
         <ul>
+          <li><strong>Reusability of low-level components:</strong> Decisions about reusable low-level utilities are made early in the design.</li>
+          <li><strong>Focused problem-solving:</strong> Developers can focus on solving smaller and more isolated problems first.</li>
+          <li><strong>Increased modularity:</strong> The modular approach makes it easier to update individual components without affecting the entire system.</li>
           <li><strong>Suitable for large projects</strong> where the full system scope is hard to define upfront.</li>
           <li><strong>Easy for designers</strong> to work incrementally — build and test components independently.</li>
-          <li><strong>Reusable components</strong> can be integrated from existing libraries or prior projects.</li>
           <li>A working program of components is available early in the process.</li>
         </ul>
 
         <h4>Disadvantages of bottom-up design</h4>
         <ul>
-          <li>Produces a <strong>complex architecture</strong> that is very difficult to understand and manage.</li>
+          <li>Produces a <strong>complex architecture</strong> that can be difficult to understand and manage.</li>
+          <li>Sometimes we cannot build a complete program from the pieces we started with.</li>
+          <li>Building a program can be difficult if modules are not assembled in a logical order.</li>
           <li>Overall system structure may emerge inconsistently if components are not designed with integration in mind.</li>
           <li>Harder to predict total cost and schedule upfront.</li>
         </ul>
 
+        <h3>Key differences — top-down vs bottom-up</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>S. No.</th><th>Top-Down Approach</th><th>Bottom-Up Approach</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Focus</strong></td>
+                <td>Focuses on breaking the problem into smaller, more manageable parts.</td>
+                <td>Solves smaller problems and integrates them into a complete system.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Languages</strong></td>
+                <td>Mainly used in structured programming languages like COBOL, Fortran, and C.</td>
+                <td>Mainly used in object-oriented languages like C++, C#, Java, and Python.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Redundancy</strong></td>
+                <td>Each part is programmed separately, so redundancy may occur.</td>
+                <td>Redundancy is minimised by using data encapsulation and data hiding.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Communication</strong></td>
+                <td>Communication among modules is less during initial design.</td>
+                <td>Modules must communicate to integrate the system.</td>
+              </tr>
+              <tr>
+                <td><strong>5. Primary use</strong></td>
+                <td>Used for debugging and module documentation.</td>
+                <td>Basically used in testing.</td>
+              </tr>
+              <tr>
+                <td><strong>6. Process</strong></td>
+                <td>Decomposition of the system — breaking it into smaller components.</td>
+                <td>Composition of the system — combining low-level components into a higher-level structure.</td>
+              </tr>
+              <tr>
+                <td><strong>7. Identification</strong></td>
+                <td>The top function of the system might be hard to identify.</td>
+                <td>Sometimes we cannot build a program from the pieces we have started with.</td>
+              </tr>
+              <tr>
+                <td><strong>8. Implementation</strong></td>
+                <td>Implementation details can vary throughout the process.</td>
+                <td>Building a program can be difficult if modules are not assembled in a logical order.</td>
+              </tr>
+              <tr>
+                <td><strong>9. Testing pros</strong></td>
+                <td>Easier isolation of interface errors; benefits when errors occur towards the top of the program; defects in design are detected early.</td>
+                <td>Easy to create test conditions; test results are easy to observe; suited when defects occur at the bottom of the program.</td>
+              </tr>
+              <tr>
+                <td><strong>10. Testing cons</strong></td>
+                <td>Difficulty observing output of test cases; stub writing is crucial; challenging when stubs are far from the top-level module.</td>
+                <td>No working model until several modules are constructed; no program entity without the last module; system-level functions observable only with a top-level test driver.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>When to use top-down vs bottom-up</h3>
+
+        <h4>Use top-down design when</h4>
+        <ul>
+          <li>You need to develop large and complex systems where high-level architecture is defined early.</li>
+          <li>The overall system's structure is crucial before dealing with individual components.</li>
+          <li>You are working in a procedural or structured programming environment.</li>
+          <li>The problem can be understood as a whole and decomposed systematically — e.g., a university system or word processor.</li>
+        </ul>
+
+        <h4>Use bottom-up design when</h4>
+        <ul>
+          <li>You want to focus on individual components and gradually build them into a complete system.</li>
+          <li>You are working with object-oriented languages and want to take advantage of modularity and object reusability.</li>
+          <li>The system is composed of smaller, reusable components that need to be integrated — e.g., an e-commerce or library system.</li>
+          <li>The full system scope is hard to define upfront and incremental development is preferred.</li>
+        </ul>
+
         <h3>Link to design paradigms</h3>
-        <table>
-          <thead>
-            <tr><th>Aspect</th><th>Top-Down (FOD)</th><th>Bottom-Up (OOD)</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Paradigm</strong></td>
-              <td>Function-oriented design — see <a href="05-14-function-oriented-design.html#sec-5-14">§5.14</a>.</td>
-              <td>Object-oriented design — see <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.</td>
-            </tr>
-            <tr>
-              <td><strong>Decomposition level</strong></td>
-              <td>Function/procedure level using DFDs and structure charts.</td>
-              <td>Class/object level using UML diagrams.</td>
-            </tr>
-            <tr>
-              <td><strong>Focus</strong></td>
-              <td>Functions the program performs (what it does).</td>
-              <td>Data/entities to be manipulated (what it operates on).</td>
-            </tr>
-            <tr>
-              <td><strong>Tools</strong></td>
-              <td>Structured analysis and design — DFD, structure charts.</td>
-              <td>UML — class, sequence, use case diagrams.</td>
-            </tr>
-            <tr>
-              <td><strong>Begins with</strong></td>
-              <td>High-level functional description; use case scenarios.</td>
-              <td>Identifying objects and classes from the real world.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Top-Down (FOD)</th><th>Bottom-Up (OOD)</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Paradigm</strong></td>
+                <td>Function-oriented design — see <a href="05-14-function-oriented-design.html#sec-5-14">§5.14</a>.</td>
+                <td>Object-oriented design — see <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.</td>
+              </tr>
+              <tr>
+                <td><strong>Decomposition level</strong></td>
+                <td>Function/procedure level using DFDs and structure charts.</td>
+                <td>Class/object level using UML diagrams.</td>
+              </tr>
+              <tr>
+                <td><strong>Focus</strong></td>
+                <td>Functions the program performs (what it does).</td>
+                <td>Data/entities to be manipulated (what it operates on).</td>
+              </tr>
+              <tr>
+                <td><strong>Tools</strong></td>
+                <td>Structured analysis and design — DFD, structure charts.</td>
+                <td>UML — class, sequence, use case diagrams.</td>
+              </tr>
+              <tr>
+                <td><strong>Begins with</strong></td>
+                <td>High-level functional description; use case scenarios.</td>
+                <td>Identifying objects and classes from the real world.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <div class="callout exam">
           <div class="callout-title">Exam question — Top-down vs bottom-up</div>
-          <p><strong>Q:</strong> Explain top-down and bottom-up design. Give advantages and disadvantages of each.</p>
+          <p><strong>Q:</strong> Explain top-down and bottom-up design. Give advantages, disadvantages, and examples of each.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Top-down: decompose whole → parts; stepwise refinement; small/medium; systematic.</li>
-            <li>Bottom-up: build components → integrate; large projects; incremental.</li>
-            <li>Top-down advantages: systematic, modular, predictable; disadvantage: large complex problems.</li>
-            <li>Bottom-up advantages: large projects, reusable components; disadvantage: complex architecture.</li>
+            <li>Top-down: decompose whole → parts; stepwise refinement; decomposition; structured languages (C, COBOL).</li>
+            <li>Bottom-up: build components → integrate; composition; OOP languages (C++, Java, Python).</li>
+            <li>Top-down examples: university system, word processor — refine from overview to detail.</li>
+            <li>Bottom-up examples: e-commerce (Product, Customer, Order), library system (Book, Member).</li>
+            <li>Top-down advantages: simplifies complexity, collaboration, reusability; disadvantages: hard top function, redundancy.</li>
+            <li>Bottom-up advantages: reusable components, modularity; disadvantages: complex architecture, integration order.</li>
+            <li>Testing: top-down = stubs, early design defect detection; bottom-up = easy test conditions, needs test driver.</li>
             <li>Link: top-down = FOD; bottom-up = OOD.</li>
           </ul>
         </div>

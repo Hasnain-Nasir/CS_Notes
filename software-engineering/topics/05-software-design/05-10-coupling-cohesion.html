@@ -34,14 +34,27 @@
       <section id="sec-5-10">
 
         <p>
-          <strong>Coupling</strong> and <strong>cohesion</strong> are the two primary parameters for measuring the
-          quality of modularity in a software design. Together they determine maintainability, scalability, and
-          reliability of the system.
+          The purpose of the <strong>design phase</strong> in the Software Development Life Cycle is to produce a
+          solution to the problem given in the
+          <a href="../04-requirements-engineering-and-specification/04-14-srs-document.html#sec-4-14">SRS</a>
+          (Software Requirements Specification). The output of the design phase is a
+          <strong>Software Design Document (SDD)</strong>.
         </p>
+        <p>
+          <strong>Coupling</strong> and <strong>cohesion</strong> are two key concepts in software engineering used to
+          measure the quality of a software system's design. Together they determine the maintainability, scalability,
+          and reliability of the system.
+        </p>
+
+        <h3>What is coupling and cohesion?</h3>
         <ul>
-          <li><strong>Coupling</strong> measures the degree of <em>interdependence</em> between modules — an inter-module concept.</li>
-          <li><strong>Cohesion</strong> measures the functional strength of elements <em>within</em> a module — an intra-module concept.</li>
-          <li><strong>Design goal:</strong> <strong>Low coupling</strong> and <strong>high cohesion</strong> — modules should be independent of each other but strongly focused internally.</li>
+          <li><strong>Coupling</strong> refers to the degree of <em>interdependence</em> between software modules — an inter-module concept.</li>
+          <li>High coupling means modules are closely connected, and changes in one module may affect other modules.</li>
+          <li>Low coupling means modules are largely independent, and changes in one module have little impact on others.</li>
+          <li><strong>Cohesion</strong> refers to the degree to which elements within a module work together to fulfil a single, well-defined purpose — an intra-module concept.</li>
+          <li>High cohesion means elements are closely related and focused on one purpose.</li>
+          <li>Low cohesion means elements are loosely related and serve multiple unrelated purposes.</li>
+          <li><strong>Design goal:</strong> <strong>low coupling</strong> and <strong>high cohesion</strong> — modules should be independent of each other but strongly focused internally.</li>
         </ul>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-cc-goal-caption">
@@ -51,8 +64,47 @@
           <figcaption id="fig-cc-goal-caption">Design goal — low coupling between modules, high cohesion within modules.</figcaption>
         </figure>
 
+        <p>
+          High coupling and low cohesion make a system difficult to change and test, while low coupling and high
+          cohesion make a system easier to maintain and improve.
+        </p>
+
+        <h3>Design as a two-part iterative process</h3>
+        <p>Software design is basically a two-part iterative process:</p>
+
+        <h4>1. Conceptual design</h4>
+        <ul>
+          <li>Conceptual design tells the customer <strong>what the system will do</strong>.</li>
+          <li>It is written in simple, customer-understandable language.</li>
+          <li>It gives a detailed explanation of system characteristics and describes the functionality of the system.</li>
+          <li>It is independent of implementation and is linked with the requirements document.</li>
+        </ul>
+
+        <h4>2. Technical design</h4>
+        <ul>
+          <li>Technical design allows system builders to understand the actual hardware and software needed to solve the customer's problem.</li>
+          <li>It specifies hardware components and design.</li>
+          <li>It defines the functionality and hierarchy of software components, software architecture, and network architecture.</li>
+          <li>It describes data structures, data flow, I/O components, and interfaces between system parts.</li>
+        </ul>
+
+        <h3>Modularization</h3>
+        <p>
+          <strong>Modularization</strong> is the process of dividing a software system into multiple independent
+          modules where each module works independently. See
+          <a href="05-06-modularization.html#sec-5-6">§5.6</a> for full coverage.
+        </p>
+        <ul>
+          <li>Modularization makes the system <strong>easy to understand</strong> because each module handles a specific responsibility.</li>
+          <li>System <strong>maintenance becomes easier</strong> because changes can be localised to individual modules.</li>
+          <li>A module can be <strong>reused many times</strong> wherever required, so there is no need to rewrite the same logic repeatedly.</li>
+        </ul>
+
         <h3>Coupling</h3>
-        <p>Coupling is the measure of the degree of interdependence between modules. A good software design will have <strong>low coupling</strong>.</p>
+        <p>
+          Coupling is the measure of the degree of interdependence between modules. A good software design will have
+          <strong>low coupling</strong>.
+        </p>
         <figure class="diagram figure-photo" aria-labelledby="fig-coupling-overview-caption">
           <img src="../../../assets/images/se-topic-05/coupling-overview.webp"
                alt="Overview of coupling between software modules"
@@ -60,7 +112,7 @@
           <figcaption id="fig-coupling-overview-caption">Coupling — degree of interdependence between modules.</figcaption>
         </figure>
 
-        <h4>Types of coupling (worst → best)</h4>
+        <h4>Types of coupling — syllabus (worst → best)</h4>
         <figure class="diagram figure-photo" aria-labelledby="fig-coupling-types-caption">
           <img src="../../../assets/images/se-topic-05/coupling-types.png"
                alt="Types of coupling from content coupling to data coupling"
@@ -69,16 +121,30 @@
         </figure>
 
         <ul>
-          <li><strong>1. Content coupling (worst):</strong> One module is a part of or directly modifies the internal code/data of another module. Example: Module A directly jumps into the middle of Module B's code. Most undesirable — changes in one module force changes in another.</li>
-          <li><strong>2. Common coupling:</strong> Two modules share global data. Example: Both modules read/write a shared global variable; changes to the variable affect both modules and can cause synchronisation issues between processes.</li>
-          <li><strong>3. External coupling:</strong> Two modules depend on externally imposed data formats or devices outside the software logic. Example: Both modules depend on a specific data bus, CPU register, or hardware protocol.</li>
-          <li><strong>4. Control coupling:</strong> One module controls the flow of another by passing control information (flags, mode switches). Example: Module A passes a flag to Module B telling it which sub-function to execute — changes to A's control logic affect B.</li>
-          <li><strong>5. Stamp coupling:</strong> Two modules communicate by passing a data structure (record, array) when only part of the structure is needed. Example: Passing an entire student record when only the marks field is required.</li>
-          <li><strong>6. Data coupling (best):</strong> Two modules communicate only by passing simple data values (parameters). Example: Addition using call-by-value — only the numeric values are passed, with no shared state or control flags. Most desired type of coupling.</li>
+          <li><strong>1. Content coupling (worst):</strong> One module can modify the data of another module, or control flow is passed from one module to the other. This is the worst form of coupling and should be avoided.</li>
+          <li><strong>2. Common coupling:</strong> Modules share global data such as global data structures. Changes to global data require tracing back to all modules that access it to evaluate the effect of the change, which reduces maintainability and makes reuse difficult.</li>
+          <li><strong>3. External coupling:</strong> Modules depend on externally imposed data formats, protocols, devices, or hardware outside the software being developed. Example: a specific protocol, external file format, or device interface.</li>
+          <li><strong>4. Control coupling:</strong> Modules communicate by passing control information such as flags or mode switches. It can be bad when parameters indicate completely different behaviour, but acceptable when parameters allow factoring and reuse of functionality. Example: a sort function that takes a comparison function as an argument.</li>
+          <li><strong>5. Stamp coupling:</strong> A complete data structure is passed from one module to another when only part of the structure is needed, which involves tramp data. It may be necessary for efficiency reasons when chosen by an insightful designer rather than a lazy programmer.</li>
+          <li><strong>6. Data coupling (best):</strong> Modules communicate only by passing simple data values as parameters. The components remain independent and communicate through data without tramp data or shared control. Example: a customer billing system where modules pass only the required values.</li>
+        </ul>
+
+        <h4>Other coupling types (extended awareness)</h4>
+        <ul>
+          <li><strong>Temporal coupling:</strong> Two modules depend on the timing or order of events, such as one module needing to execute before another. This can create design issues and make testing and maintenance difficult.</li>
+          <li><strong>Sequential coupling:</strong> The output of one module is used as the input of another module, creating a chain of dependencies that can be hard to maintain and modify.</li>
+          <li><strong>Communicational coupling:</strong> Two or more modules share a common communication mechanism such as a shared message queue or database, which can lead to performance issues and debugging difficulty.</li>
+          <li><strong>Functional coupling:</strong> Two modules depend on each other's functionality, such as one module calling a function from another module, resulting in tightly coupled code that is difficult to modify.</li>
+          <li><strong>Data-structured coupling:</strong> Two or more modules share a common data structure such as a database table or data file, which can affect data integrity and performance.</li>
+          <li><strong>Interaction coupling:</strong> Coupling that arises when methods of one class invoke methods of other classes. Coupling is lowest when methods communicate through parameters rather than directly accessing internal parts of other methods.</li>
+          <li><strong>Component coupling:</strong> Interaction between classes where one class has variables of another class — for example, an instance variable, method parameter, or local variable of the other class's type. Component coupling usually implies interaction coupling as well.</li>
         </ul>
 
         <h3>Cohesion</h3>
-        <p>Cohesion is the measure of the functional strength of a module — how closely related its elements are. A good software design will have <strong>high cohesion</strong>.</p>
+        <p>
+          Cohesion is a measure of the degree to which the elements of a module are functionally related. It is the
+          internal glue that keeps the module together. A good software design will have <strong>high cohesion</strong>.
+        </p>
         <figure class="diagram figure-photo" aria-labelledby="fig-cohesion-overview-caption">
           <img src="../../../assets/images/se-topic-05/cohesion-overview.webp"
                alt="Overview of cohesion within a software module"
@@ -86,7 +152,7 @@
           <figcaption id="fig-cohesion-overview-caption">Cohesion — functional strength of elements within a module.</figcaption>
         </figure>
 
-        <h4>Types of cohesion (worst → best)</h4>
+        <h4>Types of cohesion — syllabus (worst → best)</h4>
         <figure class="diagram figure-photo" aria-labelledby="fig-cohesion-types-caption">
           <img src="../../../assets/images/se-topic-05/cohesion-types.png"
                alt="Types of cohesion from coincidental to functional cohesion"
@@ -95,27 +161,65 @@
         </figure>
 
         <ul>
-          <li><strong>1. Coincidental cohesion (worst):</strong> The only relationship between functions in a module is that they happen to be in the same file — random or no logical connection. Example: A module containing unrelated utility functions grouped arbitrarily.</li>
-          <li><strong>2. Logical cohesion:</strong> All elements perform similar or slightly similar operations but serve different purposes. Example: A module containing mouse, printer, and scanner functions because they are all "device" operations.</li>
-          <li><strong>3. Temporal cohesion:</strong> Functions are related because they must all be executed in the same time span, with flow control between them. Example: A module with one function that catches exceptions and another that displays an error message — both run during error handling.</li>
-          <li><strong>4. Procedural cohesion:</strong> Functions are related through a flow of control — they are steps in an algorithm or procedure. Example: One function checks file access permission and another opens the file — sequential steps in a process.</li>
-          <li><strong>5. Communicational cohesion:</strong> Different functions operate on the same data structure. Example: Push and pop functions in a stack module — both operate on the same stack data structure.</li>
-          <li><strong>6. Sequential cohesion:</strong> Functions form a sequence where the output of one function is the input of the next. Example: Function1 reads raw data and Function2 processes that data — data flows sequentially through the module.</li>
-          <li><strong>7. Functional cohesion (best):</strong> All functions in a module cooperate to perform a single, well-defined task. Example: A mouse-control module with functions for reading trackball position, decoding movement, and updating the cursor — all parts of one function: controlling the mouse.</li>
+          <li><strong>1. Coincidental cohesion (worst):</strong> Elements are unrelated and have no conceptual relationship other than being located in the same source code. It is accidental and the worst form of cohesion. Example: a module that prints the next line and reverses the characters of a string.</li>
+          <li><strong>2. Logical cohesion:</strong> Elements are logically related but not functionally related. Example: a component that reads inputs from tape, disk, and network — the operations are related in concept but the functions are significantly different.</li>
+          <li><strong>3. Temporal cohesion:</strong> Elements are related by timing — all tasks must be executed in the same time span. Example: a module that contains code for initializing all parts of the system at startup.</li>
+          <li><strong>4. Procedural cohesion:</strong> Elements ensure the order of execution and form steps in a procedure, but the actions are still weakly connected and unlikely to be reusable. Example: calculate student GPA, print student record, calculate cumulative GPA, print cumulative GPA.</li>
+          <li><strong>5. Communicational cohesion:</strong> Two or more elements operate on the same input data or contribute towards the same output data. Example: update a record in the database and send it to the printer.</li>
+          <li><strong>6. Sequential cohesion:</strong> An element outputs data that becomes the input for another element, so data flows between the parts. This occurs naturally in functional programming languages.</li>
+          <li><strong>7. Functional cohesion (best):</strong> Every essential element for a single computation is contained in the component, and all elements cooperate to perform one well-defined task. This is the ideal situation and leads to more maintainable and reusable code.</li>
+        </ul>
+
+        <h4>Other cohesion types (extended awareness)</h4>
+        <ul>
+          <li><strong>Informational cohesion:</strong> Elements are grouped together based on their relationship to a specific data structure or object, such as a module that operates on one data type. Common in object-oriented programming.</li>
+          <li><strong>Layer cohesion:</strong> Elements are grouped by level of abstraction or responsibility, such as a module that handles only low-level hardware interactions or only high-level business logic. Common in large-scale layered systems.</li>
+        </ul>
+
+        <h3>Advantages of low coupling</h3>
+        <ul>
+          <li>Changes in one module have little or no impact on other modules, so maintenance becomes easier.</li>
+          <li>Modules can be developed, tested, and debugged independently.</li>
+          <li>Individual modules are easier to reuse in other systems or contexts.</li>
+          <li>The overall system becomes more flexible and adaptable to changing requirements.</li>
+        </ul>
+
+        <h3>Advantages of high cohesion</h3>
+        <ul>
+          <li>Each module has a clear, single purpose, which makes the system easier to understand.</li>
+          <li>Modules are easier to test because all elements inside them relate to one function.</li>
+          <li>Code inside a module is easier to reuse because it performs one well-defined job.</li>
+          <li>Errors and changes are localised within the module, improving maintainability.</li>
+        </ul>
+
+        <h3>Disadvantages of high coupling</h3>
+        <ul>
+          <li>A change in one module may force changes in many dependent modules.</li>
+          <li>Testing becomes difficult because modules cannot be tested in isolation.</li>
+          <li>Reusing a module in another system becomes hard because it depends heavily on other modules.</li>
+          <li>The system becomes fragile, error-prone, and expensive to maintain over time.</li>
+        </ul>
+
+        <h3>Disadvantages of low cohesion</h3>
+        <ul>
+          <li>A module performs many unrelated tasks, making it difficult to understand its purpose.</li>
+          <li>Changes to one part of the module may unexpectedly affect unrelated parts.</li>
+          <li>The module is hard to reuse because it does not represent a single, clear function.</li>
+          <li>Testing and debugging become more complex because the module lacks a focused responsibility.</li>
         </ul>
 
         <h3>Impact on software quality</h3>
         <ul>
-          <li><strong>High coupling + low cohesion:</strong> System is difficult to change, test, and maintain — a change in one module can break many others.</li>
-          <li><strong>Low coupling + high cohesion:</strong> System is easier to maintain, improve, and scale — changes are localised.</li>
+          <li>High coupling combined with low cohesion makes a system difficult to change, test, and maintain.</li>
+          <li>Low coupling combined with high cohesion makes a system easier to maintain, improve, and scale.</li>
           <li>Both coupling and cohesion are important factors in determining maintainability, scalability, and reliability.</li>
         </ul>
 
         <h3>Coupling and cohesion at architectural level</h3>
         <ul>
           <li>During architectural design, designers do not stress individual module internals but concentrate on coupling and cohesion between modules.</li>
-          <li>Modules are treated as black boxes; the focus is on how they communicate and depend on each other.</li>
-          <li>See comparison table in <a href="05-11-cohesion-vs-coupling.html#sec-5-11">§5.11</a>.</li>
+          <li>Modules are treated as black boxes, and the focus is on how they communicate and depend on each other.</li>
+          <li>See the direct comparison table in <a href="05-11-cohesion-vs-coupling.html#sec-5-11">§5.11</a>.</li>
         </ul>
 
         <div class="callout exam">
@@ -127,6 +231,8 @@
             <li>Coupling types (6): content → common → external → control → stamp → data (best).</li>
             <li>Cohesion types (7): coincidental → logical → temporal → procedural → communicational → sequential → functional (best).</li>
             <li>Goal: high cohesion + low coupling.</li>
+            <li>Advantages: low coupling = independent modules; high cohesion = focused modules.</li>
+            <li>Disadvantages: high coupling = ripple changes; low cohesion = unfocused modules.</li>
             <li>Give one example for each type (e.g., data coupling = call-by-value; functional cohesion = mouse control module).</li>
           </ul>
         </div>

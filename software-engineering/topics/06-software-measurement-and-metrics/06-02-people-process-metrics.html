@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 6 — 6.2 People Metrics &amp; Process Metrics</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>6.2 People Metrics &amp; Process Metrics</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 6</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-6-2">
+
+        <p>
+          Software metrics are not limited to code size and complexity. <strong>People metrics</strong> focus on the
+          human resources that build software, while <strong>process metrics</strong> focus on how the development
+          process performs over time. Together they help managers improve collaboration, productivity, and process
+          quality — leading to better project outcomes.
+        </p>
+
+        <h3>People metrics (personnel metrics)</h3>
+        <p>
+          People metrics — also called <strong>personnel metrics</strong> or <strong>resource metrics</strong> — quantify
+          useful attributes of the staff who use processes, methods, and tools to produce software products.
+        </p>
+        <ul>
+          <li>People metrics tell managers about turnover rates, productivity, absenteeism, collaboration quality, and workforce cost.</li>
+          <li>Tracking people metrics ensures team members are motivated, supported, and performing at their best.</li>
+          <li>Early identification of attrition or morale problems prevents larger project failures later.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-people-metrics-caption">
+          <img src="../../../assets/images/se-topic-06/people-metrics-categories.png"
+               alt="People metrics categories — productivity, collaboration, attrition, absenteeism, and quality of work"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-people-metrics-caption">People metrics categories track workforce performance and satisfaction.</figcaption>
+        </figure>
+
+        <h4>Top people metrics to track</h4>
+        <ul>
+          <li><strong>Productivity:</strong> Measures how much work is completed in a given period — e.g., LOC or function points produced per developer per month.</li>
+          <li><strong>Employee Net Promoter Score (eNPS):</strong> Measures how likely employees are to recommend their workplace; indicates overall satisfaction.</li>
+          <li><strong>Team collaboration:</strong> Tracks communication frequency, participation in team activities, and peer feedback on teamwork quality.</li>
+          <li><strong>Attrition (turnover rate):</strong> Percentage of employees leaving the organisation in a period; high attrition signals retention problems.</li>
+          <li><strong>Absenteeism:</strong> Frequency of unplanned absences; patterns may reveal workload, health, or motivation issues.</li>
+          <li><strong>Total cost of workforce:</strong> Sum of salaries, benefits, training, and all employment-related expenses — used for budget control.</li>
+          <li><strong>Quality of work:</strong> Evaluates whether deliverables meet standards through QA checks, stakeholder feedback, and performance reviews.</li>
+        </ul>
+
+        <h3>Process metrics</h3>
+        <p>
+          <strong>Process metrics</strong> are measures of the development process that creates the body of software.
+          A common example is the length of time required to complete a software creation task.
+        </p>
+        <ul>
+          <li>Process metrics assume that <strong>product quality is a function of process quality</strong> — a better process produces a more reliable product.</li>
+          <li>They are linked to standards such as <strong>ISO 9000 Quality Management</strong>, which defines generic requirements for quality systems.</li>
+          <li>Because software is intangible, managers use process metrics to objectively track progress, productivity, and predictions about schedule and resources.</li>
+          <li>Process metrics feed into empirical models such as <strong>COCOMO</strong>, which predicts effort based on project characteristics.</li>
+          <li>Process metrics are primarily management tools — they measure resource usage and schedule rather than program structure directly.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-process-metrics-caption">
+          <img src="../../../assets/images/se-topic-06/types-of-process-metrics.webp"
+               alt="Types of process metrics — static, dynamic, and process evolution metrics"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-process-metrics-caption">Process metrics are classified as static, dynamic, or evolution metrics.</figcaption>
+        </figure>
+
+        <h4>Three categories of process metrics</h4>
+        <ul>
+          <li><strong>Static process metrics:</strong> Directly related to the defined process structure — e.g., number of role types, number of artifact types in the process model.</li>
+          <li><strong>Dynamic process metrics:</strong> Related to process performance — e.g., how many activities are performed, how many artifacts are created during an iteration.</li>
+          <li><strong>Process evolution metrics:</strong> Related to how the process changes over time — e.g., number of iterations, frequency of process updates.</li>
+        </ul>
+
+        <h4>Top process metrics to track</h4>
+        <ul>
+          <li><strong>Lead time:</strong> Total time from initiating a task to its completion — shows end-to-end delivery speed.</li>
+          <li><strong>Cycle time:</strong> Duration of one complete cycle of a process from start to finish within the workflow.</li>
+          <li><strong>Throughput:</strong> Rate at which tasks or features are completed in a given timeframe — reflects team capacity.</li>
+          <li><strong>Work in Progress (WIP):</strong> Number of tasks currently being worked on but not yet finished — helps identify bottlenecks.</li>
+          <li><strong>Defect density:</strong> Number of defects found per unit of work or per KLOC — assesses process and product quality.</li>
+          <li><strong>Process efficiency:</strong> Ratio of value-added work to non-value-added work — identifies waste in the process.</li>
+          <li><strong>Process compliance:</strong> Extent to which the team follows defined standards, guidelines, and regulations.</li>
+        </ul>
+
+        <h3>People vs process vs product metrics</h3>
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>People metrics</th><th>Process metrics</th><th>Product metrics</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Focus</td><td>Team members and their performance</td><td>Development activities and workflow</td><td>Software attributes (size, complexity)</td></tr>
+            <tr><td>Examples</td><td>Productivity, attrition, eNPS</td><td>Lead time, defect density, compliance</td><td>LOC, FP, cyclomatic complexity</td></tr>
+            <tr><td>Primary user</td><td>HR and project managers</td><td>Process managers, quality teams</td><td>Designers, testers, estimators</td></tr>
+            <tr><td>Exam classification</td><td>People metrics</td><td>Process metrics</td><td>Product metrics (size &amp; complexity)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam questions — People &amp; process metrics</div>
+          <p><strong>Q1 (UGC-NET):</strong> Size and complexity are a part of — (A) People Metrics (B) Project Metrics (C) Process Metrics (D) Product Metrics.</p>
+          <p><strong>Answer:</strong> <strong>(D) Product Metrics</strong> — size (LOC, FP) and complexity (cyclomatic, Halstead) describe the software product itself.</p>
+          <p><strong>Q2 (UGC-NET):</strong> Which attribute should NOT be encompassed by effective software metrics? (D) Programming language dependent.</p>
+          <p><strong>Answer:</strong> <strong>(D)</strong> — good metrics should be language independent.</p>
+          <p><strong>Q3:</strong> Distinguish people metrics from process metrics with two examples each.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>People metrics quantify workforce attributes: productivity, attrition, absenteeism, collaboration.</li>
+            <li>Process metrics quantify development workflow: lead time, cycle time, defect density, compliance.</li>
+            <li>Static/dynamic/evolution categories apply to process metrics.</li>
+            <li>Process metrics link to ISO 9000 and COCOMO; people metrics link to team management and retention.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="06-01-measurement-overview.html">&larr; 6.1 Measurement Overview</a>
+        <a class="btn-back chapter-nav-next" href="06-03-halstead-metrics.html">6.3 Halstead Metrics &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

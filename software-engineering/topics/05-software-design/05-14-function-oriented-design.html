@@ -34,13 +34,21 @@
       <section id="sec-5-14">
 
         <p>
-          <strong>Function-oriented design (FOD)</strong> is an approach to software design where the system is
+          The design process for software systems often has two levels. At the first level, the focus is on deciding
+          which modules are needed for the system based on the
+          <a href="../04-requirements-engineering-and-specification/04-14-srs-document.html#sec-4-14">SRS</a>
+          (Software Requirements Specification) and how the modules should be interconnected. At the second level, the
+          internal logic of each module is designed.
+        </p>
+        <p>
+          <strong>Function-oriented design (FOD)</strong> is an approach to software design where the design is
           decomposed into a set of interacting units, each with a clearly defined function. The focus is on
           <em>what the program does</em> — the functions it performs — rather than the data it manipulates.
         </p>
         <p>
-          FOD uses a <strong>top-down</strong> strategy (<a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a>)
-          and is carried out using structured analysis and structured design techniques.
+          FOD uses a <strong>top-down</strong> strategy
+          (<a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a>) and is carried out using structured analysis
+          and structured design techniques.
         </p>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-fod-sc-caption">
@@ -50,36 +58,88 @@
           <figcaption id="fig-fod-sc-caption">Function-oriented design — from DFD analysis to structure chart design.</figcaption>
         </figure>
 
-        <h3>Two levels of the design process</h3>
+        <h3>Generic procedure — stepwise refinement</h3>
+        <p>Function-oriented design follows a generic top-down procedure:</p>
         <ul>
-          <li><strong>Level 1:</strong> Decide which modules are needed based on the SRS and how modules should be interconnected.</li>
-          <li><strong>Level 2:</strong> Design the internal logic of each module — algorithms, data structures, control flow.</li>
+          <li>Start with a high-level description of what the software or program does.</li>
+          <li>Refine each part of the description by specifying in greater detail the functionality of each part.</li>
+          <li>Continue refining until each module's logic reaches the statement level of the programming language.</li>
+          <li>This leads to a <strong>top-down structure</strong> — also called <strong>stepwise refinement</strong>.</li>
+          <li>Refinement is a process of elaboration from a highly conceptual model to lower-level details.</li>
         </ul>
 
-        <h3>Stepwise refinement</h3>
+        <h3>Problem in top-down design — single parent modules</h3>
+        <p>
+          In a strict top-down design, each module is typically used by at most one other module, and that module is
+          called its <strong>parent module</strong>. This creates a rigid hierarchy where a module cannot easily be
+          shared across different parts of the system.
+        </p>
         <ul>
-          <li>Function-oriented design is based on <strong>stepwise refinement</strong> — a top-down strategy where a program is refined as a hierarchy of increasing levels of detail.</li>
-          <li>Start with a high-level description of what the software/program does.</li>
-          <li>Refine each part by specifying in greater detail the functionality of each part.</li>
-          <li>Continue until each module's logic is at the statement level of the programming language.</li>
-          <li>Refinement is a process of elaboration — from a highly conceptual model to lower-level details.</li>
+          <li>If two unrelated parts of the system need the same logic, it may be duplicated in separate modules.</li>
+          <li>This increases redundancy and makes maintenance harder — a fix in one copy may be missed in another.</li>
         </ul>
 
-        <h3>Key tools in function-oriented design</h3>
+        <h3>Solution — reusable modules</h3>
+        <p>
+          The solution is to design <strong>reusable modules</strong> — modules that can be used by several other
+          modules to perform their required functions.
+        </p>
+        <ul>
+          <li>A reusable module is invokable from any part of the system that needs its functionality.</li>
+          <li>In structure charts, reusable modules are drawn as <strong>library modules</strong> with double vertical lines on the sides — see <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>.</li>
+          <li>Example: a <code>ValidateInput</code> module used by both the Admission module and the Fee Payment module in a university system.</li>
+        </ul>
+
+        <h3>Function-oriented design strategies</h3>
+        <p>
+          Function-oriented design uses a set of structured tools that work together from analysis through detailed
+          design. The four main strategies are:
+        </p>
 
         <h4>1. Data Flow Diagram (DFD)</h4>
         <ul>
-          <li>A DFD maps out the flow of information for any process or system — showing inputs, outputs, processes, data stores, and external entities.</li>
+          <li>A DFD maps out the flow of information for any process or system.</li>
+          <li>It uses defined symbols — rectangles, circles, and arrows — plus short text labels to show data inputs, outputs, storage points, and the routes between each destination.</li>
           <li>DFDs are created during requirements analysis and refined during design.</li>
           <li>Full coverage in <a href="../04-requirements-engineering-and-specification/04-11-dfd.html#sec-4-11">§4.11</a>.</li>
         </ul>
 
-        <h4>2. Structure chart</h4>
+        <h4>2. Data dictionary</h4>
         <ul>
-          <li>For function-oriented design, the design is represented graphically by structure charts.</li>
-          <li>The structure of a program is made up of modules together with interconnections between modules.</li>
-          <li>Structure chart is a nice representation for a design that uses functional abstraction.</li>
+          <li>A data dictionary is a repository that stores information about all data items defined in DFDs.</li>
+          <li>At the requirements stage, the data dictionary contains data items with their definitions.</li>
+          <li>Each entry typically includes: <strong>name</strong> of the item, <strong>aliases</strong> (other names), <strong>description/purpose</strong>, <strong>related data items</strong>, <strong>range of values</strong>, and <strong>data structure definition/form</strong>.</li>
+          <li>Data dictionaries eliminate ambiguity about what each data flow in a DFD actually represents.</li>
+        </ul>
+
+        <h4>3. Structure charts</h4>
+        <ul>
+          <li>A structure chart is the hierarchical representation of a system that partitions it into black boxes.</li>
+          <li>Components are read from top to bottom and left to right.</li>
+          <li>When a module calls another, it views the called module as a black box, passing required parameters and receiving results.</li>
           <li>Full coverage in <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>.</li>
+        </ul>
+
+        <h4>4. Pseudocode</h4>
+        <ul>
+          <li>Pseudocode is a system description in short English-like phrases describing the function of each module.</li>
+          <li>It uses keywords and indentation to represent control flow without language-specific syntax.</li>
+          <li>Pseudocode can replace flowcharts for documenting module logic and decreases the amount of documentation required.</li>
+          <li>Full coverage in <a href="05-08-pseudocode.html#sec-5-8">§5.8</a>.</li>
+        </ul>
+
+        <h3>Structure charts in function-oriented design</h3>
+        <p>
+          For function-oriented design, the design can be represented graphically by structure charts. The structure of
+          a program is made up of the modules of that program together with the interconnections between modules. The
+          structure chart of a program is a graphic representation of its structure.
+        </p>
+        <ul>
+          <li>In a structure chart, a module is represented by a <strong>box with the module name</strong> written inside it.</li>
+          <li>In general, procedural information is not represented in a structure chart, and the focus is on representing the <strong>hierarchy of modules</strong>.</li>
+          <li>However, there are situations where the designer may wish to communicate certain procedural information explicitly, such as major loops and decisions.</li>
+          <li>Such information can also be represented in a structure chart using conditional call and loop symbols.</li>
+          <li>A structure chart is a nice representation for a design that uses <strong>functional abstraction</strong>.</li>
         </ul>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-fod-sc2-caption">
@@ -90,33 +150,147 @@
         </figure>
 
         <h3>Module categories in FOD</h3>
+        <p>Modules in a function-oriented system can be categorised into the following classes:</p>
         <ul>
-          <li><strong>Input module:</strong> Obtains data from external sources or subordinates and passes it upward to the calling module.</li>
-          <li><strong>Output module:</strong> Sends processed data to external destinations or to superordinate modules.</li>
-          <li><strong>Transform module:</strong> Performs computation or data transformation on input data.</li>
-          <li><strong>Edit module:</strong> Validates, formats, or modifies data before further processing.</li>
+          <li><strong>Input module:</strong> Obtains information from external sources or subordinates and passes it upward to the calling module.</li>
+          <li><strong>Output module:</strong> Takes information from its superordinate and passes it on to its subordinates or external destinations.</li>
+          <li><strong>Transform module:</strong> Exists solely for transforming data into some other form — performs computation or data transformation.</li>
           <li><strong>Coordinate module:</strong> Primary concern is managing the flow of data to and from different subordinates.</li>
-          <li><strong>Get/put modules:</strong> Some modules obtain information from subordinates and pass it to superordinates (get); others receive from superordinates and pass to subordinates (put).</li>
+          <li><strong>Edit module:</strong> Validates, formats, or modifies data before further processing.</li>
+        </ul>
+
+        <h3>Example — payroll system (FOD pipeline)</h3>
+        <p>The following example shows how function-oriented design tools work together for a payroll system:</p>
+
+        <h4>Step 1 — DFD (analysis)</h4>
+        <ul>
+          <li><strong>External entities:</strong> Employee, HR Department, Bank.</li>
+          <li><strong>Processes:</strong> Calculate Salary, Generate Payslip, Transfer Payment.</li>
+          <li><strong>Data stores:</strong> Employee Records, Salary History.</li>
+          <li><strong>Data flows:</strong> Employee details flow into Calculate Salary; calculated salary flows to Generate Payslip and Transfer Payment.</li>
+        </ul>
+
+        <h4>Step 2 — Structure chart (design)</h4>
+        <ul>
+          <li><strong>Top-level control module:</strong> Payroll System.</li>
+          <li><strong>Sub-modules:</strong> Get Employee Data (input), Calculate Salary (transform), Generate Payslip (output), Transfer Payment (output).</li>
+          <li><strong>Reusable library module:</strong> Validate Employee ID — used by both Get Employee Data and Calculate Salary.</li>
+          <li><strong>Coordinate module:</strong> Payroll System manages data flow between all sub-modules.</li>
+        </ul>
+
+        <h4>Step 3 — Pseudocode (detailed design)</h4>
+        <div class="terminal" aria-label="Pseudocode — calculate salary module">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">calculate_salary.pseudo</span>
+          </div>
+          <pre><code>MODULE CalculateSalary(employeeId)
+  SET employee = GetEmployeeData(employeeId)
+  SET basicPay = employee.basicSalary
+  SET allowances = employee.hra + employee.da
+  SET deductions = employee.tax + employee.pf
+  SET netSalary = basicPay + allowances - deductions
+  RETURN netSalary
+END MODULE</code></pre>
+        </div>
+
+        <h4>Step 4 — Data dictionary entry</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Field</th><th>netSalary</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Name</strong></td><td>netSalary</td></tr>
+              <tr><td><strong>Alias</strong></td><td>net_pay, take_home_salary</td></tr>
+              <tr><td><strong>Description</strong></td><td>Final salary after adding allowances and subtracting deductions.</td></tr>
+              <tr><td><strong>Related items</strong></td><td>basicPay, allowances, deductions</td></tr>
+              <tr><td><strong>Range</strong></td><td>Positive numeric value</td></tr>
+              <tr><td><strong>Structure</strong></td><td>netSalary = basicPay + allowances − deductions</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Advantages of function-oriented design</h3>
+        <ul>
+          <li>Provides a clear, systematic top-down path from requirements to implementation.</li>
+          <li>DFDs and structure charts make the system easy to understand for both technical and non-technical stakeholders.</li>
+          <li>Modules with clearly defined functions are easier to test, debug, and maintain individually.</li>
+          <li>Reusable modules reduce redundancy and promote code reuse across the system.</li>
+          <li>Well suited for structured programming languages like C, COBOL, and Fortran.</li>
+        </ul>
+
+        <h3>Disadvantages of function-oriented design</h3>
+        <ul>
+          <li>Strict top-down hierarchy can make module reuse difficult without explicit library module design.</li>
+          <li>Changes to data structures can affect many modules because functions operate on shared data flows.</li>
+          <li>Not well suited for systems where data and behaviour are tightly bound to real-world entities.</li>
+          <li>Large systems can produce very complex DFDs and structure charts that are hard to manage.</li>
+        </ul>
+
+        <h3>When to use function-oriented design</h3>
+        <ul>
+          <li>When the system can be naturally described as a set of data transformations and processes.</li>
+          <li>When using structured or procedural programming languages.</li>
+          <li>When requirements are well understood and can be decomposed top-down — e.g., payroll, billing, or inventory systems.</li>
+          <li>When the design team is familiar with DFDs, structure charts, and stepwise refinement.</li>
         </ul>
 
         <h3>FOD vs object-oriented design</h3>
-        <ul>
-          <li>FOD focuses on <strong>functions</strong>; OOD focuses on <strong>data/objects</strong> — they are orthogonal approaches.</li>
-          <li>FOD uses top-down decomposition; OOD uses bottom-up composition.</li>
-          <li>FOD tools: DFD, structure charts; OOD tools: UML diagrams.</li>
-          <li>Full comparison in <a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a> and <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.</li>
-        </ul>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Function-Oriented Design</th><th>Object-Oriented Design</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Focus</strong></td>
+                <td>What the program <em>does</em> — functions and processes.</td>
+                <td>What entities <em>exist</em> — objects and their interactions.</td>
+              </tr>
+              <tr>
+                <td><strong>Strategy</strong></td>
+                <td>Top-down decomposition (stepwise refinement).</td>
+                <td>Bottom-up composition (identify objects, then integrate).</td>
+              </tr>
+              <tr>
+                <td><strong>Tools</strong></td>
+                <td>DFD, data dictionary, structure chart, pseudocode.</td>
+                <td>UML — class, sequence, use case diagrams.</td>
+              </tr>
+              <tr>
+                <td><strong>Languages</strong></td>
+                <td>C, COBOL, Fortran (structured/procedural).</td>
+                <td>C++, Java, Python (object-oriented).</td>
+              </tr>
+              <tr>
+                <td><strong>Data handling</strong></td>
+                <td>Data flows between functions as parameters.</td>
+                <td>Data encapsulated within objects.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Full comparison in <a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a> and
+          <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.
+        </p>
 
         <div class="callout exam">
           <div class="callout-title">Exam question — Function-oriented design</div>
-          <p><strong>Q:</strong> Explain function-oriented design. What tools are used? Describe stepwise refinement.</p>
+          <p><strong>Q:</strong> Explain function-oriented design. What tools are used? Describe stepwise refinement and module categories.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Define FOD: decompose into interacting functional units; focus on what program does.</li>
-            <li>Top-down stepwise refinement: high-level description → refine to statement level.</li>
-            <li>Tools: DFD (analysis), structure chart (design representation).</li>
-            <li>Module categories: input, output, transform, edit, coordinate.</li>
-            <li>vs OOD: functions vs objects; top-down vs bottom-up.</li>
+            <li>Define FOD: decompose into interacting functional units; focus on what program does; two-level design process.</li>
+            <li>Generic procedure: high-level description → refine each part → top-down structure (stepwise refinement).</li>
+            <li>Problem: single parent module; solution: reusable/library modules.</li>
+            <li>Four strategies: DFD, data dictionary, structure chart, pseudocode.</li>
+            <li>Structure chart: module = box; hierarchy focus; loops/decisions when needed; functional abstraction.</li>
+            <li>Module categories: input, output, transform, coordinate, edit.</li>
+            <li>Example: payroll system — DFD → structure chart → pseudocode → data dictionary.</li>
+            <li>vs OOD: functions vs objects; top-down vs bottom-up; DFD/SC vs UML.</li>
           </ul>
         </div>
       </section>

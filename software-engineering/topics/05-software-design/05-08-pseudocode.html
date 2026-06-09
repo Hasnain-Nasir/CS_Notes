@@ -34,56 +34,78 @@
       <section id="sec-5-8">
 
         <p>
-          <strong>Pseudocode</strong> is a simplified, informal representation of an algorithm or program that uses
-          a mix of natural language and programming constructs. It is used during the design phase to illustrate the
-          high-level structure and logic of an algorithm without the syntactic details of a specific programming language.
+          <strong>Pseudocode</strong> is a step-by-step description of an algorithm written in simple English using a
+          code-like structure. It is designed for <strong>human understanding</strong>, not for machine execution, and
+          does not follow the syntax of any programming language.
         </p>
+        <p>
+          During <a href="05-05-low-level-design.html#sec-5-5">low-level design</a>, each module's algorithm is
+          expressed in pseudocode before coding begins. Along with
+          <a href="05-07-structure-charts.html#sec-5-7">structure charts</a> and
+          <a href="05-09-flowcharts.html#sec-5-9">flowcharts</a>, pseudocode becomes part of the project documentation
+          handed to programmers and testers.
+        </p>
+
+        <h3>Why do we need pseudocode?</h3>
+        <ul>
+          <li>Helps programmers <strong>plan the solution</strong> before writing actual code.</li>
+          <li>Makes the logic <strong>easy to understand</strong> for others reading the solution.</li>
+          <li><strong>Bridges the gap</strong> between algorithm design and coding.</li>
+          <li><strong>Reduces logical errors</strong> before implementation.</li>
+          <li>Pseudocode is an <strong>intermediate state</strong> between algorithm and program.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-pseudo-flow-caption">
+          <img src="../../../assets/images/se-topic-05/pseudocode-algorithm-to-program.png"
+               alt="Flow from algorithm to pseudocode to program"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-pseudo-flow-caption">Pseudocode is an intermediate state between algorithm and program.</figcaption>
+        </figure>
 
         <h3>Characteristics of pseudocode</h3>
         <ul>
-          <li>Pseudocode is <strong>language-independent</strong> — it is not tied to any particular programming language syntax.</li>
+          <li>Pseudocode is <strong>language-independent</strong> — not tied to any particular programming language syntax.</li>
           <li>It uses familiar programming constructs (IF, WHILE, FOR, assignments) combined with plain English descriptions.</li>
           <li>It focuses on the <strong>logic and steps</strong> of an algorithm, not on declaration syntax or memory management.</li>
           <li>It is more structured than plain prose but less rigid than actual code.</li>
         </ul>
 
-        <h3>Purpose of pseudocode in software design</h3>
+        <h3>How to write pseudocode</h3>
+        <p>Before writing pseudocode for any algorithm, keep the following points in mind:</p>
         <ul>
-          <li>Pseudocode helps developers <strong>plan and discuss algorithms</strong> before writing actual code.</li>
-          <li>It makes it easier to understand and translate the design into code later in the development process.</li>
-          <li>During detailed design, each module's algorithm is expressed in pseudocode before coding begins.</li>
-          <li>Pseudocode, along with structure charts and flowcharts, becomes part of the project documentation handed to programmers and testers.</li>
+          <li><strong>Organize tasks logically</strong> and write steps in sequence.</li>
+          <li><strong>Define the goal first.</strong> Example: <em>"This program prints the first N Fibonacci numbers."</em></li>
+          <li>Use standard programming constructs: <strong>IF–ELSE</strong>, <strong>FOR</strong>, <strong>WHILE</strong>.</li>
+          <li><strong>Indent blocks properly</strong> to improve readability and clarity.</li>
+          <li>Use <strong>clear and meaningful names</strong> for variables and steps.</li>
+          <li>Write keywords in <strong>CAPITAL letters</strong> (IF, ELSE, WHILE, FOR, RETURN).</li>
+          <li>Ensure the pseudocode is <strong>complete</strong>, <strong>finite</strong>, and <strong>easy to understand</strong>.</li>
+          <li><strong>Avoid actual programming syntax</strong> — keep it simple and language-independent.</li>
         </ul>
 
-        <h3>Pseudocode vs algorithm vs code</h3>
-        <table>
-          <thead>
-            <tr><th>Aspect</th><th>Algorithm</th><th>Pseudocode</th><th>Actual code</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Formality</strong></td>
-              <td>Step-by-step procedure in natural language or mathematical notation.</td>
-              <td>Structured mix of natural language and programming-like constructs.</td>
-              <td>Strict syntax of a specific programming language.</td>
-            </tr>
-            <tr>
-              <td><strong>When used</strong></td>
-              <td>Problem-solving, mathematical procedures.</td>
-              <td>Design phase — planning module logic.</td>
-              <td>Implementation (coding) phase.</td>
-            </tr>
-            <tr>
-              <td><strong>Executability</strong></td>
-              <td>Not directly executable.</td>
-              <td>Not directly executable.</td>
-              <td>Directly executable by a compiler/interpreter.</td>
-            </tr>
-          </tbody>
-        </table>
+        <h3>Good vs bad pseudocode</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-pseudo-good-bad-caption">
+          <img src="../../../assets/images/se-topic-05/pseudocode-good-vs-bad.png"
+               alt="Good vs bad ways of writing pseudocode"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-pseudo-good-bad-caption">Good vs bad ways of writing pseudocode.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Good:</strong> Keywords in capitals, descriptive English, proper indentation, no language-specific syntax.</li>
+          <li><strong>Bad:</strong> Uses array indexing (<code>string[i]</code>), hardcoded bounds, symbols like <code>#</code>, or inconsistent keyword casing.</li>
+        </ul>
 
-        <h3>Example — finding the maximum of three numbers</h3>
-        <pre><code>BEGIN
+        <h3>Pseudocode examples</h3>
+
+        <h4>1. Finding the maximum of three numbers</h4>
+        <div class="terminal" aria-label="Pseudocode — find maximum of three numbers">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">find_max.pseudo</span>
+          </div>
+          <pre><code>BEGIN
   INPUT num1, num2, num3
   SET max = num1
   IF num2 &gt; max THEN
@@ -94,13 +116,17 @@
   END IF
   OUTPUT max
 END</code></pre>
-        <ul>
-          <li>This pseudocode can be directly translated into C, Java, Python, or any language without changing the logic.</li>
-          <li>Indentation and keywords (BEGIN, IF, SET, OUTPUT) make the control flow clear without language-specific syntax.</li>
-        </ul>
+        </div>
 
-        <h3>Example — calculating average marks</h3>
-        <pre><code>BEGIN
+        <h4>2. Calculating average marks</h4>
+        <div class="terminal" aria-label="Pseudocode — calculate average marks">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">average_marks.pseudo</span>
+          </div>
+          <pre><code>BEGIN
   INPUT total_students
   SET sum = 0
   SET count = 0
@@ -112,25 +138,539 @@ END</code></pre>
   SET average = sum / total_students
   OUTPUT average
 END</code></pre>
+        </div>
 
-        <h3>Guidelines for writing good pseudocode</h3>
-        <ul>
-          <li>Use clear, descriptive variable names that reflect their purpose.</li>
-          <li>Use standard control structures (sequence, selection, iteration) consistently.</li>
-          <li>One logical step per line; use indentation to show nesting.</li>
-          <li>Avoid language-specific features (pointers, specific library calls) unless necessary.</li>
-          <li>Keep each pseudocode block focused on one module or one algorithm.</li>
-        </ul>
+        <h4>3. Binary search</h4>
+        <p>
+          Binary search is a searching algorithm that works only for a <strong>sorted</strong> search space. It
+          repeatedly divides the search space in half by checking whether the target lies in the left or right half.
+        </p>
+        <div class="terminal" aria-label="Pseudocode — binary search">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">binary_search.pseudo</span>
+          </div>
+          <pre><code>BINARY_SEARCH(ARR, X, LOW, HIGH)
+
+  WHILE LOW &lt;= HIGH
+    MID = (LOW + HIGH) / 2
+    IF ARR[MID] == X THEN
+      RETURN MID
+    ELSE IF X &gt; ARR[MID] THEN
+      LOW = MID + 1
+    ELSE
+      HIGH = MID - 1
+    END IF
+  END WHILE</code></pre>
+        </div>
+
+        <h4>4. Quick sort</h4>
+        <p>
+          QuickSort is a <strong>divide and conquer</strong> algorithm. It picks a pivot element and partitions the
+          array so elements smaller than the pivot go left and greater elements go right. The same process repeats
+          recursively for both halves until the array is sorted.
+        </p>
+        <div class="terminal" aria-label="Pseudocode — quick sort">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">quicksort.pseudo</span>
+          </div>
+          <pre><code>QUICKSORT(ARR, LOW, HIGH)
+
+  IF LOW &lt; HIGH THEN
+    PIVOT = PARTITION(ARR, LOW, HIGH)
+    QUICKSORT(ARR, LOW, PIVOT - 1)
+    QUICKSORT(ARR, PIVOT + 1, HIGH)
+  END IF</code></pre>
+        </div>
+        <p>Here, <code>LOW</code> is the starting index and <code>HIGH</code> is the ending index.</p>
+
+        <h3>Algorithm vs pseudocode</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Algorithm</th><th>Pseudocode</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Definition</strong></td>
+                <td>A well-defined, step-based solution to a particular problem.</td>
+                <td>A step-by-step description of an algorithm in code-like structure using plain English.</td>
+              </tr>
+              <tr>
+                <td><strong>Language</strong></td>
+                <td>Uses simple English words only.</td>
+                <td>Uses reserved keywords like IF-ELSE, FOR, WHILE.</td>
+              </tr>
+              <tr>
+                <td><strong>Nature</strong></td>
+                <td>A sequence of steps to solve a problem.</td>
+                <td>Fake code — <em>pseudo</em> means fake; code-like structure with plain English.</td>
+              </tr>
+              <tr>
+                <td><strong>Rules</strong></td>
+                <td>No strict rules for writing.</td>
+                <td>Certain conventions and formatting rules apply.</td>
+              </tr>
+              <tr>
+                <td><strong>Relationship</strong></td>
+                <td>An algorithm can be considered pseudocode.</td>
+                <td>Pseudocode cannot be considered an algorithm on its own.</td>
+              </tr>
+              <tr>
+                <td><strong>Readability</strong></td>
+                <td>Can be difficult to understand and interpret.</td>
+                <td>Easy to understand and interpret.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Flowchart vs pseudocode</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Flowchart</th><th>Pseudocode</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Representation</strong></td>
+                <td>Pictorial representation of the flow of an algorithm.</td>
+                <td>Step-by-step description in code-like structure using plain English.</td>
+              </tr>
+              <tr>
+                <td><strong>Symbols</strong></td>
+                <td>Standard shapes — boxes, circles, diamonds, arrows for input, output, decisions, start/stop.</td>
+                <td>Reserved keywords like IF-ELSE, FOR, WHILE; no graphical symbols.</td>
+              </tr>
+              <tr>
+                <td><strong>Purpose</strong></td>
+                <td>Graphical representation for visual understanding of data flow.</td>
+                <td>Fake code for understanding logic before implementation.</td>
+              </tr>
+              <tr>
+                <td><strong>Best suited for</strong></td>
+                <td>Documentation and visual communication.</td>
+                <td>Understanding logic and planning before coding.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Practice questions — placement exams</h3>
+        <p>
+          The following pseudocode questions are commonly asked in company placement tests. Trace each program step by
+          step to find the output.
+        </p>
+
+        <h4>Infosys pseudocode questions</h4>
+
+        <p><strong>Question 1</strong></p>
+        <div class="terminal" aria-label="Infosys pseudocode question 1">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">infosys_q1.pseudo</span>
+          </div>
+          <pre><code>FOR i = 0 TO 4 STEP 1 DO
+  IF i == i++ + --i THEN
+    DISPLAY i
+  END IF
+END FOR</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Infosys question 1 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>0</code></pre>
+        </div>
+
+        <p><strong>Question 2</strong></p>
+        <div class="terminal" aria-label="Infosys pseudocode question 2">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">infosys_q2.pseudo</span>
+          </div>
+          <pre><code>SET Character c = '7'
+SWITCH(c)
+  CASE '1': DISPLAY "One"
+  CASE '7': DISPLAY "Seven"
+  CASE '2': DISPLAY "Two"
+  DEFAULT: DISPLAY "Hello"
+  BREAK
+END SWITCH</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Infosys question 2 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>SevenTwoHello</code></pre>
+        </div>
+
+        <p><strong>Question 3</strong></p>
+        <div class="terminal" aria-label="Infosys pseudocode question 3">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">infosys_q3.pseudo</span>
+          </div>
+          <pre><code>Integer a, p
+SET a = 5
+a = a + 1
+a = a * 2
+a = a / 2
+p = a / 5 + 6
+PRINT p</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Infosys question 3 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>7</code></pre>
+        </div>
+
+        <p><strong>Question 4</strong></p>
+        <div class="terminal" aria-label="Infosys pseudocode question 4">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">infosys_q4.pseudo</span>
+          </div>
+          <pre><code>Integer a, b, c
+SET b = 40, a = 20, c = 20
+a = a + c
+c = c + a
+a = a + c
+c = c + a
+PRINT a + b + c</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Infosys question 4 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>300</code></pre>
+        </div>
+
+        <p><strong>Question 5</strong></p>
+        <div class="terminal" aria-label="Infosys pseudocode question 5">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">infosys_q5.pseudo</span>
+          </div>
+          <pre><code>Integer a, b, c
+SET a = 4, b = 3, c = 1
+IF (a &gt;&gt; (c - 1) &amp;&amp; b &lt;&lt; (c + 1)) THEN
+  a = a + c
+ELSE
+  b = a &lt;&lt;&lt; c
+END IF
+PRINT a - b + c</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Infosys question 5 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>3</code></pre>
+        </div>
+
+        <h4>Accenture pseudocode questions</h4>
+
+        <p><strong>Question 1</strong> — for <code>a = 5</code>, <code>b = 1</code></p>
+        <div class="terminal" aria-label="Accenture pseudocode question 1">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">accenture_q1.pseudo</span>
+          </div>
+          <pre><code>Integer funn(Integer a, Integer b)
+  IF (b + a || a - b) &amp;&amp; (b &gt; a) &amp;&amp; 1) THEN
+    a = a + b + b - 2
+    RETURN 3 - a
+  ELSE
+    RETURN a - b + 1
+  END IF
+  RETURN a + b
+END FUNCTION funn()</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Accenture question 1 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>5</code></pre>
+        </div>
+
+        <p><strong>Question 2</strong> — for <code>a = 5</code>, <code>b = 1</code></p>
+        <div class="terminal" aria-label="Accenture pseudocode question 2">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">accenture_q2.pseudo</span>
+          </div>
+          <pre><code>Integer funn(Integer a, Integer b)
+  IF (b MOD a &amp;&amp; a MOD b) || (a ^ b &gt; a) THEN
+    a = a ^ b
+  ELSE
+    RETURN a - b
+  END IF
+  RETURN a + b
+END FUNCTION funn()</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Accenture question 2 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>5</code></pre>
+        </div>
+
+        <p><strong>Question 3</strong></p>
+        <div class="terminal" aria-label="Accenture pseudocode question 3">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">accenture_q3.pseudo</span>
+          </div>
+          <pre><code>Integer a, b, c
+SET a = 4, b = 4, c = 4
+IF (a &amp; (b ^ b) &amp; c) THEN
+  a = a &gt;&gt; 1
+END IF
+PRINT a + b + c</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Accenture question 3 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>12</code></pre>
+        </div>
+
+        <p><strong>Question 4</strong> — for <code>a = 10</code>, <code>b = 11</code></p>
+        <div class="terminal" aria-label="Accenture pseudocode question 4">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">accenture_q4.pseudo</span>
+          </div>
+          <pre><code>Integer funn(Integer a, Integer b)
+  IF (0) THEN
+    RETURN a - b - funn(-7, -1)
+  END IF
+  a = a + a + a + a
+  RETURN a
+END FUNCTION funn()</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Accenture question 4 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>40</code></pre>
+        </div>
+
+        <p><strong>Question 5</strong> — for <code>a = 5</code>, <code>b = 1</code></p>
+        <div class="terminal" aria-label="Accenture pseudocode question 5">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">accenture_q5.pseudo</span>
+          </div>
+          <pre><code>Integer funn(Integer a, Integer b)
+  IF (b + a || a - b) &amp;&amp; (b &gt; a) &amp;&amp; 1) THEN
+    a = a + b + b - 2
+    RETURN 3 - a
+  ELSE
+    RETURN a - b + 1
+  END IF
+  RETURN a + b
+END FUNCTION fun()</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Accenture question 5 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>5</code></pre>
+        </div>
+
+        <h4>Capgemini pseudocode questions</h4>
+
+        <p><strong>Question 1</strong> — for <code>a = 8</code>, <code>b = 1</code></p>
+        <div class="terminal" aria-label="Capgemini pseudocode question 1">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">capgemini_q1.pseudo</span>
+          </div>
+          <pre><code>Integer funn(Integer a, Integer b)
+  IF (a &gt; b &amp;&amp; a &gt; 0) THEN
+    RETURN a + b + funn(b - 1, a - 1)
+  END IF
+  RETURN a + b
+END FUNCTION funn()</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Capgemini question 1 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>16</code></pre>
+        </div>
+
+        <p><strong>Question 2</strong> — for <code>p = 7</code>, <code>q = 2</code></p>
+        <div class="terminal" aria-label="Capgemini pseudocode question 2">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">capgemini_q2.pseudo</span>
+          </div>
+          <pre><code>Integer funn(Integer p, Integer q)
+  IF (p + q &lt; 10) THEN
+    RETURN 1 + funn(p + 1, q + 1)
+  ELSE
+    RETURN 2
+  END IF
+END FUNCTION funn()</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Capgemini question 2 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>3</code></pre>
+        </div>
+
+        <p><strong>Question 3</strong> — for <code>a = 2</code>, <code>b = 7</code>, <code>c = 7</code></p>
+        <div class="terminal" aria-label="Capgemini pseudocode question 3">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">capgemini_q3.pseudo</span>
+          </div>
+          <pre><code>Integer funn(Integer a, Integer b, Integer c)
+  IF ((b + a) &lt; (a - b)) THEN
+    a = a + c
+    b = (10 + 10) + c
+  END IF
+  RETURN a + b + c
+END FUNCTION funn()</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Capgemini question 3 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>16</code></pre>
+        </div>
+
+        <p><strong>Question 4</strong></p>
+        <div class="terminal" aria-label="Capgemini pseudocode question 4">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">capgemini_q4.pseudo</span>
+          </div>
+          <pre><code>String str1 = "err", str2 = "krr"
+PRINT (count consonant(upper(reverse(str2) + reverse(str1))))</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Capgemini question 4 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>5</code></pre>
+        </div>
+
+        <p><strong>Question 5</strong></p>
+        <div class="terminal" aria-label="Capgemini pseudocode question 5">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">capgemini_q5.pseudo</span>
+          </div>
+          <pre><code>Integer a, b, c
+SET a = 2, b = 11, c = 5
+IF ((4 + 5) &lt; (6 + b)) THEN
+  b = c &amp; a
+END IF
+PRINT a + b + c</code></pre>
+        </div>
+        <div class="terminal terminal--output" aria-label="Capgemini question 5 answer">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">Answer</span>
+          </div>
+          <pre><code>7</code></pre>
+        </div>
 
         <div class="callout exam">
           <div class="callout-title">Exam question — Pseudocode</div>
           <p><strong>Q:</strong> What is pseudocode? Why is it used in the design phase? Write pseudocode for a simple task.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Define: informal algorithm representation using natural language + programming constructs.</li>
-            <li>Purpose: plan algorithms, discuss logic, bridge design to code, part of documentation.</li>
-            <li>Properties: language-independent, not executable, structured.</li>
-            <li>Write small example (e.g., find max of three numbers or calculate average).</li>
+            <li>Define: step-by-step algorithm description in plain English with code-like structure; not executable.</li>
+            <li>Purpose: plan solutions, bridge algorithm to code, reduce errors, improve communication.</li>
+            <li>Properties: language-independent, structured, keywords in capitals, proper indentation.</li>
+            <li>vs algorithm: pseudocode uses IF/FOR/WHILE keywords; algorithm uses plain English only.</li>
+            <li>vs flowchart: pseudocode is text-based; flowchart is pictorial with standard symbols.</li>
+            <li>Write small example (e.g., find max, binary search, or calculate average).</li>
           </ul>
         </div>
       </section>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 6 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 6</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>Measurement vs metric:</strong> Measurement = raw attribute value; metric = quantitative indicator for decision-making. Five activities: formulation, collection, analysis, interpretation, feedback.</li>
+          <li><strong>Metric types:</strong> Product (size, complexity — LOC, FP, Halstead, cyclomatic); Process (lead time, defect density, compliance); Project (cost, schedule, staffing, productivity).</li>
+          <li><strong>Good metric properties:</strong> Quantitative, understandable, repeatable, economical, applicable early, language independent.</li>
+          <li><strong>Direct vs indirect:</strong> Direct = measure attribute itself (LOC, FP count); indirect = estimate via related parameters (productivity-based effort).</li>
+          <li><strong>People metrics:</strong> Productivity, eNPS, team collaboration, attrition, absenteeism, total workforce cost, quality of work. Focus on workforce performance and satisfaction.</li>
+          <li><strong>Process metrics:</strong> Static (process structure), dynamic (runtime performance), evolution (changes over time). Top metrics: lead time, cycle time, throughput, WIP, defect density, efficiency, compliance. Link to ISO 9000 and COCOMO.</li>
+          <li><strong>Exam classification:</strong> Size &amp; complexity = Product metrics (UGC-NET). Language-dependent attribute should NOT be in good metrics.</li>
+          <li><strong>Halstead (1977):</strong> Program = operators + operands. n1, n2 = distinct; N1, N2 = total. N=N1+N2; n=n1+n2; V=N·log₂(n); D=(n1/2)·(N2/n2); E=V·D; T=E/(18×60). Errors≈V/3000. Requires complete code; size-oriented white-box metric.</li>
+          <li><strong>Function Points (Albrecht 1979):</strong> User-oriented black-box size metric; language independent. Five components: EI, EO, EQ, ILF, EIF. Weights: EI(3/4/6), EO(4/5/7), EQ(3/4/6), ILF(7/10/15), EIF(5/7/10). UFP=Σ(count×weight); CAF=0.65+0.01×Σ(fi); FP=UFP×CAF. 14 adjustment factors (0–5 each); CAF range 0.65–1.35.</li>
+          <li><strong>LOC:</strong> Non-comment, non-blank lines; KLOC=thousands. White-box/direct metric; language dependent. Effort=Size/Productivity; Cost=Effort×Pay. Used in COCOMO (DE=a·KLOC^b). Correlates roughly with cost, duration, defects.</li>
+          <li><strong>LOC vs FP:</strong> LOC=design-oriented, language-dependent, after coding; FP=specification-based, user-oriented, language-independent, early estimation. Both measure software size for effort/cost models.</li>
+          <li><strong>Cyclomatic complexity (McCabe):</strong> Control-flow complexity from CFG. V(G)=E−N+2; V(G)=R+1; V(G)=D+1. Minimum basis path test cases = V(G). No control flow → V(G)=1; one if → V(G)=2. Low=simpler; high=refactor. Control complexity only — not data complexity.</li>
+          <li><strong>Size metric families:</strong> Size-oriented (LOC, Halstead) = white-box; Function-oriented (FP) = black-box; Complexity (cyclomatic) = structural/control-flow.</li>
+          <li><strong>Links to SPM:</strong> Size estimation §3.5 (direct KLOC vs indirect FP); COCOMO §3.6 (KLOC or FP input); decomposition estimation uses both approaches.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="06-06-cyclomatic-complexity.html">&larr; 6.6 Cyclomatic Complexity</a>
+        <a class="btn-back chapter-nav-next" href="../../index.html">Software Engineering &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>
