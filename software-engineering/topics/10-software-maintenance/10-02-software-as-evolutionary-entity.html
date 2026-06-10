@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 10 — 10.2 Software as Evolutionary Entity</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>10.2 Software as Evolutionary Entity</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 10</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-10-2">
+
+        <p>
+          Software is not a static artifact — it is a dynamic model of the real world that must evolve as the
+          world itself changes. This evolutionary nature is the fundamental reason maintenance exists and why
+          it dominates the software life cycle — see
+          <a href="10-03-need-for-maintenance.html#sec-10-3">§10.3 Need for Maintenance</a> and
+          <a href="10-04-maintenance-categories.html#sec-10-4">§10.4 Maintenance Categories</a>.
+        </p>
+
+        <h3>Software as a model of the real world</h3>
+        <ul>
+          <li>Software encodes a simplified representation of business processes, physical systems, or user workflows.</li>
+          <li>When the real world changes — new regulations, market conditions, technology, or user expectations — the software model must be updated to remain valid.</li>
+          <li>A system that is never modified eventually becomes obsolete or incorrect relative to its operating environment.</li>
+          <li>Maintenance is therefore not an optional add-on but an inherent consequence of software's role as a world model.</li>
+        </ul>
+
+        <h3>E-type vs S-type software</h3>
+        <ul>
+          <li><strong>S-type (Static-type) software:</strong> Software that implements a well-understood, fixed specification — e.g. scientific computations with stable mathematical foundations; changes are rare and predictable.</li>
+          <li><strong>E-type (Evolutionary-type) software:</strong> Software that implements a real-world application and must evolve as the application domain changes — virtually all business and information systems are E-type.</li>
+          <li>E-type software is subject to Lehman's laws of software evolution; S-type software is largely exempt from them.</li>
+          <li>Most exam questions on software evolution refer to E-type systems.</li>
+        </ul>
+
+        <h3>Lehman's eight laws of software evolution</h3>
+        <p>Meir Lehman (1980) formulated eight empirically observed laws governing E-type software evolution.</p>
+        <ol>
+          <li><strong>Continuing Change:</strong> An E-type system must be continually adapted or it becomes progressively less useful over time.</li>
+          <li><strong>Increasing Complexity:</strong> As a system evolves, its structure becomes more complex unless active work is done to reduce complexity.</li>
+          <li><strong>Self Regulation:</strong> The evolution process is self-regulating — distribution of product and process measures tends to be near-normal.</li>
+          <li><strong>Conservation of Organisational Stability:</strong> The average effective global activity rate in an evolving E-type system is invariant over the product lifetime.</li>
+          <li><strong>Conservation of Familiarity:</strong> During active evolution, the content of successive releases is statistically invariant — roughly the same proportion of the system is changed in each release.</li>
+          <li><strong>Continuing Growth:</strong> The functional content of an E-type system must be continually increased to maintain user satisfaction over its lifetime.</li>
+          <li><strong>Declining Quality:</strong> The quality of an E-type system will appear to be declining unless it is rigorously maintained and adapted to operational environment changes.</li>
+          <li><strong>Feedback System:</strong> E-type systems constitute multi-loop, multi-agent feedback systems and must be treated as such to achieve significant improvement.</li>
+        </ol>
+
+        <h3>Software is never "finished"</h3>
+        <ul>
+          <li>Unlike manufactured products with a defined end-of-life, software systems can remain in active use for decades.</li>
+          <li>Typical development takes 1–2 years, while maintenance may continue for 15–20 years or longer.</li>
+          <li>More than 65% of total life cycle cost is spent on maintenance — see <a href="10-05-cost-of-maintenance.html#sec-10-5">§10.5 Cost of Maintenance</a>.</li>
+          <li>Organisations that treat delivery as "project completion" underestimate the long-term commitment required.</li>
+        </ul>
+
+        <h3>Legacy systems</h3>
+        <ul>
+          <li>A <strong>legacy system</strong> is an older software system that remains in operational use despite being built with outdated technology, languages, or architectures.</li>
+          <li>Legacy systems often lack adequate documentation, have high maintenance cost, and resist integration with modern platforms.</li>
+          <li>Organisations face a strategic choice: continue maintaining, re-engineer, replace, or retire legacy systems — see <a href="10-06-software-re-engineering.html#sec-10-6">§10.6 Re-engineering</a>.</li>
+          <li>Reverse engineering is often the first step in understanding a legacy system before deciding on a migration strategy — see <a href="10-07-reverse-engineering.html#sec-10-7">§10.7 Reverse Engineering</a>.</li>
+          <li>Many critical business systems (banking, government, healthcare) are legacy systems that cannot be simply discarded.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software as Evolutionary Entity</div>
+          <p><strong>Q:</strong> Explain why software is an evolutionary entity. State Lehman's eight laws. Differentiate E-type and S-type software. What is a legacy system?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Software models the real world; real-world changes require software changes; maintenance is inherent not optional.</li>
+            <li>E-type = real-world application, evolves with domain; S-type = fixed specification, stable, rare changes.</li>
+            <li>Lehman's 8 laws: Continuing Change, Increasing Complexity, Self Regulation, Conservation of Organisational Stability, Conservation of Familiarity, Continuing Growth, Declining Quality, Feedback System.</li>
+            <li>Software never finished: build 1–2 years, maintain 15–20 years; >65% of lifecycle cost in maintenance.</li>
+            <li>Legacy system = old operational software with outdated tech, poor docs, high cost; options: maintain, re-engineer, replace, retire.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="10-01-software-maintenance-overview.html">&larr; 10.1 Software Maintenance Overview</a>
+        <a class="btn-back chapter-nav-next" href="10-03-need-for-maintenance.html">10.3 Need for Maintenance &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

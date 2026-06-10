@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — Software Reliability &amp; Fault Tolerance</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="index-hero topic-hub">
+    <header class="site-header site-header--hub">
+      <div class="site-header-top">
+        <h1>11. Software Reliability &amp; Fault Tolerance</h1>
+        <div class="site-header-actions">
+          <a class="btn-back" href="../../index.html">&larr; Software Engineering</a>
+        </div>
+      </div>
+      <div class="outline-coverage" id="outline-coverage">
+        <div class="outline-coverage-title">Syllabus outline covered in this topic</div>
+        <ul>
+          <li>Supplementary exam depth — Software Reliability &amp; Fault Tolerance</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="subtopic-cards">
+      <a class="subtopic-card" href="11-01-software-reliability.html">
+        <span class="subtopic-card-circle">11.1</span>
+        <span class="subtopic-card-label">Software Reliability</span>
+      </a>
+      <a class="subtopic-card" href="11-02-fault-tolerance.html">
+        <span class="subtopic-card-circle">11.2</span>
+        <span class="subtopic-card-label">Fault Tolerance</span>
+      </a>
+      <a class="subtopic-card" href="11-03-reliability-growth-models.html">
+        <span class="subtopic-card-circle">11.3</span>
+        <span class="subtopic-card-label">Reliability Growth Models</span>
+      </a>
+      <a class="subtopic-card" href="11-04-jelinski-moranda-model.html">
+        <span class="subtopic-card-circle">11.4</span>
+        <span class="subtopic-card-label">Jelinski-Moranda Model</span>
+      </a>
+      <a class="subtopic-card" href="11-05-schick-wolverton-model.html">
+        <span class="subtopic-card-circle">11.5</span>
+        <span class="subtopic-card-label">Schick-Wolverton Model</span>
+      </a>
+      <a class="subtopic-card" href="11-06-goel-okumoto-model.html">
+        <span class="subtopic-card-circle">11.6</span>
+        <span class="subtopic-card-label">Goel-Okumoto Model</span>
+      </a>
+      <a class="subtopic-card" href="11-07-pnz-model.html">
+        <span class="subtopic-card-circle">11.7</span>
+        <span class="subtopic-card-label">PNZ Model</span>
+      </a>
+      <a class="subtopic-card" href="11-08-mills-error-seeding-model.html">
+        <span class="subtopic-card-circle">11.8</span>
+        <span class="subtopic-card-label">Mills' Error Seeding Model</span>
+      </a>
+      <a class="subtopic-card" href="11-09-key-takeaways.html">
+        <span class="subtopic-card-circle">✓</span>
+        <span class="subtopic-card-label">Key takeaways</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 10 — 10.1 Software Maintenance Overview</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>10.1 Software Maintenance Overview</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 10</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-10-1">
+
+        <p>
+          <strong>Software maintenance</strong> is the phase of the software life cycle that begins after delivery
+          and continues for as long as the system remains in use. It encompasses all activities required to keep
+          software operational, correct, and aligned with evolving user and environmental needs — see
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">§2.1 SDLC</a> for the maintenance phase
+          within the overall life cycle.
+        </p>
+
+        <h3>Definitions</h3>
+        <ul>
+          <li><strong>IEEE Std 1219 (1993):</strong> Software maintenance is the modification of a software product after delivery to correct faults, to improve performance or other attributes, or to adapt the product to a modified environment.</li>
+          <li><strong>ISO/IEC 12207:</strong> Maintenance comprises the activities that occur when software code or associated documentation is modified due to a problem or because of the need for improvement or adaptation.</li>
+          <li>Maintenance is a <strong>continuous process</strong> throughout the software life cycle — not merely a post-delivery activity that begins only after deployment.</li>
+          <li>Every change during maintenance must follow formal change control — see <a href="../09-processes-configuration-management/09-05-change-control-process.html#sec-9-5">§9.5 Change Control Process</a>.</li>
+        </ul>
+
+        <h3>Key aspects of maintenance</h3>
+        <ul>
+          <li><strong>Bug fixing (corrective maintenance):</strong> Identifying and correcting defects discovered in production use — see <a href="10-04-maintenance-categories.html#sec-10-4">§10.4 Maintenance Categories</a>.</li>
+          <li><strong>Enhancements (perfective maintenance):</strong> Adding new features or improving existing functionality to meet evolving user requirements.</li>
+          <li><strong>Performance optimization:</strong> Tuning the system to improve response time, throughput, or resource consumption.</li>
+          <li><strong>Porting and migration (adaptive maintenance):</strong> Adapting the software to new hardware platforms, operating systems, or network environments.</li>
+          <li><strong>Re-engineering:</strong> Restructuring legacy systems to improve maintainability without changing external behaviour — see <a href="10-06-software-re-engineering.html#sec-10-6">§10.6 Software Re-engineering</a>.</li>
+          <li><strong>Documentation:</strong> Updating user manuals, design documents, and inline comments so they reflect the current system state.</li>
+        </ul>
+
+        <h3>Maintenance in the SDLC</h3>
+        <ul>
+          <li>The SDLC explicitly includes a maintenance phase after deployment — maintenance consumes the majority of total life cycle effort and cost.</li>
+          <li>Maintenance activities reuse the same engineering disciplines as development: analysis, design, implementation, and testing.</li>
+          <li>Effective maintenance depends on configuration management, version control, and regression testing established during development — see <a href="../09-processes-configuration-management/index.html">Topic 9 — Processes &amp; Configuration Management</a>.</li>
+        </ul>
+
+        <h3>Planned vs unplanned maintenance</h3>
+        <ul>
+          <li><strong>Planned maintenance:</strong> Scheduled activities such as periodic reviews, preventive refactoring, documentation updates, and scheduled upgrades.</li>
+          <li><strong>Unplanned maintenance:</strong> Reactive work triggered by unexpected failures, critical bugs, or urgent regulatory changes.</li>
+          <li><strong>Proactive maintenance:</strong> Anticipating future problems through code reviews, refactoring, and preventive measures before failures occur.</li>
+          <li><strong>Reactive maintenance:</strong> Responding to problems only after they have been reported or have caused service disruption.</li>
+          <li>A mature maintenance organisation balances proactive and reactive work — over-reliance on reactive maintenance increases cost and risk.</li>
+        </ul>
+
+        <h3>Maintenance stakeholders</h3>
+        <ul>
+          <li><strong>Original development team:</strong> Maintains the system they built; has the deepest knowledge but may move to new projects after delivery.</li>
+          <li><strong>In-house maintenance team:</strong> A dedicated group within the organisation that takes over after the development team hands off the product.</li>
+          <li><strong>Third-party maintenance:</strong> External vendors or contractors maintain the system under a support contract — common when the original developers are unavailable.</li>
+          <li>Knowledge transfer from developers to maintainers is critical — poor handover leads to longer diagnosis times and higher maintenance cost.</li>
+        </ul>
+
+        <h3>Maintenance process phases (ISO/IEC 12207)</h3>
+        <p>The ISO maintenance process defines seven sequential phases, each with defined inputs, activities, and outputs.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Phase</th><th>Inputs</th><th>Process / Activities</th><th>Outputs</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Problem Identification</strong></td>
+                <td>User reports, monitoring alerts, change requests, audit findings</td>
+                <td>Log and classify maintenance requests; assign priority; determine if change is needed</td>
+                <td>Maintenance request record; problem classification</td>
+              </tr>
+              <tr>
+                <td><strong>2. Analysis</strong></td>
+                <td>Maintenance request; current system documentation; source code</td>
+                <td>Investigate root cause; perform impact analysis; estimate effort and cost; propose solution</td>
+                <td>Analysis report; impact assessment; feasibility decision</td>
+              </tr>
+              <tr>
+                <td><strong>3. Design</strong></td>
+                <td>Approved analysis report; existing design documents</td>
+                <td>Design the modification; update affected modules; plan test cases; obtain design review approval</td>
+                <td>Updated design specification; test plan</td>
+              </tr>
+              <tr>
+                <td><strong>4. Implementation</strong></td>
+                <td>Approved design; source code baseline; change control authorisation</td>
+                <td>Modify code and documentation; conduct code review; check in changes via SCM</td>
+                <td>Modified software; updated documentation; change log entry</td>
+              </tr>
+              <tr>
+                <td><strong>5. System Test</strong></td>
+                <td>Modified software; test plan; test environment</td>
+                <td>Execute unit, integration, and system tests; perform regression testing; verify fix or enhancement</td>
+                <td>Test results; defect reports; test completion report</td>
+              </tr>
+              <tr>
+                <td><strong>6. Acceptance Test</strong></td>
+                <td>Tested software; acceptance criteria; user involvement</td>
+                <td>User or customer validates that the change meets requirements; sign-off obtained</td>
+                <td>Acceptance test report; user approval</td>
+              </tr>
+              <tr>
+                <td><strong>7. Delivery</strong></td>
+                <td>Accepted software; release notes; deployment plan</td>
+                <td>Deploy to production; update configuration baselines; notify stakeholders; close maintenance request</td>
+                <td>Released software; updated baselines; maintenance closure record</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Maintenance request flow</h3>
+        <div class="terminal" aria-label="Pseudocode — maintenance request flow">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">maintenance_request_flow.pseudo</span>
+          </div>
+          <pre><code>// ISO 12207 maintenance process — simplified flow
+
+REQUEST = receive_maintenance_request(user_report OR change_request)
+LOG request in maintenance tracking system
+
+CLASSIFY request AS corrective | adaptive | perfective | preventive
+ASSIGN priority (critical | high | medium | low)
+
+IF priority == critical THEN
+  escalate to emergency patch process
+ELSE
+  submit to change control board   // see §9.5
+END IF
+
+ANALYSIS = perform_impact_analysis(REQUEST, current_baseline)
+IF ANALYSIS.feasible == false THEN
+  reject request WITH reason
+  GOTO close_request
+END IF
+
+DESIGN modification based on ANALYSIS
+IMPLEMENT changes under SCM version control
+TEST modified system (unit → integration → system → regression)
+ACCEPTANCE_TEST with user/customer sign-off
+DELIVER to production; update baselines; close request</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Maintenance Overview</div>
+          <p><strong>Q:</strong> Define software maintenance (IEEE and ISO). List key maintenance aspects. Describe the ISO maintenance process phases. Differentiate planned vs unplanned and proactive vs reactive maintenance.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>IEEE: modification after delivery to correct faults, improve performance/attributes, adapt to modified environment.</li>
+            <li>ISO/IEC 12207: activities when code/docs modified due to problem or improvement/adaptation need.</li>
+            <li>Continuous throughout lifecycle; not just post-delivery; part of SDLC maintenance phase.</li>
+            <li>Key aspects: bug fixing, enhancements, performance, porting/migration, re-engineering, documentation.</li>
+            <li>Seven phases: Problem Identification → Analysis → Design → Implementation → System Test → Acceptance Test → Delivery.</li>
+            <li>Planned = scheduled; unplanned = reactive to failures; proactive = preventive; reactive = fix after failure.</li>
+            <li>Stakeholders: original dev team, in-house maintenance, third-party; all changes via change control (§9.5).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="index.html">&larr; Topic 10</a>
+        <a class="btn-back chapter-nav-next" href="10-02-software-as-evolutionary-entity.html">10.2 Software as Evolutionary Entity &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

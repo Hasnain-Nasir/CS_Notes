@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 10 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 10</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>10.1 Overview:</strong> IEEE: modification after delivery to correct faults, improve performance/attributes, adapt to modified environment. ISO/IEC 12207: activities when code/docs modified due to problem or improvement/adaptation. Continuous throughout lifecycle; part of SDLC maintenance phase (§2.1).</li>
+          <li><strong>Key aspects:</strong> Bug fixing, enhancements, performance optimization, porting/migration, re-engineering, documentation. Planned vs unplanned; proactive vs reactive. Stakeholders: original dev team, in-house maintenance, third-party.</li>
+          <li><strong>ISO maintenance process (7 phases):</strong> Problem Identification → Analysis → Design → Implementation → System Test → Acceptance Test → Delivery. All changes via change control (§9.5).</li>
+          <li><strong>10.2 Evolutionary entity:</strong> Software models real world; real-world changes require software changes. E-type = evolutionary (business systems); S-type = static (fixed spec). Software never finished: build 1–2 years, maintain 15–20 years.</li>
+          <li><strong>Lehman's 8 laws:</strong> Continuing Change, Increasing Complexity, Self Regulation, Conservation of Organisational Stability, Conservation of Familiarity, Continuing Growth, Declining Quality, Feedback System.</li>
+          <li><strong>Legacy systems:</strong> Old operational software with outdated tech, poor docs, high cost; options: maintain, re-engineer, replace, retire.</li>
+          <li><strong>10.3 Need:</strong> Correct faults, improve design, enhancements, interface with other systems, new hardware/OS, migrate legacy, retire software, user requirement changes. Challenges: 10–15 year lifespan, undocumented changes, legacy code, complexity, changing requirements, interoperability, lack of tests, skill gaps, high cost.</li>
+          <li><strong>Support processes:</strong> Maintenance plan, SCM (Topic 9), change control (§9.5), regression testing (Topic 7), current documentation.</li>
+          <li><strong>10.4 Categories (IMPORTANT):</strong> IEEE four categories by purpose. Corrective = fix discovered problems (least expensive per change; retest + regression). Adaptive = changed environment, same function (OS port, regulations). Perfective = improve performance/features/restructure (~60% effort). Preventive = correct latent faults before failure; reduces C in effort formula.</li>
+          <li><strong>Proactive vs reactive:</strong> Proactive = scheduled preventive/planned; Reactive = after failure (corrective/emergency). Patching = emergency corrective; needs impact analysis; risk of new bugs.</li>
+          <li><strong>Exam traps:</strong> OS port = adaptive (NOT perfective); new feature = perfective (NOT corrective); refactor = preventive. UGC NET 2016: i–b, ii–c, iii–d, iv–a → Answer B. Memory: C=Correct bugs, A=Adapt environment, P=Perfect/improve, P=Prevent latent faults.</li>
+          <li><strong>10.5 Cost (IMPORTANT):</strong> >65% lifecycle cost; build 1–2 yrs, maintain 15–20 yrs. M = P + Ke(C−D): legacy example P=50,Ke=6,C=8,D=3 → M=80 PM; after familiarity D=6 → M=62 PM; after refactoring C=5 → M=44 PM.</li>
+          <li><strong>COCOMO maintenance:</strong> AME = ACT × SDE. Example: 100 KLOC organic → SDE≈302 PM; ACT=0.15 → AME=45.3 PM/yr; breakeven ~6.7 years. Corrective cheaper per change than perfective.</li>
+          <li><strong>10 cost factors:</strong> Complexity, size, users, change rate, personnel, tools, plan, age, maintenance type, location. Non-technical: domain, staff stability, lifetime, external dependence, hardware stability. Technical: module independence, language, style, testing, docs, SCM.</li>
+          <li><strong>Postponing maintenance:</strong> Customer dissatisfaction, hidden errors, quality decline, technical debt, security exposure, staff turnover (reduces D). Reduce cost: design for maintainability, proactive strategy, automation, Agile/DevOps, SCM, re-engineering.</li>
+          <li><strong>10.6 Re-engineering:</strong> Examine and alter system to reconstitute in new form; improve maintainability; reuse existing artifacts. Not new development; not reuse (§12.1). Process: Planning → Analysis → Design → Implementation → Testing → Deployment.</li>
+          <li><strong>Six re-engineering steps:</strong> Inventory Analysis → Document Reconstruction → Reverse Engineering → Code Reconstruction → Data Reconstruction → Forward Engineering. Cost factors: software quality, tool support, data conversion, expert staff.</li>
+          <li><strong>10.7 Reverse engineering:</strong> Recover design/requirements from code; back engineering; does not modify software. Why: lost docs, maintenance, reuse, discover flaws, security analysis.</li>
+          <li><strong>8 reverse engineering steps:</strong> Collect info → Examine → Extract structure → Record functionality → Record data flow → Record control flow → Review design → Generate documentation.</li>
+          <li><strong>Forward vs reverse:</strong> Forward = requirements→design→code (creates software); Reverse = code→design→requirements (produces documentation). Data RE: program level + system level. Tools: Rigi, Bunch, GEN++, PBS, CIAO.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="10-07-reverse-engineering.html">&larr; 10.7 Reverse Engineering</a>
+        <a class="btn-back chapter-nav-next" href="../11-software-reliability-fault-tolerance/index.html">Topic 11 &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

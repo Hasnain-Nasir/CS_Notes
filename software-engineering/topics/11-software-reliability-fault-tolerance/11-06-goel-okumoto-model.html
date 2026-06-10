@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — 11.6 Goel-Okumoto Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>11.6 Goel-Okumoto Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-11-6">
+
+        <p>
+          The <strong>Goel-Okumoto (GO) model</strong> (1979) is an <strong>exponential Non-Homogeneous
+          Poisson Process (NHPP)</strong> model. Unlike the step-function
+          <a href="11-04-jelinski-moranda-model.html#sec-11-4">§11.4 Jelinski-Moranda Model</a>, GO
+          produces a smooth, continuously decreasing failure intensity curve.
+        </p>
+
+        <h3>Model type</h3>
+        <ul>
+          <li>GO is an NHPP model — failures occur according to a Poisson process whose rate λ(t) changes over time.</li>
+          <li>It is one of the most widely used SRGMs because of its simplicity, two-parameter form, and good empirical fit.</li>
+          <li>The mean value function m(t) has an exponential saturation shape — failures are detected rapidly at first, then more slowly as remaining faults decrease.</li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ol>
+          <li>Faults in the software are independent of each other.</li>
+          <li>The failure rate at any time is proportional to the number of remaining (undetected) faults.</li>
+          <li>When a fault causes a failure, it is removed from the program before the next test session — faults are not rediscovered.</li>
+          <li><strong>Perfect debugging:</strong> every detected fault is permanently and correctly fixed; no new faults are introduced during debugging.</li>
+        </ol>
+
+        <h3>Differential equation</h3>
+        <p>
+          Let m(t) be the expected cumulative number of faults detected by time t, and a be the total
+          initial fault content. The rate of fault detection is proportional to remaining faults:
+        </p>
+        <p>dm/dt = b [a − m(t)]</p>
+        <ul>
+          <li>The left side is the rate at which new faults are detected per unit time.</li>
+          <li>The right side says detection rate = b × (faults not yet found) = b[a − m(t)].</li>
+          <li>As m(t) approaches a, the detection rate approaches zero — all faults have been found.</li>
+        </ul>
+
+        <h3>Mean value function</h3>
+        <p>Solving the differential equation with m(0) = 0 gives:</p>
+        <p>m(t) = a (1 − e<sup>−bt</sup>)</p>
+        <ul>
+          <li>At t = 0, m(0) = 0 — no faults detected yet.</li>
+          <li>As t → ∞, m(t) → a — all a faults are eventually detected.</li>
+          <li>The curve is S-shaped in cumulative failures vs time — rapid growth initially, then saturation.</li>
+        </ul>
+
+        <h3>Parameters</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Parameter</th><th>Symbol</th><th>Meaning</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Total fault content</td><td>a</td><td>Total number of faults initially present in the software</td></tr>
+              <tr><td>Fault detection rate</td><td>b</td><td>Rate at which remaining faults are detected per unit time</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Failure intensity and reliability</h3>
+        <ul>
+          <li>Failure intensity: λ(t) = dm/dt = ab e<sup>−bt</sup> — decreases exponentially over time.</li>
+          <li>Reliability (probability of zero failures in [0, t]): R(t) = e<sup>−m(t)</sup> = e<sup>−a(1−e<sup>−bt</sup>)</sup>.</li>
+          <li>Reliability increases as testing continues because m(t) grows (more faults removed) and λ(t) shrinks.</li>
+        </ul>
+
+        <h3>Parameter estimation (MLE)</h3>
+        <ul>
+          <li><strong>Type-I data (time-between-failure):</strong> MLE maximises the likelihood using exact failure times t₁, t₂, …, t<sub>n</sub>. The log-likelihood involves terms ln λ(t<sub>i</sub>) and m(t<sub>n</sub>).</li>
+          <li><strong>Type-II data (failure-count):</strong> MLE uses the number of failures n<sub>i</sub> observed in each time interval [t<sub>i−1</sub>, t<sub>i</sub>]. The likelihood is based on the Poisson probability of observing n<sub>i</sub> failures given m(t<sub>i</sub>) − m(t<sub>i−1</sub>).</li>
+          <li>Both a and b are estimated simultaneously; iterative numerical methods (e.g. Newton-Raphson) are typically used.</li>
+          <li>Initial estimates can be obtained from a plot of cumulative failures vs time — the saturation level estimates a, and the slope estimates b.</li>
+        </ul>
+
+        <h3>Characteristics</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Characteristic</th><th>Detail</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Model type</td><td>Exponential NHPP</td></tr>
+              <tr><td>Mean value function</td><td>m(t) = a(1 − e<sup>−bt</sup>)</td></tr>
+              <tr><td>Failure intensity</td><td>λ(t) = ab e<sup>−bt</sup> — smooth exponential decay</td></tr>
+              <tr><td>Reliability</td><td>R(t) = e<sup>−a(1−e<sup>−bt</sup>)</sup></td></tr>
+              <tr><td>Debugging</td><td>Perfect — no new faults introduced</td></tr>
+              <tr><td>Data types</td><td>Both Type-I and Type-II</td></tr>
+              <tr><td>Parameters</td><td>a (total faults), b (detection rate)</td></tr>
+              <tr><td>Limitation</td><td>Perfect debugging assumption; exponential shape may not fit S-shaped detection phases</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Goel-Okumoto Model</div>
+          <p><strong>Q:</strong> State the GO model assumptions. Write the differential equation, mean value function, and reliability formula. How are parameters estimated?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>GO (1979): exponential NHPP; smooth decreasing failure intensity.</li>
+            <li>Assumptions: independent faults; failure rate ∝ remaining faults; faults removed before retest; perfect debugging.</li>
+            <li>dm/dt = b[a − m(t)]; m(t) = a(1 − e<sup>−bt</sup>); λ(t) = ab e<sup>−bt</sup>.</li>
+            <li>R(t) = e<sup>−a(1−e<sup>−bt</sup>)</sup>.</li>
+            <li>Parameters: a (total faults), b (detection rate) — MLE for Type-I and Type-II data.</li>
+            <li>Contrast with JM: GO has smooth curve, not step function; supports both data types.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="11-05-schick-wolverton-model.html">&larr; 11.5 Schick-Wolverton Model</a>
+        <a class="btn-back chapter-nav-next" href="11-07-pnz-model.html">11.7 PNZ Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

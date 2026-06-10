@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — 11.1 Software Reliability</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>11.1 Software Reliability</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-11-1">
+
+        <p>
+          <strong>Software reliability</strong> is the probability that software will operate failure-free
+          for a specified period of time in a specified environment. It is a core quality attribute in
+          McCall's model and ISO/IEC 9126 — see
+          <a href="../08-software-quality-assurance/08-05-quality-frameworks.html#sec-8-5">§8.5 Quality Frameworks</a>
+          — and must be specified in the SRS as a non-functional requirement — see
+          <a href="../04-requirements-engineering-and-specification/04-09-requirements-classification.html#sec-4-9">§4.9 Requirements Classification</a>.
+        </p>
+
+        <h3>Definition</h3>
+        <ul>
+          <li>Software reliability measures how consistently a system performs its intended functions without failure over time.</li>
+          <li>It is expressed as a probability — the likelihood of failure-free operation during a fixed interval in a fixed environment.</li>
+          <li>Reliability is measured per some unit of time (hours, days, execution cycles) rather than as a one-time pass/fail check.</li>
+          <li>Software reliability depends entirely on human factors in design — it cannot be predicted from any physical basis like hardware wear.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-sw-rel-caption">
+          <img src="../../../assets/images/se-topic-11/software-reliability-curve.png"
+               alt="Software reliability lifecycle — many initial faults, useful life after testing, new faults from upgrades"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-sw-rel-caption">Software reliability lifecycle — the system starts with many faults, enters a useful life after testing and debugging, and may acquire new faults when upgrades are applied.</figcaption>
+        </figure>
+
+        <h3>Software reliability lifecycle</h3>
+        <ul>
+          <li>Software begins with many faults when first created — defects are introduced during requirements, design, and coding.</li>
+          <li>After testing and debugging, the system enters a <strong>useful life</strong> phase with fewer failures.</li>
+          <li>Upgrades and enhancements during useful life can introduce new faults, requiring further testing.</li>
+          <li>There is no equivalent of hardware preventive maintenance — software does not wear out, but it can become unreliable through changes and environment shifts.</li>
+          <li>Unlike hardware, software failures are not time-dependent in the wear-and-tear sense — a fault dormant today may trigger tomorrow when new input or environment conditions appear.</li>
+        </ul>
+
+        <h3>Hardware reliability vs software reliability</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-hw-rel-caption">
+          <img src="../../../assets/images/se-topic-11/hardware-reliability.png"
+               alt="Hardware reliability bathtub curve — infant mortality, useful life, wear-out phase"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-hw-rel-caption">Hardware reliability follows the bathtub curve — infant mortality, useful life, and wear-out phases driven by physical deterioration.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Feature</th><th>Hardware Reliability</th><th>Software Reliability</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Source of failure</td><td>Defects in design, production, and maintenance</td><td>Defects in design (and specification)</td></tr>
+              <tr><td>Wear and tear</td><td>Failures occur due to physical deterioration</td><td>No wear and tear — faults do not age physically</td></tr>
+              <tr><td>Failure warning</td><td>Prior deterioration warning before failure</td><td>No prior deterioration warning</td></tr>
+              <tr><td>Failure curve</td><td>Bathtub curve applies</td><td>No bathtub curve for failure rates</td></tr>
+              <tr><td>Time dependence</td><td>Failures are time-dependent (wear-out)</td><td>Failures are not time-dependent in the physical sense</td></tr>
+              <tr><td>Prediction from design</td><td>Reliability can be predicted from physical design</td><td>Cannot be predicted from physical basis alone</td></tr>
+              <tr><td>Environment impact</td><td>Strongly related to environmental conditions</td><td>External environment does not directly degrade code</td></tr>
+              <tr><td>Redundancy</td><td>Hardware redundancy has physical limits</td><td>Software redundancy (N-version, recovery blocks) can improve reliability</td></tr>
+              <tr><td>Maintenance</td><td>Repairs can make hardware more reliable</td><td>No preventive maintenance equivalent — fixes require re-testing</td></tr>
+              <tr><td>Metric</td><td>Often expressed as MTBF</td><td>Measured using ROCOF, MTTF, POFOD, availability, etc.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Reliability attributes (measures)</h3>
+        <ul>
+          <li>Reliability attributes quantify software dependability and should be specified in the SRS so achievement can be verified objectively.</li>
+          <li>A good reliability measure should be observer-independent — different people should obtain the same value when measuring the same system.</li>
+        </ul>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Attribute</th><th>Meaning</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>ROCOF</strong> (Rate of Occurrence of Failure)</td><td>Frequency of unexpected behaviour — how many times the software fails per unit time; total failures divided by observation interval.</td></tr>
+              <tr><td><strong>MTTF</strong> (Mean Time To Failure)</td><td>Average time between successive failures during execution; only run time is counted — downtime for repair is excluded.</td></tr>
+              <tr><td><strong>MTTR</strong> (Mean Time To Repair)</td><td>Average time to locate and fix the error that caused a failure.</td></tr>
+              <tr><td><strong>MTBF</strong> (Mean Time Between Failures)</td><td>MTBF = MTTF + MTTR; time between one failure and the next, including repair time (real time, not execution time).</td></tr>
+              <tr><td><strong>POFOD</strong> (Probability of Failure on Demand)</td><td>Probability the system fails when a service request is made; e.g. POFOD = 0.001 means 1 failure per 1000 requests.</td></tr>
+              <tr><td><strong>Availability</strong></td><td>Probability the system is available for use over a given period; considers both failure frequency and downtime during repair.</td></tr>
+              <tr><td><strong>Fault tolerance</strong></td><td>Ability to continue functioning correctly despite unexpected events or component breakdowns — see <a href="11-02-fault-tolerance.html#sec-11-2">§11.2 Fault Tolerance</a>.</td></tr>
+              <tr><td><strong>Recoverability</strong></td><td>Ability to bounce back quickly from a setback with minimal downtime and data loss.</td></tr>
+              <tr><td><strong>Redundancy</strong></td><td>Duplication of critical components to avoid single points of failure and maintain service during faults.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>MTTF calculation example</h3>
+        <div class="terminal" aria-label="Pseudocode — MTTF calculation">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">mttf_calculation.pseudo</span>
+          </div>
+          <pre><code>// Failures observed at execution time instants (hours of run time)
+T = [10, 25, 40, 58, 70]   // T1..T5 failure times
+n = length(T) - 1          // 4 intervals between 5 failures
+
+// MTTF = average of intervals between successive failures
+intervals = []
+FOR i = 1 TO n DO
+  intervals.add(T[i+1] - T[i])
+END FOR
+
+MTTF = sum(intervals) / n
+// intervals = [15, 15, 18, 12]  →  MTTF = 60/4 = 15 hours
+
+// MTTR = average repair time (real time, not execution time)
+repair_times = [2, 3, 1, 4]   // hours to fix each failure
+MTTR = sum(repair_times) / length(repair_times)   // = 2.5 hours
+
+MTBF = MTTF + MTTR   // = 15 + 2.5 = 17.5 hours (real time between failures)</code></pre>
+        </div>
+
+        <h3>Factors affecting software reliability</h3>
+        <ul>
+          <li><strong>Complexity:</strong> High software complexity is a major contributor to reliability problems — McCabe's cyclomatic complexity is one complexity-oriented metric; see <a href="../06-software-measurement-and-metrics/06-06-cyclomatic-complexity.html#sec-6-6">§6.6 Cyclomatic Complexity</a>.</li>
+          <li><strong>Optimistic assumption:</strong> Assuming software that runs correctly once will always run correctly leads to hidden defects surfacing later under new conditions.</li>
+          <li><strong>Environment change:</strong> Software that worked in one environment may fail when the operating environment changes — e.g. the Ariane 5 rocket failure caused by design defects exposed by faster horizontal drift speed not present in Ariane 4.</li>
+          <li><strong>Specification and coding errors:</strong> Failures arise from ambiguities, oversights, misinterpretation of specifications, inadequate testing, and incorrect or unexpected usage.</li>
+          <li><strong>No universal model:</strong> Many software reliability models exist, but no single model captures all complexity — each requires assumptions and fits specific contexts; see <a href="11-03-reliability-growth-models.html#sec-11-3">§11.3 Reliability Growth Models</a>.</li>
+        </ul>
+
+        <h3>Achieving high reliability — four strategies</h3>
+        <ul>
+          <li><strong>Error avoidance:</strong> Prevent errors during development using experienced developers, appropriate software engineering tools, and suitable CASE tools.</li>
+          <li><strong>Error detection:</strong> Find remaining errors through rigorous testing — unit, integration, system, acceptance, and reliability testing.</li>
+          <li><strong>Error removal:</strong> Fix detected errors and re-test repeatedly until the error is confirmed removed — iterative reliability testing.</li>
+          <li><strong>Fault tolerance:</strong> When 100% error-free software is impractical, design the system to deliver correct results despite residual failures — N-version programming, recovery blocks, rollback recovery; see <a href="11-02-fault-tolerance.html#sec-11-2">§11.2</a>.</li>
+        </ul>
+        <ul>
+          <li>Design for reliability from the start — include fault tolerance, redundancy, and error handling in the architecture.</li>
+          <li>Maintain high code quality through modularization, encapsulation, and abstraction for easier maintenance and updates.</li>
+          <li>Document the system thoroughly so it can be maintained and tested consistently over time.</li>
+          <li>Apply continuous improvement based on user feedback and ongoing testing to adapt to changing requirements.</li>
+          <li>Design with security in mind — encryption, access controls, and secure coding practices support overall dependability.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Reliability</div>
+          <p><strong>Q:</strong> Define software reliability. List reliability attributes with formulas. Differentiate hardware and software reliability. Explain how high reliability is achieved.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Software reliability = probability of failure-free operation for fixed time in fixed environment; human-design dependent; no physical wear.</li>
+            <li>Lifecycle: many initial faults → testing/debugging → useful life → upgrades may add new faults.</li>
+            <li>Attributes: ROCOF, MTTF (execution time only), MTTR, MTBF = MTTF + MTTR, POFOD, availability, fault tolerance, recoverability.</li>
+            <li>Hardware vs software: bathtub curve vs none; wear vs no wear; time-dependent vs not; redundancy possible in software.</li>
+            <li>Four strategies: error avoidance, detection (testing), removal (debugging), fault tolerance (NVP, RB, rollback).</li>
+            <li>Factors: complexity, environment change, specification errors, no universal reliability model.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="index.html">&larr; Topic 11</a>
+        <a class="btn-back chapter-nav-next" href="11-02-fault-tolerance.html">11.2 Fault Tolerance &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

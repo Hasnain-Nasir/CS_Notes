@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 10 — 10.7 Reverse Engineering</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>10.7 Reverse Engineering</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 10</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-10-7">
+
+        <p>
+          <strong>Reverse engineering</strong> (also called back engineering) is the process of analysing
+          existing software to recover design information and requirements from source code or executables.
+          It is a critical step within the re-engineering process — see
+          <a href="10-06-software-re-engineering.html#sec-10-6">§10.6 Software Re-engineering</a> — and
+          supports reuse decisions described in
+          <a href="../12-advanced-issues-reusability-patterns/12-01-reusability.html#sec-12-1">§12.1 Reusability</a>.
+        </p>
+
+        <h3>Definition</h3>
+        <ul>
+          <li>Reverse engineering recovers design models, data structures, control flow, and functional specifications from existing code through systematic analysis.</li>
+          <li>It moves from implementation (code) back to design and requirements — the opposite direction of normal forward engineering.</li>
+          <li>Reverse engineering does not modify the software; it produces documentation and models that enable informed maintenance, re-engineering, or reuse decisions.</li>
+          <li>It is also called <strong>back engineering</strong> because it reverses the usual development direction.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-rev-eng-caption">
+          <img src="../../../assets/images/se-topic-10/reverse-engineering.webp"
+               alt="Reverse engineering — recovering design and requirements from existing source code"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-rev-eng-caption">Reverse engineering — analysing existing code to recover design information and documentation.</figcaption>
+        </figure>
+
+        <h3>Why reverse engineering is needed</h3>
+        <ul>
+          <li><strong>Lost documentation:</strong> Original design documents were never created or have been lost over the system's lifetime.</li>
+          <li><strong>Maintenance assistance:</strong> Maintainers need to understand module interactions and data flows before making safe changes.</li>
+          <li><strong>Reuse:</strong> Identifying reusable components within legacy systems for incorporation into new products — see <a href="../12-advanced-issues-reusability-patterns/12-01-reusability.html#sec-12-1">§12.1</a>.</li>
+          <li><strong>Discover flaws:</strong> Analysis may reveal design defects, security vulnerabilities, or logic errors not visible from user-level testing.</li>
+          <li><strong>Security analysis:</strong> Examining code for vulnerabilities, backdoors, or compliance violations in third-party or legacy components.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-rev-eng-flow-caption">
+          <img src="../../../assets/images/se-topic-10/reverse-engineering-flow.png"
+               alt="Reverse engineering flow — from source code through analysis to recovered design documentation"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-rev-eng-flow-caption">Reverse engineering flow — from source code through structured analysis to recovered design documentation.</figcaption>
+        </figure>
+
+        <h3>Eight steps of reverse engineering</h3>
+        <ol>
+          <li><strong>Collect information:</strong> Gather all available source code, executables, documentation, and stakeholder knowledge about the system.</li>
+          <li><strong>Examine:</strong> Review the collected material to understand overall system scope, technology stack, and major components.</li>
+          <li><strong>Extract structure:</strong> Identify modules, classes, procedures, and their hierarchical relationships using static analysis tools.</li>
+          <li><strong>Record functionality:</strong> Document what each module or component does — its inputs, outputs, and processing logic.</li>
+          <li><strong>Record data flow:</strong> Map how data moves between modules — data dictionaries, variable usage, and inter-module data passing.</li>
+          <li><strong>Record control flow:</strong> Document decision points, loops, and call sequences that govern program execution paths.</li>
+          <li><strong>Review recovered design:</strong> Validate the recovered models against known behaviour, test cases, and stakeholder knowledge.</li>
+          <li><strong>Generate documentation:</strong> Produce formal design documents, structure charts, DFDs, or UML diagrams from the recovered information.</li>
+        </ol>
+
+        <h3>Forward vs reverse engineering</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-fwd-eng-caption">
+          <img src="../../../assets/images/se-topic-10/forward-engineering.png"
+               alt="Forward engineering — progressing from requirements through design to implementation"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-fwd-eng-caption">Forward engineering — the standard development direction from requirements to implementation.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Forward Engineering</th><th>Reverse Engineering</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Direction</td><td>Requirements → Design → Code</td><td>Code → Design → Requirements</td></tr>
+              <tr><td>Starting point</td><td>Requirements specification</td><td>Existing source code or executables</td></tr>
+              <tr><td>Output</td><td>Working software product</td><td>Design models and documentation</td></tr>
+              <tr><td>Modifies software</td><td>Yes — creates or extends code</td><td>No — analyses existing code without modification</td></tr>
+              <tr><td>When used</td><td>Normal development and re-engineering implementation phase</td><td>Legacy system analysis, maintenance, re-engineering analysis phase</td></tr>
+              <tr><td>Tools</td><td>IDEs, compilers, CASE tools for design</td><td>Static analysers, decompilers, Rigi, Bunch, GEN++</td></tr>
+              <tr><td>Goal</td><td>Build a system that meets requirements</td><td>Understand an existing system to enable maintenance or transformation</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Data reverse engineering</h3>
+        <ul>
+          <li><strong>Program level:</strong> Recovering internal data structures — records, arrays, linked lists, and object attributes — from source code analysis.</li>
+          <li><strong>System level:</strong> Recovering file layouts, database schemas, and inter-system data exchange formats from files, DBMS catalogues, and log analysis.</li>
+          <li>Data reverse engineering is essential before data reconstruction in the re-engineering process — see <a href="10-06-software-re-engineering.html#sec-10-6">§10.6 Step 5</a>.</li>
+        </ul>
+
+        <h3>Processing reverse engineering</h3>
+        <ul>
+          <li>Processing reverse engineering recovers the computational logic and control structures of a system at multiple levels of abstraction.</li>
+          <li><strong>Levels of abstraction:</strong> Machine code → assembly → source code → module structure → architectural design.</li>
+          <li><strong>Component analysis:</strong> Identifies individual processing components, their interfaces, and dependencies within the overall system architecture.</li>
+          <li>Automated tools traverse call graphs and dependency trees to build structure models from large codebases.</li>
+        </ul>
+
+        <h3>Reverse engineering tools</h3>
+        <ul>
+          <li><strong>Rigi:</strong> Visualisation tool for extracting and displaying software structure from source code — builds dependency graphs.</li>
+          <li><strong>Bunch:</strong> Clustering tool that groups related modules to reveal architectural layers in unstructured code.</li>
+          <li><strong>GEN++:</strong> Generates C++ class hierarchy and relationship diagrams from existing C++ source code.</li>
+          <li><strong>PBS (Portable Bookkeeper System):</strong> Tracks software metrics and structure across large multi-language codebases.</li>
+          <li><strong>CIAO:</strong> Component-based analysis tool for understanding object-oriented system architecture and dependencies.</li>
+          <li>Modern equivalents include static analysers (SonarQube, Understand), decompilers, and architecture discovery tools integrated into IDEs.</li>
+        </ul>
+
+        <h3>Reverse engineering in the re-engineering process</h3>
+        <ul>
+          <li>Reverse engineering is Step 3 of the six-step re-engineering process — it provides the design input for code and data reconstruction.</li>
+          <li>Without reverse engineering, re-engineering teams operate blind — making structural changes without understanding existing dependencies.</li>
+          <li>Recovered documentation from reverse engineering feeds directly into forward engineering during the re-engineering implementation phase.</li>
+        </ul>
+
+        <h3>Reverse engineering steps</h3>
+        <div class="terminal" aria-label="Pseudocode — reverse engineering steps">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">reverse_engineering_steps.pseudo</span>
+          </div>
+          <pre><code>// Eight-step reverse engineering process
+
+STEP 1: COLLECT_INFORMATION
+  gather source code, executables, existing docs, stakeholder input
+
+STEP 2: EXAMINE
+  review materials; identify technology stack, scope, major components
+
+STEP 3: EXTRACT_STRUCTURE
+  use static analysis → module hierarchy, class diagrams, call graphs
+
+STEP 4: RECORD_FUNCTIONALITY
+  FOR each module DO
+    document inputs, outputs, processing logic
+  END FOR
+
+STEP 5: RECORD_DATA_FLOW
+  map data dictionaries, inter-module data passing, file/DB schemas
+
+STEP 6: RECORD_CONTROL_FLOW
+  document decisions, loops, call sequences, state transitions
+
+STEP 7: REVIEW_DESIGN
+  validate recovered models against known behaviour and test cases
+
+STEP 8: GENERATE_DOCUMENTATION
+  produce design docs, DFDs, structure charts, UML diagrams
+  // output feeds forward engineering in re-engineering (§10.6)</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Reverse Engineering</div>
+          <p><strong>Q:</strong> Define reverse engineering. Why is it needed? List the eight steps. Compare forward and reverse engineering. Name reverse engineering tools.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Definition: recover design and requirements from code analysis; back engineering; does not modify software.</li>
+            <li>Why: lost documentation, maintenance assistance, reuse, discover flaws, security analysis.</li>
+            <li>8 steps: Collect info → Examine → Extract structure → Record functionality → Record data flow → Record control flow → Review design → Generate documentation.</li>
+            <li>Forward: requirements→design→code, creates software; Reverse: code→design→requirements, produces documentation.</li>
+            <li>Data RE: program level (internal structures) and system level (files/DB); Processing RE: levels of abstraction, component analysis.</li>
+            <li>Tools: Rigi, Bunch, GEN++, PBS, CIAO.</li>
+            <li>Used as Step 3 in re-engineering process (§10.6).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="10-06-software-re-engineering.html">&larr; 10.6 Software Re-engineering</a>
+        <a class="btn-back chapter-nav-next" href="10-08-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 10 — 10.4 Maintenance Categories</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>10.4 Maintenance Categories</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 10</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-10-4">
+
+        <p>
+          IEEE and ISO/IEC 12207 classify all maintenance activities into <strong>four categories</strong> based on the
+          <em>purpose</em> of the change — not based on who requested it or how urgent it is. Correct classification
+          drives prioritisation, effort estimation, budget allocation, and change control routing — see
+          <a href="../09-processes-configuration-management/09-05-change-control-process.html#sec-9-5">§9.5 Change Control Process</a>.
+          Misclassification is a common exam trap — e.g. porting to a new OS is <strong>adaptive</strong>, not perfective.
+        </p>
+
+        <h3>Formal definitions (IEEE / ISO)</h3>
+        <ul>
+          <li><strong>IEEE 1993:</strong> Software maintenance is modification of a software product after delivery to correct faults, improve performance or other attributes, or adapt the product to a modified environment.</li>
+          <li><strong>ISO/IEC 12207:</strong> Maintenance activities occur when software undergoes modifications to code and associated documentation due to a problem or a need for improvement or adaptation.</li>
+          <li>All four categories fall under this umbrella — the category is determined by <em>why</em> the change is being made.</li>
+          <li>After receiving a maintenance request, the first step is to identify the category; sometimes the reported problem is with the user, not the software — see <a href="10-01-software-maintenance-overview.html#sec-10-1">§10.1 Overview</a>.</li>
+        </ul>
+
+        <h3>Four categories of maintenance</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Category</th><th>Formal purpose</th><th>Trigger</th><th>Examples</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Corrective</strong></td>
+                <td>Correct discovered problems after delivery — faults that cause incorrect behaviour</td>
+                <td>Bug report, failure in production, audit finding, security vulnerability</td>
+                <td>Fixing a payroll calculation error; correcting a null-pointer crash; patching an SQL injection flaw; fixing incorrect tax computation in reports</td>
+              </tr>
+              <tr>
+                <td><strong>Adaptive</strong></td>
+                <td>Keep software usable in a changed or changing environment — functionality unchanged</td>
+                <td>New OS, hardware, DBMS, regulations, business rules, or external system interfaces</td>
+                <td>Porting from Windows Server 2016 to 2022; updating JDBC drivers for PostgreSQL 16; modifying code for new GDPR rules; interfacing with a new payment gateway API</td>
+              </tr>
+              <tr>
+                <td><strong>Perfective</strong></td>
+                <td>Improve performance, maintainability, or user-visible functionality after delivery</td>
+                <td>User enhancement request, performance bottleneck, usability improvement, restructuring for changeability</td>
+                <td>Adding export-to-PDF feature; reducing search response time from 5s to 0.5s; redesigning modules for easier modification; improving dashboard UI layout</td>
+              </tr>
+              <tr>
+                <td><strong>Preventive</strong></td>
+                <td>Detect and correct latent faults before they become effective faults; reduce future maintenance difficulty</td>
+                <td>Proactive quality initiative, technical debt reduction, scheduled review</td>
+                <td>Refactoring high-complexity modules; updating outdated design documents; adding automated backups; improving test coverage from 40% to 80%; adding monitoring and alerting</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Corrective maintenance — detail</h3>
+        <ul>
+          <li>Corrective maintenance is triggered when the system behaves incorrectly — output is wrong, the system crashes, or a security flaw is discovered.</li>
+          <li>It may be essential either to rectify bugs observed while the system is in use, or in some cases to enhance performance where the current behaviour is technically incorrect (e.g. slow response that violates the SLA).</li>
+          <li>Corrective changes follow the full change control process: problem report → analysis → fix → test → deploy — though critical fixes may use an expedited path.</li>
+          <li><strong>Retesting</strong> verifies that the specific defect fix works; <strong>regression testing</strong> ensures the fix did not break existing functionality — both are mandatory after corrective changes.</li>
+          <li>Corrective maintenance is typically the <strong>least expensive</strong> category per individual change, because the scope is narrow and the problem is well-defined.</li>
+        </ul>
+
+        <h3>Adaptive maintenance — detail</h3>
+        <ul>
+          <li>Adaptive maintenance modifies the product so it continues to work when the <em>environment</em> changes — the specified functional requirements remain the same.</li>
+          <li>Common triggers include new operating systems, new hardware platforms, new database versions, changed government policies, revised business rules, and new external system interfaces.</li>
+          <li>Adaptive work is often underestimated — porting may require changes throughout the codebase even when user-visible features are unchanged.</li>
+          <li>Deferred adaptive maintenance leaves the system on unsupported platforms with security vulnerabilities and compliance risks.</li>
+          <li>Example: a banking system must adapt when the central bank changes transaction reporting format — functionality is the same (report transactions) but the format changes.</li>
+        </ul>
+
+        <h3>Perfective maintenance — detail</h3>
+        <ul>
+          <li>Perfective maintenance is driven by user demands for new features or improvements to existing functionality — it is the largest category by effort.</li>
+          <li>It includes improving functionality, performance, reliability, and restructuring the system to improve changeability (maintainability).</li>
+          <li>Perfective changes expand scope compared to corrective fixes — they require requirements analysis, design updates, new test cases, and user documentation revisions.</li>
+          <li>Because perfective requests are open-ended, they need strong change control and prioritisation to prevent scope creep — see <a href="../09-processes-configuration-management/09-05-change-control-process.html#sec-9-5">§9.5</a>.</li>
+          <li>Example: users request a mobile-responsive version of an existing web dashboard — this is perfective (new capability), not adaptive (environment change).</li>
+        </ul>
+
+        <h3>Preventive maintenance — detail</h3>
+        <ul>
+          <li>Preventive maintenance addresses problems that are <em>not yet critical</em> but may cause serious failures if ignored — it reduces future corrective effort.</li>
+          <li>It includes code optimisation, documentation updates, scheduled reviews, test suite expansion, backup procedures, and refactoring to reduce complexity.</li>
+          <li>Preventive work is closely related to <strong>proactive maintenance</strong> — taking action before failures occur rather than reacting after them.</li>
+          <li>In ISO terminology, preventive maintenance detects and corrects <strong>latent faults</strong> — defects present in the code that have not yet caused a visible failure.</li>
+          <li>Preventive maintenance reduces the <strong>C</strong> (complexity) term in the maintenance effort formula — see <a href="10-05-cost-of-maintenance.html#sec-10-5">§10.5 Cost of Maintenance</a>.</li>
+        </ul>
+
+        <h3>Proactive vs reactive maintenance</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Proactive</th><th>Reactive</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Timing</td><td>Scheduled before problems occur</td><td>Triggered after a failure or complaint</td></tr>
+              <tr><td>Primary category</td><td>Preventive (and planned perfective/adaptive)</td><td>Corrective (and emergency adaptive)</td></tr>
+              <tr><td>Examples</td><td>Scheduled refactoring, documentation review, backup testing</td><td>Hotfix for production crash, emergency OS port after vendor EOL</td></tr>
+              <tr><td>Cost pattern</td><td>Lower long-term cost; predictable budget</td><td>Higher long-term cost; unpredictable spikes</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Planned maintenance activities (scheduled updates, backups, reviews) are proactive; unplanned activities triggered by crashes or security breaches are reactive.</li>
+          <li>Organisations with strong preventive programmes spend less on emergency corrective work over the system lifetime.</li>
+        </ul>
+
+        <h3>Corrective maintenance and patching</h3>
+        <ul>
+          <li><strong>Patching</strong> is emergency corrective maintenance — a fix applied under management pressure when a critical production defect cannot wait for the next scheduled release.</li>
+          <li>Patches are deployed quickly but carry higher risk because impact analysis, full regression testing, and documentation updates may be abbreviated.</li>
+          <li>Poorly managed patches often introduce <strong>unforeseen future errors</strong> — a patch in one module breaks another module that was not retested.</li>
+          <li>Even emergency patches must not bypass change control entirely — at minimum: unique change number, impact analysis, retest of affected areas, and post-deployment monitoring.</li>
+          <li>Every patch should be merged back into the main codebase through version control — see <a href="../09-processes-configuration-management/09-06-software-version-control.html#sec-9-6">§9.6 Version Control</a> — to prevent patch divergence.</li>
+        </ul>
+
+        <h3>Typical effort and cost distribution</h3>
+        <ul>
+          <li>Industry studies consistently show that maintenance effort is dominated by perfective work, not bug fixing — this is why maintenance budgets are often underestimated.</li>
+          <li>Approximate distribution: <strong>~60% perfective</strong>, <strong>~20% adaptive</strong>, <strong>~20% corrective</strong>.</li>
+          <li>Preventive effort is often embedded within the other categories rather than tracked separately — e.g. refactoring done during a perfective change.</li>
+          <li>Corrective maintenance is typically <strong>less expensive per change</strong> than perfective maintenance because scope is narrower and requirements are clearer.</li>
+          <li>Organisations that budget maintenance only for bug fixes allocate roughly one-third of what they actually need.</li>
+        </ul>
+
+        <h3>Category identification — common exam scenarios</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Scenario</th><th>Category</th><th>Reason</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Fix wrong interest calculation in loan module</td><td>Corrective</td><td>Bug in production — incorrect output</td></tr>
+              <tr><td>Upgrade DB from MySQL 5.7 to 8.0</td><td>Adaptive</td><td>Environment change — same functionality</td></tr>
+              <tr><td>Add two-factor authentication feature</td><td>Perfective</td><td>New user-requested functionality</td></tr>
+              <tr><td>Refactor 500-line function into smaller modules</td><td>Preventive</td><td>Reduce future complexity — no current failure</td></tr>
+              <tr><td>Comply with new tax law reporting format</td><td>Adaptive</td><td>Regulatory environment change</td></tr>
+              <tr><td>Improve page load speed from 8s to 2s</td><td>Perfective</td><td>Performance enhancement — not a bug fix</td></tr>
+              <tr><td>Hotfix for server crash at midnight</td><td>Corrective (patch)</td><td>Emergency fix for production failure</td></tr>
+              <tr><td>Update user manual after feature release</td><td>Part of perfective</td><td>Documentation update accompanying enhancement</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>UGC NET 2016 — match maintenance type to description</h3>
+        <p>Match the maintenance types in List 1 to their descriptions in List 2:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>List 1 (Type)</th><th>List 2 (Description)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>i. Corrective</td><td>a. Detect and correct latent faults before they become effective faults</td></tr>
+              <tr><td>ii. Adaptive</td><td>b. Correct discovered problems after delivery</td></tr>
+              <tr><td>iii. Perfective</td><td>c. Keep product usable in a changed or changing environment</td></tr>
+              <tr><td>iv. Preventive</td><td>d. Improve performance or maintainability after delivery</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Correct matching: <strong>i–b</strong> (corrective = correct discovered problems), <strong>ii–c</strong> (adaptive = changed environment), <strong>iii–d</strong> (perfective = improve performance/maintainability), <strong>iv–a</strong> (preventive = latent faults).</li>
+          <li><strong>Answer: B</strong> — the option listing i–b, ii–c, iii–d, iv–a.</li>
+        </ul>
+        <p>Memory aid: <strong>C</strong>orrective = <strong>C</strong>orrect bugs; <strong>A</strong>daptive = <strong>A</strong>dapt to environment; <strong>P</strong>erfective = <strong>P</strong>erfect/improve; <strong>P</strong>reventive = <strong>P</strong>revent future faults.</p>
+
+        <h3>Classify and route maintenance request</h3>
+        <div class="terminal" aria-label="Pseudocode — classify and route maintenance request">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">classify_maintenance_request.pseudo</span>
+          </div>
+          <pre><code>FUNCTION classify_and_route(request):
+
+  // Step 1 — Validate: is it actually a software problem?
+  IF request.problem_caused_by_user_error THEN
+    RETURN "user_training_required"   // not a maintenance change
+  END IF
+
+  // Step 2 — Classify by purpose
+  IF request.trigger IN ["production_failure", "bug_report", "security_flaw"] THEN
+    category = "corrective"
+  ELSE IF request.trigger == "environment_change" THEN
+    // new OS, hardware, DBMS, regulations — functionality unchanged
+    category = "adaptive"
+  ELSE IF request.trigger IN ["user_enhancement", "performance_improvement",
+                              "new_feature", "ui_improvement"] THEN
+    category = "perfective"
+  ELSE IF request.trigger IN ["proactive_refactoring", "documentation_update",
+                              "backup_setup", "test_coverage_improvement"] THEN
+    category = "preventive"
+  ELSE
+    category = "unclassified"   // requires manual review by maintainer
+  END IF
+
+  // Step 3 — Assign change number and enter repository (SCM)
+  change_id = assign_unique_change_number(request)
+  store_in_modification_request_repository(change_id, category, request)
+
+  // Step 4 — Route by priority
+  IF category == "corrective" AND request.priority == "critical" THEN
+    ROUTE to emergency_patch_process
+    REQUIRE impact_analysis BEFORE deploy
+    REQUIRE retest + regression_test AFTER fix
+  ELSE IF category == "perfective" THEN
+    ROUTE to change_control_board for scope/priority approval
+  ELSE
+    ROUTE to standard_maintenance_process
+  END IF
+
+  RETURN category, change_id
+END FUNCTION
+
+// Example classifications:
+// "App crashes on login"           → corrective (critical patch)
+// "Migrate to Linux from Windows"  → adaptive
+// "Add dark mode to UI"            → perfective
+// "Refactor payment module"        → preventive</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Maintenance Categories</div>
+          <p><strong>Q:</strong> Define the four categories of software maintenance with formal definitions and examples. Distinguish proactive from reactive maintenance. State effort distribution. Classify given scenarios. Solve UGC NET 2016 match question.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>IEEE: modification after delivery to correct faults, improve attributes, or adapt to modified environment.</li>
+            <li>Corrective: fix discovered problems/bugs; least expensive per change; retest + regression test required.</li>
+            <li>Adaptive: adapt to changed environment (OS, hardware, regulations) — functionality unchanged.</li>
+            <li>Perfective: improve performance/maintainability or add features — largest share (~60%) of effort.</li>
+            <li>Preventive: correct latent faults before they become effective; reduces complexity (C in effort formula).</li>
+            <li>Proactive = scheduled preventive/planned; Reactive = after failure (corrective/emergency adaptive).</li>
+            <li>Effort: ~60% perfective, ~20% adaptive, ~20% corrective; preventive embedded in others.</li>
+            <li>Patching = emergency corrective; needs impact analysis even when urgent; risk of introducing new bugs.</li>
+            <li>UGC NET 2016: i–b, ii–c, iii–d, iv–a → Answer B.</li>
+            <li>Common trap: OS port = adaptive (not perfective); new feature = perfective (not corrective).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="10-03-need-for-maintenance.html">&larr; 10.3 Need for Maintenance</a>
+        <a class="btn-back chapter-nav-next" href="10-05-cost-of-maintenance.html">10.5 Cost of Maintenance &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

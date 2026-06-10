@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — 11.2 Fault Tolerance</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>11.2 Fault Tolerance</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-11-2">
+
+        <p>
+          <strong>Fault tolerance</strong> is the ability of a system to continue delivering correct service
+          despite the presence of faults. It is one of the reliability attributes introduced in
+          <a href="11-01-software-reliability.html#sec-11-1">§11.1 Software Reliability</a> and is achieved
+          when 100% error-free software is impractical — the system is designed to detect, contain, and
+          recover from failures rather than prevent every defect.
+        </p>
+
+        <h3>Definition</h3>
+        <ul>
+          <li>Fault tolerance means the system can operate correctly (or degrade gracefully) even when one or more components fail or produce incorrect results.</li>
+          <li>A <strong>fault</strong> is a defect in the system; an <strong>error</strong> is the manifestation of a fault; a <strong>failure</strong> is when the error causes incorrect external behaviour.</li>
+          <li>Fault tolerance does not eliminate faults — it prevents faults from propagating into observable failures.</li>
+          <li>It is essential in safety-critical, real-time, and high-availability systems where downtime or incorrect output is unacceptable.</li>
+        </ul>
+
+        <h3>Basic fault tolerant techniques</h3>
+        <ul>
+          <li><strong>Redundancy:</strong> Duplicate hardware or software components so that a backup can take over when the primary fails.</li>
+          <li><strong>Checkpointing:</strong> Save the system state at intervals so execution can be rolled back to a known-good point after a failure.</li>
+          <li><strong>Error detection and correction:</strong> Use checksums, parity bits, voting, or exception handlers to detect and correct erroneous outputs.</li>
+          <li><strong>Failure prediction:</strong> Monitor system behaviour to anticipate impending failures and trigger preventive action before a fault becomes a failure.</li>
+          <li><strong>Load balancing:</strong> Distribute workload across multiple replicas so that the failure of one node does not halt the entire service.</li>
+          <li><strong>Isolation:</strong> Confine faults within a module or process boundary so they cannot corrupt unrelated components.</li>
+          <li><strong>Replication:</strong> Maintain multiple copies of data or services; if one replica fails, others continue serving requests.</li>
+          <li><strong>Dynamic reconfiguration:</strong> Reorganise the system at runtime — reroute traffic, activate standby components, or reassign tasks when a fault is detected.</li>
+        </ul>
+
+        <h3>Fault removal vs fault masking</h3>
+        <ul>
+          <li><strong>Fault removal</strong> eliminates the underlying defect through debugging and re-testing — the fault no longer exists in the code.</li>
+          <li><strong>Fault masking</strong> hides the effect of a fault at runtime without removing it — the fault may still be present but its incorrect output is overridden or corrected.</li>
+          <li>Recovery blocks and N-version programming are fault-masking techniques: they deliver a correct result despite a faulty version executing.</li>
+          <li>Fault removal is preferred during development; fault masking is used at runtime when residual faults cannot be eliminated before deployment.</li>
+        </ul>
+
+        <h3>Forward vs backward error recovery</h3>
+        <ul>
+          <li><strong>Backward error recovery</strong> restores the system to a previously saved checkpoint and re-executes from that point — used in checkpoint/rollback schemes.</li>
+          <li><strong>Forward error recovery</strong> continues execution from the current state by applying corrective action — used in recovery blocks and N-version programming where an alternative version produces the correct result.</li>
+          <li>Backward recovery requires saving and restoring state, which adds storage and time overhead but guarantees a clean restart.</li>
+          <li>Forward recovery avoids rollback overhead but requires redundant computation paths (alternate versions or acceptance tests).</li>
+        </ul>
+
+        <h3>Design diversity</h3>
+        <ul>
+          <li>Design diversity means implementing the same specification using independent teams, languages, algorithms, or compilers so that correlated faults are unlikely.</li>
+          <li>The goal is to ensure that versions fail independently — a bug in one version should not appear in the others.</li>
+          <li>It underpins both recovery blocks and N-version programming, where multiple diverse implementations of the same function are maintained.</li>
+          <li>Complete independence is difficult to achieve in practice because teams may share specifications and test cases, introducing common-mode failures.</li>
+        </ul>
+
+        <h3>Recovery block scheme (RB)</h3>
+        <p>
+          In the <strong>recovery block scheme</strong>, versions are tried <strong>sequentially</strong>.
+          The primary version runs first; if its output fails the acceptance test, the system falls back
+          to alternate versions one at a time until one passes or all are exhausted.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-rb-caption">
+          <img src="../../../assets/images/se-topic-11/recovery-block-scheme.png"
+               alt="Recovery block scheme — primary version tried first, alternates tried sequentially on failure"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-rb-caption">Recovery block scheme — sequential trial of primary and alternate versions with acceptance testing.</figcaption>
+        </figure>
+        <p>The recovery block syntax is:</p>
+        <div class="terminal" aria-label="Recovery block syntax">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">recovery_block.syntax</span>
+          </div>
+          <pre><code>Ensure T
+  By P
+  Else by Q1
+  Else by Q2
+  ...
+  Else by Qn
+  Else Error</code></pre>
+        </div>
+        <ul>
+          <li><strong>T</strong> is the acceptance test that validates the output of each version.</li>
+          <li><strong>P</strong> is the primary version; <strong>Q1, Q2, …, Qn</strong> are diverse alternate versions.</li>
+          <li>Versions are executed one after another — only one version runs at a time until a passing result is found.</li>
+          <li>If all versions fail the acceptance test, the <strong>Error</strong> clause is triggered.</li>
+        </ul>
+
+        <h3>N-version programming (NVP)</h3>
+        <p>
+          In <strong>N-version programming</strong>, N independent versions execute <strong>in parallel</strong>
+          on identical inputs. A voter selects the majority result (or applies a more sophisticated
+          selection rule) to produce the final output.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-nvp-caption">
+          <img src="../../../assets/images/se-topic-11/n-version-programming.png"
+               alt="N-version programming — N diverse versions run in parallel, voter selects majority output"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-nvp-caption">N-version programming — parallel execution of diverse versions with majority voting.</figcaption>
+        </figure>
+        <ul>
+          <li>All N versions run simultaneously, so NVP has higher computational cost than recovery blocks but lower latency on the success path.</li>
+          <li>The voter compares outputs and selects the result agreed upon by at least two versions (for N = 3).</li>
+          <li>NVP masks faults as long as a majority of versions produce the correct output.</li>
+          <li>Common-mode failures across all versions defeat NVP — design diversity must be genuine.</li>
+        </ul>
+
+        <h3>Checkpoint and rollback recovery</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-cpr-caption">
+          <img src="../../../assets/images/se-topic-11/checkpoint-rollback-recovery.png"
+               alt="Checkpoint rollback recovery — system state saved at intervals, rolled back on failure"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-cpr-caption">Checkpoint/rollback recovery — periodic state saves enable backward error recovery after a failure.</figcaption>
+        </figure>
+        <ul>
+          <li>The system periodically saves its state (checkpoint) to stable storage.</li>
+          <li>When a failure is detected, execution rolls back to the most recent valid checkpoint and resumes from there.</li>
+          <li>This is a <strong>backward error recovery</strong> technique — it does not require diverse versions but does require idempotent or repeatable computation after rollback.</li>
+          <li>Checkpoint frequency trades storage overhead against the amount of work lost on rollback.</li>
+        </ul>
+
+        <h3>Failure probability — recovery block vs N-version programming</h3>
+        <p>
+          Let p be the probability that a single version fails (produces incorrect output or fails the
+          acceptance test). Assume versions fail independently.
+        </p>
+        <ul>
+          <li><strong>Recovery block (sequential, k versions):</strong> All k versions must fail for the block to fail. P(RB fails) = p<sup>k</sup>.</li>
+          <li><strong>N-version programming (parallel, N = 3, majority vote):</strong> NVP fails when at least 2 of 3 versions fail. P(NVP fails) = 3p²(1 − p) + p³ = 3p² − 2p³.</li>
+          <li>For p = 0.01: P(RB fails with k = 3) = 10⁻⁶; P(NVP fails with N = 3) ≈ 2.98 × 10⁻⁴ — RB is more reliable for the same number of versions when p is small.</li>
+          <li>For p = 0.1: P(RB fails with k = 3) = 0.001; P(NVP fails with N = 3) = 0.028 — RB still wins, but the gap narrows as p increases.</li>
+          <li>NVP trades higher parallel cost for lower response time; RB trades sequential latency for lower resource usage.</li>
+        </ul>
+
+        <h3>Recovery block — pseudocode</h3>
+        <div class="terminal" aria-label="Pseudocode — recovery block execution">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">recovery_block.pseudo</span>
+          </div>
+          <pre><code>// Recovery block: sequential trial with acceptance test
+versions = [P, Q1, Q2, Q3]   // primary + alternates
+acceptance_test = T
+
+FOR each version v IN versions DO
+  result = EXECUTE(v, input)
+  IF acceptance_test(result) THEN
+    RETURN result          // forward recovery — correct output found
+  END IF
+END FOR
+
+RAISE Error                  // all versions failed acceptance test</code></pre>
+        </div>
+
+        <h3>N-version programming — pseudocode</h3>
+        <div class="terminal" aria-label="Pseudocode — N-version programming with voting">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">n_version_programming.pseudo</span>
+          </div>
+          <pre><code>// N-version programming: parallel execution with majority vote
+versions = [V1, V2, V3]      // N = 3 diverse implementations
+results = []
+
+PARALLEL FOR each version v IN versions DO
+  results.add(EXECUTE(v, input))
+END PARALLEL
+
+// Majority voter — select result agreed by at least 2 versions
+FOR each candidate r IN results DO
+  count = COUNT(results WHERE result == r)
+  IF count >= 2 THEN
+    RETURN r               // forward recovery via majority
+  END IF
+END FOR
+
+RAISE Error                  // no majority agreement — all disagree or 2+ failed</code></pre>
+        </div>
+
+        <h3>RB sequential vs NVP parallel — summary</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Feature</th><th>Recovery Block (RB)</th><th>N-Version Programming (NVP)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Execution</td><td>Sequential — one version at a time</td><td>Parallel — all versions simultaneously</td></tr>
+              <tr><td>Recovery type</td><td>Forward error recovery</td><td>Forward error recovery (majority vote)</td></tr>
+              <tr><td>Resource cost</td><td>Lower — only one version active at a time</td><td>Higher — all N versions run concurrently</td></tr>
+              <tr><td>Latency</td><td>Higher on failure path (tries versions in sequence)</td><td>Lower — determined by slowest version</td></tr>
+              <tr><td>Failure probability (k = N = 3)</td><td>P(fail) = p³</td><td>P(fail) = 3p² − 2p³</td></tr>
+              <tr><td>Acceptance test</td><td>Required — each version validated before proceeding</td><td>Not required — voter compares outputs directly</td></tr>
+              <tr><td>Design diversity</td><td>Primary + alternates developed independently</td><td>All N versions developed independently</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Component-based fault tolerance evaluation is modelled in the
+          <a href="11-07-pnz-model.html#sec-11-7">§11.7 PNZ Model</a>, which accounts for imperfect
+          debugging when predicting dependability of systems built from redundant components.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Fault Tolerance</div>
+          <p><strong>Q:</strong> Define fault tolerance. Explain fault removal vs fault masking. Compare recovery blocks and N-version programming. Write the recovery block syntax and failure probability formulas.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Fault tolerance = ability to deliver correct service despite faults; does not remove defects, masks or recovers from them.</li>
+            <li>Fault removal = debugging; fault masking = runtime correction without removing the defect (RB, NVP).</li>
+            <li>Backward recovery = checkpoint/rollback; forward recovery = alternate version or voting.</li>
+            <li>RB sequential: Ensure T By P Else by Q1…; P(fail) = p<sup>k</sup>.</li>
+            <li>NVP parallel: N versions + majority voter; P(fail) = 3p² − 2p³ for N = 3.</li>
+            <li>Design diversity: independent teams/languages to avoid common-mode failures.</li>
+            <li>Basic techniques: redundancy, checkpointing, error detection, isolation, replication, load balancing, dynamic reconfiguration.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="11-01-software-reliability.html">&larr; 11.1 Software Reliability</a>
+        <a class="btn-back chapter-nav-next" href="11-03-reliability-growth-models.html">11.3 Reliability Growth Models &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

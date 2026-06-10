@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — 11.3 Reliability Growth Models</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>11.3 Reliability Growth Models</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-11-3">
+
+        <p>
+          <strong>Software Reliability Growth Models (SRGMs)</strong> are mathematical models that describe
+          how software reliability improves as faults are detected and removed during testing. They are
+          introduced here as an overview; individual syllabus models are covered in
+          <a href="11-04-jelinski-moranda-model.html#sec-11-4">§11.4</a> through
+          <a href="11-08-mills-error-seeding-model.html#sec-11-8">§11.8</a>.
+        </p>
+
+        <h3>Definition</h3>
+        <ul>
+          <li>An SRGM is a statistical model that relates the number of failures (or the failure rate) to the amount of testing effort — measured in execution time or number of test cases.</li>
+          <li>As testing progresses and faults are removed, the failure intensity decreases and reliability increases — this growth pattern is what the model captures.</li>
+          <li>SRGMs are <strong>black-box models</strong>: they use observed failure data without requiring knowledge of the internal program structure.</li>
+          <li>No single SRGM is universally valid — each model makes specific assumptions about fault detection and debugging behaviour.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-srgm-caption">
+          <img src="../../../assets/images/se-topic-11/software-reliability-curve.png"
+               alt="Software reliability growth curve — failure rate decreases as testing progresses"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-srgm-caption">Reliability growth during testing — failure rate decreases as faults are detected and removed over time or test cases.</figcaption>
+        </figure>
+
+        <h3>What SRGMs represent</h3>
+        <ul>
+          <li>SRGMs plot <strong>reliability</strong> or <strong>failure rate (intensity)</strong> against <strong>time</strong> (execution hours) or against <strong>number of test cases</strong> executed.</li>
+          <li>The x-axis is cumulative testing effort; the y-axis is either the probability of failure-free operation (reliability) or the instantaneous failure rate λ(t).</li>
+          <li>A typical growth curve shows high failure intensity early in testing, declining as more faults are found and fixed.</li>
+          <li>The curve can be used to estimate when the software will reach a target reliability level (e.g. 0.99 over 100 hours).</li>
+        </ul>
+
+        <h3>Purposes of SRGMs</h3>
+        <ul>
+          <li><strong>Predict reliability:</strong> Estimate the reliability the software will achieve after additional testing — e.g. "after 500 more test cases, reliability will reach 0.995."</li>
+          <li><strong>Guide testing:</strong> Determine how much more testing is needed to reach a reliability target before release.</li>
+          <li><strong>Allocate resources:</strong> Decide whether to continue testing, add staff, or release based on projected reliability versus the required threshold.</li>
+          <li><strong>Identify problem areas:</strong> A model that fits poorly may indicate inconsistent debugging, incomplete fault removal, or heterogeneous fault populations.</li>
+        </ul>
+
+        <h3>Black-box models</h3>
+        <ul>
+          <li>Black-box SRGMs treat the software as an opaque system — only failure times or failure counts are observed, not code paths or module structure.</li>
+          <li>They assume faults are removed upon detection (perfect or imperfect debugging depending on the model).</li>
+          <li>Parameters are estimated from test data using Maximum Likelihood Estimation (MLE) or least-squares fitting.</li>
+          <li>White-box (structure-based) models use program complexity metrics but are less common in the syllabus SRGM set.</li>
+        </ul>
+
+        <h3>Failure data types</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Data type</th><th>Name</th><th>What is recorded</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Type-I</strong></td>
+                <td>Time-between-failure (TBF)</td>
+                <td>Exact time intervals between successive failures during execution</td>
+                <td>Failures at 10 h, 25 h, 40 h → TBF = [10, 15, 15]</td>
+              </tr>
+              <tr>
+                <td><strong>Type-II</strong></td>
+                <td>Failure-count</td>
+                <td>Number of failures observed within fixed time intervals or after fixed test cases</td>
+                <td>3 failures in first 100 test cases, 2 in next 100 → counts = [3, 2]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Type-I data is more informative because exact failure times are recorded, but it requires continuous monitoring during execution.</li>
+          <li>Type-II data is easier to collect in batch testing but provides less precise timing information.</li>
+          <li>Different SRGMs use different data types — JM and SW use Type-I; GO and PNZ support both Type-I and Type-II.</li>
+        </ul>
+
+        <h3>Non-homogeneous Poisson process (NHPP)</h3>
+        <ul>
+          <li>Many SRGMs are based on the <strong>Non-Homogeneous Poisson Process (NHPP)</strong>, where the failure intensity λ(t) varies with time rather than remaining constant.</li>
+          <li>In an NHPP, the expected number of failures by time t is given by the <strong>mean value function</strong> m(t) = ∫₀ᵗ λ(s) ds.</li>
+          <li>As faults are removed, λ(t) decreases and m(t) grows more slowly — modelling reliability growth.</li>
+          <li>The <a href="../03-software-project-management/03-11-quasi-renewal.html#sec-3-11">§3.11 Quasi Renewal Process</a> is a related counting process where inter-failure intervals grow by a constant factor α &gt; 1, modelling reliability growth during burn-in.</li>
+        </ul>
+
+        <h3>Duane and Coutinho models (brief)</h3>
+        <ul>
+          <li>The <strong>Duane model</strong> (1964) was originally developed for hardware reliability growth and plots cumulative failure rate against cumulative operating time on log-log axes — a straight line indicates reliability growth.</li>
+          <li>The <strong>Coutinho model</strong> extends Duane's approach to software, relating failure rate to cumulative test time with a power-law relationship.</li>
+          <li>Both are empirical curve-fitting models rather than stochastic process models — they are less detailed than JM, SW, GO, or PNZ but useful for quick trend analysis.</li>
+        </ul>
+
+        <h3>Key syllabus models</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Model</th><th>Year</th><th>Type</th><th>Key assumption</th><th>Section</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Jelinski-Moranda (JM)</strong></td>
+                <td>1972</td>
+                <td>Binomial / step function</td>
+                <td>Constant hazard φ per remaining fault; perfect debugging</td>
+                <td><a href="11-04-jelinski-moranda-model.html#sec-11-4">§11.4</a></td>
+              </tr>
+              <tr>
+                <td><strong>Schick-Wolverton (SW)</strong></td>
+                <td>1978</td>
+                <td>Modification of JM</td>
+                <td>Failure rate increases with time since last debugging</td>
+                <td><a href="11-05-schick-wolverton-model.html#sec-11-5">§11.5</a></td>
+              </tr>
+              <tr>
+                <td><strong>Goel-Okumoto (GO)</strong></td>
+                <td>1979</td>
+                <td>Exponential NHPP</td>
+                <td>Failures proportional to remaining faults; perfect debugging</td>
+                <td><a href="11-06-goel-okumoto-model.html#sec-11-6">§11.6</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pham-Nordmann-Zhang (PNZ)</strong></td>
+                <td>—</td>
+                <td>NHPP with imperfect debugging</td>
+                <td>S-shaped detection; faults introduced during debugging at rate α</td>
+                <td><a href="11-07-pnz-model.html#sec-11-7">§11.7</a></td>
+              </tr>
+              <tr>
+                <td><strong>Mills Error Seeding</strong></td>
+                <td>1980s</td>
+                <td>Fault content estimation</td>
+                <td>Inject known errors; estimate total inherent faults via sampling</td>
+                <td><a href="11-08-mills-error-seeding-model.html#sec-11-8">§11.8</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>SRGM workflow — pseudocode</h3>
+        <div class="terminal" aria-label="Pseudocode — SRGM workflow">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">srgm_workflow.pseudo</span>
+          </div>
+          <pre><code>// Step 1: Collect failure data during testing
+IF continuous monitoring THEN
+  data = Type_I_time_between_failures()   // exact failure times
+ELSE
+  data = Type_II_failure_counts()       // failures per test interval
+END IF
+
+// Step 2: Select an appropriate SRGM
+// Consider: data type, debugging assumptions, growth curve shape
+model = SELECT_MODEL(data)   // e.g. JM, SW, GO, PNZ
+
+// Step 3: Estimate model parameters via MLE or least squares
+params = ESTIMATE_PARAMETERS(model, data)
+// e.g. JM: N (initial faults), φ (hazard rate)
+// e.g. GO: a (total faults), b (detection rate)
+
+// Step 4: Validate model fit (goodness-of-fit test)
+goodness = CHI_SQUARE_TEST(model, data, params)
+IF goodness FAILS THEN
+  TRY alternative model OR collect more data
+END IF
+
+// Step 5: Predict reliability at future testing effort
+target_time = 500   // hours or test cases
+R_predicted = model.RELIABILITY(target_time, params)
+failure_rate = model.LAMBDA(target_time, params)
+
+// Step 6: Decision — release or continue testing?
+IF R_predicted >= reliability_target THEN
+  RECOMMEND release
+ELSE
+  extra_effort = COMPUTE_EFFORT_FOR_TARGET(model, reliability_target)
+  RECOMMEND continue testing for extra_effort units
+END IF</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Reliability Growth Models</div>
+          <p><strong>Q:</strong> Define SRGM. State its purposes. Differentiate Type-I and Type-II failure data. List the key syllabus models with their assumptions.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>SRGM = mathematical model relating failure rate/reliability to testing effort; black-box; reliability grows as faults are removed.</li>
+            <li>Purposes: predict reliability, guide testing, allocate resources, identify problem areas.</li>
+            <li>Type-I = time-between-failure (exact times); Type-II = failure-count per interval.</li>
+            <li>NHPP: failure intensity λ(t) varies with time; mean value function m(t) = ∫λ(s)ds.</li>
+            <li>JM (1972, binomial, perfect debugging); SW (1978, λ increases with time since debug); GO (1979, exponential NHPP); PNZ (imperfect debugging, S-shaped); Mills (error seeding).</li>
+            <li>Workflow: collect data → select model → estimate parameters → validate fit → predict → decide release.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="11-02-fault-tolerance.html">&larr; 11.2 Fault Tolerance</a>
+        <a class="btn-back chapter-nav-next" href="11-04-jelinski-moranda-model.html">11.4 Jelinski-Moranda Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

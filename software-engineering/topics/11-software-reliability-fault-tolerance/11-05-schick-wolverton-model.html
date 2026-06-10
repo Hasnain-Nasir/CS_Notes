@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — 11.5 Schick-Wolverton Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>11.5 Schick-Wolverton Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-11-5">
+
+        <p>
+          The <strong>Schick-Wolverton (SW) model</strong> (1978) is a modification of the
+          <a href="11-04-jelinski-moranda-model.html#sec-11-4">§11.4 Jelinski-Moranda Model</a>.
+          It retains JM's assumption of a fixed initial fault count N and perfect debugging, but
+          introduces a time-dependent failure rate that increases within each failure interval.
+        </p>
+
+        <h3>Motivation</h3>
+        <ul>
+          <li>In the JM model, the failure intensity λ is constant within each interval between failures — it only changes when a fault is removed.</li>
+          <li>In practice, the longer a fault remains undetected, the more likely it is to cause a failure as more execution paths are exercised.</li>
+          <li>The SW model captures this by making λ proportional to the time elapsed since the last debugging event.</li>
+          <li>SW is more sophisticated than JM and generally provides better fits to real failure data.</li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ol>
+          <li>The software contains exactly <strong>N</strong> initial faults at the start of testing.</li>
+          <li>Each remaining fault has hazard rate <strong>φ</strong>, but the overall failure intensity increases linearly with time since the last fault was removed.</li>
+          <li>Failures occur independently.</li>
+          <li><strong>Perfect debugging:</strong> faults are permanently removed upon detection; no new faults are introduced.</li>
+        </ol>
+
+        <h3>Failure intensity</h3>
+        <p>
+          During the i<sup>th</sup> failure interval, where t<sub>i</sub> is the time elapsed since the
+          (i − 1)<sup>th</sup> failure was debugged:
+        </p>
+        <p>λ(t<sub>i</sub>) = φ [N − (i − 1)] t<sub>i</sub></p>
+        <ul>
+          <li>At t<sub>i</sub> = 0 (immediately after debugging), λ = 0 — no failure can occur instantly after a fix.</li>
+          <li>As t<sub>i</sub> increases, λ grows linearly — reflecting increased exposure of remaining faults.</li>
+          <li>When a new failure occurs and a fault is removed, λ resets to 0 and the coefficient drops to φ[N − i].</li>
+        </ul>
+
+        <h3>Reliability function</h3>
+        <p>
+          The probability of failure-free operation during the i<sup>th</sup> interval is:
+        </p>
+        <p>R(t<sub>i</sub>) = e<sup>−φ [N − (i − 1)] t<sub>i</sub>² / 2</sup></p>
+        <ul>
+          <li>The exponent contains t<sub>i</sub>² rather than t<sub>i</sub> because λ(t<sub>i</sub>) is linear in t<sub>i</sub> — integrating λ gives a t<sub>i</sub>²/2 term.</li>
+          <li>Reliability decreases more rapidly early in the interval (when λ is small) and more slowly later — a different shape from JM's exponential decay.</li>
+        </ul>
+
+        <h3>Comparison with JM</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Feature</th><th>Jelinski-Moranda (JM)</th><th>Schick-Wolverton (SW)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Year</td><td>1972</td><td>1978</td></tr>
+              <tr><td>Failure intensity</td><td>λ(t<sub>i</sub>) = φ[N − (i − 1)] — constant within interval</td><td>λ(t<sub>i</sub>) = φ[N − (i − 1)]t<sub>i</sub> — increases with time</td></tr>
+              <tr><td>Reliability</td><td>R = e<sup>−φ[N−(i−1)]t<sub>i</sub></sup></td><td>R = e<sup>−φ[N−(i−1)]t<sub>i</sub>²/2</sup></td></tr>
+              <tr><td>λ at start of interval</td><td>φ[N − (i − 1)] — non-zero</td><td>0 — resets after each debugging</td></tr>
+              <tr><td>Parameters</td><td>N, φ</td><td>N, φ</td></tr>
+              <tr><td>Data type</td><td>Type-I</td><td>Type-I</td></tr>
+              <tr><td>Fit quality</td><td>Often too optimistic; poor fit to some datasets</td><td>Better fit; more realistic time-dependent intensity</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Parameter estimation</h3>
+        <ul>
+          <li>Both N and φ are estimated from Type-I failure data using <strong>Maximum Likelihood Estimation (MLE)</strong>.</li>
+          <li>Estimating N is particularly important — it represents the total inherent fault content and directly affects reliability predictions.</li>
+          <li>The MLE for N involves maximising the likelihood function over integer values N ≥ n (where n is the number of observed failures).</li>
+          <li>φ is estimated simultaneously; the log-likelihood for the SW model incorporates the t<sub>i</sub>² term from the reliability function.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Schick-Wolverton Model</div>
+          <p><strong>Q:</strong> How does the SW model modify JM? Write the failure intensity and reliability formulas. Why is SW more sophisticated?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>SW (1978) = modification of JM; same N and perfect debugging assumptions.</li>
+            <li>Key change: failure rate increases with time since last debugging — λ(t<sub>i</sub>) = φ[N − (i − 1)]t<sub>i</sub>.</li>
+            <li>R(t<sub>i</sub>) = e<sup>−φ[N−(i−1)]t<sub>i</sub>²/2</sup>.</li>
+            <li>λ resets to 0 after each fault removal; grows linearly within interval.</li>
+            <li>More sophisticated: captures time-dependent exposure; better fit than JM.</li>
+            <li>Parameters N, φ estimated via MLE from Type-I data.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="11-04-jelinski-moranda-model.html">&larr; 11.4 Jelinski-Moranda Model</a>
+        <a class="btn-back chapter-nav-next" href="11-06-goel-okumoto-model.html">11.6 Goel-Okumoto Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

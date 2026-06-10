@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — 11.4 Jelinski-Moranda Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>11.4 Jelinski-Moranda Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-11-4">
+
+        <p>
+          The <strong>Jelinski-Moranda (JM) model</strong> (1972) is the first and one of the best-known
+          black-box software reliability growth models. It belongs to the <strong>binomial type</strong>
+          of SRGMs and is covered in the overview at
+          <a href="11-03-reliability-growth-models.html#sec-11-3">§11.3 Reliability Growth Models</a>.
+        </p>
+
+        <h3>Model type</h3>
+        <ul>
+          <li>The JM model is a <strong>binomial-type</strong> model — it assumes a fixed initial number of faults N, and each fault has an equal constant probability of causing the next failure.</li>
+          <li>It was among the earliest attempts to apply reliability growth theory (originally developed for hardware) to software testing data.</li>
+          <li>The failure intensity drops in discrete steps each time a fault is detected and removed — producing a step-function reliability growth curve.</li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ol>
+          <li>The software contains exactly <strong>N</strong> initial faults at the start of testing.</li>
+          <li>Each remaining fault has the same constant hazard rate <strong>φ</strong> (phi) — the probability per unit time that a specific fault causes a failure.</li>
+          <li>Failures occur independently — the failure caused by one fault does not affect the failure times of other faults.</li>
+          <li><strong>Perfect debugging:</strong> when a failure occurs, the fault that caused it is immediately and permanently removed — no new faults are introduced.</li>
+        </ol>
+
+        <h3>Failure intensity</h3>
+        <p>
+          After (i − 1) faults have been removed, (N − (i − 1)) faults remain. The failure intensity
+          at the i<sup>th</sup> failure interval is:
+        </p>
+        <p>λ(t<sub>i</sub>) = φ [N − (i − 1)]</p>
+        <ul>
+          <li>At the start (i = 1), λ = φN — the highest failure rate when all N faults are present.</li>
+          <li>After each fault is removed, λ drops by φ — a step decrease.</li>
+          <li>When all N faults are removed, λ = 0 — the software is fault-free under this model's assumptions.</li>
+        </ul>
+
+        <h3>Reliability function</h3>
+        <p>
+          The probability of failure-free operation during the i<sup>th</sup> interval of duration t<sub>i</sub>
+          (time since the (i − 1)<sup>th</sup> failure) is:
+        </p>
+        <p>R(t<sub>i</sub>) = e<sup>−φ [N − (i − 1)] t<sub>i</sub></sup></p>
+        <ul>
+          <li>Reliability increases as i increases (fewer remaining faults) and as t<sub>i</sub> increases (more time without failure in the current interval).</li>
+          <li>The reliability curve is exponential within each interval but steps up at each fault removal.</li>
+        </ul>
+
+        <h3>Parameters</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Parameter</th><th>Symbol</th><th>Meaning</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Initial fault count</td><td>N</td><td>Total number of faults present at the start of testing</td></tr>
+              <tr><td>Fault hazard rate</td><td>φ</td><td>Constant failure rate per individual fault per unit time</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Both N and φ are estimated from Type-I (time-between-failure) data using Maximum Likelihood Estimation (MLE).</li>
+          <li>N must be an integer ≥ the number of failures observed; φ must be positive.</li>
+        </ul>
+
+        <h3>Characteristics</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Characteristic</th><th>Detail</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Model type</td><td>Binomial — fixed N faults, equal hazard φ</td></tr>
+              <tr><td>Failure intensity shape</td><td>Step function — drops by φ at each fault removal</td></tr>
+              <tr><td>Debugging assumption</td><td>Perfect — faults removed permanently, none introduced</td></tr>
+              <tr><td>Data type</td><td>Type-I (time-between-failure)</td></tr>
+              <tr><td>Parameters</td><td>N (initial faults), φ (per-fault hazard)</td></tr>
+              <tr><td>Reliability function</td><td>R(t<sub>i</sub>) = e<sup>−φ[N−(i−1)]t<sub>i</sub></sup></td></tr>
+              <tr><td>Prediction tendency</td><td>Optimistic — assumes all faults will eventually be found</td></tr>
+              <tr><td>Limitation</td><td>Constant φ per fault is unrealistic — some faults are harder to trigger than others</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Optimistic predictions</h3>
+        <ul>
+          <li>The JM model tends to produce <strong>optimistic reliability predictions</strong> because it assumes perfect debugging and a fixed, finite fault count.</li>
+          <li>In practice, debugging may introduce new faults and the total fault count is not known in advance — the model overestimates how quickly reliability will improve.</li>
+          <li>Despite this limitation, JM remains important as the foundational SRGM and as a basis for later models such as the
+            <a href="11-05-schick-wolverton-model.html#sec-11-5">§11.5 Schick-Wolverton Model</a>.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Jelinski-Moranda Model</div>
+          <p><strong>Q:</strong> State the JM model assumptions. Write the failure intensity and reliability formulas. Why are JM predictions optimistic?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>JM (1972): first black-box SRGM; binomial type; step-function failure intensity.</li>
+            <li>Assumptions: N initial faults; constant hazard φ per fault; independent failures; perfect debugging.</li>
+            <li>λ(t<sub>i</sub>) = φ[N − (i − 1)]; R(t<sub>i</sub>) = e<sup>−φ[N−(i−1)]t<sub>i</sub></sup>.</li>
+            <li>Parameters: N, φ — estimated via MLE from Type-I data.</li>
+            <li>Optimistic because perfect debugging and fixed N overestimate reliability growth; constant φ unrealistic.</li>
+            <li>Modified by Schick-Wolverton (1978) — see §11.5.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="11-03-reliability-growth-models.html">&larr; 11.3 Reliability Growth Models</a>
+        <a class="btn-back chapter-nav-next" href="11-05-schick-wolverton-model.html">11.5 Schick-Wolverton Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

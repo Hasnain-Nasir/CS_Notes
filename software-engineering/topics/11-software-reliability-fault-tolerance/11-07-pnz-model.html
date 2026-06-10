@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — 11.7 PNZ Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>11.7 PNZ Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-11-7">
+
+        <p>
+          The <strong>Pham-Nordmann-Zhang (PNZ) model</strong> is an NHPP-based software reliability
+          growth model that accounts for <strong>imperfect debugging</strong> — faults may be introduced
+          during the debugging process. It is particularly useful for evaluating
+          <strong>component-based systems</strong> and systems that employ
+          <a href="11-02-fault-tolerance.html#sec-11-2">§11.2 Fault Tolerance</a> techniques.
+        </p>
+
+        <h3>Model type</h3>
+        <ul>
+          <li>PNZ is an NHPP model like the <a href="11-06-goel-okumoto-model.html#sec-11-6">§11.6 Goel-Okumoto Model</a>, but relaxes the perfect debugging assumption.</li>
+          <li>It models an <strong>S-shaped fault detection rate</strong> — slow initial detection (faults are hard to find early), rapid middle phase, then saturation as most faults are removed.</li>
+          <li>PNZ can evaluate dependability of systems built from multiple components, including those with redundant or fault-tolerant architectures.</li>
+        </ul>
+
+        <h3>Imperfect debugging</h3>
+        <ul>
+          <li>In real debugging, fixing one fault may introduce new faults — the total fault count is not fixed and may grow over time.</li>
+          <li>PNZ models this by allowing the effective fault content to increase at rate <strong>α</strong> during debugging.</li>
+          <li>The time-varying fault content is: a(t) = a(1 + αt), where a is the initial fault count and α is the rate at which new faults are introduced per unit time.</li>
+          <li>When α = 0, PNZ reduces to a model with perfect debugging; when α &gt; 0, the fault pool grows and reliability growth slows or reverses.</li>
+        </ul>
+
+        <h3>Time-varying parameters</h3>
+        <ul>
+          <li><strong>Fault content function:</strong> a(t) = a(1 + αt) — total faults grow linearly with time due to imperfect debugging.</li>
+          <li><strong>Detection rate function:</strong> b(t) = b / (1 + βe<sup>−bt</sup>) — produces the S-shaped detection curve; β controls the inflection point.</li>
+          <li>The S-shape arises because b(t) starts low (few faults found), rises to a peak (rapid detection phase), then declines (remaining faults are harder to find).</li>
+        </ul>
+
+        <h3>Mean value function</h3>
+        <p>
+          The expected cumulative number of faults detected by time t in the PNZ model is:
+        </p>
+        <p>m(t) = (a/b) ln[(1 + β) / (1 + βe<sup>−bt</sup>)] + αt</p>
+        <ul>
+          <li>The first term captures S-shaped detection from the initial fault pool a.</li>
+          <li>The second term αt accounts for additional faults introduced during debugging that are also eventually detected.</li>
+          <li>When α = 0 and β → 0, the model approaches the GO model's exponential form.</li>
+        </ul>
+
+        <h3>Parameters</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Parameter</th><th>Symbol</th><th>Meaning</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Initial fault content</td><td>a</td><td>Number of faults present at the start of testing</td></tr>
+              <tr><td>Fault detection rate</td><td>b</td><td>Base rate at which faults are detected</td></tr>
+              <tr><td>S-shape control</td><td>β</td><td>Controls the inflection point of the S-shaped detection curve</td></tr>
+              <tr><td>Imperfect debugging rate</td><td>α</td><td>Rate at which new faults are introduced per unit time during debugging</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Failure intensity and reliability</h3>
+        <ul>
+          <li>Failure intensity: λ(t) = dm/dt = ab / (1 + βe<sup>−bt</sup>) + α — combines S-shaped detection with fault introduction.</li>
+          <li>Reliability: R(t) = e<sup>−m(t)</sup> — probability of zero failures in the interval [0, t].</li>
+          <li>When α &gt; 0, reliability growth may plateau or even decrease if new faults are introduced faster than existing ones are removed.</li>
+        </ul>
+
+        <h3>Objectives of the PNZ model</h3>
+        <ul>
+          <li><strong>Predict dependability:</strong> Estimate the reliability of component-based systems where individual components may have different fault profiles and debugging histories.</li>
+          <li><strong>Failure analysis:</strong> Identify whether reliability growth is stalling due to imperfect debugging rather than insufficient testing effort.</li>
+          <li><strong>Optimise testing:</strong> Determine the optimal amount of testing effort required to reach a reliability target, accounting for faults introduced during debugging.</li>
+          <li><strong>Cost-benefit analysis:</strong> Compare the cost of additional testing against the reliability improvement achieved, especially when debugging introduces new faults.</li>
+        </ul>
+
+        <h3>Component-based and fault-tolerant systems</h3>
+        <ul>
+          <li>PNZ can be applied to systems composed of multiple modules or components, each with its own fault content and detection rate.</li>
+          <li>When combined with fault tolerance techniques (recovery blocks, N-version programming, replication), PNZ helps predict whether the system's overall dependability meets requirements despite imperfect debugging in individual components.</li>
+          <li>The model's imperfect debugging parameter α is especially relevant for fault-tolerant systems where fixes to one component may affect others.</li>
+        </ul>
+
+        <h3>Comparison with other NHPP models</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Feature</th><th>Goel-Okumoto (GO)</th><th>PNZ</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Debugging</td><td>Perfect — fixed fault count a</td><td>Imperfect — a(t) = a(1 + αt)</td></tr>
+              <tr><td>Detection curve</td><td>Exponential saturation</td><td>S-shaped — b(t) = b/(1 + βe<sup>−bt</sup>)</td></tr>
+              <tr><td>Parameters</td><td>a, b</td><td>a, b, β, α</td></tr>
+              <tr><td>Mean value function</td><td>m(t) = a(1 − e<sup>−bt</sup>)</td><td>m(t) = (a/b)ln[(1+β)/(1+βe<sup>−bt</sup>)] + αt</td></tr>
+              <tr><td>Fault introduction</td><td>Not modelled</td><td>New faults at rate α during debugging</td></tr>
+              <tr><td>Use case</td><td>Simple growth prediction</td><td>Component-based systems, fault tolerance evaluation</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — PNZ Model</div>
+          <p><strong>Q:</strong> What is imperfect debugging in the PNZ model? Write the time-varying parameters and mean value function. State the model's objectives.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>PNZ: NHPP with imperfect debugging; S-shaped fault detection; evaluates component-based and fault-tolerant systems.</li>
+            <li>Imperfect debugging: new faults introduced at rate α during debugging — a(t) = a(1 + αt).</li>
+            <li>b(t) = b/(1 + βe<sup>−bt</sup>) — S-shaped detection rate.</li>
+            <li>m(t) = (a/b)ln[(1+β)/(1+βe<sup>−bt</sup>)] + αt; λ(t) = ab/(1+βe<sup>−bt</sup>) + α.</li>
+            <li>Parameters: a, b, β, α.</li>
+            <li>Objectives: predict dependability, failure analysis, optimise testing, cost-benefit analysis.</li>
+            <li>Links to fault tolerance (§11.2) for component-based dependability evaluation.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="11-06-goel-okumoto-model.html">&larr; 11.6 Goel-Okumoto Model</a>
+        <a class="btn-back chapter-nav-next" href="11-08-mills-error-seeding-model.html">11.8 Mills' Error Seeding Model &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

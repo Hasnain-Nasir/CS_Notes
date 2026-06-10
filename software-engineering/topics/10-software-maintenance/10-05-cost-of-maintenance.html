@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 10 — 10.5 Cost of Maintenance</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>10.5 Cost of Maintenance</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 10</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-10-5">
+
+        <p>
+          Software maintenance is the <strong>most expensive phase</strong> of the software life cycle — more than
+          65% of total cost is spent here, not during initial development. Understanding what drives maintenance
+          cost, how to estimate effort using quantitative models, and how to reduce cost is essential for both
+          project planning and exams. Maintenance category mix directly affects cost — see
+          <a href="10-04-maintenance-categories.html#sec-10-4">§10.4 Maintenance Categories</a>.
+        </p>
+
+        <h3>Why maintenance cost exceeds development cost</h3>
+        <ul>
+          <li>More than <strong>65%</strong> of total software life cycle cost is spent on maintenance activities — not on initial development.</li>
+          <li>Software is typically built in <strong>1–2 years</strong> but maintained for <strong>15–20 years</strong> or longer — the maintenance period is 10× longer than development.</li>
+          <li>Approximately <strong>60% of maintenance effort is perfective</strong> (enhancements and improvements) — not bug fixing — so budgets based only on corrective work are severely inadequate.</li>
+          <li>Each maintenance change touches code that other modules depend on — ripple effects increase analysis and regression testing effort.</li>
+          <li>Original developers leave; new maintainers must rebuild understanding from code and incomplete documentation — familiarity (D) starts low.</li>
+          <li>Complexity (C) grows with every change unless preventive refactoring is performed — Lehman's Law of Increasing Complexity applies.</li>
+          <li>Legacy systems use obsolete languages and platforms — specialised skills are scarce and expensive.</li>
+          <li>Undocumented changes accumulate over years — each new maintainer spends extra effort discovering what previous teams changed.</li>
+          <li>Organisations that under-budget maintenance face escalating technical debt and eventual system failure or forced replacement.</li>
+        </ul>
+
+        <h3>Components of maintenance cost and effort</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Cost component</th><th>What it includes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Labor</strong></td><td>Salaries of maintenance engineers, analysts, testers, project managers — the largest single cost component</td></tr>
+              <tr><td><strong>Hardware and software tools</strong></td><td>Development environments, test servers, SCM tools, deployment platforms, software licences</td></tr>
+              <tr><td><strong>Training</strong></td><td>Onboarding maintainers to unfamiliar codebases, languages, or domain knowledge lost when original team leaves</td></tr>
+              <tr><td><strong>Time and resources</strong></td><td>Effort to identify the problem, design the fix, implement, test, and deploy the solution</td></tr>
+              <tr><td><strong>Communication and coordination</strong></td><td>Meetings with users, management, and other teams; status reporting; change approval cycles</td></tr>
+              <tr><td><strong>Testing and validation</strong></td><td>Retesting the fix, regression testing unaffected areas, acceptance testing with users</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Maintenance effort activities include: problem analysis, feasibility study, design modification, coding, unit testing, integration testing, system testing, acceptance testing, and documentation update.</li>
+          <li>Indirect costs include production downtime during failed deployments, customer support for maintenance incidents, and opportunity cost of staff not available for new product development.</li>
+        </ul>
+
+        <h3>Maintenance effort formula (Boehm)</h3>
+        <ul>
+          <li>Boehm's model relates total maintenance effort to productive baseline effort, system complexity, and team familiarity:</li>
+        </ul>
+        <p><strong>M = P + K<sub>e</sub>(C − D)</strong></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Symbol</th><th>Meaning</th><th>Effect on M</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>M</strong></td><td>Total maintenance effort (person-months or person-hours)</td><td>Output — what we estimate</td></tr>
+              <tr><td><strong>P</strong></td><td>Productive effort — baseline effort for a well-designed, well-documented system with experienced team</td><td>Fixed baseline; lower P = better initial quality</td></tr>
+              <tr><td><strong>K<sub>e</sub></strong></td><td>Empirical constant reflecting organisation and environment (typically 4–8)</td><td>Higher Ke = steeper penalty for complexity</td></tr>
+              <tr><td><strong>C</strong></td><td>Complexity measure — increases with poor design, high coupling, lack of documentation, large codebase</td><td>Higher C → higher M</td></tr>
+              <tr><td><strong>D</strong></td><td>Familiarity measure — increases as maintainers gain knowledge of the system over time</td><td>Higher D → lower M</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>When C &gt; D, the term K<sub>e</sub>(C − D) adds penalty effort — legacy systems with poor docs have high C and low D, maximising this penalty.</li>
+          <li>As maintainers gain experience over months/years, D increases and M decreases for similar types of changes.</li>
+          <li>Preventive maintenance (refactoring, documentation) reduces C — directly lowering future M.</li>
+          <li>Staff turnover resets D — each new maintainer starts with low familiarity, increasing cost.</li>
+        </ul>
+
+        <h3>Worked examples — Boehm formula</h3>
+        <div class="terminal" aria-label="Pseudocode — Boehm maintenance effort examples">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">boehm_effort_examples.pseudo</span>
+          </div>
+          <pre><code>// Formula: M = P + Ke * (C - D)
+
+// Example 1 — Well-maintained system, experienced team
+P = 40,  Ke = 5,  C = 4,  D = 3
+M = 40 + 5 * (4 - 3) = 40 + 5 = 45 person-months
+
+// Example 2 — Legacy system, poor docs, new team (EXAM FAVOURITE)
+P = 50,  Ke = 6,  C = 8,  D = 3
+M = 50 + 6 * (8 - 3) = 50 + 30 = 80 person-months
+
+// Example 3 — Same legacy system after 2 years (team gained familiarity)
+P = 50,  Ke = 6,  C = 8,  D = 6
+M = 50 + 6 * (8 - 6) = 50 + 12 = 62 person-months
+
+// Example 4 — After preventive refactoring (complexity reduced)
+P = 50,  Ke = 6,  C = 5,  D = 6
+M = 50 + 6 * (5 - 6) = 50 + (-6) = 44 person-months
+// C &lt; D → penalty term is negative → M &lt; P (ideal state)</code></pre>
+        </div>
+
+        <h3>COCOMO maintenance effort estimation</h3>
+        <ul>
+          <li>COCOMO provides a top-down estimate of <strong>annual</strong> maintenance effort based on original development size:</li>
+          <li><strong>AME = ACT × SDE</strong></li>
+          <li><strong>AME</strong> = Annual Maintenance Effort (person-months per year)</li>
+          <li><strong>ACT (Annual Change Traffic):</strong> The fraction of the software modified per year — e.g. ACT = 0.15 means 15% of the codebase changes annually.</li>
+          <li><strong>SDE (Software Development Effort):</strong> The original total effort in person-months to develop the software — obtained from Basic COCOMO: E = a × (KLOC)<sup>b</sup>.</li>
+          <li>See <a href="../03-software-project-management/03-06-cocomo.html#sec-3-6">§3.6 COCOMO Model</a> for development effort formulas and project type constants.</li>
+        </ul>
+
+        <h3>Full COCOMO maintenance example</h3>
+        <div class="terminal" aria-label="Pseudocode — COCOMO maintenance effort full calculation">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">cocomo_maintenance_calculation.pseudo</span>
+          </div>
+          <pre><code>// Step 1 — Estimate original development effort (Basic COCOMO, Organic)
+KLOC = 100
+a = 2.4,  b = 1.05
+SDE = a * (KLOC ^ b)
+// SDE = 2.4 * (100 ^ 1.05) = 2.4 * 125.9 ≈ 302 person-months
+
+// Step 2 — Annual Maintenance Effort
+ACT = 0.15    // 15% of codebase changed per year
+AME = ACT * SDE
+// AME = 0.15 * 302 = 45.3 person-months per year
+
+// Step 3 — Multi-year maintenance projection
+maintenance_years = 10
+total_maintenance = AME * maintenance_years
+// total = 45.3 * 10 = 453 person-months over 10 years
+
+// Step 4 — Compare to development
+// Development: 302 PM (one-time)
+// 10-year maintenance: 453 PM
+// Maintenance exceeds development cost in ~6.7 years:
+// breakeven_years = SDE / AME = 302 / 45.3 ≈ 6.7 years
+
+// Step 5 — Boehm check on a specific change cycle
+P = 45,  Ke = 6,  C = 7,  D = 4
+M = P + Ke * (C - D) = 45 + 6 * 3 = 63 person-months for this cycle</code></pre>
+        </div>
+
+        <h3>Software maintenance cost factors (10 factors)</h3>
+        <p>Factors that distinguish maintenance from development and lead to higher maintenance cost:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Factor</th><th>Effect on cost</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Complexity of system</td><td>More complex → more analysis, testing, and ripple effects per change</td></tr>
+              <tr><td>2</td><td>Size of system</td><td>Larger codebase → more modules to understand and retest</td></tr>
+              <tr><td>3</td><td>Number of users</td><td>More users → more change requests, higher impact of failures, more testing scenarios</td></tr>
+              <tr><td>4</td><td>Change rate</td><td>More frequent changes → more cumulative complexity and regression risk</td></tr>
+              <tr><td>5</td><td>Availability of skilled personnel</td><td>Scarce skills → higher labour cost and longer diagnosis time</td></tr>
+              <tr><td>6</td><td>Tools and technologies</td><td>Good SCM, automated testing, CI/CD reduce cost; obsolete tools increase it</td></tr>
+              <tr><td>7</td><td>Maintenance plan</td><td>Clear plan with SLAs and priorities enables efficient resource use</td></tr>
+              <tr><td>8</td><td>Age of system</td><td>Older systems use outdated technology; harder to find skilled maintainers</td></tr>
+              <tr><td>9</td><td>Type of maintenance</td><td>Corrective typically less expensive per change than perfective (broader scope)</td></tr>
+              <tr><td>10</td><td>Location / labour cost</td><td>Geographic location affects labour rates for maintenance teams</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Non-technical factors</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Factor</th><th>How it increases maintenance cost</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Application domain</strong></td><td>Safety-critical domains (healthcare, aviation, finance) require rigorous change processes, formal testing, and audit trails — each change takes longer</td></tr>
+              <tr><td><strong>Staff stability</strong></td><td>High turnover reduces familiarity (D in Boehm formula) — each new maintainer spends months learning the system before becoming productive</td></tr>
+              <tr><td><strong>Program lifetime</strong></td><td>Longer-lived systems accumulate more changes, more complexity, and more undocumented modifications over decades</td></tr>
+              <tr><td><strong>Dependence on external environment</strong></td><td>Systems tightly coupled to external APIs, platforms, or regulations require frequent adaptive maintenance</td></tr>
+              <tr><td><strong>Hardware stability</strong></td><td>Frequent hardware platform changes force adaptive maintenance — e.g. migrating when server vendor ends support</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Technical factors</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Factor</th><th>How it affects maintenance cost</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Module independence</strong></td><td>Loosely coupled modules (high cohesion, low coupling) can be changed in isolation — see <a href="../05-software-design/05-10-coupling-cohesion.html#sec-5-10">§5.10 Coupling and Cohesion</a></td></tr>
+              <tr><td><strong>Programming language</strong></td><td>Mainstream, well-supported languages reduce cost; obsolete languages (COBOL, Fortran) require scarce specialists</td></tr>
+              <tr><td><strong>Programming style</strong></td><td>Consistent, readable code with meaningful names reduces diagnosis time; spaghetti code increases C</td></tr>
+              <tr><td><strong>Program validation and testing</strong></td><td>Comprehensive automated test suites catch regressions quickly — without tests, every change requires manual re-verification</td></tr>
+              <tr><td><strong>Documentation</strong></td><td>Accurate design docs, API references, and change logs reduce time to understand the system — poor docs inflate C</td></tr>
+              <tr><td><strong>Configuration management</strong></td><td>SCM tools, baselines, and change tracking prevent conflicting modifications — see <a href="../09-processes-configuration-management/09-01-scm-overview.html#sec-9-1">Topic 9</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Development vs maintenance — key differences driving cost</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Development</th><th>Maintenance</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Duration</td><td>1–2 years typically</td><td>15–20+ years</td></tr>
+              <tr><td>Team knowledge</td><td>Team built the system — high D</td><td>Often different team — low D initially</td></tr>
+              <tr><td>Documentation</td><td>Created alongside code</td><td>Often outdated or missing</td></tr>
+              <tr><td>Change scope</td><td>Greenfield — no existing users</td><td>Every change risks breaking production users</td></tr>
+              <tr><td>Testing</td><td>Test new functionality</td><td>Retest fix + regression test entire system</td></tr>
+              <tr><td>Primary activity</td><td>Build from requirements</td><td>~60% perfective enhancements, not bug fixes</td></tr>
+              <tr><td>Cost share</td><td>~35% of lifecycle</td><td>~65%+ of lifecycle</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Risks and intangible costs of postponing maintenance</h3>
+        <ul>
+          <li>Organisations sometimes try to control maintenance cost by <strong>postponing</strong> maintenance — this creates intangible costs that exceed the savings.</li>
+          <li><strong>Customer dissatisfaction:</strong> Unresolved bugs and unfulfilled enhancement requests erode trust — users may switch to competitors or escalate contractually.</li>
+          <li><strong>Hidden errors:</strong> Deferred fixes allow latent defects to compound — a minor bug today may cause a critical production failure months later.</li>
+          <li><strong>Reduced software quality:</strong> Changes made under pressure without proper testing introduce new hidden errors — quality degrades with each deferred cycle.</li>
+          <li><strong>Technical debt:</strong> Deferred preventive and perfective work accumulates — eventually the system becomes unmaintainable and requires expensive re-engineering or replacement.</li>
+          <li><strong>Security exposure:</strong> Postponed adaptive maintenance (OS upgrades, library patches) leaves known vulnerabilities unpatched.</li>
+          <li><strong>Staff morale:</strong> Maintainers working on fragile, undocumented systems with constant firefighting experience higher burnout and turnover — further reducing D.</li>
+        </ul>
+
+        <h3>Ways to reduce maintenance cost</h3>
+        <ul>
+          <li><strong>Design for maintainability during development:</strong> Modular architecture, coding standards, comprehensive documentation, and automated tests reduce C from the start — cheapest time to invest in quality is during initial development.</li>
+          <li><strong>Proactive maintenance strategy:</strong> Schedule preventive refactoring and documentation updates rather than waiting for failures — reduces emergency corrective spikes.</li>
+          <li><strong>Automation:</strong> Automated regression test suites, CI/CD pipelines, and deployment scripts reduce manual effort per change.</li>
+          <li><strong>Agile, DevOps, and CI/CD:</strong> Short release cycles with continuous integration catch defects early when they are cheap to fix.</li>
+          <li><strong>SCM tools:</strong> Version control, baselines, and change tracking prevent conflicting modifications — see <a href="../09-processes-configuration-management/09-06-software-version-control.html#sec-9-6">§9.6 Version Control</a>.</li>
+          <li><strong>Clear maintenance plan:</strong> Define roles, SLAs, escalation procedures, and budget before delivery — not after the first production incident.</li>
+          <li><strong>Retain domain knowledge:</strong> Minimise staff turnover; document decisions and changes continuously to maintain high D.</li>
+          <li><strong>Re-engineering:</strong> Restructuring legacy systems to reduce complexity can lower long-term cost — see <a href="10-06-software-re-engineering.html#sec-10-6">§10.6 Re-engineering</a>.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Cost of Maintenance</div>
+          <p><strong>Q:</strong> Why does maintenance cost exceed development cost? Explain M = P + Ke(C−D) with a numerical example. Calculate AME using COCOMO. List technical and non-technical cost factors. State risks of postponing maintenance.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>&gt;65% lifecycle cost in maintenance; build 1–2 years, maintain 15–20 years; ~60% perfective effort.</li>
+            <li>Cost components: labor (largest), tools, training, testing, coordination.</li>
+            <li>M = P + Ke(C−D): M=total, P=productive baseline, Ke=4–8, C=complexity, D=familiarity.</li>
+            <li>Legacy example: P=50, Ke=6, C=8, D=3 → M=80 PM; after familiarity D=6 → M=62 PM.</li>
+            <li>COCOMO: AME = ACT × SDE; e.g. SDE=302 PM, ACT=0.15 → AME=45.3 PM/year; breakeven ~6.7 years.</li>
+            <li>10 cost factors: complexity, size, users, change rate, personnel, tools, plan, age, type, location.</li>
+            <li>Non-technical: domain, staff stability, lifetime, external dependence, hardware stability.</li>
+            <li>Technical: module independence, language, style, testing, documentation, SCM.</li>
+            <li>Corrective cheaper per change than perfective; preventive reduces C.</li>
+            <li>Postponing risks: customer dissatisfaction, hidden errors, quality decline, technical debt, security exposure.</li>
+            <li>Reduce cost: design for maintainability, proactive strategy, automation, Agile/DevOps, SCM, re-engineering.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="10-04-maintenance-categories.html">&larr; 10.4 Maintenance Categories</a>
+        <a class="btn-back chapter-nav-next" href="10-06-software-re-engineering.html">10.6 Software Re-engineering &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

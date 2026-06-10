@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>11.1 Software Reliability:</strong> Probability of failure-free operation for fixed time in fixed environment; human-design dependent; no physical wear; lifecycle: many initial faults → testing → useful life → upgrades add new faults.</li>
+          <li><strong>Reliability attributes:</strong> ROCOF (failure frequency), MTTF (avg time between failures — execution time only), MTTR (repair time), MTBF = MTTF + MTTR, POFOD (failure on demand), availability, fault tolerance, recoverability, redundancy.</li>
+          <li><strong>Hardware vs software:</strong> Hardware = bathtub curve, wear, time-dependent; Software = no bathtub, no wear, redundancy can improve reliability, no preventive maintenance equivalent.</li>
+          <li><strong>High reliability strategies:</strong> Error avoidance (experienced devs, tools) → error detection (testing) → error removal (debugging) → fault tolerance (NVP, RB, rollback).</li>
+          <li><strong>11.2 Fault Tolerance:</strong> Continue correct service despite faults; fault-removal (forward/backward recovery) vs fault-masking (NVP voting); design diversity.</li>
+          <li><strong>Basic techniques:</strong> Redundancy, checkpointing, error detection/correction, load balancing, isolation, replication, dynamic reconfiguration.</li>
+          <li><strong>Recovery Block (RB):</strong> Sequential — primary P, acceptance test T, alternates Q1..Qn; `Ensure T By P Else by Q1...`; rollback state on failure; better for non-real-time.</li>
+          <li><strong>N-Version Programming (NVP):</strong> N independent versions run in parallel; voter selects result; no re-execution delay; controversial (common-mode failures).</li>
+          <li><strong>Checkpoint/Rollback:</strong> Save system state periodically; restore on failure — backward error recovery.</li>
+          <li><strong>11.3 SRGMs:</strong> Mathematical models predicting reliability improvement during testing; black-box; guide testing and resource allocation; Type-I (failure-count) vs Type-II (time-between-failures) data.</li>
+          <li><strong>11.4 Jelinski-Moranda (1972):</strong> Binomial type; N initial faults; perfect debugging; λ(ti) = φ[N-(i-1)]; R(ti) = e^(-φ[N-(i-1)]ti); tends to be optimistic.</li>
+          <li><strong>11.5 Schick-Wolverton (1978):</strong> JM modification; failure rate increases with time since last failure: λ(ti) = φ[N-(i-1)]ti; R(ti) = e^(-φ[N-(i-1)]ti²/2).</li>
+          <li><strong>11.6 Goel-Okumoto (1979):</strong> Exponential NHPP; m(t) = a(1-e^(-bt)); a = total faults, b = detection rate; perfect debugging; widely used.</li>
+          <li><strong>11.7 PNZ Model:</strong> NHPP with imperfect debugging; S-shaped detection rate; faults introduced during debugging (rate α); a(t)=a(1+αt); evaluates fault tolerance benefit.</li>
+          <li><strong>11.8 Mills Error Seeding:</strong> Inject n₁ known errors; find k seeded in r removed; estimate N̂ = [n₁(r-k)/k - 1]+1; alternative: two programmers N̂ = n₁r/k; hypergeometric distribution.</li>
+          <li><strong>Model comparison:</strong> JM/SW = time-between-failure; GO/PNZ = NHPP mean value; Mills = fault count estimation (not growth curve).</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="11-08-mills-error-seeding-model.html">&larr; 11.8 Mills' Error Seeding Model</a>
+        <a class="btn-back chapter-nav-next" href="../12-advanced-issues-reusability-patterns/index.html">Topic 12 &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

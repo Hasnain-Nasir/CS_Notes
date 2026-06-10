@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 11 — 11.8 Mills' Error Seeding Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>11.8 Mills' Error Seeding Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-11-8">
+
+        <p>
+          <strong>Mills' Error Seeding Model</strong> (1980s) is a technique for estimating the total
+          number of inherent faults in software by injecting a known number of artificial errors and
+          measuring how many are detected during testing. It is covered in the SRGM overview at
+          <a href="11-03-reliability-growth-models.html#sec-11-3">§11.3 Reliability Growth Models</a>
+          as a fault-content estimation approach rather than a time-based growth model.
+        </p>
+
+        <h3>Principle</h3>
+        <ul>
+          <li>The tester injects a known number of seeded (artificial) errors into the program alongside the inherent (natural) errors already present.</li>
+          <li>Testing is then performed without distinguishing seeded from inherent errors — the tester finds some of both types.</li>
+          <li>The ratio of detected seeded errors to total seeded errors is assumed to equal the ratio of detected inherent errors to total inherent errors — this is the capture-recapture principle.</li>
+          <li>From this ratio, the total number of inherent faults can be estimated.</li>
+        </ul>
+
+        <h3>Variables</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Symbol</th><th>Meaning</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>S</td><td>Number of seeded (known) errors injected into the program</td></tr>
+              <tr><td>s</td><td>Number of seeded errors detected during testing</td></tr>
+              <tr><td>N₀</td><td>Estimated number of inherent (natural) errors in the program</td></tr>
+              <tr><td>n₁</td><td>Total number of errors detected during testing (seeded + inherent)</td></tr>
+              <tr><td>k</td><td>Number of inherent errors detected during testing (n₁ − s)</td></tr>
+              <tr><td>r</td><td>Total number of errors in the combined population (S + N₀)</td></tr>
+              <tr><td>N̂</td><td>Estimated total inherent error count (rounded up)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Hypergeometric distribution approach</h3>
+        <p>
+          The error seeding problem is modelled using the <strong>hypergeometric distribution</strong>,
+          which describes the probability of drawing a certain number of successes from a finite
+          population without replacement.
+        </p>
+        <ul>
+          <li>Population size: r = S + N₀ (seeded + inherent errors).</li>
+          <li>Sample size: n₁ (total errors detected).</li>
+          <li>Successes in population: S (seeded errors).</li>
+          <li>Successes in sample: s (seeded errors detected).</li>
+        </ul>
+        <p>The estimate for inherent errors is:</p>
+        <p>N₀ = n₁(r − k) / k − 1</p>
+        <p>The estimated total inherent error count (rounded up to the next integer) is:</p>
+        <p>N̂ = ⌈N₀⌉ + 1</p>
+        <ul>
+          <li>Here r = S + N₀ and k = n₁ − s (inherent errors found).</li>
+          <li>The formula assumes seeded and inherent errors have equal probability of being detected — a critical assumption.</li>
+        </ul>
+
+        <h3>Alternative: two-programmer method</h3>
+        <p>A simpler estimation formula used in the two-programmer variant is:</p>
+        <p>N̂ = n₁r / k</p>
+        <ul>
+          <li>In this variant, one programmer seeds S known errors, and a second programmer (tester) finds n₁ total errors without knowing which are seeded.</li>
+          <li>r = S + N₀ as before, and k = n₁ − s.</li>
+          <li>This method is easier to apply but makes the same equal-detection-probability assumption.</li>
+        </ul>
+
+        <h3>Steps of error seeding</h3>
+        <ol>
+          <li><strong>Introduce errors:</strong> A known number S of artificial errors is seeded into the program by an experienced programmer who records their locations.</li>
+          <li><strong>Test:</strong> The program is tested by an independent tester who does not know which errors are seeded and which are inherent.</li>
+          <li><strong>Measure:</strong> The total errors found n₁ and the seeded errors found s are counted; inherent errors found k = n₁ − s.</li>
+          <li><strong>Estimate and improve:</strong> The total inherent error count N̂ is computed; if N̂ is too high, more testing or debugging is performed and the process may be repeated.</li>
+        </ol>
+
+        <h3>Error seeding estimation — pseudocode</h3>
+        <div class="terminal" aria-label="Pseudocode — Mills error seeding estimation">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">error_seeding.pseudo</span>
+          </div>
+          <pre><code>// Step 1: Seed known errors into the program
+S = 20                    // number of seeded errors injected
+seed_locations = INJECT_ERRORS(program, S)
+
+// Step 2: Independent tester runs tests (blind to seed locations)
+test_results = RUN_TESTS(program)
+n1 = COUNT(test_results.errors_found)   // total errors found
+
+// Step 3: Identify how many seeded errors were detected
+s = COUNT(test_results.errors_found WHERE error IN seed_locations)
+k = n1 - s                // inherent errors detected
+
+// Step 4: Estimate total inherent errors (hypergeometric method)
+// N0 = n1 * (r - k) / k - 1,  where r = S + N0
+// Solve iteratively or use two-programmer shortcut:
+N_hat = CEIL(n1 * (S + N0_estimate) / k)
+// Simplified two-programmer formula:
+N_hat_simple = n1 * (S + N0_estimate) / k
+
+// Step 5: Decision
+IF N_hat > acceptable_threshold THEN
+  RECOMMEND more testing or debugging
+ELSE
+  RECOMMEND sufficient fault removal for release
+END IF</code></pre>
+        </div>
+
+        <h3>Drawbacks and limitations</h3>
+        <ul>
+          <li><strong>Cost:</strong> Seeding errors requires an experienced programmer's time to inject realistic faults, and a separate tester must be available — doubling personnel requirements.</li>
+          <li><strong>Equal detection assumption:</strong> Seeded errors must be equally likely to be detected as inherent errors — if seeded errors are too obvious or too subtle compared to real faults, the estimate is biased.</li>
+          <li><strong>Representativeness:</strong> Artificially seeded errors may not match the type, severity, or location distribution of real inherent errors.</li>
+          <li><strong>Tester awareness:</strong> If the tester suspects seeding is in use, they may change their testing strategy, invalidating the statistical assumptions.</li>
+          <li><strong>Small sample bias:</strong> When few errors are detected (small k), the estimate N̂ becomes highly unstable and unreliable.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Mills' Error Seeding Model</div>
+          <p><strong>Q:</strong> Explain Mills' error seeding technique. Write the estimation formulas. List the steps and drawbacks.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Inject S known errors; test blindly; use capture-recapture to estimate inherent fault count.</li>
+            <li>Hypergeometric: N₀ = n₁(r − k)/k − 1; N̂ = ⌈N₀⌉ + 1.</li>
+            <li>Two-programmer method: N̂ = n₁r/k.</li>
+            <li>Steps: introduce errors → test → measure (n₁, s, k) → estimate and improve.</li>
+            <li>Drawbacks: cost (two personnel); seeded errors must match detection likelihood of inherent errors; representativeness; small sample bias.</li>
+            <li>Variables: S (seeded), s (seeded found), n₁ (total found), k = n₁ − s (inherent found), N̂ (estimated inherent total).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="11-07-pnz-model.html">&larr; 11.7 PNZ Model</a>
+        <a class="btn-back chapter-nav-next" href="11-09-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

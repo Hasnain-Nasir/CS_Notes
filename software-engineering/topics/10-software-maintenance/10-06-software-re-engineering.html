@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 10 — 10.6 Software Re-engineering</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>10.6 Software Re-engineering</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 10</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-10-6">
+
+        <p>
+          <strong>Software re-engineering</strong> is a structured approach to improving legacy systems by
+          examining and altering them to reconstitute the system in a new form with better maintainability.
+          It is distinct from new development and from simple reuse — see
+          <a href="../12-advanced-issues-reusability-patterns/12-01-reusability.html#sec-12-1">§12.1 Reusability</a>
+          for reuse concepts and <a href="10-07-reverse-engineering.html#sec-10-7">§10.7 Reverse Engineering</a>
+          for the reverse engineering step within re-engineering.
+        </p>
+
+        <h3>Definition and scope</h3>
+        <ul>
+          <li>Re-engineering involves examining and altering a system to reconstitute it in a new form while preserving (or deliberately improving) external functionality.</li>
+          <li>The primary goal is to improve <strong>maintainability</strong> — reducing complexity, improving structure, and updating technology without rewriting from scratch.</li>
+          <li>Re-engineering is <strong>not the same as new development</strong> — it reuses existing artifacts (code, data, business logic) rather than starting from a blank requirements document.</li>
+          <li>Re-engineering is also distinct from <strong>reuse</strong>, which incorporates existing components into new systems rather than transforming an existing system in place.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-reeng-process-caption">
+          <img src="../../../assets/images/se-topic-10/re-engineering-process.webp"
+               alt="Software re-engineering process — planning through deployment to improve legacy system maintainability"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-reeng-process-caption">Software re-engineering process — a structured approach to transforming legacy systems while reusing existing artifacts.</figcaption>
+        </figure>
+
+        <h3>Objectives of re-engineering</h3>
+        <ul>
+          <li><strong>Cost-effective evolution:</strong> Extend the useful life of a legacy system at lower cost than full replacement.</li>
+          <li><strong>Improve quality and maintainability:</strong> Restructure code, update documentation, and modernise architecture to reduce future maintenance effort.</li>
+          <li><strong>Support new platforms:</strong> Migrate the system to modern hardware, operating systems, or cloud environments.</li>
+          <li><strong>Add features:</strong> Incorporate new functionality into a restructured codebase that can accommodate change more easily.</li>
+          <li>Re-engineering addresses Lehman's law of increasing complexity by actively reducing structural complexity — see <a href="10-02-software-as-evolutionary-entity.html#sec-10-2">§10.2</a>.</li>
+        </ul>
+
+        <h3>Re-engineering process phases</h3>
+        <ol>
+          <li><strong>Planning:</strong> Assess the legacy system, define re-engineering scope, estimate cost and schedule, and obtain stakeholder approval.</li>
+          <li><strong>Analysis:</strong> Understand the current system through reverse engineering, inventory analysis, and document reconstruction.</li>
+          <li><strong>Design:</strong> Define the target architecture and design the transformed system structure.</li>
+          <li><strong>Implementation:</strong> Reconstruct code and data according to the new design using forward engineering techniques.</li>
+          <li><strong>Testing:</strong> Verify that the re-engineered system preserves required functionality and meets quality standards.</li>
+          <li><strong>Deployment:</strong> Replace or parallel-run the legacy system with the re-engineered version in the production environment.</li>
+        </ol>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-reeng-steps-caption">
+          <img src="../../../assets/images/se-topic-10/re-engineering-steps.jpg"
+               alt="Six steps of software re-engineering — inventory analysis through forward engineering"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-reeng-steps-caption">Six steps of software re-engineering — from inventory analysis through forward engineering.</figcaption>
+        </figure>
+
+        <h3>Six steps of re-engineering</h3>
+        <ol>
+          <li><strong>Inventory Analysis:</strong> Catalogue all software assets — modules, data stores, interfaces, and documentation — to determine re-engineering candidates and scope.</li>
+          <li><strong>Document Reconstruction:</strong> Recreate missing or outdated design and requirements documentation from existing code and stakeholder knowledge.</li>
+          <li><strong>Reverse Engineering:</strong> Analyse existing code to recover design models, data structures, and control flow — see <a href="10-07-reverse-engineering.html#sec-10-7">§10.7</a>.</li>
+          <li><strong>Code Reconstruction:</strong> Restructure or rewrite code modules to improve readability, modularity, and adherence to modern standards without changing external behaviour.</li>
+          <li><strong>Data Reconstruction:</strong> Restructure databases and data files — normalise schemas, eliminate redundancy, migrate to new DBMS platforms.</li>
+          <li><strong>Forward Engineering:</strong> Apply modern design and implementation techniques to produce the transformed system from recovered specifications — see <a href="10-07-reverse-engineering.html#sec-10-7">§10.7 Forward vs Reverse Engineering</a>.</li>
+        </ol>
+
+        <h3>Re-engineering vs reuse vs new development</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Approach</th><th>Starting point</th><th>Outcome</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Re-engineering</strong></td>
+                <td>Existing legacy system</td>
+                <td>Same system transformed in place — improved structure, same business function</td>
+              </tr>
+              <tr>
+                <td><strong>Reuse</strong></td>
+                <td>Existing components or COTS products</td>
+                <td>New system built by assembling reusable parts — see <a href="../12-advanced-issues-reusability-patterns/12-01-reusability.html#sec-12-1">§12.1</a></td>
+              </tr>
+              <tr>
+                <td><strong>New development</strong></td>
+                <td>Fresh requirements specification</td>
+                <td>Entirely new system; legacy system retired</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Re-engineering cost factors</h3>
+        <ul>
+          <li><strong>Quality of existing software:</strong> Well-structured legacy code is cheaper to re-engineer than spaghetti code with no documentation.</li>
+          <li><strong>Tool support:</strong> Automated reverse engineering and refactoring tools reduce manual analysis effort.</li>
+          <li><strong>Extent of data conversion:</strong> Migrating large, complex databases to new schemas or platforms adds significant cost.</li>
+          <li><strong>Availability of expert staff:</strong> Maintainers who understand the legacy domain and technology reduce analysis time and error risk.</li>
+          <li>Re-engineering should be undertaken only when cost-benefit analysis shows it is cheaper than continued maintenance or full replacement.</li>
+        </ul>
+
+        <h3>Re-engineering steps</h3>
+        <div class="terminal" aria-label="Pseudocode — re-engineering steps">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">reengineering_steps.pseudo</span>
+          </div>
+          <pre><code>// Six-step re-engineering process
+
+STEP 1: INVENTORY_ANALYSIS
+  catalogue all modules, data stores, interfaces, documentation
+  identify candidates for re-engineering vs retirement
+
+STEP 2: DOCUMENT_RECONSTRUCTION
+  recreate missing design/requirements docs from code + interviews
+
+STEP 3: REVERSE_ENGINEERING
+  analyse code → recover design models, data flow, control flow
+  // see §10.7 reverse_engineering_steps.pseudo
+
+STEP 4: CODE_RECONSTRUCTION
+  restructure modules; apply modern coding standards
+  preserve external behaviour (regression tests required)
+
+STEP 5: DATA_RECONSTRUCTION
+  normalise schemas; migrate to target DBMS; validate data integrity
+
+STEP 6: FORWARD_ENGINEERING
+  implement target architecture from recovered specifications
+  deploy re-engineered system; parallel-run with legacy until validated</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Re-engineering</div>
+          <p><strong>Q:</strong> Define software re-engineering. How does it differ from new development and reuse? List the six re-engineering steps and process phases. What factors affect re-engineering cost?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Definition: examine and alter system to reconstitute in new form; improve maintainability; reuse existing artifacts.</li>
+            <li>Not new development (reuses artifacts); not reuse (transforms existing system in place, not assemble new from parts).</li>
+            <li>Objectives: cost-effective evolution, improve quality/maintainability, new platforms, add features.</li>
+            <li>Process phases: Planning → Analysis → Design → Implementation → Testing → Deployment.</li>
+            <li>Six steps: Inventory Analysis → Document Reconstruction → Reverse Engineering → Code Reconstruction → Data Reconstruction → Forward Engineering.</li>
+            <li>Cost factors: software quality, tool support, data conversion extent, expert staff availability.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="10-05-cost-of-maintenance.html">&larr; 10.5 Cost of Maintenance</a>
+        <a class="btn-back chapter-nav-next" href="10-07-reverse-engineering.html">10.7 Reverse Engineering &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>
