@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 8 — 8.3 Verification &amp; Validation</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>8.3 Verification &amp; Validation (V&amp;V)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 8</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-8-3">
+
+        <p>
+          <strong>Verification and Validation (V&amp;V)</strong> are the processes of investigating whether a
+          software system satisfies specifications and standards and fulfils its required purpose. Both play a
+          central role in developing high-quality software — verification examines whether the product is built
+          <em>right</em> according to requirements, while validation examines whether the <em>right</em> product
+          is built to meet user needs. V&amp;V activities are distributed across the entire SDLC, not confined to
+          a single testing phase at the end.
+        </p>
+        <p>
+          The QA overview in <a href="08-01-quality-assurance-overview.html#sec-8-1">§8.1</a> links verification
+          to QA and validation to QC; SQA in <a href="08-02-software-quality-assurance.html#sec-8-2">§8.2</a>
+          oversees both as part of the overall quality system.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-vv-caption">
+          <img src="../../../assets/images/se-topic-08/verification-vs-validation.webp"
+               alt="Verification versus Validation — building the product right vs building the right product"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-vv-caption">Verification checks conformance to specifications; validation checks fitness for user needs.</figcaption>
+        </figure>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-vv-sequence-caption">
+          <img src="../../../assets/images/se-topic-08/verification-then-validation.png"
+               alt="Verification followed by Validation — sequential relationship in the V and V process"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-vv-sequence-caption">Verification is followed by validation — first confirm the artefact meets its specification, then confirm the product meets user needs.</figcaption>
+        </figure>
+
+        <h3>What is Verification?</h3>
+        <ul>
+          <li>Verification is the process of checking that software achieves its goal without defects and that the product being developed is <strong>correct according to its specifications</strong>.</li>
+          <li>It answers the question: <strong>"Are we building the product <em>right</em>?"</strong></li>
+          <li>Verification confirms that the developed product fulfils the documented requirements and conforms to design standards — it is concerned with <em>conformance</em>, not user satisfaction alone.</li>
+          <li>Verification is also called <strong>static testing</strong> because it does not require executing the program; work products are examined directly.</li>
+          <li>Static testing checks whether development is proceeding correctly and whether the software being produced matches what was planned in the SRS and design documents.</li>
+        </ul>
+
+        <h3>Static testing — verification activities</h3>
+        <ul>
+          <li><strong>Inspections:</strong> A careful, structured examination of the software's design or code to spot potential problems, inconsistencies, or areas for improvement before they propagate to later phases.</li>
+          <li><strong>Reviews:</strong> A team effort where stakeholders assess requirements, design, or code together to confirm that everything is on track and meets specified objectives.</li>
+          <li><strong>Walkthroughs:</strong> The developer or designer gives an informal presentation of their work, explaining how it meets project requirements — a quick way to align the team and catch misunderstandings early.</li>
+          <li><strong>Desk-checking:</strong> A developer manually reviews their own code or design line by line to catch mistakes before submitting the work product for formal review or compilation.</li>
+          <li><strong>Static analysis:</strong> Automated tools scan source code for syntax errors, style violations, security patterns, and potential defects without running the program.</li>
+        </ul>
+
+        <h3>What is Validation?</h3>
+        <ul>
+          <li>Validation is the process of checking whether the software product is up to the mark — whether it meets high-level requirements and actually solves the user's problem.</li>
+          <li>It answers the question: <strong>"Are we building the <em>right</em> product?"</strong></li>
+          <li>Validation compares the <strong>actual product</strong> against <strong>expected behaviour</strong> in real or simulated use conditions, not just against internal documents.</li>
+          <li>Validation is also called <strong>dynamic testing</strong> because it requires executing the software and observing its behaviour.</li>
+          <li>Dynamic testing examines whether the product performs correctly in practice and whether it satisfies the client's business needs, not merely whether it matches a written specification.</li>
+        </ul>
+
+        <h3>Dynamic testing — validation activities</h3>
+        <ul>
+          <li><strong>Black box testing:</strong> The software is tested from the user's perspective without knowledge of internal code — inputs are applied and outputs are checked against expected behaviour (e.g. clicking buttons, submitting forms).</li>
+          <li><strong>White box testing:</strong> Testing examines the internal logic, control flow, and structure of the code to confirm that paths, conditions, and data handling work correctly behind the scenes.</li>
+          <li><strong>Unit testing:</strong> Individual functions or modules are tested in isolation to confirm each piece works correctly on its own before being combined with other components.</li>
+          <li><strong>Integration testing:</strong> After unit testing, combined modules are tested together to confirm interfaces, data flow, and interactions work as intended.</li>
+          <li><strong>System testing:</strong> The complete integrated system is tested against the overall requirements to confirm end-to-end functionality.</li>
+          <li><strong>User acceptance testing (UAT):</strong> The client or end users test the finished product to confirm it meets their needs and expectations before accepting delivery.</li>
+          <li><strong>Non-functional testing:</strong> Performance, load, security, and usability tests validate that the product behaves acceptably under real-world conditions beyond functional correctness.</li>
+        </ul>
+
+        <h3>Example scenario — e-commerce application</h3>
+        <p>The following example shows how verification and validation apply to the same project at different stages:</p>
+        <ul>
+          <li><strong>Verification (during development):</strong> The team reviews the system design and code for key features — user registration, shopping cart, and payment processing. Through inspections and walkthroughs, they confirm each part is being built according to the initial plan and SRS specifications before coding proceeds further.</li>
+          <li><strong>Validation (after implementation):</strong> Once development is complete, the team runs unit tests to confirm individual features work — for example, that the shopping cart calculates prices correctly. Integration tests confirm all features work together. System testing checks the whole application. Finally, the client performs acceptance testing to confirm the software meets their business needs.</li>
+          <li>Verification catches design and specification errors early; validation confirms the running product actually delivers value to the user.</li>
+        </ul>
+
+        <h3>Verification vs Validation — comparison</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Verification</th><th>Validation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Definition</strong></td><td>The set of activities that ensure software correctly implements the specified function</td><td>The set of activities that ensure the built software is traceable to customer requirements and user needs</td></tr>
+              <tr><td><strong>Question</strong></td><td>Are we building the product right?</td><td>Are we building the right product?</td></tr>
+              <tr><td><strong>Focus</strong></td><td>Checking documents, designs, code, and programs for conformance</td><td>Testing and validating the actual running product</td></tr>
+              <tr><td><strong>Type of testing</strong></td><td>Static testing — no code execution required</td><td>Dynamic testing — code must be executed</td></tr>
+              <tr><td><strong>Execution</strong></td><td>Does not include running the program</td><td>Includes running the program and observing results</td></tr>
+              <tr><td><strong>Methods used</strong></td><td>Reviews, walkthroughs, inspections, desk-checking, static analysis</td><td>Black box testing, white box testing, unit/integration/system testing, non-functional testing, UAT</td></tr>
+              <tr><td><strong>Timing</strong></td><td>During each development phase — early defect detection</td><td>After implementation; concentrated at integration, system, and acceptance stages</td></tr>
+              <tr><td><strong>QA/QC link</strong></td><td>QA activity — process and specification conformance</td><td>QC activity — product quality against user needs</td></tr>
+              <tr><td><strong>Who performs</strong></td><td>Developers, reviewers, SQA group</td><td>Test engineers, end users, customers, independent validators</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Verification is followed by validation</strong> — at each stage, the team first confirms the work product meets its specification (verification), then confirms the overall system meets user needs (validation).</li>
+          <li>Both are required; strong verification reduces the number of defects reaching validation, but verification alone cannot confirm the product solves the user's real problem.</li>
+        </ul>
+
+        <h3>Why Verification and Validation are important</h3>
+        <ul>
+          <li><strong>Verifying correctness:</strong> Verification catches mistakes early in development and ensures the software is being built the right way according to the original plan and specifications — before expensive coding and testing cycles are wasted.</li>
+          <li><strong>Meeting user needs:</strong> Validation confirms the final product actually solves the user's problem and performs as expected in real-world conditions, not just on paper.</li>
+          <li><strong>Preventing bugs and issues:</strong> Verification finds defects before the software is even executed, allowing fixes at low cost; validation ensures the running product works reliably, preventing surprises after release.</li>
+          <li><strong>Improving efficiency:</strong> Using both V&amp;V together helps teams catch issues sooner, reduce rework, shorten the bug-fix cycle, and release products faster with higher confidence.</li>
+          <li>Together, V&amp;V provide the evidence that SQA needs to report quality status to management — see <a href="08-02-software-quality-assurance.html#sec-8-2">§8.2 SQA</a>.</li>
+        </ul>
+
+        <h3>V&amp;V roles in the SDLC</h3>
+        <p>V&amp;V activities support several critical analysis functions throughout the lifecycle:</p>
+        <ul>
+          <li><strong>Traceability analysis:</strong> Ensures that every requirement is linked to design elements, code modules, and test cases — and that no extraneous features exist.</li>
+          <li><strong>Interface analysis:</strong> Verifies that interfaces between modules, subsystems, and external systems are correctly specified and implemented.</li>
+          <li><strong>Criticality analysis:</strong> Assigns criticality levels to software components based on the consequences of failure, so that V&amp;V effort is proportional to risk.</li>
+          <li><strong>Hazard and risk analysis:</strong> Identifies potential hazards, assesses their severity and likelihood, and ensures that mitigation measures are verified and validated.</li>
+        </ul>
+
+        <h3>Criticality analysis — five steps</h3>
+        <p>Criticality analysis prioritises V&amp;V activities by ranking components according to the impact of their failure:</p>
+        <div class="terminal" aria-label="Pseudocode — criticality analysis five steps">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">criticality_analysis.pseudo</span>
+          </div>
+          <pre><code>CRITICALITY_ANALYSIS(system)
+
+STEP 1 — IDENTIFY COMPONENTS
+  LIST all software components, modules, and subsystems
+  MAP each component to its functional requirements
+
+STEP 2 — ASSIGN CRITICALITY LEVELS
+  FOR each component C DO
+    DETERMINE failure consequences (safety, financial, operational)
+    ASSIGN level: CRITICAL | HIGH | MEDIUM | LOW
+  END FOR
+
+STEP 3 — IDENTIFY FAILURE MODES
+  FOR each component C DO
+    LIST possible failure modes (crash, wrong output, data loss, ...)
+    ESTIMATE probability of each failure mode
+  END FOR
+
+STEP 4 — ASSESS IMPACT
+  FOR each (component, failure_mode) pair DO
+    COMPUTE impact score = severity × probability
+    RECORD in criticality matrix
+  END FOR
+
+STEP 5 — PRIORITISE V&amp;V ACTIVITIES
+  SORT components by impact score (highest first)
+  ALLOCATE verification effort (reviews, static analysis) by level
+  ALLOCATE validation effort (testing depth, coverage) by level
+  DOCUMENT V&amp;V plan with traceability to criticality rankings
+
+END CRITICALITY_ANALYSIS</code></pre>
+        </div>
+
+        <h3>V&amp;V and the V-Model</h3>
+        <p>
+          The <strong>V-Model</strong> maps each development phase on the left (verification side) to a
+          corresponding testing phase on the right (validation side). Verification activities descend from
+          requirements to coding; validation activities ascend from unit testing to user acceptance testing.
+          Horizontal arrows link each development artefact to the test level that validates it.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-v-model-vv-caption">
+          <img src="../../../assets/images/se-topic-08/v-model-verification-validation.png"
+               alt="V-Model — Verification phases on the left mapped to Validation testing phases on the right"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-v-model-vv-caption">V-Model — each verification phase (left) pairs with a validation test level (right): requirements ↔ UAT, high-level design ↔ system testing, detail design ↔ integration testing, program specification ↔ unit testing.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Requirement specification</strong> is validated by <strong>user acceptance testing</strong> — confirming the delivered system meets original user needs.</li>
+          <li><strong>High-level design</strong> is validated by <strong>system testing</strong> — confirming the integrated architecture works as a whole.</li>
+          <li><strong>Detail design</strong> is validated by <strong>integration testing</strong> — confirming modules interact correctly through their interfaces.</li>
+          <li><strong>Program specification</strong> is validated by <strong>unit testing</strong> — confirming each individual program module behaves according to its detailed spec.</li>
+          <li><strong>Coding</strong> sits at the base of the V — the point where design becomes executable code and both verification (code review) and validation (unit tests) begin in earnest.</li>
+          <li>The V-Model ensures V&amp;V is planned from the start rather than bolted on at the end — each test level has a direct traceability link back to a development artefact.</li>
+        </ul>
+        <p>
+          See the full V-Model process description in
+          <a href="../02-sdlc-and-process-models/02-13-v-model.html">§2.13 V-Model</a>.
+        </p>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Verification &amp; Validation</div>
+          <p><strong>Q:</strong> Define verification and validation. Differentiate between them with a comparison table. List static and dynamic testing activities. Explain why V&amp;V are important and describe the role of criticality analysis.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>V&amp;V = investigating whether software satisfies specs/standards and fulfils its required purpose.</li>
+            <li>Verification = "building product right" — static testing, no execution; methods: inspections, reviews, walkthroughs, desk-checking, static analysis.</li>
+            <li>Validation = "building right product" — dynamic testing, requires execution; methods: black/white box, unit/integration/system/UAT, non-functional testing.</li>
+            <li>Verification followed by validation at each stage.</li>
+            <li>Comparison: definition, focus (docs vs product), type (static vs dynamic), execution, methods, QA vs QC link.</li>
+            <li>Importance: early correctness, meeting user needs, preventing bugs, improving efficiency.</li>
+            <li>Example: verification = design/code reviews during development; validation = unit → integration → system → acceptance testing after build.</li>
+            <li>V&amp;V roles: traceability, interface analysis, criticality analysis, hazard/risk analysis.</li>
+            <li>Criticality analysis: identify components → assign levels → identify failure modes → assess impact → prioritise V&amp;V.</li>
+            <li>V-Model: requirements↔UAT, HLD↔system test, detail design↔integration test, program spec↔unit test.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="08-02-software-quality-assurance.html">&larr; 8.2 Software Quality Assurance</a>
+        <a class="btn-back chapter-nav-next" href="08-04-sqa-plans.html">8.4 SQA Plans &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 9 — 9.1 Processes &amp; Configuration Management (overview)</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>9.1 Processes &amp; Configuration Management (overview)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 9</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-9-1">
+
+        <p>
+          <strong>Processes and Configuration Management</strong> address how a software organisation controls
+          change across the entire development lifecycle. A <strong>process</strong> is a defined set of repeatable
+          activities — from requirements to maintenance — that produce consistent results. <strong>Configuration
+          management</strong> is the discipline that identifies, controls, and tracks every changeable work product
+          so that the team always knows what is being built, tested, and delivered.
+        </p>
+        <p>
+          Together, formal processes and configuration management prevent chaos in multi-person, multi-version,
+          geographically distributed projects. SCM is classified as an <strong>umbrella activity</strong> that runs
+          parallel to every SDLC phase, alongside SQA, risk management, and technical reviews — see
+          <a href="../08-software-quality-assurance/08-02-software-quality-assurance.html#sec-8-2">§8.2 SQA</a>.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-umbrella-caption">
+          <img src="../../../assets/images/se-topic-09/umbrella-activity.webp"
+               alt="Umbrella activities in software engineering — SCM runs parallel to all SDLC phases"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-umbrella-caption">SCM is an umbrella activity that supports every phase of the software development lifecycle.</figcaption>
+        </figure>
+
+        <h3>Why configuration management matters</h3>
+        <ul>
+          <li>Modern software projects involve <strong>multiple people</strong> working on code that is continually updated — without control, integration becomes impossible.</li>
+          <li>Projects often have <strong>multiple versions, branches, and authors</strong> working concurrently, sometimes from different geographic locations.</li>
+          <li><strong>Changing requirements, policies, budgets, and schedules</strong> must be accommodated without breaking the existing product.</li>
+          <li>Software must run on <strong>various machines and operating systems</strong>, requiring controlled builds and reproducible configurations.</li>
+          <li>SCM helps develop <strong>coordination among stakeholders</strong> and controls the costs involved in making changes to a system.</li>
+          <li>Without an SCM plan, a project can become <strong>uncontrollable</strong> and may be discontinued — especially in outsourced or distributed teams.</li>
+        </ul>
+
+        <h3>Problems without configuration management</h3>
+        <ul>
+          <li><strong>Inconsistency from replication:</strong> Engineers keep private copies of modules and forget to notify others of interface changes, causing integration failures at build time.</li>
+          <li><strong>Concurrent access conflicts:</strong> Two developers edit the same file simultaneously and overwrite each other's work without knowing.</li>
+          <li><strong>Unstable development environment:</strong> A module keeps changing while other modules integrate against it — baselines freeze a known-good state to prevent this.</li>
+          <li><strong>No status accounting:</strong> The team loses track of who changed what, when, and why — making debugging and auditing nearly impossible.</li>
+          <li><strong>Handling variants:</strong> A bug fix in one version must be applied consistently across all active releases and branches — without SCM this is error-prone.</li>
+        </ul>
+
+        <h3>SCM within Software Project Management</h3>
+        <ul>
+          <li>SCM is one of the management types within SPM — alongside requirement management, change management, and release management — see <a href="../03-software-project-management/03-02-project-management-process.html#sec-3-2">§3.2 Project Management Process</a>.</li>
+          <li>SCM is the process of <strong>controlling and tracking software changes</strong>, including revision control and establishment of baselines.</li>
+          <li>Change control boards (CCB) and traceability links connect SCM to requirements management in <a href="../04-requirements-engineering-and-specification/04-07-review-management.html#sec-4-7">§4.7 Review &amp; Management</a>.</li>
+          <li>At CMM Level 2, <strong>Software Configuration Management</strong> is a key process area — see <a href="../03-software-project-management/03-10-cmm.html#sec-3-10">§3.10 CMM</a>.</li>
+          <li>SQA plans reference version control, baselines, and change control as quality mechanisms — see <a href="../08-software-quality-assurance/08-04-sqa-plans.html#sec-8-4">§8.4 SQA Plans</a>.</li>
+        </ul>
+
+        <h3>Topic 9 structure</h3>
+        <ul>
+          <li><strong>§9.2</strong> defines Software Configuration Management and its core concepts (CIs, baselines).</li>
+          <li><strong>§9.3</strong> lists the objectives SCM is designed to achieve.</li>
+          <li><strong>§9.4</strong> describes the main SCM activities performed throughout a project.</li>
+          <li><strong>§9.5</strong> explains the formal change control process and roles involved.</li>
+          <li><strong>§9.6</strong> covers software version control procedures and tools.</li>
+          <li><strong>§9.7</strong> presents system-level configuration management as an integrated discipline.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Processes &amp; Configuration Management overview</div>
+          <p><strong>Q:</strong> What is configuration management? Why is it needed in software projects? What problems arise without SCM?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Process + configuration management = controlled, repeatable development with tracked product state.</li>
+            <li>SCM = umbrella activity parallel to entire SDLC; part of SPM.</li>
+            <li>Needed for: multi-person projects, concurrent versions/branches, changing requirements, multi-platform deployment, cost control.</li>
+            <li>Without SCM: inconsistency, concurrent-access conflicts, unstable environment, no status accounting, variant chaos.</li>
+            <li>Links to SQA, CMM Level 2, requirements change control, SQA plans.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="index.html">&larr; Topic 9</a>
+        <a class="btn-back chapter-nav-next" href="09-02-software-configuration-management.html">9.2 Software Configuration Management &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

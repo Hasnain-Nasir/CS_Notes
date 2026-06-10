@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 9 — 9.6 Software Version Control</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>9.6 Software Version Control</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 9</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-9-6">
+
+        <p>
+          <strong>Software version control</strong> is a set of procedures and tools for managing versions of
+          configuration items — source code, documentation, data, and executables. It allows teams to track
+          every change, collaborate without overwriting each other's work, and revert to earlier versions when
+          something goes wrong.
+        </p>
+
+        <h3>What is version control?</h3>
+        <ul>
+          <li>Version control keeps track of changes in computer programs and related work products over time.</li>
+          <li>It lets team members see <strong>what changes were made, when, and by whom</strong>, and go back to an older version if a change introduces a defect.</li>
+          <li>A <strong>version</strong> is a collection of software configuration items (SCIs) that together represent a defined state of the product — it may contain variants for different platforms or customers.</li>
+          <li>Version control is one of the five SCM activities — see <a href="09-04-scm-activities.html#sec-9-4">§9.4 SCM Activities</a>.</li>
+        </ul>
+
+        <h3>Importance of version control</h3>
+        <ul>
+          <li><strong>Collaboration:</strong> Multiple developers work on the same project simultaneously without corrupting each other's changes.</li>
+          <li><strong>Code management and history:</strong> Every change is recorded, providing a complete history that supports debugging and auditing.</li>
+          <li><strong>Rollback capability:</strong> If a new change breaks the system, the team can revert to any previous known-good version instantly.</li>
+          <li><strong>Quality assurance:</strong> Controlled releases ensure that only tested, approved code reaches production environments.</li>
+          <li><strong>Reusability:</strong> Prior versions and components can be retrieved and reused in new projects or branches.</li>
+          <li><strong>Branching and merging:</strong> Parallel development paths (features, hotfixes, releases) are managed and merged systematically.</li>
+          <li><strong>Project management:</strong> Version milestones align with project schedules and deliverable tracking.</li>
+          <li><strong>CI/CD integration:</strong> Version control integrates with continuous integration and deployment pipelines for automated build and test cycles.</li>
+        </ul>
+
+        <h3>Four version control sub-activities</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-version-graph-caption">
+          <img src="../../../assets/images/se-topic-09/version-development-graph.png"
+               alt="Version development graph — tracking evolution of configuration item versions over time"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-version-graph-caption">A version development graph tracks how a configuration item evolves through successive versions and branches.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>Identifying new versions:</strong> Each time changes are made and saved, the version control system creates a new unique version. Prior versions (v0, v1, v2…) are stored for reference and rollback.</li>
+          <li><strong>Numbering scheme:</strong> Versions follow a structured naming convention — typically <strong>X.Y.Z</strong> where X = whole SCI or major release, Y = component-level change, Z = minor correction within a component (e.g. 1.0 → 1.1 → 1.1.1 → 1.2 → 2.0).</li>
+          <li><strong>Visibility:</strong> The version number appears in the document frame or below the title so all team members know which version they are viewing or editing.</li>
+          <li><strong>Tracking:</strong> A version development graph records the history of changes — who made each change, when, and what was modified — maintaining accountability across the team.</li>
+        </ol>
+
+        <h3>Version evolution example</h3>
+        <ul>
+          <li>After initial release at version <strong>1.0</strong>, minor corrections produce <strong>1.1</strong>, then <strong>1.1.1</strong> and <strong>1.1.2</strong>.</li>
+          <li>A major update creates version <strong>1.2</strong>; development of the 1.x line continues through <strong>1.3</strong> and <strong>1.4</strong>.</li>
+          <li>A significant architectural change creates a new evolutionary path — version <strong>2.0</strong> — while version 1.x may still be supported for existing customers.</li>
+          <li>Both evolutionary paths can be maintained simultaneously, each with its own branch in the version control system.</li>
+        </ul>
+
+        <h3>Version control tools — Git workflow</h3>
+        <p>Modern projects use distributed version control systems such as <strong>Git</strong>. A typical workflow:</p>
+        <div class="terminal" aria-label="Git version control workflow example">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">git_workflow.sh</span>
+          </div>
+          <pre><code># Initialise a new repository
+git init
+
+# Stage and commit changes (creates a new version snapshot)
+git add .
+git commit -m "Initial baseline v1.0"
+
+# Create a feature branch for parallel development
+git checkout -b feature/login-module
+
+# Work on feature, commit incrementally
+git add login.py
+git commit -m "Add login module v1.1"
+
+# Merge feature branch back to main after review
+git checkout main
+git merge feature/login-module
+
+# Tag a release version
+git tag v1.1.0
+
+# View version history
+git log --oneline</code></pre>
+        </div>
+        <ul>
+          <li><strong>Centralised VCS</strong> (e.g. SVN): a single server holds the repository; developers check out and check in files.</li>
+          <li><strong>Distributed VCS</strong> (e.g. Git): every developer has a full copy of the repository history, enabling offline work and flexible branching.</li>
+          <li>Version control repositories serve as the <strong>project database</strong> referenced in the change control process — CIs are checked out, modified, and checked in through the VCS.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Version Control</div>
+          <p><strong>Q:</strong> What is software version control? List its sub-activities and explain the X.Y.Z numbering scheme.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Version control = procedures + tools to manage versions of SCIs (code, docs, data).</li>
+            <li>Benefits: collaboration, history/rollback, QA, reusability, branching/merging, CI/CD integration.</li>
+            <li>Four sub-activities: identify new versions, numbering scheme (X.Y.Z), visibility, tracking (version graph).</li>
+            <li>X = major release/whole SCI; Y = component change; Z = minor correction within component.</li>
+            <li>Multiple evolutionary paths (1.x and 2.x) supported simultaneously.</li>
+            <li>Tools: Git (distributed), SVN (centralised); check-out/modify/check-in in change control.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="09-05-change-control-process.html">&larr; 9.5 Change Control Process</a>
+        <a class="btn-back chapter-nav-next" href="09-07-system-configuration-management.html">9.7 System Configuration Management &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

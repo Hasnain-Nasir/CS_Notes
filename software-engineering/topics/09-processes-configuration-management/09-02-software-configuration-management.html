@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 9 — 9.2 Software Configuration Management</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>9.2 Software Configuration Management</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 9</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-9-2">
+
+        <p>
+          <strong>Software Configuration Management (SCM)</strong> is the process of defining and implementing
+          a standard configuration for a software project so that the product remains in a known, controlled
+          state throughout development. SCM tracks and manages the emerging product and its versions, ensures
+          all stakeholders know what is being designed, developed, built, tested, and delivered, and enables
+          requirements to be traced through to the final software product.
+        </p>
+
+        <h3>Definition</h3>
+        <ul>
+          <li>SCM can be defined as the process of <strong>identifying, organizing, and controlling changes</strong> to software work products throughout the lifecycle.</li>
+          <li>It manages not only source code but also <strong>documentation, data, tools, and hardware</strong> used in development.</li>
+          <li>SCM includes <strong>revision control</strong> (tracking versions of each item) and <strong>establishment of baselines</strong> (formally approved snapshots of the product).</li>
+          <li>Primary benefits include easier setup and maintenance, less downtime, better enterprise integration, more reliable backups, and maximised productivity by minimising mistakes.</li>
+          <li>SCM is an <strong>umbrella activity</strong> — it runs in parallel with the entire SDLC, not just during coding — see <a href="09-01-scm-overview.html#sec-9-1">§9.1</a>.</li>
+        </ul>
+
+        <h3>Configuration Items (CIs)</h3>
+        <ul>
+          <li>A <strong>Configuration Item (CI)</strong> is any work product that is placed under SCM control — source code files, design documents, test plans, executables, libraries, and user manuals.</li>
+          <li>Each CI is uniquely identified, versioned, and tracked so that changes can be traced to their origin.</li>
+          <li>Configuration identification determines the <strong>scope</strong> of the software system — what items exist and which of them will be managed.</li>
+          <li>Relationships among CIs are established so that the impact of a change to one item on others can be assessed.</li>
+        </ul>
+
+        <h3>Baselines</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-baseline-caption">
+          <img src="../../../assets/images/se-topic-09/baseline-items.png"
+               alt="Baseline items in software development — formally approved configuration snapshots"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-baseline-caption">A baseline is a formally reviewed and agreed set of configuration items that serves as the basis for further development.</figcaption>
+        </figure>
+        <ul>
+          <li>A <strong>baseline</strong> is a formally accepted version of a software configuration item — designated and fixed at a specific point in time.</li>
+          <li>Per IEEE 610.12-1990, a baseline is a specification or product that has been <strong>formally reviewed and agreed upon</strong> and serves as the basis for further development; changes occur only through formal change control.</li>
+          <li>A baseline is a set of <strong>mutually consistent CIs</strong> that have been formally reviewed and agreed upon at a given milestone.</li>
+          <li>Once a baseline is set, it can <strong>only be changed through formal change control procedures</strong> — not by ad hoc edits.</li>
+          <li>Baselines freeze a known-good state so that other teams can integrate against a stable reference while development continues elsewhere.</li>
+          <li>Common baseline types include: <strong>functional</strong>, <strong>allocated</strong>, <strong>design</strong>, <strong>product</strong>, <strong>operational</strong>, <strong>acceptance test</strong>, <strong>integration test</strong>, and <strong>unit test</strong> baselines.</li>
+          <li>The baseline process: document work products → review and fix issues → approve baseline → evaluate and approve all subsequent changes formally.</li>
+        </ul>
+
+        <h3>What SCM controls</h3>
+        <ul>
+          <li><strong>Source code</strong> — all program files under version control.</li>
+          <li><strong>Documentation</strong> — SRS, design documents, test plans, user manuals, release notes.</li>
+          <li><strong>Executables and libraries</strong> — compiled binaries, DLLs, and third-party components.</li>
+          <li><strong>Tools and environments</strong> — compilers, build scripts, configuration files, and deployment settings.</li>
+          <li>SCM ensures the system is always in a <strong>known and stable state</strong> — every change is recorded, and any version can be reproduced.</li>
+        </ul>
+
+        <h3>SCM and traceability</h3>
+        <ul>
+          <li>Through SCM, design requirements can be <strong>traced to the final software product</strong> — each requirement links to design elements, code modules, test cases, and delivered features.</li>
+          <li>SCM supports <strong>reproducibility</strong> — a software system can be replicated at any stage of development for testing, debugging, or deployment.</li>
+          <li>SCM enables <strong>parallel development</strong> — multiple developers work on different branches simultaneously without corrupting the main codebase.</li>
+          <li>Effective SCM links code modifications to reported issues, making <strong>bug tracking</strong> more accurate and auditable.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Configuration Management</div>
+          <p><strong>Q:</strong> Define Software Configuration Management. Explain Configuration Items and baselines with their role in the SCM process.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>SCM = process of defining/implementing standard configuration; tracks product and versions; ensures stakeholder visibility and traceability.</li>
+            <li>Includes revision control + baselines; manages code, docs, tools, executables.</li>
+            <li>CI = any work product under SCM control, uniquely identified and versioned.</li>
+            <li>Baseline = formally accepted CI snapshot; mutually consistent CIs; fixed at a point in time; changed only via formal change control.</li>
+            <li>Baseline types: functional, design, product, test baselines, etc.</li>
+            <li>Benefits: known stable state, reproducibility, parallel development, traceability, bug tracking.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="09-01-scm-overview.html">&larr; 9.1 Overview</a>
+        <a class="btn-back chapter-nav-next" href="09-03-objectives-of-scm.html">9.3 Objectives of SCM &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

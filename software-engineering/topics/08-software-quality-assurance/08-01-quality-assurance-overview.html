@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 8 — 8.1 Quality Assurance (overview)</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>8.1 Quality Assurance (overview)</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 8</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-8-1">
+
+        <p>
+          <strong>Quality assurance (QA)</strong> is a proactive, process-oriented discipline that ensures quality
+          is built into products from the start rather than inspected in at the end. It encompasses the policies,
+          procedures, and systematic activities needed to provide confidence that a product or service will satisfy
+          quality requirements. In software engineering, QA is closely related to — but broader than — testing and
+          inspection alone.
+        </p>
+        <p>
+          The general concept of software quality is introduced in
+          <a href="../01-introduction-and-fundamentals/01-12-software-quality.html#sec-1-12">§1.12 Software Quality</a>.
+          This section focuses on how organisations manage and assure that quality through evolving quality
+          management approaches.
+        </p>
+
+        <h3>Evolution of quality management</h3>
+        <p>Quality management has evolved through four major stages, each building on the previous one:</p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-qms-evolution-caption">
+          <img src="../../../assets/images/se-topic-01/qms-evolution.png"
+               alt="Evolution of quality management — Inspection, Quality Control, Quality Assurance, Total Quality Management"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-qms-evolution-caption">Evolution of the Quality Management System — each stage adds more process focus and prevention.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>Inspection:</strong> Products are examined directly after production to detect visible defects — a basic, reactive form of quality checking with no systematic process improvement.</li>
+          <li><strong>Quality Control (QC):</strong> Defective items are identified through testing and inspection, and the root causes of defects are traced and corrected so the same mistakes do not repeat immediately.</li>
+          <li><strong>Quality Assurance (QA):</strong> Defined processes, standards, and preventive measures are established so that good-quality products are built systematically, including security and compliance checks before defects reach the customer.</li>
+          <li><strong>Total Quality Management (TQM):</strong> All organisational procedures are continuously measured and improved; quality becomes the responsibility of every employee, not just a dedicated QC team, and process measurements drive ongoing refinement.</li>
+        </ol>
+        <ul>
+          <li>Each stage does not replace the previous one — modern organisations still inspect and test (QC) while also running QA and TQM programmes on top.</li>
+          <li>In software, moving from pure inspection (code review only at the end) to QA means defining standards, reviews, and metrics at every SDLC phase.</li>
+        </ul>
+
+        <h3>What is Quality Assurance?</h3>
+        <ul>
+          <li>QA is defined as an activity that ensures the approaches, techniques, methods, and processes designed for a project are implemented correctly.</li>
+          <li>Its primary aim is to <strong>prevent defects</strong> by improving the process, not merely to find defects after they appear in the product.</li>
+          <li>QA recognises flaws in the <strong>process</strong> itself — if the development method is weak, even skilled programmers will produce unreliable software.</li>
+          <li>QA is completed <strong>before</strong> Quality Control in the logical sequence: first ensure the process is sound, then verify the product against that process.</li>
+          <li>QA is a <strong>proactive, preventive, process-oriented</strong> discipline that runs throughout the Software Development Life Cycle (SDLC).</li>
+        </ul>
+
+        <h3>Characteristics of Quality Assurance</h3>
+        <ul>
+          <li><strong>Process-oriented:</strong> QA places strong emphasis on creating and following reliable procedures and standards so that product quality is consistent across projects.</li>
+          <li><strong>Proactive and preventive:</strong> QA tries to stop errors before they are coded or released, rather than waiting for testers to discover them later.</li>
+          <li><strong>Continuous improvement:</strong> QA includes regular assessment of processes and feedback loops so that methods improve over time — this bridges QA toward TQM.</li>
+          <li><strong>Organisation-wide involvement:</strong> All team members participate in QA activities such as reviews and standards compliance, not only a separate QA department.</li>
+          <li><strong>Statistical Process Control (SPC):</strong> QA often uses statistical techniques to monitor process performance and detect trends before they become serious quality failures.</li>
+        </ul>
+
+        <h3>Quality Assurance vs Quality Control</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-qa-vs-qc-caption">
+          <img src="../../../assets/images/se-topic-08/qa-vs-qc.webp"
+               alt="Quality Assurance versus Quality Control — process-oriented preventive vs product-oriented corrective"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-qa-vs-qc-caption">QA focuses on preventing defects through process; QC focuses on detecting and correcting defects in the product.</figcaption>
+        </figure>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Quality Assurance (QA)</th><th>Quality Control (QC)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Orientation</strong></td><td>Process-oriented — focuses on how the product is built</td><td>Product-oriented — focuses on the finished product</td></tr>
+              <tr><td><strong>Nature</strong></td><td>Preventive — stops defects before they occur</td><td>Corrective — finds and fixes defects after they occur</td></tr>
+              <tr><td><strong>Timing</strong></td><td>Applied throughout the lifecycle, before and during development</td><td>Applied after development activities, typically during testing</td></tr>
+              <tr><td><strong>Responsibility</strong></td><td>Entire team and organisation; QA group sets standards</td><td>Testing/inspection team verifies the product against specifications</td></tr>
+              <tr><td><strong>Activities</strong></td><td>Process definition, reviews, audits, standards compliance, training</td><td>Testing, inspection, defect logging, rework</td></tr>
+              <tr><td><strong>Goal</strong></td><td>Build quality in through proper processes</td><td>Identify and remove defects from the product</td></tr>
+              <tr><td><strong>Program execution</strong></td><td>QA does not require executing the program — reviews and audits suffice</td><td>QC typically requires running the software (dynamic testing)</td></tr>
+              <tr><td><strong>Lifecycle scope</strong></td><td>Covers the entire SDLC — requirements through maintenance</td><td>Concentrated in the Software Testing Life Cycle (STLC) and delivery phases</td></tr>
+              <tr><td><strong>Statistical technique</strong></td><td>Statistical Process Control (SPC) — monitors process variation</td><td>Statistical Quality Control (SQC) — monitors product defect rates</td></tr>
+              <tr><td><strong>Software example</strong></td><td>Verification — design review, code inspection, walkthrough of SRS</td><td>Validation — system testing, acceptance testing, beta testing</td></tr>
+              <tr><td><strong>Output</strong></td><td>Process compliance evidence, improved methods, fewer escaped defects</td><td>Defect reports, test results, corrected product builds</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>QA comes before QC</strong> in the quality lifecycle — if processes are well defined and followed (QA), fewer defects reach the testing stage (QC).</li>
+          <li>QA is not a substitute for QC; both are needed. QA reduces the volume of defects; QC catches those that still escape.</li>
+          <li>In software terms, <strong>verification</strong> is a QA activity (checking that the product is built correctly against specifications), while <strong>validation</strong> is a QC activity (checking that the right product was built for user needs). These are covered in detail in <a href="08-03-verification-validation.html#sec-8-3">§8.3 Verification &amp; Validation</a>.</li>
+        </ul>
+
+        <h3>QA in the software context</h3>
+        <ul>
+          <li>Software QA applies systematic, planned activities to ensure that software development and maintenance processes conform to agreed standards and produce fit-for-purpose products.</li>
+          <li>QA activities include establishing quality standards, conducting process audits, overseeing reviews, and ensuring that corrective actions are taken when deviations are found.</li>
+          <li>Unlike manufacturing QC (which inspects physical units on a production line), software QC relies heavily on reviews, static analysis, and dynamic testing because software cannot be "sampled" in the same way as physical goods.</li>
+          <li>Software is intangible — there is no visible product until late in the project, so QA must use documentation, metrics, and formal reviews to track progress objectively.</li>
+          <li>Software Quality Assurance (SQA) is the specialised application of QA principles to software projects — covered in <a href="08-02-software-quality-assurance.html#sec-8-2">§8.2 Software Quality Assurance</a>.</li>
+        </ul>
+
+        <h3>Software testing vs Quality Assurance</h3>
+        <ul>
+          <li><strong>Software testing</strong> focuses on finding defects in the product by executing code and comparing results against expected behaviour — it is primarily a QC activity.</li>
+          <li><strong>Quality Assurance</strong> focuses on improving the process so that fewer defects are introduced in the first place — it is broader than testing alone.</li>
+          <li>Testing is a <strong>subset</strong> of the overall QA programme; SQA ensures that testing itself is properly planned, resourced, and conducted.</li>
+          <li>Testing produces a list of defects; QA produces confidence that processes were followed and that the overall quality system is working.</li>
+          <li>An organisation can run many tests and still fail on quality if its requirements process, design reviews, or change control are weak — QA addresses those upstream gaps.</li>
+        </ul>
+
+        <h3>Why Quality Assurance matters in software projects</h3>
+        <ul>
+          <li>Defects found late in the SDLC cost far more to fix than defects caught during requirements or design reviews — QA pushes detection earlier.</li>
+          <li>Customers and contracting organisations increasingly require evidence of a formal QA programme before awarding projects (especially in government and safety-critical domains).</li>
+          <li>QA provides traceability — documented evidence that each requirement was reviewed, tested, and signed off, which is essential for audits and maintenance.</li>
+          <li>Continuous process improvement under QA reduces rework, schedule overruns, and post-release maintenance costs over multiple projects.</li>
+          <li>Without QA, teams depend on individual heroics; with QA, success becomes repeatable even when staff change.</li>
+        </ul>
+
+        <h3>Key distinctions for exams</h3>
+        <ul>
+          <li>QA = <strong>process</strong> focus, preventive, proactive; QC = <strong>product</strong> focus, detective, reactive.</li>
+          <li>Verification ("Are we building the product <em>right</em>?") aligns with QA; validation ("Are we building the <em>right</em> product?") aligns with QC.</li>
+          <li>TQM extends QA by making continuous improvement an organisation-wide culture, not just a dedicated department's responsibility.</li>
+          <li>Inspection is the earliest and simplest form; it detects problems but does not prevent them or improve the underlying process.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Quality Assurance overview</div>
+          <p><strong>Q:</strong> Explain the evolution of quality management from Inspection to TQM. Differentiate between Quality Assurance and Quality Control with examples in software development.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Evolution: Inspection → QC → QA → TQM; each stage adds process focus and continuous improvement.</li>
+            <li>QA characteristics: process-oriented, proactive, preventive, continuous improvement, organisation-wide.</li>
+            <li>QA: process-oriented, preventive, applied throughout SDLC; examples — process audits, standards, reviews, verification, SPC.</li>
+            <li>QC: product-oriented, corrective, applied during/after testing; examples — dynamic testing, validation, defect fixing, SQC.</li>
+            <li>QA precedes QC; good QA reduces defects reaching QC. Testing is a subset of QA.</li>
+            <li>Verification = QA example; Validation = QC example. SQA = software-specific QA.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="index.html">&larr; Topic 8</a>
+        <a class="btn-back chapter-nav-next" href="08-02-software-quality-assurance.html">8.2 Software Quality Assurance &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

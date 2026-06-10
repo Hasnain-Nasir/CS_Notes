@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 8 — 8.8 Six Sigma</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>8.8 Six Sigma</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 8</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-8-8">
+
+        <p>
+          <strong>Six Sigma</strong> is a methodology that helps organisations make their processes better and
+          more efficient by identifying and removing errors and variations. Variation in processes leads to errors,
+          errors lead to product defects, and defects lead to poor customer satisfaction — by reducing variation
+          and errors, Six Sigma reduces process costs and increases customer satisfaction.
+        </p>
+        <p>
+          Six Sigma was introduced in <strong>1986 by American engineer Bill Smith</strong> while working at
+          <strong>Motorola</strong>. It is now used across manufacturing, service industries, government agencies,
+          aerospace, e-commerce, and software engineering to improve process and product quality. It is covered
+          alongside other quality frameworks in <a href="08-05-quality-frameworks.html#sec-8-5">§8.5</a> and
+          referenced from SQA in <a href="08-02-software-quality-assurance.html#sec-8-2">§8.2</a>.
+        </p>
+
+        <h3>What is Six Sigma?</h3>
+        <ul>
+          <li>Six Sigma is a statistical concept that aims to define and reduce the variation found in any process.</li>
+          <li>It is a process of producing high-quality output through two phases: <strong>identification</strong> (finding the causes of defects) and <strong>elimination</strong> (removing those causes to reduce variation across the whole process).</li>
+          <li>A Six Sigma process has a failure rate of only <strong>3.4 defects per million opportunities (DPMO)</strong>, meaning <strong>99.99966%</strong> of outputs are defect-free.</li>
+          <li>By comparison, a Five Sigma process allows approximately <strong>233 errors per million opportunities</strong> — Six Sigma sets a much stricter quality target.</li>
+          <li>The name comes from the Greek letter σ (sigma), which denotes <strong>standard deviation</strong> in statistics — a Six Sigma process performs six standard deviations from the mean before defects occur.</li>
+        </ul>
+
+        <h3>Characteristics of Six Sigma</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-six-sigma-char-caption">
+          <img src="../../../assets/images/se-topic-08/six-sigma-characteristics.png"
+               alt="Six Sigma characteristics — data-driven, customer-focused, process-oriented defect reduction"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-six-sigma-char-caption">Six Sigma is data-driven, customer-focused, and process-oriented.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Statistical quality control:</strong> Six Sigma is derived from the Greek letter σ (sigma), which denotes standard deviation — standard deviation is used to measure the quality and consistency of process output.</li>
+          <li><strong>Methodical approach:</strong> Six Sigma applies systematic frameworks — <strong>DMAIC</strong> (Define, Measure, Analyze, Improve, Control) for improving existing processes and <strong>DMADV</strong> (Define, Measure, Analyze, Design, Verify) for new designs.</li>
+          <li><strong>Fact and data-based approach:</strong> Decisions are grounded in statistical analysis and measured data, not intuition or guesswork.</li>
+          <li><strong>Project and objective-based focus:</strong> Six Sigma is implemented through defined projects with clear goals, scope, and success criteria tied to business requirements.</li>
+          <li><strong>Customer focus:</strong> Quality improvement standards are based on specific customer requirements — what the customer considers critical to quality (CTQ) drives all improvement efforts.</li>
+          <li><strong>Teamwork approach:</strong> Six Sigma requires organisations to get structured for quality improvement — cross-functional teams led by certified belt holders execute projects together.</li>
+          <li><strong>Financially linked:</strong> Projects must demonstrate measurable financial benefits to justify the investment in improvement activities.</li>
+        </ul>
+
+        <h3>Lean Six Sigma</h3>
+        <ul>
+          <li><strong>Lean Six Sigma</strong> combines two methodologies — <strong>Lean</strong> (eliminate waste) and <strong>Six Sigma</strong> (reduce variation and errors).</li>
+          <li>Lean focuses on removing anything that does not add value to the customer — unnecessary steps, delays, and inefficiencies in the process.</li>
+          <li>Six Sigma focuses on reducing variation and defects so that output quality is consistently high.</li>
+          <li>Together, Lean Six Sigma fixes both <strong>efficiency</strong> (speed and flow) and <strong>quality</strong> (accuracy and consistency) issues.</li>
+          <li>Lean Six Sigma delivers value to the customer by removing unnecessary steps while ensuring the remaining steps produce defect-free results.</li>
+          <li>Both Lean and Six Sigma promote <strong>continuous improvement</strong>, making Lean Six Sigma a powerful approach for software delivery pipelines and development processes.</li>
+        </ul>
+
+        <h3>Six principles</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-six-sigma-principles-caption">
+          <img src="../../../assets/images/se-topic-08/six-sigma-principles.webp"
+               alt="Six Sigma principles — customer focus, data-driven decisions, proactive management, boundaryless collaboration, drive for perfection"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-six-sigma-principles-caption">Six Sigma is guided by six core principles for sustained quality improvement.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>Customer-centric improvement:</strong> The primary principle is to focus on the customer — Voice of the Customer (VoC) methods determine what the customer truly wants from a product or process, and improvements are measured against those requirements to boost satisfaction, retention, and loyalty.</li>
+          <li><strong>Continuous process improvement:</strong> An organisation that fully implements Six Sigma never stops improving — it continuously discovers and prioritises opportunities, moving to new areas once one is improved, with the goal of 99.99966% accuracy across all processes.</li>
+          <li><strong>Reduce variation:</strong> Every process has inherent variation; reducing it reduces errors and defects. In software development, variation exists because developers have different coding styles, expertise levels, and environments — strategies like coding standards, code reviews, automated testing, and documentation reduce this variation.</li>
+          <li><strong>Eliminating waste:</strong> Waste means removing items, procedures, or steps that do not add value to the customer — eliminating waste reduces processing time, errors, and overall costs (aligned with Lean principles).</li>
+          <li><strong>Empowering employees:</strong> Improved processes are only sustainable when employees have the tools to monitor and maintain them — process improvement teams define and implement changes, then equip the people who operate the process daily to supervise it in its improved state.</li>
+          <li><strong>Controlling the process:</strong> Six Sigma improvements bring out-of-control processes back under statistical control — after improvements are implemented, control charts, measurements, and training keep the process stable and prevent regression to previous defect levels.</li>
+        </ol>
+
+        <h3>The Six Sigma methodology — DMAIC and DMADV</h3>
+        <p>
+          Six Sigma teams use two main methodologies to achieve process improvements and establish process control.
+          <strong>DMAIC</strong> improves an existing process; <strong>DMADV</strong> creates a new process or product design.
+          The primary difference lies in team goals and project outcomes — both aim for better quality, efficiency,
+          production, profits, and customer satisfaction.
+        </p>
+
+        <h3>DMAIC — existing process improvement</h3>
+        <p>
+          <strong>DMAIC</strong> (Define, Measure, Analyze, Improve, Control) is used to enhance an
+          <strong>existing business process</strong> that is performing below specification. A DMAIC project
+          involves identifying the key problems, verifying them with data, brainstorming solutions, implementing
+          them, and designing a control plan to maintain the improved state. If a process needs to be completely
+          replaced or redesigned, the team should use DMADV instead.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dmaic-caption">
+          <img src="../../../assets/images/se-topic-08/dmaic-cycle.webp"
+               alt="DMAIC cycle — Define, Measure, Analyze, Improve, Control"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dmaic-caption">The DMAIC cycle for improving existing processes.</figcaption>
+        </figure>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dmaic-methodology-caption">
+          <img src="../../../assets/images/se-topic-08/dmaic-methodology.jpg"
+               alt="DMAIC Six Sigma methodology — five phases from Define through Control"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dmaic-methodology-caption">DMAIC methodology — five structured phases for existing process improvement.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>Define:</strong> Identify problems, establish project requirements, and set success goals. Six Sigma leaders use tools in this phase to create flexibility for different project types depending on leadership guidance and budgets.</li>
+          <li><strong>Measure:</strong> Use data to validate assumptions about the process and problem. The team collects and arranges data for analysis — measuring can be challenging without proper data collection tools, queries, or manual processes.</li>
+          <li><strong>Analyze:</strong> Identify and understand root causes of problems or inefficiencies. Teams develop predictions about relationships between inputs and outputs, use statistical analysis to validate assumptions, and prioritise causes that lead into the Improve phase.</li>
+          <li><strong>Improve:</strong> Develop and test solution concepts from the Analyze phase using statistics and real-world observations. Hypothesis testing continues as teams select and implement the best solutions.</li>
+          <li><strong>Control:</strong> Establish controls and standards so improvements are maintained, then transition responsibility to the process owner who monitors ongoing performance.</li>
+        </ol>
+        <div class="terminal" aria-label="Pseudocode — DMAIC methodology phases">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">dmaic_methodology.pseudo</span>
+          </div>
+          <pre><code>DMAIC(existing_process)
+
+PHASE 1 — DEFINE
+  IDENTIFY the problem and its impact on customers
+  DEFINE project scope, goals, and deliverables
+  FORM cross-functional project team
+  CREATE project charter with CTQ (Critical to Quality) metrics
+  MAP current process (SIPOC diagram)
+
+PHASE 2 — MEASURE
+  IDENTIFY key process input and output variables
+  VALIDATE measurement system (MSA — Measurement System Analysis)
+  COLLECT baseline data on current process performance
+  CALCULATE current sigma level and defect rate (DPMO)
+  DOCUMENT process capability (Cp, Cpk)
+
+PHASE 3 — ANALYZE
+  IDENTIFY root causes of defects and variation
+  USE tools: fishbone diagram, Pareto chart, hypothesis testing
+  VERIFY root causes with data (not assumptions)
+  PRIORITISE causes by impact on CTQ metrics
+
+PHASE 4 — IMPROVE
+  GENERATE and evaluate solution alternatives
+  PILOT selected solutions on a small scale
+  IMPLEMENT best solution across the process
+  MEASURE improvement in sigma level and defect rate
+
+PHASE 5 — CONTROL
+  DOCUMENT revised process procedures and standards
+  IMPLEMENT control charts to monitor ongoing performance
+  TRAIN staff on new procedures
+  CREATE response plan for out-of-control conditions
+  TRANSFER ownership to process owner
+
+END DMAIC</code></pre>
+        </div>
+
+        <h3>DMADV — new process or product design</h3>
+        <p>
+          <strong>DMADV</strong> (Define, Measure, Analyze, Design, Verify) is used to create
+          <strong>new product designs or process designs</strong> that must meet Six Sigma quality from the start.
+          Six Sigma teams use DMADV when:
+        </p>
+        <ul>
+          <li>The organisation wants to launch a <strong>new service or product</strong>.</li>
+          <li>Business leaders decide to <strong>replace a process</strong> to meet upgrade requirements or align processes, machinery, or workers with future goals.</li>
+          <li>A Six Sigma team determines that <strong>upgrading an existing process is unlikely</strong> to achieve the expected project outcomes — a full redesign is needed.</li>
+        </ul>
+        <figure class="diagram figure-photo" aria-labelledby="fig-dmadv-caption">
+          <img src="../../../assets/images/se-topic-08/dmadv-methodology.webp"
+               alt="DMADV methodology — Define, Measure, Analyze, Design, Verify"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-dmadv-caption">The DMADV methodology for designing new processes or products to Six Sigma standards.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>Define:</strong> In DMADV, the Define stage is stricter — teams must identify problems and define requirements within a change management environment, incorporating all organisational change programme needs.</li>
+          <li><strong>Measure:</strong> Use data to validate assumptions about the process and problem; focus on collecting and arranging data for analysis, same as in DMAIC.</li>
+          <li><strong>Analyze:</strong> Identify root causes and prioritise best practices and standards for measuring and designing the new process.</li>
+          <li><strong>Design:</strong> The phase where DMADV diverges from DMAIC — the team designs a new process including solution testing, process mapping, workflow principles, and infrastructure development.</li>
+          <li><strong>Verify:</strong> Check that designed solutions work as intended, measuring success against initial goals to ensure improvements are effective and sustainable before hand-off to operations.</li>
+        </ol>
+        <div class="terminal" aria-label="Pseudocode — DMADV methodology phases">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">dmadv_methodology.pseudo</span>
+          </div>
+          <pre><code>DMADV(new_process_or_product)
+
+PHASE 1 — DEFINE
+  IDENTIFY customer requirements and CTQ metrics
+  DEFINE project goals aligned with business strategy
+  CREATE project charter and scope
+  FORM design team with required expertise
+
+PHASE 2 — MEASURE
+  TRANSLATE customer needs into measurable design specifications
+  BENCHMARK against competitors and industry standards
+  IDENTIFY risks and regulatory requirements
+  ESTABLISH target sigma level for the new design
+
+PHASE 3 — ANALYZE
+  GENERATE alternative design concepts
+  EVALUATE alternatives against CTQ metrics
+  SELECT optimal design concept using decision matrices
+  PERFORM failure mode and effects analysis (FMEA)
+
+PHASE 4 — DESIGN
+  DETAIL the selected design (architecture, components, processes)
+  OPTIMISE design parameters using statistical tools (DOE)
+  BUILD prototype or pilot implementation
+  VALIDATE design meets CTQ specifications
+
+PHASE 5 — VERIFY
+  TEST prototype/pilot against customer requirements
+  VERIFY process capability at Six Sigma level
+  DOCUMENT final design and process specifications
+  HAND OFF to production/operations with control plan
+
+END DMADV</code></pre>
+        </div>
+
+        <h3>Belt certification levels</h3>
+        <p>
+          A Six Sigma certification demonstrates practical knowledge and execution of the methodology.
+          Some organisations provide internal certification; most certifications are obtained through
+          online or onsite training courses. Levels are differentiated by belt colour:
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-belts-caption">
+          <img src="../../../assets/images/se-topic-08/six-sigma-certification-levels.webp"
+               alt="Six Sigma belt certification levels — White, Yellow, Green, Black, Master Black Belt"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-belts-caption">Six Sigma certification follows a belt hierarchy indicating expertise level.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Belt</th><th>Role</th><th>Typical responsibilities</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>White Belt</strong></td><td>Awareness</td><td>Conversant with Six Sigma fundamentals; not typically a process improvement team member; training introduces auxiliary staff to why project teams work as they do</td></tr>
+              <tr><td><strong>Yellow Belt</strong></td><td>Support</td><td>Step up from White Belt; basic introduction to Six Sigma concepts including the DMAIC method; assists on improvement projects</td></tr>
+              <tr><td><strong>Green Belt</strong></td><td>Project lead (part-time)</td><td>Works on Six Sigma teams under Black or Master Black Belt direction; may lead minor projects independently; has intermediate statistical analysis skills</td></tr>
+              <tr><td><strong>Black Belt</strong></td><td>Project lead (full-time)</td><td>Typically serves as project manager on process improvement projects; may work in management, analysis, or planning roles across the organisation</td></tr>
+              <tr><td><strong>Master Black Belt</strong></td><td>Strategic leader</td><td>Highest certification level; supervises Black and Green Belts, consults on difficult projects, advises on complex statistical concepts, and trains others in Six Sigma methodology</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Most certification programmes require passing an exam; some Green and Black Belt candidates must also demonstrate expertise through completed Six Sigma project experience.</li>
+        </ul>
+
+        <h3>Key Six Sigma tools and techniques</h3>
+        <ul>
+          <li><strong>5S:</strong> Sort, Set in order, Shine, Standardize, Sustain — workplace organisation for eliminating waste and improving efficiency.</li>
+          <li><strong>Seven wastes (Muda):</strong> Overproduction, waiting, transport, over-processing, inventory, motion, defects — categories of non-value-adding activity to eliminate.</li>
+          <li><strong>Value stream mapping:</strong> Visual tool that maps all steps in a process to identify value-adding and non-value-adding activities.</li>
+          <li><strong>Visual workplace:</strong> Uses visual signals (labels, colour coding, dashboards) so process status and problems are immediately visible to the team.</li>
+          <li><strong>Voice of the Customer (VOC):</strong> Systematic collection and analysis of customer requirements to define CTQ metrics.</li>
+          <li><strong>Kaizen:</strong> Continuous, incremental improvement involving all employees; small changes accumulated over time produce significant gains.</li>
+          <li><strong>Regression analysis:</strong> Statistical technique used to model relationships between process inputs and outputs and predict defect causes.</li>
+          <li><strong>Kanban:</strong> Visual workflow management system that limits work in progress and improves flow through the process.</li>
+          <li><strong>Pareto chart:</strong> Identifies the vital few causes that account for the majority of defects (80/20 rule).</li>
+          <li><strong>Fishbone (Ishikawa) diagram:</strong> Visual root-cause analysis tool that categorises potential causes of a problem.</li>
+          <li><strong>Control charts:</strong> Statistical charts that monitor process stability over time and detect out-of-control conditions.</li>
+          <li><strong>FMEA:</strong> Failure Mode and Effects Analysis — systematically evaluates potential failure modes and their impact.</li>
+        </ul>
+
+        <h3>Six Sigma in software engineering</h3>
+        <ul>
+          <li>Software teams apply Six Sigma to reduce defect rates in development, testing, and release processes — for example, reducing variation in code review practices or deployment procedures.</li>
+          <li>DMAIC suits improving an existing SDLC process (e.g. reducing post-release defect escape rate); DMADV suits designing a new development workflow or product architecture from scratch.</li>
+          <li>Lean Six Sigma is widely adopted in agile and DevOps environments to eliminate waste (unnecessary meetings, manual handoffs, redundant testing) while maintaining Six Sigma quality targets.</li>
+          <li>Strategies that reduce variation in software — coding standards, automated testing, CI/CD pipelines, and documentation — directly support the Six Sigma principle of variation reduction.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Six Sigma</div>
+          <p><strong>Q:</strong> What is Six Sigma? Describe its characteristics, principles, DMAIC and DMADV methodologies, belt levels, and key tools.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Six Sigma (Bill Smith, Motorola 1986): methodology to reduce variation/errors; identification + elimination of defect causes.</li>
+            <li>Target: 3.4 DPMO = 99.99966% yield (vs Five Sigma ≈ 233 DPMO). σ = standard deviation.</li>
+            <li>Characteristics: statistical QC, methodical (DMAIC/DMADV), data-based, project-focused, customer-focused, teamwork.</li>
+            <li>Principles: customer-centric (VoC), continuous improvement, reduce variation, eliminate waste, empower employees, control process.</li>
+            <li>Lean Six Sigma = Lean (waste elimination) + Six Sigma (variation reduction).</li>
+            <li>DMAIC (existing process): Define → Measure → Analyze → Improve → Control.</li>
+            <li>DMADV (new design): Define → Measure → Analyze → Design → Verify; use when new product or full redesign needed.</li>
+            <li>Belts: White (awareness), Yellow (basic DMAIC), Green (part-time lead), Black (full-time PM), Master Black Belt (strategy/training).</li>
+            <li>Tools: 5S, seven wastes, value stream mapping, VOC, kaizen, regression, kanban, Pareto, fishbone, control charts, FMEA.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="08-07-sei-cmm.html">&larr; 8.7 SEI-CMM</a>
+        <a class="btn-back chapter-nav-next" href="08-09-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

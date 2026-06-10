@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 8 — 8.2 Software Quality Assurance</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>8.2 Software Quality Assurance</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 8</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-8-2">
+
+        <p>
+          <strong>Software Quality Assurance (SQA)</strong> is an umbrella activity that runs in parallel with
+          the entire Software Development Life Cycle (SDLC). Its purpose is to ensure that software engineering
+          processes, methods, and standards are applied correctly so that the resulting product meets defined
+          quality goals. SQA is not the same as testing — it oversees the entire quality system, including
+          processes, reviews, standards, and defect prevention.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-what-is-quality-caption">
+          <img src="../../../assets/images/se-topic-08/what-is-quality.jpg"
+               alt="What is software quality — conformance to requirements and fitness for use"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-what-is-quality-caption">Software quality combines conformance to specifications with fitness for the user's intended purpose.</figcaption>
+        </figure>
+
+        <h3>Definition and scope</h3>
+        <ul>
+          <li>SQA is a <strong>process</strong> that ensures software products meet quality standards and stated requirements throughout development and maintenance.</li>
+          <li>Its primary <strong>objective</strong> is to prevent defects, improve overall product quality, and ensure customer satisfaction — not merely to count bugs at the end.</li>
+          <li>SQA implements quality control and quality management activities across the entire lifecycle so that problems are caught before they reach the customer.</li>
+          <li>It is a planned and systematic set of activities needed to provide adequate confidence that a software product conforms to established technical requirements and user needs.</li>
+          <li>SQA operates as an <strong>umbrella activity</strong> — it spans every phase of the SDLC from requirements through maintenance, not just the testing phase.</li>
+          <li>SQA runs <strong>parallel to development</strong>; the SQA group monitors process compliance while the engineering team builds the product.</li>
+          <li>SQA provides management with objective evidence that quality objectives are being met and that deviations are identified and corrected promptly.</li>
+        </ul>
+
+        <h3>How software quality is defined for SQA</h3>
+        <ul>
+          <li>In SQA, software quality means <strong>conformance</strong> to explicitly stated functional and performance requirements in the SRS.</li>
+          <li>It also means conformance to documented development standards — coding rules, design conventions, and review procedures agreed for the project.</li>
+          <li>Quality includes <strong>implicit characteristics</strong> expected of all professionally developed software, such as maintainability, reliability, and usability, even when not written line-by-line in the SRS.</li>
+          <li>A product can meet every written requirement and still fail SQA if it is unmaintainable, insecure, or unusable — quality is broader than functional correctness alone.</li>
+        </ul>
+
+        <h3>Two groups responsible for SQA</h3>
+        <ul>
+          <li><strong>Software engineers</strong> perform the technical quality work — applying sound methods, conducting formal technical reviews, and executing well-planned testing on a daily basis.</li>
+          <li>The <strong>SQA group</strong> has organisational responsibility for quality assurance planning, oversight, record keeping, analysis, and reporting to management.</li>
+          <li>Engineers address quality at the work-product level; the SQA group ensures that the overall process and standards are being followed consistently.</li>
+          <li>The SQA group typically reports independently of the development manager so that audit findings are objective and not suppressed to meet schedule pressure.</li>
+        </ul>
+
+        <h3>Elements of SQA</h3>
+        <p>SQA is built from several interlocking elements that together form a complete quality system:</p>
+        <ul>
+          <li><strong>Standards and procedures:</strong> Adoption of IEEE, ISO, and organisational software engineering standards (such as IEEE 730 for SQA plans, ISO 9001 for QMS, and CMMI for process maturity) that define how work should be performed.</li>
+          <li><strong>Reviews and audits:</strong> Technical reviews are QC activities performed by engineers to uncover errors; SQA audits are performed by SQA personnel to verify that quality guidelines and process rules are being followed.</li>
+          <li><strong>Testing oversight:</strong> Testing is a QC function whose primary goal is to find errors — SQA ensures that testing is properly planned, resourced, multi-level, and efficiently conducted rather than ad hoc.</li>
+          <li><strong>Defect collection and analysis:</strong> SQA collects and analyses error and defect data to understand how defects are introduced and which engineering activities best eliminate them.</li>
+          <li><strong>Change management:</strong> SQA ensures that adequate change management practices are instituted so that every modification is reviewed, approved, and tested before release.</li>
+          <li><strong>Education and training:</strong> Every software organisation wants to improve its practices — the SQA group leads process improvement and sponsors training programmes for engineers, managers, and stakeholders.</li>
+          <li><strong>Security management:</strong> SQA verifies that appropriate security processes and technologies are used so that vulnerabilities are addressed throughout the lifecycle.</li>
+          <li><strong>Safety:</strong> For safety-critical systems, SQA assesses the impact of software failure and initiates steps required to reduce risk to acceptable levels.</li>
+          <li><strong>Risk management:</strong> SQA ensures that risk management activities are properly conducted and that contingency plans exist for identified quality and schedule risks.</li>
+        </ul>
+
+        <h3>SQA techniques (from process to product)</h3>
+        <ul>
+          <li><strong>Code reviews and inspections:</strong> Structured examination of source code and design documents to find defects before compilation or execution.</li>
+          <li><strong>Audits:</strong> Independent checks by SQA staff that procedures, standards, and the SQA plan itself are being followed on the project.</li>
+          <li><strong>Testing:</strong> Dynamic execution of the software at unit, integration, system, and acceptance levels — overseen by SQA to ensure coverage and traceability.</li>
+          <li><strong>Metrics:</strong> Quantitative measures such as defect density, code coverage, review effectiveness, and schedule variance used to evaluate whether quality goals are being met.</li>
+          <li><strong>Documentation control:</strong> Proper documentation of requirements, design, test cases, and review records for transparency and traceability during audits and maintenance.</li>
+          <li><strong>Continuous improvement:</strong> Monitoring processes and products to identify improvement opportunities and implementing corrective actions when trends show declining quality.</li>
+        </ul>
+
+        <h3>SQA focus areas</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-sqa-focuses-caption">
+          <img src="../../../assets/images/se-topic-08/sqa-focuses.webp"
+               alt="SQA focus areas — portability, usability, reusability, correctness, maintainability, error control"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-sqa-focuses-caption">SQA monitors quality attributes across the product lifecycle, not just functional correctness.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Portability:</strong> The software can be transferred to different hardware or software environments with minimal modification.</li>
+          <li><strong>Usability:</strong> Users can learn and operate the system efficiently; interfaces meet human-factors requirements.</li>
+          <li><strong>Reusability:</strong> Components and modules are designed so they can be reused in future projects, reducing development cost and improving consistency.</li>
+          <li><strong>Correctness:</strong> The software performs its intended functions correctly and conforms to its specifications.</li>
+          <li><strong>Maintainability:</strong> The system can be modified to correct defects, improve performance, or adapt to a changed environment with acceptable effort.</li>
+          <li><strong>Reliability:</strong> The software performs consistently under normal use and recovers gracefully from errors — a core PDF quality attribute monitored by SQA.</li>
+          <li><strong>Efficiency:</strong> The system uses reasonable CPU, memory, and network resources while meeting performance requirements.</li>
+          <li><strong>Functionality:</strong> All required features are present and operate as specified in the SRS — the baseline attribute against which testing is traced.</li>
+          <li><strong>Error control:</strong> Defects are detected early, tracked systematically, and prevented from recurring through process improvement.</li>
+        </ul>
+
+        <h3>What SQA encompasses — seven core areas</h3>
+        <p>SQA as a comprehensive quality system is built from seven interrelated areas:</p>
+        <ol>
+          <li><strong>Quality management approach:</strong> A documented strategy for how quality will be achieved on the project, aligned with organisational policy.</li>
+          <li><strong>Effective software engineering technology:</strong> Use of proven methods, tools, and techniques (CASE tools, configuration management, review methods) that support quality production.</li>
+          <li><strong>Formal technical reviews:</strong> Structured reviews applied throughout the software process at requirements, design, code, and test stages.</li>
+          <li><strong>Multi-tiered testing strategy:</strong> A planned combination of unit, integration, system, and acceptance testing — not reliance on a single test pass at the end.</li>
+          <li><strong>Software documentation control:</strong> Controlling and tracking all project documents and the changes made to them so that every artefact remains consistent and auditable.</li>
+          <li><strong>Compliance with development standards:</strong> Ensuring the project follows applicable IEEE, ISO, and internal coding/design standards when they apply.</li>
+          <li><strong>Measurement and reporting mechanisms:</strong> Collecting quality metrics and reporting results to the project manager and senior management on a regular schedule.</li>
+        </ol>
+        <h3>Major SQA activities during a project</h3>
+        <ul>
+          <li><strong>SQA management plan:</strong> Prepare a plan for how SQA will be carried out throughout the project — which activities apply, what standards govern the work, and what skills the SQA team needs (see <a href="08-04-sqa-plans.html#sec-8-4">§8.4 SQA Plans</a>).</li>
+          <li><strong>Set checkpoints:</strong> The SQA team defines evaluation checkpoints at key milestones and measures project performance against collected data at each checkpoint.</li>
+          <li><strong>Measure change impact:</strong> When a defect fix or requirement change is made, SQA tracks whether the fix re-introduces new errors and verifies compatibility with the whole system before sign-off.</li>
+          <li><strong>Multi-testing strategy:</strong> SQA does not rely on a single testing approach — multiple methods (reviews, static analysis, unit/integration/system/acceptance testing) are combined for broader coverage.</li>
+          <li><strong>Review software engineering activities:</strong> The SQA group identifies and documents processes, then verifies the correctness of software products against those processes.</li>
+          <li><strong>Formal technical reviews of work products:</strong> SQA selects key deliverables (SRS, design, code modules) for formal review, documents deviations, and verifies that corrections are applied.</li>
+          <li><strong>Formalise deviation handling:</strong> All deviations from standards or the project plan are tracked and handled according to a documented procedure until resolved.</li>
+          <li><strong>Maintain records and reports:</strong> Test cases, defect logs, change requests, and review minutes are comprehensively documented and shared with stakeholders.</li>
+          <li><strong>Manage good relations:</strong> SQA works constructively with developers and testers — poor relations between SQA and engineering teams directly harm project quality and schedule.</li>
+          <li><strong>Report non-compliance to senior management:</strong> Items that cannot be resolved at project level are escalated and tracked until closed.</li>
+        </ul>
+
+        <div class="terminal" aria-label="Pseudocode — SQA activity flow across SDLC">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">sqa_activity_flow.pseudo</span>
+          </div>
+          <pre><code>FOR each SDLC phase (Requirements → Design → Code → Test → Deploy → Maintain)
+  Prepare / update SQA Plan for phase deliverables
+  Set quality checkpoints before phase exit
+  Review work products (SRS, SDD, code, test plans)
+  Verify process compliance against standards (IEEE, ISO, internal)
+  Conduct or oversee formal technical reviews
+  Track defects → analyse root causes → verify fixes
+  Measure impact of every approved change
+  Run multi-level testing (unit, integration, system, acceptance)
+  Collect metrics (defect density, coverage, review findings)
+  Document all records and report to project manager
+  IF non-compliance found THEN
+    Log deviation → assign correction → verify closure
+    IF unresolved THEN escalate to senior management
+  END IF
+END FOR
+Continuous improvement: feed metrics back into process refinement</code></pre>
+        </div>
+
+        <h3>SQA group responsibilities (detailed)</h3>
+        <ul>
+          <li><strong>Prepare an SQA plan</strong> during project planning and have all interested parties review it; the plan governs both the SQA group and the engineering team's quality activities.</li>
+          <li><strong>Participate in selecting the software process</strong> — the SQA group reviews the chosen process description for conformance with organisational policy, internal standards, and external requirements.</li>
+          <li><strong>Review engineering activities</strong> to verify compliance with the defined software process; identify documents, track deviations, and confirm corrections.</li>
+          <li><strong>Audit designated work products</strong> — review selected deliverables, document deviations, verify fixes, and periodically report results to the project manager.</li>
+          <li><strong>Ensure deviations are documented and handled</strong> according to a written procedure, whether the deviation arises in the project plan, process, standards, or a technical work product.</li>
+          <li><strong>Record and report non-compliance</strong> to senior management and track non-compliance items until they are fully resolved.</li>
+        </ul>
+
+        <h3>Quality management frameworks used with SQA</h3>
+        <ul>
+          <li>Most organisations base their SQA programme on one or more established quality management models — the three most widely used are <strong>ISO 9000</strong>, <strong>CMMI</strong>, and <strong>Six Sigma</strong>.</li>
+          <li><strong>ISO 9000</strong> provides international guidelines for a Quality Management System (QMS) — see <a href="08-06-iso-9000.html#sec-8-6">§8.6</a>.</li>
+          <li><strong>CMMI / SEI-CMM</strong> assesses process maturity on five levels — see <a href="08-07-sei-cmm.html#sec-8-7">§8.7</a> and <a href="../03-software-project-management/03-10-cmm.html#sec-3-10">§3.10</a>.</li>
+          <li><strong>Six Sigma</strong> uses statistical methods to reduce process variation and defects — see <a href="08-08-six-sigma.html#sec-8-8">§8.8</a>.</li>
+          <li>McCall, Boehm, and ISO/IEC 9126 quality factor models define <em>what</em> to measure; SQA defines <em>how</em> to assure those factors are achieved — see <a href="08-05-quality-frameworks.html#sec-8-5">§8.5 Quality Frameworks</a>.</li>
+        </ul>
+
+        <h3>SQA vs software testing</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Software Quality Assurance (SQA)</th><th>Software Testing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Scope</td><td>Entire SDLC — process, standards, reviews, audits, and testing oversight</td><td>Product verification — executing tests to find defects in the built software</td></tr>
+              <tr><td>Focus</td><td>Process quality and prevention of defects</td><td>Product quality and detection of defects</td></tr>
+              <tr><td>Timing</td><td>Continuous from project start to delivery</td><td>Concentrated during implementation and test phases (with test planning earlier)</td></tr>
+              <tr><td>Goal</td><td>Ensure the right process is followed so quality is built in</td><td>Ensure the product meets specified requirements</td></tr>
+              <tr><td>Who performs it</td><td>SQA group + all engineers following defined processes</td><td>Test engineers / QA testers (often a dedicated test team)</td></tr>
+              <tr><td>Output</td><td>Audit reports, compliance records, process metrics, SQA plan</td><td>Test cases, defect reports, test coverage reports</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Testing verifies that the product works; SQA verifies that the <em>process</em> used to build the product is sound and that testing itself is adequate.</li>
+          <li>SQA is proactive and process-focused; testing is largely reactive and product-focused, though test planning is proactive.</li>
+          <li>An organisation can test thoroughly but still produce poor-quality software if its underlying processes are chaotic — SQA addresses that upstream gap.</li>
+          <li>SQA groups typically report to senior management independently of the development team to maintain objectivity in audits and non-compliance reporting.</li>
+          <li>High-quality commercial software increases market share and customer trust — SQA is the organisational mechanism that makes quality repeatable rather than accidental.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Quality Assurance</div>
+          <p><strong>Q:</strong> Define Software Quality Assurance. List its elements, focus areas, and major activities. How does SQA differ from software testing?</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>SQA = umbrella activity parallel to SDLC; objective = prevent defects, improve quality, ensure customer satisfaction.</li>
+            <li>Two groups: software engineers (technical QA/QC work) + SQA group (planning, oversight, records, reporting).</li>
+            <li>Elements: standards (IEEE/ISO/CMMI), reviews/audits, testing oversight, defect analysis, change management, education, security, safety, risk.</li>
+            <li>Techniques: code reviews, inspections, audits, testing, metrics (defect density, coverage), documentation, continuous improvement.</li>
+            <li>Seven encompassed areas: quality management approach, SE technology, formal reviews, multi-tiered testing, doc control, standards compliance, measurement/reporting.</li>
+            <li>Focus attributes: portability, usability, reusability, correctness, maintainability, reliability, efficiency, functionality, error control.</li>
+            <li>Major activities: SQA plan, checkpoints, change impact, multi-testing, deviation handling, records, relations, escalation to management.</li>
+            <li>Frameworks: ISO 9000, CMMI, Six Sigma (+ McCall/Boehm/9126 for quality factors).</li>
+            <li>SQA = process assurance across SDLC; testing = product verification; SQA oversees testing as one component.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="08-01-quality-assurance-overview.html">&larr; 8.1 QA Overview</a>
+        <a class="btn-back chapter-nav-next" href="08-03-verification-validation.html">8.3 Verification &amp; Validation &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 8 — 8.5 Software Quality Frameworks</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>8.5 Software Quality Frameworks</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 8</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-8-5">
+
+        <p>
+          A <strong>software quality framework</strong> provides a structured model for defining, measuring, and
+          evaluating software quality attributes. Several frameworks have been proposed since the 1970s, each
+          organising quality factors differently. Understanding these models helps teams communicate about quality,
+          select appropriate metrics, and compare products objectively.
+        </p>
+
+        <h3>McCall's Quality Model (1977)</h3>
+        <p>
+          John McCall proposed a model with <strong>11 quality factors</strong> grouped into three categories based
+          on how the software is used and maintained:
+        </p>
+
+        <h4>Product operation (runtime behaviour)</h4>
+        <ul>
+          <li><strong>Correctness:</strong> The extent to which the program satisfies its specification and fulfils the user's objectives.</li>
+          <li><strong>Reliability:</strong> The ability to perform intended functions without failure over a specified period.</li>
+          <li><strong>Efficiency:</strong> The amount of computing resources (CPU, memory, I/O) consumed relative to the functions performed.</li>
+          <li><strong>Integrity:</strong> The degree to which access to programs and data is controlled and unauthorised access is prevented.</li>
+          <li><strong>Usability:</strong> The effort required to learn, operate, and prepare inputs for the program.</li>
+        </ul>
+
+        <h4>Product revision (ability to change)</h4>
+        <ul>
+          <li><strong>Maintainability:</strong> The effort required to locate and fix errors in an operational program.</li>
+          <li><strong>Flexibility:</strong> The effort required to modify an operational program.</li>
+          <li><strong>Testability:</strong> The effort required to test a program to ensure it performs its intended functions.</li>
+        </ul>
+
+        <h4>Product transition (adaptability to new environments)</h4>
+        <ul>
+          <li><strong>Portability:</strong> The effort required to transfer a program from one hardware or software environment to another.</li>
+          <li><strong>Reusability:</strong> The extent to which a program (or parts of it) can be reused in other applications.</li>
+          <li><strong>Interoperability:</strong> The effort required to couple one system to another.</li>
+        </ul>
+
+        <h3>Boehm's Hierarchical Quality Model (1978)</h3>
+        <p>
+          Barry Boehm proposed a <strong>hierarchical model</strong> that connects high-level quality goals to
+          measurable primitive constructs through intermediate quality factors:
+        </p>
+        <ul>
+          <li><strong>Primary uses (top level):</strong> As-is utility (how well the software works now), maintainability (how easily it can be changed), and portability (how easily it can be moved to new environments).</li>
+          <li><strong>Seven general quality factors (middle level):</strong> Portability, reliability, efficiency, human engineering (usability), testability, understandability, and modifiability.</li>
+          <li><strong>Primitive constructs (bottom level):</strong> Measurable attributes such as device independence, completeness, consistency, and accuracy that can be directly observed or measured in the software.</li>
+          <li>The hierarchy allows quality goals to be traced down to concrete, measurable properties of the code and documentation.</li>
+        </ul>
+
+        <h3>ISO/IEC 9126 Quality Model</h3>
+        <p>
+          <strong>ISO/IEC 9126</strong> is an international standard that defines a comprehensive software product
+          quality model. It consists of <strong>four parts</strong>:
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-9126-parts-caption">
+          <img src="../../../assets/images/se-topic-08/iso-9126-parts.png"
+               alt="ISO/IEC 9126 four parts — quality model, external metrics, internal metrics, quality in use metrics"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-9126-parts-caption">ISO/IEC 9126 comprises four parts covering the quality model and three metric types.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Part</th><th>Title</th><th>Content</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Part 1</td><td>Quality model</td><td>Defines six quality characteristics and their sub-characteristics</td></tr>
+              <tr><td>Part 2</td><td>External metrics</td><td>Metrics measured by executing software (behaviour in use)</td></tr>
+              <tr><td>Part 3</td><td>Internal metrics</td><td>Metrics measured from source code and documentation (static properties)</td></tr>
+              <tr><td>Part 4</td><td>Quality in use metrics</td><td>Metrics measured in the user's environment (effectiveness, productivity, safety, satisfaction)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Six quality characteristics (Part 1)</h4>
+        <figure class="diagram figure-photo" aria-labelledby="fig-9126-model-caption">
+          <img src="../../../assets/images/se-topic-08/iso-9126-quality-model.png"
+               alt="ISO/IEC 9126 quality model — six characteristics with sub-characteristics"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-9126-model-caption">ISO/IEC 9126 defines six top-level quality characteristics, each decomposed into sub-characteristics.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Characteristic</th><th>Sub-characteristics</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Functionality</strong></td><td>Suitability, accuracy, interoperability, security, compliance</td></tr>
+              <tr><td><strong>Reliability</strong></td><td>Maturity, fault tolerance, recoverability, compliance</td></tr>
+              <tr><td><strong>Usability</strong></td><td>Understandability, learnability, operability, attractiveness, compliance</td></tr>
+              <tr><td><strong>Efficiency</strong></td><td>Time behaviour, resource utilisation, compliance</td></tr>
+              <tr><td><strong>Maintainability</strong></td><td>Analysability, changeability, stability, testability, compliance</td></tr>
+              <tr><td><strong>Portability</strong></td><td>Adaptability, installability, co-existence, replaceability, compliance</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Quality in use (Part 4)</h4>
+        <ul>
+          <li><strong>Effectiveness:</strong> The accuracy and completeness with which users achieve specified goals.</li>
+          <li><strong>Productivity:</strong> The resources expended relative to the results achieved in a specified context of use.</li>
+          <li><strong>Safety:</strong> The ability of the software to avoid states in which harm to people, business, or property can result.</li>
+          <li><strong>Satisfaction:</strong> The degree to which user needs are fulfilled, including comfort and acceptability of use.</li>
+        </ul>
+
+        <p>
+          ISO/IEC 9126 has been <strong>superseded by ISO/IEC 25010</strong> (Systems and Software Quality
+          Requirements and Evaluation — SQuaRE), which expands the model to cover data quality and quality of
+          services in addition to product quality. For exams, the six characteristics of 9126 remain commonly tested.
+        </p>
+
+        <h3>Popular organisational quality frameworks</h3>
+        <p>Beyond product-quality models, organisations adopt process-level frameworks to institutionalise quality:</p>
+        <ul>
+          <li><strong>ISO 9000:</strong> International Quality Management System standards — certifies that an organisation follows documented, repeatable processes (see <a href="08-06-iso-9000.html#sec-8-6">§8.6</a>).</li>
+          <li><strong>CMMI (Capability Maturity Model Integration):</strong> Process maturity framework with five levels from ad hoc to optimising — assesses and improves organisational process capability (see <a href="08-07-sei-cmm.html#sec-8-7">§8.7</a>).</li>
+          <li><strong>Six Sigma:</strong> Data-driven methodology to reduce defects and process variation — targets 3.4 defects per million opportunities (see <a href="08-08-six-sigma.html#sec-8-8">§8.8</a>).</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Quality Frameworks</div>
+          <p><strong>Q:</strong> Compare McCall's, Boehm's, and ISO/IEC 9126 quality models. List the six ISO 9126 characteristics and quality-in-use metrics.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>McCall (1977): 11 factors in 3 groups — product operation (5), product revision (3), product transition (3).</li>
+            <li>Boehm (1978): hierarchical — primary uses (utility, maintainability, portability) → 7 factors → primitive constructs.</li>
+            <li>ISO 9126: 4 parts (model, external metrics, internal metrics, quality in use); 6 characteristics with sub-chars.</li>
+            <li>Six characteristics: functionality, reliability, usability, efficiency, maintainability, portability.</li>
+            <li>Quality in use: effectiveness, productivity, safety, satisfaction.</li>
+            <li>9126 replaced by ISO/IEC 25010 (SQuaRE).</li>
+            <li>Organisational frameworks: ISO 9000, CMMI, Six Sigma.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="08-04-sqa-plans.html">&larr; 8.4 SQA Plans</a>
+        <a class="btn-back chapter-nav-next" href="08-06-iso-9000.html">8.6 ISO 9000 &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 8 — 8.4 SQA Plans</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>8.4 SQA Plans</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 8</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-8-4">
+
+        <p>
+          An <strong>SQA Plan</strong> (Software Quality Assurance Plan) is a formal document that defines the
+          quality assurance activities, responsibilities, standards, and evaluation procedures for a specific
+          software project. Its main goal is to guarantee that the product delivered to the market is
+          trouble- and defect-free and fulfils the specifications listed in the
+          <strong>SRS (Software Requirements Specification)</strong>. The plan is developed during the
+          <strong>project planning phase</strong> and governs both the SQA group's work and the quality
+          activities performed by the engineering team throughout the lifecycle.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-sqa-plan-lifecycle-caption">
+          <img src="../../../assets/images/se-topic-08/sqa-plan-lifecycle.png"
+               alt="SQA Plan — Software Quality Assurance integrated across Development, Baseline System, Production, and Release to Market"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-sqa-plan-lifecycle-caption">An SQA Plan spans the full lifecycle — from research and analysis through design, production, delivery, and support.</figcaption>
+        </figure>
+
+        <h3>Three purposes of an SQA Plan</h3>
+        <ul>
+          <li><strong>Assign QA duties:</strong> The plan determines which quality assurance tasks are assigned to each concerned team and individual on the project.</li>
+          <li><strong>Define review areas:</strong> It lists the areas that require review, audit, and examination at each phase of development.</li>
+          <li><strong>Identify SQA work products:</strong> It determines the documents, records, and reports that the SQA group must produce and maintain.</li>
+        </ul>
+
+        <h3>What is a Software Quality Assurance Plan?</h3>
+        <ul>
+          <li>A Quality Assurance Plan (QAP) is a document or set of documents that outlines the systematic processes, procedures, and standards for ensuring the quality of a product or service.</li>
+          <li>For software, the SQA plan is used alongside the typical development cycle — research, prototyping, design, production, and release.</li>
+          <li>Key components include: <strong>purpose</strong>, <strong>references</strong>, <strong>configuration and management</strong>, <strong>tools</strong>, <strong>code controls</strong>, <strong>testing methodology</strong>, <strong>problem reporting and remedial measures</strong>, and related sections for easy documentation and referencing.</li>
+          <li>The SQA Plan provides a contract between the SQA group, the development team, and management on how quality will be achieved and measured.</li>
+          <li>It serves as an auditable record that the organisation took reasonable steps to assure software quality.</li>
+        </ul>
+
+        <h3>Importance of the SQA Plan</h3>
+        <ul>
+          <li><strong>Quality standards and guidelines:</strong> The plan lays out requirements and guidelines to ensure the software satisfies predetermined quality standards.</li>
+          <li><strong>Risk management:</strong> It supports identifying, assessing, and controlling risks to reduce the possibility of errors and quality failures.</li>
+          <li><strong>Standardization and consistency:</strong> The plan ensures consistent methods, processes, and procedures across the project, fostering a unified approach to quality assurance.</li>
+          <li><strong>Customer satisfaction:</strong> A well-defined SQA Plan helps ensure the finished product meets customer needs and increases overall satisfaction.</li>
+          <li><strong>Resource optimization:</strong> By defining roles, responsibilities, and procedures, the plan maximizes resource use and minimises unnecessary rework.</li>
+          <li><strong>Early issue detection:</strong> SQA Plans help identify problems early, reducing the cost and effort of fixing them later in the lifecycle.</li>
+        </ul>
+
+        <h3>Objectives and goals</h3>
+        <ul>
+          <li><strong>Compliance:</strong> Ensure the project complies with industry standards, regulatory requirements, and organisational guidelines.</li>
+          <li><strong>Customer satisfaction:</strong> Deliver products that meet or exceed customer expectations by incorporating their requirements into QA processes.</li>
+          <li><strong>Defect prevention:</strong> Implement proactive measures to prevent defects in the early stages rather than detecting them late.</li>
+          <li><strong>Consistency and reliability:</strong> Establish a consistent process so deliverable quality is predictable across all project phases.</li>
+          <li><strong>Process improvement:</strong> Continuously improve QA processes through feedback, assessments, and regular plan updates.</li>
+          <li><strong>Risk management:</strong> Identify, assess, and mitigate risks that could impact software quality.</li>
+          <li><strong>Clear roles and responsibilities:</strong> Define who is accountable for each QA activity to foster collaboration and avoid gaps.</li>
+          <li><strong>Documentation and traceability:</strong> Maintain comprehensive records that enable transparency and traceability of quality decisions.</li>
+          <li><strong>Training and competence:</strong> Ensure team members have the skills and knowledge needed to perform QA tasks effectively.</li>
+          <li><strong>Continuous monitoring and reporting:</strong> Track quality metrics regularly and report status so data-driven decisions can be made.</li>
+        </ul>
+
+        <h3>What the SQA Plan identifies</h3>
+        <ul>
+          <li><strong>Evaluations to be performed:</strong> Which work products will be evaluated, at what milestones, and using what criteria.</li>
+          <li><strong>Audits and reviews:</strong> Schedule and scope of formal technical reviews, process audits, and management reviews.</li>
+          <li><strong>Applicable standards:</strong> Coding standards, design standards, documentation standards, and process standards (IEEE, ISO, organisational) that the project must follow.</li>
+          <li><strong>Error reporting and tracking procedures:</strong> How defects are logged, classified, prioritised, assigned, and closed; what tools are used.</li>
+          <li><strong>SQA documents to be produced:</strong> Audit reports, review minutes, compliance checklists, and periodic SQA status reports.</li>
+          <li><strong>Amount of feedback required:</strong> How frequently the SQA group reports to management and what metrics are included in those reports.</li>
+        </ul>
+
+        <h3>SQA Plan activities</h3>
+        <ul>
+          <li><strong>Process description review:</strong> The SQA group reviews the project's software development process description to ensure it conforms to organisational standards and covers all necessary quality activities.</li>
+          <li><strong>Formal technical reviews (FTRs):</strong> Structured reviews of requirements, design, code, and test plans at defined checkpoints; SQA ensures FTRs are conducted and action items are resolved.</li>
+          <li><strong>Deviation handling:</strong> When the project deviates from the SQA Plan or applicable standards, the SQA group documents the deviation, assesses its impact, and ensures corrective action is taken.</li>
+          <li><strong>Reporting to senior management:</strong> The SQA group provides regular status reports on quality metrics, open defects, audit findings, and compliance levels so management can make informed decisions.</li>
+        </ul>
+
+        <h3>IEEE 730 — Standard for Software Quality Assurance Plans</h3>
+        <p>
+          <strong>IEEE Std 730</strong> defines the minimum contents and structure of an SQA Plan. It ensures
+          consistency across projects and organisations by specifying required sections such as purpose, scope,
+          referenced documents, management approach, documentation requirements, standards, reviews, testing,
+          problem reporting, and tools. Following IEEE 730 makes the plan auditable and comparable across projects.
+        </p>
+
+        <h3>SQA Plan outline</h3>
+        <p>The following pseudocode summarises a typical SQA Plan structure aligned with IEEE 730:</p>
+        <div class="terminal" aria-label="Pseudocode — SQA plan outline">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">sqa_plan_outline.pseudo</span>
+          </div>
+          <pre><code>SQA_PLAN(project)
+
+SECTION 1 — PURPOSE AND SCOPE
+  STATE quality objectives for the project
+  DEFINE boundaries (what is in / out of SQA scope)
+  IDENTIFY deliverables covered by this plan
+
+SECTION 2 — REFERENCED DOCUMENTS
+  LIST applicable standards (IEEE 730, ISO 9001, org standards)
+  LIST project documents (SRS, SDP, test plans)
+
+SECTION 3 — MANAGEMENT
+  DEFINE SQA organisation and roles
+  ASSIGN responsibilities (SQA lead, reviewers, auditors)
+  DESCRIBE interface with project management and dev team
+
+SECTION 4 — DOCUMENTATION
+  LIST SQA documents to be produced (audit reports, review records)
+  SPECIFY document control and retention procedures
+
+SECTION 5 — STANDARDS, PRACTICES, AND CONVENTIONS
+  IDENTIFY coding, design, and documentation standards
+  STATE compliance verification methods
+
+SECTION 6 — REVIEWS AND AUDITS
+  SCHEDULE formal technical reviews at each milestone
+  DEFINE process audit frequency and scope
+  SPECIFY entry/exit criteria for each review
+
+SECTION 7 — TESTING
+  DESCRIBE SQA oversight of test planning and execution
+  DEFINE test coverage and acceptance criteria requirements
+
+SECTION 8 — PROBLEM REPORTING AND CORRECTIVE ACTION
+  DEFINE defect logging, classification, and tracking procedures
+  SPECIFY escalation paths for unresolved quality issues
+
+SECTION 9 — TOOLS, TECHNIQUES, AND METHODOLOGIES
+  LIST static analysis tools, review tools, defect trackers
+  DESCRIBE metrics to be collected (defect density, review rate)
+
+SECTION 10 — MEDIA CONTROL, SUPPLIER CONTROL, COLLECTION, MAINTENANCE
+  DEFINE version control and configuration management requirements
+  SPECIFY quality requirements for vendor/subcontractor deliverables
+
+SECTION 11 — RECORDS
+  IDENTIFY records to be maintained (audit logs, review minutes)
+  DEFINE retention period and access controls
+
+END SQA_PLAN</code></pre>
+        </div>
+
+        <h3>Steps to develop an SQA Plan</h3>
+        <ol>
+          <li><strong>Define project objectives and scope</strong> — articulate goals, deliverables, and stakeholders for which the plan is being created.</li>
+          <li><strong>Identify quality standards and criteria</strong> — determine applicable industry standards, regulations, and internal organisational requirements.</li>
+          <li><strong>Identify stakeholders</strong> — involve project managers, developers, testers, customers, and regulatory bodies who affect or depend on quality.</li>
+          <li><strong>Define roles and responsibilities</strong> — assign accountability for each QA activity to specific individuals or teams.</li>
+          <li><strong>Conduct a risk assessment</strong> — identify quality risks, assess their impact and likelihood, and plan mitigation strategies.</li>
+          <li><strong>Establish QA activities</strong> — determine reviews, inspections, audits, testing, and other control measures for each lifecycle phase.</li>
+          <li><strong>Develop testing and inspection procedures</strong> — create test plans, test cases, and acceptance criteria aligned with quality standards.</li>
+          <li><strong>Document processes and procedures</strong> — write the plan sections so team members have a consistent reference.</li>
+          <li><strong>Establish reporting mechanisms</strong> — define documentation requirements for tracking and reporting quality status.</li>
+          <li><strong>Allocate resources and training</strong> — specify tools, skills, and training needed to support QA efforts.</li>
+          <li><strong>Define change control processes</strong> — ensure changes to the project do not negatively impact quality without review.</li>
+          <li><strong>Review and obtain approval</strong> — seek stakeholder feedback, revise the draft, and obtain formal sign-off before implementation.</li>
+          <li><strong>Monitor and improve continuously</strong> — track metrics, update the plan as the project evolves, and incorporate lessons learned.</li>
+        </ol>
+
+        <h3>SQA implementation phase</h3>
+        <ul>
+          <li>Before development begins, developers work with the SQA team to construct a development plan; the SQA team produces the SQA Plan while developers write the SDLC plan.</li>
+          <li>If both documents are well-written and structured, the application is effectively <strong>50% complete</strong> before coding starts — because requirements, processes, and quality checkpoints are already defined.</li>
+          <li>During this phase, the SQA team's duty is to ensure that the proposed features of the intended application will be implemented correctly and that the development process itself is monitored, not just the final product.</li>
+          <li>The SQA team reviews project documentation in detail to confirm the application's purpose, scope, and requirements are clearly stated and testable.</li>
+          <li>SQA may advise the development team on appropriate design techniques, languages, or frameworks that support quality goals for the specific project.</li>
+        </ul>
+
+        <h3>Best practices for creating an SQA Plan</h3>
+        <ul>
+          <li><strong>Understand project objectives</strong> — tailor the plan to the specific goals, scope, and constraints of the project rather than using a generic template unchanged.</li>
+          <li><strong>Define quality standards</strong> — document all relevant industry, regulatory, and internal standards the software must adhere to.</li>
+          <li><strong>Involve stakeholders</strong> — engage developers, testers, project managers, and customers when drafting the plan so their requirements are reflected.</li>
+          <li><strong>Set clear roles and responsibilities</strong> — define SQA manager, tester, developer, and project manager responsibilities explicitly.</li>
+          <li><strong>Establish testing processes</strong> — specify types of testing (unit, integration, system, acceptance), techniques, tools, and success criteria for each phase.</li>
+          <li><strong>Incorporate automated testing</strong> — use automation for regression and repetitive tests to improve coverage and efficiency where practical.</li>
+          <li><strong>Document test plans and cases</strong> — maintain comprehensive test documentation covering both functional and non-functional requirements.</li>
+          <li><strong>Implement code reviews</strong> — integrate peer review into the development process to catch defects early.</li>
+          <li><strong>Use CI/CD practices</strong> — automate integration and deployment so changes are tested consistently and integration issues are caught quickly.</li>
+          <li><strong>Apply configuration management</strong> — use version control, baselines, and change control to maintain consistency and traceability.</li>
+        </ul>
+
+        <h3>Why an SQA Plan matters for software companies</h3>
+        <ul>
+          <li><strong>Quality and customer satisfaction:</strong> An SQA plan establishes processes that help software meet or exceed customer expectations, enhancing reputation and loyalty.</li>
+          <li><strong>Regulatory compliance:</strong> Many industries require adherence to specific standards; the plan demonstrates commitment to quality and reduces legal risk.</li>
+          <li><strong>Early defect detection:</strong> Code reviews, testing, and inspections defined in the plan catch issues early, when they are cheapest to fix.</li>
+          <li><strong>Cost reduction:</strong> Fewer defects reaching production means lower maintenance costs and less post-release firefighting.</li>
+          <li><strong>Better collaboration:</strong> Defined roles and communication channels reduce misunderstandings and improve team efficiency.</li>
+          <li><strong>Risk management:</strong> Proactive risk strategies in the plan help address potential quality problems before they become critical.</li>
+          <li><strong>Improved productivity:</strong> Standardised processes streamline development, testing, and release, enabling faster and more reliable delivery.</li>
+          <li>On very small projects, a full formal SQA plan may add overhead disproportionate to scope — the plan should be scaled to project size while still covering essential QA activities.</li>
+        </ul>
+
+        <h3>Relationship to other project plans</h3>
+        <ul>
+          <li>The SQA Plan is developed alongside the Software Development Plan (SDP) and Test Plan during project initiation.</li>
+          <li>It references the project's requirements specification, design documents, and configuration management plan.</li>
+          <li>SQA checkpoint reviews align with project milestones defined in the project schedule.</li>
+          <li>Changes to the SQA Plan follow the same change control process as other project documents.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — SQA Plans</div>
+          <p><strong>Q:</strong> What is an SQA Plan? State its three purposes, objectives, and development steps. Describe the role of IEEE 730.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>SQA Plan = formal document defining QA activities, responsibilities, standards, and procedures; goal = defect-free product meeting SRS specs.</li>
+            <li>Three purposes: assign QA duties, list review/audit areas, identify SQA work products.</li>
+            <li>Importance: standards, risk management, consistency, customer satisfaction, resource optimization, early issue detection.</li>
+            <li>Objectives: compliance, defect prevention, consistency, process improvement, roles/responsibilities, traceability, monitoring.</li>
+            <li>Identifies: evaluations, audits/reviews, standards, error reporting/tracking, SQA documents, feedback amount.</li>
+            <li>Development steps: define scope → standards → stakeholders → roles → risk assessment → QA activities → testing procedures → document → report → resources → change control → approval → monitor.</li>
+            <li>Implementation phase: SQA Plan + SDLC plan prepared before coding; SQA monitors process and reviews documentation.</li>
+            <li>IEEE 730 = standard for SQA Plan contents (purpose, scope, management, standards, reviews, testing, problem reporting, records).</li>
+            <li>Best practices: stakeholder involvement, clear roles, testing processes, code reviews, CI/CD, configuration management.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="08-03-verification-validation.html">&larr; 8.3 Verification &amp; Validation</a>
+        <a class="btn-back chapter-nav-next" href="08-05-quality-frameworks.html">8.5 Quality Frameworks &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

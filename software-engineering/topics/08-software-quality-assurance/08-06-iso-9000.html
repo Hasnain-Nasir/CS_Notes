@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 8 — 8.6 ISO 9000 Certification / Models</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>8.6 ISO 9000 Certification / Models</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 8</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-8-6">
+
+        <p>
+          The <strong>ISO 9000 family</strong> is a set of international standards for Quality Management Systems
+          (QMS) published by the International Organization for Standardization. Unlike product-quality models
+          (McCall, ISO 9126), ISO 9000 certifies that an organisation's <strong>processes</strong> for producing
+          goods or services meet defined quality management requirements — it does not certify the product itself.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-iso-9000-caption">
+          <img src="../../../assets/images/se-topic-08/iso-9000.png"
+               alt="ISO 9000 family — quality management system standards"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-iso-9000-caption">ISO 9000 provides guidelines and requirements for quality management systems across industries.</figcaption>
+        </figure>
+
+        <h3>What ISO 9000 covers</h3>
+        <ul>
+          <li>ISO 9000 standards provide guidelines and requirements for establishing, implementing, maintaining, and continually improving a Quality Management System.</li>
+          <li>They focus on the <strong>production process</strong> — how work is planned, executed, monitored, and improved — rather than evaluating individual products.</li>
+          <li>Certification is awarded by accredited third-party auditors who verify that the organisation's QMS conforms to the standard.</li>
+          <li>ISO 9000 applies to any industry; for software, the companion standard <strong>ISO/IEC/IEEE 90003:2018</strong> provides guidance on applying ISO 9001 requirements specifically to software development and maintenance.</li>
+        </ul>
+
+        <h3>Why the software industry needs ISO 9000</h3>
+        <ul>
+          <li>Software is intangible and its quality cannot be inspected like physical goods — process assurance is essential.</li>
+          <li>Clients and government contracts often require ISO 9001 certification as a prerequisite for vendor selection.</li>
+          <li>Certification demonstrates to customers that the organisation follows documented, repeatable, and auditable development processes.</li>
+          <li>It provides a common language and framework for quality management that is recognised internationally.</li>
+          <li>It complements technical quality models (ISO 9126/25010) by ensuring the processes that produce software are themselves controlled.</li>
+        </ul>
+
+        <h3>ISO 9001 requirements</h3>
+        <p><strong>ISO 9001:2015</strong> is the certifiable standard within the ISO 9000 family. Key requirements include:</p>
+        <ul>
+          <li><strong>Document control:</strong> All quality-related documents must be approved, reviewed, updated, and distributed under controlled procedures.</li>
+          <li><strong>Planning:</strong> Quality objectives must be planned, resourced, and aligned with customer requirements.</li>
+          <li><strong>Review:</strong> Management reviews the QMS periodically; design and development reviews occur at defined stages.</li>
+          <li><strong>Testing and validation:</strong> Products and services must be verified and validated before delivery to the customer.</li>
+          <li><strong>Organisational aspects:</strong> Management commitment, defined roles and responsibilities, competence of personnel, and infrastructure provision.</li>
+        </ul>
+
+        <h3>Five components of a Quality Management System</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Component</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Quality Management System (QMS)</strong></td><td>The overall framework of policies, procedures, and records that define how quality is managed</td></tr>
+              <tr><td><strong>Management responsibility</strong></td><td>Top management demonstrates commitment, sets quality policy, and conducts management reviews</td></tr>
+              <tr><td><strong>Resource management</strong></td><td>Human resources, infrastructure, and work environment are provided and maintained to support quality objectives</td></tr>
+              <tr><td><strong>Product realization</strong></td><td>Planning, design, development, purchasing, production, and service delivery follow controlled processes</td></tr>
+              <tr><td><strong>Measurement, analysis, and improvement</strong></td><td>Monitoring customer satisfaction, internal audits, data analysis, corrective/preventive action, and continual improvement</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Seven quality management principles (ISO 9001:2015)</h3>
+        <ul>
+          <li><strong>Customer focus:</strong> Organisations depend on customers and should understand and meet current and future customer needs.</li>
+          <li><strong>Leadership:</strong> Leaders establish unity of purpose and create conditions in which people are engaged in achieving quality objectives.</li>
+          <li><strong>Engagement of people:</strong> Competent, empowered, and engaged people at all levels are essential to deliver value.</li>
+          <li><strong>Process approach:</strong> Consistent and predictable results are achieved more effectively when activities are managed as interrelated processes.</li>
+          <li><strong>Improvement:</strong> Successful organisations have an ongoing focus on improvement.</li>
+          <li><strong>Evidence-based decision making:</strong> Decisions based on the analysis and evaluation of data are more likely to produce desired results.</li>
+          <li><strong>Relationship management:</strong> Organisations manage relationships with interested parties (suppliers, partners) for sustained success.</li>
+        </ul>
+
+        <h3>ISO/IEC/IEEE 90003:2018 for software</h3>
+        <ul>
+          <li>This standard maps ISO 9001:2015 requirements to software development, supply, and maintenance contexts.</li>
+          <li>It provides guidance on applying QMS requirements to software lifecycle processes, including requirements management, design, coding, testing, and configuration management.</li>
+          <li>Software organisations seeking ISO 9001 certification typically use 90003 as the interpretive guide for audit preparation.</li>
+        </ul>
+
+        <h3>Implementation steps</h3>
+        <p>Organisations typically follow eight steps to achieve ISO 9001 certification:</p>
+        <ol>
+          <li><strong>Gap analysis:</strong> Compare current practices against ISO 9001 requirements to identify deficiencies.</li>
+          <li><strong>Management commitment:</strong> Secure top-management support and allocate resources for the certification effort.</li>
+          <li><strong>QMS design:</strong> Document quality policy, objectives, procedures, and work instructions.</li>
+          <li><strong>Training:</strong> Educate all staff on QMS requirements and their individual responsibilities.</li>
+          <li><strong>Implementation:</strong> Deploy the QMS across all relevant departments and projects.</li>
+          <li><strong>Internal audit:</strong> Conduct internal audits to verify compliance and identify non-conformances.</li>
+          <li><strong>Management review:</strong> Senior management reviews audit results and approves corrective actions.</li>
+          <li><strong>External certification audit:</strong> An accredited certification body performs a two-stage audit and awards certification if compliant.</li>
+        </ol>
+
+        <h3>Exam points — limitations of ISO 9000</h3>
+        <ul>
+          <li>ISO 9000 certifies <strong>process compliance</strong>, not product quality — a certified organisation can still produce defective software if the process is followed but inadequate.</li>
+          <li>Certification is <strong>expensive and time-consuming</strong>, requiring extensive documentation and ongoing audit maintenance.</li>
+          <li>The standard is <strong>generic</strong> — it applies to all industries, so software-specific guidance (90003) is needed for meaningful application.</li>
+          <li>Certification can become a <strong>paperwork exercise</strong> if the organisation focuses on passing audits rather than genuinely improving quality.</li>
+          <li>ISO 9000 does not address <strong>process maturity levels</strong> the way CMMI does — it is pass/fail, not staged.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — ISO 9000</div>
+          <p><strong>Q:</strong> What is ISO 9000? Why does the software industry need it? Describe the five QMS components and seven quality management principles.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>ISO 9000 = international QMS standards; certifies processes, not products.</li>
+            <li>Software needs it because quality is process-dependent; clients require certification; provides auditable framework.</li>
+            <li>ISO 9001:2015 = certifiable standard; requirements: document control, planning, review, testing, org aspects.</li>
+            <li>Five QMS components: QMS itself, management responsibility, resource management, product realization, measurement/analysis/improvement.</li>
+            <li>Seven principles: customer focus, leadership, engagement of people, process approach, improvement, evidence-based decisions, relationship management.</li>
+            <li>ISO/IEC/IEEE 90003:2018 = software-specific application guide.</li>
+            <li>Limitations: process not product; expensive; generic; can become paperwork exercise; no maturity levels.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="08-05-quality-frameworks.html">&larr; 8.5 Quality Frameworks</a>
+        <a class="btn-back chapter-nav-next" href="08-07-sei-cmm.html">8.7 SEI-CMM &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

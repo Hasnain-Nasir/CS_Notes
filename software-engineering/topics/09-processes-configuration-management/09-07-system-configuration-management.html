@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 9 — 9.7 System Configuration Management</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>9.7 System Configuration Management</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 9</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-9-7">
+
+        <p>
+          <strong>System Configuration Management</strong> is the integrated application of all SCM activities
+          at the system level — controlling the entire software system's configuration throughout its lifecycle.
+          Whenever software is built, there is always scope for improvement, and those improvements require
+          controlled changes. System SCM ensures that every change is analysed, recorded, reported, and
+          controlled before it affects the product.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-system-scm-caption">
+          <img src="../../../assets/images/se-topic-09/system-scm-diagram.jpg"
+               alt="System Configuration Management — integrated control of software system configuration"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-system-scm-caption">System SCM integrates identification, version control, change control, auditing, and reporting at the whole-system level.</figcaption>
+        </figure>
+
+        <h3>Why system-level SCM is needed</h3>
+        <ul>
+          <li>Requirements keep changing — systems must be upgraded based on current needs to meet desired outputs.</li>
+          <li>Changes must be <strong>analysed before implementation</strong>, recorded before they are applied, reported with before-and-after details, and controlled to improve quality and reduce errors.</li>
+          <li>Without checked changes, modifications can undermine a well-run software project — SCM prevents this.</li>
+          <li>System SCM is an <strong>essential part of all project management activities</strong> — not an optional add-on.</li>
+        </ul>
+
+        <h3>What system SCM manages</h3>
+        <ul>
+          <li><strong>Source code</strong> — all program files and scripts under version control.</li>
+          <li><strong>Documentation</strong> — requirements, design, test plans, user guides, release notes, and configuration guides.</li>
+          <li><strong>Executables and assets</strong> — compiled binaries, libraries, media files, and third-party components.</li>
+          <li><strong>Tools and environments</strong> — build systems, deployment configurations, and development environment settings.</li>
+          <li>System SCM ensures the software is always in a <strong>known and stable state</strong> — every component is tracked and every change is auditable.</li>
+        </ul>
+
+        <h3>Integrated SCM processes at system level</h3>
+        <ul>
+          <li><strong>Identification and establishment:</strong> All system CIs are identified, related to each other, and baselined at milestones — see <a href="09-02-software-configuration-management.html#sec-9-2">§9.2</a>.</li>
+          <li><strong>Version control:</strong> All system components are versioned with a consistent numbering scheme; multiple release paths are managed — see <a href="09-06-software-version-control.html#sec-9-6">§9.6</a>.</li>
+          <li><strong>Change control:</strong> Every system change follows the formal CR → CCB → ECR process — see <a href="09-05-change-control-process.html#sec-9-5">§9.5</a>.</li>
+          <li><strong>Configuration auditing:</strong> System-wide audits verify that all components satisfy baseline requirements and that what is built matches what was specified.</li>
+          <li><strong>Reporting:</strong> Accurate configuration status is communicated to developers, testers, end users, and customers through admin guides, user guides, FAQs, release notes, and installation guides.</li>
+        </ul>
+
+        <h3>Benefits of system configuration management</h3>
+        <ul>
+          <li><strong>Effective bug tracking:</strong> Code modifications are linked to reported issues, making defect tracing accurate and auditable.</li>
+          <li><strong>Continuous integration and deployment:</strong> SCM integrates with CI/CD pipelines to automate build, test, and deployment of controlled releases.</li>
+          <li><strong>Risk management:</strong> Early detection and correction of configuration problems reduces the chance of critical flaws reaching production.</li>
+          <li><strong>Support for large projects:</strong> An orderly method for handling code changes across large, multi-team projects.</li>
+          <li><strong>Reproducibility:</strong> Exact versions of code, libraries, and dependencies are recorded so builds can be replicated in development, test, and production environments.</li>
+          <li><strong>Parallel development:</strong> Multiple developers collaborate on different branches simultaneously without corrupting the main codebase.</li>
+          <li><strong>Replication and distribution:</strong> Software systems can be replicated to customer sites, test labs, and production servers with confidence in configuration consistency.</li>
+          <li><strong>Team coordination:</strong> All stakeholders work from the same controlled configuration, reducing integration errors and miscommunication.</li>
+        </ul>
+
+        <h3>System SCM and software quality</h3>
+        <ul>
+          <li>System SCM provides the infrastructure that SQA relies on — controlled baselines, traceable changes, and auditable records — see <a href="../08-software-quality-assurance/08-02-software-quality-assurance.html#sec-8-2">§8.2 SQA</a>.</li>
+          <li>SQA plans specify version control, baselines, and change control requirements as part of the quality system — see <a href="../08-software-quality-assurance/08-04-sqa-plans.html#sec-8-4">§8.4 SQA Plans</a>.</li>
+          <li>At CMM Level 2, Software Configuration Management is a key process area requiring formal procedures — see <a href="../03-software-project-management/03-10-cmm.html#sec-3-10">§3.10 CMM</a>.</li>
+          <li>Incremental and iterative development models rely on SCM to tag releases at each increment — see <a href="../02-sdlc-and-process-models/02-08-incremental.html">§2.8 Incremental Model</a>.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — System Configuration Management</div>
+          <p><strong>Q:</strong> What is System Configuration Management? Explain its role in project management and list its key benefits.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>System SCM = integrated application of all SCM activities at whole-system level; essential part of project management.</li>
+            <li>Changes must be analysed, recorded, reported, controlled before implementation.</li>
+            <li>Manages: source code, documentation, executables, tools/environments.</li>
+            <li>Integrated processes: identification, version control, change control, audit, reporting.</li>
+            <li>Benefits: bug tracking, CI/CD, risk management, large-project support, reproducibility, parallel development, replication, team coordination.</li>
+            <li>Links to SQA, SQA plans, CMM Level 2, incremental development.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="09-06-software-version-control.html">&larr; 9.6 Software Version Control</a>
+        <a class="btn-back chapter-nav-next" href="09-08-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

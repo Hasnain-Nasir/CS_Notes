@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 9 — 9.5 Change Control Process</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>9.5 Change Control Process</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 9</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-9-5">
+
+        <p>
+          The <strong>change control process</strong> is the formal procedure through which modifications to
+          configuration items are requested, evaluated, approved or rejected, implemented, and verified.
+          Change control is part of overall change management and ensures that quality and consistency are
+          maintained whenever the software configuration is modified.
+        </p>
+
+        <h3>Objectives of change control</h3>
+        <ul>
+          <li>Change control aims to <strong>identify, evaluate, prioritise, and control changes</strong> requested by team members or stakeholders.</li>
+          <li>Changes must be <strong>analysed before implementation</strong>, recorded with before-and-after details, and reported to all affected parties.</li>
+          <li>The process prevents uncontrolled modifications that could undermine a well-managed software project.</li>
+          <li>Change control is one of the five SCM activities — see <a href="09-04-scm-activities.html#sec-9-4">§9.4 SCM Activities</a>.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-change-flow-caption">
+          <img src="../../../assets/images/se-topic-09/change-control-flow.png"
+               alt="Change control process — Change Request through evaluation, CCB decision, ECR, to new version"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-change-flow-caption">The change control process — from change request submission through CCB decision to implementation and new version creation.</figcaption>
+        </figure>
+
+        <h3>Steps in the change control process</h3>
+        <ol>
+          <li><strong>Submit Change Request (CR):</strong> A team member or stakeholder documents the proposed change, its reason, and the affected configuration items.</li>
+          <li><strong>Evaluate the change:</strong> Assess technical merit, potential side effects, overall impact on other CIs and system functions, and projected cost of the change.</li>
+          <li><strong>Prepare change report:</strong> Document the evaluation results for review by the decision authority.</li>
+          <li><strong>CCB decision:</strong> The Change Control Board (CCB) — a person or group with authority — makes a final decision on the status and priority of the change.</li>
+          <li><strong>Generate ECR (if approved):</strong> An Engineering Change Request is created describing the change, constraints to be respected, and criteria for review and audit.</li>
+          <li><strong>Check out, modify, test:</strong> The affected CI is checked out of the project database, the change is implemented, and the modified object is tested.</li>
+          <li><strong>Check in and create new version:</strong> The object is checked back into the repository and version control mechanisms create the next version of the software.</li>
+          <li><strong>Notify if rejected:</strong> If the CCB rejects the change, the requestor is notified with a proper reason.</li>
+        </ol>
+
+        <div class="terminal" aria-label="Pseudocode — change control process">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">change_control_process.pseudo</span>
+          </div>
+          <pre><code>CHANGE_CONTROL(configuration_item CI)
+
+STEP 1 — SUBMIT
+  REQUESTOR submits Change Request (CR)
+  DOCUMENT: reason, affected CIs, proposed modification
+
+STEP 2 — EVALUATE
+  ASSESS technical merit of change
+  ASSESS potential side effects on other CIs and system functions
+  ESTIMATE overall impact and projected cost
+  PREPARE change report with evaluation results
+
+STEP 3 — CCB DECISION
+  CHANGE CONTROL BOARD (CCB) reviews change report
+  DECIDE: APPROVE | REJECT | DEFER
+  IF REJECTED THEN
+    NOTIFY requestor with reason → END
+  END IF
+
+STEP 4 — IMPLEMENT (if approved)
+  GENERATE Engineering Change Request (ECR)
+    DESCRIBE change, constraints, review/audit criteria
+  CHECK OUT CI from project database
+  IMPLEMENT modification
+  TEST modified CI
+
+STEP 5 — CHECK IN
+  CHECK IN CI to project database
+  CREATE new version using version control mechanisms
+  UPDATE configuration status accounting records
+  NOTIFY stakeholders of approved change
+
+END CHANGE_CONTROL</code></pre>
+        </div>
+
+        <h3>Roles in change control</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-change-roles-caption">
+          <img src="../../../assets/images/se-topic-09/change-control-roles.png"
+               alt="Change control roles — Interested Party, Project Manager, CCB, Project Team Member"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-change-roles-caption">Change control involves defined roles — requestor, project manager, CCB, and reviewing team members.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Interested party (requestor):</strong> Documents and submits the change request with justification and impact description.</li>
+          <li><strong>Project manager:</strong> Acknowledges the request and ensures it is routed to the appropriate reviewers and the CCB.</li>
+          <li><strong>Change Control Board (CCB):</strong> Logs the request in the tracking system, evaluates priority, and makes the final approve/reject decision.</li>
+          <li><strong>Project team member (reviewer):</strong> Reviews the technical worthiness of the proposed change and provides assessment input to the CCB.</li>
+          <li>After a decision, the requestor is informed of the outcome — approved changes proceed to implementation; rejected changes are documented with reasons.</li>
+        </ul>
+
+        <h3>Guidelines for making changes</h3>
+        <ul>
+          <li><strong>No silent changes:</strong> Every modification must go through the formal change control system — ad hoc edits are not permitted on baselined items.</li>
+          <li><strong>Preserve quality:</strong> Changes must not degrade the overall quality of the product; testing is mandatory before check-in.</li>
+          <li><strong>Formal system with flexibility:</strong> The process must be rigorous enough to prevent chaos but flexible enough to accommodate legitimate urgent fixes.</li>
+          <li><strong>Maintain records:</strong> All change requests, decisions, and implementations are documented for audit and traceability.</li>
+          <li><strong>Revise the plan when needed:</strong> After a major lifecycle phase or significant change to deliverables, schedule, budget, or approach, the project plan is revised and approved by senior management.</li>
+          <li>Projects requiring scope or product changes must have a <strong>configuration management plan</strong> as part of the overall project documentation.</li>
+        </ul>
+
+        <h3>Change control in requirements management</h3>
+        <ul>
+          <li>Proposed requirement changes are logged, assessed for impact on cost, schedule, and design, and approved or rejected by the CCB — see <a href="../04-requirements-engineering-and-specification/04-07-review-management.html#sec-4-7">§4.7 Review &amp; Management of User Needs</a>.</li>
+          <li>Each requirement should be uniquely identified for traceability so that changes can be tracked from SRS through design, code, and test.</li>
+          <li>Change control connects SCM to SQA — SQA ensures adequate change management practices are followed — see <a href="../08-software-quality-assurance/08-02-software-quality-assurance.html#sec-8-2">§8.2 SQA</a>.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Change Control Process</div>
+          <p><strong>Q:</strong> Describe the change control process in SCM. Explain the role of the CCB and list guidelines for making changes.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Change control = formal procedure for requesting, evaluating, approving, implementing, verifying changes to CIs.</li>
+            <li>Steps: CR → evaluate (merit, side effects, impact, cost) → change report → CCB decision → ECR → check-out → modify → test → check-in → new version.</li>
+            <li>CCB = person/group with authority to approve/reject/defer changes; logs requests; notifies requestor.</li>
+            <li>Roles: requestor, project manager, CCB, team reviewer.</li>
+            <li>Guidelines: no silent changes, preserve quality, formal yet flexible, maintain records, revise plan when significant changes occur.</li>
+            <li>Requires configuration management plan for scope/product changes.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="09-04-scm-activities.html">&larr; 9.4 SCM Activities</a>
+        <a class="btn-back chapter-nav-next" href="09-06-software-version-control.html">9.6 Software Version Control &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

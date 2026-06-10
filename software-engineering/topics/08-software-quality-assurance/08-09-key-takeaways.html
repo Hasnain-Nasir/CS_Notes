@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 8 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 8</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>8.1 QA Overview:</strong> Evolution: Inspection → QC → QA → TQM. QA = process-oriented, preventive, proactive; QC = product-oriented, corrective, reactive. QA precedes QC. Verification = QA example ("building product right"); Validation = QC example ("building right product").</li>
+          <li><strong>QA vs QC table:</strong> QA focuses on how product is built (standards, audits, reviews); QC focuses on finished product (testing, inspection, defect fixing). Both needed — QA reduces defects reaching QC.</li>
+          <li><strong>8.2 SQA:</strong> Umbrella activity parallel to entire SDLC. Elements: standards (IEEE/ISO), reviews/audits, testing oversight, defect analysis, change management, education, security, safety, risk. Focus: portability, usability, reusability, correctness, maintainability, error control.</li>
+          <li><strong>SQA major activities:</strong> SQA plan, checkpoint reviews, change impact analysis, multi-level testing oversight, vendor relations, record keeping. Seven encompassed areas: standards, reviews, testing oversight, defect analysis, change management, education, security/safety/risk.</li>
+          <li><strong>SQA vs testing:</strong> SQA = process assurance throughout SDLC; testing = product verification. SQA group reports to senior management independently.</li>
+          <li><strong>8.3 V&amp;V:</strong> Verification = "Are we building the product right?" (static: reviews, inspections, walkthroughs, static analysis). Validation = "Are we building the right product?" (dynamic: testing, prototyping, UAT). Verification followed by validation at each stage.</li>
+          <li><strong>V&amp;V roles in SDLC:</strong> Traceability analysis, interface analysis, criticality analysis (5 steps: identify components → assign levels → identify failure modes → assess impact → prioritise V&amp;V), hazard/risk analysis.</li>
+          <li><strong>V-Model link:</strong> Each development phase paired with corresponding V&amp;V activity (requirements ↔ acceptance testing, design ↔ system testing, etc.).</li>
+          <li><strong>8.4 SQA Plans:</strong> Developed during project planning; governs SQA and engineering team QA. Identifies: evaluations, audits/reviews, applicable standards, error reporting/tracking, SQA documents, feedback amount. Activities: process review, FTRs, deviation handling, senior management reporting. IEEE 730 = standard for SQA Plan contents.</li>
+          <li><strong>8.5 McCall (1977):</strong> 11 factors in 3 groups — product operation (correctness, reliability, efficiency, integrity, usability); product revision (maintainability, flexibility, testability); product transition (portability, reusability, interoperability).</li>
+          <li><strong>Boehm (1978):</strong> Hierarchical model — primary uses (as-is utility, maintainability, portability) → 7 quality factors → primitive constructs (measurable attributes).</li>
+          <li><strong>ISO/IEC 9126:</strong> 4 parts (quality model, external metrics, internal metrics, quality in use). Six characteristics: functionality, reliability, usability, efficiency, maintainability, portability — each with sub-characteristics. Quality in use: effectiveness, productivity, safety, satisfaction. Replaced by ISO/IEC 25010 (SQuaRE).</li>
+          <li><strong>Organisational frameworks:</strong> ISO 9000 (QMS certification), CMMI (process maturity levels), Six Sigma (defect reduction).</li>
+          <li><strong>8.6 ISO 9000:</strong> International QMS standards; certifies processes, not products. Why software needs it: intangible product, client requirements, auditable framework. ISO 9001:2015 = certifiable standard. Five QMS components: QMS, management responsibility, resource management, product realization, measurement/analysis/improvement.</li>
+          <li><strong>Seven principles:</strong> Customer focus, leadership, engagement of people, process approach, improvement, evidence-based decision making, relationship management. ISO/IEC/IEEE 90003:2018 = software application guide. Eight implementation steps: gap analysis → commitment → design → training → implement → internal audit → management review → external audit.</li>
+          <li><strong>ISO 9000 limitations:</strong> Process not product; expensive; generic; can become paperwork; no maturity levels (unlike CMM).</li>
+          <li><strong>8.7 SEI-CMM:</strong> Strategy for process improvement (SEI, Carnegie Mellon). Five levels: 1 Initial (ad hoc) → 2 Repeatable (basic PM) → 3 Defined (standardised) → 4 Managed (quantitative) → 5 Optimizing (continuous improvement). Sequential — stabilise each before advancing.</li>
+          <li><strong>CMM KPAs:</strong> L2: project planning, config mgmt, requirements mgmt, subcontract mgmt, SQA. L3: peer reviews, inter-group coordination, org process definition/focus, training. L4: software quality mgmt, quantitative process mgmt. L5: process/technology change mgmt, defect prevention. CMMI extends CMM.</li>
+          <li><strong>ISO 9000 vs CMM:</strong> ISO = QMS pass/fail, all industries, document control focus. CMM = 5-level maturity rating, software-specific, quantitative management focus. Complementary — ISO asks "have a quality system?"; CMM asks "how mature is the process?"</li>
+          <li><strong>8.8 Six Sigma:</strong> Bill Smith, Motorola 1986. Target: 3.4 DPMO = 99.99966% yield. Data-driven, customer-focused, process-oriented. Six principles: customer focus, data-driven decisions, proactive management, boundaryless collaboration, drive for perfection, structured methodology.</li>
+          <li><strong>DMAIC (existing process):</strong> Define → Measure → Analyze → Improve → Control. <strong>DMADV (new design):</strong> Define → Measure → Analyze → Design → Verify.</li>
+          <li><strong>Six Sigma belts:</strong> White (awareness), Yellow (support), Green (part-time project lead), Black (full-time project lead), Master Black Belt (strategy/training). Tools: 5S, seven wastes (Muda), VOC, kaizen, Pareto, fishbone, control charts, FMEA. Lean Six Sigma = Six Sigma + Lean waste elimination.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="08-08-six-sigma.html">&larr; 8.8 Six Sigma</a>
+        <a class="btn-back chapter-nav-next" href="../09-processes-configuration-management/index.html">Topic 9 — Configuration Management &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

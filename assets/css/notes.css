@@ -1689,7 +1689,10 @@ pre.code code {
 /* Terminal-style code blocks */
 .terminal {
   margin: 1.25rem 0;
+  width: 100%;
   max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;

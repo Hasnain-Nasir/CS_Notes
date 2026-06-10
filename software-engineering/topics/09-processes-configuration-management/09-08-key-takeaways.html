@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 9 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 9</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>9.1 Overview:</strong> SCM = umbrella activity parallel to entire SDLC; part of SPM. Needed for multi-person projects, concurrent versions/branches, changing requirements, multi-platform deployment. Without SCM: inconsistency, concurrent-access conflicts, unstable environment, no status accounting, variant chaos.</li>
+          <li><strong>9.2 SCM definition:</strong> Process of defining/implementing standard configuration; tracks product and versions; ensures stakeholder visibility and traceability. Includes revision control + baselines.</li>
+          <li><strong>Configuration Item (CI):</strong> Any work product under SCM control — code, docs, executables, tools — uniquely identified and versioned.</li>
+          <li><strong>Baseline:</strong> Formally accepted CI snapshot; mutually consistent CIs; fixed at a point in time; changed only via formal change control. Types: functional, design, product, test baselines.</li>
+          <li><strong>9.3 Objectives:</strong> Classic 3: identify configuration at points in time; systematically control changes; maintain integrity &amp; traceability. Also: collaboration, version control, replication, stakeholder visibility, remote admin, reduced downtime, reliable backups.</li>
+          <li><strong>9.4 SCM Activities (5):</strong> (1) Configuration identification/establishment, (2) Version control, (3) Change control, (4) Status accounting, (5) Configuration audit &amp; reporting.</li>
+          <li><strong>9.5 Change Control:</strong> CR → evaluate (merit, side effects, impact, cost) → change report → CCB decision → ECR (if approved) → check-out → modify → test → check-in → new version. Roles: requestor, PM, CCB, reviewer. No silent changes; revise plan when significant scope/schedule changes.</li>
+          <li><strong>9.6 Version Control:</strong> Procedures + tools for managing SCI versions. Sub-activities: identify versions, numbering (X.Y.Z), visibility, tracking graph. X = major release; Y = component; Z = minor fix. Tools: Git (distributed), SVN (centralised). Benefits: collaboration, rollback, branching/merging, CI/CD.</li>
+          <li><strong>9.7 System SCM:</strong> Integrated SCM at whole-system level; manages code, docs, executables, environments. Essential part of all PM activities. Benefits: bug tracking, CI/CD, risk management, reproducibility, parallel development, replication, team coordination. Links to SQA, CMM Level 2.</li>
+          <li><strong>CCB:</strong> Change Control Board — approves/rejects/defer changes; logs requests; notifies requestor.</li>
+          <li><strong>ECR:</strong> Engineering Change Request — generated for each approved change; describes change, constraints, audit criteria.</li>
+          <li><strong>Status accounting:</strong> Tracks what each version contains; records who/when/why for every change.</li>
+          <li><strong>Configuration audit:</strong> Verifies product satisfies baseline; confirms completeness, correctness, consistency; complements FTR.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="09-07-system-configuration-management.html">&larr; 9.7 System Configuration Management</a>
+        <a class="btn-back chapter-nav-next" href="../../index.html">Software Engineering &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

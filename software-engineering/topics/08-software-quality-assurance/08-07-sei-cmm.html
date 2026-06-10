@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 8 — 8.7 SEI-CMM Model</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>8.7 SEI-CMM Model</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 8</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-8-7">
+
+        <p>
+          The <strong>Capability Maturity Model (CMM)</strong>, developed by the Software Engineering Institute
+          (SEI) at Carnegie Mellon University, is a <strong>strategy for software process improvement</strong>.
+          It provides a staged framework for assessing and improving an organisation's ability to produce quality
+          software consistently. CMM is widely used in SQA contexts to benchmark organisational maturity.
+        </p>
+        <p>
+          A detailed treatment of CMM from the Software Project Management perspective is available in
+          <a href="../03-software-project-management/03-10-cmm.html#sec-3-10">§3.10 Capability Maturity Model</a>.
+          This section focuses on CMM's role in quality assurance and compares it with ISO 9000.
+        </p>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-cmm-caption">
+          <img src="../../../assets/images/se-topic-03/cmm.jpg"
+               alt="Capability Maturity Model — five maturity levels from Initial to Optimizing"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-cmm-caption">SEI Capability Maturity Model (CMM) — five sequential maturity levels.</figcaption>
+        </figure>
+
+        <h3>What is process maturity?</h3>
+        <ul>
+          <li><strong>Maturity</strong> refers to the degree of formality and optimisation of an organisation's software processes.</li>
+          <li>A more mature process is more predictable in terms of time, cost, and quality because it is defined, measured, and continuously improved.</li>
+          <li>CMM provides a roadmap: organisations start at Level 1 (chaotic) and systematically advance through five levels.</li>
+          <li>Each level must be stabilised before advancing to the next — skipping levels is not permitted.</li>
+        </ul>
+
+        <h3>Five maturity levels</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Level</th><th>Name</th><th>Characteristics</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td>Initial</td>
+                <td>Processes are ad hoc and chaotic; success depends on individual effort; no stable engineering practices; time and cost estimates are unreliable.</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td>Repeatable</td>
+                <td>Basic project management is established; plans are based on experience from similar past projects; requirements management and tracking begin; successes can be repeated on comparable projects.</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td>Defined</td>
+                <td>The software process is standardised and documented organisation-wide; training programs ensure staff competence; risk management is integrated; projects tailor the standard process rather than inventing their own.</td>
+              </tr>
+              <tr>
+                <td><strong>4</strong></td>
+                <td>Managed</td>
+                <td>Quantitative quality goals are set for products and processes; process performance is measured with statistical techniques; time and cost become predictable because variation is understood and controlled.</td>
+              </tr>
+              <tr>
+                <td><strong>5</strong></td>
+                <td>Optimizing</td>
+                <td>Defect root-cause analysis drives continuous process improvement; the organisation focuses on preventing defect occurrence through incremental and innovative technological changes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Key Process Areas (KPAs)</h3>
+        <p>Each maturity level (except Level 1) is defined by specific Key Process Areas that the organisation must implement:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Level</th><th>Key Process Areas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1 — Initial</td><td>No formal KPAs — processes are ad hoc</td></tr>
+              <tr><td>2 — Repeatable</td><td>Project planning, configuration management, requirements management, subcontract management, software quality assurance</td></tr>
+              <tr><td>3 — Defined</td><td>Peer reviews, inter-group coordination, organisation process definition, organisation process focus, training programs</td></tr>
+              <tr><td>4 — Managed</td><td>Software quality management, quantitative process management</td></tr>
+              <tr><td>5 — Optimizing</td><td>Process change management, technology change management, defect prevention</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>KPAs define what an organisation must do well at each level; each KPA has goals, commitments, abilities, activities, measurements, and verification practices.</li>
+          <li>Software Quality Assurance appears as a KPA at Level 2, reflecting that basic SQA practices are foundational to process repeatability.</li>
+          <li>At Level 4, Software Quality Management becomes a KPA, indicating that quality is managed quantitatively rather than just checked.</li>
+        </ul>
+
+        <h3>CMM vs CMMI</h3>
+        <ul>
+          <li>CMM was later extended to <strong>CMMI (Capability Maturity Model Integration)</strong>, which combines software engineering with systems engineering, integrated product development, and supplier sourcing.</li>
+          <li>CMMI uses staged and continuous representation; CMM uses only staged representation.</li>
+          <li>For exams, knowing the five CMM levels and their characteristics is usually sufficient.</li>
+        </ul>
+
+        <h3>ISO 9000 vs SEI-CMM</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>ISO 9000</th><th>SEI-CMM</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Focus</strong></td><td>Quality Management System — are processes documented and followed?</td><td>Process maturity — how capable and optimised are the processes?</td></tr>
+              <tr><td><strong>Scope</strong></td><td>All industries (manufacturing, services, software)</td><td>Software and systems engineering organisations</td></tr>
+              <tr><td><strong>Assessment</strong></td><td>Pass/fail certification by accredited auditors</td><td>Maturity level rating (1–5) by SEI-authorised assessors</td></tr>
+              <tr><td><strong>Levels</strong></td><td>Single standard (ISO 9001) — certified or not</td><td>Five maturity levels — organisation is rated at a specific level</td></tr>
+              <tr><td><strong>Emphasis</strong></td><td>Document control, customer focus, continual improvement</td><td>Process definition, measurement, quantitative management, defect prevention</td></tr>
+              <tr><td><strong>Outcome</strong></td><td>Certificate valid for ~3 years with surveillance audits</td><td>Maturity level rating indicating process capability</td></tr>
+              <tr><td><strong>Improvement path</strong></td><td>Continual improvement through PDCA cycle</td><td>Sequential level advancement with specific KPAs at each level</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>ISO 9000 and CMM are complementary — many organisations pursue both certifications.</li>
+          <li>ISO 9000 asks "Do you have a quality system?"; CMM asks "How mature is your software process?"</li>
+          <li>A Level 1 CMM organisation can theoretically hold ISO 9001 certification if its documented processes are followed, even though those processes may be immature.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — SEI-CMM Model</div>
+          <p><strong>Q:</strong> Describe the five CMM maturity levels with characteristics. Compare ISO 9000 and SEI-CMM.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>CMM = SEI strategy for process improvement; assesses organisational software process maturity.</li>
+            <li>Level 1 Initial: ad hoc, chaotic; Level 2 Repeatable: basic PM; Level 3 Defined: standardised process; Level 4 Managed: quantitative goals; Level 5 Optimizing: continuous improvement.</li>
+            <li>Levels sequential — must stabilise each before advancing.</li>
+            <li>KPAs define requirements at each level; SQA is a Level 2 KPA.</li>
+            <li>ISO 9000 vs CMM: ISO = QMS pass/fail for all industries; CMM = 5-level maturity rating for software.</li>
+            <li>ISO certifies process documentation; CMM measures process capability and optimisation.</li>
+            <li>CMMI extends CMM to systems engineering and supplier sourcing.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="08-06-iso-9000.html">&larr; 8.6 ISO 9000</a>
+        <a class="btn-back chapter-nav-next" href="08-08-six-sigma.html">8.8 Six Sigma &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

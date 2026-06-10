@@ -54,7 +54,8 @@
 
         <h3>Five information-domain components</h3>
         <p>FP counts five types of user-visible functions in the information domain:</p>
-        <table>
+        <div class="table-wrap">
+<table>
           <thead>
             <tr><th>Component</th><th>Abbreviation</th><th>Description</th><th>Examples</th></tr>
           </thead>
@@ -66,6 +67,7 @@
             <tr><td>External Interface Files</td><td>EIF</td><td>Data referenced by this application but maintained by another system</td><td>Shared databases, shared routines</td></tr>
           </tbody>
         </table>
+</div>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-fp-analysis-caption">
           <img src="../../../assets/images/se-topic-06/functional-point-analysis.png"
@@ -76,7 +78,8 @@
 
         <h3>Complexity weights (2D FP — information domain)</h3>
         <p>Each component is rated as <strong>Simple</strong>, <strong>Average</strong>, or <strong>Complex</strong> and multiplied by a weight:</p>
-        <table>
+        <div class="table-wrap">
+<table>
           <thead>
             <tr><th>Measurement parameter</th><th>Simple</th><th>Average</th><th>Complex</th></tr>
           </thead>
@@ -88,6 +91,7 @@
             <tr><td>External Interface Files (EIF)</td><td>5</td><td>7</td><td>10</td></tr>
           </tbody>
         </table>
+</div>
 
         <h3>FP calculation steps</h3>
         <h4>Step 1 — Count functions and compute Unadjusted Function Points (UFP)</h4>
@@ -97,7 +101,8 @@
           <li><strong>UFP = Σ (count<sub>i</sub> × weight<sub>i</sub>)</strong> for all five component types.</li>
         </ul>
         <p><strong>Example counts (average complexity):</strong></p>
-        <table>
+        <div class="table-wrap">
+<table>
           <thead>
             <tr><th>Parameter</th><th>Count</th><th>Weight</th><th>Weighted total</th></tr>
           </thead>
@@ -110,6 +115,7 @@
             <tr><td colspan="3"><strong>UFP total</strong></td><td><strong>618</strong></td></tr>
           </tbody>
         </table>
+</div>
 
         <h4>Step 2 — Rate 14 general system characteristics (fi)</h4>
         <p>
@@ -147,6 +153,23 @@
           <li><strong>Adjusted case:</strong> <strong>FP = UFP × CAF</strong> (also written FP = UFP × EAF).</li>
         </ul>
 
+        <div class="terminal" aria-label="Pseudocode — function point calculation steps">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">fp_calculation.pseudo</span>
+          </div>
+          <pre><code>BEGIN
+  Count EI, EO, EQ, ILF, EIF
+  Classify each as Simple / Average / Complex
+  UFP = SUM(count × weight for each component)
+  Rate 14 system characteristics fi (0 to 5 each)
+  CAF = 0.65 + 0.01 × SUM(fi)
+  FP = UFP × CAF
+END</code></pre>
+        </div>
+
         <h3>Worked example</h3>
         <p>Given: EI=50, EO=40, EQ=35, ILF=6, EIF=4 — all at average complexity; all 14 factors rated average (3 each).</p>
         <ul>
@@ -183,7 +206,8 @@
         </ul>
 
         <h3>FP vs LOC (summary)</h3>
-        <table>
+        <div class="table-wrap">
+<table>
           <thead>
             <tr><th>Aspect</th><th>Function Point (FP)</th><th>Lines of Code (LOC)</th></tr>
           </thead>
@@ -195,6 +219,7 @@
             <tr><td>Best for</td><td>Data processing / business systems</td><td>Comparing productivity within same language</td></tr>
           </tbody>
         </table>
+</div>
         <p>See <a href="06-05-lines-of-code.html#sec-6-5">§6.5</a> for full LOC discussion and exam comparison.</p>
 
         <div class="callout exam">
