@@ -34,10 +34,96 @@
       <section id="sec-9-5">
 
         <p>
-          The <strong>change control process</strong> is the formal procedure through which modifications to
-          configuration items are requested, evaluated, approved or rejected, implemented, and verified.
-          Change control is part of overall change management and ensures that quality and consistency are
-          maintained whenever the software configuration is modified.
+          <strong>Change management</strong> in project management is the process of handling changes that arise
+          during a project — keeping the project on track even when requirements, schedules, or team dynamics
+          shift unexpectedly. <strong>Change control</strong> is the formal SCM procedure within change management
+          that governs how modifications to configuration items are requested, evaluated, approved, implemented,
+          and verified. Configuration management is part of the overall change management approach — see
+          <a href="09-03-objectives-of-scm.html#sec-9-3">§9.3 Objectives of SCM</a>.
+        </p>
+
+        <h3>Change management vs change control</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Change Management</th><th>Change Control (SCM)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Scope</strong></td><td>Entire project — people, processes, requirements, schedule, team dynamics</td><td>Configuration items — code, docs, baselines in the CM database</td></tr>
+              <tr><td><strong>Goal</strong></td><td>Guide teams through transitions smoothly; ensure changes are adopted successfully</td><td>Identify, evaluate, prioritise, and control changes to CIs formally</td></tr>
+              <tr><td><strong>Focus</strong></td><td>Organisational and human side of change</td><td>Technical and product side — version control, baselines, traceability</td></tr>
+              <tr><td><strong>Key artefact</strong></td><td>Request for Change (RFC), change proposal, revised project plan</td><td>Change Request (CR), Engineering Change Request (ECR), new CI version</td></tr>
+              <tr><td><strong>Decision body</strong></td><td>Change management team, stakeholders, senior management</td><td>Change Control Board (CCB)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>What is change management in project management?</h3>
+        <ul>
+          <li>Change management is a <strong>structured process</strong> that guides teams and individuals through transitions, ensuring everyone follows the same process and timeline when changes happen.</li>
+          <li>The goal is to ensure changes are <strong>adopted successfully</strong> without excessive disruption to the project or team dynamics.</li>
+          <li>A <strong>change</strong> is anything that alters the original plan — a new requirement, a bug fix, a change in team structure, or a shift in how tasks are assigned.</li>
+          <li><strong>Project management</strong> organises the project from start to finish — planning, goals, time management, and keeping the team aligned toward the same end result.</li>
+          <li>Change management and project management work together — PM provides the framework; change management handles the transitions within that framework.</li>
+        </ul>
+
+        <h3>Sources of change in software projects</h3>
+        <ul>
+          <li><strong>Business reorganisation</strong> — structural changes in the client organisation that affect project priorities or contacts.</li>
+          <li><strong>New market conditions</strong> — competitive pressure or market shifts that require new features or faster delivery.</li>
+          <li><strong>New equipment or technology</strong> — adoption of new platforms, tools, or hardware that affects the product design.</li>
+          <li><strong>Bug fixes and errors</strong> — defects discovered during development or testing that require code or design changes.</li>
+          <li><strong>New customer needs</strong> — evolving user requirements discovered during development or after initial delivery.</li>
+          <li><strong>Performance or reliability improvement</strong> — non-functional requirements that emerge after initial specification.</li>
+          <li><strong>Budgetary or scheduling constraints</strong> — cost or time pressures that force scope reduction, reprioritisation, or process changes.</li>
+        </ul>
+
+        <h3>Why change management is important</h3>
+        <ul>
+          <li><strong>Improving performance:</strong> When changes are handled well, teams adjust quickly and keep work running smoothly, boosting overall project performance.</li>
+          <li><strong>Increasing engagement:</strong> Keeping team members engaged during change helps them feel part of the process, leading to higher motivation and productivity.</li>
+          <li><strong>Encouraging innovation:</strong> A structured change process creates an environment where new ideas are welcomed and teams adapt creatively to problems.</li>
+          <li><strong>Adopting new technologies:</strong> Good change management makes it easier for teams to adopt new tools or platforms without causing disruption.</li>
+          <li><strong>Implementing new requirements:</strong> As business needs evolve, change management ensures new requirements are added without confusion, keeping everything aligned with project goals.</li>
+          <li><strong>Reducing costs:</strong> Properly managed change avoids unnecessary delays and rework, saving money over the project lifecycle.</li>
+          <li>Without change management, unexpected shifts can cause confusion, mistakes, and project failure — especially in large or distributed teams.</li>
+        </ul>
+
+        <h3>Types of change management</h3>
+        <ul>
+          <li><strong>Anticipatory change management:</strong> Planning ahead for changes that are known to be coming — e.g. preparing for a planned platform migration or a scheduled requirements update at the next milestone.</li>
+          <li><strong>Reactive change management:</strong> Responding to unexpected changes — a critical bug in production, a sudden regulatory requirement, or a crisis that forces rapid reprioritisation.</li>
+          <li><strong>Incremental change management:</strong> Making small, gradual changes over time — e.g. continuously adding features in an incremental development model rather than one large release.</li>
+          <li><strong>Strategic change management:</strong> Large, organisation-wide changes — adopting a new technology stack, switching from waterfall to agile, or changing the overall product direction.</li>
+        </ul>
+
+        <h3>Process of change management — eight steps</h3>
+        <p>
+          The change management process guides people and organisations through changes smoothly and efficiently,
+          ensuring everyone gets on board with the transition:
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-change-mgmt-caption">
+          <img src="../../../assets/images/se-topic-09/change-management-process.png"
+               alt="Process of Change Management — eight steps from RFC creation through review, planning, testing, implementation, and closure"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-change-mgmt-caption">The eight-step change management process — from creating an RFC through assessment, planning, testing, implementation, review, and closure.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>Creating a Request for Change (RFC):</strong> Identify the need for change (bug, improvement, new requirement) and create a formal RFC document explaining what needs to change, why, and the potential impact on the system.</li>
+          <li><strong>Reviewing and assessing the request:</strong> The change management team reviews whether the change is needed, feasible, and what resources and risks are involved.</li>
+          <li><strong>Planning the change:</strong> Create a detailed plan outlining what will be done, when, what resources are required, and backup plans to avoid major disruptions.</li>
+          <li><strong>Testing the change:</strong> Test the change in a controlled environment before going live to ensure it works as expected and does not break the existing system.</li>
+          <li><strong>Creating a change proposal:</strong> If testing succeeds, write a formal change proposal with implementation details and risks; submit for stakeholder approval.</li>
+          <li><strong>Implementing the change:</strong> Apply the approved change in the live environment — gradually or during planned downtime to minimise disruption.</li>
+          <li><strong>Reviewing change performance:</strong> Monitor whether the change achieved desired outcomes, check for new issues, and collect user feedback.</li>
+          <li><strong>Closing the process:</strong> Update documentation, conduct a final review, and officially close the change once everything runs smoothly.</li>
+        </ol>
+
+        <h3>SCM change control process</h3>
+        <p>
+          Within the broader change management process, <strong>change control</strong> is the SCM-specific procedure
+          for modifying configuration items. It maps to the eight-step process above but focuses on the CM database,
+          CCB decisions, and version control:
         </p>
 
         <h3>Objectives of change control</h3>
@@ -109,6 +195,32 @@ STEP 5 — CHECK IN
 END CHANGE_CONTROL</code></pre>
         </div>
 
+        <h3>Mapping change management steps to SCM change control</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Change management step</th><th>SCM change control equivalent</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1. Create RFC</td><td>Submit Change Request (CR) / New Requirements Report</td></tr>
+              <tr><td>2. Review and assess</td><td>Evaluate technical merit, side effects, impact, cost → change report</td></tr>
+              <tr><td>3. Plan the change</td><td>CCB approves; generate ECR with constraints and audit criteria</td></tr>
+              <tr><td>4. Test the change</td><td>Check out CI → implement → test in controlled environment</td></tr>
+              <tr><td>5. Create change proposal</td><td>ECR formally documents approved change for implementation</td></tr>
+              <tr><td>6. Implement the change</td><td>Check in CI to CM database; create new version</td></tr>
+              <tr><td>7. Review performance</td><td>Configuration audit; verify CI meets intended requirements</td></tr>
+              <tr><td>8. Close the process</td><td>Closed ECR; update status accounting; notify stakeholders</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-scm-cycle-caption">
+          <img src="../../../assets/images/se-topic-09/scm-change-control-cycle.png"
+               alt="SCM change control cycle — CCB decision, CM database check-out, verification, closed ECR"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-scm-cycle-caption">SCM change control cycle — CCB evaluates requests; approved changes are checked out from the CM database, verified, and checked in as a new version with a closed ECR.</figcaption>
+        </figure>
+
         <h3>Roles in change control</h3>
         <figure class="diagram figure-photo" aria-labelledby="fig-change-roles-caption">
           <img src="../../../assets/images/se-topic-09/change-control-roles.png"
@@ -116,12 +228,30 @@ END CHANGE_CONTROL</code></pre>
                width="660" height="auto" loading="lazy" decoding="async" />
           <figcaption id="fig-change-roles-caption">Change control involves defined roles — requestor, project manager, CCB, and reviewing team members.</figcaption>
         </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Role</th><th>Responsibilities</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Interested party (requestor)</strong></td><td>Documents the change request with priority, proposed approach, and workaround if the change is not implemented</td></tr>
+              <tr><td><strong>Project manager</strong></td><td>Acknowledges that the change applies to this project and routes it to reviewers and the CCB</td></tr>
+              <tr><td><strong>Change Control Board (CCB)</strong></td><td>Enters the change request into the tracking system log; evaluates priority; makes final approve/reject/defer decision</td></tr>
+              <tr><td><strong>Project team member (reviewer)</strong></td><td>Reviews the change request and determines whether it is worth evaluating for action; provides technical assessment</td></tr>
+            </tbody>
+          </table>
+        </div>
         <ul>
-          <li><strong>Interested party (requestor):</strong> Documents and submits the change request with justification and impact description.</li>
-          <li><strong>Project manager:</strong> Acknowledges the request and ensures it is routed to the appropriate reviewers and the CCB.</li>
-          <li><strong>Change Control Board (CCB):</strong> Logs the request in the tracking system, evaluates priority, and makes the final approve/reject decision.</li>
-          <li><strong>Project team member (reviewer):</strong> Reviews the technical worthiness of the proposed change and provides assessment input to the CCB.</li>
-          <li>After a decision, the requestor is informed of the outcome — approved changes proceed to implementation; rejected changes are documented with reasons.</li>
+          <li>After a decision, the requestor is always informed of the outcome — approved changes proceed to implementation; rejected changes are documented with reasons.</li>
+          <li>The CCB may also decide to <strong>defer</strong> a change to the next version rather than implement it in the current release — see the SCM cycle diagram above.</li>
+        </ul>
+
+        <h3>Revise the project plan</h3>
+        <ul>
+          <li>When deliverables, schedule, budget, or approach change significantly, the <strong>project plan must be revised</strong> to reflect the plan actually in use by the team.</li>
+          <li>Plan revision also occurs at the end of each major lifecycle phase as a standard review point.</li>
+          <li>The <strong>senior manager</strong> reviews changes to the project plan and approves the revised version.</li>
+          <li>A project that needs to manage changes to scope or product description must have a <strong>configuration management plan</strong> from the outset.</li>
         </ul>
 
         <h3>Guidelines for making changes</h3>
@@ -134,6 +264,13 @@ END CHANGE_CONTROL</code></pre>
           <li>Projects requiring scope or product changes must have a <strong>configuration management plan</strong> as part of the overall project documentation.</li>
         </ul>
 
+        <h3>Example — change management in practice</h3>
+        <ul>
+          <li><strong>Software project example:</strong> A client requests a new reporting module mid-project that was not in the original SRS. The team creates an RFC, the CCB assesses impact on schedule and architecture, a plan is made, the module is developed and tested in a staging environment, and only then merged into the main codebase after approval — with the project plan and SRS updated to reflect the new scope.</li>
+          <li><strong>Hospital EHR system example:</strong> A hospital switching to a new electronic health record system affects nearly every operation — from patient tracking to billing. Without a change management plan, the transition causes confusion, mistakes, and delays. A good plan ensures staff receive proper training before go-live, feedback is collected after deployment, and issues are addressed quickly — keeping operations efficient and minimising disruption to patient care.</li>
+          <li>Both examples show that change management is not just a technical process — it requires planning, communication, training, and post-implementation review to succeed.</li>
+        </ul>
+
         <h3>Change control in requirements management</h3>
         <ul>
           <li>Proposed requirement changes are logged, assessed for impact on cost, schedule, and design, and approved or rejected by the CCB — see <a href="../04-requirements-engineering-and-specification/04-07-review-management.html#sec-4-7">§4.7 Review &amp; Management of User Needs</a>.</li>
@@ -142,16 +279,19 @@ END CHANGE_CONTROL</code></pre>
         </ul>
 
         <div class="callout exam">
-          <div class="callout-title">Exam question — Change Control Process</div>
-          <p><strong>Q:</strong> Describe the change control process in SCM. Explain the role of the CCB and list guidelines for making changes.</p>
+          <div class="callout-title">Exam question — Change Control &amp; Change Management</div>
+          <p><strong>Q:</strong> Explain change management and change control. Describe the eight-step change management process, the SCM change control procedure, and the role of the CCB.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Change control = formal procedure for requesting, evaluating, approving, implementing, verifying changes to CIs.</li>
-            <li>Steps: CR → evaluate (merit, side effects, impact, cost) → change report → CCB decision → ECR → check-out → modify → test → check-in → new version.</li>
-            <li>CCB = person/group with authority to approve/reject/defer changes; logs requests; notifies requestor.</li>
-            <li>Roles: requestor, project manager, CCB, team reviewer.</li>
-            <li>Guidelines: no silent changes, preserve quality, formal yet flexible, maintain records, revise plan when significant changes occur.</li>
-            <li>Requires configuration management plan for scope/product changes.</li>
+            <li>Change management = handling project changes smoothly; change control = formal SCM procedure for CI modifications.</li>
+            <li>CM is part of overall change management; change control objective: identify, evaluate, prioritise, control changes.</li>
+            <li>Sources of change: business reorganisation, market conditions, new tech, bugs, customer needs, performance, budget/schedule.</li>
+            <li>Types: anticipatory, reactive, incremental, strategic.</li>
+            <li>8 steps: RFC → review/assess → plan → test → change proposal → implement → review performance → close.</li>
+            <li>SCM steps: CR → evaluate → change report → CCB → ECR → check-out → modify → test → check-in → new version → closed ECR.</li>
+            <li>CCB = approves/rejects/defers; roles: requestor, PM, CCB, reviewer; requestor always informed.</li>
+            <li>Guidelines: no silent changes, preserve quality, formal system, flexibility, records + revised plan.</li>
+            <li>Revise project plan when deliverables/schedule/budget/approach change significantly; configuration management plan required.</li>
           </ul>
         </div>
       </section>

@@ -40,7 +40,7 @@
           <li><strong>9.3 Objectives:</strong> Classic 3: identify configuration at points in time; systematically control changes; maintain integrity &amp; traceability. Also: collaboration, version control, replication, stakeholder visibility, remote admin, reduced downtime, reliable backups.</li>
           <li><strong>9.4 SCM Activities (5):</strong> (1) Configuration identification/establishment, (2) Version control, (3) Change control, (4) Status accounting, (5) Configuration audit &amp; reporting.</li>
           <li><strong>9.5 Change Control:</strong> CR → evaluate (merit, side effects, impact, cost) → change report → CCB decision → ECR (if approved) → check-out → modify → test → check-in → new version. Roles: requestor, PM, CCB, reviewer. No silent changes; revise plan when significant scope/schedule changes.</li>
-          <li><strong>9.6 Version Control:</strong> Procedures + tools for managing SCI versions. Sub-activities: identify versions, numbering (X.Y.Z), visibility, tracking graph. X = major release; Y = component; Z = minor fix. Tools: Git (distributed), SVN (centralised). Benefits: collaboration, rollback, branching/merging, CI/CD.</li>
+          <li><strong>9.6 Version Control (VCS):</strong> Tool to track/manage code changes; components: repository, revision, branch, merge, commit, working copy. Three types: Local (single machine); CVCS (central server, SVN/CVS, single point of failure); DVCS (local repo + push/pull, Git/Mercurial/Bazaar). CVCS = one-step commit; DVCS = commit then push. SCM sub-activities: X.Y.Z numbering, visibility, tracking graph. Integrates with change control and CI/CD.</li>
           <li><strong>9.7 System SCM:</strong> Integrated SCM at whole-system level; manages code, docs, executables, environments. Essential part of all PM activities. Benefits: bug tracking, CI/CD, risk management, reproducibility, parallel development, replication, team coordination. Links to SQA, CMM Level 2.</li>
           <li><strong>CCB:</strong> Change Control Board — approves/rejects/defer changes; logs requests; notifies requestor.</li>
           <li><strong>ECR:</strong> Engineering Change Request — generated for each approved change; describes change, constraints, audit criteria.</li>
@@ -51,7 +51,7 @@
 
       <nav class="chapter-nav" aria-label="Section navigation">
         <a class="btn-back chapter-nav-prev" href="09-07-system-configuration-management.html">&larr; 9.7 System Configuration Management</a>
-        <a class="btn-back chapter-nav-next" href="../../index.html">Software Engineering &rarr;</a>
+        <a class="btn-back chapter-nav-next" href="../12-advanced-issues-reusability-patterns/index.html">Topic 12 &rarr;</a>
       </nav>
     </main>
   </div>

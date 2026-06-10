@@ -36,26 +36,60 @@
         <p>
           <strong>Software Configuration Management (SCM)</strong> is the process of defining and implementing
           a standard configuration for a software project so that the product remains in a known, controlled
-          state throughout development. SCM tracks and manages the emerging product and its versions, ensures
-          all stakeholders know what is being designed, developed, built, tested, and delivered, and enables
-          requirements to be traced through to the final software product.
+          state throughout development. SCM tracks and manages the emerging product and its versions, identifies
+          and controls the configuration of software, hardware, and tools used throughout the development cycle,
+          and ensures all stakeholders know what is being designed, developed, built, tested, and delivered.
+        </p>
+        <p>
+          Through SCM, design requirements can be traced to the final software product. SCM is an
+          <strong>umbrella activity</strong> applied throughout the software process — see
+          <a href="09-01-scm-overview.html#sec-9-1">§9.1 Overview</a>.
         </p>
 
         <h3>Definition</h3>
         <ul>
           <li>SCM can be defined as the process of <strong>identifying, organizing, and controlling changes</strong> to software work products throughout the lifecycle.</li>
-          <li>It manages not only source code but also <strong>documentation, data, tools, and hardware</strong> used in development.</li>
+          <li>It is the process of defining and implementing a <strong>standard configuration</strong> that results in easier setup and maintenance, less downtime, better enterprise integration, more reliable backups, and maximised productivity by minimising mistakes.</li>
+          <li>SCM manages and tracks the <strong>emerging product and its versions</strong> — not just the final deliverable.</li>
+          <li>It identifies and controls configuration of <strong>software, hardware, and tools</strong> used throughout the development cycle.</li>
           <li>SCM includes <strong>revision control</strong> (tracking versions of each item) and <strong>establishment of baselines</strong> (formally approved snapshots of the product).</li>
-          <li>Primary benefits include easier setup and maintenance, less downtime, better enterprise integration, more reliable backups, and maximised productivity by minimising mistakes.</li>
-          <li>SCM is an <strong>umbrella activity</strong> — it runs in parallel with the entire SDLC, not just during coding — see <a href="09-01-scm-overview.html#sec-9-1">§9.1</a>.</li>
+          <li>In SPM, SCM is the process of <strong>controlling and tracking software changes</strong>, including revision control and establishment of baselines — see <a href="../03-software-project-management/03-02-project-management-process.html#sec-3-2">§3.2 Project Management Process</a>.</li>
+        </ul>
+
+        <h3>Why SCM is essential for software projects</h3>
+        <ul>
+          <li>As program complexity increased since the 1960s, SCM techniques became critical for improving productivity, reducing costs, and keeping projects progressing to completion.</li>
+          <li>SCM gives developers a means to <strong>coordinate the work of numerous people</strong> on a common product — whether they work in close proximity or across a wide geographic area.</li>
+          <li>Without a proper SCM plan, projects become increasingly difficult to control and can reach a point where the project must be discontinued because it cannot be fixed.</li>
+          <li>SCM becomes especially important when software is developed through <strong>outsourcing</strong> or <strong>distributed development</strong> across multiple teams and locations.</li>
+          <li>The choice of software lifecycle model also affects how SCM is applied — iterative and incremental models require more frequent baselines and version tagging than a single-pass waterfall.</li>
+        </ul>
+
+        <h3>Problems SCM prevents</h3>
+        <ul>
+          <li><strong>Inconsistency from replication:</strong> If every engineer keeps a personal copy of a module and makes local interface changes without notifying teammates, different copies become inconsistent and integration fails when modules are combined.</li>
+          <li><strong>Concurrent access conflicts:</strong> When two engineers edit the same module simultaneously, one save can overwrite the other's work — this applies to code, design documents, and any other deliverable object.</li>
+          <li><strong>Unstable development environment:</strong> If module C keeps changing while another developer integrates A with B, progress is blocked — baselines freeze a stable reference that others can depend on.</li>
+          <li><strong>Lost status information:</strong> Without SCM, the team loses track of who made changes and when — making debugging, auditing, and accountability impossible.</li>
+          <li><strong>Variant handling:</strong> When multiple versions or revisions of the same module exist, a bug fix must be applied consistently across all variants — SCM tracks which versions need the same patch.</li>
         </ul>
 
         <h3>Configuration Items (CIs)</h3>
         <ul>
           <li>A <strong>Configuration Item (CI)</strong> is any work product that is placed under SCM control — source code files, design documents, test plans, executables, libraries, and user manuals.</li>
-          <li>Each CI is uniquely identified, versioned, and tracked so that changes can be traced to their origin.</li>
-          <li>Configuration identification determines the <strong>scope</strong> of the software system — what items exist and which of them will be managed.</li>
-          <li>Relationships among CIs are established so that the impact of a change to one item on others can be assessed.</li>
+          <li>Examples of CIs include: SRS documents, architecture diagrams, individual source files, compiled binaries, test case files, build scripts, and configuration files.</li>
+          <li>Each CI is <strong>uniquely identified, versioned, and tracked</strong> so that changes can be traced to their origin and impact assessed.</li>
+          <li><strong>Configuration identification</strong> determines the scope of the software system — selecting which items exist and which will be managed under SCM.</li>
+          <li>Relationships among CIs are established so that the impact of a change to one item on others can be assessed before approval.</li>
+          <li>All elements associated with a baseline must be kept under <strong>formal change control</strong> — no CI in a baseline can be modified without going through the change control process.</li>
+        </ul>
+
+        <h3>The Configuration Management (CM) database</h3>
+        <ul>
+          <li>The <strong>CM database</strong> (or project repository) is the central store where all configuration items and their versions are maintained.</li>
+          <li>When a change is approved, the affected CI is <strong>checked out</strong> from the CM database, modified, tested, and then <strong>checked in</strong> to create a new version.</li>
+          <li>The CM database serves as the <strong>shared project database</strong> referenced by all team members — it is the single authoritative source for the current product configuration.</li>
+          <li>Baselines are stored and referenced from the CM database; when a baseline is updated after approved changes, a new baseline is formed instantly for others to use.</li>
         </ul>
 
         <h3>Baselines</h3>
@@ -66,13 +100,61 @@
           <figcaption id="fig-baseline-caption">A baseline is a formally reviewed and agreed set of configuration items that serves as the basis for further development.</figcaption>
         </figure>
         <ul>
-          <li>A <strong>baseline</strong> is a formally accepted version of a software configuration item — designated and fixed at a specific point in time.</li>
-          <li>Per IEEE 610.12-1990, a baseline is a specification or product that has been <strong>formally reviewed and agreed upon</strong> and serves as the basis for further development; changes occur only through formal change control.</li>
+          <li>A <strong>baseline</strong> is a formally accepted version of a software configuration item — designated and fixed at a specific point in time during the SCM process.</li>
+          <li>Per IEEE Std 610.12-1990, a baseline is an <strong>agreed description and review of product attributes</strong> that serves as the basis for further development; changes can be done only through formal change control procedures.</li>
+          <li>A baseline is a <strong>milestone and reference point</strong> marked by completion or delivery of one or more CIs and formal approval obtained through formal technical review.</li>
           <li>A baseline is a set of <strong>mutually consistent CIs</strong> that have been formally reviewed and agreed upon at a given milestone.</li>
+          <li>The baseline is a <strong>shared project database</strong> — SCM maintains the integrity of this set of products.</li>
+          <li>The main aim of a baseline is to <strong>reduce and control vulnerability</strong> — weaknesses that can lead to uncontrollable changes — by fixing key deliverables at critical points in the lifecycle.</li>
           <li>Once a baseline is set, it can <strong>only be changed through formal change control procedures</strong> — not by ad hoc edits.</li>
-          <li>Baselines freeze a known-good state so that other teams can integrate against a stable reference while development continues elsewhere.</li>
-          <li>Common baseline types include: <strong>functional</strong>, <strong>allocated</strong>, <strong>design</strong>, <strong>product</strong>, <strong>operational</strong>, <strong>acceptance test</strong>, <strong>integration test</strong>, and <strong>unit test</strong> baselines.</li>
-          <li>The baseline process: document work products → review and fix issues → approve baseline → evaluate and approve all subsequent changes formally.</li>
+          <li>When a manager freezes an object to a baseline, a requester who needs changes works on a private copy; after configuration is updated, a <strong>new baseline is formed instantly</strong> for others to use and depend on.</li>
+        </ul>
+
+        <h3>Baseline establishment process</h3>
+        <ol>
+          <li>Elements are <strong>documented properly</strong> and reviewed to find issues in the design model or work products.</li>
+          <li>Errors and defects found during review are <strong>corrected and fixed</strong>.</li>
+          <li>All parts of the model are reviewed; all problems found are fixed and <strong>formally approved</strong>.</li>
+          <li>The approved model becomes the <strong>baseline</strong>.</li>
+          <li>Any further changes to items in the baseline are allowed <strong>only after each change is evaluated and approved</strong> through formal change control.</li>
+        </ol>
+
+        <h3>Baseline types and their components</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Baseline type</th><th>Typical components included</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Functional baseline</strong></td><td>Operation document, system requirements</td></tr>
+              <tr><td><strong>Allocated baseline</strong></td><td>High-level design document, preliminary design, interface control documents</td></tr>
+              <tr><td><strong>Design baseline</strong></td><td>Detailed design documents</td></tr>
+              <tr><td><strong>Product baseline</strong></td><td>Source and executable code, final system specifications, user and maintenance manuals, hardware/software specifications</td></tr>
+              <tr><td><strong>Operational baseline</strong></td><td>Source/executable code, final specs, user manuals, acceptance test plans, test procedures, site integration test cases and reports</td></tr>
+              <tr><td><strong>Acceptance test baseline</strong></td><td>Source/executable code, integration test plans, test procedures, test cases, data sets, test reports</td></tr>
+              <tr><td><strong>Integration test baseline</strong></td><td>Source/executable code, unit test plans, test procedures, test cases, data sets, test reports</td></tr>
+              <tr><td><strong>Unit test baseline</strong></td><td>Source and executable code modules</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>SCM change control cycle (overview)</h3>
+        <p>
+          Every change to a baselined CI follows a controlled cycle involving the Change Control Board (CCB)
+          and the CM database. Full detail is in <a href="09-05-change-control-process.html#sec-9-5">§9.5 Change Control Process</a>.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-scm-cycle-caption">
+          <img src="../../../assets/images/se-topic-09/scm-change-control-cycle.png"
+               alt="SCM change control cycle — from new requirements through CCB decision, CM database check-out, verification, to closed ECR"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-scm-cycle-caption">SCM change control cycle — CCB evaluates requests; approved changes are implemented via check-out from the CM database, verified, and checked in as a new version.</figcaption>
+        </figure>
+        <ul>
+          <li>A <strong>New Requirements / System Problem Report</strong> is submitted as input to the change process.</li>
+          <li>The <strong>CCB</strong> analyses the request and decides to: reject (notify proposer), defer to next version, or implement in the current version.</li>
+          <li>For approved changes, the CI is <strong>checked out</strong> from the CM database, the change is implemented and verified against intended requirements.</li>
+          <li>If verification fails, a new <strong>ECR (Engineering Change Request)</strong> is generated or re-work is performed; if it passes, the CI is <strong>checked in</strong> to the CM database.</li>
+          <li>The process closes with a <strong>Closed ECR</strong> output document — the change is complete and recorded.</li>
         </ul>
 
         <h3>What SCM controls</h3>
@@ -90,19 +172,24 @@
           <li>SCM supports <strong>reproducibility</strong> — a software system can be replicated at any stage of development for testing, debugging, or deployment.</li>
           <li>SCM enables <strong>parallel development</strong> — multiple developers work on different branches simultaneously without corrupting the main codebase.</li>
           <li>Effective SCM links code modifications to reported issues, making <strong>bug tracking</strong> more accurate and auditable.</li>
+          <li>Baselines provide <strong>consistency and traceability</strong> across the project — all team members work from the same approved foundation at each milestone.</li>
+          <li>SCM is a key process area at <strong>CMM Level 2</strong> — formal SCM procedures are required for repeatable project management — see <a href="../03-software-project-management/03-10-cmm.html#sec-3-10">§3.10 CMM</a>.</li>
         </ul>
 
         <div class="callout exam">
           <div class="callout-title">Exam question — Software Configuration Management</div>
-          <p><strong>Q:</strong> Define Software Configuration Management. Explain Configuration Items and baselines with their role in the SCM process.</p>
+          <p><strong>Q:</strong> Define Software Configuration Management. Explain Configuration Items, baselines, and the CM database. What problems does SCM prevent?</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>SCM = process of defining/implementing standard configuration; tracks product and versions; ensures stakeholder visibility and traceability.</li>
-            <li>Includes revision control + baselines; manages code, docs, tools, executables.</li>
-            <li>CI = any work product under SCM control, uniquely identified and versioned.</li>
-            <li>Baseline = formally accepted CI snapshot; mutually consistent CIs; fixed at a point in time; changed only via formal change control.</li>
-            <li>Baseline types: functional, design, product, test baselines, etc.</li>
-            <li>Benefits: known stable state, reproducibility, parallel development, traceability, bug tracking.</li>
+            <li>SCM = process of defining/implementing standard configuration; tracks product and versions; controls software/hardware/tools; ensures stakeholder visibility and traceability.</li>
+            <li>Includes revision control + baselines; part of SPM; umbrella activity across SDLC.</li>
+            <li>CI = any work product under SCM control, uniquely identified and versioned; all baseline elements under formal change control.</li>
+            <li>CM database = central repository; check-out → modify → test → check-in cycle.</li>
+            <li>Baseline (IEEE 610.12-1990) = agreed product attributes; milestone/reference point; mutually consistent CIs; changed only via formal change control.</li>
+            <li>Baseline process: document → review/fix → approve → baseline → evaluate all further changes.</li>
+            <li>Baseline types: functional, allocated, design, product, operational, acceptance/integration/unit test baselines.</li>
+            <li>Problems prevented: inconsistency, concurrent access, unstable environment, lost status info, variant handling.</li>
+            <li>Change cycle: CR → CCB → check-out → implement/verify → check-in → closed ECR.</li>
           </ul>
         </div>
       </section>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 12 — Advanced Issues: Reusability &amp; Patterns</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="index-hero topic-hub">
+    <header class="site-header site-header--hub">
+      <div class="site-header-top">
+        <h1>12. Advanced Issues: Reusability &amp; Patterns</h1>
+        <div class="site-header-actions">
+          <a class="btn-back" href="../../index.html">&larr; Software Engineering</a>
+        </div>
+      </div>
+      <div class="outline-coverage" id="outline-coverage">
+        <div class="outline-coverage-title">Syllabus outline covered in this topic</div>
+        <ul>
+          <li>Advanced issues — Reusability</li>
+          <li>Advanced issues — Patterns</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="subtopic-cards">
+      <a class="subtopic-card" href="12-01-reusability.html">
+        <span class="subtopic-card-circle">12.1</span>
+        <span class="subtopic-card-label">Reusability</span>
+      </a>
+      <a class="subtopic-card" href="12-02-design-patterns.html">
+        <span class="subtopic-card-circle">12.2</span>
+        <span class="subtopic-card-label">Design Patterns</span>
+      </a>
+      <a class="subtopic-card" href="12-03-key-takeaways.html">
+        <span class="subtopic-card-circle">✓</span>
+        <span class="subtopic-card-label">Key takeaways</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

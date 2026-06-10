@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 12 — 12.2 Design Patterns</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>12.2 Design Patterns</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 12</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-12-2">
+
+        <p>
+          <strong>Design patterns</strong> are reusable, proven solutions to common problems encountered during
+          the design and implementation of software systems. They were popularised by the
+          <strong>Gang of Four (GoF)</strong> — Gamma, Helm, Johnson, and Vlissides — in their 1994 book
+          <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>. Patterns represent
+          <strong>design-level reuse</strong> — see <a href="12-01-reusability.html#sec-12-1">§12.1 Reusability</a>
+          — and extend the OOD principles from
+          <a href="../05-software-design/05-15-object-oriented-design.html#sec-5-15">§5.15 Object-Oriented Design</a>.
+        </p>
+
+        <h3>What is pattern designing?</h3>
+        <ul>
+          <li>Pattern designing is the application of design patterns — reusable and proven solutions — to common problems during software design and implementation.</li>
+          <li>Design patterns are <strong>general solutions</strong> to recurring design problems that have been tried and tested in real-world scenarios.</li>
+          <li>They provide a set of proven approaches that promote best practices in software development.</li>
+          <li>Patterns are <strong>programming language-independent</strong> strategies — they represent ideas, not particular implementations.</li>
+          <li>Using patterns makes code more flexible, reusable, and maintainable when applied to the right problem.</li>
+          <li>Patterns are not mandatory for every project — they are meant for common problem-solving, applied when a suitable recurring problem is identified.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-pattern-intro-caption">
+          <img src="../../../assets/images/se-topic-12/pattern-design-intro.webp"
+               alt="Introduction to pattern designing — reusable proven solutions to common software design problems"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-pattern-intro-caption">Design patterns provide reusable, proven solutions to recurring design problems in software systems.</figcaption>
+        </figure>
+
+        <h3>Pattern structure (GoF template)</h3>
+        <p>Every design pattern is documented using a standard template with four key elements:</p>
+        <ul>
+          <li><strong>Pattern name:</strong> A meaningful name that captures the essence of the pattern — e.g. Singleton, Observer, Factory Method — establishing a common vocabulary for developers.</li>
+          <li><strong>Problem:</strong> The recurring design problem or situation where the pattern applies — when to use it and what forces or constraints exist.</li>
+          <li><strong>Solution:</strong> The proven design structure — the classes, objects, and relationships that resolve the problem.</li>
+          <li><strong>Consequences:</strong> The results of applying the pattern — trade-offs in flexibility, complexity, performance, and maintainability.</li>
+        </ul>
+
+        <h3>Characteristics of pattern designing</h3>
+        <ul>
+          <li><strong>Problem-solution approach:</strong> Patterns identify common design problems and provide well-defined, proven solutions effective in similar contexts.</li>
+          <li><strong>Reusability:</strong> Patterns encapsulate successful design practices that can be applied across multiple projects, saving time and effort.</li>
+          <li><strong>Abstraction:</strong> Patterns abstract away specific implementation details and focus on high-level design concepts.</li>
+          <li><strong>Common vocabulary:</strong> Patterns establish standard terms that developers use to communicate design decisions — saying "Observer" conveys a full design intent.</li>
+          <li><strong>Proven solutions:</strong> Patterns are based on collective community experience, not arbitrary design choices — they represent solutions tested in real projects.</li>
+        </ul>
+
+        <h3>Three categories of design patterns (GoF)</h3>
+        <p>The Gang of Four categorises 23 design patterns into three groups based on their purpose:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Category</th><th>Purpose</th><th>Key idea</th><th>Example patterns</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Creational</strong></td><td>Object creation mechanisms</td><td>Abstract how objects are instantiated</td><td>Singleton, Factory Method, Abstract Factory, Builder, Prototype</td></tr>
+              <tr><td><strong>Structural</strong></td><td>Class and object composition</td><td>Combine objects into larger structures</td><td>Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy</td></tr>
+              <tr><td><strong>Behavioral</strong></td><td>Object communication and responsibility</td><td>Define how objects interact and distribute work</td><td>Observer, Strategy, Command, State, Template Method, Visitor</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>1. Creational design patterns</h3>
+        <ul>
+          <li>Creational patterns <strong>abstract the instantiation process</strong> — they make a system independent of how its objects are created, composed, and represented.</li>
+          <li>They encapsulate knowledge about which concrete classes the system uses and hide how instances are created and assembled.</li>
+          <li>Two recurring themes: encapsulating which concrete class is used; hiding how instances are created.</li>
+        </ul>
+        <ul>
+          <li><strong>Singleton:</strong> Ensures a class has only one instance and provides a global access point — used for database connections, configuration managers, and logging systems.</li>
+          <li><strong>Factory Method:</strong> Defines an interface for creating objects but lets subclasses decide which class to instantiate — decouples object creation from the code that uses objects.</li>
+          <li><strong>Abstract Factory:</strong> Provides an interface for creating families of related objects without specifying their concrete classes.</li>
+          <li><strong>Builder:</strong> Separates the construction of a complex object from its representation — same construction process can create different representations.</li>
+          <li><strong>Prototype:</strong> Creates new objects by copying an existing object (prototype) rather than creating from scratch — useful when object creation is expensive.</li>
+        </ul>
+
+        <h3>Singleton pattern — example</h3>
+        <ul>
+          <li>The Singleton pattern ensures only <strong>one object</strong> of a class exists in the application.</li>
+          <li>All clients receive the same shared instance — e.g. one DatabaseConnectionManager for the entire application.</li>
+          <li>Prevents accidental creation of multiple instances and ensures efficient, consistent use of shared resources.</li>
+          <li>Can use lazy initialization (created on first access) or eager initialization (created at class load time).</li>
+        </ul>
+        <div class="terminal" aria-label="Pseudocode — Singleton pattern">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">singleton_pattern.pseudo</span>
+          </div>
+          <pre><code>CLASS DatabaseConnectionManager
+
+  PRIVATE STATIC instance = NULL
+  PRIVATE connectionString
+
+  // Private constructor — prevents external instantiation
+  PRIVATE CONSTRUCTOR DatabaseConnectionManager(connStr)
+    connectionString = connStr
+  END CONSTRUCTOR
+
+  PUBLIC STATIC FUNCTION getInstance(connStr)
+    IF instance IS NULL THEN
+      instance = NEW DatabaseConnectionManager(connStr)
+    END IF
+    RETURN instance
+  END FUNCTION
+
+  PUBLIC FUNCTION executeQuery(sql)
+    // use shared connection
+  END FUNCTION
+
+END CLASS
+
+// All clients get the same instance
+db1 = DatabaseConnectionManager.getInstance("localhost:5432")
+db2 = DatabaseConnectionManager.getInstance("localhost:5432")
+// db1 IS db2  →  only ONE instance exists</code></pre>
+        </div>
+
+        <h3>Factory Method pattern — example</h3>
+        <ul>
+          <li>The Factory Method defines an interface for creating objects but lets subclasses decide which concrete class to instantiate.</li>
+          <li>The client code works with the abstract product interface — it does not need to know the concrete class being created.</li>
+          <li>New product types can be added by creating new subclasses without modifying existing client code — supports the Open/Closed Principle.</li>
+        </ul>
+        <div class="terminal" aria-label="Pseudocode — Factory Method pattern">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">factory_method_pattern.pseudo</span>
+          </div>
+          <pre><code>ABSTRACT CLASS DocumentCreator
+  ABSTRACT FUNCTION createDocument()   // Factory Method
+  FUNCTION processDocument()
+    doc = createDocument()
+    doc.open()
+    doc.save()
+  END FUNCTION
+END CLASS
+
+CLASS PDFCreator EXTENDS DocumentCreator
+  FUNCTION createDocument()
+    RETURN NEW PDFDocument()
+  END FUNCTION
+END CLASS
+
+CLASS WordCreator EXTENDS DocumentCreator
+  FUNCTION createDocument()
+    RETURN NEW WordDocument()
+  END FUNCTION
+END CLASS
+
+// Client uses abstract creator — no knowledge of concrete type
+creator = NEW PDFCreator()
+creator.processDocument()   // creates and processes a PDF</code></pre>
+        </div>
+
+        <h3>2. Structural design patterns</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-structural-caption">
+          <img src="../../../assets/images/se-topic-12/structural-patterns.webp"
+               alt="Types of Structural Design Patterns — Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-structural-caption">Seven structural design patterns — concerned with how classes and objects are composed into larger structures.</figcaption>
+        </figure>
+        <ul>
+          <li>Structural patterns are concerned with <strong>how classes and objects are composed</strong> to form larger structures while keeping those structures flexible and efficient.</li>
+          <li>They help independently developed class libraries work together and allow new functionality through object composition at runtime.</li>
+        </ul>
+        <ul>
+          <li><strong>Adapter:</strong> Converts the interface of a class into another interface clients expect — lets incompatible classes work together (wrapper pattern).</li>
+          <li><strong>Bridge:</strong> Separates an abstraction from its implementation so both can vary independently — avoids permanent binding between abstraction and implementation.</li>
+          <li><strong>Composite:</strong> Composes objects into tree structures to represent part-whole hierarchies — clients treat individual objects and compositions uniformly.</li>
+          <li><strong>Decorator:</strong> Adds new responsibilities to objects dynamically without altering their structure — wraps the original object with additional functionality.</li>
+          <li><strong>Facade:</strong> Provides a unified, simplified interface to a set of interfaces in a subsystem — makes the subsystem easier to use.</li>
+          <li><strong>Flyweight:</strong> Shares common data across multiple objects to reduce memory usage — separates intrinsic (shared) state from extrinsic (unique) state.</li>
+          <li><strong>Proxy:</strong> Provides a surrogate or placeholder to control access to another object — supports lazy loading, access control, and logging.</li>
+        </ul>
+
+        <h3>3. Behavioral design patterns</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-behavioral-caption">
+          <img src="../../../assets/images/se-topic-12/behavioral-patterns.webp"
+               alt="Types of Behavioral Design Patterns — Observer, Strategy, Command, State, and others"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-behavioral-caption">Ten behavioral design patterns — concerned with algorithms and assignment of responsibilities between objects.</figcaption>
+        </figure>
+        <ul>
+          <li>Behavioral patterns are concerned with <strong>algorithms and the assignment of responsibilities</strong> between objects — how objects communicate and distribute work.</li>
+          <li>They characterise complex control flows and define patterns of communication, not just object structure.</li>
+          <li>Behavioral class patterns use inheritance to distribute behaviour; behavioral object patterns use object composition.</li>
+        </ul>
+        <ul>
+          <li><strong>Observer:</strong> Defines a one-to-many dependency — when one object changes state, all dependents are notified automatically (publish-subscribe).</li>
+          <li><strong>Strategy:</strong> Defines a family of algorithms, encapsulates each one, and makes them interchangeable — lets the algorithm vary independently from clients.</li>
+          <li><strong>State:</strong> Allows an object to alter its behaviour when its internal state changes — replaces complex conditional logic with state objects.</li>
+          <li><strong>Command:</strong> Encapsulates a request as an object — supports undo/redo, queuing, and logging of requests.</li>
+          <li><strong>Chain of Responsibility:</strong> Passes a request along a chain of handlers — each handler decides whether to process it or pass it on.</li>
+          <li><strong>Template Method:</strong> Defines the skeleton of an algorithm in a base class — subclasses override specific steps without changing the overall structure.</li>
+          <li><strong>Mediator:</strong> Defines an object that encapsulates how a set of objects interact — promotes loose coupling by preventing direct object references.</li>
+          <li><strong>Memento:</strong> Captures and restores an object's internal state without breaking encapsulation — supports undo and rollback.</li>
+          <li><strong>Visitor:</strong> Adds new operations to a class hierarchy without modifying the classes — separates algorithms from object structure.</li>
+          <li><strong>Interpreter:</strong> Defines a representation for a language grammar and an interpreter — used for domain-specific languages.</li>
+        </ul>
+
+        <h3>Observer pattern — example</h3>
+        <ul>
+          <li>The Observer pattern defines a <strong>one-to-many dependency</strong> between a subject and its observers.</li>
+          <li>When the subject's state changes, all registered observers are notified and updated automatically.</li>
+          <li>Commonly used in GUI event handling, publish-subscribe systems, and model-view architectures.</li>
+          <li>Observers and subjects are loosely coupled — new observer types can be added without modifying the subject.</li>
+        </ul>
+        <div class="terminal" aria-label="Pseudocode — Observer pattern">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">observer_pattern.pseudo</span>
+          </div>
+          <pre><code>INTERFACE Observer
+  FUNCTION update(data)
+END INTERFACE
+
+CLASS StockMarket   // Subject
+  PRIVATE observers = []
+  PRIVATE price
+
+  FUNCTION attach(observer)
+    observers.add(observer)
+  END FUNCTION
+
+  FUNCTION setPrice(newPrice)
+    price = newPrice
+    FOR EACH obs IN observers DO
+      obs.update(price)    // notify all observers
+    END FOR
+  END FUNCTION
+END CLASS
+
+CLASS StockDisplay IMPLEMENTS Observer   // Concrete Observer
+  FUNCTION update(data)
+    PRINT "Stock price updated: " + data
+  END FUNCTION
+END CLASS
+
+market = NEW StockMarket()
+display = NEW StockDisplay()
+market.attach(display)
+market.setPrice(150.00)   // display automatically notified</code></pre>
+        </div>
+
+        <h3>Strategy pattern — example</h3>
+        <ul>
+          <li>The Strategy pattern defines a <strong>family of interchangeable algorithms</strong> encapsulated in separate strategy classes.</li>
+          <li>The client selects or switches the strategy at runtime without modifying client code — eliminates complex if-else chains for algorithm selection.</li>
+          <li>Commonly used for sorting algorithms, payment methods, compression formats, and routing policies.</li>
+        </ul>
+        <div class="terminal" aria-label="Pseudocode — Strategy pattern">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">strategy_pattern.pseudo</span>
+          </div>
+          <pre><code>INTERFACE PaymentStrategy
+  FUNCTION pay(amount)
+END INTERFACE
+
+CLASS CreditCardPayment IMPLEMENTS PaymentStrategy
+  FUNCTION pay(amount)
+    PRINT "Paid " + amount + " via Credit Card"
+  END FUNCTION
+END CLASS
+
+CLASS PayPalPayment IMPLEMENTS PaymentStrategy
+  FUNCTION pay(amount)
+    PRINT "Paid " + amount + " via PayPal"
+  END FUNCTION
+END CLASS
+
+CLASS ShoppingCart
+  PRIVATE strategy   // current payment strategy
+
+  FUNCTION setPaymentStrategy(s)
+    strategy = s
+  END FUNCTION
+
+  FUNCTION checkout(amount)
+    strategy.pay(amount)   // delegates to selected strategy
+  END FUNCTION
+END CLASS
+
+cart = NEW ShoppingCart()
+cart.setPaymentStrategy(NEW CreditCardPayment())
+cart.checkout(99.99)
+cart.setPaymentStrategy(NEW PayPalPayment())   // switch at runtime
+cart.checkout(49.50)</code></pre>
+        </div>
+
+        <h3>Patterns vs reusability</h3>
+        <ul>
+          <li><strong>Code reuse</strong> operates at the implementation level — reusing actual source code modules or libraries.</li>
+          <li><strong>Pattern reuse</strong> operates at the design level — reusing proven design structures and relationships between classes.</li>
+          <li>Patterns do not provide ready-made code — they provide a blueprint that must be adapted to the specific context of each project.</li>
+          <li>Both forms of reuse reduce development effort, improve quality, and promote consistency — they complement each other in a reuse strategy.</li>
+          <li>Overusing patterns without a clear need can introduce unnecessary complexity — patterns should be applied when a genuine recurring problem exists.</li>
+        </ul>
+
+        <h3>Design patterns and OOD / UML</h3>
+        <ul>
+          <li>Design patterns extend OOD principles — they apply high cohesion, low coupling, and information hiding in proven combinations — see <a href="../05-software-design/05-10-coupling-cohesion.html#sec-5-10">§5.10 Coupling and Cohesion</a>.</li>
+          <li>Patterns are commonly documented using <strong>UML class diagrams</strong> showing the participating classes, their relationships, and roles — see <a href="../05-software-design/05-16-uml-modelling.html#sec-5-16">§5.16 UML Modelling</a>.</li>
+          <li>Creational patterns often appear as factory classes in class diagrams; behavioral patterns like Observer show association relationships between subject and observer classes.</li>
+          <li>Understanding OOD concepts (inheritance, polymorphism, encapsulation, interfaces) is essential before applying patterns effectively.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Design Patterns</div>
+          <p><strong>Q:</strong> What are design patterns? Describe the GoF pattern template and three categories with one example each. Explain Singleton, Observer, and Strategy patterns.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Design pattern = reusable proven solution to recurring design problem; GoF 1994; language-independent; design-level reuse.</li>
+            <li>Pattern template: name, problem, solution, consequences.</li>
+            <li>Characteristics: problem-solution approach, reusability, abstraction, common vocabulary, proven solutions.</li>
+            <li>Creational (object creation): Singleton, Factory, Abstract Factory, Builder, Prototype.</li>
+            <li>Structural (composition): Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy.</li>
+            <li>Behavioral (communication): Observer, Strategy, Command, State, Template Method, etc.</li>
+            <li>Singleton: one instance, global access; used for DB manager, config, logging.</li>
+            <li>Observer: one-to-many notification; subject notifies observers on state change; publish-subscribe.</li>
+            <li>Strategy: interchangeable algorithms encapsulated in strategy classes; selected at runtime.</li>
+            <li>Patterns vs code reuse: design-level vs implementation-level; complement each other.</li>
+            <li>Link to OOD principles and UML class diagrams.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="12-01-reusability.html">&larr; 12.1 Reusability</a>
+        <a class="btn-back chapter-nav-next" href="12-03-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

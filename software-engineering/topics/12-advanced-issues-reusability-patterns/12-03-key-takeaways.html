@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 12 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 12</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>12.1 Reusability:</strong> Software reuse = building new systems from existing artifacts and knowledge rather than from scratch; addresses software crisis; umbrella activity parallel to SDLC.</li>
+          <li><strong>Benefits:</strong> Reduced development time/cost; better tested and more reliable components; consistency across products; faster response to new requirements.</li>
+          <li><strong>Types of reuse:</strong> Code, design, specification, component, framework, pattern reuse — each operates at a different lifecycle level.</li>
+          <li><strong>Reusable component traits:</strong> Generic, modular, low coupling/high cohesion, well-documented, thoroughly tested, version-controlled, configurable.</li>
+          <li><strong>DRY principle:</strong> Every piece of knowledge has a single authoritative representation; avoids duplicated logic and inconsistent maintenance.</li>
+          <li><strong>Component-Based Architecture (CBA):</strong> Software assembled from reusable, independently deployable components with well-defined interfaces; promotes modularity and flexibility.</li>
+          <li><strong>Reuse-Oriented Model (ROM) — 4 steps:</strong> (1) Identify reusable components, (2) Understand all components, (3) Modify components, (4) Integrate into new system. Requires component catalogue; risk if library is insufficient.</li>
+          <li><strong>Reuse Maturity Model:</strong> L1 single-project source pool; L2 multi-project source copy (maintenance nightmare); L3 ad hoc binary reuse (utility in own project); L4 controlled binary reuse with version tracking (Reuse/Release Equivalence Principle).</li>
+          <li><strong>Reuse vs re-engineering vs reverse engineering:</strong> Reuse = use existing artifacts for new systems; Re-engineering = improve legacy system without changing core purpose; Reverse engineering = recover design/requirements from existing code (8 steps).</li>
+          <li><strong>12.2 Design Patterns:</strong> Reusable proven solutions to recurring design problems; GoF 1994; language-independent; design-level reuse (not ready-made code).</li>
+          <li><strong>GoF pattern template:</strong> Name, problem, solution, consequences.</li>
+          <li><strong>Three categories:</strong> Creational (object creation — Singleton, Factory, Abstract Factory, Builder, Prototype); Structural (composition — Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy); Behavioral (communication — Observer, Strategy, Command, State, Template Method, etc.).</li>
+          <li><strong>Singleton:</strong> One instance only; global access point; private constructor; used for DB manager, config, logging.</li>
+          <li><strong>Factory Method:</strong> Interface for creating objects; subclasses decide concrete class; decouples creation from use; supports Open/Closed Principle.</li>
+          <li><strong>Observer:</strong> One-to-many dependency; subject notifies all observers on state change; publish-subscribe; loosely coupled.</li>
+          <li><strong>Strategy:</strong> Family of interchangeable algorithms encapsulated in strategy classes; selected/switched at runtime; eliminates complex if-else chains.</li>
+          <li><strong>Patterns vs code reuse:</strong> Patterns = design-level blueprint; code reuse = implementation-level modules; complement each other; overuse without need adds complexity.</li>
+          <li><strong>Links:</strong> Patterns extend OOD (coupling/cohesion, §5.10); documented with UML class diagrams (§5.16); patterns are design-level form of reusability (§12.1).</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="12-02-design-patterns.html">&larr; 12.2 Design Patterns</a>
+        <a class="btn-back chapter-nav-next" href="../../index.html">Software Engineering &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

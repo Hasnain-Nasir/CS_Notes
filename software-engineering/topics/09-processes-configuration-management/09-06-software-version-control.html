@@ -34,33 +34,184 @@
       <section id="sec-9-6">
 
         <p>
-          <strong>Software version control</strong> is a set of procedures and tools for managing versions of
-          configuration items — source code, documentation, data, and executables. It allows teams to track
-          every change, collaborate without overwriting each other's work, and revert to earlier versions when
-          something goes wrong.
+          A <strong>Version Control System (VCS)</strong> is a tool used in software development and collaborative
+          projects to track and manage changes to source code and other configuration items. Version control is
+          one of the five SCM activities — see <a href="09-04-scm-activities.html#sec-9-4">§9.4 SCM Activities</a>
+          — and the CM database referenced in change control is typically implemented as a VCS repository — see
+          <a href="09-05-change-control-process.html#sec-9-5">§9.5 Change Control Process</a>.
         </p>
 
-        <h3>What is version control?</h3>
+        <h3>What is a Version Control System?</h3>
         <ul>
-          <li>Version control keeps track of changes in computer programs and related work products over time.</li>
-          <li>It lets team members see <strong>what changes were made, when, and by whom</strong>, and go back to an older version if a change introduces a defect.</li>
-          <li>A <strong>version</strong> is a collection of software configuration items (SCIs) that together represent a defined state of the product — it may contain variants for different platforms or customers.</li>
-          <li>Version control is one of the five SCM activities — see <a href="09-04-scm-activities.html#sec-9-4">§9.4 SCM Activities</a>.</li>
+          <li>A VCS <strong>tracks and records changes</strong> to the codebase, maintaining a structured project history over time.</li>
+          <li>It allows <strong>multiple developers to collaborate</strong> on the same project without overwriting each other's work.</li>
+          <li>Developers access and update a <strong>central or shared repository</strong> where project files and their complete history are stored.</li>
+          <li>Teams can <strong>share updates</strong> with each other and <strong>revert to earlier versions</strong> of the project when a change introduces defects.</li>
+          <li>Version control keeps track of <strong>who made each change, when, and what was modified</strong> — supporting accountability, debugging, and auditing.</li>
+          <li>A <strong>version</strong> in SCM terms is a collection of software configuration items (SCIs) representing a defined state of the product — it may contain variants for different platforms or customers.</li>
         </ul>
 
-        <h3>Importance of version control</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-vcs-server-caption">
+          <img src="../../../assets/images/se-topic-09/vcs-server-architecture.png"
+               alt="Version control server architecture — central repository connected to multiple developer workstations"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-vcs-server-caption">A version control system connects developers to a shared repository where all project files and history are stored.</figcaption>
+        </figure>
+
+        <h3>Core components of a VCS</h3>
+        <p>Version control systems work using a few core concepts that help teams manage code changes and collaborate efficiently:</p>
+        <ul>
+          <li><strong>Repository:</strong> A central (or local) location that stores all project files along with their complete change history and metadata such as author name and commit message.</li>
+          <li><strong>Revision:</strong> A specific saved version of a file or project, identified using a unique ID such as a hash (Git) or sequential number (SVN).</li>
+          <li><strong>Branch:</strong> A separate copy of the codebase used to develop features or fix bugs without affecting the main (trunk/master) code line.</li>
+          <li><strong>Merging:</strong> The process of combining changes from one branch into another — may require resolving conflicts when two developers edited the same lines.</li>
+          <li><strong>Commit:</strong> A snapshot of changes made to the codebase at a specific point in time, used to track and manage project history.</li>
+          <li><strong>Working copy:</strong> The local set of files a developer is currently editing — distinct from the repository history until changes are committed.</li>
+        </ul>
+
+        <h3>Types of Version Control Systems</h3>
+        <p>There are three main types of version control systems, each suited to different collaboration needs:</p>
+
+        <h3>1. Local Version Control Systems (Local VCS)</h3>
+        <ul>
+          <li>A Local VCS stores all project versions on a <strong>single computer</strong> and is mainly used by one developer without remote collaboration.</li>
+          <li>There is <strong>no internet or server dependency</strong> — all history is kept locally on the developer's machine.</li>
+          <li>Useful for individual projects, personal scripts, or learning exercises where no team collaboration is needed.</li>
+          <li>Limited to single-user environments — cannot share changes with other developers without manually copying files.</li>
+          <li>Examples of local-only approaches include simple directory copies with date stamps, or tools like RCS (Revision Control System).</li>
+        </ul>
+
+        <h3>2. Centralized Version Control Systems (CVCS)</h3>
+        <p>
+          In a Centralized VCS, all files and their version history are stored in a <strong>single central server</strong>.
+          Developers connect to this server to access or modify files — there is only one official repository.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-centralized-vcs-caption">
+          <img src="../../../assets/images/se-topic-09/centralized-vcs.png"
+               alt="Centralized Version Control — developers commit and update through a single central server repository"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-centralized-vcs-caption">Centralized VCS — all developers commit and update through a single central server repository; working copies are checked out from the server.</figcaption>
+        </figure>
+        <p>The typical CVCS workflow:</p>
+        <ol>
+          <li><strong>Update / Checkout:</strong> A developer retrieves the latest version of files from the central server into their working copy.</li>
+          <li><strong>Make changes:</strong> The developer edits files in their local working copy.</li>
+          <li><strong>Commit:</strong> The developer saves changes directly back to the central server, making them immediately available to all other team members.</li>
+        </ol>
+        <ul>
+          <li>CVCS enables <strong>collaboration among multiple developers</strong> through a single shared central repository.</li>
+          <li>Administrators have <strong>fine-grained access control</strong> over who can read or write to the repository.</li>
+          <li>CVCS provides <strong>visibility into project activities</strong> — all changes pass through the central server and are logged centrally.</li>
+          <li>CVCS has a <strong>single point of failure</strong> — if the central server goes down, developers cannot commit or retrieve updates.</li>
+          <li>Without server access, developers cannot collaborate or share changes — all work stops until the server is restored.</li>
+          <li>Popular CVCS tools: <strong>Subversion (SVN)</strong> and <strong>CVS (Concurrent Versions System)</strong>.</li>
+        </ul>
+
+        <h3>3. Distributed Version Control Systems (DVCS)</h3>
+        <p>
+          A Distributed VCS allows each developer to have a <strong>full local repository</strong> along with a working
+          copy of the project. Changes committed locally are not automatically visible to others until pushed
+          to a shared remote repository.
+        </p>
+        <figure class="diagram figure-photo" aria-labelledby="fig-distributed-vcs-caption">
+          <img src="../../../assets/images/se-topic-09/distributed-vcs.png"
+               alt="Distributed Version Control — each developer has a local repository; push and pull sync with central server"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-distributed-vcs-caption">Distributed VCS — each developer has a full local repository; changes are shared via push (upload) and pull (download) with the central shared repository.</figcaption>
+        </figure>
+        <p>The typical DVCS workflow uses a <strong>two-step process</strong> to share changes:</p>
+        <ol>
+          <li><strong>Commit:</strong> Saves changes to the <strong>local repository</strong> — visible only to that developer until pushed.</li>
+          <li><strong>Push:</strong> Uploads committed changes from the local repository to the central/shared remote repository so others can access them.</li>
+          <li><strong>Pull:</strong> Downloads changes from the central/shared repository into the local repository and updates the working copy.</li>
+        </ol>
+        <ul>
+          <li>Developers can <strong>commit and work offline</strong> — full history is available locally without server access.</li>
+          <li>DVCS is more resilient — if the central server fails, any developer's local repository can restore the full project history.</li>
+          <li>Branching and merging are <strong>lightweight and fast</strong> because all operations happen locally first.</li>
+          <li>Popular DVCS tools: <strong>Git</strong>, <strong>Mercurial</strong>, and <strong>Bazaar</strong>.</li>
+        </ul>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Centralized VCS (CVCS)</th><th>Distributed VCS (DVCS)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Repository location</strong></td><td>Single central server only</td><td>Full local copy on each developer's machine + shared remote</td></tr>
+              <tr><td><strong>Share changes</strong></td><td>Single step: commit directly to server</td><td>Two steps: commit locally → push to remote</td></tr>
+              <tr><td><strong>Offline work</strong></td><td>Limited — needs server for commit/update</td><td>Full commit history available offline</td></tr>
+              <tr><td><strong>Server failure</strong></td><td>Work stops — single point of failure</td><td>Any local clone can restore the repository</td></tr>
+              <tr><td><strong>Branching</strong></td><td>Supported but heavier (server-side)</td><td>Lightweight, fast, local-first</td></tr>
+              <tr><td><strong>Examples</strong></td><td>SVN, CVS</td><td>Git, Mercurial, Bazaar</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Popular Version Control Systems</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-top-vcs-caption">
+          <img src="../../../assets/images/se-topic-09/top-vcs-tools.png"
+               alt="Top 5 free version control systems — Git, Mercurial, Subversion, Bazaar, CVS"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-top-vcs-caption">Five widely used free version control systems — Git, Mercurial, Subversion, Bazaar, and CVS.</figcaption>
+        </figure>
+
+        <h3>Git</h3>
+        <ul>
+          <li>Git is the most widely used <strong>Distributed Version Control System</strong>, developed by <strong>Linus Torvalds in 2005</strong> for managing the Linux kernel source code.</li>
+          <li>It supports decentralised workflows and is the engine behind platforms such as <strong>GitHub, GitLab, and Bitbucket</strong>.</li>
+          <li>Git is <strong>lightweight, fast, and efficient</strong> — most operations run locally without network access.</li>
+          <li>It provides <strong>simple and non-destructive branching and merging</strong>, making parallel feature development straightforward.</li>
+          <li>Key commands: <strong>git clone</strong> (copy a remote repository), <strong>git pull</strong> (download and merge remote changes), <strong>git push</strong> (upload local commits to remote).</li>
+          <li>Git is the standard VCS for modern software engineering, DevOps, and CI/CD pipelines.</li>
+        </ul>
+
+        <h3>Subversion (SVN)</h3>
+        <ul>
+          <li>Subversion is a popular <strong>centralized version control system</strong> — less common in open-source today but still widely used in enterprises.</li>
+          <li>Uses a <strong>single central repository</strong> — all developers commit directly to the server.</li>
+          <li>Supports <strong>branching and tagging</strong>, though branching is less flexible and heavier compared to Git.</li>
+          <li>Provides <strong>versioning of files and directories</strong> with sequential revision numbers (r1, r2, r3…).</li>
+          <li>SVN is valued for its simplicity and straightforward centralized structure in organisations with strict access control requirements.</li>
+        </ul>
+
+        <h3>Mercurial</h3>
+        <ul>
+          <li>Mercurial is a <strong>distributed version control system</strong> similar to Git but with a simpler interface and gentler learning curve.</li>
+          <li>It is <strong>simple, fast, and scalable</strong> — suited to both small and large projects.</li>
+          <li>Supports <strong>branching and merging</strong> with tools for managing project history and changes.</li>
+          <li>Used in various open-source and enterprise projects; historically used by Facebook and Mozilla.</li>
+        </ul>
+
+        <h3>CVS (Concurrent Versions System)</h3>
+        <ul>
+          <li>CVS is an early <strong>centralized version control system</strong> widely used in the late 1990s and early 2000s.</li>
+          <li>It influenced modern VCS tools and laid the foundation for systems like Subversion.</li>
+          <li>Uses a <strong>centralized repository architecture</strong> — tracks changes to individual files over time.</li>
+          <li>Allows multiple developers to work on the same codebase concurrently.</li>
+          <li>Provides <strong>basic branching and tagging</strong>, though more limited than modern alternatives — largely replaced by SVN and Git today.</li>
+        </ul>
+
+        <h3>Bazaar</h3>
+        <ul>
+          <li>Bazaar is a <strong>distributed version control system</strong> developed by Canonical (creators of Ubuntu).</li>
+          <li>Supports <strong>both centralized and distributed workflows</strong> — can be used like SVN or like Git depending on project needs.</li>
+          <li>It is <strong>beginner-friendly and easy to learn</strong>, with human-readable commands such as <strong>bzr commit</strong> and <strong>bzr push</strong>.</li>
+          <li>Provides <strong>cross-platform support</strong> (Linux, Windows, macOS); historically used in Ubuntu and Launchpad projects.</li>
+        </ul>
+
+        <h3>Importance of version control in SCM</h3>
         <ul>
           <li><strong>Collaboration:</strong> Multiple developers work on the same project simultaneously without corrupting each other's changes.</li>
-          <li><strong>Code management and history:</strong> Every change is recorded, providing a complete history that supports debugging and auditing.</li>
-          <li><strong>Rollback capability:</strong> If a new change breaks the system, the team can revert to any previous known-good version instantly.</li>
-          <li><strong>Quality assurance:</strong> Controlled releases ensure that only tested, approved code reaches production environments.</li>
-          <li><strong>Reusability:</strong> Prior versions and components can be retrieved and reused in new projects or branches.</li>
-          <li><strong>Branching and merging:</strong> Parallel development paths (features, hotfixes, releases) are managed and merged systematically.</li>
-          <li><strong>Project management:</strong> Version milestones align with project schedules and deliverable tracking.</li>
-          <li><strong>CI/CD integration:</strong> Version control integrates with continuous integration and deployment pipelines for automated build and test cycles.</li>
+          <li><strong>Complete history:</strong> Every change is recorded with author, timestamp, and message — supporting debugging, auditing, and rollback.</li>
+          <li><strong>Rollback capability:</strong> If a new change breaks the system, the team reverts to any previous known-good revision instantly.</li>
+          <li><strong>Parallel development:</strong> Feature branches, release branches, and hotfix branches are managed and merged systematically.</li>
+          <li><strong>Baseline support:</strong> Tags and release branches mark baselines that correspond to formally approved product snapshots — see <a href="09-02-software-configuration-management.html#sec-9-2">§9.2 Baselines</a>.</li>
+          <li><strong>Change control integration:</strong> CIs are checked out, modified, tested, and checked in through the VCS as part of the change control process.</li>
+          <li><strong>CI/CD integration:</strong> Automated build, test, and deployment pipelines trigger on every commit or push to the repository.</li>
         </ul>
 
-        <h3>Four version control sub-activities</h3>
+        <h3>Four version control sub-activities (SCM)</h3>
         <figure class="diagram figure-photo" aria-labelledby="fig-version-graph-caption">
           <img src="../../../assets/images/se-topic-09/version-development-graph.png"
                alt="Version development graph — tracking evolution of configuration item versions over time"
@@ -68,9 +219,9 @@
           <figcaption id="fig-version-graph-caption">A version development graph tracks how a configuration item evolves through successive versions and branches.</figcaption>
         </figure>
         <ol>
-          <li><strong>Identifying new versions:</strong> Each time changes are made and saved, the version control system creates a new unique version. Prior versions (v0, v1, v2…) are stored for reference and rollback.</li>
+          <li><strong>Identifying new versions:</strong> Each time changes are made and saved, the VCS creates a new unique version or revision. Prior versions (v0, v1, v2…) are stored for reference and rollback.</li>
           <li><strong>Numbering scheme:</strong> Versions follow a structured naming convention — typically <strong>X.Y.Z</strong> where X = whole SCI or major release, Y = component-level change, Z = minor correction within a component (e.g. 1.0 → 1.1 → 1.1.1 → 1.2 → 2.0).</li>
-          <li><strong>Visibility:</strong> The version number appears in the document frame or below the title so all team members know which version they are viewing or editing.</li>
+          <li><strong>Visibility:</strong> The version number or revision ID appears in the document frame, commit message, or tag so all team members know which version they are viewing or editing.</li>
           <li><strong>Tracking:</strong> A version development graph records the history of changes — who made each change, when, and what was modified — maintaining accountability across the team.</li>
         </ol>
 
@@ -78,12 +229,12 @@
         <ul>
           <li>After initial release at version <strong>1.0</strong>, minor corrections produce <strong>1.1</strong>, then <strong>1.1.1</strong> and <strong>1.1.2</strong>.</li>
           <li>A major update creates version <strong>1.2</strong>; development of the 1.x line continues through <strong>1.3</strong> and <strong>1.4</strong>.</li>
-          <li>A significant architectural change creates a new evolutionary path — version <strong>2.0</strong> — while version 1.x may still be supported for existing customers.</li>
-          <li>Both evolutionary paths can be maintained simultaneously, each with its own branch in the version control system.</li>
+          <li>A significant architectural change creates a new evolutionary path — version <strong>2.0</strong> — while version 1.x may still be supported for existing customers on a separate branch.</li>
+          <li>Both evolutionary paths are maintained simultaneously, each with its own branch in the VCS — e.g. <strong>main</strong> (2.x) and <strong>release-1.x</strong> (maintenance branch).</li>
         </ul>
 
-        <h3>Version control tools — Git workflow</h3>
-        <p>Modern projects use distributed version control systems such as <strong>Git</strong>. A typical workflow:</p>
+        <h3>Git workflow — practical example</h3>
+        <p>Modern software projects use Git as the standard DVCS. A typical SCM-integrated workflow:</p>
         <div class="terminal" aria-label="Git version control workflow example">
           <div class="terminal-header">
             <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
@@ -91,47 +242,73 @@
             <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
             <span class="terminal-title">git_workflow.sh</span>
           </div>
-          <pre><code># Initialise a new repository
-git init
+          <pre><code># Clone the shared remote repository (full local copy)
+git clone https://github.com/org/project.git
+cd project
 
-# Stage and commit changes (creates a new version snapshot)
-git add .
-git commit -m "Initial baseline v1.0"
-
-# Create a feature branch for parallel development
+# Create a feature branch (parallel development without affecting main)
 git checkout -b feature/login-module
 
-# Work on feature, commit incrementally
-git add login.py
-git commit -m "Add login module v1.1"
+# Stage and commit changes to LOCAL repository
+git add login.py auth.py
+git commit -m "Add login module — refs CR-042"
 
-# Merge feature branch back to main after review
+# Push branch to remote so team can review
+git push -u origin feature/login-module
+
+# After CCB approval and code review — merge to main
 git checkout main
-git merge feature/login-module
+git pull                          # get latest remote changes
+git merge feature/login-module      # merge approved feature
 
-# Tag a release version
-git tag v1.1.0
+# Tag the release baseline
+git tag -a v1.1.0 -m "Release 1.1.0 — baseline approved by CCB"
 
-# View version history
-git log --oneline</code></pre>
+# Push merged main and tag to remote repository
+git push origin main
+git push origin v1.1.0
+
+# View full commit history
+git log --oneline --graph</code></pre>
         </div>
-        <ul>
-          <li><strong>Centralised VCS</strong> (e.g. SVN): a single server holds the repository; developers check out and check in files.</li>
-          <li><strong>Distributed VCS</strong> (e.g. Git): every developer has a full copy of the repository history, enabling offline work and flexible branching.</li>
-          <li>Version control repositories serve as the <strong>project database</strong> referenced in the change control process — CIs are checked out, modified, and checked in through the VCS.</li>
-        </ul>
+
+        <div class="terminal" aria-label="Pseudocode — SVN centralized workflow">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">svn_workflow.sh</span>
+          </div>
+          <pre><code># Centralized VCS workflow (Subversion)
+
+# Checkout working copy from central server
+svn checkout https://svn.example.com/repo/trunk working-copy
+cd working-copy
+
+# Update working copy with latest server changes
+svn update
+
+# Edit files locally, then commit directly to central server
+svn commit -m "Fix bug in payment module — refs CR-019"
+
+# All team members see the change immediately after commit
+# No separate push step — commit goes directly to central repository</code></pre>
+        </div>
 
         <div class="callout exam">
           <div class="callout-title">Exam question — Software Version Control</div>
-          <p><strong>Q:</strong> What is software version control? List its sub-activities and explain the X.Y.Z numbering scheme.</p>
+          <p><strong>Q:</strong> What is a Version Control System? Explain its components, three types (Local, Centralized, Distributed), and compare CVCS with DVCS. Name popular VCS tools.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
-            <li>Version control = procedures + tools to manage versions of SCIs (code, docs, data).</li>
-            <li>Benefits: collaboration, history/rollback, QA, reusability, branching/merging, CI/CD integration.</li>
-            <li>Four sub-activities: identify new versions, numbering scheme (X.Y.Z), visibility, tracking (version graph).</li>
-            <li>X = major release/whole SCI; Y = component change; Z = minor correction within component.</li>
-            <li>Multiple evolutionary paths (1.x and 2.x) supported simultaneously.</li>
-            <li>Tools: Git (distributed), SVN (centralised); check-out/modify/check-in in change control.</li>
+            <li>VCS = tool to track/manage code changes; enables collaboration, history, rollback; part of SCM.</li>
+            <li>Components: repository, revision, branch, merge, commit, working copy.</li>
+            <li>Local VCS: single machine, no server, single user, no collaboration.</li>
+            <li>CVCS: single central server; checkout → edit → commit (one step to share); SVN, CVS; single point of failure.</li>
+            <li>DVCS: full local repo per developer; commit → push (two steps); pull to sync; offline work; Git, Mercurial, Bazaar.</li>
+            <li>CVCS vs DVCS: repository location, share mechanism, offline capability, server failure resilience, branching.</li>
+            <li>Git (DVCS, 2005, GitHub/GitLab); SVN (CVCS); Mercurial (DVCS); CVS (early CVCS); Bazaar (DVCS, dual mode).</li>
+            <li>SCM sub-activities: identify versions, X.Y.Z numbering, visibility, tracking graph.</li>
+            <li>Integrates with change control (check-out/in) and CI/CD pipelines.</li>
           </ul>
         </div>
       </section>

@@ -35,70 +35,152 @@
 
         <p>
           The <strong>objectives of Software Configuration Management</strong> define what SCM is designed to
-          achieve for a project and organisation. Objectives span both the classic software-engineering goals
-          (integrity, traceability, controlled change) and operational goals (reliable environments, reduced
-          downtime, multi-user support).
+          achieve for a project and organisation. SCM is an umbrella activity applied throughout the software
+          process — it manages and tracks the emerging product and its versions, identifies and controls the
+          configuration of software, hardware, and tools, and ensures all stakeholders know what is being
+          designed, developed, built, tested, and delivered. Objectives span classic software-engineering goals
+          (integrity, traceability, controlled change), system-level goals (collaboration, replication), and
+          operational standards goals (reliable environments, reduced downtime, multi-user support).
+        </p>
+        <p>
+          SCM objectives connect directly to the definition of SCM in
+          <a href="09-02-software-configuration-management.html#sec-9-2">§9.2</a> and are implemented through
+          the activities described in <a href="09-04-scm-activities.html#sec-9-4">§9.4 SCM Activities</a>.
         </p>
 
         <h3>Three classic configuration management objectives</h3>
+        <p>
+          Configuration management (as part of overall change management) has three major purposes that form
+          the foundation of all SCM work:
+        </p>
         <ul>
-          <li><strong>Identify product configuration at points in time:</strong> SCM records the exact state of all configuration items at each milestone so the team knows precisely what was built and delivered.</li>
-          <li><strong>Systematically control configuration changes:</strong> Every modification follows a formal process — request, evaluation, approval, implementation, verification — rather than ad hoc edits.</li>
-          <li><strong>Maintain integrity and traceability:</strong> SCM ensures the product remains consistent and that every change can be traced from requirement through design, code, test, and delivery.</li>
+          <li><strong>Identify product configuration at points in time:</strong> SCM records the exact state of all configuration items at each milestone so the team knows precisely what was built, tested, and delivered at any given moment.</li>
+          <li><strong>Systematically control changes to the configuration:</strong> Every modification follows a formal process — request, evaluation, approval, implementation, verification — rather than ad hoc edits that bypass team awareness.</li>
+          <li><strong>Maintain integrity and traceability throughout the product lifecycle:</strong> SCM ensures the product remains internally consistent and that every change can be traced from requirement through design, code, test, and delivery.</li>
+        </ul>
+        <ul>
+          <li>These three objectives allow large teams to work together in a <strong>stable environment</strong> while still providing the flexibility required for creative development work.</li>
+          <li>When developing and maintaining a project, changes to parameters are inevitable — these objectives ensure changes are managed rather than allowed to destabilise the product.</li>
         </ul>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-scm-objectives-caption">
           <img src="../../../assets/images/se-topic-09/scm-objectives.png"
                alt="Objectives of Software Configuration Management standards"
                width="660" height="auto" loading="lazy" decoding="async" />
-          <figcaption id="fig-scm-objectives-caption">SCM objectives ensure controlled, consistent, and traceable software development.</figcaption>
+          <figcaption id="fig-scm-objectives-caption">SCM objectives ensure controlled, consistent, and traceable software development across the project lifecycle.</figcaption>
         </figure>
 
         <h3>Key system-level SCM objectives</h3>
         <ul>
-          <li><strong>Control the evolution of software systems:</strong> Changes are properly planned, tested, and integrated into the final product rather than applied unpredictably.</li>
-          <li><strong>Enable collaboration and coordination:</strong> All team members work from the same version of each work product, with conflicts detected and resolved systematically.</li>
-          <li><strong>Provide version control:</strong> Teams manage and track different versions of the system and can revert to earlier versions when needed.</li>
-          <li><strong>Facilitate replication and distribution:</strong> Software systems can be replicated to test, production, and customer environments with confidence that the configuration is identical.</li>
-          <li><strong>Ensure stakeholder visibility:</strong> All people involved in the process know what is being designed, developed, built, tested, and delivered at every stage.</li>
+          <li><strong>Control the evolution of software systems:</strong> Changes are properly planned, tested, and integrated into the final product rather than applied unpredictably or without impact analysis.</li>
+          <li><strong>Enable collaboration and coordination:</strong> All team members work from the same version of each work product, with conflicts detected and resolved systematically through version control tools.</li>
+          <li><strong>Provide version control:</strong> Teams manage and track different versions of the system, support multiple release paths, and revert to earlier versions when a change introduces defects.</li>
+          <li><strong>Facilitate replication and distribution:</strong> Software systems can be replicated to test, production, and customer environments with confidence that the configuration is identical at every site.</li>
+          <li><strong>Ensure stakeholder visibility:</strong> All people involved in the software process know what is being designed, developed, built, tested, and delivered at every stage — no hidden or undocumented work products exist.</li>
+          <li><strong>Reduce project vulnerability:</strong> By fixing key deliverables at baselines and controlling all subsequent changes, SCM reduces the weakness that leads to uncontrollable modifications — see <a href="09-02-software-configuration-management.html#sec-9-2">§9.2 Baselines</a>.</li>
         </ul>
 
-        <h3>Operational and standards objectives</h3>
+        <h3>Objectives of SCM standards (operational)</h3>
+        <p>Beyond software-project goals, SCM standards also aim to achieve reliable, interchangeable, and manageable computing environments:</p>
+
+        <h3>Remote system administration</h3>
         <ul>
-          <li><strong>Remote system administration:</strong> SCM standards enable administrators to manage software configurations across distributed systems without physical access to each machine.</li>
-          <li><strong>Reduced user downtime:</strong> Controlled updates and rollback capability minimise disruption when changes are deployed.</li>
-          <li><strong>Reliable data backups:</strong> Version-controlled repositories serve as authoritative backups of all project artefacts.</li>
-          <li><strong>Easy workstation setup:</strong> Standard directory structures and configuration scripts allow new team members to set up a consistent development environment quickly.</li>
-          <li><strong>Multi-user support:</strong> SCM tools allow multiple developers to work on the same codebase concurrently without overwriting each other's changes.</li>
-          <li><strong>Uniform remote software installation:</strong> Standard configurations and scripts ensure software is installed consistently across all machines in an organisation.</li>
+          <li>Configuration standards include the necessary software and privileges for remote administration tools on each machine.</li>
+          <li>A correctly installed and configured remote administration client on each workstation enables central management of the entire development network.</li>
+          <li>Remote tools can check virus protection versions, verify machine configuration, and provide remote help-desk functionality without physical access to each machine.</li>
+        </ul>
+
+        <h3>Reduced user downtime</h3>
+        <ul>
+          <li>A standard configuration makes systems <strong>completely interchangeable</strong> — if one machine fails, an identical replacement can be deployed with minimal disruption.</li>
+          <li>On an unrecoverable error, an identical new system can be dropped into place; user data is transferred from the old machine or restored from the most recent backup.</li>
+          <li>The goal is that the user experiences little change in the system interface and installed software after a replacement or recovery.</li>
+        </ul>
+
+        <h3>Reliable data backups</h3>
+        <ul>
+          <li>Using a <strong>standard directory for user data</strong> allows the backup system to selectively backup a small portion of each machine, reducing network traffic and tape usage.</li>
+          <li>A divided directory structure between system data and user data is one of the main goals of configuration standards — backups become predictable and efficient.</li>
+          <li>Version-controlled repositories also serve as authoritative backups of all project artefacts between scheduled backup cycles.</li>
+        </ul>
+
+        <h3>Easy workstation setup</h3>
+        <ul>
+          <li>A standardised configuration streamlines the process of setting up new development machines and ensures that vital components are always present.</li>
+          <li>When multiple machines are configured to the same standard, most setup steps can be <strong>automated</strong>, reducing onboarding time for new team members.</li>
+          <li>Consistent environments prevent "works on my machine" problems caused by mismatched tool versions or missing dependencies.</li>
+        </ul>
+
+        <h3>Multi-user support</h3>
+        <ul>
+          <li>System configuration is designed so multiple users can share the same workstation without interfering with each other's settings or data.</li>
+          <li>Some software packages do not support completely independent settings for all users, but users can still have independent data directories under a structured layout.</li>
+          <li>A well-designed directory structure does not impose limits on the number of independent users a system can support.</li>
+        </ul>
+
+        <h3>Remote software installation</h3>
+        <ul>
+          <li>Factory-default software installations are suitable for single-user machines but lead to <strong>non-uniform configurations</strong> across a collection of development machines.</li>
+          <li>A good configuration standard installs software into <strong>specific directory areas</strong> to logically divide software on the disk — e.g. separating development tools, runtime libraries, and user applications.</li>
+          <li>Universal installation scripts make it easy to identify installed components and automate installation procedures across many machines simultaneously.</li>
+          <li>When software is installed into specific directories, maintenance and upgrading of running software becomes less complex and more predictable.</li>
         </ul>
 
         <h3>Change control objective</h3>
         <ul>
-          <li>The change control component of SCM aims to <strong>identify, evaluate, prioritise, and control changes</strong> requested by team members or stakeholders.</li>
-          <li>Changes must be <strong>analysed before implementation</strong>, recorded with before-and-after details, and reported to relevant parties.</li>
-          <li>No change is applied silently — every modification goes through the formal change control process described in <a href="09-05-change-control-process.html#sec-9-5">§9.5</a>.</li>
+          <li>Change control is part of the overall change management approach — its objective is to <strong>identify, evaluate, prioritise, and control changes</strong> to the project when requested by a team member or stakeholder.</li>
+          <li>Changes must be <strong>analysed before implementation</strong>, recorded with before-and-after details, and reported to all affected parties.</li>
+          <li>No change is applied silently — every modification to a baselined item goes through the formal change control process in <a href="09-05-change-control-process.html#sec-9-5">§9.5</a>.</li>
           <li>Quality and consistency are preserved throughout the change process; records and revised plans are maintained when scope or deliverables change significantly.</li>
+        </ul>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Objective category</th><th>Primary focus</th><th>Key outcome</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Classic CM (3 objectives)</strong></td><td>Product configuration state</td><td>Identify, control, trace changes across lifecycle</td></tr>
+              <tr><td><strong>System-level SCM</strong></td><td>Team coordination and product evolution</td><td>Collaboration, version control, replication, visibility</td></tr>
+              <tr><td><strong>Operational standards</strong></td><td>Computing environment reliability</td><td>Interchangeable systems, backups, remote admin, uniform install</td></tr>
+              <tr><td><strong>Change control</strong></td><td>Individual change requests</td><td>Identify, evaluate, prioritise, control; no silent changes</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Guidelines that support SCM objectives</h3>
+        <p>When SCM objectives require changes to the project plan or product, the following guidelines ensure objectives are met in practice:</p>
+        <ul>
+          <li><strong>Transparency:</strong> No one is allowed to change anything in the project without others knowing — all changes are visible to the team.</li>
+          <li><strong>Quality preservation:</strong> Every change must ensure that overall product quality is maintained or improved, not degraded.</li>
+          <li><strong>Formal change control system:</strong> All changes follow the documented change control procedure — not informal agreements.</li>
+          <li><strong>Flexibility:</strong> The project process must be flexible enough that legitimate changes can be accommodated without excessive delay.</li>
+          <li><strong>Records and revised plans:</strong> Records are properly maintained after each change, and the revised project plan reflects the plan actually in use by the team.</li>
+          <li>Projects that need to manage changes to project scope or product description must have a <strong>configuration management plan</strong> at the outset — see <a href="09-04-scm-activities.html#sec-9-4">§9.4</a>.</li>
         </ul>
 
         <h3>SCM objectives in project management context</h3>
         <ul>
-          <li>Projects requiring scope or product changes need a <strong>configuration management plan</strong> as part of the overall project plan.</li>
-          <li>SCM objectives support <strong>risk management</strong> by detecting and correcting problems early before they propagate across the system.</li>
-          <li>SCM integrates with <strong>continuous integration and deployment (CI/CD)</strong> to automate testing and delivery of controlled builds.</li>
-          <li>SCM is a critical component at <strong>CMM Level 2</strong>, where repeatable project management requires formal configuration control — see <a href="../03-software-project-management/03-10-cmm.html#sec-3-10">§3.10 CMM</a>.</li>
+          <li>Configuration management is part of the overall <strong>change management approach</strong> in SPM — see <a href="../03-software-project-management/03-02-project-management-process.html#sec-3-2">§3.2 Project Management Process</a>.</li>
+          <li>When deliverables, schedule, budget, or approach change significantly, the project plan is revised at the end of each major lifecycle phase and approved by senior management.</li>
+          <li>SCM objectives support <strong>risk management</strong> by detecting and correcting configuration problems early before they propagate across the system.</li>
+          <li>SCM integrates with <strong>continuous integration and deployment (CI/CD)</strong> to automate testing and delivery of controlled, reproducible builds.</li>
+          <li>SCM is a <strong>key process area at CMM Level 2</strong> — formal SCM procedures are required for repeatable project management — see <a href="../03-software-project-management/03-10-cmm.html#sec-3-10">§3.10 CMM</a>.</li>
+          <li>SQA ensures adequate change management practices are instituted — linking SCM objectives to quality assurance in <a href="../08-software-quality-assurance/08-02-software-quality-assurance.html#sec-8-2">§8.2 SQA</a>.</li>
         </ul>
 
         <div class="callout exam">
           <div class="callout-title">Exam question — Objectives of SCM</div>
-          <p><strong>Q:</strong> List the objectives of Software Configuration Management. Distinguish between classic CM objectives and operational SCM objectives.</p>
+          <p><strong>Q:</strong> List the objectives of Software Configuration Management. Distinguish between classic CM objectives, system-level objectives, and operational standards objectives.</p>
           <p><strong>Model answer points:</strong></p>
           <ul>
+            <li>SCM = umbrella activity; manages/tracks product; controls software/hardware/tools; ensures stakeholder visibility.</li>
             <li>Classic 3: identify configuration at points in time; systematically control changes; maintain integrity &amp; traceability.</li>
-            <li>System-level: control evolution, collaboration, version control, replication/distribution, stakeholder visibility.</li>
-            <li>Operational: remote admin, reduced downtime, reliable backups, easy setup, multi-user support, uniform installation.</li>
-            <li>Change control objective: identify, evaluate, prioritise, control changes; no silent changes.</li>
-            <li>Requires configuration management plan for scope/product changes; supports CI/CD and CMM Level 2.</li>
+            <li>System-level: control evolution, collaboration, version control, replication/distribution, stakeholder visibility, reduce vulnerability.</li>
+            <li>Operational standards: remote admin, reduced downtime (interchangeable systems), reliable backups, easy setup, multi-user support, uniform remote software installation.</li>
+            <li>Change control objective: identify, evaluate, prioritise, control changes; no silent changes; quality preserved.</li>
+            <li>Guidelines: transparency, quality, formal system, flexibility, records + revised plan; configuration management plan required for scope/product changes.</li>
+            <li>PM context: part of change management; plan revision at phase end; supports CI/CD, risk management, CMM Level 2, SQA.</li>
           </ul>
         </div>
       </section>

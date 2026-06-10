@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 12 — 12.1 Reusability</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>12.1 Reusability</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 12</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-12-1">
+
+        <p>
+          <strong>Software reusability</strong> is the practice of using existing software artifacts — components,
+          modules, libraries, frameworks, and design knowledge — to build new systems rather than developing
+          everything from scratch. Reusability is a core advanced issue in the course outline and directly
+          addresses the <strong>software crisis</strong> — the gap between what hardware can deliver and what
+          software can produce — described in
+          <a href="../01-introduction-and-fundamentals/01-06-software-crisis.html#sec-1-6">§1.6 Software Crisis</a>.
+        </p>
+
+        <h3>What is software reuse?</h3>
+        <ul>
+          <li><strong>Software reuse</strong> is the process of creating software systems from existing software systems and knowledge, rather than building every system from scratch.</li>
+          <li>Reuse applies existing software artifacts — code, designs, specifications, test cases, and documentation — to reduce development effort on new projects.</li>
+          <li>Reusability is listed as a quality attribute in McCall's model (product transition factor) — see <a href="../08-software-quality-assurance/08-05-quality-frameworks.html#sec-8-5">§8.5 Quality Frameworks</a> — and as an SQA focus area in <a href="../08-software-quality-assurance/08-02-software-quality-assurance.html#sec-8-2">§8.2 SQA</a>.</li>
+          <li>Reuse is an umbrella activity in software engineering — it runs parallel to the SDLC alongside SCM, SQA, and technical reviews.</li>
+        </ul>
+
+        <h3>Why reusability matters</h3>
+        <ul>
+          <li>Reusability <strong>reduces development time and cost</strong> by avoiding repeated implementation of already-solved problems.</li>
+          <li>Reused components are typically <strong>better tested and more reliable</strong> because they have been exercised in prior projects.</li>
+          <li>Reuse improves <strong>consistency</strong> across products — the same authentication module or logging library behaves identically everywhere it is used.</li>
+          <li>It helps organisations respond faster to new requirements by assembling proven building blocks rather than coding from zero.</li>
+          <li>Without deliberate reuse strategies, every project reinvents utilities, interfaces, and algorithms — multiplying maintenance cost and defect risk.</li>
+        </ul>
+
+        <h3>Types of software reuse</h3>
+        <ul>
+          <li><strong>Code reuse:</strong> Reusing source code modules, functions, or libraries — e.g. importing a math library or copying a validated sorting routine into a new project.</li>
+          <li><strong>Design reuse:</strong> Reusing architectural or detailed design solutions — e.g. applying a layered architecture or a proven module decomposition from a prior system.</li>
+          <li><strong>Specification reuse:</strong> Reusing requirements or interface specifications — e.g. adopting a standard API specification or a reusable requirements template for a common domain.</li>
+          <li><strong>Component reuse:</strong> Reusing self-contained, independently deployable software components with well-defined interfaces — the foundation of component-based development.</li>
+          <li><strong>Framework reuse:</strong> Reusing an application skeleton that defines the overall structure — developers fill in domain-specific code within the framework's predefined hooks.</li>
+          <li><strong>Pattern reuse:</strong> Reusing proven design-level solutions to recurring problems — design patterns are a form of design reuse; see <a href="12-02-design-patterns.html#sec-12-2">§12.2 Design Patterns</a>.</li>
+        </ul>
+
+        <h3>Characteristics of reusable components</h3>
+        <ul>
+          <li><strong>Generic and domain-independent where possible:</strong> A reusable component solves a general problem (e.g. date formatting) rather than one project's specific case.</li>
+          <li><strong>Modular and loosely coupled:</strong> The component has a well-defined interface and minimal dependencies on other modules — high cohesion, low coupling — see <a href="../05-software-design/05-10-coupling-cohesion.html#sec-5-10">§5.10 Coupling and Cohesion</a>.</li>
+          <li><strong>Well-documented:</strong> Clear documentation of purpose, interface, preconditions, and usage examples is essential for others to adopt the component.</li>
+          <li><strong>Thoroughly tested:</strong> Reusable components must be validated independently so that adopting projects inherit reliability rather than hidden defects.</li>
+          <li><strong>Version-controlled:</strong> Components must be tracked in a repository with version numbers so consuming projects know exactly which version they depend on.</li>
+          <li><strong>Configurable:</strong> Parameters or configuration files allow the same component to adapt to different contexts without modifying its source code.</li>
+        </ul>
+
+        <h3>DRY principle — Don't Repeat Yourself</h3>
+        <ul>
+          <li>The <strong>DRY principle</strong> states that every piece of knowledge in a system should have a single, authoritative representation — duplication of logic should be avoided.</li>
+          <li>DRY promotes code reuse by centralising shared logic in one place, so changes need to be made only once rather than in multiple locations.</li>
+          <li>Centralised logic reduces errors, simplifies maintenance, and ensures consistent behaviour across the codebase.</li>
+          <li>DRY works with modular design and the Single Responsibility Principle to build scalable, maintainable systems.</li>
+        </ul>
+        <div class="terminal" aria-label="Pseudocode — DRY vs non-DRY validation">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">dry_principle.pseudo</span>
+          </div>
+          <pre><code>// NON-DRY — validation logic duplicated in multiple functions
+FUNCTION registerUser(email)
+  IF NOT contains("@") OR length(email) &lt; 5 THEN RETURN error
+  ...
+END FUNCTION
+
+FUNCTION updateProfile(email)
+  IF NOT contains("@") OR length(email) &lt; 5 THEN RETURN error   // duplicated!
+  ...
+END FUNCTION
+
+// DRY — single reusable validation function
+FUNCTION isValidEmail(email)
+  RETURN contains("@") AND length(email) &gt;= 5
+END FUNCTION
+
+FUNCTION registerUser(email)
+  IF NOT isValidEmail(email) THEN RETURN error
+  ...
+END FUNCTION
+
+FUNCTION updateProfile(email)
+  IF NOT isValidEmail(email) THEN RETURN error   // reuses same logic
+  ...
+END FUNCTION</code></pre>
+        </div>
+
+        <h3>Component-based architecture</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-cba-caption">
+          <img src="../../../assets/images/se-topic-12/component-based-architecture.webp"
+               alt="Component-Based Architecture — software built from reusable, independently deployable components"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-cba-caption">Component-Based Architecture — software is assembled from reusable components, each encapsulating specific functionality with well-defined interfaces.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Component-Based Architecture (CBA)</strong> organises software into reusable parts, each serving a specific function with well-defined interfaces.</li>
+          <li>Components encapsulate both data and behaviour — they interact through interfaces without exposing internal implementation details.</li>
+          <li>Components can be developed, tested, and deployed independently, then combined to form complete applications.</li>
+          <li>CBA promotes modularity, flexibility, and reusability — the same login component can be reused across web, mobile, and desktop applications.</li>
+          <li>Library modules in function-oriented design are an early form of component reuse — see <a href="../05-software-design/05-14-function-oriented-design.html#sec-5-14">§5.14 Function-Oriented Design</a>.</li>
+        </ul>
+
+        <h3>Reuse-Oriented Model (ROM)</h3>
+        <p>
+          The <strong>Reuse-Oriented Model</strong> (also called Reuse-Oriented Development) builds new systems
+          primarily by identifying, modifying, and integrating components from existing systems rather than
+          writing new code from scratch.
+        </p>
+        <ol>
+          <li><strong>Identify reusable components:</strong> Examine the old system and select components most suitable for reuse in the new system.</li>
+          <li><strong>Understand all components:</strong> Analyse the selected components to understand their interfaces, dependencies, and behaviour fully.</li>
+          <li><strong>Modify components:</strong> Adapt old components to meet new requirements — this may involve interface changes, performance tuning, or feature additions.</li>
+          <li><strong>Integrate into new system:</strong> Combine all modified (and any newly created) parts into the complete new system.</li>
+        </ol>
+        <ul>
+          <li>Reuse can begin at any lifecycle phase — requirements, planning, design, code, or test data — not only during coding.</li>
+          <li>ROM reduces total development cost, lowers risk, saves time, and is efficient when a sufficient library of reusable components exists.</li>
+          <li>ROM requires a catalogue or framework for categorising components and tracking required modifications.</li>
+          <li>If the reusable component library is insufficient, ROM may force compromises in requirements, producing a system that does not fully meet user needs.</li>
+          <li>Incompatible old components can impact system evolution if their interfaces do not align with new technology choices.</li>
+        </ul>
+        <div class="terminal" aria-label="Pseudocode — reuse-oriented development steps">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">reuse_oriented_model.pseudo</span>
+          </div>
+          <pre><code>REUSE_ORIENTED_DEVELOPMENT(new_system, existing_systems[])
+
+STEP 1 — IDENTIFY
+  FOR each existing_system DO
+    SCAN modules, libraries, interfaces
+    SELECT candidates matching new_system requirements
+    RECORD in reuse catalogue with compatibility notes
+  END FOR
+
+STEP 2 — UNDERSTAND
+  FOR each selected component DO
+    ANALYSE interface, dependencies, behaviour, constraints
+    DOCUMENT findings and modification needs
+  END FOR
+
+STEP 3 — MODIFY
+  FOR each component requiring change DO
+    ADAPT interface / logic to meet new requirements
+    TEST modified component independently
+    VERSION and publish to component repository
+  END FOR
+
+STEP 4 — INTEGRATE
+  ASSEMBLE modified + new components into new_system
+  RUN integration and system tests
+  VERIFY new_system meets all requirements
+
+END REUSE_ORIENTED_DEVELOPMENT</code></pre>
+        </div>
+
+        <h3>Reuse Maturity Model</h3>
+        <p>
+          The <strong>Reuse Maturity Model</strong> describes how organisations evolve their reuse practices
+          from ad hoc copying to controlled, version-tracked component libraries:
+        </p>
+
+        <h3>Level 1 — Single project source-based reuse</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-rmm1-caption">
+          <img src="../../../assets/images/se-topic-12/reuse-maturity-level1.png"
+               alt="Reuse Maturity Level 1 — single project containing multiple applications sharing one source pool"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-rmm1-caption">Level 1 — all source code in a single project; multiple applications share one source pool without copying between projects.</figcaption>
+        </figure>
+        <ul>
+          <li>All source code is placed within a <strong>single project</strong> that holds multiple applications.</li>
+          <li>There is no need to copy files between projects because everything lives in one pool.</li>
+          <li>This approach does not scale well — as applications and developers increase, maintaining a single source pool becomes difficult.</li>
+        </ul>
+
+        <h3>Level 2 — Multi-project source-based reuse</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-rmm2-caption">
+          <img src="../../../assets/images/se-topic-12/reuse-maturity-level2.png"
+               alt="Reuse Maturity Level 2 — source copied between multiple projects"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-rmm2-caption">Level 2 — common utility source code is copied from one project into another; each copy evolves independently, creating maintenance problems.</figcaption>
+        </figure>
+        <ul>
+          <li>Source code is divided into <strong>multiple projects</strong>; common utilities are copied from one project into another.</li>
+          <li>Bug fixes must be applied to <strong>every copy</strong> of the reused code — maintenance becomes difficult as copies diverge over time.</li>
+          <li>Two host projects that evolve reused code independently make long-term maintenance increasingly costly.</li>
+        </ul>
+
+        <h3>Level 3 — Ad hoc binary reuse</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-rmm3-caption">
+          <img src="../../../assets/images/se-topic-12/reuse-maturity-level3.png"
+               alt="Reuse Maturity Level 3 — utility components in separate projects linked as binary dependencies"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-rmm3-caption">Level 3 — utility code lives in its own project; application projects link binary artifacts with dependency relationships.</figcaption>
+        </figure>
+        <ul>
+          <li>Utility source code is placed in its <strong>own independent project</strong> with its own lifecycle.</li>
+          <li>Application projects include <strong>binary artifacts</strong> of the utility project rather than copying source code.</li>
+          <li>Only a single version of the utility needs to be maintained — fixes benefit all consuming applications.</li>
+          <li>Without release procedures or dependency management, it is difficult to know which exact version of a utility an application uses.</li>
+        </ul>
+
+        <h3>Level 4 — Controlled binary reuse</h3>
+        <ul>
+          <li>Builds on Level 3 — project boundaries remain the same (application projects + component projects).</li>
+          <li>Each release of a component project is <strong>controlled and tracked with a version number</strong>.</li>
+          <li>When a bug is discovered, the exact version containing the bug can be identified and fixed systematically.</li>
+          <li>Follows the <strong>Reuse/Release Equivalence Principle</strong> — the effort required to reuse a component must be no greater than the effort required to release it.</li>
+          <li>Level 4 is the target maturity level for organisations building serious component libraries.</li>
+        </ul>
+
+        <h3>Reusability vs re-engineering vs reverse engineering</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Concept</th><th>Definition</th><th>Goal</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Reusability</strong></td><td>Using existing artifacts to build new systems</td><td>Reduce cost/time; improve quality through proven components</td></tr>
+              <tr><td><strong>Re-engineering</strong></td><td>Examining and modifying an existing system to improve functionality, performance, or adaptability without changing core purpose</td><td>Restructure legacy systems for maintainability and technology upgrade</td></tr>
+              <tr><td><strong>Reverse engineering</strong></td><td>Deconstructing a system to recover design and requirements from existing code</td><td>Recover lost documentation; enable reuse; assist maintenance</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Re-engineering activities</strong> include: reverse engineering, restructuring, forward engineering, and re-documentation.</li>
+          <li><strong>Reverse engineering steps:</strong> collect information → examine → extract structure → record functionality → record data flow → record control flow → review design → generate documentation.</li>
+          <li>Reverse engineering supports reuse by recovering design knowledge from legacy systems where documentation is missing or outdated.</li>
+          <li>Re-engineering costs significantly less than new development and carries lower risk because it improves systems incrementally rather than replacing them entirely.</li>
+          <li>Full detail on re-engineering and reverse engineering is covered in Topic 10 — Software Maintenance.</li>
+        </ul>
+
+        <h3>Reusability and design patterns</h3>
+        <ul>
+          <li>Design patterns are a form of <strong>design-level reuse</strong> — they capture proven solutions to recurring design problems so teams do not reinvent solutions for common situations.</li>
+          <li>Code reuse operates at the implementation level; pattern reuse operates at the design level — both complement each other.</li>
+          <li>Patterns establish a common vocabulary for communicating design decisions across teams and projects — see <a href="12-02-design-patterns.html#sec-12-2">§12.2 Design Patterns</a>.</li>
+          <li>High cohesion and low coupling — principles from <a href="../05-software-design/05-10-coupling-cohesion.html#sec-5-10">§5.10</a> — are prerequisites for both reusable components and well-designed patterns.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Reusability</div>
+          <p><strong>Q:</strong> Define software reusability. List types of reuse, characteristics of reusable components, and levels of the Reuse Maturity Model. Differentiate reuse from re-engineering and reverse engineering.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Software reuse = creating systems from existing artifacts/knowledge, not from scratch; addresses software crisis.</li>
+            <li>Benefits: reduced cost/time, better quality/consistency, faster response to requirements.</li>
+            <li>Types: code, design, specification, component, framework, pattern reuse.</li>
+            <li>Reusable component characteristics: generic, modular, low coupling, documented, tested, version-controlled, configurable.</li>
+            <li>DRY principle: single authoritative representation; avoids duplicated logic.</li>
+            <li>ROM 4 steps: identify → understand → modify → integrate.</li>
+            <li>Reuse Maturity Model: L1 single project; L2 multi-project copy; L3 ad hoc binary; L4 controlled binary with version tracking.</li>
+            <li>Reuse vs re-engineering vs reverse engineering: build new from existing vs improve legacy vs recover design from code.</li>
+            <li>Patterns = design-level reuse; link to coupling/cohesion and OOD.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="index.html">&larr; Topic 12</a>
+        <a class="btn-back chapter-nav-next" href="12-02-design-patterns.html">12.2 Design Patterns &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>
