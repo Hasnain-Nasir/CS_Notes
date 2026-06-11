@@ -1,13 +1,13 @@
 (function () {
   var BOOKS = [
-    { id: "home", label: "Home", title: "Home", path: "index.html" },
-    { id: "infosec", label: "Info Sec", title: "Information Security", path: "info-sec/index.html" },
-    { id: "se", label: "Software Eng.", title: "Software Engineering", path: "software-engineering/index.html" },
-    { id: "coa", label: "Comp Org & ASM", title: "Computer Organization and Assembly Language", path: "coa/index.html" },
-    { id: "la", label: "Linear Algebra", title: "Linear Algebra", path: "linear-algebra/index.html" },
-    { id: "tbw", label: "Tech & Bus. Writing", title: "Technical and Business Writing", path: "technical-writing/index.html" },
-    { id: "civics", label: "Civics", title: "Civics and Community Engagement", path: "civics/index.html" },
-    { id: "mgmt", label: "Management", title: "Introduction to Management", path: "management/index.html" }
+    { id: "home", label: "Home", title: "Home", path: "" },
+    { id: "infosec", label: "Info Sec", title: "Information Security", path: "info-sec" },
+    { id: "se", label: "Software Eng.", title: "Software Engineering", path: "software-engineering" },
+    { id: "coa", label: "Comp Org & ASM", title: "Computer Organization and Assembly Language", path: "coa" },
+    { id: "la", label: "Linear Algebra", title: "Linear Algebra", path: "linear-algebra" },
+    { id: "tbw", label: "Tech & Bus. Writing", title: "Technical and Business Writing", path: "technical-writing" },
+    { id: "civics", label: "Civics", title: "Civics and Community Engagement", path: "civics" },
+    { id: "mgmt", label: "Management", title: "Introduction to Management", path: "management" }
   ];
 
   var FOOTER_INFOSEC = [
@@ -16,27 +16,38 @@
     { label: "Protection Models", soon: true },
     { label: "Cryptography & Hashing", soon: true },
     { label: "Intrusion Detection", soon: true },
-    { label: "All Info Sec Topics", path: "info-sec/index.html" }
+    { label: "All Info Sec Topics", path: "info-sec" }
   ];
 
   var FOOTER_SE = [
-    { label: "Intro to Software Engineering", path: "software-engineering/topics/01-introduction-and-fundamentals/index.html" },
-    { label: "SDLC & Process Models", path: "software-engineering/topics/02-sdlc-and-process-models/index.html" },
-    { label: "Classical Waterfall Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-02-classical-waterfall.html" },
-    { label: "Agile Software Development", path: "software-engineering/topics/02-sdlc-and-process-models/02-11-agile.html" },
-    { label: "Spiral Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-05-spiral.html" },
-    { label: "Process Model Comparison", path: "software-engineering/topics/02-sdlc-and-process-models/02-16-comparison.html" },
-    { label: "All SE Topics", path: "software-engineering/index.html" }
+    { label: "Intro to Software Engineering", path: "software-engineering/topics/01-introduction-and-fundamentals" },
+    { label: "SDLC & Process Models", path: "software-engineering/topics/02-sdlc-and-process-models" },
+    { label: "Classical Waterfall Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-02-classical-waterfall" },
+    { label: "Agile Software Development", path: "software-engineering/topics/02-sdlc-and-process-models/02-11-agile" },
+    { label: "Spiral Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-05-spiral" },
+    { label: "Process Model Comparison", path: "software-engineering/topics/02-sdlc-and-process-models/02-16-comparison" },
+    { label: "All SE Topics", path: "software-engineering" }
   ];
 
   var FOOTER_SITE = [
-    { label: "Home", path: "index.html" },
-    { label: "Past Papers", path: "index.html#past-papers" },
-    { label: "Software Engineering", path: "software-engineering/index.html" },
-    { label: "Information Security", path: "info-sec/index.html" },
-    { label: "Linear Algebra", path: "linear-algebra/index.html" },
-    { label: "Computer Org. & Assembly", path: "coa/index.html" }
+    { label: "Home", path: "" },
+    { label: "Past Papers", path: "/#past-papers" },
+    { label: "Software Engineering", path: "software-engineering" },
+    { label: "Information Security", path: "info-sec" },
+    { label: "Linear Algebra", path: "linear-algebra" },
+    { label: "Computer Org. & Assembly", path: "coa" }
   ];
+
+  function navHref(prefix, path) {
+    if (!path) return prefix || "/";
+    if (path.charAt(0) === "/") return path;
+    return prefix + path;
+  }
+
+  function normalizeNavBook(book) {
+    if (!book || book === "home") return book;
+    return book.replace(/\/index\.html$/, "").replace(/\.html$/, "");
+  }
 
   function getDepth() {
     var d = document.body.getAttribute("data-nav-depth");
@@ -66,7 +77,7 @@
 
     var brand = document.createElement("a");
     brand.className = "global-brand";
-    brand.href = prefix + "index.html";
+    brand.href = navHref(prefix, "");
     brand.setAttribute("aria-label", "Notes By Nain");
     brand.innerHTML =
       '<span class="global-brand-text" aria-hidden="true">' +
@@ -97,7 +108,7 @@
 
     BOOKS.forEach(function (book) {
       var a = document.createElement("a");
-      a.href = prefix + book.path;
+      a.href = navHref(prefix, book.path);
       a.textContent = book.label;
       if (book.title) a.setAttribute("title", book.title);
       if (book.id === "home" && depth === 0) a.setAttribute("aria-current", "page");
@@ -209,17 +220,17 @@
 
     grid.appendChild(
       buildFooterColumn("Software Engineering", FOOTER_SE, function (item) {
-        return prefix + item.path;
+        return navHref(prefix, item.path);
       })
     );
     grid.appendChild(
       buildFooterColumn("Information Security", FOOTER_INFOSEC, function (item) {
-        return prefix + item.path;
+        return navHref(prefix, item.path);
       })
     );
     grid.appendChild(
       buildFooterColumn("Site", FOOTER_SITE, function (item) {
-        return prefix + item.path;
+        return navHref(prefix, item.path);
       })
     );
 
@@ -291,15 +302,15 @@
       if (e.matches) setMenuOpen(false);
     });
 
-    var currentBook = document.body.getAttribute("data-nav-book");
+    var currentBook = normalizeNavBook(document.body.getAttribute("data-nav-book"));
     if (currentBook === "home" || (depth === 0 && !currentBook)) {
-      var homeLink = nav.querySelector('a[href="' + prefix + 'index.html"]');
+      var homeLink = nav.querySelector('a[href="' + navHref(prefix, "") + '"]');
       if (homeLink && depth === 0) homeLink.setAttribute("aria-current", "page");
     } else if (currentBook) {
       nav.querySelectorAll("a").forEach(function (a) {
         a.removeAttribute("aria-current");
       });
-      var bookPath = prefix + currentBook;
+      var bookPath = navHref(prefix, currentBook);
       var active = nav.querySelector('a[href="' + bookPath + '"]');
       if (active) active.setAttribute("aria-current", "page");
     }
@@ -313,20 +324,33 @@
 /* Bundled below: notes-auth.js + notes-chat.js (InfinityFree blocks separate loads) */
 (function () {
   var API = "/api";
-  var AUTH_PAGE = "/login.html";
+  var AUTH_PAGE = "/login";
+  var AUTH_RETURN_KEY = "notes_auth_return";
   var currentUser = null;
   var listeners = [];
   var gateApplied = false;
 
+  function normalizePath(path) {
+    if (!path || path.charAt(0) !== "/") return "/";
+    return path
+      .replace(/\/index\.html(?=($|[?#]))/g, "/")
+      .replace(/\.html(?=($|[?#]))/g, "")
+      .replace(/\/+$/, "") || "/";
+  }
+
   function isAuthPage() {
-    var p = window.location.pathname;
-    return p === "/login.html" || p.endsWith("/login.html");
+    return normalizePath(window.location.pathname) === "/login";
   }
 
   function redirectToLogin() {
-    var returnPath = window.location.pathname + window.location.search + window.location.hash;
     if (isAuthPage()) return;
-    window.location.replace(AUTH_PAGE + "?return=" + encodeURIComponent(returnPath));
+    var returnPath = normalizePath(
+      window.location.pathname + window.location.search + window.location.hash
+    );
+    try {
+      sessionStorage.setItem(AUTH_RETURN_KEY, returnPath);
+    } catch (e) {}
+    window.location.replace(AUTH_PAGE);
   }
 
   function applySiteGate(user) {
@@ -363,7 +387,7 @@
   }
 
   function checkSession() {
-    return api("/auth/me.php").then(function (d) {
+    return api("/auth/me").then(function (d) {
       currentUser = d.user || null;
       emit();
       applySiteGate(currentUser);
@@ -377,7 +401,7 @@
   }
 
   function login(username, password) {
-    return api("/auth/login.php", {
+    return api("/auth/login", {
       method: "POST",
       body: { username: username, password: password }
     }).then(function (d) {
@@ -394,7 +418,7 @@
   }
 
   function register(username, password, displayName) {
-    return api("/auth/register.php", {
+    return api("/auth/register", {
       method: "POST",
       body: { username: username, password: password, display_name: displayName }
     }).then(function (d) {
@@ -408,14 +432,14 @@
   }
 
   function forgotPassword(username) {
-    return api("/auth/forgot-password.php", {
+    return api("/auth/forgot-password", {
       method: "POST",
       body: { username: username }
     });
   }
 
   function logout() {
-    return api("/auth/logout.php", { method: "POST" }).then(function () {
+    return api("/auth/logout", { method: "POST" }).then(function () {
       currentUser = null;
       emit();
       document.dispatchEvent(new CustomEvent("auth-logout"));
@@ -620,9 +644,7 @@
   }
 
   function getPageUrl() {
-    var p = window.location.pathname;
-    if (p.endsWith("/")) p += "index.html";
-    return p;
+    return window.location.pathname + window.location.search;
   }
 
   function loadBotUi() {
@@ -826,7 +848,7 @@
         logEl.innerHTML = "";
         return;
       }
-      fetch("/api/chat/history.php", { credentials: "same-origin" })
+      fetch("/api/chat/history", { credentials: "same-origin" })
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (!d.ok) return;
@@ -859,7 +881,7 @@
       if (sendBtn) sendBtn.disabled = true;
 
       appendMessageTyping("user", text).then(function () {
-        return fetch("/api/chat/send.php", {
+        return fetch("/api/chat/send", {
           method: "POST",
           credentials: "same-origin",
           headers: { "Content-Type": "application/json" },

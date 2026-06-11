@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>11.1 Software Reliability</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+            <a class="btn-back" href=".">&larr; Topic 11</a>
           </div>
         </div>
       </header>
@@ -37,9 +37,9 @@
           <strong>Software reliability</strong> is the probability that software will operate failure-free
           for a specified period of time in a specified environment. It is a core quality attribute in
           McCall's model and ISO/IEC 9126 — see
-          <a href="../08-software-quality-assurance/08-05-quality-frameworks.html#sec-8-5">§8.5 Quality Frameworks</a>
+          <a href="../08-software-quality-assurance/08-05-quality-frameworks#sec-8-5">§8.5 Quality Frameworks</a>
           — and must be specified in the SRS as a non-functional requirement — see
-          <a href="../04-requirements-engineering-and-specification/04-09-requirements-classification.html#sec-4-9">§4.9 Requirements Classification</a>.
+          <a href="../04-requirements-engineering-and-specification/04-09-requirements-classification#sec-4-9">§4.9 Requirements Classification</a>.
         </p>
 
         <h3>Definition</h3>
@@ -110,7 +110,7 @@
               <tr><td><strong>MTBF</strong> (Mean Time Between Failures)</td><td>MTBF = MTTF + MTTR; time between one failure and the next, including repair time (real time, not execution time).</td></tr>
               <tr><td><strong>POFOD</strong> (Probability of Failure on Demand)</td><td>Probability the system fails when a service request is made; e.g. POFOD = 0.001 means 1 failure per 1000 requests.</td></tr>
               <tr><td><strong>Availability</strong></td><td>Probability the system is available for use over a given period; considers both failure frequency and downtime during repair.</td></tr>
-              <tr><td><strong>Fault tolerance</strong></td><td>Ability to continue functioning correctly despite unexpected events or component breakdowns — see <a href="11-02-fault-tolerance.html#sec-11-2">§11.2 Fault Tolerance</a>.</td></tr>
+              <tr><td><strong>Fault tolerance</strong></td><td>Ability to continue functioning correctly despite unexpected events or component breakdowns — see <a href="11-02-fault-tolerance#sec-11-2">§11.2 Fault Tolerance</a>.</td></tr>
               <tr><td><strong>Recoverability</strong></td><td>Ability to bounce back quickly from a setback with minimal downtime and data loss.</td></tr>
               <tr><td><strong>Redundancy</strong></td><td>Duplication of critical components to avoid single points of failure and maintain service during faults.</td></tr>
             </tbody>
@@ -147,11 +147,11 @@ MTBF = MTTF + MTTR   // = 15 + 2.5 = 17.5 hours (real time between failures)</co
 
         <h3>Factors affecting software reliability</h3>
         <ul>
-          <li><strong>Complexity:</strong> High software complexity is a major contributor to reliability problems — McCabe's cyclomatic complexity is one complexity-oriented metric; see <a href="../06-software-measurement-and-metrics/06-06-cyclomatic-complexity.html#sec-6-6">§6.6 Cyclomatic Complexity</a>.</li>
+          <li><strong>Complexity:</strong> High software complexity is a major contributor to reliability problems — McCabe's cyclomatic complexity is one complexity-oriented metric; see <a href="../06-software-measurement-and-metrics/06-06-cyclomatic-complexity#sec-6-6">§6.6 Cyclomatic Complexity</a>.</li>
           <li><strong>Optimistic assumption:</strong> Assuming software that runs correctly once will always run correctly leads to hidden defects surfacing later under new conditions.</li>
           <li><strong>Environment change:</strong> Software that worked in one environment may fail when the operating environment changes — e.g. the Ariane 5 rocket failure caused by design defects exposed by faster horizontal drift speed not present in Ariane 4.</li>
           <li><strong>Specification and coding errors:</strong> Failures arise from ambiguities, oversights, misinterpretation of specifications, inadequate testing, and incorrect or unexpected usage.</li>
-          <li><strong>No universal model:</strong> Many software reliability models exist, but no single model captures all complexity — each requires assumptions and fits specific contexts; see <a href="11-03-reliability-growth-models.html#sec-11-3">§11.3 Reliability Growth Models</a>.</li>
+          <li><strong>No universal model:</strong> Many software reliability models exist, but no single model captures all complexity — each requires assumptions and fits specific contexts; see <a href="11-03-reliability-growth-models#sec-11-3">§11.3 Reliability Growth Models</a>.</li>
         </ul>
 
         <h3>Achieving high reliability — four strategies</h3>
@@ -159,7 +159,7 @@ MTBF = MTTF + MTTR   // = 15 + 2.5 = 17.5 hours (real time between failures)</co
           <li><strong>Error avoidance:</strong> Prevent errors during development using experienced developers, appropriate software engineering tools, and suitable CASE tools.</li>
           <li><strong>Error detection:</strong> Find remaining errors through rigorous testing — unit, integration, system, acceptance, and reliability testing.</li>
           <li><strong>Error removal:</strong> Fix detected errors and re-test repeatedly until the error is confirmed removed — iterative reliability testing.</li>
-          <li><strong>Fault tolerance:</strong> When 100% error-free software is impractical, design the system to deliver correct results despite residual failures — N-version programming, recovery blocks, rollback recovery; see <a href="11-02-fault-tolerance.html#sec-11-2">§11.2</a>.</li>
+          <li><strong>Fault tolerance:</strong> When 100% error-free software is impractical, design the system to deliver correct results despite residual failures — N-version programming, recovery blocks, rollback recovery; see <a href="11-02-fault-tolerance#sec-11-2">§11.2</a>.</li>
         </ul>
         <ul>
           <li>Design for reliability from the start — include fault tolerance, redundancy, and error handling in the architecture.</li>
@@ -185,8 +185,8 @@ MTBF = MTTF + MTTR   // = 15 + 2.5 = 17.5 hours (real time between failures)</co
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="index.html">&larr; Topic 11</a>
-        <a class="btn-back chapter-nav-next" href="11-02-fault-tolerance.html">11.2 Fault Tolerance &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href=".">&larr; Topic 11</a>
+        <a class="btn-back chapter-nav-next" href="11-02-fault-tolerance">11.2 Fault Tolerance &rarr;</a>
       </nav>
     </main>
   </div>

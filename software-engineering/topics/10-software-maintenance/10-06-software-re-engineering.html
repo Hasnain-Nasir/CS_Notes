@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>10.6 Software Re-engineering</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href="index.html">&larr; Topic 10</a>
+            <a class="btn-back" href=".">&larr; Topic 10</a>
           </div>
         </div>
       </header>
@@ -37,8 +37,8 @@
           <strong>Software re-engineering</strong> is a structured approach to improving legacy systems by
           examining and altering them to reconstitute the system in a new form with better maintainability.
           It is distinct from new development and from simple reuse — see
-          <a href="../12-advanced-issues-reusability-patterns/12-01-reusability.html#sec-12-1">§12.1 Reusability</a>
-          for reuse concepts and <a href="10-07-reverse-engineering.html#sec-10-7">§10.7 Reverse Engineering</a>
+          <a href="../12-advanced-issues-reusability-patterns/12-01-reusability#sec-12-1">§12.1 Reusability</a>
+          for reuse concepts and <a href="10-07-reverse-engineering#sec-10-7">§10.7 Reverse Engineering</a>
           for the reverse engineering step within re-engineering.
         </p>
 
@@ -63,7 +63,7 @@
           <li><strong>Improve quality and maintainability:</strong> Restructure code, update documentation, and modernise architecture to reduce future maintenance effort.</li>
           <li><strong>Support new platforms:</strong> Migrate the system to modern hardware, operating systems, or cloud environments.</li>
           <li><strong>Add features:</strong> Incorporate new functionality into a restructured codebase that can accommodate change more easily.</li>
-          <li>Re-engineering addresses Lehman's law of increasing complexity by actively reducing structural complexity — see <a href="10-02-software-as-evolutionary-entity.html#sec-10-2">§10.2</a>.</li>
+          <li>Re-engineering addresses Lehman's law of increasing complexity by actively reducing structural complexity — see <a href="10-02-software-as-evolutionary-entity#sec-10-2">§10.2</a>.</li>
         </ul>
 
         <h3>Re-engineering process phases</h3>
@@ -87,10 +87,10 @@
         <ol>
           <li><strong>Inventory Analysis:</strong> Catalogue all software assets — modules, data stores, interfaces, and documentation — to determine re-engineering candidates and scope.</li>
           <li><strong>Document Reconstruction:</strong> Recreate missing or outdated design and requirements documentation from existing code and stakeholder knowledge.</li>
-          <li><strong>Reverse Engineering:</strong> Analyse existing code to recover design models, data structures, and control flow — see <a href="10-07-reverse-engineering.html#sec-10-7">§10.7</a>.</li>
+          <li><strong>Reverse Engineering:</strong> Analyse existing code to recover design models, data structures, and control flow — see <a href="10-07-reverse-engineering#sec-10-7">§10.7</a>.</li>
           <li><strong>Code Reconstruction:</strong> Restructure or rewrite code modules to improve readability, modularity, and adherence to modern standards without changing external behaviour.</li>
           <li><strong>Data Reconstruction:</strong> Restructure databases and data files — normalise schemas, eliminate redundancy, migrate to new DBMS platforms.</li>
-          <li><strong>Forward Engineering:</strong> Apply modern design and implementation techniques to produce the transformed system from recovered specifications — see <a href="10-07-reverse-engineering.html#sec-10-7">§10.7 Forward vs Reverse Engineering</a>.</li>
+          <li><strong>Forward Engineering:</strong> Apply modern design and implementation techniques to produce the transformed system from recovered specifications — see <a href="10-07-reverse-engineering#sec-10-7">§10.7 Forward vs Reverse Engineering</a>.</li>
         </ol>
 
         <h3>Re-engineering vs reuse vs new development</h3>
@@ -108,7 +108,7 @@
               <tr>
                 <td><strong>Reuse</strong></td>
                 <td>Existing components or COTS products</td>
-                <td>New system built by assembling reusable parts — see <a href="../12-advanced-issues-reusability-patterns/12-01-reusability.html#sec-12-1">§12.1</a></td>
+                <td>New system built by assembling reusable parts — see <a href="../12-advanced-issues-reusability-patterns/12-01-reusability#sec-12-1">§12.1</a></td>
               </tr>
               <tr>
                 <td><strong>New development</strong></td>
@@ -177,8 +177,8 @@ STEP 6: FORWARD_ENGINEERING
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="10-05-cost-of-maintenance.html">&larr; 10.5 Cost of Maintenance</a>
-        <a class="btn-back chapter-nav-next" href="10-07-reverse-engineering.html">10.7 Reverse Engineering &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href="10-05-cost-of-maintenance">&larr; 10.5 Cost of Maintenance</a>
+        <a class="btn-back chapter-nav-next" href="10-07-reverse-engineering">10.7 Reverse Engineering &rarr;</a>
       </nav>
     </main>
   </div>

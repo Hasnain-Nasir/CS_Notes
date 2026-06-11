@@ -24,12 +24,19 @@
   }
 
   function getReturnUrl() {
-    var params = new URLSearchParams(window.location.search);
-    var ret = params.get("return");
-    if (ret && ret.charAt(0) === "/" && ret.indexOf("/login.html") === -1) {
-      return ret;
-    }
-    return "/index.html";
+    try {
+      var ret = sessionStorage.getItem("notes_auth_return");
+      sessionStorage.removeItem("notes_auth_return");
+      if (ret && ret.charAt(0) === "/") {
+        var path = ret.split("?")[0].split("#")[0].replace(/\/$/, "") || "/";
+        if (path !== "/login") {
+          return ret
+            .replace(/\/index\.html(?=($|[?#]))/g, "/")
+            .replace(/\.html(?=($|[?#]))/g, "");
+        }
+      }
+    } catch (e) {}
+    return "/";
   }
 
   function redirectAfterAuth(d) {
@@ -87,7 +94,7 @@
     }
     var submitBtn = e.target.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    api("/auth/login.php", { method: "POST", body: { username: username, password: password } })
+    api("/auth/login", { method: "POST", body: { username: username, password: password } })
       .then(function (d) {
         redirectAfterAuth(d);
       })
@@ -124,7 +131,7 @@
     }
     var submitBtn = e.target.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    api("/auth/register.php", { method: "POST", body: { username: username, display_name: displayName, password: password } })
+    api("/auth/register", { method: "POST", body: { username: username, display_name: displayName, password: password } })
       .then(function (d) {
         redirectAfterAuth(d);
       })
@@ -153,7 +160,7 @@
     }
     var submitBtn = e.target.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    api("/auth/forgot-password.php", { method: "POST", body: { username: username } })
+    api("/auth/forgot-password", { method: "POST", body: { username: username } })
       .then(function (d) {
         var success = document.getElementById("auth-forgot-success");
         if (success) {
@@ -170,7 +177,7 @@
       });
   });
 
-  api("/auth/me.php").then(function (d) {
+  api("/auth/me").then(function (d) {
     if (d.user) {
       window.location.replace(getReturnUrl());
     }

@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>9.6 Software Version Control</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href="index.html">&larr; Topic 9</a>
+            <a class="btn-back" href=".">&larr; Topic 9</a>
           </div>
         </div>
       </header>
@@ -36,9 +36,9 @@
         <p>
           A <strong>Version Control System (VCS)</strong> is a tool used in software development and collaborative
           projects to track and manage changes to source code and other configuration items. Version control is
-          one of the five SCM activities — see <a href="09-04-scm-activities.html#sec-9-4">§9.4 SCM Activities</a>
+          one of the five SCM activities — see <a href="09-04-scm-activities#sec-9-4">§9.4 SCM Activities</a>
           — and the CM database referenced in change control is typically implemented as a VCS repository — see
-          <a href="09-05-change-control-process.html#sec-9-5">§9.5 Change Control Process</a>.
+          <a href="09-05-change-control-process#sec-9-5">§9.5 Change Control Process</a>.
         </p>
 
         <h3>What is a Version Control System?</h3>
@@ -206,7 +206,7 @@
           <li><strong>Complete history:</strong> Every change is recorded with author, timestamp, and message — supporting debugging, auditing, and rollback.</li>
           <li><strong>Rollback capability:</strong> If a new change breaks the system, the team reverts to any previous known-good revision instantly.</li>
           <li><strong>Parallel development:</strong> Feature branches, release branches, and hotfix branches are managed and merged systematically.</li>
-          <li><strong>Baseline support:</strong> Tags and release branches mark baselines that correspond to formally approved product snapshots — see <a href="09-02-software-configuration-management.html#sec-9-2">§9.2 Baselines</a>.</li>
+          <li><strong>Baseline support:</strong> Tags and release branches mark baselines that correspond to formally approved product snapshots — see <a href="09-02-software-configuration-management#sec-9-2">§9.2 Baselines</a>.</li>
           <li><strong>Change control integration:</strong> CIs are checked out, modified, tested, and checked in through the VCS as part of the change control process.</li>
           <li><strong>CI/CD integration:</strong> Automated build, test, and deployment pipelines trigger on every commit or push to the repository.</li>
         </ul>
@@ -314,8 +314,8 @@ svn commit -m "Fix bug in payment module — refs CR-019"
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="09-05-change-control-process.html">&larr; 9.5 Change Control Process</a>
-        <a class="btn-back chapter-nav-next" href="09-07-system-configuration-management.html">9.7 System Configuration Management &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href="09-05-change-control-process">&larr; 9.5 Change Control Process</a>
+        <a class="btn-back chapter-nav-next" href="09-07-system-configuration-management">9.7 System Configuration Management &rarr;</a>
       </nav>
     </main>
   </div>

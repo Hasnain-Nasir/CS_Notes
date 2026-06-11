@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>5.14 Function-Oriented Design</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+            <a class="btn-back" href=".">&larr; Topic 5</a>
           </div>
         </div>
       </header>
@@ -36,7 +36,7 @@
         <p>
           The design process for software systems often has two levels. At the first level, the focus is on deciding
           which modules are needed for the system based on the
-          <a href="../04-requirements-engineering-and-specification/04-14-srs-document.html#sec-4-14">SRS</a>
+          <a href="../04-requirements-engineering-and-specification/04-14-srs-document#sec-4-14">SRS</a>
           (Software Requirements Specification) and how the modules should be interconnected. At the second level, the
           internal logic of each module is designed.
         </p>
@@ -47,7 +47,7 @@
         </p>
         <p>
           FOD uses a <strong>top-down</strong> strategy
-          (<a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a>) and is carried out using structured analysis
+          (<a href="05-13-top-down-bottom-up#sec-5-13">§5.13</a>) and is carried out using structured analysis
           and structured design techniques.
         </p>
 
@@ -86,7 +86,7 @@
         </p>
         <ul>
           <li>A reusable module is invokable from any part of the system that needs its functionality.</li>
-          <li>In structure charts, reusable modules are drawn as <strong>library modules</strong> with double vertical lines on the sides — see <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>.</li>
+          <li>In structure charts, reusable modules are drawn as <strong>library modules</strong> with double vertical lines on the sides — see <a href="05-07-structure-charts#sec-5-7">§5.7</a>.</li>
           <li>Example: a <code>ValidateInput</code> module used by both the Admission module and the Fee Payment module in a university system.</li>
         </ul>
 
@@ -101,7 +101,7 @@
           <li>A DFD maps out the flow of information for any process or system.</li>
           <li>It uses defined symbols — rectangles, circles, and arrows — plus short text labels to show data inputs, outputs, storage points, and the routes between each destination.</li>
           <li>DFDs are created during requirements analysis and refined during design.</li>
-          <li>Full coverage in <a href="../04-requirements-engineering-and-specification/04-11-dfd.html#sec-4-11">§4.11</a>.</li>
+          <li>Full coverage in <a href="../04-requirements-engineering-and-specification/04-11-dfd#sec-4-11">§4.11</a>.</li>
         </ul>
 
         <h4>2. Data dictionary</h4>
@@ -117,7 +117,7 @@
           <li>A structure chart is the hierarchical representation of a system that partitions it into black boxes.</li>
           <li>Components are read from top to bottom and left to right.</li>
           <li>When a module calls another, it views the called module as a black box, passing required parameters and receiving results.</li>
-          <li>Full coverage in <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>.</li>
+          <li>Full coverage in <a href="05-07-structure-charts#sec-5-7">§5.7</a>.</li>
         </ul>
 
         <h4>4. Pseudocode</h4>
@@ -125,7 +125,7 @@
           <li>Pseudocode is a system description in short English-like phrases describing the function of each module.</li>
           <li>It uses keywords and indentation to represent control flow without language-specific syntax.</li>
           <li>Pseudocode can replace flowcharts for documenting module logic and decreases the amount of documentation required.</li>
-          <li>Full coverage in <a href="05-08-pseudocode.html#sec-5-8">§5.8</a>.</li>
+          <li>Full coverage in <a href="05-08-pseudocode#sec-5-8">§5.8</a>.</li>
         </ul>
 
         <h3>Structure charts in function-oriented design</h3>
@@ -274,8 +274,8 @@ END MODULE</code></pre>
           </table>
         </div>
         <p>
-          Full comparison in <a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a> and
-          <a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>.
+          Full comparison in <a href="05-13-top-down-bottom-up#sec-5-13">§5.13</a> and
+          <a href="05-15-object-oriented-design#sec-5-15">§5.15</a>.
         </p>
 
         <div class="callout exam">
@@ -296,8 +296,8 @@ END MODULE</code></pre>
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="05-13-top-down-bottom-up.html">&larr; 5.13 Top-Down &amp; Bottom-Up</a>
-        <a class="btn-back chapter-nav-next" href="05-15-object-oriented-design.html">5.15 Object-Oriented Design &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href="05-13-top-down-bottom-up">&larr; 5.13 Top-Down &amp; Bottom-Up</a>
+        <a class="btn-back chapter-nav-next" href="05-15-object-oriented-design">5.15 Object-Oriented Design &rarr;</a>
       </nav>
     </main>
   </div>

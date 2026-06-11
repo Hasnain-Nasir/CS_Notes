@@ -1,19 +1,33 @@
 (function () {
   var API = "/api";
-  var AUTH_PAGE = "/login.html";
+  var AUTH_PAGE = "/login";
+  var AUTH_RETURN_KEY = "notes_auth_return";
   var currentUser = null;
   var listeners = [];
   var gateApplied = false;
 
+  function normalizePath(path) {
+    if (!path || path.charAt(0) !== "/") return "/";
+    return path
+      .replace(/\/index\.html(?=($|[?#]))/g, "/")
+      .replace(/\.html(?=($|[?#]))/g, "")
+      .replace(/\/+$/, "") || "/";
+  }
+
   function isAuthPage() {
-    var p = window.location.pathname;
-    return p === "/login.html" || p.endsWith("/login.html");
+    var p = normalizePath(window.location.pathname);
+    return p === "/login";
   }
 
   function redirectToLogin() {
-    var returnPath = window.location.pathname + window.location.search + window.location.hash;
     if (isAuthPage()) return;
-    window.location.replace(AUTH_PAGE + "?return=" + encodeURIComponent(returnPath));
+    var returnPath = normalizePath(
+      window.location.pathname + window.location.search + window.location.hash
+    );
+    try {
+      sessionStorage.setItem(AUTH_RETURN_KEY, returnPath);
+    } catch (e) {}
+    window.location.replace(AUTH_PAGE);
   }
 
   function applySiteGate(user) {
@@ -50,7 +64,7 @@
   }
 
   function checkSession() {
-    return api("/auth/me.php").then(function (d) {
+    return api("/auth/me").then(function (d) {
       currentUser = d.user || null;
       emit();
       applySiteGate(currentUser);
@@ -64,7 +78,7 @@
   }
 
   function login(username, password) {
-    return api("/auth/login.php", {
+    return api("/auth/login", {
       method: "POST",
       body: { username: username, password: password }
     }).then(function (d) {
@@ -81,7 +95,7 @@
   }
 
   function register(username, password, displayName) {
-    return api("/auth/register.php", {
+    return api("/auth/register", {
       method: "POST",
       body: { username: username, password: password, display_name: displayName }
     }).then(function (d) {
@@ -95,14 +109,14 @@
   }
 
   function forgotPassword(username) {
-    return api("/auth/forgot-password.php", {
+    return api("/auth/forgot-password", {
       method: "POST",
       body: { username: username }
     });
   }
 
   function logout() {
-    return api("/auth/logout.php", { method: "POST" }).then(function () {
+    return api("/auth/logout", { method: "POST" }).then(function () {
       currentUser = null;
       emit();
       document.dispatchEvent(new CustomEvent("auth-logout"));

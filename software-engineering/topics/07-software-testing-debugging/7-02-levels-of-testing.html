@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>7.5–7.10 Levels of Testing</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+            <a class="btn-back" href=".">&larr; Topic 7</a>
           </div>
         </div>
       </header>
@@ -34,8 +34,8 @@
       <p>
         Software is tested at progressively broader levels as components are assembled into a complete system.
         Each level has a distinct scope, performer, and objective within the
-        <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">§2.1 SDLC</a> testing phase and the
-        <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 V&amp;V</a> framework.
+        <a href="../02-sdlc-and-process-models/02-01-sdlc#sec-2-1">§2.1 SDLC</a> testing phase and the
+        <a href="../08-software-quality-assurance/08-03-verification-validation#sec-8-3">§8.3 V&amp;V</a> framework.
       </p>
 
       <figure class="diagram figure-photo" aria-labelledby="fig-levels-testing-caption">
@@ -66,7 +66,7 @@
           <li>It is performed <strong>after unit testing</strong> and focuses on data flow, control flow, and API contracts between combined components.</li>
           <li>At the integration level, testing is often <strong>black box</strong> — testers verify behaviour through module interfaces without examining internal code.</li>
           <li>Integration testing can also use <strong>white box</strong> techniques when verifying internal interactions, call sequences, or shared data structures between modules.</li>
-          <li>Integration strategies (top-down, bottom-up, sandwich) determine the order in which modules are combined — see <a href="7-03-testing-strategies.html#sec-7-11">§7.11–7.14 Testing Strategies</a>.</li>
+          <li>Integration strategies (top-down, bottom-up, sandwich) determine the order in which modules are combined — see <a href="7-03-testing-strategies#sec-7-11">§7.11–7.14 Testing Strategies</a>.</li>
           <li>Stubs (for top-down) and drivers (for bottom-up) simulate missing modules during incremental integration.</li>
         </ul>
       </section>
@@ -91,7 +91,7 @@
           <li><strong>User Acceptance Testing (UAT)</strong> is performed by end users or customer representatives in a realistic operational setting.</li>
           <li><strong>Alpha testing</strong> is conducted at the developer's site with a selected group of internal or external users before public release.</li>
           <li><strong>Beta testing</strong> releases the product to a limited external user base in the real environment to gather feedback before general availability.</li>
-          <li>Acceptance testing confirms that the right product has been built — a validation activity aligned with <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 V&amp;V</a>.</li>
+          <li>Acceptance testing confirms that the right product has been built — a validation activity aligned with <a href="../08-software-quality-assurance/08-03-verification-validation#sec-8-3">§8.3 V&amp;V</a>.</li>
           <li>Formal sign-off at acceptance testing authorises the system for production deployment.</li>
         </ul>
       </section>
@@ -102,7 +102,7 @@
         <ul>
           <li>Regression testing re-executes previously passed test cases after changes (bug fixes, enhancements, refactoring) to ensure existing functionality is not broken.</li>
           <li>It is not a separate level in the traditional hierarchy but a <strong>type of testing applied at every level</strong> whenever the codebase changes.</li>
-          <li>Regression testing ensures that <strong>old functionality remains intact</strong> after modifications — a critical activity during maintenance — see also <a href="../10-software-maintenance/10-04-maintenance-categories.html#sec-10-4">§10.4 Maintenance Categories</a>.</li>
+          <li>Regression testing ensures that <strong>old functionality remains intact</strong> after modifications — a critical activity during maintenance — see also <a href="../10-software-maintenance/10-04-maintenance-categories#sec-10-4">§10.4 Maintenance Categories</a>.</li>
           <li>Automated regression test suites are common because manually re-running all tests after every change is impractical for large systems.</li>
           <li>Smoke tests (quick sanity checks of core features) and full regression suites are often run at different frequencies in CI/CD pipelines.</li>
         </ul>
@@ -207,8 +207,8 @@ END PROCEDURE</code></pre>
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="7-01-software-testing-overview.html">&larr; 7.1–7.4 Testing Overview</a>
-        <a class="btn-back chapter-nav-next" href="7-03-testing-strategies.html">7.11–7.14 Testing Strategies &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href="7-01-software-testing-overview">&larr; 7.1–7.4 Testing Overview</a>
+        <a class="btn-back chapter-nav-next" href="7-03-testing-strategies">7.11–7.14 Testing Strategies &rarr;</a>
       </nav>
     </main>
   </div>

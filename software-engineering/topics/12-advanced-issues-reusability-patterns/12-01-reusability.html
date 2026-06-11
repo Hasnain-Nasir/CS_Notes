@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>12.1 Reusability</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href="index.html">&larr; Topic 12</a>
+            <a class="btn-back" href=".">&larr; Topic 12</a>
           </div>
         </div>
       </header>
@@ -39,14 +39,14 @@
           everything from scratch. Reusability is a core advanced issue in the course outline and directly
           addresses the <strong>software crisis</strong> — the gap between what hardware can deliver and what
           software can produce — described in
-          <a href="../01-introduction-and-fundamentals/01-06-software-crisis.html#sec-1-6">§1.6 Software Crisis</a>.
+          <a href="../01-introduction-and-fundamentals/01-06-software-crisis#sec-1-6">§1.6 Software Crisis</a>.
         </p>
 
         <h3>What is software reuse?</h3>
         <ul>
           <li><strong>Software reuse</strong> is the process of creating software systems from existing software systems and knowledge, rather than building every system from scratch.</li>
           <li>Reuse applies existing software artifacts — code, designs, specifications, test cases, and documentation — to reduce development effort on new projects.</li>
-          <li>Reusability is listed as a quality attribute in McCall's model (product transition factor) — see <a href="../08-software-quality-assurance/08-05-quality-frameworks.html#sec-8-5">§8.5 Quality Frameworks</a> — and as an SQA focus area in <a href="../08-software-quality-assurance/08-02-software-quality-assurance.html#sec-8-2">§8.2 SQA</a>.</li>
+          <li>Reusability is listed as a quality attribute in McCall's model (product transition factor) — see <a href="../08-software-quality-assurance/08-05-quality-frameworks#sec-8-5">§8.5 Quality Frameworks</a> — and as an SQA focus area in <a href="../08-software-quality-assurance/08-02-software-quality-assurance#sec-8-2">§8.2 SQA</a>.</li>
           <li>Reuse is an umbrella activity in software engineering — it runs parallel to the SDLC alongside SCM, SQA, and technical reviews.</li>
         </ul>
 
@@ -66,13 +66,13 @@
           <li><strong>Specification reuse:</strong> Reusing requirements or interface specifications — e.g. adopting a standard API specification or a reusable requirements template for a common domain.</li>
           <li><strong>Component reuse:</strong> Reusing self-contained, independently deployable software components with well-defined interfaces — the foundation of component-based development.</li>
           <li><strong>Framework reuse:</strong> Reusing an application skeleton that defines the overall structure — developers fill in domain-specific code within the framework's predefined hooks.</li>
-          <li><strong>Pattern reuse:</strong> Reusing proven design-level solutions to recurring problems — design patterns are a form of design reuse; see <a href="12-02-design-patterns.html#sec-12-2">§12.2 Design Patterns</a>.</li>
+          <li><strong>Pattern reuse:</strong> Reusing proven design-level solutions to recurring problems — design patterns are a form of design reuse; see <a href="12-02-design-patterns#sec-12-2">§12.2 Design Patterns</a>.</li>
         </ul>
 
         <h3>Characteristics of reusable components</h3>
         <ul>
           <li><strong>Generic and domain-independent where possible:</strong> A reusable component solves a general problem (e.g. date formatting) rather than one project's specific case.</li>
-          <li><strong>Modular and loosely coupled:</strong> The component has a well-defined interface and minimal dependencies on other modules — high cohesion, low coupling — see <a href="../05-software-design/05-10-coupling-cohesion.html#sec-5-10">§5.10 Coupling and Cohesion</a>.</li>
+          <li><strong>Modular and loosely coupled:</strong> The component has a well-defined interface and minimal dependencies on other modules — high cohesion, low coupling — see <a href="../05-software-design/05-10-coupling-cohesion#sec-5-10">§5.10 Coupling and Cohesion</a>.</li>
           <li><strong>Well-documented:</strong> Clear documentation of purpose, interface, preconditions, and usage examples is essential for others to adopt the component.</li>
           <li><strong>Thoroughly tested:</strong> Reusable components must be validated independently so that adopting projects inherit reliability rather than hidden defects.</li>
           <li><strong>Version-controlled:</strong> Components must be tracked in a repository with version numbers so consuming projects know exactly which version they depend on.</li>
@@ -132,7 +132,7 @@ END FUNCTION</code></pre>
           <li>Components encapsulate both data and behaviour — they interact through interfaces without exposing internal implementation details.</li>
           <li>Components can be developed, tested, and deployed independently, then combined to form complete applications.</li>
           <li>CBA promotes modularity, flexibility, and reusability — the same login component can be reused across web, mobile, and desktop applications.</li>
-          <li>Library modules in function-oriented design are an early form of component reuse — see <a href="../05-software-design/05-14-function-oriented-design.html#sec-5-14">§5.14 Function-Oriented Design</a>.</li>
+          <li>Library modules in function-oriented design are an early form of component reuse — see <a href="../05-software-design/05-14-function-oriented-design#sec-5-14">§5.14 Function-Oriented Design</a>.</li>
         </ul>
 
         <h3>Reuse-Oriented Model (ROM)</h3>
@@ -264,15 +264,15 @@ END REUSE_ORIENTED_DEVELOPMENT</code></pre>
           <li><strong>Reverse engineering steps:</strong> collect information → examine → extract structure → record functionality → record data flow → record control flow → review design → generate documentation.</li>
           <li>Reverse engineering supports reuse by recovering design knowledge from legacy systems where documentation is missing or outdated.</li>
           <li>Re-engineering costs significantly less than new development and carries lower risk because it improves systems incrementally rather than replacing them entirely.</li>
-            <li>Full detail on re-engineering and reverse engineering is covered in <a href="../10-software-maintenance/index.html">Topic 10 — Software Maintenance</a>.</li>
+            <li>Full detail on re-engineering and reverse engineering is covered in <a href="../10-software-maintenance/index">Topic 10 — Software Maintenance</a>.</li>
         </ul>
 
         <h3>Reusability and design patterns</h3>
         <ul>
           <li>Design patterns are a form of <strong>design-level reuse</strong> — they capture proven solutions to recurring design problems so teams do not reinvent solutions for common situations.</li>
           <li>Code reuse operates at the implementation level; pattern reuse operates at the design level — both complement each other.</li>
-          <li>Patterns establish a common vocabulary for communicating design decisions across teams and projects — see <a href="12-02-design-patterns.html#sec-12-2">§12.2 Design Patterns</a>.</li>
-          <li>High cohesion and low coupling — principles from <a href="../05-software-design/05-10-coupling-cohesion.html#sec-5-10">§5.10</a> — are prerequisites for both reusable components and well-designed patterns.</li>
+          <li>Patterns establish a common vocabulary for communicating design decisions across teams and projects — see <a href="12-02-design-patterns#sec-12-2">§12.2 Design Patterns</a>.</li>
+          <li>High cohesion and low coupling — principles from <a href="../05-software-design/05-10-coupling-cohesion#sec-5-10">§5.10</a> — are prerequisites for both reusable components and well-designed patterns.</li>
         </ul>
 
         <div class="callout exam">
@@ -294,8 +294,8 @@ END REUSE_ORIENTED_DEVELOPMENT</code></pre>
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="index.html">&larr; Topic 12</a>
-        <a class="btn-back chapter-nav-next" href="12-02-design-patterns.html">12.2 Design Patterns &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href=".">&larr; Topic 12</a>
+        <a class="btn-back chapter-nav-next" href="12-02-design-patterns">12.2 Design Patterns &rarr;</a>
       </nav>
     </main>
   </div>

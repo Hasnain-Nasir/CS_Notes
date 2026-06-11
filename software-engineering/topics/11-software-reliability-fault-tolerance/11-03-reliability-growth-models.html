@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>11.3 Reliability Growth Models</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href="index.html">&larr; Topic 11</a>
+            <a class="btn-back" href=".">&larr; Topic 11</a>
           </div>
         </div>
       </header>
@@ -37,8 +37,8 @@
           <strong>Software Reliability Growth Models (SRGMs)</strong> are mathematical models that describe
           how software reliability improves as faults are detected and removed during testing. They are
           introduced here as an overview; individual syllabus models are covered in
-          <a href="11-04-jelinski-moranda-model.html#sec-11-4">§11.4</a> through
-          <a href="11-08-mills-error-seeding-model.html#sec-11-8">§11.8</a>.
+          <a href="11-04-jelinski-moranda-model#sec-11-4">§11.4</a> through
+          <a href="11-08-mills-error-seeding-model#sec-11-8">§11.8</a>.
         </p>
 
         <h3>Definition</h3>
@@ -113,7 +113,7 @@
           <li>Many SRGMs are based on the <strong>Non-Homogeneous Poisson Process (NHPP)</strong>, where the failure intensity λ(t) varies with time rather than remaining constant.</li>
           <li>In an NHPP, the expected number of failures by time t is given by the <strong>mean value function</strong> m(t) = ∫₀ᵗ λ(s) ds.</li>
           <li>As faults are removed, λ(t) decreases and m(t) grows more slowly — modelling reliability growth.</li>
-          <li>The <a href="../03-software-project-management/03-11-quasi-renewal.html#sec-3-11">§3.11 Quasi Renewal Process</a> is a related counting process where inter-failure intervals grow by a constant factor α &gt; 1, modelling reliability growth during burn-in.</li>
+          <li>The <a href="../03-software-project-management/03-11-quasi-renewal#sec-3-11">§3.11 Quasi Renewal Process</a> is a related counting process where inter-failure intervals grow by a constant factor α &gt; 1, modelling reliability growth during burn-in.</li>
         </ul>
 
         <h3>Duane and Coutinho models (brief)</h3>
@@ -135,35 +135,35 @@
                 <td>1972</td>
                 <td>Binomial / step function</td>
                 <td>Constant hazard φ per remaining fault; perfect debugging</td>
-                <td><a href="11-04-jelinski-moranda-model.html#sec-11-4">§11.4</a></td>
+                <td><a href="11-04-jelinski-moranda-model#sec-11-4">§11.4</a></td>
               </tr>
               <tr>
                 <td><strong>Schick-Wolverton (SW)</strong></td>
                 <td>1978</td>
                 <td>Modification of JM</td>
                 <td>Failure rate increases with time since last debugging</td>
-                <td><a href="11-05-schick-wolverton-model.html#sec-11-5">§11.5</a></td>
+                <td><a href="11-05-schick-wolverton-model#sec-11-5">§11.5</a></td>
               </tr>
               <tr>
                 <td><strong>Goel-Okumoto (GO)</strong></td>
                 <td>1979</td>
                 <td>Exponential NHPP</td>
                 <td>Failures proportional to remaining faults; perfect debugging</td>
-                <td><a href="11-06-goel-okumoto-model.html#sec-11-6">§11.6</a></td>
+                <td><a href="11-06-goel-okumoto-model#sec-11-6">§11.6</a></td>
               </tr>
               <tr>
                 <td><strong>Pham-Nordmann-Zhang (PNZ)</strong></td>
                 <td>—</td>
                 <td>NHPP with imperfect debugging</td>
                 <td>S-shaped detection; faults introduced during debugging at rate α</td>
-                <td><a href="11-07-pnz-model.html#sec-11-7">§11.7</a></td>
+                <td><a href="11-07-pnz-model#sec-11-7">§11.7</a></td>
               </tr>
               <tr>
                 <td><strong>Mills Error Seeding</strong></td>
                 <td>1980s</td>
                 <td>Fault content estimation</td>
                 <td>Inject known errors; estimate total inherent faults via sampling</td>
-                <td><a href="11-08-mills-error-seeding-model.html#sec-11-8">§11.8</a></td>
+                <td><a href="11-08-mills-error-seeding-model#sec-11-8">§11.8</a></td>
               </tr>
             </tbody>
           </table>
@@ -229,8 +229,8 @@ END IF</code></pre>
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="11-02-fault-tolerance.html">&larr; 11.2 Fault Tolerance</a>
-        <a class="btn-back chapter-nav-next" href="11-04-jelinski-moranda-model.html">11.4 Jelinski-Moranda Model &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href="11-02-fault-tolerance">&larr; 11.2 Fault Tolerance</a>
+        <a class="btn-back chapter-nav-next" href="11-04-jelinski-moranda-model">11.4 Jelinski-Moranda Model &rarr;</a>
       </nav>
     </main>
   </div>

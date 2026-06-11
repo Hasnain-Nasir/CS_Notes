@@ -11,7 +11,7 @@
   <div class="admin-forbidden">
     <h1>403 — Forbidden</h1>
     <p>Normal users cannot access the admin dashboard.</p>
-    <a href="/index.html" class="btn-back">Back to notes</a>
+    <a href="/" class="btn-back">Back to notes</a>
   </div>
 </body>
 </html>

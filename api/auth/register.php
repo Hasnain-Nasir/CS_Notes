@@ -41,5 +41,5 @@ if (!$user) {
 json_response([
     'ok' => true,
     'user' => user_public($user),
-    'redirect' => '/index.html',
+    'redirect' => '/',
 ]);

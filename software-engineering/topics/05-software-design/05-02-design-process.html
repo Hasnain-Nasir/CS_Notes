@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>5.2 Software Design Process (Set 1 &amp; 2)</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href="index.html">&larr; Topic 5</a>
+            <a class="btn-back" href=".">&larr; Topic 5</a>
           </div>
         </div>
       </header>
@@ -36,7 +36,7 @@
         <p>
           The <strong>design phase</strong> of software development deals with transforming customer requirements —
           as described in the
-          <a href="../04-requirements-engineering-and-specification/04-14-srs-document.html#sec-4-14">SRS</a>
+          <a href="../04-requirements-engineering-and-specification/04-14-srs-document#sec-4-14">SRS</a>
           (Software Requirements Specification) — into a form that can be implemented using a programming language.
           It is the bridge between <em>what</em> the system must do (requirements) and <em>how</em> it will be built
           (implementation).
@@ -52,7 +52,7 @@
         <p>
           The design phase takes the SRS as input and produces the
           <strong>Software Design Description (SDD)</strong> as output (see
-          <a href="05-01-basic-concept.html#sec-5-1">§5.1</a>). The process can be understood at two complementary
+          <a href="05-01-basic-concept#sec-5-1">§5.1</a>). The process can be understood at two complementary
           levels: the <strong>three design levels</strong> (Set 1) and the <strong>design activities and
           deliverables</strong> (Set 2).
         </p>
@@ -97,14 +97,14 @@
           <li><strong>Component interfaces</strong> — how components connect and exchange data.</li>
           <li><strong>Non-functional properties:</strong> Component scaling, performance, resource consumption, and reliability.</li>
           <li><strong>Communication and interaction</strong> between components.</li>
-          <li>At this level, designers focus on <strong>coupling and cohesion</strong> between modules rather than internal module logic (see <a href="05-10-coupling-cohesion.html#sec-5-10">§5.10</a>).</li>
+          <li>At this level, designers focus on <strong>coupling and cohesion</strong> between modules rather than internal module logic (see <a href="05-10-coupling-cohesion#sec-5-10">§5.10</a>).</li>
         </ul>
 
         <h4>3. Detailed design (low-level design)</h4>
         <p>
           Detailed design is the specification of the internal elements of all major system components — their properties,
           relationships, processing, and often their algorithms and data structures. See also
-          <a href="05-05-low-level-design.html#sec-5-5">§5.5</a>.
+          <a href="05-05-low-level-design#sec-5-5">§5.5</a>.
         </p>
         <ul>
           <li>Decomposition of major system components into program units.</li>
@@ -137,7 +137,7 @@
         <ul>
           <li>The problem is decomposed into a set of modules; control relationships and interfaces among modules are identified.</li>
           <li>The outcome is called the <strong>program architecture</strong>.</li>
-          <li>Representation techniques: structure charts and UML diagrams (see <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>, <a href="05-16-uml-modelling.html#sec-5-16">§5.16</a>).</li>
+          <li>Representation techniques: structure charts and UML diagrams (see <a href="05-07-structure-charts#sec-5-7">§5.7</a>, <a href="05-16-uml-modelling#sec-5-16">§5.16</a>).</li>
         </ul>
 
         <h4>Detailed design</h4>
@@ -185,7 +185,7 @@
         <h4>5. User interface design</h4>
         <p>
           The focus shifts to usability. UI designers work on visual elements, navigation, and overall user experience
-          to ensure the interface is intuitive and friendly. See <a href="05-17-user-interface-design.html#sec-5-17">§5.17</a>.
+          to ensure the interface is intuitive and friendly. See <a href="05-17-user-interface-design#sec-5-17">§5.17</a>.
         </p>
 
         <h4>6. Prototyping</h4>
@@ -222,12 +222,12 @@
         <p>
           Software design comes after project requirements are complete and before the actual development (coding) phase
           begins. In the broader
-          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a>, the sequence is:
+          <a href="../02-sdlc-and-process-models/02-01-sdlc#sec-2-1">SDLC</a>, the sequence is:
         </p>
         <ul>
           <li><strong>Requirements phase:</strong> User needs are captured and documented in the SRS.</li>
           <li><strong>Design phase:</strong> The team uses tools such as wireframes,
-            <a href="../04-requirements-engineering-and-specification/04-11-dfd.html#sec-4-11">data flow diagrams</a>,
+            <a href="../04-requirements-engineering-and-specification/04-11-dfd#sec-4-11">data flow diagrams</a>,
             and UI designs to map out how the system will work — drawing the roadmap for how everything will come together.</li>
           <li><strong>Development phase:</strong> After design is approved, the actual coding and implementation begins.</li>
         </ul>
@@ -239,7 +239,7 @@
         <h3>Software design principles (overview)</h3>
         <p>
           To ensure software is easy to manage, maintain, and update, the following principles should guide the design
-          process. Full coverage is in <a href="05-03-design-principles.html#sec-5-3">§5.3</a>.
+          process. Full coverage is in <a href="05-03-design-principles#sec-5-3">§5.3</a>.
         </p>
         <ul>
           <li><strong>Modularity:</strong> Break software into smaller, independent modules — each handling a specific task — so modules can be tested, maintained, and updated without affecting the entire system.</li>
@@ -264,8 +264,8 @@
         </ul>
         <p>
           For technical design documentation, teams also use structure charts, UML tools, and pseudocode/flowchart editors
-          (see <a href="05-07-structure-charts.html#sec-5-7">§5.7</a>, <a href="05-08-pseudocode.html#sec-5-8">§5.8</a>,
-          <a href="05-09-flowcharts.html#sec-5-9">§5.9</a>).
+          (see <a href="05-07-structure-charts#sec-5-7">§5.7</a>, <a href="05-08-pseudocode#sec-5-8">§5.8</a>,
+          <a href="05-09-flowcharts#sec-5-9">§5.9</a>).
         </p>
 
         <h3>Points to be considered while designing software</h3>
@@ -281,7 +281,7 @@
           <li>Different levels of abstraction are necessary at each stage of the design process.</li>
           <li>At a <strong>higher level</strong>, the solution is described in broad terms covering a wide range of concerns.</li>
           <li>At a <strong>lower level</strong>, a more detailed description of the software solution is given.</li>
-          <li>See also <a href="05-03-design-principles.html#sec-5-3">§5.3</a> for abstraction as a design principle.</li>
+          <li>See also <a href="05-03-design-principles#sec-5-3">§5.3</a> for abstraction as a design principle.</li>
         </ul>
 
         <h4>2. Modularity (subdivide the system)</h4>
@@ -290,7 +290,7 @@
           <li>In design, the system is subdivided so that parts can be created independently and reused in different systems to perform different functions.</li>
           <li>Monolithic software is hard to grasp; modularity has become both a trend and a necessity in modern design.</li>
           <li>A system with fewer, larger components is more complex and costly; dividing it into components reduces effort and cost.</li>
-          <li>Detailed coverage in <a href="05-06-modularization.html#sec-5-6">§5.6</a>.</li>
+          <li>Detailed coverage in <a href="05-06-modularization#sec-5-6">§5.6</a>.</li>
         </ul>
 
         <h4>3. Architecture (design a structure)</h4>
@@ -298,14 +298,14 @@
           <li>Architecture is a technique for designing the structure of a system.</li>
           <li>In software design, architecture focuses on the various elements of the structure and the data they use.</li>
           <li>Components interact with each other and share the data defined by the architectural structure.</li>
-          <li>See <a href="05-04-architectural-design.html#sec-5-4">§5.4</a> for architectural design in detail.</li>
+          <li>See <a href="05-04-architectural-design#sec-5-4">§5.4</a> for architectural design in detail.</li>
         </ul>
 
         <h4>4. Refinement (remove impurities)</h4>
         <ul>
           <li>Refinement means elaborating a system or software in greater detail to remove errors and increase quality.</li>
           <li>It is a process of developing or presenting the software in a more detailed manner — finding errors and reducing them.</li>
-          <li>Refinement is closely linked to <strong>stepwise refinement</strong> in top-down design (see <a href="05-13-top-down-bottom-up.html#sec-5-13">§5.13</a>).</li>
+          <li>Refinement is closely linked to <strong>stepwise refinement</strong> in top-down design (see <a href="05-13-top-down-bottom-up#sec-5-13">§5.13</a>).</li>
         </ul>
 
         <h4>5. Pattern (a repeated form)</h4>
@@ -319,7 +319,7 @@
         <ul>
           <li>Information hiding means concealing information so that it cannot be accessed by unwanted parties.</li>
           <li>In software design, modules are designed so that information contained in one module is hidden and cannot be directly accessed by other modules.</li>
-          <li>This reduces coupling and protects internal implementation details — closely related to encapsulation in OOD (<a href="05-15-object-oriented-design.html#sec-5-15">§5.15</a>).</li>
+          <li>This reduces coupling and protects internal implementation details — closely related to encapsulation in OOD (<a href="05-15-object-oriented-design#sec-5-15">§5.15</a>).</li>
         </ul>
 
         <h4>7. Refactoring (reconstruct something)</h4>
@@ -350,8 +350,8 @@
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="05-01-basic-concept.html">&larr; 5.1 Basic Concept</a>
-        <a class="btn-back chapter-nav-next" href="05-03-design-principles.html">5.3 Design Principles &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href="05-01-basic-concept">&larr; 5.1 Basic Concept</a>
+        <a class="btn-back chapter-nav-next" href="05-03-design-principles">5.3 Design Principles &rarr;</a>
       </nav>
     </main>
   </div>
