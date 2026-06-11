@@ -233,6 +233,67 @@
     loadUsers();
   }
 
+  var pwReqList = document.getElementById("password-requests-list");
+  if (pwReqList) {
+    function loadPasswordRequests() {
+      api("password-requests.php").then(function (d) {
+        var reqs = d.requests || [];
+        if (!reqs.length) {
+          pwReqList.innerHTML = "<p>No pending password reset requests.</p>";
+          return;
+        }
+        pwReqList.innerHTML = reqs.map(function (r) {
+          return '<form class="admin-form admin-form--card admin-pw-request" data-req-id="' + r.id + '">' +
+            '<div class="admin-pw-request-head">' +
+            '<strong>' + esc(r.username) + '</strong>' +
+            '<span class="admin-meta">Requested ' + esc(r.requested_at) + '</span>' +
+            '</div>' +
+            '<div class="admin-form-grid admin-form-grid--inline">' +
+            '<label class="admin-field admin-field--grow">' +
+            '<span>New password</span>' +
+            '<input name="new_password" type="password" placeholder="Min 6 characters" required minlength="6">' +
+            '</label>' +
+            '<div class="admin-form-actions">' +
+            '<button type="submit" class="admin-btn">Set password &amp; resolve</button>' +
+            '<button type="button" class="admin-btn-sm admin-btn-danger" data-dismiss="' + r.id + '">Dismiss</button>' +
+            '</div></div>' +
+            '<p class="admin-form-error" hidden></p>' +
+            '</form>';
+        }).join("");
+
+        pwReqList.querySelectorAll(".admin-pw-request").forEach(function (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var errEl = form.querySelector(".admin-form-error");
+            errEl.hidden = true;
+            var fd = new FormData(form);
+            api("password-requests.php", {
+              method: "POST",
+              body: { action: "resolve", id: +form.dataset.reqId, new_password: fd.get("new_password") }
+            }).then(function () {
+              loadPasswordRequests();
+            }).catch(function (err) {
+              errEl.textContent = err.message;
+              errEl.hidden = false;
+            });
+          });
+        });
+
+        pwReqList.querySelectorAll("[data-dismiss]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (!confirm("Dismiss this request without changing the password?")) return;
+            api("password-requests.php", { method: "POST", body: { action: "dismiss", id: +btn.dataset.dismiss } })
+              .then(loadPasswordRequests)
+              .catch(function (err) { alert(err.message); });
+          });
+        });
+      }).catch(function (e) {
+        pwReqList.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>";
+      });
+    }
+    loadPasswordRequests();
+  }
+
   var keysList = document.getElementById("keys-list");
   var addKey = document.getElementById("add-key-form");
   if (keysList) {

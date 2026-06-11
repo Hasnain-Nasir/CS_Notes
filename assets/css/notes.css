@@ -2925,3 +2925,202 @@ body.fab-stacked .nain-term-widget {
   font-size: 0.85rem;
   margin: 0;
 }
+
+/* ——— Auth page (login.html) ——— */
+
+.auth-body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.auth-page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 90%, color-mix(in srgb, #818cf8 14%, transparent), transparent 50%),
+    var(--bg);
+  animation: auth-bg-float 18s ease-in-out infinite alternate;
+}
+
+@keyframes auth-bg-float {
+  0% { filter: hue-rotate(0deg); transform: scale(1); }
+  100% { filter: hue-rotate(12deg); transform: scale(1.03); }
+}
+
+.auth-page-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem var(--site-container-padding-x, 1rem);
+  max-width: var(--site-container-max, 1200px);
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.auth-page-brand {
+  pointer-events: none;
+}
+
+.auth-page-main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.auth-page-card {
+  width: min(100%, 420px);
+  background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(12px);
+  animation: auth-card-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes auth-card-enter {
+  from { opacity: 0; transform: translateY(1.25rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-page-card[data-transition="out"] {
+  animation: auth-card-out 0.18s ease both;
+}
+
+@keyframes auth-card-out {
+  to { opacity: 0.6; transform: translateY(-0.35rem) scale(0.985); }
+}
+
+.auth-page-viewport {
+  position: relative;
+}
+
+.auth-page-panel h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 4vw, 1.55rem);
+  color: var(--heading);
+}
+
+.auth-page-sub {
+  margin: 0 0 1.15rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.auth-page-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.auth-page-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.auth-page-field span {
+  color: var(--text-muted);
+}
+
+.auth-page-field input {
+  font: inherit;
+  min-height: 44px;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-page-field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.auth-page-submit {
+  margin-top: 0.25rem;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.auth-page-submit:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.auth-page-submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.auth-page-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.auth-page-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.auth-page-link {
+  background: none;
+  border: none;
+  padding: 0.35rem 0;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--accent);
+  cursor: pointer;
+  text-align: left;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.auth-page-link:hover {
+  text-decoration: underline;
+}
+
+.auth-success {
+  color: #22c55e;
+  font-size: 0.88rem;
+  margin: 0;
+  line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-page-bg,
+  .auth-page-card,
+  .auth-page-card[data-transition="out"] {
+    animation: none;
+  }
+}

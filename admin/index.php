@@ -9,7 +9,15 @@ $stats = [
     'memories' => (int) $pdo->query('SELECT COUNT(*) FROM user_memories')->fetchColumn(),
     'api_keys' => (int) $pdo->query('SELECT COUNT(*) FROM api_keys WHERE is_active = 1')->fetchColumn(),
     'papers' => (int) $pdo->query('SELECT COUNT(*) FROM past_papers')->fetchColumn(),
+    'password_requests' => 0,
 ];
+try {
+    $stats['password_requests'] = (int) $pdo->query(
+        "SELECT COUNT(*) FROM password_reset_requests WHERE status = 'pending'"
+    )->fetchColumn();
+} catch (Throwable $e) {
+    // table may not exist until migration runs
+}
 ?>
 <div class="admin-cards">
   <div class="admin-stat-card"><span>Users</span><strong><?= $stats['users'] ?></strong></div>
@@ -17,5 +25,6 @@ $stats = [
   <div class="admin-stat-card"><span>Memories</span><strong><?= $stats['memories'] ?></strong></div>
   <div class="admin-stat-card"><span>Active API keys</span><strong><?= $stats['api_keys'] ?></strong></div>
   <div class="admin-stat-card"><span>Past papers</span><strong><?= $stats['papers'] ?></strong></div>
+  <div class="admin-stat-card"><span>Pending password requests</span><strong><?= $stats['password_requests'] ?></strong></div>
 </div>
 <?php admin_footer(); ?>

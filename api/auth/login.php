@@ -24,5 +24,5 @@ if (!$user) {
 json_response([
     'ok' => true,
     'user' => user_public($user),
-    'redirect' => $user['role'] === 'admin' ? '/admin/' : null,
+    'redirect' => '/index.html',
 ]);

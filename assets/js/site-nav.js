@@ -313,8 +313,30 @@
 /* Bundled below: notes-auth.js + notes-chat.js (InfinityFree blocks separate loads) */
 (function () {
   var API = "/api";
+  var AUTH_PAGE = "/login.html";
   var currentUser = null;
   var listeners = [];
+  var gateApplied = false;
+
+  function isAuthPage() {
+    var p = window.location.pathname;
+    return p === "/login.html" || p.endsWith("/login.html");
+  }
+
+  function redirectToLogin() {
+    var returnPath = window.location.pathname + window.location.search + window.location.hash;
+    if (isAuthPage()) return;
+    window.location.replace(AUTH_PAGE + "?return=" + encodeURIComponent(returnPath));
+  }
+
+  function applySiteGate(user) {
+    if (!document.body.classList.contains("site-body")) return;
+    if (isAuthPage()) return;
+    if (!user && !gateApplied) {
+      gateApplied = true;
+      redirectToLogin();
+    }
+  }
 
   function emit() {
     listeners.forEach(function (fn) { fn(currentUser); });
@@ -330,8 +352,10 @@
       body: opts.body ? JSON.stringify(opts.body) : undefined
     }).then(function (r) {
       return r.json().then(function (d) {
-        if (!r.ok && r.status !== 401) {
-          throw new Error((d && d.error) || "Request failed");
+        if (!r.ok) {
+          var err = new Error((d && d.error) || "Request failed");
+          err.status = r.status;
+          throw err;
         }
         return d;
       });
@@ -342,10 +366,12 @@
     return api("/auth/me.php").then(function (d) {
       currentUser = d.user || null;
       emit();
+      applySiteGate(currentUser);
       return currentUser;
     }).catch(function () {
       currentUser = null;
       emit();
+      applySiteGate(null);
       return null;
     });
   }
@@ -367,11 +393,35 @@
     });
   }
 
+  function register(username, password, displayName) {
+    return api("/auth/register.php", {
+      method: "POST",
+      body: { username: username, password: password, display_name: displayName }
+    }).then(function (d) {
+      currentUser = d.user;
+      emit();
+      if (d.redirect) {
+        window.location.href = d.redirect;
+      }
+      return d;
+    });
+  }
+
+  function forgotPassword(username) {
+    return api("/auth/forgot-password.php", {
+      method: "POST",
+      body: { username: username }
+    });
+  }
+
   function logout() {
     return api("/auth/logout.php", { method: "POST" }).then(function () {
       currentUser = null;
       emit();
       document.dispatchEvent(new CustomEvent("auth-logout"));
+      if (document.body.classList.contains("site-body") && !isAuthPage()) {
+        redirectToLogin();
+      }
     });
   }
 
@@ -449,9 +499,9 @@
       if (caret) caret.hidden = true;
       btn.textContent = "Login";
       btn.setAttribute("aria-label", "Login");
-      btn.title = "Login to chat";
+      btn.title = "Sign in";
       btn.onclick = function () {
-        openLoginModal();
+        redirectToLogin();
       };
     }
   }
@@ -488,12 +538,12 @@
       '<div class="auth-modal-panel" role="dialog" aria-labelledby="auth-modal-title">' +
       '<button type="button" class="auth-modal-close" aria-label="Close">&times;</button>' +
       '<h2 id="auth-modal-title">Login</h2>' +
-      '<p class="auth-modal-sub">Sign in to chat with the notes assistant.</p>' +
+      '<p class="auth-modal-sub">Sign in to continue.</p>' +
       '<form id="auth-login-form">' +
       '<label>Username <input name="username" autocomplete="username" required></label>' +
       '<label>Password <input name="password" type="password" autocomplete="current-password" required></label>' +
       '<p class="auth-error" hidden></p>' +
-      '<button type="submit">Login</button>' +
+      '<button type="submit">Sign in</button>' +
       '</form></div>';
     document.body.appendChild(overlay);
 
@@ -507,15 +557,14 @@
       var errEl = overlay.querySelector(".auth-error");
       errEl.hidden = true;
       login(fd.get("username"), fd.get("password")).catch(function (err) {
-        errEl.textContent = err.message || "Login failed";
+        errEl.textContent = err.status === 401 ? "Invalid login credentials" : (err.message || "Login failed");
         errEl.hidden = false;
       });
     });
   }
 
   function openLoginModal() {
-    ensureLoginModal();
-    document.getElementById("auth-modal").hidden = false;
+    redirectToLogin();
   }
 
   function closeLoginModal() {
@@ -526,12 +575,15 @@
   window.NotesAuth = {
     checkSession: checkSession,
     login: login,
+    register: register,
+    forgotPassword: forgotPassword,
     logout: logout,
     onAuthChange: onAuthChange,
     isLoggedIn: isLoggedIn,
     getUser: getUser,
     openLoginModal: openLoginModal,
-    closeLoginModal: closeLoginModal
+    closeLoginModal: closeLoginModal,
+    redirectIfNotLoggedIn: applySiteGate
   };
 
   document.addEventListener("site-nav-ready", function () {

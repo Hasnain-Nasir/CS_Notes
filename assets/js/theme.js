@@ -210,14 +210,14 @@
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
-      if (document.querySelector(".global-header .theme-toggle")) {
+      if (document.querySelector(".theme-toggle") || document.body.classList.contains("auth-body")) {
         initPageEnhancements();
       } else {
         document.addEventListener("site-nav-ready", initPageEnhancements, { once: true });
       }
     });
   } else {
-    if (document.querySelector(".global-header .theme-toggle")) {
+    if (document.querySelector(".theme-toggle") || document.body.classList.contains("auth-body")) {
       initPageEnhancements();
     } else {
       document.addEventListener("site-nav-ready", initPageEnhancements, { once: true });
