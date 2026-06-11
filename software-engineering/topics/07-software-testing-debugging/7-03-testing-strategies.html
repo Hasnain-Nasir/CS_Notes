@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — 7.11–7.14 Testing Strategies</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>7.11–7.14 Testing Strategies</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-7-11">
+
+        <p>
+          Testing strategies define <em>how</em> and <em>in what order</em> testing is applied across the
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">§2.1 SDLC</a>. They complement testing
+          levels (<a href="7-02-levels-of-testing.html#sec-7-5">§7.5–7.10</a>) and techniques
+          (<a href="7-04-white-box-testing.html#sec-7-15">§7.15 white box</a>,
+          <a href="7-05-black-box-testing.html#sec-7-16">§7.16–7.17 black box</a>).
+        </p>
+
+        <h3>Functionality testing vs performance testing (7.11)</h3>
+        <ul>
+          <li><strong>Functionality testing</strong> verifies that the system performs the functions specified in requirements — inputs produce correct outputs and business rules are enforced.</li>
+          <li><strong>Performance testing</strong> evaluates how the system behaves under load — response time, throughput, resource usage, and scalability under stress.</li>
+          <li>Functionality testing answers <em>"Does it work correctly?"</em>; performance testing answers <em>"Does it work fast enough under expected load?"</em></li>
+          <li>Both are essential before release — a functionally correct system that responds in 30 seconds may still fail non-functional requirements.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7-12">
+
+        <h3>Functional vs non-functional testing (7.12)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Functional Testing</th><th>Non-Functional Testing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Question answered</td><td>What does the system <em>do</em>?</td><td>How <em>well</em> does the system perform?</td></tr>
+              <tr><td>Basis</td><td>Functional requirements in SRS</td><td>Quality attributes — performance, usability, security, reliability</td></tr>
+              <tr><td>Examples</td><td>Login, payment processing, report generation</td><td>Load testing, stress testing, usability testing, security scanning</td></tr>
+              <tr><td>Technique</td><td>Primarily black box (equivalence partitioning, use cases)</td><td>Specialised tools and benchmarks (JMeter, penetration testing)</td></tr>
+              <tr><td>When performed</td><td>Unit through acceptance levels</td><td>Primarily system and acceptance levels</td></tr>
+              <tr><td>Pass/fail criteria</td><td>Output matches expected result for given input</td><td>Meets measurable thresholds (e.g. response &lt; 2 s, 99.9% uptime)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Functional testing confirms that specified features work; non-functional testing confirms quality attributes are satisfied.</li>
+          <li>Non-functional requirements should be specified in the SRS so they can be tested objectively — see <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 V&amp;V</a>.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7-13">
+
+        <h3>Top-down integration testing (7.13)</h3>
+        <ul>
+          <li>Top-down integration testing begins with the <strong>highest-level (main) modules</strong> and progressively integrates lower-level submodules.</li>
+          <li>It follows a <strong>big-to-small</strong>, <strong>structure-oriented</strong> approach aligned with the system's call hierarchy.</li>
+          <li>Lower-level modules that are not yet developed are replaced by <strong>test stubs</strong> — temporary modules that simulate the missing submodule's behaviour.</li>
+          <li>Stubs return predetermined responses so upper modules can be tested before their dependencies are complete.</li>
+          <li>Top-down integration allows early verification of major control flows and user-visible features at the top of the hierarchy.</li>
+          <li>It suits projects where the high-level architecture is stable and the main control logic must be validated early.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-top-down-caption">
+          <img src="../../../assets/images/se-topic-07/top-down-integration.png"
+               alt="Top-down integration testing — high-level modules tested first with stubs for lower modules"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-top-down-caption">Top-down integration — main module tested first; stubs substitute for lower-level modules not yet implemented.</figcaption>
+        </figure>
+
+        <h3>Bottom-up integration testing</h3>
+        <ul>
+          <li>Bottom-up integration testing begins with the <strong>lowest-level modules</strong> and progressively integrates upward toward the main module.</li>
+          <li>It follows a <strong>small-to-big</strong> approach and is commonly used in <strong>object-oriented</strong> and component-based development.</li>
+          <li>Higher-level modules that are not yet developed are replaced by <strong>test drivers</strong> — temporary programs that call and pass data to lower-level submodules.</li>
+          <li>Bottom-up integration ensures that foundational components work correctly before building on top of them.</li>
+          <li>It is generally <strong>less expensive</strong> than top-down because stubs for every lower module are not needed — only drivers for the current integration level.</li>
+          <li>Main module and global control flow are tested last, which can delay detection of architectural problems.</li>
+        </ul>
+
+      </section>
+
+      <section id="sec-7-14">
+
+        <h3>Test stubs and test drivers</h3>
+        <ul>
+          <li>A <strong>test stub</strong> is a temporary module that simulates the behaviour of a submodule that has not yet been developed — used in <strong>top-down</strong> integration.</li>
+          <li>A stub accepts calls from the module under test and returns canned (predetermined) responses without performing real processing.</li>
+          <li>A <strong>test driver</strong> is a temporary main program that calls a submodule and passes test data to it — used in <strong>bottom-up</strong> integration.</li>
+          <li>A driver simulates the calling module so lower-level components can be tested before the modules that invoke them are complete.</li>
+        </ul>
+
+        <h3>Top-down vs bottom-up integration — comparison</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Top-Down Integration</th><th>Bottom-Up Integration</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Starting point</td><td>Main / high-level module</td><td>Lowest-level leaf modules</td></tr>
+              <tr><td>Direction</td><td>Big to small — decompose downward</td><td>Small to big — compose upward</td></tr>
+              <tr><td>Orientation</td><td>Structure-oriented (call hierarchy)</td><td>Function-oriented / OOP component-based</td></tr>
+              <tr><td>Substitute needed</td><td>Test stubs for lower modules</td><td>Test drivers for higher modules</td></tr>
+              <tr><td>Early visibility</td><td>Major control flows tested early</td><td>Low-level utility functions tested early</td></tr>
+              <tr><td>Main module tested</td><td>First</td><td>Last</td></tr>
+              <tr><td>Stub/driver overhead</td><td>Many stubs required as lower modules are missing</td><td>Fewer drivers — one per integration step</td></tr>
+              <tr><td>Relative cost</td><td>More expensive due to stub development</td><td>Less expensive — fewer temporary modules</td></tr>
+              <tr><td>Architectural defect detection</td><td>Early — top-level design flaws found quickly</td><td>Late — main control flow tested last</td></tr>
+              <tr><td>Best suited for</td><td>Stable architecture; function-oriented design</td><td>Object-oriented systems; reusable components</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="terminal" aria-label="Pseudocode — top-down and bottom-up integration">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">top_down_bottom_up.pseudo</span>
+          </div>
+          <pre><code>// ── Top-Down Integration ──
+PROCEDURE top_down_integration(system):
+
+  main_module = system.root_module
+  test(main_module WITH stubs_for_all_children)
+
+  FOR EACH level FROM top TO bottom:
+    FOR EACH module AT level:
+      replace_stub(module) WITH actual_implementation
+      test(parent_module WITH remaining_stubs)
+    END FOR
+  END FOR
+
+END PROCEDURE
+
+FUNCTION stub_for(module):
+  RETURN canned_response(module.expected_interface)
+END FUNCTION
+
+
+// ── Bottom-Up Integration ──
+PROCEDURE bottom_up_integration(system):
+
+  leaf_modules = get_lowest_level_modules(system)
+
+  FOR EACH leaf IN leaf_modules:
+    driver = create_test_driver(leaf)
+    test(leaf WITH driver)
+  END FOR
+
+  FOR EACH level FROM bottom TO top:
+    combine_tested_modules_at_level(level)
+    driver = create_test_driver(combined_layer)
+    test(combined_layer WITH driver)
+  END FOR
+
+  test(full_system WITHOUT drivers_or_stubs)
+
+END PROCEDURE
+
+FUNCTION create_test_driver(module):
+  RETURN program_that_calls(module, passes_test_data, checks_output)
+END FUNCTION</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Testing Strategies</div>
+          <p><strong>Q:</strong> Distinguish functional from non-functional testing. Explain top-down and bottom-up integration testing. Define test stubs and drivers. Compare top-down and bottom-up approaches.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Functional = what system does (requirements-based); non-functional = how well (performance, usability, security).</li>
+            <li>Top-down: high-level first; stubs for lower modules; structure-oriented; big-to-small; main module tested first.</li>
+            <li>Bottom-up: low-level first; drivers for higher modules; OOP/component-based; small-to-big; less expensive.</li>
+            <li>Stub = simulates missing submodule (top-down); driver = simulates calling main module (bottom-up).</li>
+            <li>Top-down finds architectural issues early but needs many stubs; bottom-up tests foundations first but delays main-module testing.</li>
+            <li>Functionality vs performance: correct behaviour vs acceptable speed/load under stress.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="7-02-levels-of-testing.html">&larr; 7.5–7.10 Levels of Testing</a>
+        <a class="btn-back chapter-nav-next" href="7-04-white-box-testing.html">7.15 White Box Testing &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

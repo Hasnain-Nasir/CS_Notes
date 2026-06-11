@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — Key takeaways</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>Key takeaways — exam revision</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="callout exam" id="key-takeaways">
+        <ul>
+          <li><strong>7.1 What is testing:</strong> Process to find defects, verify requirements, reduce risk. Not proof of correctness — shows presence of defects, not absence.</li>
+          <li><strong>7.2 Testing vs QA vs QC:</strong> Testing = subset of QA (find defects); QA = process-focused, entire SDLC (§8.1); QC = product verification. Testing overseen by SQA (§8.2).</li>
+          <li><strong>7.3 STLC phases:</strong> Requirement analysis → Test planning → Test case development → Environment setup → Execution → Closure. Parallel to SDLC testing phase (§2.1).</li>
+          <li><strong>7.4 Seven principles:</strong> (1) Shows presence not absence of defects; (2) Exhaustive testing impossible; (3) Early testing; (4) Defect clustering/Pareto 80/20; (5) Pesticide paradox; (6) Context dependent; (7) Absence of errors fallacy.</li>
+          <li><strong>Testing guidelines:</strong> Clear goals, comprehensive cases, test data, automate where appropriate, multiple techniques, TDD, document, continuous monitor, involve users, use testing framework.</li>
+          <li><strong>Testing objectives:</strong> Find defects, build confidence, provide decision info, prevent defects, verify requirements met.</li>
+          <li><strong>7.5 Unit testing:</strong> Individual components/functions; developer performs; white box; first level; stubs/drivers not needed at pure unit level.</li>
+          <li><strong>7.6 Integration testing:</strong> Interface between modules; after unit; black box at integration level; white box when testing internal module interactions.</li>
+          <li><strong>7.7 System testing:</strong> Complete integrated system; functional + non-functional; real environment; entire product validated as whole.</li>
+          <li><strong>7.8 Acceptance testing:</strong> Validate against user requirements; UAT; alpha/beta are acceptance types; validation not just verification.</li>
+          <li><strong>7.9 Regression testing:</strong> Re-test after changes; ensure old functionality not broken; automated suites common; mandatory after corrective maintenance (§10.4).</li>
+          <li><strong>7.10 Testing order:</strong> Unit → Integration → System → Acceptance. Each level builds on previous; defects cheaper to fix at lower levels.</li>
+          <li><strong>7.11 Functional vs performance:</strong> Functional = what system does; Performance = how well under load (non-functional subset).</li>
+          <li><strong>7.12 Non-functional testing:</strong> Performance, usability, security, reliability, scalability — how well, not what.</li>
+          <li><strong>7.13 Top-down integration:</strong> Test high-level first; stubs simulate lower modules; structure-oriented; big-to-small; early design defect detection.</li>
+          <li><strong>7.14 Bottom-up integration:</strong> Test low-level first; drivers simulate main module; OOP-friendly; small-to-big; less stub overhead; needs test driver.</li>
+          <li><strong>Stubs vs drivers:</strong> Stub = simulate submodule (top-down); Driver = simulate calling module, pass data to submodules (bottom-up).</li>
+          <li><strong>7.15 White box testing:</strong> Tests internal structure/code; glass box/structural/clear box; developer performs. Techniques: statement, branch, path, condition coverage, basis path testing. Link cyclomatic complexity V(G) = basis paths (§6.6). Workflow: understand code → identify paths (CFG) → design cases → execute &amp; measure coverage → report. Data flow + control flow testing.</li>
+          <li><strong>7.16 Black box techniques:</strong> Equivalence partitioning, boundary value analysis, decision table, state transition, use case testing, error guessing. No internal code knowledge; specification-based.</li>
+          <li><strong>7.17 Test data preparation:</strong> Valid/invalid/boundary classes; representative from each equivalence class; decision table → test cases; cause-effect graphing → decision table → test cases. Workflow: input → SUT → actual output → compare expected → pass/fail. Types: functional, regression, non-functional.</li>
+          <li><strong>7.18 Alpha testing:</strong> Internal acceptance at developer site; QA + internal users; controlled environment; before beta; bugs fixed before release.</li>
+          <li><strong>7.19 Beta testing:</strong> External users in real environment; limited users; feedback collection. Closed beta = invited only; Open beta = any user. Both validation/acceptance testing.</li>
+          <li><strong>Alpha vs beta:</strong> Alpha: internal, developer site, controlled, before beta. Beta: external, user site, real-world, after alpha.</li>
+          <li><strong>7.20 Static testing:</strong> Review code/docs WITHOUT executing program; verification activity; early, cheaper fixes. Complements dynamic testing (§8.3).</li>
+          <li><strong>7.21 Static techniques:</strong> Walkthrough (author-led, informal); Code inspection (formal peer review, checklist); FTR (structured meeting, trained moderator NOT author, issue log + summary report + action items). Standards: IEEE coding, naming, indentation, documentation.</li>
+          <li><strong>Static vs dynamic:</strong> Static = no execution, verification, early; Dynamic = executed, validation, after build.</li>
+          <li><strong>7.22 Manual vs automation:</strong> Manual = slower, human judgment, exploratory/usability/ad-hoc. Automation = faster, repeatable, higher setup cost, script maintenance; best for regression, repetitive tests, large data, stable UI.</li>
+          <li><strong>7.23 Selenium:</strong> Open-source web automation; Java/Python/C#; WebDriver API; cross-browser; TestNG/JUnit. Components: IDE (record), WebDriver (programmatic), Grid (distributed parallel).</li>
+          <li><strong>7.24 Smoke testing:</strong> Shallow wide; main functions after build; build verification; "does it smoke?"; reject bad builds before deeper testing.</li>
+          <li><strong>7.25 Sanity testing:</strong> Narrow deep; specific changed functionality after minor fix; follows smoke pass; rejects bad fixes.</li>
+          <li><strong>Smoke vs sanity:</strong> Smoke = wide/shallow/new build; Sanity = narrow/deep/specific change.</li>
+          <li><strong>7.26 Load testing:</strong> Normal/expected load; performance under anticipated user volume; response time, throughput at typical scale.</li>
+          <li><strong>Stress testing:</strong> Beyond normal capacity; breaking point; failure and recovery behaviour; capacity planning.</li>
+          <li><strong>Load vs stress:</strong> Load = expected volume; Stress = exceed limits to find failure point.</li>
+          <li><strong>Frontend testing:</strong> UI, UX, client-side logic, browser compatibility, responsiveness.</li>
+          <li><strong>Backend testing:</strong> APIs, database, server logic, integration layers, data integrity.</li>
+          <li><strong>7.27 Testing vs debugging:</strong> Testing finds defects (tester, planned); Debugging locates/fixes root cause (developer, reactive to failures).</li>
+          <li><strong>7.28 Debugging process:</strong> Reproduce → narrow location → analyse cause → fix → retest → regression. Techniques: print/logging, breakpoints, binary search in code, rubber duck, cause elimination.</li>
+          <li><strong>Exam traps:</strong> Alpha ≠ beta (internal/controlled vs external/real). Smoke ≠ sanity (wide build vs narrow fix). Load ≠ stress (expected vs beyond capacity). Static ≠ dynamic (no execution vs run program). Testing ≠ debugging (find vs fix). Top-down uses stubs; bottom-up uses drivers. White box = structural/developer; black box = functional/specification. Verification (static/right product built) vs validation (dynamic/right product) — §8.3.</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="7-10-debugging.html">&larr; 7.27–7.28 Debugging</a>
+        <a class="btn-back chapter-nav-next" href="../08-software-quality-assurance/index.html">Topic 8 &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

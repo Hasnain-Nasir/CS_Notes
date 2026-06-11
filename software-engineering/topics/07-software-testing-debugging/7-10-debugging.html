@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — 7.27–7.28 Debugging</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>7.27–7.28 Debugging</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-7-27">
+
+        <p>
+          <strong>Testing</strong> and <strong>debugging</strong> are complementary but distinct activities. Testing
+          discovers that a defect exists; debugging locates its root cause and removes it. After a fix, retesting
+          and <strong>regression testing</strong> confirm the correction — mandatory after corrective maintenance
+          as described in <a href="../10-software-maintenance/10-04-maintenance-categories.html#sec-10-4">§10.4 Maintenance Categories</a>.
+        </p>
+
+        <h3>Testing vs debugging (7.27)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Testing</th><th>Debugging</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Goal</strong></td><td>Find defects — confirm that failures exist</td><td>Locate and fix root cause of defects</td></tr>
+              <tr><td><strong>Performed by</strong></td><td>Tester / QA team (may include developers in unit testing)</td><td>Developer who wrote or maintains the code</td></tr>
+              <tr><td><strong>Nature</strong></td><td>Can be planned in advance — test cases, schedules, coverage targets</td><td>Reactive — triggered by failed test results or bug reports</td></tr>
+              <tr><td><strong>Output</strong></td><td>Defect report, test results, pass/fail status</td><td>Code fix, root cause analysis, updated unit tests</td></tr>
+              <tr><td><strong>Process position</strong></td><td>Precedes debugging — identifies symptoms</td><td>Follows failed test — diagnoses and removes cause</td></tr>
+              <tr><td><strong>Success criterion</strong></td><td>Defects are found and documented</td><td>Defect is fixed and verified by retest + regression</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section id="sec-7-28">
+
+        <h3>What is debugging?</h3>
+        <ul>
+          <li>Debugging is the process of <strong>finding and removing software errors</strong> (bugs) from a program.</li>
+          <li>It typically follows a <strong>failed test</strong> or user bug report — the tester provides symptoms; the developer traces the cause.</li>
+          <li>Debugging requires understanding both the expected behaviour (from specifications) and the actual faulty behaviour (from test output).</li>
+          <li>A fix is not complete until the original test passes and regression tests confirm no new defects were introduced.</li>
+        </ul>
+
+        <h3>Debugging steps</h3>
+        <ol>
+          <li><strong>Reproduce the bug</strong> — run the failing test case or follow the user steps until the defect appears consistently.</li>
+          <li><strong>Narrow the location</strong> — isolate which module, function, or line of code is responsible using logs, breakpoints, or binary search.</li>
+          <li><strong>Analyse the cause</strong> — determine why the code produces wrong output — logic error, off-by-one, null reference, race condition, etc.</li>
+          <li><strong>Fix the defect</strong> — modify the code to correct the root cause, not just the symptom.</li>
+          <li><strong>Retest</strong> — rerun the failing test case to confirm the fix resolves the reported issue.</li>
+          <li><strong>Regression test</strong> — run the broader test suite to ensure the fix did not break existing functionality — critical after corrective maintenance (<a href="../10-software-maintenance/10-04-maintenance-categories.html#sec-10-4">§10.4</a>).</li>
+        </ol>
+
+        <h3>Debugging techniques</h3>
+        <ul>
+          <li><strong>Print / logging:</strong> Insert output statements or use a logging framework to trace variable values and execution flow at runtime.</li>
+          <li><strong>Breakpoints:</strong> Use a debugger to pause execution at specific lines and inspect variable state, call stack, and memory.</li>
+          <li><strong>Binary search in code:</strong> Comment out or disable half the code, rerun the test, and repeat — systematically halving the search space to locate the fault.</li>
+          <li><strong>Rubber duck debugging:</strong> Explain the code line by line to another person (or an inanimate object) — verbalising often reveals the logical error.</li>
+          <li><strong>Cause elimination:</strong> List possible causes, test each hypothesis systematically, and eliminate those that do not match the observed symptoms.</li>
+        </ul>
+
+        <div class="terminal" aria-label="Pseudocode — debugging process">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">debug_process.pseudo</span>
+          </div>
+          <pre><code>PROCEDURE debug_defect(failed_test):
+
+  // Step 1 — Reproduce
+  result = RUN failed_test
+  IF result.status != "FAIL" THEN
+    RETURN "cannot_reproduce — gather more info from tester"
+  END IF
+  LOG symptoms: input, expected_output, actual_output
+
+  // Step 2 — Narrow location
+  suspect_modules = isolate_using_logs_and_breakpoints(failed_test)
+  WHILE suspect_modules.size > 1 DO
+    // Binary search: disable half, rerun
+    half = suspect_modules.split_in_half()
+    IF RUN failed_test WITH half[0] disabled STILL FAILS THEN
+      suspect_modules = half[0]
+    ELSE
+      suspect_modules = half[1]
+    END IF
+  END WHILE
+  fault_location = suspect_modules[0]
+
+  // Step 3 — Analyse cause
+  root_cause = analyse_code_at(fault_location)
+  // e.g. off_by_one, null_pointer, wrong_operator, race_condition
+
+  // Step 4 — Fix
+  APPLY code_fix AT fault_location TO address root_cause
+
+  // Step 5 — Retest
+  retest_result = RUN failed_test
+  IF retest_result.status != "PASS" THEN
+    GOTO Step 2   // fix incomplete — continue debugging
+  END IF
+
+  // Step 6 — Regression
+  regression_result = RUN full_regression_suite()
+  IF regression_result.has_new_failures THEN
+    REVERT fix OR debug_regression_failures
+  ELSE
+    CLOSE defect WITH root_cause_documentation
+  END IF
+
+END PROCEDURE</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Debugging</div>
+          <p><strong>Q:</strong> Distinguish testing from debugging. Describe the debugging process and common techniques. Explain the role of regression testing after a fix.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Testing finds defects (tester); debugging locates and fixes root cause (developer).</li>
+            <li>Testing can be planned; debugging is reactive to test failures.</li>
+            <li>Steps: reproduce → narrow location → analyse cause → fix → retest → regression.</li>
+            <li>Techniques: print/logging, breakpoints, binary search in code, rubber duck, cause elimination.</li>
+            <li>Regression testing mandatory after fix — especially corrective maintenance (§10.4).</li>
+            <li>Common trap: fixing symptoms without root cause analysis leads to recurring defects.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="7-09-specialized-testing.html">&larr; 7.24–7.26 Specialized Testing</a>
+        <a class="btn-back chapter-nav-next" href="7-11-key-takeaways.html">Key takeaways &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

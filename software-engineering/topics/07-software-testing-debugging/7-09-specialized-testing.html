@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — 7.24–7.26 Specialized Testing</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>7.24–7.26 Specialized Testing</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-7-24">
+
+        <p>
+          Beyond standard functional and structural tests, several <strong>specialized testing</strong> types target
+          specific quality goals — build verification, targeted fixes, performance limits, and architectural layers.
+          Smoke and sanity testing gate daily builds; load and stress testing evaluate performance; frontend and
+          backend testing split concerns across the client–server boundary.
+        </p>
+
+        <h3>Smoke testing</h3>
+        <ul>
+          <li>Smoke testing is a <strong>shallow but wide</strong> test of the main functions after a new build is received.</li>
+          <li>It acts as <strong>build verification</strong> — confirming the build is stable enough for further testing, not a deep functional audit.</li>
+          <li>The name comes from hardware testing: if the device smokes when powered on, stop testing — similarly, if critical paths fail, reject the build.</li>
+          <li>Smoke tests cover login, navigation, core CRUD operations, and other high-level workflows — "Does it smoke?" before investing in detailed testing.</li>
+          <li>Failed smoke tests send the build back to development without running the full test suite.</li>
+        </ul>
+
+        <h3>Sanity testing</h3>
+        <ul>
+          <li>Sanity testing is a <strong>narrow but deep</strong> test of specific functionality that was changed after a minor fix or small enhancement.</li>
+          <li>It verifies that the particular change works correctly and that related areas still behave as expected.</li>
+          <li>Sanity testing is narrower in scope than regression testing — it focuses on the changed module, not the entire application.</li>
+          <li>Sanity testing typically follows a smoke test pass — smoke confirms build stability; sanity confirms the specific fix.</li>
+          <li>If sanity fails, the fix is rejected; if it passes, broader regression may follow.</li>
+        </ul>
+
+        <h3>Smoke vs sanity testing</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Smoke testing</th><th>Sanity testing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Scope</strong></td><td>Shallow and wide — main functions across the product</td><td>Narrow and deep — specific changed functionality</td></tr>
+              <tr><td><strong>Purpose</strong></td><td>Build verification — is the build testable?</td><td>Fix verification — does the specific change work?</td></tr>
+              <tr><td><strong>When</strong></td><td>Immediately after receiving a new build</td><td>After a minor fix or small code change</td></tr>
+              <tr><td><strong>Depth</strong></td><td>Surface-level — critical paths only</td><td>Focused depth on the modified area</td></tr>
+              <tr><td><strong>Failure action</strong></td><td>Reject build — return to development</td><td>Reject fix — developer reworks the change</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section id="sec-7-25">
+
+        <h3>Load testing</h3>
+        <ul>
+          <li>Load testing evaluates system behaviour under <strong>normal or expected load</strong> — the anticipated number of concurrent users or transactions.</li>
+          <li>It measures response time, throughput, and resource utilisation (CPU, memory, network) at expected production volume.</li>
+          <li>Load testing confirms the system meets performance requirements under typical operating conditions.</li>
+          <li>It is a type of <strong>non-functional testing</strong> — it tests <em>how well</em> the system performs, not <em>what</em> it does functionally.</li>
+        </ul>
+
+        <h3>Stress testing</h3>
+        <ul>
+          <li>Stress testing pushes the system <strong>beyond normal capacity</strong> to find its breaking point and observe failure behaviour.</li>
+          <li>It increases load gradually or suddenly until the system degrades or fails — revealing bottlenecks, memory leaks, and recovery mechanisms.</li>
+          <li>Stress testing answers: "What happens when we exceed expected capacity?" — important for capacity planning and graceful degradation design.</li>
+          <li>Recovery after stress removal is also evaluated — does the system return to normal operation?</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-load-stress-caption">
+          <img src="../../../assets/images/se-topic-07/load-stress-testing.png"
+               alt="Load testing versus stress testing — expected load performance compared to beyond-capacity breaking point"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-load-stress-caption">Load testing validates performance at expected user volume; stress testing finds the breaking point beyond normal capacity.</figcaption>
+        </figure>
+
+        <h3>Load vs stress testing</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Load testing</th><th>Stress testing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Load level</strong></td><td>Normal / expected user volume</td><td>Beyond normal capacity — extreme or peak overload</td></tr>
+              <tr><td><strong>Goal</strong></td><td>Verify performance meets requirements under typical use</td><td>Find breaking point and failure/recovery behaviour</td></tr>
+              <tr><td><strong>Metrics</strong></td><td>Response time, throughput, resource usage at expected load</td><td>Point of failure, degradation pattern, recovery time</td></tr>
+              <tr><td><strong>Question answered</strong></td><td>"Does it perform well enough at expected scale?"</td><td>"What happens when we exceed limits?"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section id="sec-7-26">
+
+        <h3>Frontend testing</h3>
+        <ul>
+          <li>Frontend testing validates the <strong>user interface (UI)</strong>, user experience (UX), and <strong>client-side logic</strong> that runs in the browser or mobile app.</li>
+          <li>It covers layout, responsiveness, accessibility, form validation, and JavaScript behaviour.</li>
+          <li><strong>Browser compatibility</strong> testing ensures the application works across Chrome, Firefox, Safari, Edge, and different screen sizes.</li>
+          <li>Tools such as Selenium (see <a href="7-08-automation-testing.html#sec-7-23">§7.23</a>) are commonly used for automated frontend regression.</li>
+        </ul>
+
+        <h3>Backend testing</h3>
+        <ul>
+          <li>Backend testing validates <strong>APIs</strong>, <strong>database</strong> operations, server-side business logic, and <strong>integration layers</strong> between services.</li>
+          <li>It verifies correct data storage, retrieval, transaction integrity, authentication, and authorization on the server.</li>
+          <li>Backend tests often run without a UI — using API clients, database queries, and service mocks.</li>
+          <li>Performance, security, and data consistency are primary backend testing concerns.</li>
+        </ul>
+
+        <h3>Frontend vs backend testing</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Frontend testing</th><th>Backend testing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Focus</strong></td><td>UI, UX, client-side logic, presentation layer</td><td>APIs, database, server logic, integration layers</td></tr>
+              <tr><td><strong>Environment</strong></td><td>Browser, mobile app, rendering engine</td><td>Application server, database, microservices</td></tr>
+              <tr><td><strong>Typical checks</strong></td><td>Layout, responsiveness, form validation, browser compatibility</td><td>API responses, SQL queries, business rules, data integrity</td></tr>
+              <tr><td><strong>Tools</strong></td><td>Selenium, Cypress, browser DevTools</td><td>Postman, JUnit, database test harnesses, API mocks</td></tr>
+              <tr><td><strong>Visibility</strong></td><td>User-visible behaviour</td><td>Server-side behaviour often invisible to end user</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Specialized Testing</div>
+          <p><strong>Q:</strong> Distinguish smoke and sanity testing. Compare load and stress testing. Explain frontend vs backend testing.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Smoke = shallow wide, build verification, "does it smoke?"; Sanity = narrow deep, specific changed functionality after minor fix.</li>
+            <li>Load = normal/expected load, performance under typical volume; Stress = beyond capacity, breaking point, recovery behaviour.</li>
+            <li>Frontend = UI, UX, client-side, browser compatibility; Backend = APIs, database, server logic, integration layers.</li>
+            <li>Smoke rejects bad builds; sanity rejects bad fixes; both are gate checks before deeper testing.</li>
+            <li>Common trap: smoke ≠ sanity — smoke is wide/shallow on new build; sanity is narrow/deep on specific change.</li>
+            <li>Common trap: load ≠ stress — load tests expected volume; stress tests beyond limits to find failure point.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="7-08-automation-testing.html">&larr; 7.22–7.23 Automation Testing</a>
+        <a class="btn-back chapter-nav-next" href="7-10-debugging.html">7.27–7.28 Debugging &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

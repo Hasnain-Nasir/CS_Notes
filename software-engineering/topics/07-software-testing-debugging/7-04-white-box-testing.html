@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — 7.15 White Box Testing</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>7.15 White Box (Structural) Testing</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-7-15">
+
+        <p>
+          <strong>White box testing</strong> (also called glass box, clear box, or structural testing) examines the
+          internal structure, logic, and code paths of a program. It complements black box testing
+          (<a href="7-05-black-box-testing.html#sec-7-16">§7.16–7.17</a>) and supports verification activities in
+          <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 V&amp;V</a>.
+        </p>
+
+        <h3>Definition</h3>
+        <ul>
+          <li>White box testing evaluates software by inspecting and exercising its <strong>internal structure, source code, and control flow</strong>.</li>
+          <li>Test cases are derived from knowledge of the program's logic — conditions, loops, branches, and data paths — not from external specifications alone.</li>
+          <li>Alternative names: <strong>glass box</strong>, <strong>clear box</strong>, and <strong>structural testing</strong>.</li>
+          <li>White box testing can be applied at <strong>unit</strong>, <strong>integration</strong>, and <strong>system</strong> levels whenever internal code access is available.</li>
+          <li>It is primarily performed by <strong>developers</strong> who understand the codebase.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-statement-coverage-caption">
+          <img src="../../../assets/images/se-topic-07/statement-coverage.png"
+               alt="Statement coverage example — test cases designed to execute every statement in the control flow graph"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-statement-coverage-caption">Statement coverage — each executable statement must be visited at least once by the test suite.</figcaption>
+        </figure>
+
+        <h3>White box testing techniques</h3>
+        <ul>
+          <li><strong>Statement coverage:</strong> Design test cases so that every executable statement in the program is executed at least once.</li>
+          <li><strong>Branch coverage (decision coverage):</strong> Ensure every branch (true and false outcomes) of each decision point is taken at least once.</li>
+          <li><strong>Path coverage:</strong> Execute every possible independent path through the control flow graph — the strongest but most expensive criterion.</li>
+          <li><strong>Condition coverage:</strong> Test each boolean sub-condition within a compound decision for both true and false outcomes independently.</li>
+          <li><strong>Basis path testing:</strong> Use the Control Flow Graph (CFG) and cyclomatic complexity to derive a minimum set of linearly independent paths — see <a href="../06-software-measurement-and-metrics/06-06-cyclomatic-complexity.html#sec-6-6">§6.6 Cyclomatic Complexity</a>.</li>
+        </ul>
+
+        <h3>Coverage hierarchy</h3>
+        <ul>
+          <li>Path coverage ⊃ branch coverage ⊃ statement coverage — satisfying a stronger criterion automatically satisfies weaker ones.</li>
+          <li>100% statement coverage does not guarantee 100% branch coverage — a decision's false branch may remain untested.</li>
+          <li>Cyclomatic complexity V(G) gives the minimum number of independent paths needed for basis path testing: V(G) = E − N + 2P (edges − nodes + 2 × connected components).</li>
+        </ul>
+
+        <h3>Control flow testing and data flow testing</h3>
+        <ul>
+          <li><strong>Control flow testing</strong> focuses on the sequence of execution — ensuring all branches, loops, and paths in the CFG are exercised by test cases.</li>
+          <li><strong>Data flow testing</strong> tracks the definition and use of variables through the program — detecting anomalies such as using a variable before it is defined or after it is killed.</li>
+          <li>Data flow testing complements control flow testing by catching defects related to variable lifecycle (define-use pairs) that branch coverage alone may miss.</li>
+        </ul>
+
+        <h3>White box testing workflow</h3>
+        <ol>
+          <li><strong>Code understanding:</strong> Read and analyse the source code, identifying modules, functions, and their responsibilities.</li>
+          <li><strong>Path identification (CFG):</strong> Construct the Control Flow Graph showing nodes (statements/blocks) and edges (transfers of control).</li>
+          <li><strong>Test case design:</strong> Derive test inputs from coverage criteria (statement, branch, path, basis path) to exercise identified paths.</li>
+          <li><strong>Execution and coverage measurement:</strong> Run test cases and measure which statements, branches, and paths were actually executed.</li>
+          <li><strong>Reporting:</strong> Document coverage results, untested paths, and defects found; iterate until coverage targets are met.</li>
+        </ol>
+
+        <div class="terminal" aria-label="Pseudocode — white box coverage example">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">white_box_coverage.pseudo</span>
+          </div>
+          <pre><code>// Example function under test
+FUNCTION classify_grade(score):
+  IF score >= 90 THEN
+    RETURN "A"
+  ELSE IF score >= 75 THEN
+    RETURN "B"
+  ELSE IF score >= 60 THEN
+    RETURN "C"
+  ELSE
+    RETURN "F"
+  END IF
+END FUNCTION
+
+// ── Statement coverage test cases ──
+// Need at least one test per RETURN statement (4 statements)
+test_statement_coverage():
+  ASSERT classify_grade(95)  == "A"   // executes RETURN "A"
+  ASSERT classify_grade(80)  == "B"   // executes RETURN "B"
+  ASSERT classify_grade(65)  == "C"   // executes RETURN "C"
+  ASSERT classify_grade(40)  == "F"   // executes RETURN "F"
+
+// ── Branch coverage test cases ──
+// Need true AND false for each decision (3 decisions × 2 = 6 branches)
+test_branch_coverage():
+  ASSERT classify_grade(95)  == "A"   // score >= 90 : TRUE
+  ASSERT classify_grade(85)  == "B"   // score >= 90 : FALSE, score >= 75 : TRUE
+  ASSERT classify_grade(70)  == "C"   // score >= 75 : FALSE, score >= 60 : TRUE
+  ASSERT classify_grade(40)  == "F"   // score >= 60 : FALSE
+  // Boundary values also test decision edges:
+  ASSERT classify_grade(90)  == "A"   // boundary: score >= 90 TRUE at exactly 90
+  ASSERT classify_grade(89)  == "B"   // boundary: score >= 90 FALSE at 89
+
+// ── Coverage measurement ──
+PROCEDURE measure_coverage(test_suite, source_code):
+  cfg = build_control_flow_graph(source_code)
+  results = execute(test_suite)
+  statement_pct = count_executed_statements(results) / total_statements(cfg)
+  branch_pct    = count_executed_branches(results)    / total_branches(cfg)
+  REPORT statement_pct, branch_pct
+END PROCEDURE</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — White Box Testing</div>
+          <p><strong>Q:</strong> Define white box testing. List its techniques. Explain the workflow. Distinguish control flow from data flow testing. Relate basis path testing to cyclomatic complexity.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>White box = tests internal structure/code; glass box/structural/clear box; developer performs; unit/integration/system levels.</li>
+            <li>Techniques: statement, branch, path, condition coverage; basis path testing using CFG.</li>
+            <li>Coverage hierarchy: path ⊃ branch ⊃ statement; 100% statement ≠ 100% branch.</li>
+            <li>Basis path: minimum independent paths = cyclomatic complexity V(G) — link §6.6.</li>
+            <li>Control flow = exercise branches/paths; data flow = track variable define-use pairs.</li>
+            <li>Workflow: code understanding → CFG → test design → execution &amp; coverage → reporting.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="7-03-testing-strategies.html">&larr; 7.11–7.14 Testing Strategies</a>
+        <a class="btn-back chapter-nav-next" href="7-05-black-box-testing.html">7.16–7.17 Black Box Testing &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

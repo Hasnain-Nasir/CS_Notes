@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — 7.22–7.23 Automation Testing</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>7.22–7.23 Automation Testing</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-7-22">
+
+        <p>
+          <strong>Test automation</strong> uses scripts and tools to execute predefined test cases without manual
+          intervention. It is especially valuable for <strong>regression testing</strong> after changes — see
+          <a href="7-02-levels-of-testing.html#sec-7-9">§7.9 Regression Testing</a>. Automation does not replace
+          manual testing entirely; the choice depends on test type, stability of the application, and cost of
+          script maintenance.
+        </p>
+
+        <h3>Manual vs automation testing (7.22)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Manual testing</th><th>Automation testing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Speed</strong></td><td>Slower — human executes each step</td><td>Faster — scripts run repeatedly without fatigue</td></tr>
+              <tr><td><strong>Initial cost</strong></td><td>Lower setup cost — no tool development</td><td>Higher upfront cost — tool selection, script development, training</td></tr>
+              <tr><td><strong>Repeatability</strong></td><td>Variable — human error and inconsistency</td><td>High — same steps executed identically every run</td></tr>
+              <tr><td><strong>Human judgment</strong></td><td>Strong — exploratory, usability, subjective assessment</td><td>Limited — checks only what is scripted</td></tr>
+              <tr><td><strong>Maintenance</strong></td><td>No scripts to update when UI changes</td><td>Scripts must be maintained when application changes — ongoing cost</td></tr>
+              <tr><td><strong>Best suited for</strong></td><td>Exploratory, usability, ad-hoc, one-time tests</td><td>Regression, repetitive suites, large data sets, stable functionality</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>When to automate</h3>
+        <ul>
+          <li>Automate <strong>repetitive tests</strong> that run frequently — login flows, CRUD operations, smoke suites after every build.</li>
+          <li>Automate <strong>regression testing</strong> to verify that fixes and enhancements do not break existing functionality — essential after maintenance changes (see <a href="../10-software-maintenance/10-04-maintenance-categories.html#sec-10-4">§10.4</a>).</li>
+          <li>Automate tests involving <strong>large data sets</strong> where manual entry is impractical or error-prone.</li>
+          <li>Automate when the <strong>UI and APIs are stable</strong> — frequent UI redesigns increase script maintenance cost and reduce automation ROI.</li>
+          <li>Automate performance and load test scenarios that require many concurrent virtual users.</li>
+        </ul>
+
+        <h3>When to keep manual testing</h3>
+        <ul>
+          <li>Use manual testing for <strong>exploratory testing</strong> — testers creatively probe the application without predefined scripts.</li>
+          <li>Use manual testing for <strong>usability and UX</strong> evaluation where human perception and judgment are essential.</li>
+          <li>Use manual testing for <strong>one-time or ad-hoc</strong> tests that will not be repeated enough to justify automation cost.</li>
+          <li>Use manual testing when requirements are volatile and scripts would be rewritten after every sprint.</li>
+          <li>Use manual testing for new features before they stabilise enough to automate reliably.</li>
+        </ul>
+
+      </section>
+
+      <section id="sec-7-23">
+
+        <h3>Selenium</h3>
+        <ul>
+          <li><strong>Selenium</strong> is an open-source framework for automating web browser interactions — the most widely used web UI automation tool.</li>
+          <li>It supports multiple programming languages: <strong>Java, Python, C#</strong>, and others through language bindings.</li>
+          <li>Selenium uses the <strong>WebDriver API</strong> to control browsers programmatically — click buttons, fill forms, verify page content.</li>
+          <li>It provides <strong>cross-browser</strong> support — Chrome, Firefox, Edge, Safari — enabling consistent tests across environments.</li>
+          <li>Selenium integrates with test frameworks such as <strong>TestNG</strong> and <strong>JUnit</strong> for test organisation, assertions, and reporting.</li>
+        </ul>
+
+        <h3>Selenium components</h3>
+        <ul>
+          <li><strong>Selenium IDE:</strong> Browser extension for record-and-playback of user actions — useful for quick prototyping of test scripts, not for large production suites.</li>
+          <li><strong>Selenium WebDriver:</strong> Programmatic API for writing robust, maintainable test scripts in code — the core component for professional automation.</li>
+          <li><strong>Selenium Grid:</strong> Distributes test execution across multiple machines and browsers in parallel — reduces total test run time in CI/CD pipelines.</li>
+        </ul>
+
+        <div class="terminal" aria-label="Pseudocode — Selenium login test example">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">selenium_test_example.pseudo</span>
+          </div>
+          <pre><code>TEST login_with_valid_credentials:
+
+  // Setup — launch browser via WebDriver
+  driver = WebDriver.create("chrome")
+  driver.navigate_to("https://app.example.com/login")
+
+  // Step 1 — Enter username
+  username_field = driver.find_element(id="username")
+  username_field.type("testuser@example.com")
+
+  // Step 2 — Enter password
+  password_field = driver.find_element(id="password")
+  password_field.type("SecurePass123")
+
+  // Step 3 — Click login button
+  login_button = driver.find_element(id="btn-login")
+  login_button.click()
+
+  // Step 4 — Verify successful login
+  welcome_message = driver.find_element(class="welcome-banner")
+  ASSERT welcome_message.text CONTAINS "Welcome, testuser"
+  ASSERT driver.current_url == "https://app.example.com/dashboard"
+
+  // Teardown
+  driver.quit()
+
+END TEST</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Automation Testing</div>
+          <p><strong>Q:</strong> Compare manual and automation testing. When should tests be automated vs manual? Describe Selenium and its components.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Manual = slower, human judgment, exploratory/usability; Automation = faster, repeatable, best for regression.</li>
+            <li>Automate: repetitive, regression, large data, stable UI. Manual: exploratory, usability, one-time, ad-hoc.</li>
+            <li>Selenium = open-source web automation; Java/Python/C#; WebDriver API; cross-browser; TestNG/JUnit.</li>
+            <li>Components: IDE (record), WebDriver (programmatic), Grid (distributed parallel execution).</li>
+            <li>Automation scripts require maintenance when UI changes — not a one-time investment.</li>
+            <li>Common trap: automation cannot fully replace manual testing — exploratory and usability need humans.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="7-07-static-testing.html">&larr; 7.20–7.21 Static Testing</a>
+        <a class="btn-back chapter-nav-next" href="7-09-specialized-testing.html">7.24–7.26 Specialized Testing &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

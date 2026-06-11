@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — 7.18–7.19 Alpha &amp; Beta Testing</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>7.18–7.19 Alpha &amp; Beta Testing</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-7-18">
+
+        <p>
+          <strong>Alpha testing</strong> and <strong>beta testing</strong> are two forms of
+          <em>acceptance testing</em> — validation activities that confirm the software meets user needs
+          before or during release. Both belong to the acceptance level described in
+          <a href="7-02-levels-of-testing.html#sec-7-8">§7.8 Acceptance Testing</a>; alpha runs first at
+          the developer site, beta follows with external users in real environments.
+        </p>
+
+        <h3>Alpha testing (7.18)</h3>
+        <ul>
+          <li>Alpha testing is internal acceptance testing performed at the <strong>developer's site</strong> before the product is released to external customers.</li>
+          <li>The QA team and selected <strong>internal users</strong> (employees, in-house stakeholders) test the nearly complete product in a <strong>controlled environment</strong>.</li>
+          <li>Alpha testing occurs <strong>before beta testing</strong> — defects found here are fixed before the software reaches external users.</li>
+          <li>Testers simulate real usage scenarios while developers remain available to fix critical bugs quickly.</li>
+          <li>Alpha testing validates that the product is stable enough for limited external exposure and that major functional requirements are met.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-alpha-caption">
+          <img src="../../../assets/images/se-topic-07/alpha-testing-process.webp"
+               alt="Alpha testing process — internal QA and users test at developer site before beta release"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-alpha-caption">Alpha testing: internal team validates the product at the developer site in a controlled setting before external release.</figcaption>
+        </figure>
+
+      </section>
+
+      <section id="sec-7-19">
+
+        <h3>Beta testing</h3>
+        <ul>
+          <li>Beta testing is external acceptance testing where <strong>real users</strong> evaluate the product in their own <strong>real environment</strong> — not at the developer's site.</li>
+          <li>A <strong>limited number of users</strong> receive a pre-release version and use it under normal operating conditions.</li>
+          <li>The primary goal is <strong>feedback collection</strong> — usability issues, compatibility problems, and defects that only appear in diverse real-world setups.</li>
+          <li>Beta testing follows alpha testing; the product is considered feature-complete but may still contain defects.</li>
+          <li>Developers analyse feedback and release patches before general availability.</li>
+        </ul>
+
+        <h3>Open beta vs closed beta</h3>
+        <figure class="diagram figure-photo" aria-labelledby="fig-beta-types-caption">
+          <img src="../../../assets/images/se-topic-07/beta-testing-types.webp"
+               alt="Open beta and closed beta testing types — limited invited users versus public release"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-beta-types-caption">Beta testing types: closed beta restricts access to invited users; open beta allows any interested user to participate.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Closed beta:</strong> Access is restricted to a selected group of invited users — common for enterprise or regulated products where controlled feedback is needed.</li>
+          <li><strong>Open beta:</strong> The pre-release version is available to any interested user — useful for gathering broad compatibility and scale feedback before launch.</li>
+          <li>Both types are external validation; the difference is who is allowed to participate and how feedback volume is managed.</li>
+        </ul>
+
+        <h3>Alpha vs beta testing</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Alpha testing</th><th>Beta testing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Who tests</strong></td><td>QA team and internal users at the organisation</td><td>External real users (customers, volunteers)</td></tr>
+              <tr><td><strong>Where</strong></td><td>Developer's site / controlled lab</td><td>User's own site — home, office, production-like setting</td></tr>
+              <tr><td><strong>Environment</strong></td><td>Controlled, simulated, developer-supervised</td><td>Real-world, diverse hardware, networks, and usage patterns</td></tr>
+              <tr><td><strong>Purpose</strong></td><td>Find and fix defects before external exposure; confirm readiness for beta</td><td>Collect user feedback; validate fitness for purpose in real conditions</td></tr>
+              <tr><td><strong>When</strong></td><td>Before beta — after system testing, before general release</td><td>After alpha — pre-release to selected or open user base</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Validation and acceptance testing</h3>
+        <ul>
+          <li>Both alpha and beta testing are types of <strong>validation testing</strong> — they answer "Are we building the <em>right</em> product?" rather than checking internal conformance alone.</li>
+          <li>They are also forms of <strong>acceptance testing</strong> — the final level in the testing hierarchy (unit → integration → system → acceptance) covered in <a href="7-02-levels-of-testing.html#sec-7-5">§7.5–7.10</a>.</li>
+          <li>Alpha leans toward controlled validation with internal stakeholders; beta extends validation to actual end-user experience before full deployment.</li>
+          <li>See also <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 Verification &amp; Validation</a> for the broader V&amp;V framework.</li>
+        </ul>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Alpha &amp; Beta Testing</div>
+          <p><strong>Q:</strong> Define alpha and beta testing. Compare who tests, where, environment, purpose, and timing. State their relationship to acceptance and validation testing. Distinguish open and closed beta.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Alpha = internal acceptance testing at developer site; QA + internal users; controlled environment; before beta; bugs fixed before release.</li>
+            <li>Beta = external users test in real environment; limited users; feedback collection; follows alpha.</li>
+            <li>Closed beta = invited users only; Open beta = any interested user.</li>
+            <li>Both are validation testing and acceptance testing types — final level after system testing.</li>
+            <li>Alpha: who = internal; where = developer site; when = before beta. Beta: who = external; where = user site; when = pre-release after alpha.</li>
+            <li>Common trap: alpha is NOT beta — alpha is internal/controlled; beta is external/real-world.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="7-05-black-box-testing.html">&larr; 7.16–7.17 Black Box Testing</a>
+        <a class="btn-back chapter-nav-next" href="7-07-static-testing.html">7.20–7.21 Static Testing &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

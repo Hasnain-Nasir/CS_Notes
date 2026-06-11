@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — 7.1–7.4 Software Testing Overview</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>7.1–7.4 Software Testing Overview</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-7-1">
+
+        <p>
+          <strong>Software testing</strong> is a process of executing a program with the intent of finding defects,
+          verifying that requirements are met, and reducing the risk of failure in production. Testing is a core
+          validation activity within the broader
+          <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 Verification &amp; Validation</a>
+          framework and occurs throughout the
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">§2.1 SDLC</a>, not only at the end of development.
+        </p>
+
+        <h3>What is software testing?</h3>
+        <ul>
+          <li>Software testing is a systematic process of evaluating a software product to detect differences between expected and actual behaviour.</li>
+          <li>The primary purpose is to <strong>find defects</strong> (bugs, errors, faults) before the software reaches end users.</li>
+          <li>Testing also <strong>verifies requirements</strong> — confirming that the implemented system matches the specification and design documents.</li>
+          <li>Testing <strong>reduces risk</strong> by exposing failures early, when they are cheaper to fix and before they cause business or safety harm.</li>
+          <li>Testing cannot prove that software is defect-free; it can only show the presence of defects — see the seven principles in <a href="#sec-7-4">§7.4</a>.</li>
+        </ul>
+
+        <figure class="diagram figure-photo" aria-labelledby="fig-types-testing-caption">
+          <img src="../../../assets/images/se-topic-07/types-of-testing.webp"
+               alt="Overview of software testing types — functional, non-functional, structural, and change-related testing"
+               width="660" height="auto" loading="lazy" decoding="async" />
+          <figcaption id="fig-types-testing-caption">Types of software testing — classified by purpose (functional vs non-functional), knowledge of internals (white box vs black box), and level (unit through acceptance).</figcaption>
+        </figure>
+
+        <h3>Testing objectives</h3>
+        <ul>
+          <li><strong>Find defects:</strong> Discover bugs, errors, and faults in code, design, and requirements before release.</li>
+          <li><strong>Build confidence:</strong> Provide stakeholders with evidence that the system works as intended under realistic conditions.</li>
+          <li><strong>Provide information for decisions:</strong> Supply test results that help managers decide whether to release, defer, or rework the product.</li>
+          <li><strong>Prevent defects:</strong> Early testing and reviews catch problems before they propagate to later phases, reducing rework cost.</li>
+          <li><strong>Verify requirements are met:</strong> Confirm that functional and non-functional requirements specified in the SRS are satisfied.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7-2">
+
+        <h3>Testing vs Quality Assurance vs Quality Control</h3>
+        <ul>
+          <li><strong>Testing</strong> is a specific activity that executes software (or examines work products) to find defects and verify behaviour — it is primarily product-focused and reactive to what has been built.</li>
+          <li><strong>Quality Assurance (QA)</strong> is a proactive, process-oriented discipline that defines standards, procedures, and reviews to prevent defects from being introduced — see <a href="../08-software-quality-assurance/08-01-quality-assurance-overview.html#sec-8-1">§8.1 Quality Assurance Overview</a>.</li>
+          <li><strong>Quality Control (QC)</strong> is the set of activities that inspect and test the product to detect defects after development — testing is the main QC technique in software.</li>
+          <li>QA asks <em>"Are we following the right process?"</em>; QC (including testing) asks <em>"Does the product meet quality standards?"</em></li>
+          <li>Testing alone cannot assure quality — a product can pass all tests yet still fail to meet user needs if requirements were wrong (a validation failure, not a testing failure).</li>
+          <li>Verification (building the product right) and validation (building the right product) are explained in <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 V&amp;V</a>; testing supports both.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7-3">
+
+        <h3>Software Testing Life Cycle (STLC)</h3>
+        <p>
+          The <strong>Software Testing Life Cycle (STLC)</strong> is a sequence of activities that govern how testing is
+          planned, designed, executed, and closed within a project. STLC aligns with the testing phase of the
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">§2.1 SDLC</a> but can overlap with coding
+          and design when test-driven or agile practices are used.
+        </p>
+        <ul>
+          <li><strong>Requirement analysis:</strong> Testers review requirements, user stories, and acceptance criteria to identify what must be tested and flag ambiguous or untestable requirements early.</li>
+          <li><strong>Test planning:</strong> Define scope, objectives, resources, schedule, tools, entry/exit criteria, and risk-based priorities in a test plan document.</li>
+          <li><strong>Test case development:</strong> Design detailed test cases, test scripts, and test data from requirements, use cases, and design specifications.</li>
+          <li><strong>Test environment setup:</strong> Prepare hardware, software, network, databases, and test data so the system under test can be executed in a controlled environment.</li>
+          <li><strong>Test execution:</strong> Run test cases, log results, report defects, and track them through to resolution and retest.</li>
+          <li><strong>Test closure:</strong> Evaluate exit criteria, compile test summary reports, archive artefacts, and capture lessons learned for future projects.</li>
+        </ul>
+
+        <div class="terminal" aria-label="Pseudocode — STLC phases">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">stlc_phases.pseudo</span>
+          </div>
+          <pre><code>PROCEDURE software_testing_life_cycle(project):
+
+  // Phase 1 — Requirement Analysis
+  requirements = load_srs_and_user_stories(project)
+  testable_items = identify_testable_requirements(requirements)
+  flag_ambiguous_or_missing_requirements(testable_items)
+
+  // Phase 2 — Test Planning
+  test_plan = create_test_plan(
+    scope, objectives, resources, schedule, tools,
+    entry_criteria, exit_criteria, risk_priorities
+  )
+  APPROVE test_plan WITH test_manager AND stakeholders
+
+  // Phase 3 — Test Case Development
+  FOR EACH requirement IN testable_items:
+    test_cases += design_test_cases(requirement)
+    test_data += prepare_test_data(requirement)
+  END FOR
+
+  // Phase 4 — Test Environment Setup
+  environment = configure_test_environment(
+    hardware, software, network, database, test_data
+  )
+  VERIFY environment meets entry_criteria
+
+  // Phase 5 — Test Execution
+  FOR EACH test_case IN test_cases:
+    result = execute(test_case, environment)
+    IF result != expected THEN
+      log_defect(test_case, result, expected)
+    END IF
+  END FOR
+  retest_resolved_defects()
+
+  // Phase 6 — Test Closure
+  IF exit_criteria_met(test_plan) THEN
+    generate_test_summary_report()
+    archive_test_artefacts()
+    capture_lessons_learned()
+  ELSE
+    escalate_to_project_manager("exit criteria not met")
+  END IF
+
+END PROCEDURE</code></pre>
+        </div>
+      </section>
+
+      <section id="sec-7-4">
+
+        <h3>Seven principles of software testing</h3>
+        <ol>
+          <li><strong>Testing shows presence of defects, not their absence:</strong> Passing all planned tests does not prove the software is bug-free — it only means no defects were found under those specific conditions.</li>
+          <li><strong>Exhaustive testing is impossible:</strong> Testing every possible input combination is infeasible for non-trivial systems; testing must be risk-based and selective.</li>
+          <li><strong>Early testing:</strong> Defects found in requirements or design cost far less to fix than defects found after coding or in production — test planning should start as early as possible.</li>
+          <li><strong>Defect clustering (Pareto 80/20):</strong> A small number of modules typically contain most defects; testing effort should concentrate on high-risk, high-complexity areas.</li>
+          <li><strong>Pesticide paradox:</strong> Repeating the same tests eventually stops finding new defects; test cases must be reviewed and updated regularly.</li>
+          <li><strong>Testing is context dependent:</strong> A safety-critical medical system requires different testing rigour, coverage, and documentation than a simple mobile game.</li>
+          <li><strong>Absence-of-errors fallacy:</strong> Finding and fixing many defects does not help if the system does not meet user needs — a validated but useless product is still a failure.</li>
+        </ol>
+
+        <h3>Testing guidelines</h3>
+        <ol>
+          <li><strong>Define clear testing goals:</strong> Every test cycle should have explicit objectives tied to requirements, risk areas, and release criteria.</li>
+          <li><strong>Design comprehensive test cases:</strong> Cover normal paths, boundary conditions, error paths, and invalid inputs — not just the happy path.</li>
+          <li><strong>Prepare appropriate test data:</strong> Use realistic, representative data including edge cases and invalid values that trigger error handling.</li>
+          <li><strong>Automate repetitive tests:</strong> Regression and smoke tests should run automatically in CI pipelines to catch regressions quickly.</li>
+          <li><strong>Apply multiple testing techniques:</strong> Combine white box, black box, static analysis, and reviews for broader defect detection.</li>
+          <li><strong>Use Test-Driven Development (TDD):</strong> Write tests before code where practicable to clarify requirements and prevent defects at unit level.</li>
+          <li><strong>Document test activities:</strong> Maintain test plans, cases, results, and defect logs for traceability, audit, and knowledge transfer.</li>
+          <li><strong>Monitor testing continuously:</strong> Track defect trends, coverage metrics, and test progress against the schedule throughout the project.</li>
+          <li><strong>Involve users in testing:</strong> User Acceptance Testing (UAT) and beta programmes validate that the product meets real-world needs.</li>
+          <li><strong>Adopt a testing framework:</strong> Standardise tools, conventions, and reporting so the team can execute and maintain tests efficiently.</li>
+        </ol>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Software Testing Overview</div>
+          <p><strong>Q:</strong> Define software testing and state its objectives. Distinguish testing from QA and QC. List STLC phases. State the seven principles of testing and key testing guidelines.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Testing = process to find defects, verify requirements, reduce risk; cannot prove absence of defects.</li>
+            <li>Objectives: find defects, build confidence, inform decisions, prevent defects, verify requirements met.</li>
+            <li>QA = proactive process focus (prevent defects); QC = product inspection (testing finds defects); testing is a QC activity.</li>
+            <li>STLC: requirement analysis → test planning → test case development → environment setup → execution → closure.</li>
+            <li>Seven principles: presence not absence; exhaustive impossible; early testing; defect clustering 80/20; pesticide paradox; context dependent; absence-of-errors fallacy.</li>
+            <li>Link to V&amp;V (§8.3): verification = built right; validation = right product built; testing supports both.</li>
+            <li>Guidelines: clear goals, comprehensive cases, test data, automation, multiple techniques, TDD, documentation, monitoring, user involvement, framework.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="../06-software-measurement-and-metrics/06-07-key-takeaways.html">&larr; Topic 6</a>
+        <a class="btn-back chapter-nav-next" href="7-02-levels-of-testing.html">7.5–7.10 Levels of Testing &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

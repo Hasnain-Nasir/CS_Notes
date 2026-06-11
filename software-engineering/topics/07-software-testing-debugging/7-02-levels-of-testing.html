@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — 7.5–7.10 Levels of Testing</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>7.5–7.10 Levels of Testing</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <p>
+        Software is tested at progressively broader levels as components are assembled into a complete system.
+        Each level has a distinct scope, performer, and objective within the
+        <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">§2.1 SDLC</a> testing phase and the
+        <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 V&amp;V</a> framework.
+      </p>
+
+      <figure class="diagram figure-photo" aria-labelledby="fig-levels-testing-caption">
+        <img src="../../../assets/images/se-topic-07/levels-of-testing.webp"
+             alt="Levels of software testing — unit, integration, system, and acceptance testing in ascending scope"
+             width="660" height="auto" loading="lazy" decoding="async" />
+        <figcaption id="fig-levels-testing-caption">Levels of testing — scope increases from individual units through integrated modules to the complete system and user acceptance.</figcaption>
+      </figure>
+
+      <section id="sec-7-5">
+
+        <h3>Unit testing (7.5)</h3>
+        <ul>
+          <li>Unit testing verifies individual components, functions, methods, or classes in isolation from the rest of the system.</li>
+          <li>It is the <strong>first level</strong> of testing and is typically performed by <strong>developers</strong> during or immediately after coding.</li>
+          <li>Unit tests commonly use <strong>white box</strong> techniques because developers have full access to source code and internal logic.</li>
+          <li>The goal is to confirm that each unit behaves correctly for valid inputs, boundary inputs, and error conditions.</li>
+          <li>Stubs and drivers are generally <strong>not needed</strong> at unit level because the unit is tested directly without depending on unwritten modules.</li>
+          <li>Unit testing supports early defect detection and is the foundation for Test-Driven Development (TDD).</li>
+        </ul>
+      </section>
+
+      <section id="sec-7-6">
+
+        <h3>Integration testing (7.6)</h3>
+        <ul>
+          <li>Integration testing verifies the <strong>interfaces and interactions</strong> between modules or subsystems after unit testing is complete.</li>
+          <li>It is performed <strong>after unit testing</strong> and focuses on data flow, control flow, and API contracts between combined components.</li>
+          <li>At the integration level, testing is often <strong>black box</strong> — testers verify behaviour through module interfaces without examining internal code.</li>
+          <li>Integration testing can also use <strong>white box</strong> techniques when verifying internal interactions, call sequences, or shared data structures between modules.</li>
+          <li>Integration strategies (top-down, bottom-up, sandwich) determine the order in which modules are combined — see <a href="7-03-testing-strategies.html#sec-7-11">§7.11–7.14 Testing Strategies</a>.</li>
+          <li>Stubs (for top-down) and drivers (for bottom-up) simulate missing modules during incremental integration.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7-7">
+
+        <h3>System testing (7.7)</h3>
+        <ul>
+          <li>System testing evaluates the <strong>complete, integrated system</strong> as a whole against specified requirements.</li>
+          <li>It covers both <strong>functional</strong> requirements (what the system does) and <strong>non-functional</strong> requirements (how well it performs — performance, security, usability).</li>
+          <li>System testing is conducted in an environment that closely resembles the <strong>real production environment</strong> — hardware, OS, network, and data volumes.</li>
+          <li>It is typically performed by an independent test team rather than the development team to reduce bias.</li>
+          <li>System testing validates end-to-end workflows, error recovery, and system-wide constraints before the product is released to users.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7-8">
+
+        <h3>Acceptance testing (7.8)</h3>
+        <ul>
+          <li>Acceptance testing validates the system against <strong>user requirements and business needs</strong> — the final gate before deployment.</li>
+          <li><strong>User Acceptance Testing (UAT)</strong> is performed by end users or customer representatives in a realistic operational setting.</li>
+          <li><strong>Alpha testing</strong> is conducted at the developer's site with a selected group of internal or external users before public release.</li>
+          <li><strong>Beta testing</strong> releases the product to a limited external user base in the real environment to gather feedback before general availability.</li>
+          <li>Acceptance testing confirms that the right product has been built — a validation activity aligned with <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 V&amp;V</a>.</li>
+          <li>Formal sign-off at acceptance testing authorises the system for production deployment.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7-9">
+
+        <h3>Regression testing (7.9)</h3>
+        <ul>
+          <li>Regression testing re-executes previously passed test cases after changes (bug fixes, enhancements, refactoring) to ensure existing functionality is not broken.</li>
+          <li>It is not a separate level in the traditional hierarchy but a <strong>type of testing applied at every level</strong> whenever the codebase changes.</li>
+          <li>Regression testing ensures that <strong>old functionality remains intact</strong> after modifications — a critical activity during maintenance — see also <a href="../10-software-maintenance/10-04-maintenance-categories.html#sec-10-4">§10.4 Maintenance Categories</a>.</li>
+          <li>Automated regression test suites are common because manually re-running all tests after every change is impractical for large systems.</li>
+          <li>Smoke tests (quick sanity checks of core features) and full regression suites are often run at different frequencies in CI/CD pipelines.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7-10">
+
+        <h3>Unit testing vs system testing</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Unit Testing</th><th>System Testing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Scope</td><td>Individual component, function, or class</td><td>Complete integrated system</td></tr>
+              <tr><td>Level</td><td>First level — lowest granularity</td><td>Third level — after unit and integration</td></tr>
+              <tr><td>Performed by</td><td>Developers</td><td>Independent test team</td></tr>
+              <tr><td>Primary technique</td><td>White box (code-level)</td><td>Black box (requirement-based)</td></tr>
+              <tr><td>Environment</td><td>Developer workstation / IDE</td><td>Production-like test environment</td></tr>
+              <tr><td>Stubs / drivers</td><td>Not typically needed</td><td>Not applicable — full system available</td></tr>
+              <tr><td>Focus</td><td>Internal logic, edge cases, error paths</td><td>End-to-end workflows, functional + non-functional requirements</td></tr>
+              <tr><td>When performed</td><td>During or immediately after coding</td><td>After integration testing is complete</td></tr>
+              <tr><td>Defect cost to fix</td><td>Low — found early</td><td>Higher — may require changes across modules</td></tr>
+              <tr><td>Automation</td><td>Highly automated (unit test frameworks)</td><td>Mix of automated and manual test cases</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Order of testing levels</h3>
+        <p>The standard sequence of testing levels is:</p>
+        <ol>
+          <li><strong>Unit testing</strong> — verify individual components in isolation.</li>
+          <li><strong>Integration testing</strong> — verify interfaces between combined modules.</li>
+          <li><strong>System testing</strong> — verify the complete system against requirements.</li>
+          <li><strong>Acceptance testing</strong> — validate the system against user and business needs.</li>
+        </ol>
+        <ul>
+          <li><strong>Regression testing</strong> runs at every stage whenever changes are made — it is not a separate step in this sequence but a cross-cutting activity.</li>
+          <li>Defects found at lower levels are cheaper to fix; the testing pyramid emphasises many unit tests, fewer integration tests, and even fewer system/end-to-end tests.</li>
+        </ul>
+
+        <div class="terminal" aria-label="Pseudocode — testing levels flow">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">testing_levels_flow.pseudo</span>
+          </div>
+          <pre><code>PROCEDURE execute_testing_levels(system):
+
+  // Level 1 — Unit Testing (developers, white box)
+  FOR EACH module IN system.modules:
+    unit_results = run_unit_tests(module)
+    IF unit_results.has_failures THEN
+      fix_defects_and_retest(module)
+    END IF
+  END FOR
+
+  // Level 2 — Integration Testing (interfaces between modules)
+  integrated = combine_modules(system.modules, strategy="top_down_or_bottom_up")
+  integration_results = run_integration_tests(integrated)
+  IF integration_results.has_failures THEN
+    fix_interface_defects_and_retest(integrated)
+  END IF
+
+  // Level 3 — System Testing (complete system, real-like environment)
+  deploy_to_test_environment(system)
+  system_results = run_system_tests(system)   // functional + non-functional
+  IF system_results.has_failures THEN
+    fix_system_defects_and_retest(system)
+  END IF
+
+  // Level 4 — Acceptance Testing (user validation)
+  acceptance_results = run_uat(system, end_users)
+  IF acceptance_results.approved THEN
+    authorise_production_deployment(system)
+  ELSE
+    RETURN "release blocked — acceptance criteria not met"
+  END IF
+
+  // Cross-cutting — Regression Testing (after any change at any level)
+  ON ANY code_change:
+    run_regression_suite(previous_passed_tests)
+
+END PROCEDURE</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Levels of Testing</div>
+          <p><strong>Q:</strong> Describe unit, integration, system, acceptance, and regression testing. Compare unit and system testing. State the correct order of testing levels.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Unit: individual components; developer; white box; first level; stubs/drivers not needed.</li>
+            <li>Integration: module interfaces; after unit; black box at interface level (can be white box for internal interactions).</li>
+            <li>System: complete integrated system; functional + non-functional; real-like environment; independent test team.</li>
+            <li>Acceptance: validate against user requirements; UAT; alpha (developer site) and beta (limited external release) are types.</li>
+            <li>Regression: re-test after changes; ensure old functionality intact; automated suites common; cross-cutting activity.</li>
+            <li>Order: Unit → Integration → System → Acceptance; regression at every level after changes.</li>
+            <li>Unit vs system: scope (component vs whole system), performer (developer vs test team), technique (white vs black box).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="7-01-software-testing-overview.html">&larr; 7.1–7.4 Testing Overview</a>
+        <a class="btn-back chapter-nav-next" href="7-03-testing-strategies.html">7.11–7.14 Testing Strategies &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

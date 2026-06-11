@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("infosec-notes-theme") !== "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <title>Topic 7 — 7.20–7.21 Static Testing</title>
+  <link rel="stylesheet" href="../../../assets/css/notes.css">
+  <script src="../../../assets/js/site-nav.js" defer></script>
+  <script src="../../../assets/js/theme.js" defer></script>
+</head>
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
+  <div class="page-wrapper">
+    <main class="main-content">
+      <header class="site-header site-header--hub">
+        <div class="site-header-top">
+          <h1>7.20–7.21 Static Testing</h1>
+          <div class="site-header-actions">
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="sec-7-20">
+
+        <p>
+          <strong>Static testing</strong> examines software work products — code, design documents, requirements,
+          test plans — <em>without executing</em> the program. It is a core <strong>verification</strong> activity
+          that checks whether artefacts are built correctly according to specifications and standards. See
+          <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 Verification &amp; Validation</a>
+          for how static testing fits the broader V&amp;V framework.
+        </p>
+
+        <h3>What is static testing? (7.20)</h3>
+        <ul>
+          <li>Static testing reviews code, design, and documentation to find defects <strong>without running</strong> the software.</li>
+          <li>It is a <strong>verification</strong> activity — it answers "Are we building the product <em>right</em>?" by checking conformance to plans and standards.</li>
+          <li>Static testing can begin early in the SDLC — requirements and design can be reviewed before any code is compiled or executed.</li>
+          <li>Defects found early are cheaper to fix than defects discovered during dynamic testing or in production.</li>
+          <li>Static testing complements dynamic testing; both are needed for comprehensive quality assurance.</li>
+        </ul>
+
+        <h3>Three static testing techniques (7.21)</h3>
+
+        <h4>1. Walkthrough</h4>
+        <ul>
+          <li>A walkthrough is an <strong>informal, author-led</strong> review where the author presents the work product and explains how it meets requirements.</li>
+          <li>Participants ask questions and suggest improvements — the goal is learning and early defect detection, not formal sign-off.</li>
+          <li>No strict checklist is required; the atmosphere is collaborative rather than adversarial.</li>
+          <li>Walkthroughs are commonly used for requirements, design, and code at early stages.</li>
+        </ul>
+
+        <h4>2. Code inspection</h4>
+        <ul>
+          <li>Code inspection is a <strong>formal peer review</strong> of source code conducted by reviewers other than the author.</li>
+          <li>Reviewers follow a <strong>checklist</strong> covering logic errors, standards compliance, documentation, and common defect patterns.</li>
+          <li>Each defect is logged with severity and location; the author fixes issues and a follow-up inspection may verify corrections.</li>
+          <li>Inspections are more rigorous than walkthroughs and produce measurable defect counts for process improvement.</li>
+        </ul>
+
+        <h4>3. Formal Technical Review (FTR)</h4>
+        <ul>
+          <li>FTR is a <strong>structured meeting</strong> with a defined agenda, roles, and deliverables — more formal than a walkthrough.</li>
+          <li>A <strong>trained moderator</strong> (not the author) leads the session, keeps discussion focused, and ensures all checklist items are covered.</li>
+          <li>Participants include the author, reviewers, and sometimes a customer representative or domain expert.</li>
+          <li>FTR produces an <strong>issue log</strong>, <strong>summary report</strong>, and <strong>action items</strong> assigned to responsible persons with deadlines.</li>
+          <li>Issue identification covers defects, deviations from standards, and areas needing clarification — not just syntax errors.</li>
+        </ul>
+
+      </section>
+
+      <section id="sec-7-21">
+
+        <h3>Compliance with design and coding standards</h3>
+        <ul>
+          <li>Static reviews check adherence to <strong>IEEE coding standards</strong>, project-specific naming conventions, indentation rules, and documentation requirements.</li>
+          <li>Reviewers verify that code structure matches the approved design and that comments accurately describe module behaviour.</li>
+          <li>Standards compliance reduces maintenance cost and improves readability — especially important when multiple developers contribute to the same codebase.</li>
+          <li>Non-compliance items are recorded in the issue log and tracked to closure like functional defects.</li>
+        </ul>
+
+        <h3>Static vs dynamic testing</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>Static testing</th><th>Dynamic testing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Execution</strong></td><td>Work products examined without running the program</td><td>Software is executed with test inputs</td></tr>
+              <tr><td><strong>Activity type</strong></td><td>Verification — conformance to specs and standards</td><td>Validation — behaviour against requirements in operation</td></tr>
+              <tr><td><strong>When applied</strong></td><td>Early — requirements, design, code reviews</td><td>After build — unit through acceptance levels</td></tr>
+              <tr><td><strong>Techniques</strong></td><td>Walkthrough, inspection, FTR, desk-checking, static analysis</td><td>White box, black box, integration, system testing</td></tr>
+              <tr><td><strong>Defect types found</strong></td><td>Missing requirements, design flaws, coding standard violations, logic errors visible on paper</td><td>Runtime failures, incorrect outputs, performance issues, integration faults</td></tr>
+              <tr><td><strong>Cost of fixing</strong></td><td>Lower — defects caught before compilation and deployment</td><td>Higher — may require rebuild, retest, and regression</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="terminal" aria-label="Pseudocode — Formal Technical Review process">
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--red" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--yellow" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--green" aria-hidden="true"></span>
+            <span class="terminal-title">ftr_process.pseudo</span>
+          </div>
+          <pre><code>PROCEDURE formal_technical_review(work_product):
+
+  // Step 1 — Preparation
+  moderator = assign_trained_moderator()          // NOT the author
+  reviewers = select_peer_reviewers(work_product)
+  distribute work_product + checklist + standards TO reviewers
+  reviewers PREPARE individually BEFORE meeting
+
+  // Step 2 — Conduct structured meeting
+  moderator OPENS meeting WITH defined agenda
+  author PRESENTS work_product briefly
+  reviewers DISCUSS findings AGAINST checklist
+  moderator RECORDS each issue IN issue_log:
+    issue_id, description, severity, location, owner
+
+  // Step 3 — Issue identification and classification
+  FOR EACH finding IN issue_log DO
+    CLASSIFY AS defect | standards_violation | clarification_needed
+    ASSIGN action_item TO responsible_person WITH deadline
+  END FOR
+
+  // Step 4 — Deliverables
+  GENERATE summary_report:
+    work_product_reviewed, participants, issues_found,
+    standards_compliance_status, overall_recommendation
+  DISTRIBUTE summary_report + action_items TO team
+
+  // Step 5 — Follow-up
+  author FIXES recorded issues
+  IF critical_defects_remain THEN
+    SCHEDULE follow_up_review
+  ELSE
+    CLOSE review WITH sign_off FROM moderator
+  END IF
+
+END PROCEDURE</code></pre>
+        </div>
+
+        <div class="callout exam">
+          <div class="callout-title">Exam question — Static Testing</div>
+          <p><strong>Q:</strong> Define static testing. Describe walkthrough, code inspection, and FTR. Explain standards compliance checking. Compare static and dynamic testing.</p>
+          <p><strong>Model answer points:</strong></p>
+          <ul>
+            <li>Static testing = review code/docs WITHOUT executing program; verification activity.</li>
+            <li>Walkthrough = author-led, informal; Code inspection = formal peer review with checklist; FTR = structured meeting, trained moderator, issue log + summary report + action items.</li>
+            <li>Standards: IEEE coding standards, naming, indentation, documentation checked during reviews.</li>
+            <li>Static = no execution, early, verification; Dynamic = executed, later, validation.</li>
+            <li>FTR moderator must NOT be the author; produces issue identification, summary report, and action items.</li>
+            <li>Common trap: static testing is NOT the same as static analysis tools alone — it includes human reviews (walkthrough, inspection, FTR).</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="chapter-nav" aria-label="Section navigation">
+        <a class="btn-back chapter-nav-prev" href="7-06-alpha-beta-testing.html">&larr; 7.18–7.19 Alpha &amp; Beta Testing</a>
+        <a class="btn-back chapter-nav-next" href="7-08-automation-testing.html">7.22–7.23 Automation Testing &rarr;</a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>
