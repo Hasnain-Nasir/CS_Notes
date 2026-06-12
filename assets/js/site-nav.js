@@ -255,11 +255,28 @@
     document.documentElement.style.setProperty("--global-header-height", h + "px");
   }
 
+  function buildAmbientBackground() {
+    var ambient = document.createElement("div");
+    ambient.className = "site-ambient";
+    ambient.setAttribute("aria-hidden", "true");
+    ambient.innerHTML =
+      '<div class="site-ambient__mesh"></div>' +
+      '<div class="site-ambient__orb site-ambient__orb--1"></div>' +
+      '<div class="site-ambient__orb site-ambient__orb--2"></div>' +
+      '<div class="site-ambient__orb site-ambient__orb--3"></div>' +
+      '<div class="site-ambient__grid"></div>';
+    return ambient;
+  }
+
   function initSiteNav() {
     if (!document.body.classList.contains("site-body")) return;
 
     var depth = getDepth();
     var prefix = rootPrefix(depth);
+
+    if (!document.querySelector(".site-ambient")) {
+      document.body.insertBefore(buildAmbientBackground(), document.body.firstChild);
+    }
 
     var header = buildHeader(prefix, depth);
     var footer = buildFooter(prefix, depth);
