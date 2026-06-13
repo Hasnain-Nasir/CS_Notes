@@ -12,8 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $user = auth_login($username, $password);
     if ($user && $user['role'] === 'admin') {
-        $return = $_SESSION['admin_return'] ?? '/admin/';
-        unset($_SESSION['admin_return']);
+        $return = $_GET['return'] ?? '/admin/';
         header('Location: ' . $return);
         exit;
     }
@@ -56,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label>Username <input type="text" name="username" required autocomplete="username"></label>
       <label>Password <input type="password" name="password" required autocomplete="current-password"></label>
       <button type="submit">Login</button>
-      <a href="/">Back to site</a>
+      <a href="/index.html">Back to site</a>
     </form>
   </div>
   <script src="/assets/js/theme.js"></script>

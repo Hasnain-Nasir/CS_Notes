@@ -20,7 +20,9 @@
   }
 
   function getPageUrl() {
-    return window.location.pathname + window.location.search;
+    var p = window.location.pathname;
+    if (p.endsWith("/")) p += "index.html";
+    return p;
   }
 
   function loadBotUi() {
@@ -146,7 +148,7 @@
     }
 
     function loadHistory() {
-      fetch("/api/chat/history", { credentials: "same-origin" })
+      fetch("/api/chat/history.php", { credentials: "same-origin" })
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (!d.ok) return;
@@ -176,7 +178,7 @@
       sending = true;
       appendMessage("user", text);
 
-      fetch("/api/chat/send", {
+      fetch("/api/chat/send.php", {
         method: "POST",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },

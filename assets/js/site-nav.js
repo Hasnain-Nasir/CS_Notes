@@ -1,13 +1,13 @@
 (function () {
   var BOOKS = [
-    { id: "home", label: "Home", title: "Home", path: "" },
-    { id: "infosec", label: "Info Sec", title: "Information Security", path: "info-sec" },
-    { id: "se", label: "Software Eng.", title: "Software Engineering", path: "software-engineering" },
-    { id: "coa", label: "Comp Org & ASM", title: "Computer Organization and Assembly Language", path: "coa" },
-    { id: "la", label: "Linear Algebra", title: "Linear Algebra", path: "linear-algebra" },
-    { id: "tbw", label: "Tech & Bus. Writing", title: "Technical and Business Writing", path: "technical-writing" },
-    { id: "civics", label: "Civics", title: "Civics and Community Engagement", path: "civics" },
-    { id: "mgmt", label: "Management", title: "Introduction to Management", path: "management" }
+    { id: "home", label: "Home", title: "Home", path: "index.html" },
+    { id: "infosec", label: "Info Sec", title: "Information Security", path: "info-sec/index.html" },
+    { id: "se", label: "Software Eng.", title: "Software Engineering", path: "software-engineering/index.html" },
+    { id: "coa", label: "Comp Org & ASM", title: "Computer Organization and Assembly Language", path: "coa/index.html" },
+    { id: "la", label: "Linear Algebra", title: "Linear Algebra", path: "linear-algebra/index.html" },
+    { id: "tbw", label: "Tech & Bus. Writing", title: "Technical and Business Writing", path: "technical-writing/index.html" },
+    { id: "civics", label: "Civics", title: "Civics and Community Engagement", path: "civics/index.html" },
+    { id: "mgmt", label: "Management", title: "Introduction to Management", path: "management/index.html" }
   ];
 
   var FOOTER_INFOSEC = [
@@ -16,38 +16,27 @@
     { label: "Protection Models", soon: true },
     { label: "Cryptography & Hashing", soon: true },
     { label: "Intrusion Detection", soon: true },
-    { label: "All Info Sec Topics", path: "info-sec" }
+    { label: "All Info Sec Topics", path: "info-sec/index.html" }
   ];
 
   var FOOTER_SE = [
-    { label: "Intro to Software Engineering", path: "software-engineering/topics/01-introduction-and-fundamentals" },
-    { label: "SDLC & Process Models", path: "software-engineering/topics/02-sdlc-and-process-models" },
-    { label: "Classical Waterfall Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-02-classical-waterfall" },
-    { label: "Agile Software Development", path: "software-engineering/topics/02-sdlc-and-process-models/02-11-agile" },
-    { label: "Spiral Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-05-spiral" },
-    { label: "Process Model Comparison", path: "software-engineering/topics/02-sdlc-and-process-models/02-16-comparison" },
-    { label: "All SE Topics", path: "software-engineering" }
+    { label: "Intro to Software Engineering", path: "software-engineering/topics/01-introduction-and-fundamentals/index.html" },
+    { label: "SDLC & Process Models", path: "software-engineering/topics/02-sdlc-and-process-models/index.html" },
+    { label: "Classical Waterfall Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-02-classical-waterfall.html" },
+    { label: "Agile Software Development", path: "software-engineering/topics/02-sdlc-and-process-models/02-11-agile.html" },
+    { label: "Spiral Model", path: "software-engineering/topics/02-sdlc-and-process-models/02-05-spiral.html" },
+    { label: "Process Model Comparison", path: "software-engineering/topics/02-sdlc-and-process-models/02-16-comparison.html" },
+    { label: "All SE Topics", path: "software-engineering/index.html" }
   ];
 
   var FOOTER_SITE = [
-    { label: "Home", path: "" },
-    { label: "Past Papers", path: "/#past-papers" },
-    { label: "Software Engineering", path: "software-engineering" },
-    { label: "Information Security", path: "info-sec" },
-    { label: "Linear Algebra", path: "linear-algebra" },
-    { label: "Computer Org. & Assembly", path: "coa" }
+    { label: "Home", path: "index.html" },
+    { label: "Past Papers", path: "index.html#past-papers" },
+    { label: "Software Engineering", path: "software-engineering/index.html" },
+    { label: "Information Security", path: "info-sec/index.html" },
+    { label: "Linear Algebra", path: "linear-algebra/index.html" },
+    { label: "Computer Org. & Assembly", path: "coa/index.html" }
   ];
-
-  function navHref(prefix, path) {
-    if (!path) return prefix || "/";
-    if (path.charAt(0) === "/") return path;
-    return prefix + path;
-  }
-
-  function normalizeNavBook(book) {
-    if (!book || book === "home") return book;
-    return book.replace(/\/index\.html$/, "").replace(/\.html$/, "");
-  }
 
   function getDepth() {
     var d = document.body.getAttribute("data-nav-depth");
@@ -77,7 +66,7 @@
 
     var brand = document.createElement("a");
     brand.className = "global-brand";
-    brand.href = navHref(prefix, "");
+    brand.href = prefix + "index.html";
     brand.setAttribute("aria-label", "Notes By Nain");
     brand.innerHTML =
       '<span class="global-brand-text" aria-hidden="true">' +
@@ -108,7 +97,7 @@
 
     BOOKS.forEach(function (book) {
       var a = document.createElement("a");
-      a.href = navHref(prefix, book.path);
+      a.href = prefix + book.path;
       a.textContent = book.label;
       if (book.title) a.setAttribute("title", book.title);
       if (book.id === "home" && depth === 0) a.setAttribute("aria-current", "page");
@@ -220,17 +209,17 @@
 
     grid.appendChild(
       buildFooterColumn("Software Engineering", FOOTER_SE, function (item) {
-        return navHref(prefix, item.path);
+        return prefix + item.path;
       })
     );
     grid.appendChild(
       buildFooterColumn("Information Security", FOOTER_INFOSEC, function (item) {
-        return navHref(prefix, item.path);
+        return prefix + item.path;
       })
     );
     grid.appendChild(
       buildFooterColumn("Site", FOOTER_SITE, function (item) {
-        return navHref(prefix, item.path);
+        return prefix + item.path;
       })
     );
 
@@ -255,28 +244,11 @@
     document.documentElement.style.setProperty("--global-header-height", h + "px");
   }
 
-  function buildAmbientBackground() {
-    var ambient = document.createElement("div");
-    ambient.className = "site-ambient";
-    ambient.setAttribute("aria-hidden", "true");
-    ambient.innerHTML =
-      '<div class="site-ambient__mesh"></div>' +
-      '<div class="site-ambient__orb site-ambient__orb--1"></div>' +
-      '<div class="site-ambient__orb site-ambient__orb--2"></div>' +
-      '<div class="site-ambient__orb site-ambient__orb--3"></div>' +
-      '<div class="site-ambient__grid"></div>';
-    return ambient;
-  }
-
   function initSiteNav() {
     if (!document.body.classList.contains("site-body")) return;
 
     var depth = getDepth();
     var prefix = rootPrefix(depth);
-
-    if (!document.querySelector(".site-ambient")) {
-      document.body.insertBefore(buildAmbientBackground(), document.body.firstChild);
-    }
 
     var header = buildHeader(prefix, depth);
     var footer = buildFooter(prefix, depth);
@@ -319,15 +291,15 @@
       if (e.matches) setMenuOpen(false);
     });
 
-    var currentBook = normalizeNavBook(document.body.getAttribute("data-nav-book"));
+    var currentBook = document.body.getAttribute("data-nav-book");
     if (currentBook === "home" || (depth === 0 && !currentBook)) {
-      var homeLink = nav.querySelector('a[href="' + navHref(prefix, "") + '"]');
+      var homeLink = nav.querySelector('a[href="' + prefix + 'index.html"]');
       if (homeLink && depth === 0) homeLink.setAttribute("aria-current", "page");
     } else if (currentBook) {
       nav.querySelectorAll("a").forEach(function (a) {
         a.removeAttribute("aria-current");
       });
-      var bookPath = navHref(prefix, currentBook);
+      var bookPath = prefix + currentBook;
       var active = nav.querySelector('a[href="' + bookPath + '"]');
       if (active) active.setAttribute("aria-current", "page");
     }
@@ -341,43 +313,8 @@
 /* Bundled below: notes-auth.js + notes-chat.js (InfinityFree blocks separate loads) */
 (function () {
   var API = "/api";
-  var AUTH_PAGE = "/login";
-  var AUTH_RETURN_KEY = "notes_auth_return";
   var currentUser = null;
   var listeners = [];
-  var gateApplied = false;
-
-  function normalizePath(path) {
-    if (!path || path.charAt(0) !== "/") return "/";
-    return path
-      .replace(/\/index\.html(?=($|[?#]))/g, "/")
-      .replace(/\.html(?=($|[?#]))/g, "")
-      .replace(/\/+$/, "") || "/";
-  }
-
-  function isAuthPage() {
-    return normalizePath(window.location.pathname) === "/login";
-  }
-
-  function redirectToLogin() {
-    if (isAuthPage()) return;
-    var returnPath = normalizePath(
-      window.location.pathname + window.location.search + window.location.hash
-    );
-    try {
-      sessionStorage.setItem(AUTH_RETURN_KEY, returnPath);
-    } catch (e) {}
-    window.location.replace(AUTH_PAGE);
-  }
-
-  function applySiteGate(user) {
-    if (!document.body.classList.contains("site-body")) return;
-    if (isAuthPage()) return;
-    if (!user && !gateApplied) {
-      gateApplied = true;
-      redirectToLogin();
-    }
-  }
 
   function emit() {
     listeners.forEach(function (fn) { fn(currentUser); });
@@ -393,10 +330,8 @@
       body: opts.body ? JSON.stringify(opts.body) : undefined
     }).then(function (r) {
       return r.json().then(function (d) {
-        if (!r.ok) {
-          var err = new Error((d && d.error) || "Request failed");
-          err.status = r.status;
-          throw err;
+        if (!r.ok && r.status !== 401) {
+          throw new Error((d && d.error) || "Request failed");
         }
         return d;
       });
@@ -404,21 +339,19 @@
   }
 
   function checkSession() {
-    return api("/auth/me").then(function (d) {
+    return api("/auth/me.php").then(function (d) {
       currentUser = d.user || null;
       emit();
-      applySiteGate(currentUser);
       return currentUser;
     }).catch(function () {
       currentUser = null;
       emit();
-      applySiteGate(null);
       return null;
     });
   }
 
   function login(username, password) {
-    return api("/auth/login", {
+    return api("/auth/login.php", {
       method: "POST",
       body: { username: username, password: password }
     }).then(function (d) {
@@ -434,35 +367,11 @@
     });
   }
 
-  function register(username, password, displayName) {
-    return api("/auth/register", {
-      method: "POST",
-      body: { username: username, password: password, display_name: displayName }
-    }).then(function (d) {
-      currentUser = d.user;
-      emit();
-      if (d.redirect) {
-        window.location.href = d.redirect;
-      }
-      return d;
-    });
-  }
-
-  function forgotPassword(username) {
-    return api("/auth/forgot-password", {
-      method: "POST",
-      body: { username: username }
-    });
-  }
-
   function logout() {
-    return api("/auth/logout", { method: "POST" }).then(function () {
+    return api("/auth/logout.php", { method: "POST" }).then(function () {
       currentUser = null;
       emit();
       document.dispatchEvent(new CustomEvent("auth-logout"));
-      if (document.body.classList.contains("site-body") && !isAuthPage()) {
-        redirectToLogin();
-      }
     });
   }
 
@@ -540,9 +449,9 @@
       if (caret) caret.hidden = true;
       btn.textContent = "Login";
       btn.setAttribute("aria-label", "Login");
-      btn.title = "Sign in";
+      btn.title = "Login to chat";
       btn.onclick = function () {
-        redirectToLogin();
+        openLoginModal();
       };
     }
   }
@@ -579,12 +488,12 @@
       '<div class="auth-modal-panel" role="dialog" aria-labelledby="auth-modal-title">' +
       '<button type="button" class="auth-modal-close" aria-label="Close">&times;</button>' +
       '<h2 id="auth-modal-title">Login</h2>' +
-      '<p class="auth-modal-sub">Sign in to continue.</p>' +
+      '<p class="auth-modal-sub">Sign in to chat with the notes assistant.</p>' +
       '<form id="auth-login-form">' +
       '<label>Username <input name="username" autocomplete="username" required></label>' +
       '<label>Password <input name="password" type="password" autocomplete="current-password" required></label>' +
       '<p class="auth-error" hidden></p>' +
-      '<button type="submit">Sign in</button>' +
+      '<button type="submit">Login</button>' +
       '</form></div>';
     document.body.appendChild(overlay);
 
@@ -598,14 +507,15 @@
       var errEl = overlay.querySelector(".auth-error");
       errEl.hidden = true;
       login(fd.get("username"), fd.get("password")).catch(function (err) {
-        errEl.textContent = err.status === 401 ? "Invalid login credentials" : (err.message || "Login failed");
+        errEl.textContent = err.message || "Login failed";
         errEl.hidden = false;
       });
     });
   }
 
   function openLoginModal() {
-    redirectToLogin();
+    ensureLoginModal();
+    document.getElementById("auth-modal").hidden = false;
   }
 
   function closeLoginModal() {
@@ -616,15 +526,12 @@
   window.NotesAuth = {
     checkSession: checkSession,
     login: login,
-    register: register,
-    forgotPassword: forgotPassword,
     logout: logout,
     onAuthChange: onAuthChange,
     isLoggedIn: isLoggedIn,
     getUser: getUser,
     openLoginModal: openLoginModal,
-    closeLoginModal: closeLoginModal,
-    redirectIfNotLoggedIn: applySiteGate
+    closeLoginModal: closeLoginModal
   };
 
   document.addEventListener("site-nav-ready", function () {
@@ -661,7 +568,9 @@
   }
 
   function getPageUrl() {
-    return window.location.pathname + window.location.search;
+    var p = window.location.pathname;
+    if (p.endsWith("/")) p += "index.html";
+    return p;
   }
 
   function loadBotUi() {
@@ -865,7 +774,7 @@
         logEl.innerHTML = "";
         return;
       }
-      fetch("/api/chat/history", { credentials: "same-origin" })
+      fetch("/api/chat/history.php", { credentials: "same-origin" })
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (!d.ok) return;
@@ -898,7 +807,7 @@
       if (sendBtn) sendBtn.disabled = true;
 
       appendMessageTyping("user", text).then(function () {
-        return fetch("/api/chat/send", {
+        return fetch("/api/chat/send.php", {
           method: "POST",
           credentials: "same-origin",
           headers: { "Content-Type": "application/json" },

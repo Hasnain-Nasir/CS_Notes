@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>4.14 Requirements Specifications / SRS Document</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href=".">&larr; Topic 4</a>
+            <a class="btn-back" href="index.html">&larr; Topic 4</a>
           </div>
         </div>
       </header>
@@ -47,7 +47,7 @@
           <li>SRS is a kind of <strong>agreement between the customer and the company</strong>, containing complete information about the requirements desired by the customer and the product to be made by the company.</li>
           <li>Interaction between customers and contractors is necessary to fully understand customer needs before the SRS is developed.</li>
           <li>The SRS may include changes and modifications needed to increase product quality and satisfy customer demand.</li>
-          <li>SRS serves as the primary deliverable of the <strong>requirements specification</strong> phase in the <a href="04-02-re-process#sec-4-2">RE process (§4.2)</a> and as the baseline for design, testing, and acceptance.</li>
+          <li>SRS serves as the primary deliverable of the <strong>requirements specification</strong> phase in the <a href="04-02-re-process.html#sec-4-2">RE process (§4.2)</a> and as the baseline for design, testing, and acceptance.</li>
         </ul>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-srs-format-caption">
@@ -82,7 +82,7 @@
           <li>Functional requirements specify the expected behaviour of the system — which outputs should be produced from the given inputs.</li>
           <li>They describe the relationship between the input and output of the system.</li>
           <li>For each functional requirement, a detailed description of all data inputs and their source, the units of measure, and the range of valid inputs must be specified.</li>
-          <li>Each requirement should be uniquely identified for traceability (see <a href="04-09-requirements-classification#sec-4-9">§4.9</a>).</li>
+          <li>Each requirement should be uniquely identified for traceability (see <a href="04-09-requirements-classification.html#sec-4-9">§4.9</a>).</li>
         </ul>
         <p>Functionally, the system can be viewed as performing a group of high-level functions F<sub>i</sub>, where each function F<sub>i</sub> is a transformation of a set of input data I<sub>i</sub> to a corresponding set of output data O<sub>i</sub>.</p>
 
@@ -119,13 +119,13 @@
         <h4>8. Preliminary schedule and budget</h4>
         <ul>
           <li>This section explains the initial version of the project plan, including overall time duration and overall cost required for development of the project.</li>
-          <li>It links directly to project planning in <a href="../03-software-project-management/03-02-project-management-process#sec-3-2">Topic 3 §3.2</a> and cost estimation in <a href="../03-software-project-management/03-05-size-estimation#sec-3-5">§3.5</a>.</li>
+          <li>It links directly to project planning in <a href="../03-software-project-management/03-02-project-management-process.html#sec-3-2">Topic 3 §3.2</a> and cost estimation in <a href="../03-software-project-management/03-05-size-estimation.html#sec-3-5">§3.5</a>.</li>
         </ul>
 
         <h4>9. Appendices</h4>
         <ul>
           <li>Additional information such as references from where information was gathered, definitions of specific terms, acronyms, and abbreviations are given and explained.</li>
-          <li>Supporting material may include sample input/output, glossary, analysis models (<a href="04-11-dfd#sec-4-11">DFD</a>, <a href="04-12-erd#sec-4-12">ERD</a>), decision tables, and traceability matrices.</li>
+          <li>Supporting material may include sample input/output, glossary, analysis models (<a href="04-11-dfd.html#sec-4-11">DFD</a>, <a href="04-12-erd.html#sec-4-12">ERD</a>), decision tables, and traceability matrices.</li>
         </ul>
 
         <h4>10. Goals of implementation</h4>
@@ -158,14 +158,14 @@
           <li><strong>Basis for project planning:</strong> The SRS provides the information project managers need to define realistic timelines, assign appropriate resources, and set milestones. It allows teams to accurately estimate costs and schedules.</li>
           <li><strong>Guidance for development teams:</strong> The SRS guides developers in understanding functional specifications and how the software will be designed. It offers an overview of system architecture, user interfaces, and data structures.</li>
           <li><strong>Facilitates testing and quality assurance:</strong> QA and testing teams use the SRS to design test cases that verify the software conforms to what was specified, making testing more systematic.</li>
-          <li><strong>Change management:</strong> The SRS provides a baseline against which any proposed changes can be judged, ensuring changes are recorded, approved, and properly implemented without scope creep (see <a href="04-07-review-management#sec-4-7">§4.7</a>).</li>
+          <li><strong>Change management:</strong> The SRS provides a baseline against which any proposed changes can be judged, ensuring changes are recorded, approved, and properly implemented without scope creep (see <a href="04-07-review-management.html#sec-4-7">§4.7</a>).</li>
           <li><strong>Client and stakeholder satisfaction:</strong> The SRS acts as a contract between the development team and the client. When the final product meets what was documented, client satisfaction and trust increase.</li>
           <li><strong>Risk mitigation:</strong> The SRS helps in risk assessment by specifying dependencies, constraints, and potential risks early in the software development life cycle.</li>
           <li><strong>Enhanced collaboration:</strong> The SRS fosters team spirit and a single shared vision among cross-functional teams, making the development process more integrated and efficient.</li>
         </ul>
 
         <h3>Characteristics of a good SRS</h3>
-        <p>A good SRS document should possess the following characteristics (full detail in <a href="04-16-srs-quality#sec-4-16">§4.16</a>):</p>
+        <p>A good SRS document should possess the following characteristics (full detail in <a href="04-16-srs-quality.html#sec-4-16">§4.16</a>):</p>
         <ul>
           <li><strong>Complete:</strong> All software requirements should be mentioned in the SRS.</li>
           <li><strong>Correct:</strong> Requirements should be according to the needs of the customer.</li>
@@ -190,8 +190,8 @@
 
         <h3>SRS and the SDLC</h3>
         <ul>
-          <li>The approved SRS marks the end of the requirements phase in the <a href="../02-sdlc-and-process-models/02-01-sdlc#sec-2-1">SDLC</a> and the input to the design phase.</li>
-          <li>Changes after approval require formal change control through requirements management (see <a href="04-07-review-management#sec-4-7">§4.7</a>).</li>
+          <li>The approved SRS marks the end of the requirements phase in the <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">SDLC</a> and the input to the design phase.</li>
+          <li>Changes after approval require formal change control through requirements management (see <a href="04-07-review-management.html#sec-4-7">§4.7</a>).</li>
           <li>Ignoring the importance of a correct SRS can mean project failure, increased development costs, and dissatisfied stakeholders.</li>
           <li>Developing a powerful SRS is the first step on the road to success for any software development project.</li>
         </ul>
@@ -199,7 +199,7 @@
         <h3>Two SRS documents (customer vs developer)</h3>
         <ul>
           <li>In practice, two SRS documents are sometimes written: the <strong>first SRS</strong> is written by the customer to define their expectations of the user, and the <strong>second SRS</strong> is written by the developer to serve as a contract document between customer and developer.</li>
-          <li>Further guidance on writing a good SRS is covered in <a href="04-15-write-good-srs#sec-4-15">§4.15</a>, and IEEE standard structure in <a href="04-17-ieee-srs#sec-4-17">§4.17</a>.</li>
+          <li>Further guidance on writing a good SRS is covered in <a href="04-15-write-good-srs.html#sec-4-15">§4.15</a>, and IEEE standard structure in <a href="04-17-ieee-srs.html#sec-4-17">§4.17</a>.</li>
         </ul>
 
         <div class="callout exam">
@@ -219,8 +219,8 @@
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="04-13-decision-tables">&larr; 4.13 Decision Tables</a>
-        <a class="btn-back chapter-nav-next" href="04-15-write-good-srs">4.15 Write Good SRS &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href="04-13-decision-tables.html">&larr; 4.13 Decision Tables</a>
+        <a class="btn-back chapter-nav-next" href="04-15-write-good-srs.html">4.15 Write Good SRS &rarr;</a>
       </nav>
     </main>
   </div>

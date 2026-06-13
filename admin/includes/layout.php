@@ -5,8 +5,7 @@ function admin_require(): array
 {
     $user = current_user();
     if (!$user) {
-        $_SESSION['admin_return'] = $_SERVER['REQUEST_URI'];
-        header('Location: /admin/login');
+        header('Location: /admin/login.php?return=' . urlencode($_SERVER['REQUEST_URI']));
         exit;
     }
     if ($user['role'] !== 'admin') {
@@ -21,14 +20,6 @@ function admin_header(string $title, string $active = ''): void
 {
     $user = admin_require();
     $displayName = htmlspecialchars($user['display_name'] ?? $user['username']);
-    $pendingPwReqs = 0;
-    try {
-        $pendingPwReqs = (int) db()->query(
-            "SELECT COUNT(*) FROM password_reset_requests WHERE status = 'pending'"
-        )->fetchColumn();
-    } catch (Throwable $e) {
-        $pendingPwReqs = 0;
-    }
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,19 +48,16 @@ function admin_header(string $title, string $active = ''): void
       <p class="admin-sidebar-label">Admin panel</p>
       <nav class="admin-nav" aria-label="Admin">
         <a href="/admin/" class="<?= $active === 'overview' ? 'is-active' : '' ?>">Overview</a>
-        <a href="/admin/messages" class="<?= $active === 'messages' ? 'is-active' : '' ?>">Chats</a>
-        <a href="/admin/memories" class="<?= $active === 'memories' ? 'is-active' : '' ?>">Memories</a>
-        <a href="/admin/users" class="<?= $active === 'users' ? 'is-active' : '' ?>">Users</a>
-        <a href="/admin/password-requests" class="<?= $active === 'password-requests' ? 'is-active' : '' ?>">
-          Password requests<?php if ($pendingPwReqs > 0): ?><span class="admin-nav-badge"><?= $pendingPwReqs ?></span><?php endif; ?>
-        </a>
-        <a href="/admin/keys" class="<?= $active === 'keys' ? 'is-active' : '' ?>">API Keys</a>
-        <a href="/admin/knowledge" class="<?= $active === 'knowledge' ? 'is-active' : '' ?>">Site Knowledge</a>
-        <a href="/admin/papers" class="<?= $active === 'papers' ? 'is-active' : '' ?>">Past Papers</a>
-        <a href="/admin/backups" class="<?= $active === 'backups' ? 'is-active' : '' ?>">Backups</a>
+        <a href="/admin/messages.php" class="<?= $active === 'messages' ? 'is-active' : '' ?>">Chats</a>
+        <a href="/admin/memories.php" class="<?= $active === 'memories' ? 'is-active' : '' ?>">Memories</a>
+        <a href="/admin/users.php" class="<?= $active === 'users' ? 'is-active' : '' ?>">Users</a>
+        <a href="/admin/keys.php" class="<?= $active === 'keys' ? 'is-active' : '' ?>">API Keys</a>
+        <a href="/admin/knowledge.php" class="<?= $active === 'knowledge' ? 'is-active' : '' ?>">Site Knowledge</a>
+        <a href="/admin/papers.php" class="<?= $active === 'papers' ? 'is-active' : '' ?>">Past Papers</a>
+        <a href="/admin/backups.php" class="<?= $active === 'backups' ? 'is-active' : '' ?>">Backups</a>
       </nav>
       <div class="admin-sidebar-foot">
-        <a href="/">View site</a>
+        <a href="/index.html">View site</a>
       </div>
     </aside>
     <div class="admin-content">

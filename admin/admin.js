@@ -57,8 +57,8 @@
   if (logoutBtn) {
     logoutBtn.addEventListener("click", function () {
       closeAdminUserMenu();
-      fetch("/api/auth/logout", { method: "POST", credentials: "same-origin" }).then(function () {
-        window.location.href = "/admin/login";
+      fetch("/api/auth/logout.php", { method: "POST", credentials: "same-origin" }).then(function () {
+        window.location.href = "/admin/login.php";
       });
     });
   }
@@ -103,7 +103,7 @@
         btn.classList.toggle("is-active", +btn.dataset.chatUser === userId);
       });
       chatsMessages.innerHTML = "<p class='admin-chats-empty'>Loading chat…</p>";
-      api("messages?user_id=" + encodeURIComponent(userId)).then(function (d) {
+      api("messages.php?user_id=" + encodeURIComponent(userId)).then(function (d) {
         renderChatMessages(d.chats || []);
       }).catch(function (e) {
         chatsMessages.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>";
@@ -113,7 +113,7 @@
     function deleteActiveChat() {
       if (!activeChatUser) return;
       if (!confirm("Delete all chat messages for " + (activeChatName || "this user") + "? This cannot be undone.")) return;
-      api("messages", { method: "POST", body: { action: "delete_user_chat", user_id: activeChatUser } })
+      api("messages.php", { method: "POST", body: { action: "delete_user_chat", user_id: activeChatUser } })
         .then(function () {
           activeChatUser = null;
           activeChatName = "";
@@ -128,7 +128,7 @@
     }
 
     function loadChatUsers() {
-      api("messages").then(function (d) {
+      api("messages.php").then(function (d) {
         var users = d.users || [];
         if (!users.length) {
           chatsUsers.innerHTML = "";
@@ -163,7 +163,7 @@
     function loadMemories() {
       var uid = document.getElementById("filter-user").value;
       var q = uid ? "?user_id=" + encodeURIComponent(uid) : "";
-      api("memories" + q).then(function (d) {
+      api("memories.php" + q).then(function (d) {
         if (!d.memories.length) {
           memList.innerHTML = "<p>No memories yet. Add one above.</p>";
           return;
@@ -177,7 +177,7 @@
         memList.querySelectorAll("[data-mdel]").forEach(function (btn) {
           btn.addEventListener("click", function () {
             if (!confirm("Delete this memory?")) return;
-            api("memories", { method: "POST", body: { action: "delete", id: +btn.dataset.mdel } }).then(loadMemories);
+            api("memories.php", { method: "POST", body: { action: "delete", id: +btn.dataset.mdel } }).then(loadMemories);
           });
         });
       }).catch(function (e) { memList.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>"; });
@@ -186,7 +186,7 @@
       addMemory.addEventListener("submit", function (e) {
         e.preventDefault();
         var fd = new FormData(addMemory);
-        api("memories", {
+        api("memories.php", {
           method: "POST",
           body: { action: "save", user_id: +fd.get("user_id"), memory_text: fd.get("memory_text") }
         }).then(function () { addMemory.reset(); loadMemories(); }).catch(function (err) { alert(err.message); });
@@ -200,7 +200,7 @@
   var createUser = document.getElementById("create-user-form");
   if (usersList) {
     function loadUsers() {
-      api("users").then(function (d) {
+      api("users.php").then(function (d) {
         if (!d.users.length) {
           usersList.innerHTML = "<p>No users yet.</p>";
           return;
@@ -215,7 +215,7 @@
           }).join("") + "</table>";
         usersList.querySelectorAll("[data-toggle]").forEach(function (btn) {
           btn.addEventListener("click", function () {
-            api("users", { method: "POST", body: { action: "toggle", id: +btn.dataset.toggle, is_active: btn.dataset.active === "1" } }).then(loadUsers);
+            api("users.php", { method: "POST", body: { action: "toggle", id: +btn.dataset.toggle, is_active: btn.dataset.active === "1" } }).then(loadUsers);
           });
         });
       }).catch(function (e) { usersList.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>"; });
@@ -224,7 +224,7 @@
       createUser.addEventListener("submit", function (e) {
         e.preventDefault();
         var fd = new FormData(createUser);
-        api("users", {
+        api("users.php", {
           method: "POST",
           body: { action: "create", username: fd.get("username"), password: fd.get("password"), display_name: fd.get("display_name"), role: fd.get("role") }
         }).then(function () { createUser.reset(); loadUsers(); alert("User created"); }).catch(function (err) { alert(err.message); });
@@ -233,72 +233,11 @@
     loadUsers();
   }
 
-  var pwReqList = document.getElementById("password-requests-list");
-  if (pwReqList) {
-    function loadPasswordRequests() {
-      api("password-requests").then(function (d) {
-        var reqs = d.requests || [];
-        if (!reqs.length) {
-          pwReqList.innerHTML = "<p>No pending password reset requests.</p>";
-          return;
-        }
-        pwReqList.innerHTML = reqs.map(function (r) {
-          return '<form class="admin-form admin-form--card admin-pw-request" data-req-id="' + r.id + '">' +
-            '<div class="admin-pw-request-head">' +
-            '<strong>' + esc(r.username) + '</strong>' +
-            '<span class="admin-meta">Requested ' + esc(r.requested_at) + '</span>' +
-            '</div>' +
-            '<div class="admin-form-grid admin-form-grid--inline">' +
-            '<label class="admin-field admin-field--grow">' +
-            '<span>New password</span>' +
-            '<input name="new_password" type="password" placeholder="Min 6 characters" required minlength="6">' +
-            '</label>' +
-            '<div class="admin-form-actions">' +
-            '<button type="submit" class="admin-btn">Set password &amp; resolve</button>' +
-            '<button type="button" class="admin-btn-sm admin-btn-danger" data-dismiss="' + r.id + '">Dismiss</button>' +
-            '</div></div>' +
-            '<p class="admin-form-error" hidden></p>' +
-            '</form>';
-        }).join("");
-
-        pwReqList.querySelectorAll(".admin-pw-request").forEach(function (form) {
-          form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            var errEl = form.querySelector(".admin-form-error");
-            errEl.hidden = true;
-            var fd = new FormData(form);
-            api("password-requests", {
-              method: "POST",
-              body: { action: "resolve", id: +form.dataset.reqId, new_password: fd.get("new_password") }
-            }).then(function () {
-              loadPasswordRequests();
-            }).catch(function (err) {
-              errEl.textContent = err.message;
-              errEl.hidden = false;
-            });
-          });
-        });
-
-        pwReqList.querySelectorAll("[data-dismiss]").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            if (!confirm("Dismiss this request without changing the password?")) return;
-            api("password-requests", { method: "POST", body: { action: "dismiss", id: +btn.dataset.dismiss } })
-              .then(loadPasswordRequests)
-              .catch(function (err) { alert(err.message); });
-          });
-        });
-      }).catch(function (e) {
-        pwReqList.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>";
-      });
-    }
-    loadPasswordRequests();
-  }
-
   var keysList = document.getElementById("keys-list");
   var addKey = document.getElementById("add-key-form");
   if (keysList) {
     function loadKeys() {
-      api("api-keys").then(function (d) {
+      api("api-keys.php").then(function (d) {
         if (!d.keys.length) {
           keysList.innerHTML = "<p>No API keys yet. Add one above.</p>";
           return;
@@ -313,7 +252,7 @@
         keysList.querySelectorAll("[data-test]").forEach(function (btn) {
           btn.addEventListener("click", function () {
             btn.disabled = true;
-            api("api-keys", { method: "POST", body: { action: "test", id: +btn.dataset.test } })
+            api("api-keys.php", { method: "POST", body: { action: "test", id: +btn.dataset.test } })
               .then(function (r) { alert("OK: " + r.reply); })
               .catch(function (e) { alert(e.message); })
               .finally(function () { btn.disabled = false; });
@@ -322,7 +261,7 @@
         keysList.querySelectorAll("[data-del]").forEach(function (btn) {
           btn.addEventListener("click", function () {
             if (!confirm("Delete this key?")) return;
-            api("api-keys", { method: "POST", body: { action: "delete", id: +btn.dataset.del } }).then(loadKeys);
+            api("api-keys.php", { method: "POST", body: { action: "delete", id: +btn.dataset.del } }).then(loadKeys);
           });
         });
       }).catch(function (e) { keysList.innerHTML = "<p class='admin-error'>" + esc(e.message) + "</p>"; });
@@ -331,7 +270,7 @@
       addKey.addEventListener("submit", function (e) {
         e.preventDefault();
         var fd = new FormData(addKey);
-        api("api-keys", {
+        api("api-keys.php", {
           method: "POST",
           body: {
             action: "save",
@@ -351,7 +290,7 @@
       searchKey.addEventListener("submit", function (e) {
         e.preventDefault();
         var fd = new FormData(searchKey);
-        api("api-keys", { method: "POST", body: { action: "save_search_key", tavily_api_key: fd.get("tavily_api_key") } })
+        api("api-keys.php", { method: "POST", body: { action: "save_search_key", tavily_api_key: fd.get("tavily_api_key") } })
           .then(function () { alert("Search key saved"); }).catch(function (err) { alert(err.message); });
       });
     }
@@ -360,14 +299,14 @@
 
   var knowledgeForm = document.getElementById("knowledge-form");
   if (knowledgeForm) {
-    api("site-knowledge").then(function (d) {
+    api("site-knowledge.php").then(function (d) {
       document.getElementById("knowledge-json").value = JSON.stringify(d.knowledge, null, 2);
     });
     knowledgeForm.addEventListener("submit", function (e) {
       e.preventDefault();
       try {
         var parsed = JSON.parse(document.getElementById("knowledge-json").value);
-        api("site-knowledge", { method: "POST", body: { knowledge: parsed } }).then(function () { alert("Saved"); });
+        api("site-knowledge.php", { method: "POST", body: { knowledge: parsed } }).then(function () { alert("Saved"); });
       } catch (err) { alert("Invalid JSON"); }
     });
   }
@@ -375,7 +314,7 @@
   var papersList = document.getElementById("papers-list");
   if (papersList) {
     function loadPapers() {
-      fetch("/api/admin/papers/upload", { credentials: "same-origin" }).then(function (r) { return r.json(); }).then(function (d) {
+      fetch("/api/admin/papers/upload.php", { credentials: "same-origin" }).then(function (r) { return r.json(); }).then(function (d) {
         if (!d.ok) throw new Error(d.error);
         papersList.innerHTML = "<table class='admin-table'><tr><th>Subject</th><th>Exam</th><th>Year</th><th>File</th><th>Text len</th><th></th></tr>" +
           d.papers.map(function (p) {
@@ -384,7 +323,7 @@
           }).join("") + "</table>";
         papersList.querySelectorAll("[data-pdel]").forEach(function (btn) {
           btn.addEventListener("click", function () {
-            fetch("/api/admin/papers/upload", {
+            fetch("/api/admin/papers/upload.php", {
               method: "POST",
               credentials: "same-origin",
               headers: { "Content-Type": "application/json" },
@@ -398,7 +337,7 @@
     if (uploadForm) {
       uploadForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        fetch("/api/admin/papers/upload", { method: "POST", credentials: "same-origin", body: new FormData(uploadForm) })
+        fetch("/api/admin/papers/upload.php", { method: "POST", credentials: "same-origin", body: new FormData(uploadForm) })
           .then(function (r) { return r.json(); })
           .then(function (d) { if (!d.ok) throw new Error(d.error); uploadForm.reset(); loadPapers(); alert("Uploaded"); })
           .catch(function (err) { alert(err.message); });
@@ -409,7 +348,7 @@
       manualForm.addEventListener("submit", function (e) {
         e.preventDefault();
         var fd = new FormData(manualForm);
-        fetch("/api/admin/papers/upload", {
+        fetch("/api/admin/papers/upload.php", {
           method: "POST",
           credentials: "same-origin",
           headers: { "Content-Type": "application/json" },

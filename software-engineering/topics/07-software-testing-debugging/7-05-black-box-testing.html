@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>7.16–7.17 Black Box Testing</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href=".">&larr; Topic 7</a>
+            <a class="btn-back" href="index.html">&larr; Topic 7</a>
           </div>
         </div>
       </header>
@@ -36,9 +36,9 @@
         <p>
           <strong>Black box testing</strong> evaluates software functionality without knowledge of internal code
           structure. It is the primary technique for validation in
-          <a href="../08-software-quality-assurance/08-03-verification-validation#sec-8-3">§8.3 V&amp;V</a>
+          <a href="../08-software-quality-assurance/08-03-verification-validation.html#sec-8-3">§8.3 V&amp;V</a>
           and is applied at integration, system, and acceptance levels within the
-          <a href="../02-sdlc-and-process-models/02-01-sdlc#sec-2-1">§2.1 SDLC</a>.
+          <a href="../02-sdlc-and-process-models/02-01-sdlc.html#sec-2-1">§2.1 SDLC</a>.
         </p>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-black-box-overview-caption">
@@ -60,7 +60,7 @@
           <li>Black box testing examines the software's <strong>external behaviour</strong> — inputs are supplied and outputs are compared against expected results without inspecting source code.</li>
           <li>Test cases are derived from <strong>specifications, requirements, and user stories</strong> — also called specification-based or behavioural testing.</li>
           <li>The tester treats the system as a black box whose internal workings are unknown and irrelevant to test design.</li>
-          <li>Black box testing complements white box testing (<a href="7-04-white-box-testing#sec-7-15">§7.15</a>) — together they provide broader defect detection.</li>
+          <li>Black box testing complements white box testing (<a href="7-04-white-box-testing.html#sec-7-15">§7.15</a>) — together they provide broader defect detection.</li>
         </ul>
 
         <figure class="diagram figure-photo" aria-labelledby="fig-black-box-caption">
@@ -94,7 +94,7 @@
         <h3>Test data suite preparation</h3>
         <ul>
           <li>A test data suite organises inputs into <strong>valid classes</strong>, <strong>invalid classes</strong>, and <strong>boundary classes</strong> derived from equivalence partitioning.</li>
-          <li>Select one <strong>representative value from each equivalence class</strong> rather than testing every possible input — exhaustive testing is impossible (see <a href="7-01-software-testing-overview#sec-7-4">§7.4 principle 2</a>).</li>
+          <li>Select one <strong>representative value from each equivalence class</strong> rather than testing every possible input — exhaustive testing is impossible (see <a href="7-01-software-testing-overview.html#sec-7-4">§7.4 principle 2</a>).</li>
           <li>Boundary values (minimum, maximum, just inside, just outside) are added to the suite because most defects occur at partition edges.</li>
           <li>A <strong>decision table</strong> maps combinations of conditions to expected actions — each rule becomes one or more test cases in the suite.</li>
           <li><strong>Cause-effect graphing</strong> models input conditions (causes) and output effects as a graph; the graph is converted to a decision table, which is then converted to test cases — this ensures logical combinations are not missed.</li>
@@ -111,8 +111,8 @@
         <h3>Types of testing within black box</h3>
         <ul>
           <li><strong>Functional testing:</strong> Verify that specified features produce correct outputs for given inputs — the core black box activity.</li>
-          <li><strong>Regression testing:</strong> Re-run black box test suites after changes to confirm existing functionality still works — see <a href="7-02-levels-of-testing#sec-7-9">§7.9 Regression Testing</a>.</li>
-          <li><strong>Non-functional testing:</strong> Evaluate quality attributes (performance, usability, security) through external observation without code inspection — see <a href="7-03-testing-strategies#sec-7-12">§7.12 Functional vs Non-Functional</a>.</li>
+          <li><strong>Regression testing:</strong> Re-run black box test suites after changes to confirm existing functionality still works — see <a href="7-02-levels-of-testing.html#sec-7-9">§7.9 Regression Testing</a>.</li>
+          <li><strong>Non-functional testing:</strong> Evaluate quality attributes (performance, usability, security) through external observation without code inspection — see <a href="7-03-testing-strategies.html#sec-7-12">§7.12 Functional vs Non-Functional</a>.</li>
         </ul>
 
         <div class="terminal" aria-label="Pseudocode — equivalence partitioning">
@@ -186,8 +186,8 @@ END PROCEDURE</code></pre>
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="7-04-white-box-testing">&larr; 7.15 White Box Testing</a>
-        <a class="btn-back chapter-nav-next" href="7-06-alpha-beta-testing">7.18–7.19 Alpha &amp; Beta Testing &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href="7-04-white-box-testing.html">&larr; 7.15 White Box Testing</a>
+        <a class="btn-back chapter-nav-next" href="7-06-alpha-beta-testing.html">7.18–7.19 Alpha &amp; Beta Testing &rarr;</a>
       </nav>
     </main>
   </div>

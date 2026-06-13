@@ -19,14 +19,14 @@
   <script src="../../../assets/js/site-nav.js" defer></script>
   <script src="../../../assets/js/theme.js" defer></script>
 </head>
-<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering">
+<body class="site-body" data-nav-depth="3" data-nav-book="software-engineering/index.html">
   <div class="page-wrapper">
     <main class="main-content">
       <header class="site-header site-header--hub">
         <div class="site-header-top">
           <h1>10.4 Maintenance Categories</h1>
           <div class="site-header-actions">
-            <a class="btn-back" href=".">&larr; Topic 10</a>
+            <a class="btn-back" href="index.html">&larr; Topic 10</a>
           </div>
         </div>
       </header>
@@ -37,7 +37,7 @@
           IEEE and ISO/IEC 12207 classify all maintenance activities into <strong>four categories</strong> based on the
           <em>purpose</em> of the change — not based on who requested it or how urgent it is. Correct classification
           drives prioritisation, effort estimation, budget allocation, and change control routing — see
-          <a href="../09-processes-configuration-management/09-05-change-control-process#sec-9-5">§9.5 Change Control Process</a>.
+          <a href="../09-processes-configuration-management/09-05-change-control-process.html#sec-9-5">§9.5 Change Control Process</a>.
           Misclassification is a common exam trap — e.g. porting to a new OS is <strong>adaptive</strong>, not perfective.
         </p>
 
@@ -46,7 +46,7 @@
           <li><strong>IEEE 1993:</strong> Software maintenance is modification of a software product after delivery to correct faults, improve performance or other attributes, or adapt the product to a modified environment.</li>
           <li><strong>ISO/IEC 12207:</strong> Maintenance activities occur when software undergoes modifications to code and associated documentation due to a problem or a need for improvement or adaptation.</li>
           <li>All four categories fall under this umbrella — the category is determined by <em>why</em> the change is being made.</li>
-          <li>After receiving a maintenance request, the first step is to identify the category; sometimes the reported problem is with the user, not the software — see <a href="10-01-software-maintenance-overview#sec-10-1">§10.1 Overview</a>.</li>
+          <li>After receiving a maintenance request, the first step is to identify the category; sometimes the reported problem is with the user, not the software — see <a href="10-01-software-maintenance-overview.html#sec-10-1">§10.1 Overview</a>.</li>
         </ul>
 
         <h3>Four categories of maintenance</h3>
@@ -107,7 +107,7 @@
           <li>Perfective maintenance is driven by user demands for new features or improvements to existing functionality — it is the largest category by effort.</li>
           <li>It includes improving functionality, performance, reliability, and restructuring the system to improve changeability (maintainability).</li>
           <li>Perfective changes expand scope compared to corrective fixes — they require requirements analysis, design updates, new test cases, and user documentation revisions.</li>
-          <li>Because perfective requests are open-ended, they need strong change control and prioritisation to prevent scope creep — see <a href="../09-processes-configuration-management/09-05-change-control-process#sec-9-5">§9.5</a>.</li>
+          <li>Because perfective requests are open-ended, they need strong change control and prioritisation to prevent scope creep — see <a href="../09-processes-configuration-management/09-05-change-control-process.html#sec-9-5">§9.5</a>.</li>
           <li>Example: users request a mobile-responsive version of an existing web dashboard — this is perfective (new capability), not adaptive (environment change).</li>
         </ul>
 
@@ -117,7 +117,7 @@
           <li>It includes code optimisation, documentation updates, scheduled reviews, test suite expansion, backup procedures, and refactoring to reduce complexity.</li>
           <li>Preventive work is closely related to <strong>proactive maintenance</strong> — taking action before failures occur rather than reacting after them.</li>
           <li>In ISO terminology, preventive maintenance detects and corrects <strong>latent faults</strong> — defects present in the code that have not yet caused a visible failure.</li>
-          <li>Preventive maintenance reduces the <strong>C</strong> (complexity) term in the maintenance effort formula — see <a href="10-05-cost-of-maintenance#sec-10-5">§10.5 Cost of Maintenance</a>.</li>
+          <li>Preventive maintenance reduces the <strong>C</strong> (complexity) term in the maintenance effort formula — see <a href="10-05-cost-of-maintenance.html#sec-10-5">§10.5 Cost of Maintenance</a>.</li>
         </ul>
 
         <h3>Proactive vs reactive maintenance</h3>
@@ -145,7 +145,7 @@
           <li>Patches are deployed quickly but carry higher risk because impact analysis, full regression testing, and documentation updates may be abbreviated.</li>
           <li>Poorly managed patches often introduce <strong>unforeseen future errors</strong> — a patch in one module breaks another module that was not retested.</li>
           <li>Even emergency patches must not bypass change control entirely — at minimum: unique change number, impact analysis, retest of affected areas, and post-deployment monitoring.</li>
-          <li>Every patch should be merged back into the main codebase through version control — see <a href="../09-processes-configuration-management/09-06-software-version-control#sec-9-6">§9.6 Version Control</a> — to prevent patch divergence.</li>
+          <li>Every patch should be merged back into the main codebase through version control — see <a href="../09-processes-configuration-management/09-06-software-version-control.html#sec-9-6">§9.6 Version Control</a> — to prevent patch divergence.</li>
         </ul>
 
         <h3>Typical effort and cost distribution</h3>
@@ -273,8 +273,8 @@ END FUNCTION
       </section>
 
       <nav class="chapter-nav" aria-label="Section navigation">
-        <a class="btn-back chapter-nav-prev" href="10-03-need-for-maintenance">&larr; 10.3 Need for Maintenance</a>
-        <a class="btn-back chapter-nav-next" href="10-05-cost-of-maintenance">10.5 Cost of Maintenance &rarr;</a>
+        <a class="btn-back chapter-nav-prev" href="10-03-need-for-maintenance.html">&larr; 10.3 Need for Maintenance</a>
+        <a class="btn-back chapter-nav-next" href="10-05-cost-of-maintenance.html">10.5 Cost of Maintenance &rarr;</a>
       </nav>
     </main>
   </div>
